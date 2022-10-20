@@ -1,28 +1,37 @@
 import React from "react";
 import { Box, Container, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import CssBaseline from "@mui/material/CssBaseline";
+import styles from "../../styles/Main.module.css";
 import "../../index.css";
-
-// type Props = {
-//   fontSize?: number;
-//   lineHeight?: number;
-// };
 
 const theme = createTheme({
   typography: {
-    fontFamily: "SDSamliphopangche_Outline",
+    fontFamily: "Beon",
   },
 });
 
 function Main() {
   return (
     <ThemeProvider theme={theme}>
-      <Box>
+      <CssBaseline />
+      <Box
+        style={{
+          margin: "0",
+          backgroundColor: "#1A1F28",
+          height: "100vh",
+          width: "100vw",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Container>
-          <Typography variant="h1" component="h4">
-            RE-VERSE
-          </Typography>
+          <Box className={styles.board}>
+            <Typography variant="h1" className={styles.logo}>
+              RE-VERSE
+            </Typography>
+          </Box>
         </Container>
       </Box>
     </ThemeProvider>
