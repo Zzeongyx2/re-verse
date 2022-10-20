@@ -15,14 +15,11 @@ code {
 }
 
 @font-face {
-  font-family: "SDSamliphopangche_Outline";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
+  font-family: "Beon";
+  src: url("assets/fonts/Beon.woff") format("woff");
 }
 
 @font-face {
-  font-family: "Beon";
-  src: url("assets/fonts/Beon.woff") format("woff");
+  font-family: "Ycomputer";
+  src: url("assets/fonts/Ycomputer.woff") format("woff");
 }
