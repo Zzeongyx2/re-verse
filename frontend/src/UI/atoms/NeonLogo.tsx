@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import styles from "../../styles/Main.module.css";
 import "../../index.css";
+import { useState } from "react";
 
 const theme = createTheme({
   typography: {
@@ -11,6 +12,10 @@ const theme = createTheme({
 });
 
 function NeonLogo() {
+  const [move, setMove] = useState<boolean>(false);
+  const handleMove = () => {
+    setMove((prev) => !prev);
+  };
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -26,7 +31,15 @@ function NeonLogo() {
         }}
       >
         <Container>
-          <Box className={styles.board}>
+          {/* <Box className={styles.board}> */}
+          <Box
+            className={
+              move === false
+                ? `${styles.board} ${styles.movedown}`
+                : `${styles.board} ${styles.moveup}`
+            }
+            onClick={handleMove}
+          >
             <Typography variant="h1" className={styles.logo}>
               RE-VERSE
             </Typography>

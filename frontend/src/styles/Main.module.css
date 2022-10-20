@@ -1,7 +1,7 @@
 .board {
   max-width: 700px;
   min-width: 500px;
-  margin: 0 auto;
+  margin: 0 auto 100px;
   border: 6px solid #f1f5ff;
   border-radius: 8px;
   min-height: 250px;
@@ -14,6 +14,17 @@
   box-shadow: inset 0 0 22px 3px rgba(72, 120, 239, 0.35),
     0 0 28px 5px rgba(72, 120, 239, 0.45);
   animation: blinking 0.01s infinite alternate;
+}
+
+.moveup {
+  /* transform: rotateX(180deg); */
+  transform: scale(0.5, 0.5) translateY(-80%);
+  transition: transform 0.5s linear;
+}
+
+.movedown {
+  transform: scale(1, 1);
+  transition: transform 0.5s linear;
 }
 
 .logo {
