@@ -1,7 +1,11 @@
 import NeonLogo from "../atoms/NeonLogo";
 
 function Main() {
-  return <NeonLogo />;
+  return (
+    <>
+      <NeonLogo />
+    </>
+  );
 }
 
 export default Main;
