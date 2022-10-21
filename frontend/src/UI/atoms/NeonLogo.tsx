@@ -22,10 +22,9 @@ function NeonLogo() {
       <Box
         style={{
           margin: "0",
-          backgroundColor: "#1A1F28",
-          height: "100vh",
+          // height: "100vh",
           width: "100vw",
-          display: "flex",
+          // display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}

@@ -1,7 +1,7 @@
 .board {
   max-width: 700px;
   min-width: 500px;
-  margin: 0 auto 100px;
+  margin: 0 auto;
   border: 6px solid #f1f5ff;
   border-radius: 8px;
   min-height: 250px;
@@ -18,7 +18,7 @@
 
 .moveup {
   /* transform: rotateX(180deg); */
-  transform: scale(0.5, 0.5) translateY(-80%);
+  transform: scale(0.6, 0.6) translateY(-80%);
   transition: transform 0.5s linear;
 }
 
@@ -107,4 +107,20 @@
   animation-duration: 3s;
   animation-name: slidein;
   animation-direction: alternate;
+}
+
+/* LET'S GO 버튼 */
+.button {
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  margin: -50px 0 0 -100px;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  font-size: 50px;
+  z-index: 10;
+  color: white;
+  background-color: transparent;
+  border-style: none;
 }
