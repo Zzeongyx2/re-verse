@@ -9,18 +9,12 @@ import {BsInfoCircle} from "react-icons/bs"
 // }
 
 function Login() {
-    const [id, setId] = useState<string>("");
-    const [pw, setPw] = useState<string>("");
+  const [id, setId] = useState<string>("");
+  const [pw, setPw] = useState<string>("");
 
-    const idHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setId(e.target.value);
-        
-    }
-    
-    const pwHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPw(e.target.value);
-        
-    }
+  const idHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setId(e.target.value);
+  };
 
     const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
@@ -94,6 +88,5 @@ function Login() {
         </Box>
     )
 }
-
 
 export default Login;
