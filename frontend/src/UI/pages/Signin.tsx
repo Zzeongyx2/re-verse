@@ -32,7 +32,7 @@ function Login() {
         setNickName(e.target.value);
     }
     const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key == 'Enter') {
+        if (e.key === 'Enter') {
             clickSignin()
         }
     }
@@ -56,7 +56,7 @@ function Login() {
         setPwValid({ isValid: false, message: "" });
     }
     const pwCheckBlurHandle = (e: React.FocusEvent<HTMLInputElement>) => {
-        if (pw != pwCheck) {
+        if (pw !== pwCheck) {
             setPwCheckValid({ isValid: true, message: "비밀번호가 일치하지 않습니다." });
             return;
         }
@@ -74,16 +74,16 @@ function Login() {
     }
 
     const clickSignin = () =>{
-        if (id.trim() == '') {
+        if (id.trim() === '') {
             alert("아이디를 입력하세요");
             return;
-        } else if (pw.trim() == '') {
+        } else if (pw.trim() === '') {
             alert("비밀번호를 입력하세요.")
             return;
-        } else if (pwCheck.trim() == '') {
+        } else if (pwCheck.trim() === '') {
             alert("비밀번호 확인을 입력하세요.");
             return;
-        } else if (nickName.trim() == '') {
+        } else if (nickName.trim() === '') {
             alert("닉네임을 입력하세요.");
             return;
         } else if (idValid.isValid || pwValid.isValid || pwCheckValid.isValid || nickNameValid.isValid) {

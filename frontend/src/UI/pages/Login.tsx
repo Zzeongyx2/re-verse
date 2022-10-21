@@ -23,7 +23,7 @@ function Login() {
     }
 
     const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key == 'Enter') {
+        if (e.key === 'Enter') {
             clickLogin()
         }
     }
@@ -33,10 +33,10 @@ function Login() {
         console.log("33줄");
         console.log({id: id, pw: pw});
         
-        if (id.trim() == '') {
+        if (id.trim() === '') {
             alert("아이디를 입력하세요");
             return;
-        } else if (pw.trim() == '') {
+        } else if (pw.trim() === '') {
             alert("비밀번호를 입력하세요.")
             return;
         }
