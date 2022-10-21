@@ -4,10 +4,10 @@ import styles from "../../styles/Main.module.css";
 import { useState } from "react";
 
 function Main() {
-  const [showBtn, setShowBtn] = useState<boolean>(false);
-  const handleShowBtn = () => {
-    setShowBtn((prev) => !prev);
-  };
+  // const [showBtn, setShowBtn] = useState<boolean>(false);
+  // const handleShowBtn = () => {
+  //   setShowBtn((prev) => !prev);
+  // };
 
   return (
     <Box
@@ -19,13 +19,7 @@ function Main() {
       }}
     >
       <Stack>
-        {/* <NeonLogo onClick={handleShowBtn} /> */}
         <NeonLogo />
-        {/* <button
-          className={styles.button}
-          style={{ visibility: showBtn ? "visible" : "hidden" }}
-        > */}
-        {/* <button className={styles.button}>LET'S GO</button> */}
       </Stack>
     </Box>
   );
