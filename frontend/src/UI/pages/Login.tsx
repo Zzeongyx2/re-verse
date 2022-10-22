@@ -47,8 +47,9 @@ function Login() {
   //     pw: ""
   // }
   return (
-    <Box sx={{ width: 300, mx: 10, my: 5 }}>
-      <Grid container spacing={3} justifyContent="center">
+    // <Box sx={{ width: 300, mx: 10, my: 5 }}>
+    <Box component="div" style={{ display: "flex" }}>
+      <Grid container spacing={3} sx={{ width: 300 }}>
         <Grid item xs={12}>
           <TextField
             value={id}
@@ -74,6 +75,7 @@ function Login() {
         </Grid>
         <Grid item xs={8}>
           <Box
+            component="div"
             sx={{
               alignItems: "cneter",
               justifyContent: "center",

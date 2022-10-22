@@ -18,13 +18,13 @@
 
 .moveup {
   /* transform: rotateX(180deg); */
-  transform: scale(0.6, 0.6) translateY(-80%);
-  transition: transform 0.5s linear;
+  transform: scale(0.5, 0.5) translateY(-180%);
+  transition: transform 0.8s ease-in-out;
 }
 
 .movedown {
   transform: scale(1, 1);
-  transition: transform 0.5s linear;
+  transition: transform 0.8s ease-in-out;
 }
 
 .logo {
@@ -38,6 +38,7 @@
     0 0 20px rgba(0, 73, 255, 0.5), 0 0 40px #0049ff, 0 0 300px #0049ff,
     0 0 200px #0049ff, 0 0 300px #0049ff, 0 0 500px #0049ff;
   animation: flicker 5s infinite alternate;
+  cursor: pointer;
 }
 
 .logo:before {
@@ -109,18 +110,24 @@
   animation-direction: alternate;
 }
 
-/* LET'S GO 버튼 */
+/* START 버튼 */
+.wrapper {
+  display: grid;
+  place-items: center;
+}
+
 .button {
   /* display: flex; */
   /* justify-content: center; */
   /* align-items: center; */
   margin: -50px 0 0 -100px;
-  top: 50%;
-  left: 50%;
+  top: 30%;
+  left: auto;
   position: absolute;
-  font-size: 50px;
+  font-size: px;
   z-index: 10;
-  color: white;
+  color: rgb(248, 144, 231);
   background-color: transparent;
   border-style: none;
+  text-shadow: 0 0 0.125em #fa61bf, 0 0 0.45em #fa61bf;
 }
