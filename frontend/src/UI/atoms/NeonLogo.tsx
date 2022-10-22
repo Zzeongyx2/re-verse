@@ -24,6 +24,7 @@ function NeonLogo() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box
+        component="div"
         style={{
           margin: "0",
           // height: "100vh",
@@ -35,8 +36,9 @@ function NeonLogo() {
       >
         <Container>
           {/* <Box className={styles.board}> */}
-          <Box style={{ position: "relative" }}>
+          <Box component="div" style={{ position: "relative" }}>
             <Box
+              component="div"
               className={
                 move === false
                   ? `${styles.board} ${styles.movedown}`
@@ -52,6 +54,7 @@ function NeonLogo() {
             </Box>
             <Link to="/login">
               <Box
+                component="div"
                 className={styles.wrapper}
                 // style={{ visibility: start === false ? "hidden" : "visible", transition: !start ? "visibility" }}
               >
