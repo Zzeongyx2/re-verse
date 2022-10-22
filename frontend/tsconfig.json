@@ -1,11 +1,8 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "outDir": "./dist",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -21,6 +18,9 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+    "./src/**/**/*.tsx",
+    "./src/**/**/*.ts",
+    "public/characters_pack"
   ]
 }

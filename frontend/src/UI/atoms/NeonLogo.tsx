@@ -4,6 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import styles from "../../styles/Main.module.css";
 import "../../index.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const theme = createTheme({
   typography: {
@@ -13,13 +14,17 @@ const theme = createTheme({
 
 function NeonLogo() {
   const [move, setMove] = useState<boolean>(false);
+  const [start, setStart] = useState<boolean>(false);
   const handleMove = () => {
     setMove((prev) => !prev);
+    setStart((prev) => !prev);
   };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box
+        component="div"
         style={{
           margin: "0",
           // height: "100vh",
@@ -31,17 +36,55 @@ function NeonLogo() {
       >
         <Container>
           {/* <Box className={styles.board}> */}
-          <Box
-            className={
-              move === false
-                ? `${styles.board} ${styles.movedown}`
-                : `${styles.board} ${styles.moveup}`
-            }
-            onClick={handleMove}
-          >
-            <Typography variant="h1" className={styles.logo}>
-              RE-VERSE
-            </Typography>
+          <Box component="div" style={{ position: "relative" }}>
+            <Box
+              component="div"
+              className={
+                move === false
+                  ? `${styles.board} ${styles.movedown}`
+                  : `${styles.board} ${styles.moveup}`
+              }
+              onClick={() => {
+                handleMove();
+              }}
+            >
+              <Typography variant="h1" className={styles.logo}>
+                RE-VERSE
+              </Typography>
+            </Box>
+            <Link to="/login">
+              <Box
+                component="div"
+                className={styles.wrapper}
+                // style={{ visibility: start === false ? "hidden" : "visible", transition: !start ? "visibility" }}
+              >
+                {start ? (
+                  <Typography
+                    variant="h1"
+                    className={styles.button}
+                    style={{
+                      visibility: "visible",
+                      transitionDelay: "0.7s",
+                    }}
+                  >
+                    START
+                  </Typography>
+                ) : (
+                  <Typography
+                    variant="h1"
+                    className={styles.button}
+                    style={{
+                      visibility: "hidden",
+                      opacity: "0",
+                      transition:
+                        "opacity 0.5s linear, visibility 0.5s ease-in-out",
+                    }}
+                  >
+                    START
+                  </Typography>
+                )}
+              </Box>
+            </Link>
           </Box>
         </Container>
       </Box>
