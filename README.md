@@ -6,7 +6,7 @@
 
 ## 📃기획
 
-![image.png](./images/기획서.PNG)
+![image.png](./images/기획서.png)
 
 <br/>
 
@@ -92,7 +92,7 @@
 <summary>아키텍처</summary>
 <div markdown="1">
 
-![image.png](./images/아키텍처.jpeg)
+![image.png](./images/아키텍처.png)
 
 </div>
 </details>
@@ -103,7 +103,7 @@
 <summary>컬러 팔레트</summary>
 <div markdown="1">
 
-![image.png](./images/컬러.png)
+![image.png](./images/컬러팔레트.png)
 
 </div>
 </details>
