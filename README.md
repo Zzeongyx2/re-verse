@@ -6,7 +6,7 @@
 
 ## 📃기획
 
-![image.png](./output/기획서.png)
+![image.png](./images/기획서.PNG)
 
 <br/>
 
@@ -60,7 +60,7 @@
 <summary>ER Diagram</summary>
 <div markdown="1">
 
-![image.png](./output/ERD.png)
+![image.png](./images/erd.png)
 
 </div>
 </details>
@@ -69,7 +69,7 @@
 <summary>Entity 설계</summary>
 <div markdown="1">
 
-![image.png](./output/ERD.png)
+![image.png](./images/entity.png)
 
 </div>
 </details>
@@ -78,7 +78,12 @@
 <summary>API 명세서</summary>
 <div markdown="1">
 
-![image.png](./output/API명세서.png)
+> 상세한 API 명세서는 [여기](https://re-verse.notion.site/7869225d86214153a0136063fb0d56c2?v=8ca6f13d5b4f443d9a94761f76d39ee8)를 클릭해서 확인해주세요!
+
+![image.png](./images/api/auth.PNG)
+![image.png](./images/api/user.PNG)
+![image.png](./images/api/archive.PNG)
+![image.png](./images/api/friend.PNG)
 
 </div>
 </details>
@@ -87,7 +92,7 @@
 <summary>아키텍처</summary>
 <div markdown="1">
 
-![image.png](./output/아키텍처.png)
+![image.png](./images/아키텍처.jpeg)
 
 </div>
 </details>
@@ -98,7 +103,25 @@
 <summary>컬러 팔레트</summary>
 <div markdown="1">
 
-![image.png](./output/컬러팔레트.png)
+![image.png](./images/컬러.png)
+
+</div>
+</details>
+
+<details>
+<summary>와이어프레임</summary>
+<div markdown="1">
+
+* 메인화면, 로그인 및 회원가입
+![image.png](./images/wireframe/메인_로그인_회원가입.png)
+* 프로필 관리
+![image.png](./images/wireframe/프로필.png)
+* 친구 관리
+![image.png](./images/wireframe/친구.png)
+* 아카이브 생성 및 관리
+![image.png](./images/wireframe/아카이브.png)
+* 아카이브 목록
+![image.png](./images/wireframe/아카이브_목록.png)
 
 </div>
 </details>
@@ -107,23 +130,28 @@
 <summary>목업</summary>
 <div markdown="1">
 
-![image.png](./output/목업/목업1.png)
-![image.png](./output/목업/목업2.png)
-![image.png](./output/목업/목업3.png)
-![image.png](./output/목업/목업4.png)
-![image.png](./output/목업/목업5.png)
+* 메인화면, 로그인 및 회원가입
+![image.png](./images/mockup/메인_로그인_회원가입.png)
+* 프로필 관리
+![image.png](./images/mockup/프로필.png)
+* 친구 관리
+![image.png](./images/mockup/친구.png)
+* 아카이브 생성 및 관리
+![image.png](./images/mockup/아카이브.png)
+* 아카이브 목록
+![image.png](./images/mockup/아카이브_목록.png)
 
 </div>
 </details>
 
 <br/>
 
-## 🙂 팀원 소개 🙃
+## 🙂 팀원 소개
 
-> [RE-VERSE NOTION](https://www.notion.so/re-verse/RE-VERSE-caf272f1085e4508bf2a14541a4d0c9a)
+> [RE-VERSE NOTION](https://re-verse.notion.site/RE-VERSE-caf272f1085e4508bf2a14541a4d0c9a)
 
-| 이름   | 담당     | 역할 | 코드명 |
-| ------ | -------- | ---- | ----- |
+| 이름   | 담당  | 역할 | 코드명 |
+| :------: | :------: | :----: | :-----: |
 | 정기연 | BackEnd | 팀장 | ㈜꿀㉴탕소매넣기 |
 | 박원창 | BackEnd | 팀원 | oO강약약강Oo |
 | 전윤선 | FrontEnd | 팀원 | zl존윤sun |
