@@ -122,6 +122,8 @@
 ![image.png](./images/wireframe/아카이브.png)
 * 아카이브 목록
 ![image.png](./images/wireframe/아카이브_목록.png)
+* 글 작성 및 확인
+![image.png](./images/wireframe/글작성.png)
 
 </div>
 </details>
@@ -140,6 +142,8 @@
 ![image.png](./images/mockup/아카이브.png)
 * 아카이브 목록
 ![image.png](./images/mockup/아카이브_목록.png)
+* 글 작성 및 확인
+![image.png](./images/mockup/글작성.png)
 
 </div>
 </details>
