@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/reverse_archive?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: ssafy
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL57Dialect
+#  redis:
+#    host: localhost
+#    port: 6379
+
+logging:
+  level:
+    root: info
+    org.springframework.web: error
+    org.springframework.boot: debug
+    org.apache.tiles: info
+    kr.co.reverse.archive: debug
+
