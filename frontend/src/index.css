@@ -1,3 +1,4 @@
+/* diary font */
 @font-face {
   font-family: "KNPSKkomi-Regular00";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/KNPSKkomi-Regular00.woff")
@@ -6,6 +7,7 @@
   font-style: normal;
 }
 
+/* computer font */
 @font-face {
   font-family: "HBIOS-SYS";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/HBIOS-SYS.woff2")
@@ -14,7 +16,11 @@
   font-style: normal;
 }
 
+/* travel font */
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+/* neon logo font */
+@import url("http://fonts.cdnfonts.com/css/beon");
 
 @tailwind base;
 @tailwind components;
