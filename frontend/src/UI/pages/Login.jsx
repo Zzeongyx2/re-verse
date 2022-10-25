@@ -1,7 +1,10 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { BsInfoCircle } from "react-icons/bs";
 import { Box, Grid, GridItem, Input } from "@chakra-ui/react";
+import Logo from "../atoms/Logo";
+import NonLoginMain from "./NonLoginMain";
 
 function Login() {
   const [id, setId] = useState("");
@@ -38,60 +41,77 @@ function Login() {
   };
 
   return (
-    <Box p="5" className="w-[500px]">
-      <Grid templateColumns="repeat(5)" templateRows="repeat(3)" gap={5}>
-        <GridItem rowSpan={1} colSpan={5} border="1px" borderColor="black" borderRadius="10">
-          <Input
-            focusBorderColor="none"
-            placeholder="아이디"
-            value={id}
-            onChange={idHandleChange}
-            border="none"
-          />
-        </GridItem>
-        <GridItem rowSpan={1} colSpan={5} border="1px" borderColor="black" borderRadius="10">
-          <Input
-            focusBorderColor="none"
-            placeholder="비밀번호"
-            value={pw}
-            onChange={pwHandleChange}
-            onKeyUp={handleKeyUp}
-            border="none"
-          />
-        </GridItem>
-        <GridItem rowSpan={1} colSpan={5} textAlign="center">
-          <button
-            onClick={() => {
-              clickLogin();
-            }}
-            style={{
-              width: "100%",
-              border: "5px",
-              backgroundColor: "yellow",
-              borderRadius: "11px",
-              height: "40px",
-            }}
-          >
-            로그인
-          </button>
-          <a
-            href="/signin"
-            style={{
-              textDecoration: "none",
-              color: "black",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              fontSize: "13px",
-              color: "gray",
-              margin: "20px",
-            }}
-          >
-            <BsInfoCircle />
-            아직 회원이 아니신가요?
-          </a>
-        </GridItem>
-      </Grid>
+    <Box className="bg-base2 h-screen flex items-center justify-center">
+      <Box className="max-w-md">
+        <Grid templateColumns="repeat(5)" templateRows="repeat(4)" gap={5}>
+          <GridItem rowSpan={1} colSpan={5} py={4}>
+            <Link to="/" element={<NonLoginMain />}>
+              <Logo />
+            </Link>
+          </GridItem>
+          <GridItem rowSpan={1} colSpan={5} border="1px" borderRadius="10">
+            <Input
+              className="placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
+              height={12}
+              variant="filled"
+              focusBorderColor="white"
+              placeholder="아이디"
+              value={id}
+              onChange={idHandleChange}
+            />
+          </GridItem>
+          <GridItem rowSpan={1} colSpan={5} border="1px" borderRadius="10">
+            <Input
+              className="placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
+              height={12}
+              variant="filled"
+              focusBorderColor="white"
+              placeholder="비밀번호"
+              value={pw}
+              onChange={pwHandleChange}
+              onKeyUp={handleKeyUp}
+            />
+          </GridItem>
+          <GridItem rowSpan={1} colSpan={5} textAlign="center">
+            <button
+              onClick={() => {
+                clickLogin();
+              }}
+              className="text-base1 font-semibold text-lg w-full h-12 bg-main2 hover:bg-sub2 hover:duration-300 rounded-lg"
+              // style={{
+              //   width: "100%",
+              //   border: "5px",
+              //   backgroundColor: "yellow",
+              //   borderRadius: "11px",
+              //   height: "40px",
+              // }}
+            >
+              로그인
+            </button>
+            <Link to="/signin">
+              <div className="flex justify-center items-center text-sm m-5 text-gray-400">
+                <BsInfoCircle />
+                <span className="px-1.5">아직 회원이 아니신가요?</span>
+              </div>
+            </Link>
+            {/* <a
+              href="/signin"
+              style={{
+                textDecoration: "none",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "13px",
+                color: "gray",
+                margin: "20px",
+              }}
+            >
+              <BsInfoCircle />
+              <span className="px-1.5">아직 회원이 아니신가요?</span>
+            </a> */}
+          </GridItem>
+        </Grid>
+      </Box>
     </Box>
   );
 }
