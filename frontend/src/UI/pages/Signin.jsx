@@ -1,6 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { Box, Grid, GridItem, Input } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import Login from "./Login";
+import Logo from "../atoms/Logo";
 
 function Signin() {
   const [id, setId] = useState("");
@@ -10,19 +13,19 @@ function Signin() {
 
   const [idValid, setIdValid] = useState({
     isValid: false,
-    message: "",
+    message: ".",
   });
   const [pwValid, setPwValid] = useState({
     isValid: false,
-    message: "",
+    message: ".",
   });
   const [pwCheckValid, setPwCheckValid] = useState({
     isValid: false,
-    message: "",
+    message: ".",
   });
   const [nickNameValid, setNickNameValid] = useState({
     isValid: false,
-    message: "",
+    message: ".",
   });
 
   const idHandleChange = (e) => {
@@ -43,14 +46,16 @@ function Signin() {
     }
   };
   const idBlurHandle = (e) => {
-    let idRE = new RegExp("[a-zA-Z0-9]+@[a-zA-Z]+[.][a-zA-Z]$");
+    let idRE = new RegExp("[a-zA-Z0-9]+@[a-zA-Z]+[.][a-zA-Z]{2,3}$");
+    // let idRE = new RegExp("[a-zA-Z0-9]+@[a-zA-Z]+[.][a-zA-Z]$");
     if (!idRE.test(id)) {
       setIdValid({ isValid: true, message: "*이메일 형식이 아닙니다." });
       console.log(idValid);
+      console.log(id);
       return;
     }
-    setIdValid({ isValid: false, message: "" });
-    //axios 요청으로 id 중복검사하기
+    setIdValid({ isValid: false, message: "." });
+    // axios 요청으로 id 중복검사하기
     // setIdValid({ isValid: true, message: "이미 가입된 아이디입니다." });
   };
   const pwBlurHandle = (e) => {
@@ -58,11 +63,12 @@ function Signin() {
     if (!pwRE.test(pw)) {
       setPwValid({
         isValid: true,
-        message: "*4~12글자, 영문대소문자, 숫자, 특수문자(~,!,@)만 사용 가능합니다.",
+        message:
+          "*4~12글자, 영문대소문자, 숫자, 특수문자(~,!,@)만 사용 가능합니다.",
       });
       return;
     }
-    setPwValid({ isValid: false, message: "" });
+    setPwValid({ isValid: false, message: "." });
   };
   const pwCheckBlurHandle = (e) => {
     if (pw !== pwCheck) {
@@ -72,7 +78,7 @@ function Signin() {
       });
       return;
     }
-    setPwCheckValid({ isValid: false, message: "" });
+    setPwCheckValid({ isValid: false, message: "." });
   };
   const nickNameBlurHandle = (e) => {
     let nickNameRE = new RegExp("^[a-zA-Z0-9가-힣_]{2,12}$");
@@ -84,7 +90,7 @@ function Signin() {
       });
       return;
     }
-    setNickNameValid({ isValid: false, message: "" });
+    setNickNameValid({ isValid: false, message: "." });
     //axios 요청으로 닉네임 중복검사하기
     // setNickNameValid({ isValid: true, message: "이미 가입된 닉네임입니다." });
   };
@@ -117,117 +123,128 @@ function Signin() {
   };
 
   return (
-    <Box p="5" className="w-[500px]">
-      <Grid templateColumns="repeat(5)" templateRows="repeat(5)" gap={5}>
-        <GridItem rowSpan={1} colSpan={5}>
-          <Input
-            focusBorderColor="none"
-            placeholder="이메일"
-            value={id}
-            onChange={idHandleChange}
-            onBlur={idBlurHandle}
-            border="1px"
-            borderColor={idValid.isValid ? "red" : "black"}
-            borderRadius="10"
-            _hover={{}}
-          />
-          <p
-            style={{
-              color: "red",
-              marginLeft: "5px",
-              fontSize: "10px",
-            }}
-          >
-            {idValid.message}
-          </p>
-        </GridItem>
-        <GridItem rowSpan={1} colSpan={5}>
-          <Input
-            focusBorderColor="none"
-            placeholder="비밀번호"
-            value={pw}
-            onChange={pwHandleChange}
-            onBlur={pwBlurHandle}
-            border="1px"
-            borderColor={pwValid.isValid ? "red" : "black"}
-            borderRadius="10"
-            _hover={{}}
-            type="password"
-          />
-          <p
-            style={{
-              color: "red",
-              marginLeft: "5px",
-              fontSize: "10px",
-            }}
-          >
-            {pwValid.message}
-          </p>
-        </GridItem>
-        <GridItem rowSpan={1} colSpan={5}>
-          <Input
-            focusBorderColor="none"
-            placeholder="비밀번호 확인"
-            value={pwCheck}
-            onChange={pwCheckHandleChange}
-            onBlur={pwCheckBlurHandle}
-            border="1px"
-            borderColor={pwCheckValid.isValid ? "red" : "black"}
-            borderRadius="10"
-            _hover={{}}
-            type="password"
-          />
-          <p
-            style={{
-              color: "red",
-              marginLeft: "5px",
-              fontSize: "10px",
-            }}
-          >
-            {pwCheckValid.message}
-          </p>
-        </GridItem>
+    <Box className="bg-base2 h-screen flex items-center justify-center">
+      <Box className="max-w-md">
+        <Grid templateColumns="repeat(5)" templateRows="repeat(5)" gap={3}>
+          <GridItem rowSpan={1} colSpan={5} py={4}>
+            <Link to="/login" element={<Login />}>
+              <Logo />
+            </Link>
+          </GridItem>
+          <GridItem rowSpan={1} colSpan={5}>
+            <Input
+              className="text-base2 text-md font-semibold focus:text-white focus:placeholder-white  placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
+              height={12}
+              focusBorderColor="white"
+              placeholder="이메일"
+              variant="filled"
+              value={id}
+              onChange={idHandleChange}
+              onBlur={idBlurHandle}
+            />
+            <p
+              className={
+                "text-xs mt-1 ml-1" +
+                (idValid.isValid
+                  ? " flex text-red-500"
+                  : " flex text-transparent")
+              }
+            >
+              {idValid.message}
+            </p>
+          </GridItem>
 
-        <GridItem rowSpan={1} colSpan={5}>
-          <Input
-            focusBorderColor="none"
-            placeholder="닉네임"
-            value={nickName}
-            onChange={nickNameHandleChange}
-            onBlur={nickNameBlurHandle}
-            onKeyUp={handleKeyUp}
-            border="1px"
-            borderColor={nickNameValid.isValid ? "red" : "black"}
-            borderRadius="10"
-            _hover={{}}
-          />
-          <p
-            style={{
-              color: "red",
-              marginLeft: "5px",
-              fontSize: "10px",
-            }}
-          >
-            {nickNameValid.message}
-          </p>
-        </GridItem>
-        <GridItem rowSpan={1} colSpan={5} textAlign="center">
-          <button
-            onClick={() => {
-              clickSignin();
-            }}
-            style={{
-              width: "100%",
-              border: "5px",
-              backgroundColor: "yellow",
-              borderRadius: "11px",
-              height: "40px",
-            }}
-          >
-            회원가입
-          </button>
-        </GridItem>
-      </Grid>
+          <GridItem rowSpan={1} colSpan={5}>
+            <Input
+              className="text-base2 text-md font-semibold focus:text-white focus:placeholder-white  placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
+              height={12}
+              focusBorderColor="white"
+              placeholder="비밀번호"
+              variant="filled"
+              value={pw}
+              onChange={pwHandleChange}
+              onBlur={pwBlurHandle}
+              type="password"
+            />
+            <p
+              className={
+                "text-xs mt-1 ml-1" +
+                (pwValid.isValid
+                  ? " flex text-red-500"
+                  : " flex text-transparent")
+              }
+            >
+              {pwValid.message}
+            </p>
+          </GridItem>
+
+          <GridItem rowSpan={1} colSpan={5}>
+            <Input
+              className="text-base2 text-md font-semibold focus:text-white focus:placeholder-white  placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
+              height={12}
+              focusBorderColor="white"
+              placeholder="비밀번호 확인"
+              variant="filled"
+              value={pwCheck}
+              onChange={pwCheckHandleChange}
+              onBlur={pwCheckBlurHandle}
+              type="password"
+            />
+            <p
+              className={
+                "text-xs mt-1 ml-1" +
+                (pwCheckValid.isValid
+                  ? " flex text-red-500"
+                  : " flex text-transparent")
+              }
+            >
+              {pwCheckValid.message}
+            </p>
+          </GridItem>
+
+          <GridItem rowSpan={1} colSpan={5}>
+            <Input
+              className="text-base2 text-md font-semibold focus:text-white focus:placeholder-white  placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
+              height={12}
+              focusBorderColor="white"
+              placeholder="닉네임"
+              variant="filled"
+              value={nickName}
+              onChange={nickNameHandleChange}
+              onBlur={nickNameBlurHandle}
+              onKeyUp={handleKeyUp}
+            />
+            <p
+              className={
+                "text-xs mt-1 ml-1" +
+                (nickNameValid.isValid
+                  ? " flex text-red-500"
+                  : " flex text-transparent")
+              }
+            >
+              {nickNameValid.message}
+            </p>
+          </GridItem>
+
+          <GridItem rowSpan={1} colSpan={5} textAlign="center">
+            <button
+              onClick={() => {
+                clickSignin();
+              }}
+              className="text-base1 font-semibold text-lg w-full h-12 bg-main2 hover:bg-sub2 hover:duration-300 rounded-lg"
+              // style={{
+              //   width: "100%",
+              //   border: "5px",
+              //   backgroundColor: "yellow",
+              //   borderRadius: "11px",
+              //   height: "40px",
+              // }}
+            >
+              회원가입
+            </button>
+          </GridItem>
+        </Grid>
+      </Box>
     </Box>
   );
 }
