@@ -1,7 +1,7 @@
-import { Box, Link } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import NeonLogo from "../atoms/NeonLogo";
 
-function Index() {
+function NonLoginMain() {
   return (
     // <Link to="/login">
     <Box className="bg-base2 h-screen flex items-center">
@@ -11,4 +11,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default NonLoginMain;
