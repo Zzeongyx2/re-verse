@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Box, Grid, GridItem, Input, Textarea } from "@chakra-ui/react";
+import LobbyButton from "../atoms/LobbyButton";
 
 function DashboardProfile() {
   const [userInfo, setUserInfo] = useState({
@@ -63,92 +64,150 @@ function DashboardProfile() {
   };
 
   return (
-    <Box p="5">
+    <Box className="w-[545px]" borderRadius="24" border="1px" borderColor="white">
       {!isEdit ? (
-        <Grid templateColumns="repeat(5)" templateRows="repeat(3)" gap={5}>
+        <Grid templateColumns="repeat(5)" templateRows="repeat(4)">
           <GridItem
             rowSpan={1}
             colSpan={5}
-            h={10}
+            h="64px"
             border="1px"
-            borderColor="black"
-            borderRadius="10"
+            borderColor="white"
             p="2"
+            backgroundColor="#00BEFF"
+            color="white"
+            borderTopRadius="24"
           >
-            <div>{userInfo.nickName}</div>
+            <div className="h-full flex justify-center items-center">
+              <p className="font-bold text-2xl drop-shadow">프로필</p>
+            </div>
           </GridItem>
           <GridItem
             rowSpan={1}
             colSpan={5}
-            h={100}
-            border="1px"
-            borderColor="black"
+            h="48px"
             borderRadius="10"
-            p="2"
+            px="16px"
+            py="8px"
+            m="5"
+            className="shadow"
           >
-            <div>{userInfo.message}</div>
+            <div className="text-lg">{userInfo.nickName}</div>
+          </GridItem>
+          <GridItem
+            rowSpan={1}
+            colSpan={5}
+            h="175px"
+            borderRadius="10"
+            px="16px"
+            py="8px"
+            mx="5"
+            className="shadow"
+          >
+            <div className="text-lg">{userInfo.message}</div>
           </GridItem>
           <GridItem
             rowSpan={1}
             colSpan={5}
             textAlign="center"
             border="1px"
-            borderColor="black"
-            borderRadius="10"
+            borderColor="white"
+            borderRadius="24"
+            backgroundColor="#FACC04"
+            color="white"
+            h="64px"
+            m="5"
           >
             <button
               onClick={() => {
                 editOnOff();
               }}
+              className="h-full w-full font-bold text-lg drop-shadow"
             >
               프로필 편집
             </button>
           </GridItem>
         </Grid>
       ) : (
-        <Grid templateColumns="repeat(5)" templateRows="repeat(3)" gap={5}>
-          <GridItem rowSpan={1} colSpan={5}>
+        <Grid templateColumns="repeat(5)" templateRows="repeat(4)">
+          <GridItem
+            rowSpan={1}
+            colSpan={5}
+            h="64px"
+            border="1px"
+            borderColor="white"
+            p="2"
+            backgroundColor="#00BEFF"
+            color="white"
+            borderTopRadius="24"
+          >
+            <div className="h-full flex justify-center items-center">
+              <p className="font-bold text-2xl drop-shadow">프로필</p>
+            </div>
+          </GridItem>
+          <GridItem rowSpan={1} colSpan={5} borderRadius="10" m="5" className="shadow outline-none">
             <Input
               focusBorderColor="none"
               placeholder="닉네임"
               value={editNickName}
               onChange={editNickNameHandleChange}
               onBlur={editNickNameBlurHandle}
-              border="1px"
-              borderColor={editNickNameValid.isValid ? "red" : "black"}
+              border={editNickNameValid.isValid ? "1px" : "0px"}
+              borderColor={editNickNameValid.isValid ? "red" : null}
               borderRadius="10"
               _hover={{}}
+              h="48px"
             />
-            <p
-              style={{
-                color: "red",
-                marginLeft: "5px",
-                fontSize: "10px",
-              }}
-            >
-              {editNickNameValid.message}
-            </p>
+            <p className="text-red-500 m-[5px] text-[10px]">{editNickNameValid.message}</p>
           </GridItem>
-          <GridItem rowSpan={1} colSpan={5} border="1px" borderColor="black" borderRadius="10">
+          <GridItem
+            rowSpan={1}
+            colSpan={5}
+            h="175px"
+            borderRadius="10"
+            p="2"
+            mx="5"
+            className="shadow"
+          >
             <Textarea
               focusBorderColor="none"
               placeholder="상태 메시지를 입력하세요"
               value={editMessage}
               onChange={ediMessageHandleChange}
               border="none"
+              h="160px"
             />
           </GridItem>
-          <GridItem rowSpan={1} colSpan={5} textAlign="center">
+          <GridItem
+            rowSpan={1}
+            colSpan={5}
+            textAlign="center"
+            border="1px"
+            borderColor="white"
+            borderRadius="24"
+            backgroundColor="#FACC04"
+            color="white"
+            h="64px"
+            m="5"
+          >
             <button
               onClick={() => {
                 editOnOff();
               }}
+              className="h-full w-full font-bold text-lg drop-shadow"
             >
-              저장하기
+              편집 완료
             </button>
           </GridItem>
         </Grid>
       )}
+      <LobbyButton
+        linkTo="/"
+        textcolor="white"
+        backcolor="#00BEFF"
+        buttonTitle="대표아카이브 바로가기"
+        buttonMessage="지존아카이브"
+      />
     </Box>
   );
 }
