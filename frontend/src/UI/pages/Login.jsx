@@ -51,7 +51,7 @@ function Login() {
           </GridItem>
           <GridItem rowSpan={1} colSpan={5} border="1px" borderRadius="10">
             <Input
-              className="text-white focus:placeholder-white placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
+              className="text-base2 text-md font-semibold focus:text-white focus:placeholder-white  placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
               height={12}
               variant="filled"
               focusBorderColor="white"
@@ -62,7 +62,7 @@ function Login() {
           </GridItem>
           <GridItem rowSpan={1} colSpan={5} border="1px" borderRadius="10">
             <Input
-              className="text-white focus:placeholder-white  placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
+              className="text-base2 text-md font-semibold focus:text-white focus:placeholder-white  placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
               height={12}
               variant="filled"
               focusBorderColor="white"
@@ -70,6 +70,7 @@ function Login() {
               value={pw}
               onChange={pwHandleChange}
               onKeyUp={handleKeyUp}
+              type="password"
             />
           </GridItem>
           <GridItem rowSpan={1} colSpan={5} textAlign="center">
