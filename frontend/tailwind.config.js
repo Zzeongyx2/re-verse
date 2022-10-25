@@ -35,6 +35,7 @@ module.exports = {
           "0 0 300px #0049ff",
           "0 0 500px #0049ff",
         ],
+        "4xl": ["0 0 0.125em #fa61bf", "0 0 0.45em #fa61bf"],
       },
       animation: {
         flicker: "flicker 5s infinite alternate",
