@@ -31,7 +31,8 @@ function DashboardProfile() {
   const editNickNameBlurHandle = (e) => {
     let nickNameRE = new RegExp("^[a-zA-Z0-9가-힣_]{2,12}$");
     if (!nickNameRE.test(editNickName)) {
-      setEditNickNameValid({ isValid: true, message: "2~12글자 사이로 입력해주세요." });
+      // TODO: 몇글자인지 정하기
+      setEditNickNameValid({ isValid: true, message: "*2~12글자 사이로 입력해주세요." });
       return;
     }
     setEditNickNameValid({ isValid: false, message: "" });
@@ -61,12 +62,8 @@ function DashboardProfile() {
     });
   };
 
-  const imgChange = () => {
-    alert("모달띄우기");
-  };
-
   return (
-    <Box sx={{ border: 5, borderColor: "#B7C6E7", borderRadius: "24px", m: 1, p: 2 }}>
+    <Box p="5">
       {!isEdit ? (
         <Grid templateColumns="repeat(5)" templateRows="repeat(3)" gap={5}>
           <GridItem
@@ -110,16 +107,27 @@ function DashboardProfile() {
         </Grid>
       ) : (
         <Grid templateColumns="repeat(5)" templateRows="repeat(3)" gap={5}>
-          <GridItem rowSpan={1} colSpan={5} border="1px" borderColor="black" borderRadius="10">
+          <GridItem rowSpan={1} colSpan={5}>
             <Input
-              isInvalid={editNickNameValid.isValid}
               focusBorderColor="none"
-              placeholder="닉네임을 입력하세요"
+              placeholder="닉네임"
               value={editNickName}
               onChange={editNickNameHandleChange}
               onBlur={editNickNameBlurHandle}
-              border="none"
+              border="1px"
+              borderColor={editNickNameValid.isValid ? "red" : "black"}
+              borderRadius="10"
+              _hover={{}}
             />
+            <p
+              style={{
+                color: "red",
+                marginLeft: "5px",
+                fontSize: "10px",
+              }}
+            >
+              {editNickNameValid.message}
+            </p>
           </GridItem>
           <GridItem rowSpan={1} colSpan={5} border="1px" borderColor="black" borderRadius="10">
             <Textarea
