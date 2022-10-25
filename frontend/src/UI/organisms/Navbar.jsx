@@ -5,13 +5,12 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
     <Box>
       <Box>
-        <Breadcrumb>
+        {/* <Breadcrumb>
           <BreadcrumbItem>
             <BreadcrumbLink as={Link} to="/lobby">
               RE-VERSE
@@ -22,7 +21,17 @@ function Navbar() {
               캐릭터 선택
             </BreadcrumbLink>
           </BreadcrumbItem>
-        </Breadcrumb>
+          <BreadcrumbItem>
+            <BreadcrumbLink isCurrentPage as={Link} to="/friend">
+              친구
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbItem>
+            <BreadcrumbLink isCurrentPage as={Link} to="/archive">
+              아카이브
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb> */}
       </Box>
     </Box>
   );
