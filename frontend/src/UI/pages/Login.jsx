@@ -51,7 +51,7 @@ function Login() {
           </GridItem>
           <GridItem rowSpan={1} colSpan={5} border="1px" borderRadius="10">
             <Input
-              className="placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
+              className="text-white focus:placeholder-white placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
               height={12}
               variant="filled"
               focusBorderColor="white"
@@ -62,7 +62,7 @@ function Login() {
           </GridItem>
           <GridItem rowSpan={1} colSpan={5} border="1px" borderRadius="10">
             <Input
-              className="placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
+              className="text-white focus:placeholder-white  placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
               height={12}
               variant="filled"
               focusBorderColor="white"
@@ -78,13 +78,6 @@ function Login() {
                 clickLogin();
               }}
               className="text-base1 font-semibold text-lg w-full h-12 bg-main2 hover:bg-sub2 hover:duration-300 rounded-lg"
-              // style={{
-              //   width: "100%",
-              //   border: "5px",
-              //   backgroundColor: "yellow",
-              //   borderRadius: "11px",
-              //   height: "40px",
-              // }}
             >
               로그인
             </button>
@@ -94,21 +87,6 @@ function Login() {
                 <span className="px-1.5">아직 회원이 아니신가요?</span>
               </div>
             </Link>
-            {/* <a
-              href="/signin"
-              style={{
-                textDecoration: "none",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                fontSize: "13px",
-                color: "gray",
-                margin: "20px",
-              }}
-            >
-              <BsInfoCircle />
-              <span className="px-1.5">아직 회원이 아니신가요?</span>
-            </a> */}
           </GridItem>
         </Grid>
       </Box>
