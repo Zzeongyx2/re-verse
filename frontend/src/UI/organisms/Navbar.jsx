@@ -17,6 +17,11 @@ function Navbar() {
               RE-VERSE
             </BreadcrumbLink>
           </BreadcrumbItem>
+          <BreadcrumbItem>
+            <BreadcrumbLink isCurrentPage as={Link} to="/character">
+              캐릭터 선택
+            </BreadcrumbLink>
+          </BreadcrumbItem>
         </Breadcrumb>
       </Box>
     </Box>
