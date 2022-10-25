@@ -58,7 +58,8 @@ function Signin() {
     if (!pwRE.test(pw)) {
       setPwValid({
         isValid: true,
-        message: "*4~12글자, 영문대소문자, 숫자, 특수문자(~,!,@)만 사용 가능합니다.",
+        message:
+          "*4~12글자, 영문대소문자, 숫자, 특수문자(~,!,@)만 사용 가능합니다.",
       });
       return;
     }
@@ -131,15 +132,7 @@ function Signin() {
             borderRadius="10"
             _hover={{}}
           />
-          <p
-            style={{
-              color: "red",
-              marginLeft: "5px",
-              fontSize: "10px",
-            }}
-          >
-            {idValid.message}
-          </p>
+          <p className="text-red-500 m-[5px] text-[10px]">{idValid.message}</p>
         </GridItem>
         <GridItem rowSpan={1} colSpan={5}>
           <Input
@@ -154,15 +147,7 @@ function Signin() {
             _hover={{}}
             type="password"
           />
-          <p
-            style={{
-              color: "red",
-              marginLeft: "5px",
-              fontSize: "10px",
-            }}
-          >
-            {pwValid.message}
-          </p>
+          <p className="text-red-500 m-[5px] text-[10px]">{pwValid.message}</p>
         </GridItem>
         <GridItem rowSpan={1} colSpan={5}>
           <Input
@@ -177,13 +162,7 @@ function Signin() {
             _hover={{}}
             type="password"
           />
-          <p
-            style={{
-              color: "red",
-              marginLeft: "5px",
-              fontSize: "10px",
-            }}
-          >
+          <p className="text-red-500 m-[5px] text-[10px]">
             {pwCheckValid.message}
           </p>
         </GridItem>
@@ -201,13 +180,7 @@ function Signin() {
             borderRadius="10"
             _hover={{}}
           />
-          <p
-            style={{
-              color: "red",
-              marginLeft: "5px",
-              fontSize: "10px",
-            }}
-          >
+          <p className="text-red-500 m-[5px] text-[10px]">
             {nickNameValid.message}
           </p>
         </GridItem>
