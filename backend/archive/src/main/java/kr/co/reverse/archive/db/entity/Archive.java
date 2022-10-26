@@ -31,13 +31,13 @@ public class Archive {
 //    @OneToOne
 //    private User user;
 
-//    private List<Stuff> stuffs;
+//    private List<Stuff> stuffs = new ArrayList<>();
 
-//    private List<User> members;
+//    private List<User> members = new ArrayList<>();
 
-//    private List<PhotoBook> photoBooks;
+//    private List<PhotoBook> photoBooks = new ArrayList<>();
 
-//    private List<GuestBook> guestBooks;
+//    private List<GuestBook> guestBooks = new ArrayList<>();
 
     @Builder
     public Archive(String title, String description, Boolean isDeleted, Integer level, LocalDateTime createdTime) {
