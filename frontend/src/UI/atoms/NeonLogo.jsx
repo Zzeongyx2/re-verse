@@ -30,7 +30,6 @@ function NeonLogo() {
               RE-VERSE
             </Text>
           </Box>
-          <Box>START</Box>
         </Box>
       </Container>
       <Container className="absolute grid place-items-center">
@@ -39,7 +38,7 @@ function NeonLogo() {
             {/* // FIXME: delay가 안먹는 이슈 고칠 것 */}
             <Text
               className={
-                `absolute top-1/3 left-auto -mt-7 mb-0 -ml-36 font-neon text-[6.5em] z-10 text-[#f890e7] bg-transparent border-none drop-shadow-4xl` +
+                `absolute top-1/3 left-auto -mt-7 mb-0 -ml-[158px] font-neon text-[6.5em] z-10 text-[#f890e7] bg-transparent border-none drop-shadow-4xl` +
                 (start
                   ? ` visible delay-[5000ms]`
                   : ` hidden opacity-0 transition-opacity delay-500 ease-linear`)
