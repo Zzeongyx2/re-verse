@@ -19,7 +19,7 @@ function Navbar() {
     console.log(location.pathname);
   }, [location]);
   return (
-    <Box className="flex justify-between">
+    <Box className="flex justify-between pb-14">
       <Box>
         <Breadcrumb separator="">
           <Box className="relative">
