@@ -9,6 +9,8 @@ import NavBtn from "../atoms/NavBtn";
 
 import { AiFillHome } from "react-icons/ai";
 import { MdPeopleAlt } from "react-icons/md";
+import { BsArchiveFill } from "react-icons/bs";
+import { TbHanger } from "react-icons/tb";
 
 function Navbar() {
   const location = useLocation();
@@ -17,7 +19,7 @@ function Navbar() {
     console.log(location.pathname);
   }, [location]);
   return (
-    <Box className="flex justify-between">
+    <Box className="flex justify-between pb-14">
       <Box>
         <Breadcrumb separator="">
           <Box className="relative">
@@ -38,17 +40,6 @@ function Navbar() {
                   <Link to="/lobby">
                     <BreadCrumbBtn
                       text={"로비"}
-                      from={"from-main2"}
-                      to={"to-sub2"}
-                    />
-                  </Link>
-                </BreadcrumbItem>
-              )}
-              {location.pathname === "/character" && (
-                <BreadcrumbItem>
-                  <Link to="/character">
-                    <BreadCrumbBtn
-                      text={"캐릭터 선택"}
                       from={"from-main2"}
                       to={"to-sub2"}
                     />
@@ -77,32 +68,87 @@ function Navbar() {
                   </Link>
                 </BreadcrumbItem>
               )}
+              {location.pathname === "/character" && (
+                <BreadcrumbItem>
+                  <Link to="/character">
+                    <BreadCrumbBtn
+                      text={"캐릭터 선택"}
+                      from={"from-main2"}
+                      to={"to-sub2"}
+                    />
+                  </Link>
+                </BreadcrumbItem>
+              )}
             </Box>
           </Box>
         </Breadcrumb>
       </Box>
       {/* <Box className=""> */}
       <Box className="flex justify-between w-72">
-        <NavBtn
-          icon={<AiFillHome className="text-3xl text-white" />}
-          from={"from-main1"}
-          to={"to-sub1"}
-        />
-        <NavBtn
-          icon={<MdPeopleAlt className="text-3xl text-white" />}
-          from={"from-main1"}
-          to={"to-sub1"}
-        />
-        <NavBtn
-          icon={<AiFillHome className="text-3xl text-white" />}
-          from={"from-main1"}
-          to={"to-sub1"}
-        />
-        <NavBtn
-          icon={<AiFillHome className="text-3xl text-white" />}
-          from={"from-main1"}
-          to={"to-sub1"}
-        />
+        <Link to="/lobby">
+          {location.pathname === "/lobby" ? (
+            <NavBtn
+              icon={<AiFillHome className="text-3xl text-gray-800" />}
+              from={"from-main2"}
+              to={"to-sub2"}
+            />
+          ) : (
+            <NavBtn
+              icon={<AiFillHome className="text-3xl text-white" />}
+              from={"from-main1"}
+              to={"to-sub1"}
+            />
+          )}
+        </Link>
+
+        <Link to="/friend">
+          {location.pathname === "/friend" ? (
+            <NavBtn
+              icon={<MdPeopleAlt className="text-3xl text-gray-800" />}
+              from={"from-main2"}
+              to={"to-sub2"}
+            />
+          ) : (
+            <NavBtn
+              icon={<MdPeopleAlt className="text-3xl text-white" />}
+              from={"from-main1"}
+              to={"to-sub1"}
+            />
+          )}
+        </Link>
+
+        <Link to="/archive">
+          {location.pathname === "/archive" ? (
+            <NavBtn
+              icon={<BsArchiveFill className="text-3xl text-gray-800" />}
+              from={"from-main2"}
+              to={"to-sub2"}
+            />
+          ) : (
+            <NavBtn
+              icon={<BsArchiveFill className="text-3xl text-white" />}
+              from={"from-main1"}
+              to={"to-sub1"}
+            />
+          )}
+        </Link>
+        <Link to="/character">
+          {location.pathname === "/character" ? (
+            <NavBtn
+              icon={
+                <TbHanger className="text-3xl text-gray-800 -scale-x-100" />
+              }
+              from={"from-main2"}
+              to={"to-sub2"}
+            />
+          ) : (
+            <NavBtn
+              icon={<TbHanger className="text-3xl text-white -scale-x-100" />}
+              from={"from-main1"}
+              to={"to-sub1"}
+            />
+          )}
+        </Link>
       </Box>
       {/* </Box> */}
     </Box>
