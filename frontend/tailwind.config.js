@@ -13,7 +13,7 @@ module.exports = {
         main1: "#00BEFF",
         main2: "#D2DF23",
         main3: "#C940E4",
-        sub1: "1587F1",
+        sub1: "#1587F1",
         sub2: "#98DF23",
         sub3: "#FF7067",
         sub4: "#EF5DA8",
