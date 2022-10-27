@@ -3,8 +3,6 @@ import { Box, Grid, GridItem, Input, Textarea } from "@chakra-ui/react";
 
 function LobbyProfile() {
   const [userInfo, setUserInfo] = useState({
-    userImg:
-      "https://ggotmari.s3.ap-northeast-2.amazonaws.com/profile/3ae5d166-833f-492f-a36f-32110569d100_%EB%9D%BC%EC%9D%B4%EC%96%B8.jfif",
     nickName: "Zl존윤sun",
     message: "늦었다고 생각할때가 진짜 너무 늦었다",
   });
@@ -81,7 +79,7 @@ function LobbyProfile() {
             h="64px"
             border="1px"
             // borderColor="white"
-            p="2"
+            // p="2"
             color="white"
             borderTopRadius="24"
             className="bg-gradient-to-t from-main1 to-sub1"
