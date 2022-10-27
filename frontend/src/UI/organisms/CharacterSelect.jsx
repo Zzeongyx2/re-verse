@@ -21,7 +21,11 @@ function CharacterSelect() {
 
   return (
     <Box>
-      <Grid templateColumns="repeat(8)" templateRows="repeat(2)" className="w-[863px]">
+      <Grid
+        templateColumns="repeat(8)"
+        templateRows="repeat(2)"
+        className="w-[863px]"
+      >
         <GridItem
           colSpan={8}
           rowSpan={1}
@@ -37,7 +41,11 @@ function CharacterSelect() {
             <p className="font-bold text-2xl drop-shadow">캐릭터 선택</p>
           </div>
         </GridItem>
-        <GridItem colSpan={8} rowSpan={1} className="h-[550px] flex justify-center items-center">
+        <GridItem
+          colSpan={8}
+          rowSpan={1}
+          className="h-[550px] flex justify-center items-center"
+        >
           <Grid
             templateColumns="repeat(8, 1fr)"
             templateRows="repeat(5, 1fr)"
@@ -46,7 +54,11 @@ function CharacterSelect() {
             {characters.map((character) => {
               return (
                 <GridItem colSpan={1} className="w-[75px] h-[75px] m-2 ">
-                  <img src={character.img} alt={character.idx} className="w-full h-full" />
+                  <img
+                    src={character.img}
+                    alt={character.idx}
+                    className="w-full h-full rounded-full"
+                  />
                 </GridItem>
               );
             })}
