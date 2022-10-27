@@ -26,6 +26,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  input,
+  label {
+    @apply inline-block;
+  }
+}
+
+@layer components {
+  .input-border {
+    @apply border-2 focus:outline-none;
+  }
+  .input-placehoder {
+    @apply placeholder:text-base placehoder:text-base placeholder:text-font2;
+  }
+  .color-delay {
+    @apply transition hover:duration-500;
+  }
+}
+
 html,
 body,
 main {
