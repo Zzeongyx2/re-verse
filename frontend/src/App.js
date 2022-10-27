@@ -19,7 +19,7 @@ function App() {
         <Route path="/test" element={<TestPage />} />
         <Route path="/lobby" element={<Lobby />} />
         <Route path="/character" element={<SelectCharacter />} />
-        <Route path="/friend" element={<Friend />} />
+        <Route path="/friend/*" element={<Friend />} />
         <Route path="/archive" element={<Archive />} />
       </Routes>
     </BrowserRouter>
