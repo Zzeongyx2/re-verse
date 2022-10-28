@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
-import { useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Button from "../atoms/Button";
 import FriendAccept from "../organisms/FriendAccept";
 import FriendList from "../organisms/FriendList";
@@ -8,10 +8,22 @@ import FriendRequest from "../organisms/FriendRequest";
 import Navbar from "../organisms/Navbar";
 
 function Friend() {
-  const [selectTap, setSelectTap] = useState("친구목록");
+  const [selectTap, setSelectTap] = useState("");
+  const location = useLocation();
+
   const clickBtn = (tap) => {
     setSelectTap(tap);
   };
+
+  useEffect(() => {
+    if (location.pathname.includes("list")) {
+      setSelectTap("친구목록");
+    } else if (location.pathname.includes("request")) {
+      setSelectTap("친구요청");
+    } else if (location.pathname.includes("accept")) {
+      setSelectTap("친구수락");
+    }
+  }, []);
 
   return (
     <Box>
