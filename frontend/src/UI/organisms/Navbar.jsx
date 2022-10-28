@@ -45,9 +45,9 @@ function Navbar() {
                   </Link>
                 </BreadcrumbItem>
               )}
-              {location.pathname === "/archive" && (
+              {location.pathname.includes("/archive/") && (
                 <BreadcrumbItem>
-                  <Link to="/archive">
+                  <Link to="/archive/my">
                     <BreadCrumbBtn text={"아카이브"} from={"from-main2"} to={"to-sub2"} />
                   </Link>
                 </BreadcrumbItem>
@@ -82,7 +82,7 @@ function Navbar() {
         </Link>
 
         <Link to="/friend/list">
-          {location.pathname === "/friend/list" ? (
+          {location.pathname.includes("/friend/") ? (
             <NavBtn
               icon={<MdPeopleAlt className="text-3xl text-gray-800" />}
               from={"from-main2"}
@@ -97,8 +97,8 @@ function Navbar() {
           )}
         </Link>
 
-        <Link to="/archive">
-          {location.pathname === "/archive" ? (
+        <Link to="/archive/my">
+          {location.pathname.includes("/archive/") ? (
             <NavBtn
               icon={<BsArchiveFill className="text-3xl text-gray-800" />}
               from={"from-main2"}
