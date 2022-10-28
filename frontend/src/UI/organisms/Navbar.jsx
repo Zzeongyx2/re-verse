@@ -26,11 +26,7 @@ function Navbar() {
             <Box className="absolute z-50">
               <BreadcrumbItem>
                 <Link to="/lobby">
-                  <BreadCrumbBtn
-                    text={"RE-VERSE"}
-                    from={"from-main1"}
-                    to={"to-sub1"}
-                  />
+                  <BreadCrumbBtn text={"RE-VERSE"} from={"from-main1"} to={"to-sub1"} />
                 </Link>
               </BreadcrumbItem>
             </Box>
@@ -38,44 +34,28 @@ function Navbar() {
               {location.pathname === "/lobby" && (
                 <BreadcrumbItem>
                   <Link to="/lobby">
-                    <BreadCrumbBtn
-                      text={"로비"}
-                      from={"from-main2"}
-                      to={"to-sub2"}
-                    />
+                    <BreadCrumbBtn text={"로비"} from={"from-main2"} to={"to-sub2"} />
                   </Link>
                 </BreadcrumbItem>
               )}
-              {location.pathname === "/friend" && (
+              {location.pathname.includes("/friend/") && (
                 <BreadcrumbItem>
-                  <Link to="/friend">
-                    <BreadCrumbBtn
-                      text={"친구"}
-                      from={"from-main2"}
-                      to={"to-sub2"}
-                    />
+                  <Link to="/friend/list">
+                    <BreadCrumbBtn text={"친구"} from={"from-main2"} to={"to-sub2"} />
                   </Link>
                 </BreadcrumbItem>
               )}
-              {location.pathname === "/archive" && (
+              {location.pathname.includes("/archive/") && (
                 <BreadcrumbItem>
-                  <Link to="/archive">
-                    <BreadCrumbBtn
-                      text={"아카이브"}
-                      from={"from-main2"}
-                      to={"to-sub2"}
-                    />
+                  <Link to="/archive/my">
+                    <BreadCrumbBtn text={"아카이브"} from={"from-main2"} to={"to-sub2"} />
                   </Link>
                 </BreadcrumbItem>
               )}
               {location.pathname === "/character" && (
                 <BreadcrumbItem>
                   <Link to="/character">
-                    <BreadCrumbBtn
-                      text={"캐릭터 선택"}
-                      from={"from-main2"}
-                      to={"to-sub2"}
-                    />
+                    <BreadCrumbBtn text={"캐릭터 선택"} from={"from-main2"} to={"to-sub2"} />
                   </Link>
                 </BreadcrumbItem>
               )}
@@ -101,8 +81,8 @@ function Navbar() {
           )}
         </Link>
 
-        <Link to="/friend">
-          {location.pathname === "/friend" ? (
+        <Link to="/friend/list">
+          {location.pathname.includes("/friend/") ? (
             <NavBtn
               icon={<MdPeopleAlt className="text-3xl text-gray-800" />}
               from={"from-main2"}
@@ -117,8 +97,8 @@ function Navbar() {
           )}
         </Link>
 
-        <Link to="/archive">
-          {location.pathname === "/archive" ? (
+        <Link to="/archive/my">
+          {location.pathname.includes("/archive/") ? (
             <NavBtn
               icon={<BsArchiveFill className="text-3xl text-gray-800" />}
               from={"from-main2"}
@@ -135,9 +115,7 @@ function Navbar() {
         <Link to="/character">
           {location.pathname === "/character" ? (
             <NavBtn
-              icon={
-                <TbHanger className="text-3xl text-gray-800 -scale-x-100" />
-              }
+              icon={<TbHanger className="text-3xl text-gray-800 -scale-x-100" />}
               from={"from-main2"}
               to={"to-sub2"}
             />
