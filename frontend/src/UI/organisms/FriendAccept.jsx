@@ -1,15 +1,9 @@
 import { useState, useEffect } from "react";
-import { Box, Grid, GridItem, Input } from "@chakra-ui/react";
-import { BsCheckCircle, BsSearch, BsXCircle } from "react-icons/bs";
-import { FiPlusCircle } from "react-icons/fi";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
+import { BsCheckCircle, BsXCircle } from "react-icons/bs";
 
 function FriendAccept() {
-  const [findNickName, setFindNickName] = useState("");
   const [friendAcceptList, setFriendAcceptList] = useState([]);
-
-  const findNickNameHandleChange = (e) => {
-    setFindNickName(e.target.value);
-  };
 
   const friendAccept = (email) => {
     // TODO: 친구수락 하기
@@ -59,60 +53,52 @@ function FriendAccept() {
           className="bg-white rounded-3xl w-[43vw] h-full py-4 px-5 place-self-start"
         >
           <Box className="overflow-y-scroll h-[450px]">
-            {friendAcceptList
-              .filter((friend) => {
-                if (findNickName.trim() === "") {
-                  return friend;
-                } else if (friend.nickname.includes(findNickName)) {
-                  return friend;
-                }
-              })
-              .map((friend, index) => {
-                return (
-                  <Grid
-                    key={index}
-                    templateColumns="repeat(15, 1fr)"
-                    templateRows="repeat(2, 1fr)"
-                    alignItems="center"
-                    gap={2}
-                    className="my-1 py-1 shadow"
-                  >
-                    <GridItem colSpan={1} rowSpan={2} className="w-9 h-9">
-                      <img src={friend.avatar} alt={friend.nickname} className="w-full h-full" />
-                    </GridItem>
-                    <GridItem colSpan={12} rowSpan={1} className="text-xs font-bold">
-                      <div>{friend.nickname}</div>
-                    </GridItem>
-                    <GridItem colStart={14} rowSpan={2} className="w-5 h-5 mr-2">
-                      <button
-                        className="w-full h-full"
-                        onClick={() => {
-                          friendAccept(friend.email);
-                        }}
-                      >
-                        <BsCheckCircle className="text-[#4ECB71] w-full h-full" />
-                      </button>
-                    </GridItem>
-                    <GridItem colStart={15} rowSpan={2} className="w-5 h-5 mr-2">
-                      <button
-                        className="w-full h-full"
-                        onClick={() => {
-                          friendRefuse(friend.email);
-                        }}
-                      >
-                        <BsXCircle className="text-[#EF5DA8] w-full h-full" />
-                      </button>
-                    </GridItem>
-                    <GridItem
-                      colSpan={12}
-                      rowSpan={1}
-                      className="text-xs whitespace-nowrap overflow-hidden text-ellipsis"
+            {friendAcceptList.map((friend, index) => {
+              return (
+                <Grid
+                  key={index}
+                  templateColumns="repeat(15, 1fr)"
+                  templateRows="repeat(2, 1fr)"
+                  alignItems="center"
+                  gap={2}
+                  className="my-1 py-1 shadow"
+                >
+                  <GridItem colSpan={1} rowSpan={2} className="w-9 h-9">
+                    <img src={friend.avatar} alt={friend.nickname} className="w-full h-full" />
+                  </GridItem>
+                  <GridItem colSpan={12} rowSpan={1} className="text-xs font-bold">
+                    <div>{friend.nickname}</div>
+                  </GridItem>
+                  <GridItem colStart={14} rowSpan={2} className="w-5 h-5 mr-2">
+                    <button
+                      className="w-full h-full"
+                      onClick={() => {
+                        friendAccept(friend.email);
+                      }}
                     >
-                      {friend.message}
-                    </GridItem>
-                  </Grid>
-                );
-              })}
+                      <BsCheckCircle className="text-[#4ECB71] w-full h-full" />
+                    </button>
+                  </GridItem>
+                  <GridItem colStart={15} rowSpan={2} className="w-5 h-5 mr-2">
+                    <button
+                      className="w-full h-full"
+                      onClick={() => {
+                        friendRefuse(friend.email);
+                      }}
+                    >
+                      <BsXCircle className="text-[#EF5DA8] w-full h-full" />
+                    </button>
+                  </GridItem>
+                  <GridItem
+                    colSpan={12}
+                    rowSpan={1}
+                    className="text-xs whitespace-nowrap overflow-hidden text-ellipsis"
+                  >
+                    {friend.message}
+                  </GridItem>
+                </Grid>
+              );
+            })}
           </Box>
         </GridItem>
         <GridItem
