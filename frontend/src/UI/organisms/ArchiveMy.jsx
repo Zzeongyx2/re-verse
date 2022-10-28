@@ -5,7 +5,11 @@ import { BiLogIn, BiPencil } from "react-icons/bi";
 
 function ArchiveMy() {
   const [archiveList, setArchiveList] = useState([]);
-
+  // TODO: 이미지 저장용 변수 나중에 지우기
+  const [image] = useState(
+    "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject"
+  );
+  // TODO:
   const enterArchive = (archiveId) => {
     // TODO: 아카이브로 이동
     console.log(archiveId, "이동");
@@ -32,43 +36,59 @@ function ArchiveMy() {
         members: [
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
+          },
+          {
+            nickname: "name",
+            avatar: image,
+          },
+          {
+            nickname: "name",
+            avatar: image,
+          },
+          {
+            nickname: "name",
+            avatar: image,
+          },
+          {
+            nickname: "name",
+            avatar: image,
+          },
+          {
+            nickname: "name",
+            avatar: image,
+          },
+          {
+            nickname: "name",
+            avatar: image,
           },
         ],
       },
@@ -81,8 +101,7 @@ function ArchiveMy() {
         members: [
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
         ],
       },
@@ -95,8 +114,7 @@ function ArchiveMy() {
         members: [
           {
             nickname: "String",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
         ],
       },
@@ -109,8 +127,7 @@ function ArchiveMy() {
         members: [
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
         ],
       },
@@ -123,8 +140,7 @@ function ArchiveMy() {
         members: [
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
         ],
       },
@@ -137,8 +153,7 @@ function ArchiveMy() {
         members: [
           {
             nickname: "String",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
         ],
       },
@@ -151,8 +166,7 @@ function ArchiveMy() {
         members: [
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
         ],
       },
@@ -165,8 +179,7 @@ function ArchiveMy() {
         members: [
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
         ],
       },
@@ -179,8 +192,7 @@ function ArchiveMy() {
         members: [
           {
             nickname: "String",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
         ],
       },
@@ -193,8 +205,7 @@ function ArchiveMy() {
         members: [
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
         ],
       },
@@ -207,8 +218,7 @@ function ArchiveMy() {
         members: [
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
         ],
       },
@@ -221,8 +231,7 @@ function ArchiveMy() {
         members: [
           {
             nickname: "name",
-            avatar:
-              "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+            avatar: image,
           },
         ],
       },

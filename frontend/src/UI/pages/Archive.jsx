@@ -13,14 +13,9 @@ function Archive() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const clickBtn = (tap) => {
-    setSelectTap(tap);
-  };
-
   const createArchive = () => {
     // TODO: 새 아카이브 만들기
     navigate("/archive/my");
-    setSelectTap("나의아카이브");
   };
 
   useEffect(() => {
@@ -31,18 +26,14 @@ function Archive() {
     } else if (location.pathname.includes("like")) {
       setSelectTap("즐겨찾기");
     }
-  }, []);
+  }, [location]);
 
   return (
     <Box>
       <Navbar />
       <Box className="flex justify-between mb-5">
         <div className="flex">
-          <div
-            onClick={() => {
-              clickBtn("나의아카이브");
-            }}
-          >
+          <div>
             <Link to="my">
               <Button
                 color={selectTap === "나의아카이브" ? "white" : "black"}
@@ -53,11 +44,7 @@ function Archive() {
               />
             </Link>
           </div>
-          <div
-            onClick={() => {
-              clickBtn("친구아카이브");
-            }}
-          >
+          <div>
             <Link to="friend">
               <Button
                 color={selectTap === "친구아카이브" ? "white" : "black"}
@@ -68,11 +55,7 @@ function Archive() {
               />
             </Link>
           </div>
-          <div
-            onClick={() => {
-              clickBtn("즐겨찾기");
-            }}
-          >
+          <div>
             <Link to="like">
               <Button
                 color={selectTap === "즐겨찾기" ? "white" : "black"}

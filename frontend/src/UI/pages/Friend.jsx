@@ -11,10 +11,6 @@ function Friend() {
   const [selectTap, setSelectTap] = useState("");
   const location = useLocation();
 
-  const clickBtn = (tap) => {
-    setSelectTap(tap);
-  };
-
   useEffect(() => {
     if (location.pathname.includes("list")) {
       setSelectTap("친구목록");
@@ -23,17 +19,13 @@ function Friend() {
     } else if (location.pathname.includes("accept")) {
       setSelectTap("친구수락");
     }
-  }, []);
+  }, [location]);
 
   return (
     <Box>
       <Navbar />
       <Box className="flex mb-5">
-        <div
-          onClick={() => {
-            clickBtn("친구목록");
-          }}
-        >
+        <div>
           <Link to="list">
             <Button
               color={selectTap === "친구목록" ? "white" : "black"}
@@ -44,11 +36,7 @@ function Friend() {
             />
           </Link>
         </div>
-        <div
-          onClick={() => {
-            clickBtn("친구요청");
-          }}
-        >
+        <div>
           <Link to="request">
             <Button
               color={selectTap === "친구요청" ? "white" : "black"}
@@ -59,11 +47,7 @@ function Friend() {
             />
           </Link>
         </div>
-        <div
-          onClick={() => {
-            clickBtn("친구수락");
-          }}
-        >
+        <div>
           <Link to="accept">
             <Button
               color={selectTap === "친구수락" ? "white" : "black"}
