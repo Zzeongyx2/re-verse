@@ -3,10 +3,13 @@ package kr.co.reverse.archive.db.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -14,9 +17,11 @@ import java.util.List;
 public class Archive {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Type(type = "uuid-char")
     @Column(name = "archive_id")
-    private Integer id;
+    private UUID id;
 
     private String title;
 
@@ -29,6 +34,7 @@ public class Archive {
     private LocalDateTime createdTime;
 
 //    @OneToOne
+//    @JoinColumn(name = "user_id")
 //    private User user;
 
 //    private List<Stuff> stuffs = new ArrayList<>();
