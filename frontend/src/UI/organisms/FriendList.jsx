@@ -37,7 +37,7 @@ function FriendList() {
   };
 
   const archiveDelete = (archiveId) => {
-    // TODO: 아카이브 삭제
+    // TODO: 공유된 아카이브 삭제
     console.log(archiveId, "삭제");
   };
 

@@ -22,7 +22,7 @@ function App() {
           <Route path="/lobby" element={<Lobby />} />
           <Route path="/character" element={<Character />} />
           <Route path="/friend/*" element={<Friend />} />
-          <Route path="/archive" element={<Archive />} />
+          <Route path="/archive/*" element={<Archive />} />
         </Routes>
       </Box>
     </BrowserRouter>
