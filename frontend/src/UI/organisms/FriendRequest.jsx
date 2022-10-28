@@ -6,7 +6,11 @@ import { FiPlusCircle } from "react-icons/fi";
 function FriendRequest() {
   const [findNickName, setFindNickName] = useState("");
   const [userList, setUserList] = useState([]);
-
+  // TODO: 이미지 저장용 변수 나중에 지우기
+  const [image] = useState(
+    "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject"
+  );
+  // TODO:
   const findNickNameHandleChange = (e) => {
     setFindNickName(e.target.value);
   };
@@ -24,22 +28,19 @@ function FriendRequest() {
         {
           email: "email@naver.com",
           nickname: "KIN거운KAN쵸",
-          avatar:
-            "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221027%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221027T011226Z&X-Amz-Expires=86400&X-Amz-Signature=b2d3b88c60fc8c36d3348318a552b72db514045588b08c90f60bbbd566452df6&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+          avatar: image,
           message: "엉망으로 살아야 해! 인생은 한 번이야!",
         },
         {
           email: "email@naver.com",
           nickname: "oO강약약강Oo",
-          avatar:
-            "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221027%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221027T011226Z&X-Amz-Expires=86400&X-Amz-Signature=b2d3b88c60fc8c36d3348318a552b72db514045588b08c90f60bbbd566452df6&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+          avatar: image,
           message: "가는 말이 고우면, 얕본다.",
         },
         {
           email: "email@naver.com",
           nickname: "zl존윤sun2",
-          avatar:
-            "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221027%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221027T011226Z&X-Amz-Expires=86400&X-Amz-Signature=b2d3b88c60fc8c36d3348318a552b72db514045588b08c90f60bbbd566452df6&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject",
+          avatar: image,
           message:
             "새벽에 먹는 맥주와 치킨은 0 칼로리다.새벽에 먹는 맥주와 치킨은 0 칼로리다.새벽에 먹는 맥주와 치킨은 0 칼로리다.",
         },
