@@ -14,19 +14,18 @@ public class ArchiveService {
 
     private final ArchiveRepository archiveRepository;
 
-    public void createArchive(ArchiveReq archiveReq) throws Exception {
+    public void createArchive(ArchiveReq archiveReq) {
         String title = archiveReq.getTitle();
         String description = archiveReq.getDescription();
 
         if (title == null || description == null) {
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         }
 
         Archive archive = Archive.builder()
                 .title(title)
                 .description(description)
                 .isDeleted(false)
-//                .level()
 //                .user()
                 .createdTime(LocalDateTime.now())
                 .build();
