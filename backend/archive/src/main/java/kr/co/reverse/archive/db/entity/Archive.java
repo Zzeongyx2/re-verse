@@ -29,13 +29,14 @@ public class Archive {
 
     private LocalDate createdTime;
 
-    @OneToOne
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
     private User user;
 
 //    private List<Stuff> stuffs = new ArrayList<>();
 
-    @OneToMany
-    private List<User> members = new ArrayList<>();
+    @OneToMany(mappedBy = "archive")
+    private List<ArchiveMember> members = new ArrayList<>();
 
 //    private List<PhotoBook> photoBooks = new ArrayList<>();
 
