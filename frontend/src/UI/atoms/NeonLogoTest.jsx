@@ -1,6 +1,6 @@
 function NeonLogoTest() {
   return (
-    <div className="">
+    <div className="flex items-center justify-center">
       <div className="w-[500px] my-0 mx-auto border-[6px] border-[#f1f5ff] rounded-lg text-center py-8 px-11 relative flex items-center justify-center shadow-3xl animate-blinking">
         <span
           className="w-full font-neon text-[5.5em] text-[#f1f5ff] whitespace-pre relative animate-flicker
@@ -11,7 +11,7 @@ function NeonLogoTest() {
           <span className="drop-shadow-3xl">RE-VERSE</span>
         </span>
       </div>
-      <div>
+      <div className="absolute">
         <span className="font-neon text-[5.5em] text-[#f890e7] drop-shadow-4xl">
           START
         </span>
