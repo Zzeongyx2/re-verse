@@ -134,7 +134,13 @@ function FriendList() {
             />
           </div>
           {/* friend list */}
-          <div>
+          {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
+          {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
+          {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
+          {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
+          {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
+          {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
+          <div className="w-[calc(100%-70px)]">
             {friendList
               .filter((friend) => {
                 if (findNickName.trim() === "") {
@@ -145,18 +151,28 @@ function FriendList() {
               })
               .map((friend, index) => {
                 return (
-                  <div key={index}>
-                    <div className="flex items-center">
+                  // <div key={index}>
+                  <div
+                    key={index}
+                    className="flex items-center justify-between"
+                  >
+                    <div className="flex">
                       {/* <img src={friend.avatar} alt={friend.nickname} /> */}
                       <Avatar name="profileImg" src={profileImg} />
-                      <div>
+                      <div className="">
                         <div>{friend.nickname}</div>
-                        <div>{friend.message}</div>
+                        <p className="overflow-hidden text-ellipsis line-clamp-1">
+                          {friend.message}
+                        </p>
+                        {/* <div className="whitespace-nowrap overflow-hidden text-ellipsis">
+                        {friend.message}
+                      </div> */}
                       </div>
-                      <button>
-                        <FiMinusCircle className="text-[#FF7067]" />
-                      </button>
                     </div>
+                    <button className="px-4">
+                      <FiMinusCircle className="text-[#FF7067]" />
+                    </button>
+                    {/* </div> */}
                   </div>
                 );
               })}
