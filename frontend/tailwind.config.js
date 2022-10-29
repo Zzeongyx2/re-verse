@@ -36,16 +36,6 @@ module.exports = {
           // "0 0 6px #0049ff",
           "0 0 6px rgba(0, 73, 255, 0.5)",
         ],
-        // "3xl": [
-        //   "0 0 0 transparent",
-        //   "0 0 10px #0049ff",
-        //   "0 0 20px rgba(0, 73, 255, 0.5)",
-        //   "0 0 40px #0049ff",
-        //   "0 0 300px #0049ff",
-        //   "0 0 200px #0049ff",
-        //   "0 0 300px #0049ff",
-        //   "0 0 500px #0049ff",
-        // ],
         "4xl": ["0 0 2px #fa61bf", "0 0 6px #fa61bf"],
         "5xl": [
           "0 0 0 transparent",
@@ -62,6 +52,8 @@ module.exports = {
         flicker2: "flicker 8s infinite alternate",
         blinking: "blinking 0.01s infinite alternate",
         blinking2: "blinking 0.02s infinite alternate",
+        fadein: "fadein 1s ease-in-out",
+        fadeout: "fadeout 1s ease-in-out",
       },
       keyframes: {
         flicker: {
@@ -72,6 +64,14 @@ module.exports = {
         },
         blinking: {
           "75%": { opacity: 0.8 },
+        },
+        fadein: {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
+        fadeout: {
+          from: { opacity: 1 },
+          to: { opacity: 0 },
         },
       },
       boxShadow: {
