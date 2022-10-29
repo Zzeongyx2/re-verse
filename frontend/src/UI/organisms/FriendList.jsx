@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
-import { Box, Grid, GridItem, Input } from "@chakra-ui/react";
+
 import { BsSearch } from "react-icons/bs";
 import { FiMinusCircle } from "react-icons/fi";
 import { BiLogIn } from "react-icons/bi";
 import { HiOutlineTrash } from "react-icons/hi";
 
+import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
+
 function FriendList() {
+  // temporary data
   // TODO: 이미지 저장용 변수 나중에 지우기
-  const [image] = useState(
-    "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject"
+  const [profileImg] = useState(
+    "https://images.unsplash.com/photo-1638643391904-9b551ba91eaa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2592&q=80"
   );
+
   // TODO:
   const [findNickName, setFindNickName] = useState("");
   const [friendList, setFriendList] = useState([]);
@@ -54,19 +58,19 @@ function FriendList() {
         {
           email: "email@naver.com",
           nickname: "KIN거운KAN쵸",
-          avatar: image,
+          avatar: profileImg,
           message: "엉망으로 살아야 해! 인생은 한 번이야!",
         },
         {
           email: "email@naver.com",
           nickname: "oO강약약강Oo",
-          avatar: image,
+          avatar: profileImg,
           message: "가는 말이 고우면, 얕본다.",
         },
         {
           email: "email@naver.com",
           nickname: "zl존윤sun2",
-          avatar: image,
+          avatar: profileImg,
           message:
             "새벽에 먹는 맥주와 치킨은 0 칼로리다.새벽에 먹는 맥주와 치킨은 0 칼로리다.새벽에 먹는 맥주와 치킨은 0 칼로리다.",
         },
@@ -114,25 +118,23 @@ function FriendList() {
   }, [selectFriend]);
 
   return (
-    <Box>
-      <Grid templateColumns="repeat(2, 1fr)" justifyItems="center" className="h-[500px]">
-        <GridItem
-          colSpan={1}
-          className="bg-white rounded-3xl w-[43vw] h-full py-4 px-5 place-self-start"
-        >
-          <Box className="shadow ">
-            <label className="flex justify-center items-center pl-4">
-              <BsSearch />
-              <Input
-                placeholder="닉네임을 검색하여 친구를 찾아보세요"
-                focusBorderColor="none"
-                border={0}
-                onChange={findNickNameHandleChange}
-                value={findNickName}
-              />
-            </label>
-          </Box>
-          <Box className="overflow-y-scroll h-[400px]">
+    <div>
+      {/* friend list */}
+      <div className="">
+        <div className="bg-white rounded-3xl w-2/5 h-full py-5 flex flex-col items-center">
+          {/* search */}
+          <div className="w-[calc(100%-70px)] flex justify-center items-center px-4 py-2.5 mb-4 border-2 border-base1/20 rounded-2xl">
+            <BsSearch size={24} />
+            <input
+              onChange={findNickNameHandleChange}
+              value={findNickName}
+              type="text"
+              placeholder="닉네임을 검색하여 친구를 찾아보세요"
+              className="w-full focus:outline-none pl-3.5"
+            />
+          </div>
+          {/* friend list */}
+          <div>
             {friendList
               .filter((friend) => {
                 if (findNickName.trim() === "") {
@@ -143,104 +145,25 @@ function FriendList() {
               })
               .map((friend, index) => {
                 return (
-                  <Grid
-                    key={index}
-                    templateColumns="repeat(15, 1fr)"
-                    templateRows="repeat(2, 1fr)"
-                    alignItems="center"
-                    gap={2}
-                    className="my-1 py-1 shadow"
-                  >
-                    <GridItem colSpan={1} rowSpan={2} className="w-9 h-9">
-                      <img src={friend.avatar} alt={friend.nickname} className="w-full h-full" />
-                    </GridItem>
-                    <GridItem colSpan={13} rowSpan={1} className="text-xs font-bold">
-                      <div
-                        className="hover:cursor-pointer"
-                        onClick={() => {
-                          clickNickname(friend);
-                        }}
-                      >
-                        {friend.nickname}
+                  <div key={index}>
+                    <div className="flex items-center">
+                      {/* <img src={friend.avatar} alt={friend.nickname} /> */}
+                      <Avatar name="profileImg" src={profileImg} />
+                      <div>
+                        <div>{friend.nickname}</div>
+                        <div>{friend.message}</div>
                       </div>
-                    </GridItem>
-                    <GridItem colStart={15} rowSpan={2} className="w-5 h-5 mr-2">
-                      <button
-                        className="w-full h-full"
-                        onClick={() => {
-                          friendDelete(friend.email);
-                        }}
-                      >
-                        <FiMinusCircle className="text-red-500 w-full h-full" />
+                      <button>
+                        <FiMinusCircle className="text-[#FF7067]" />
                       </button>
-                    </GridItem>
-                    <GridItem
-                      colSpan={13}
-                      rowSpan={1}
-                      className="text-xs whitespace-nowrap overflow-hidden text-ellipsis"
-                    >
-                      {friend.message}
-                    </GridItem>
-                  </Grid>
+                    </div>
+                  </div>
                 );
               })}
-          </Box>
-        </GridItem>
-        <GridItem
-          colSpan={1}
-          className="bg-white rounded-3xl w-[43vw] h-full py-4 px-5 place-self-end"
-        >
-          <Box className="shadow p-2 font-bold text-xl whitespace-nowrap overflow-hidden text-ellipsis">
-            {rightTitle}
-          </Box>
-          <Box className="overflow-y-scroll h-[400px]">
-            {archiveList.map((archive, index) => {
-              return (
-                <Grid
-                  key={index}
-                  templateColumns="repeat(15, 1fr)"
-                  templateRows="repeat(2, 1fr)"
-                  alignItems="center"
-                  gap={2}
-                  className="my-1 py-1 shadow"
-                >
-                  <GridItem colSpan={13} rowSpan={1} className="text-xs font-bold ">
-                    {archive.title}
-                  </GridItem>
-                  <GridItem colStart={14} colSpan={1} rowSpan={2} className="w-7 h-7">
-                    <button
-                      className="w-full h-full bg-[#15B9F1] rounded-3xl border-4 border-[#B7C6E7]"
-                      onClick={() => {
-                        enterArchive(archive.archiveId);
-                      }}
-                    >
-                      <BiLogIn className="text-white w-4 h-4" />
-                    </button>
-                  </GridItem>
-                  <GridItem colStart={15} colSpan={1} rowSpan={2} className="w-7 h-7 mr-2">
-                    <button
-                      className="w-full h-full bg-[#FF7067] rounded-3xl border-4 border-[#B7C6E7] flex items-center justify-center"
-                      onClick={() => {
-                        archiveDelete(archive.archiveId);
-                      }}
-                    >
-                      <HiOutlineTrash className="text-white w-4 h-4" />
-                    </button>
-                  </GridItem>
-                  <GridItem
-                    colSpan={13}
-                    rowSpan={1}
-                    className="text-xs whitespace-nowrap overflow-hidden text-ellipsis"
-                  >
-                    {archive.description}
-                  </GridItem>
-                </Grid>
-              );
-            })}
-          </Box>
-        </GridItem>
-      </Grid>
-    </Box>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
