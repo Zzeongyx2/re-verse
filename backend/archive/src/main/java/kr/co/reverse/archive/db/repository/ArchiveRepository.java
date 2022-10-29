@@ -5,9 +5,10 @@ import kr.co.reverse.archive.db.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.UUID;
 
-public interface ArchiveRepository extends JpaRepository<Archive, Integer> {
+public interface ArchiveRepository extends JpaRepository<Archive, UUID> {
 
-//    List<Archive> findAllByUser(User user);
+    List<Archive> findAllByUser(User user);
 
 }
