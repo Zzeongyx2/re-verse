@@ -59,6 +59,7 @@ module.exports = {
       },
       animation: {
         flicker: "flicker 5s infinite alternate",
+        flicker2: "flicker 8s infinite alternate",
         blinking: "blinking 0.01s infinite alternate",
         blinking2: "blinking 0.02s infinite alternate",
       },
