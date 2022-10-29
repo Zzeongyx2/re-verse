@@ -124,7 +124,7 @@ function Signin() {
 
   return (
     <Box className="h-full flex items-center justify-center">
-      <Box className="max-w-md">
+      <Box className="">
         <Grid templateColumns="repeat(5)" templateRows="repeat(5)" gap={3}>
           <GridItem rowSpan={1} colSpan={5} py={4}>
             <Link to="/login" element={<Login />}>
