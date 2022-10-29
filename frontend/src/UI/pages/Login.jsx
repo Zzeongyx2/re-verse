@@ -41,7 +41,7 @@ function Login() {
   };
 
   return (
-    <Box className="bg-base2 h-screen flex items-center justify-center">
+    <Box className="h-full flex items-center justify-center">
       <Box className="max-w-md">
         <Grid templateColumns="repeat(5)" templateRows="repeat(4)" gap={5}>
           <GridItem rowSpan={1} colSpan={5} py={4}>
