@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ArchiveReq {
+public class CreateArchiveReq {
     private String title;
 
     private String description;
