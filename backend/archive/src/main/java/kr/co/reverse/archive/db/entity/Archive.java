@@ -8,6 +8,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,15 +30,15 @@ public class Archive {
 
     private Boolean isDeleted;
 
-    private Integer level;
-
     private LocalDateTime createdTime;
 
-//    @OneToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 //    private List<Stuff> stuffs = new ArrayList<>();
+
+//    private List<User> members = new ArrayList<>();
 
 //    private List<User> members = new ArrayList<>();
 
@@ -46,11 +47,12 @@ public class Archive {
 //    private List<GuestBook> guestBooks = new ArrayList<>();
 
     @Builder
-    public Archive(String title, String description, Boolean isDeleted, Integer level, LocalDateTime createdTime) {
+    public Archive(String title, String description, Boolean isDeleted, LocalDateTime createdTime, User user, List<User> members) {
         this.title = title;
         this.description = description;
         this.isDeleted = isDeleted;
-        this.level = level;
         this.createdTime = createdTime;
+        this.user = user;
+//        this.members = members;
     }
 }
