@@ -1,6 +1,9 @@
 package kr.co.reverse.archive.db.entity;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +12,9 @@ import javax.persistence.Id;
 import java.util.UUID;
 
 @Getter
+@Setter
 @Entity
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -18,4 +23,9 @@ public class User {
     private UUID id;
 
     private String nickname;
+
+    @Builder
+    public User(String nickname) {
+        this.nickname = nickname;
+    }
 }
