@@ -22,10 +22,10 @@ function Friend() {
   }, [location]);
 
   return (
-    <div>
+    <div className="mt-8">
       <Navbar />
 
-      <div className="flex mb-5">
+      <div className="flex my-5">
         <div>
           <Link to="list">
             <Button
