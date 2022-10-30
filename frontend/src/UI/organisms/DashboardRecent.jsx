@@ -4,7 +4,15 @@ import { Link } from "react-router-dom";
 
 function DashboardRecent() {
   return (
-    <Box sx={{ border: 5, borderColor: "#B7C6E7", borderRadius: "24px", m: 1, p: 5 }}>
+    <div
+      sx={{
+        border: 5,
+        borderColor: "#B7C6E7",
+        borderRadius: "24px",
+        m: 1,
+        p: 5,
+      }}
+    >
       <Grid container>
         <Grid item xs={12}>
           <Typography>최근 방문한 아카이브</Typography>
@@ -19,7 +27,7 @@ function DashboardRecent() {
           <Link to="login">바로가기</Link>
         </Grid>
       </Grid>
-    </Box>
+    </div>
   );
 }
 
