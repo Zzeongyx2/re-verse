@@ -1,12 +1,11 @@
-import { Box } from "@chakra-ui/react";
 import Navbar from "../organisms/Navbar";
 
 function SelectCharacter() {
   return (
-    <Box className="">
+    <div className="mt-8">
       <Navbar />
-      <Box className="text-white">this is selecting character page</Box>
-    </Box>
+      <div className="text-white">this is selecting character page</div>
+    </div>
   );
 }
 

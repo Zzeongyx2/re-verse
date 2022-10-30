@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Button from "../atoms/Button";
@@ -22,9 +21,10 @@ function Friend() {
   }, [location]);
 
   return (
-    <Box>
+    <div className="mt-8">
       <Navbar />
-      <Box className="flex mb-5">
+
+      <div className="flex mb-5">
         <div>
           <Link to="list">
             <Button
@@ -58,15 +58,15 @@ function Friend() {
             />
           </Link>
         </div>
-      </Box>
-      <Box>
+      </div>
+      <div>
         <Routes>
           <Route path="/list" element={<FriendList />} />
           <Route path="/request" element={<FriendRequest />} />
           <Route path="/accept" element={<FriendAccept />} />
         </Routes>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }
 

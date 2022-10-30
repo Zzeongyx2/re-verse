@@ -8,13 +8,13 @@ import Lobby from "./UI/pages/Lobby";
 import Character from "./UI/pages/Character";
 import Friend from "./UI/pages/Friend";
 import Archive from "./UI/pages/Archive";
-import { Box } from "@chakra-ui/react";
 import NeonTest from "./UI/pages/NeonTest";
 
 function App() {
   return (
     <BrowserRouter>
-      <Box className="bg-base2 h-screen mx-auto px-14 my-auto py-10 font-sans">
+      {/* <div className="bg-base2 h-screen mx-auto px-14 my-auto py-10 font-sans"> */}
+      <div className="container mx-auto">
         <Routes>
           <Route path="/" element={<NonLoginMain />} />
           <Route path="/login" element={<Login />} />
@@ -26,7 +26,7 @@ function App() {
           <Route path="/archive/*" element={<Archive />} />
           <Route path="/neontest" element={<NeonTest />} />
         </Routes>
-      </Box>
+      </div>
     </BrowserRouter>
   );
 }

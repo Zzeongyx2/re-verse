@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { BsInfoCircle } from "react-icons/bs";
-import { Box, Grid, GridItem, Input } from "@chakra-ui/react";
+
 import Logo from "../atoms/Logo";
 import NonLoginMain from "./NonLoginMain";
+
+import { BsInfoCircle } from "react-icons/bs";
 
 function Login() {
   const [id, setId] = useState("");
@@ -38,60 +39,48 @@ function Login() {
     }
 
     console.log("axios 로그인 요청 ");
+    //axios 로그인 요청 보내기
+    window.location.href = "/lobby";
   };
 
   return (
-    <Box className="h-full flex items-center justify-center">
-      <Box className="">
-        <Grid templateColumns="repeat(5)" templateRows="repeat(4)" gap={5}>
-          <GridItem rowSpan={1} colSpan={5} py={4}>
-            <Link to="/" element={<NonLoginMain />}>
-              <Logo />
-            </Link>
-          </GridItem>
-          <GridItem rowSpan={1} colSpan={5} border="1px" borderRadius="10">
-            <Input
-              className="text-base2 text-md font-semibold focus:text-white focus:placeholder-white  placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
-              height={12}
-              variant="filled"
-              focusBorderColor="white"
-              placeholder="아이디"
-              value={id}
-              onChange={idHandleChange}
-            />
-          </GridItem>
-          <GridItem rowSpan={1} colSpan={5} border="1px" borderRadius="10">
-            <Input
-              className="text-base2 text-md font-semibold focus:text-white focus:placeholder-white  placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
-              height={12}
-              variant="filled"
-              focusBorderColor="white"
-              placeholder="비밀번호"
-              value={pw}
-              onChange={pwHandleChange}
-              onKeyUp={handleKeyUp}
-              type="password"
-            />
-          </GridItem>
-          <GridItem rowSpan={1} colSpan={5} textAlign="center">
-            <button
-              onClick={() => {
-                clickLogin();
-              }}
-              className="text-base1 font-semibold text-lg w-full h-12 bg-main2 hover:bg-sub2 hover:duration-300 rounded-lg"
-            >
-              로그인
-            </button>
-            <Link to="/signin">
-              <div className="flex justify-center items-center text-sm m-5 text-gray-400">
-                <BsInfoCircle />
-                <span className="px-1.5">아직 회원이 아니신가요?</span>
-              </div>
-            </Link>
-          </GridItem>
-        </Grid>
-      </Box>
-    </Box>
+    <div className="flex flex-col justify-center items-center h-screen">
+      <Link to="/" element={<NonLoginMain />}>
+        <Logo />
+      </Link>
+      <div className="flex flex-col box-border w-96 mt-8">
+        <input
+          className="mb-6 px-4 py-2 text-base font-semibold bg-white focus:bg-base2 focus:text-white outline-none border border-1 border-white rounded-md placeholder:text-base2/70 focus:placeholder:text-white"
+          type="text"
+          placeholder="아이디"
+          value={id}
+          onChange={idHandleChange}
+        />
+
+        <input
+          className="mb-6 px-4 py-2 text-base font-semibold bg-white focus:bg-base2 focus:text-white outline-none border border-1 border-white rounded-md placeholder:text-base2/70 focus:placeholder:text-white"
+          type="password"
+          placeholder="비밀번호"
+          value={pw}
+          onChange={pwHandleChange}
+          onKeyUp={handleKeyUp}
+        />
+        <button
+          onClick={() => {
+            clickLogin();
+          }}
+          className="py-2 text-base1 font-semibold text-lg bg-main2 hover:bg-sub2 transition hover:duration-300 rounded-md"
+        >
+          로그인
+        </button>
+        <Link to="/signin">
+          <div className="flex justify-center items-center text-sm m-5 text-gray-400">
+            <BsInfoCircle size={12} />
+            <span className="px-1.5">아직 회원이 아니신가요?</span>
+          </div>
+        </Link>
+      </div>
+    </div>
   );
 }
 
