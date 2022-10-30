@@ -39,6 +39,8 @@ function Login() {
     }
 
     console.log("axios 로그인 요청 ");
+    //axios 로그인 요청 보내기
+    window.location.href = "/lobby";
   };
 
   return (
@@ -48,7 +50,7 @@ function Login() {
       </Link>
       <div className="flex flex-col box-border w-96 mt-8">
         <input
-          className="mb-6 px-4 py-2 text-base font-semibold bg-white focus:bg-base2 focus:text-white outline-none border border-1 border-white rounded-md placeholder:text-base2 focus:placeholder:text-white"
+          className="mb-6 px-4 py-2 text-base font-semibold bg-white focus:bg-base2 focus:text-white outline-none border border-1 border-white rounded-md placeholder:text-base2/70 focus:placeholder:text-white"
           type="text"
           placeholder="아이디"
           value={id}
@@ -56,14 +58,19 @@ function Login() {
         />
 
         <input
-          className="mb-6 px-4 py-2 text-base font-semibold bg-white focus:bg-base2 focus:text-white outline-none border border-1 border-white rounded-md placeholder:text-base2 focus:placeholder:text-white"
-          type="text"
+          className="mb-6 px-4 py-2 text-base font-semibold bg-white focus:bg-base2 focus:text-white outline-none border border-1 border-white rounded-md placeholder:text-base2/70 focus:placeholder:text-white"
+          type="password"
           placeholder="비밀번호"
           value={pw}
           onChange={pwHandleChange}
           onKeyUp={handleKeyUp}
         />
-        <button className="py-2 text-base1 font-semibold text-lg bg-main2 hover:bg-sub2 transition hover:duration-300 rounded-md">
+        <button
+          onClick={() => {
+            clickLogin();
+          }}
+          className="py-2 text-base1 font-semibold text-lg bg-main2 hover:bg-sub2 transition hover:duration-300 rounded-md"
+        >
           로그인
         </button>
         <Link to="/signin">
