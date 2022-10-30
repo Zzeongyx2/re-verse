@@ -4,7 +4,6 @@ import { BsSearch } from "react-icons/bs";
 import { FiPlusCircle } from "react-icons/fi";
 
 import { Avatar, Divider } from "@chakra-ui/react";
-import { Box, Grid, GridItem, Input } from "@chakra-ui/react";
 
 function FriendRequest() {
   const [findNickName, setFindNickName] = useState("");
