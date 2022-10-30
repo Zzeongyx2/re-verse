@@ -5,7 +5,7 @@ function Button({ text, to, from, color, click }) {
        ${from} ${to} hover:from-main1 hover:to-sub1 text-${color} flex items-center mr-4`}
     >
       <button
-        className="flex justify-center text-center w-full drop-shadow font-bold "
+        className="flex justify-center text-center w-full drop-shadow font-bold"
         onClick={() => {
           click();
         }}

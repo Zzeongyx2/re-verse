@@ -76,7 +76,7 @@ function Archive() {
             </Link>
           </div>
         </div>
-        <div className="w-60 border border-white rounded-3xl bg-[#FACC04] font-bold text-lg flex justify-center">
+        <div className="w-60 border border-white rounded-3xl bg-[#FACC04] font-bold flex justify-center">
           <button
             onClick={() => {
               createArchive();
