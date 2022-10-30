@@ -10,7 +10,7 @@ function Lobby() {
     <div className="mt-8">
       <div className="">
         <Navbar />
-      </Box>
+      </div>
       <NeonLightBG />
       {/* // FIXME: 나중에 linkto 속성값 변경해야 함 */}
       <LobbyButton
@@ -32,7 +32,7 @@ function Lobby() {
       />
       <ProfileTest />
       <LobbyProfile />
-    </Box>
+    </div>
   );
 }
 
