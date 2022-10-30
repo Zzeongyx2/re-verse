@@ -12,16 +12,16 @@ import java.time.LocalDate;
 public class FriendInvitation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "friend_invitation_id")
     private Integer id;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(referencedColumnName = "user_id", name = "invitation_user_id")
     private User invitationUser;      // 나
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "user_id", name = "invitation_target_id")
     private User invitationTarget;    // 너
 
     private LocalDate createdTime;
