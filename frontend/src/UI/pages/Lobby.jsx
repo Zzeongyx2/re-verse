@@ -8,8 +8,8 @@ import ProfileTest from "../organisms/ProfileTest";
 
 function Lobby() {
   return (
-    <Box>
-      <Box className="">
+    <div className="mt-8">
+      <div className="">
         <Navbar />
       </Box>
       <NeonLightBG />
