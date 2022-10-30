@@ -64,12 +64,11 @@ function LobbyProfile() {
   };
 
   return (
-    <Box
-      className="mt-28 w-full"
+    <div
+      className="w-[545px]"
       borderRadius="24"
       border="1px"
       borderColor="white"
-      backgroundColor="white"
     >
       {!isEdit ? (
         <Grid templateColumns="repeat(5)" templateRows="repeat(4)">
@@ -214,7 +213,14 @@ function LobbyProfile() {
           </GridItem>
         </Grid>
       )}
-    </Box>
+      <LobbyButton
+        linkTo="/"
+        textcolor="white"
+        backcolor="#00BEFF"
+        buttonTitle="대표아카이브 바로가기"
+        buttonMessage="지존아카이브"
+      />
+    </div>
   );
 }
 
