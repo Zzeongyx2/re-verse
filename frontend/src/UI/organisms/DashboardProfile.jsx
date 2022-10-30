@@ -33,7 +33,10 @@ function DashboardProfile() {
     let nickNameRE = new RegExp("^[a-zA-Z0-9가-힣_]{2,12}$");
     if (!nickNameRE.test(editNickName)) {
       // TODO: 몇글자인지 정하기
-      setEditNickNameValid({ isValid: true, message: "*2~12글자 사이로 입력해주세요." });
+      setEditNickNameValid({
+        isValid: true,
+        message: "*2~12글자 사이로 입력해주세요.",
+      });
       return;
     }
     setEditNickNameValid({ isValid: false, message: "" });
@@ -64,7 +67,12 @@ function DashboardProfile() {
   };
 
   return (
-    <Box className="w-[545px]" borderRadius="24" border="1px" borderColor="white">
+    <div
+      className="w-[545px]"
+      borderRadius="24"
+      border="1px"
+      borderColor="white"
+    >
       {!isEdit ? (
         <Grid templateColumns="repeat(5)" templateRows="repeat(4)">
           <GridItem
@@ -145,7 +153,13 @@ function DashboardProfile() {
               <p className="font-bold text-2xl drop-shadow">프로필</p>
             </div>
           </GridItem>
-          <GridItem rowSpan={1} colSpan={5} borderRadius="10" m="5" className="shadow outline-none">
+          <GridItem
+            rowSpan={1}
+            colSpan={5}
+            borderRadius="10"
+            m="5"
+            className="shadow outline-none"
+          >
             <Input
               focusBorderColor="none"
               placeholder="닉네임"
@@ -158,7 +172,9 @@ function DashboardProfile() {
               _hover={{}}
               h="48px"
             />
-            <p className="text-red-500 m-[5px] text-[10px]">{editNickNameValid.message}</p>
+            <p className="text-red-500 m-[5px] text-[10px]">
+              {editNickNameValid.message}
+            </p>
           </GridItem>
           <GridItem
             rowSpan={1}
@@ -208,7 +224,7 @@ function DashboardProfile() {
         buttonTitle="대표아카이브 바로가기"
         buttonMessage="지존아카이브"
       />
-    </Box>
+    </div>
   );
 }
 

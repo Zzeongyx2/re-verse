@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Box } from "@chakra-ui/react";
 import { BiLogIn } from "react-icons/bi";
 import { AiOutlineStar, AiTwotoneStar } from "react-icons/ai";
 import { HiOutlineTrash } from "react-icons/hi";
@@ -84,10 +83,13 @@ function ArchiveLike() {
   }, []);
 
   return (
-    <Box className="bg-white rounded-3xl p-3 h-[500px] overflow-y-scroll">
+    <div className="bg-white rounded-3xl p-3 h-[500px] overflow-y-scroll">
       {archiveList.map((archive, index) => {
         return (
-          <div key={index} className="my-1 py-1.5 shadow flex items-center gap-2">
+          <div
+            key={index}
+            className="my-1 py-1.5 shadow flex items-center gap-2"
+          >
             <div className="max-w-[50px] w-1/12 text-[#FACC04] flex items-center justify-center">
               <button
                 onClick={() => {
@@ -156,7 +158,7 @@ function ArchiveLike() {
           </div>
         );
       })}
-    </Box>
+    </div>
   );
 }
 

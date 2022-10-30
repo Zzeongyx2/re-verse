@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import { Box, Grid, GridItem, Input } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+
 import Login from "./Login";
 import Logo from "../atoms/Logo";
 
-function Signin() {
+function SignIn() {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const [pwCheck, setPwCheck] = useState("");
@@ -123,130 +123,107 @@ function Signin() {
   };
 
   return (
-    <Box className="h-full flex items-center justify-center">
-      <Box className="">
-        <Grid templateColumns="repeat(5)" templateRows="repeat(5)" gap={3}>
-          <GridItem rowSpan={1} colSpan={5} py={4}>
-            <Link to="/login" element={<Login />}>
-              <Logo />
-            </Link>
-          </GridItem>
-          <GridItem rowSpan={1} colSpan={5}>
-            <Input
-              className="text-base2 text-md font-semibold focus:text-white focus:placeholder-white  placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
-              height={12}
-              focusBorderColor="white"
-              placeholder="이메일"
-              variant="filled"
-              value={id}
-              onChange={idHandleChange}
-              onBlur={idBlurHandle}
-            />
-            <p
-              className={
-                "text-xs mt-1 ml-1" +
-                (idValid.isValid
-                  ? " flex text-red-500"
-                  : " flex text-transparent")
-              }
-            >
-              {idValid.message}
-            </p>
-          </GridItem>
-
-          <GridItem rowSpan={1} colSpan={5}>
-            <Input
-              className="text-base2 text-md font-semibold focus:text-white focus:placeholder-white  placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
-              height={12}
-              focusBorderColor="white"
-              placeholder="비밀번호"
-              variant="filled"
-              value={pw}
-              onChange={pwHandleChange}
-              onBlur={pwBlurHandle}
-              type="password"
-            />
-            <p
-              className={
-                "text-xs mt-1 ml-1" +
-                (pwValid.isValid
-                  ? " flex text-red-500"
-                  : " flex text-transparent")
-              }
-            >
-              {pwValid.message}
-            </p>
-          </GridItem>
-
-          <GridItem rowSpan={1} colSpan={5}>
-            <Input
-              className="text-base2 text-md font-semibold focus:text-white focus:placeholder-white  placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
-              height={12}
-              focusBorderColor="white"
-              placeholder="비밀번호 확인"
-              variant="filled"
-              value={pwCheck}
-              onChange={pwCheckHandleChange}
-              onBlur={pwCheckBlurHandle}
-              type="password"
-            />
-            <p
-              className={
-                "text-xs mt-1 ml-1" +
-                (pwCheckValid.isValid
-                  ? " flex text-red-500"
-                  : " flex text-transparent")
-              }
-            >
-              {pwCheckValid.message}
-            </p>
-          </GridItem>
-
-          <GridItem rowSpan={1} colSpan={5}>
-            <Input
-              className="text-base2 text-md font-semibold focus:text-white focus:placeholder-white  placeholder:text-base2 placeholder:text-md placeholder:font-semibold"
-              height={12}
-              focusBorderColor="white"
-              placeholder="닉네임"
-              variant="filled"
-              value={nickName}
-              onChange={nickNameHandleChange}
-              onBlur={nickNameBlurHandle}
-              onKeyUp={handleKeyUp}
-            />
-            <p
-              className={
-                "text-xs mt-1 ml-1" +
-                (nickNameValid.isValid
-                  ? " flex text-red-500"
-                  : " flex text-transparent")
-              }
-            >
-              {nickNameValid.message}
-            </p>
-          </GridItem>
-
-          <GridItem rowSpan={1} colSpan={5} textAlign="center">
-            <button
-              onClick={() => {
-                clickSignin();
-              }}
-              className="text-base1 font-semibold text-lg w-full h-12 bg-main2 hover:bg-sub2 hover:duration-300 rounded-lg"
-              // style={{
-              //   width: "100%",
-              //   border: "5px",
-              //   backgroundColor: "yellow",
-              //   borderRadius: "11px",
-              //   height: "40px",
-              // }}
-            >
-              회원가입
-            </button>
-          </GridItem>
-        </Grid>
-      </Box>
-    </Box>
+    <div className="flex flex-col justify-center items-center h-screen">
+      <Link to="/login" element={<Login />}>
+        <Logo />
+      </Link>
+      <div className="mt-8">
+        {/* 이메일 */}
+        <div className="mb-1">
+          <input
+            className="w-96 px-4 py-2 text-base font-semibold bg-white focus:bg-base2 focus:text-white outline-none border border-1 border-white rounded-md placeholder:text-base2/70 focus:placeholder:text-white"
+            type="text"
+            placeholder="이메일"
+            value={id}
+            onChange={idHandleChange}
+            onBlur={idBlurHandle}
+          />
+          <p
+            className={
+              "text-[10px] mt-1 ml-1" +
+              (idValid.isValid
+                ? " flex text-red-500"
+                : " flex text-transparent")
+            }
+          >
+            {idValid.message}
+          </p>
+        </div>
+        {/* 비밀번호 */}
+        <div className="mb-1">
+          <input
+            className="w-96 px-4 py-2 text-base font-semibold bg-white focus:bg-base2 focus:text-white outline-none border border-1 border-white rounded-md placeholder:text-base2/70 focus:placeholder:text-white"
+            placeholder="비밀번호"
+            value={pw}
+            onChange={pwHandleChange}
+            onBlur={pwBlurHandle}
+            type="password"
+          />
+          <p
+            className={
+              "text-[10px] mt-1 ml-1" +
+              (pwValid.isValid
+                ? " flex text-red-500"
+                : " flex text-transparent")
+            }
+          >
+            {pwValid.message}
+          </p>
+        </div>
+        {/* 비밀번호 확인 */}
+        <div className="mb-1">
+          <input
+            className="w-96 px-4 py-2 text-base font-semibold bg-white focus:bg-base2 focus:text-white outline-none border border-1 border-white rounded-md placeholder:text-base2/70 focus:placeholder:text-white"
+            placeholder="비밀번호 확인"
+            value={pwCheck}
+            onChange={pwCheckHandleChange}
+            onBlur={pwCheckBlurHandle}
+            type="password"
+          />
+          <p
+            className={
+              "text-[10px] mt-1 ml-1" +
+              (pwCheckValid.isValid
+                ? " flex text-red-500"
+                : " flex text-transparent")
+            }
+          >
+            {pwCheckValid.message}
+          </p>
+        </div>
+        {/* 닉네임 */}
+        <div className="mb-1">
+          <input
+            className="w-96 px-4 py-2 text-base font-semibold bg-white focus:bg-base2 focus:text-white outline-none border border-1 border-white rounded-md placeholder:text-base2/70 focus:placeholder:text-white"
+            placeholder="닉네임"
+            value={nickName}
+            onChange={nickNameHandleChange}
+            onBlur={nickNameBlurHandle}
+            onKeyUp={handleKeyUp}
+            type="text"
+          />
+          <p
+            className={
+              "text-[10px] mt-1 ml-1" +
+              (nickNameValid.isValid
+                ? " flex text-red-500"
+                : " flex text-transparent")
+            }
+          >
+            {nickNameValid.message}
+          </p>
+        </div>
+        <button
+          onClick={() => {
+            clickSignin();
+          }}
+          className="w-96 py-2 text-base1 font-semibold text-lg bg-main2 hover:bg-sub2 transition hover:duration-300 rounded-md"
+        >
+          회원가입
+        </button>
+      </div>
+    </div>
   );
 }
 
-export default Signin;
+export default SignIn;
