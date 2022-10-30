@@ -8,25 +8,27 @@ import Lobby from "./UI/pages/Lobby";
 import Character from "./UI/pages/Character";
 import Friend from "./UI/pages/Friend";
 import Archive from "./UI/pages/Archive";
-import { Box } from "@chakra-ui/react";
 import NeonTest from "./UI/pages/NeonTest";
 
 function App() {
   return (
     <BrowserRouter>
-      <Box className="bg-base2 h-screen mx-auto px-14 my-auto py-10 font-sans">
-        <Routes>
-          <Route path="/" element={<NonLoginMain />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/test" element={<TestPage />} />
-          <Route path="/lobby" element={<Lobby />} />
-          <Route path="/character" element={<Character />} />
-          <Route path="/friend/*" element={<Friend />} />
-          <Route path="/archive/*" element={<Archive />} />
-          <Route path="/neontest" element={<NeonTest />} />
-        </Routes>
-      </Box>
+      <div className="">
+        {/* <div className="bg-base2 h-screen mx-auto px-14 my-auto py-10 font-sans"> */}
+        <div className="container mx-auto my-10">
+          <Routes>
+            <Route path="/" element={<NonLoginMain />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/test" element={<TestPage />} />
+            <Route path="/lobby" element={<Lobby />} />
+            <Route path="/character" element={<Character />} />
+            <Route path="/friend/*" element={<Friend />} />
+            <Route path="/archive/*" element={<Archive />} />
+            <Route path="/neontest" element={<NeonTest />} />
+          </Routes>
+        </div>
+      </div>
     </BrowserRouter>
   );
 }
