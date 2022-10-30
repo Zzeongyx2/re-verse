@@ -1,10 +1,8 @@
-import { Box } from "@chakra-ui/react";
-
 function TestPage() {
   return (
-    <Box className="h-full flex items-center">
-      <Box></Box>
-    </Box>
+    <div className="h-full flex items-center">
+      <div></div>
+    </div>
   );
 }
 
