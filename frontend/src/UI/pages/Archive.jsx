@@ -33,6 +33,11 @@ function Archive() {
     }
   }, [location]);
 
+  // FIXME: avatar component, layout, remove chakra grid, etc.
+  // FIXME: avatar component, layout, remove chakra grid, etc.
+  // FIXME: avatar component, layout, remove chakra grid, etc.
+  // FIXME: avatar component, layout, remove chakra grid, etc.
+  // FIXME: avatar component, layout, remove chakra grid, etc.
   return (
     <div className="mt-8">
       <Navbar />
