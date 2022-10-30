@@ -13,15 +13,15 @@ import java.util.UUID;
 public class Friend {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "friend_id")
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;      // 나
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(referencedColumnName = "user_id", name = "user_id")
+    private User user;      // 나
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "user_id", name = "target_id")
     private User target;    // 너
 
 
