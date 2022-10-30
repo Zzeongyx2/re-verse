@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Button from "../atoms/Button";
@@ -25,7 +24,7 @@ function Friend() {
     <div className="mt-8">
       <Navbar />
 
-      <div className="flex my-5">
+      <div className="flex mb-5">
         <div>
           <Link to="list">
             <Button

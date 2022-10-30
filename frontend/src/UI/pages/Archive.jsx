@@ -1,7 +1,13 @@
 import { Box } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import Button from "../atoms/Button";
 import ArchiveFriend from "../organisms/ArchiveFriend";
 import ArchiveLike from "../organisms/ArchiveLike";
@@ -29,15 +35,17 @@ function Archive() {
   }, [location]);
 
   return (
-    <Box>
+    <div className="mt-8">
       <Navbar />
-      <Box className="flex justify-between mb-5">
+      <div className="flex justify-between mb-5">
         <div className="flex">
           <div>
             <Link to="my">
               <Button
                 color={selectTap === "나의아카이브" ? "white" : "black"}
-                from={selectTap === "나의아카이브" ? "from-main1" : "from-main2"}
+                from={
+                  selectTap === "나의아카이브" ? "from-main1" : "from-main2"
+                }
                 to={selectTap === "나의아카이브" ? "to-sub1" : "to-sub2"}
                 text={"나의 아카이브"}
                 click={() => {}}
@@ -48,7 +56,9 @@ function Archive() {
             <Link to="friend">
               <Button
                 color={selectTap === "친구아카이브" ? "white" : "black"}
-                from={selectTap === "친구아카이브" ? "from-main1" : "from-main2"}
+                from={
+                  selectTap === "친구아카이브" ? "from-main1" : "from-main2"
+                }
                 to={selectTap === "친구아카이브" ? "to-sub1" : "to-sub2"}
                 text={"친구의 아카이브"}
                 click={() => {}}
@@ -76,15 +86,15 @@ function Archive() {
             새 아카이브 생성
           </button>
         </div>
-      </Box>
-      <Box>
+      </div>
+      <div>
         <Routes>
           <Route path="/my" element={<ArchiveMy />} />
           <Route path="/friend" element={<ArchiveFriend />} />
           <Route path="/like" element={<ArchiveLike />} />
         </Routes>
-      </Box>{" "}
-    </Box>
+      </div>{" "}
+    </div>
   );
 }
 
