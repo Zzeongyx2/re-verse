@@ -1,7 +1,6 @@
 package kr.co.reverse.archive.api.controller;
 
-import kr.co.reverse.archive.api.request.CreateArchiveReq;
-import kr.co.reverse.archive.api.request.GetArchiveReq;
+import kr.co.reverse.archive.api.request.ArchiveReq;
 import kr.co.reverse.archive.api.response.ArchiveRes;
 import kr.co.reverse.archive.api.response.ArchivesRes;
 import kr.co.reverse.archive.api.service.ArchiveService;
@@ -24,8 +23,8 @@ public class ArchiveController {
 
 
     @PostMapping
-    public ResponseEntity createArchive(@RequestBody CreateArchiveReq createArchiveReq) {
-        archiveService.createArchive(createArchiveReq);
+    public ResponseEntity createArchive(@RequestBody ArchiveReq archiveReq) {
+        archiveService.createArchive(archiveReq);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -54,5 +53,23 @@ public class ArchiveController {
         Archive archive = archiveService.getArchive(UUID.fromString(archiveId));
 
         return ResponseEntity.ok(ArchiveRes.of(archive));
+    }
+
+    @PatchMapping("/{archive_id}")
+    public ResponseEntity updateArchive(@PathVariable(name = "archive_id") String archiveId,
+                                        @RequestBody ArchiveReq archiveReq) {
+
+//        archiveService.updateArchive(UUID.fromString(archiveId));
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    @DeleteMapping("/{archive_id}")
+    public ResponseEntity deleteArchive(@PathVariable(name = "archive_id") String archiveId) {
+        // TODO: Archive 삭제 권한 여부 확인
+
+//        archiveService.deleteArchive(UUID.fromString(archiveId));
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 }
