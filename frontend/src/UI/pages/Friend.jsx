@@ -22,9 +22,10 @@ function Friend() {
   }, [location]);
 
   return (
-    <Box>
+    <div>
       <Navbar />
-      <Box className="flex mb-5">
+
+      <div className="flex mb-5">
         <div>
           <Link to="list">
             <Button
@@ -58,15 +59,15 @@ function Friend() {
             />
           </Link>
         </div>
-      </Box>
-      <Box>
+      </div>
+      <div>
         <Routes>
           <Route path="/list" element={<FriendList />} />
           <Route path="/request" element={<FriendRequest />} />
           <Route path="/accept" element={<FriendAccept />} />
         </Routes>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }
 
