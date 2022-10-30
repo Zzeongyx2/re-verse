@@ -1,6 +1,6 @@
 package kr.co.reverse.archive.api.service;
 
-import kr.co.reverse.archive.api.request.CreateArchiveReq;
+import kr.co.reverse.archive.api.request.ArchiveReq;
 import kr.co.reverse.archive.db.entity.Archive;
 import kr.co.reverse.archive.db.entity.User;
 import kr.co.reverse.archive.db.repository.ArchiveRepository;
@@ -20,7 +20,7 @@ public class ArchiveService {
     private final ArchiveRepository archiveRepository;
 
     @Transactional
-    public void createArchive(CreateArchiveReq archiveReq) {
+    public void createArchive(ArchiveReq archiveReq) {
         String title = archiveReq.getTitle();
         String description = archiveReq.getDescription();
 
