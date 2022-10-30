@@ -1,8 +1,6 @@
-import { Box } from "@chakra-ui/react";
-
 function Button({ text, to, from, color, click }) {
   return (
-    <Box
+    <div
       className={`border border-1 border-white rounded-3xl w-40 h-10 bg-gradient-to-t
        ${from} ${to} hover:from-main1 hover:to-sub1 text-${color} flex items-center mr-4`}
     >
@@ -14,7 +12,7 @@ function Button({ text, to, from, color, click }) {
       >
         {text}
       </button>
-    </Box>
+    </div>
   );
 }
 

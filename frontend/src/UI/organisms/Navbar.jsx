@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { Box, Breadcrumb, BreadcrumbItem } from "@chakra-ui/react";
+import { Breadcrumb, BreadcrumbItem } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -19,11 +19,11 @@ function Navbar() {
     console.log(location.pathname);
   }, [location]);
   return (
-    <Box className="flex justify-between pb-14">
-      <Box>
+    <div className="flex justify-between pb-14">
+      <div>
         <Breadcrumb separator="">
-          <Box className="relative">
-            <Box className="absolute z-50">
+          <div className="relative">
+            <div className="absolute z-50">
               <BreadcrumbItem>
                 <Link to="/lobby">
                   <BreadCrumbBtn
@@ -33,8 +33,8 @@ function Navbar() {
                   />
                 </Link>
               </BreadcrumbItem>
-            </Box>
-            <Box className="absolute left-40 ">
+            </div>
+            <div className="absolute left-40 ">
               {location.pathname === "/lobby" && (
                 <BreadcrumbItem>
                   <Link to="/lobby">
@@ -79,12 +79,12 @@ function Navbar() {
                   </Link>
                 </BreadcrumbItem>
               )}
-            </Box>
-          </Box>
+            </div>
+          </div>
         </Breadcrumb>
-      </Box>
-      {/* <Box className=""> */}
-      <Box className="flex justify-between w-56">
+      </div>
+      {/* <div className=""> */}
+      <div className="flex justify-between w-56">
         <Link to="/lobby">
           {location.pathname === "/lobby" ? (
             <NavBtn
@@ -149,11 +149,11 @@ function Navbar() {
             />
           )}
         </Link>
-      </Box>
-      {/* </Box> */}
-    </Box>
-    // <Box>
-    //   <Box>
+      </div>
+      {/* </div> */}
+    </div>
+    // <div>
+    //   <div>
     //     <Breadcrumb>
     //       <BreadcrumbItem>
     //         <BreadcrumbLink as={Link} to="/lobby">
@@ -176,8 +176,8 @@ function Navbar() {
     //         </BreadcrumbLink>
     //       </BreadcrumbItem>
     //     </Breadcrumb>
-    //   </Box>
-    // </Box>
+    //   </div>
+    // </div>
   );
 }
 
