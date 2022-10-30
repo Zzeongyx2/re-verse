@@ -6,6 +6,7 @@ import { BiLogIn } from "react-icons/bi";
 import { HiOutlineTrash } from "react-icons/hi";
 
 import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
+import { Divider } from "@chakra-ui/react";
 
 function FriendList() {
   // temporary data
@@ -121,16 +122,16 @@ function FriendList() {
     <div>
       {/* friend list */}
       <div className="">
-        <div className="bg-white rounded-3xl w-2/5 h-full py-5 flex flex-col items-center">
+        <div className="bg-white rounded-3xl w-2/5 h-full pt-5 pb-6 flex flex-col items-center">
           {/* search */}
-          <div className="w-[calc(100%-70px)] flex justify-center items-center px-4 py-2.5 mb-4 border-2 border-base1/20 rounded-2xl">
+          <div className="w-[calc(100%-70px)] flex justify-center items-center px-4 py-2 mb-3 border-2 border-base1/20 rounded-2xl">
             <BsSearch size={24} />
             <input
               onChange={findNickNameHandleChange}
               value={findNickName}
               type="text"
               placeholder="닉네임을 검색하여 친구를 찾아보세요"
-              className="w-full focus:outline-none pl-3.5"
+              className="w-full focus:outline-none pl-3.5 text-sm"
             />
           </div>
           {/* friend list */}
@@ -140,7 +141,7 @@ function FriendList() {
           {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
           {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
           {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
-          <div className="w-[calc(100%-70px)]">
+          <div className="w-[calc(100%-70px)] h-[500px] overflow-auto scrollbar-hide">
             {friendList
               .filter((friend) => {
                 if (findNickName.trim() === "") {
@@ -152,27 +153,30 @@ function FriendList() {
               .map((friend, index) => {
                 return (
                   // <div key={index}>
-                  <div
-                    key={index}
-                    className="flex items-center justify-between"
-                  >
-                    <div className="flex">
-                      {/* <img src={friend.avatar} alt={friend.nickname} /> */}
-                      <Avatar name="profileImg" src={profileImg} />
-                      <div className="">
-                        <div>{friend.nickname}</div>
-                        <p className="overflow-hidden text-ellipsis line-clamp-1">
-                          {friend.message}
-                        </p>
-                        {/* <div className="whitespace-nowrap overflow-hidden text-ellipsis">
+                  <div>
+                    <div
+                      key={index}
+                      className="flex items-center justify-between px-2 py-1"
+                    >
+                      <div className="flex items-center">
+                        {/* <img src={friend.avatar} alt={friend.nickname} /> */}
+                        <Avatar name="profileImg" src={profileImg} size="sm" />
+                        <div className="text-base1 px-3">
+                          <p className="text-sm font-bold">{friend.nickname}</p>
+                          <p className="overflow-hidden text-ellipsis line-clamp-1 text-sm">
+                            {friend.message}
+                          </p>
+                          {/* <div className="whitespace-nowrap overflow-hidden text-ellipsis">
                         {friend.message}
                       </div> */}
+                        </div>
                       </div>
+                      <button className="">
+                        <FiMinusCircle className="text-[#FF7067]" />
+                      </button>
+                      {/* </div> */}
                     </div>
-                    <button className="px-4">
-                      <FiMinusCircle className="text-[#FF7067]" />
-                    </button>
-                    {/* </div> */}
+                    <Divider />
                   </div>
                 );
               })}
