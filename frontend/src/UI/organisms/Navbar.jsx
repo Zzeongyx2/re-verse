@@ -34,7 +34,7 @@ function Navbar() {
                 </Link>
               </BreadcrumbItem>
             </Box>
-            <Box className="absolute left-44 ">
+            <Box className="absolute left-40 ">
               {location.pathname === "/lobby" && (
                 <BreadcrumbItem>
                   <Link to="/lobby">
@@ -84,7 +84,7 @@ function Navbar() {
         </Breadcrumb>
       </Box>
       {/* <Box className=""> */}
-      <Box className="flex justify-between w-64">
+      <Box className="flex justify-between w-56">
         <Link to="/lobby">
           {location.pathname === "/lobby" ? (
             <NavBtn
