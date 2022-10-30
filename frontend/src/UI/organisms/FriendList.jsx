@@ -123,7 +123,7 @@ function FriendList() {
     <div className="text-base2">
       {/* friend list */}
       <div className="flex justify-between">
-        <div className="bg-white rounded-3xl w-[calc(96%/2)] h-[500px] pt-5 pb-6 flex flex-col items-center">
+        <div className="bg-white rounded-3xl w-[calc(96%/2)] h-[600px] pt-5 pb-6 flex flex-col items-center">
           {/* search */}
           <div className="w-[calc(100%-70px)] flex justify-center items-center px-4 py-2 mb-3 border-2 border-base1/20 rounded-2xl">
             <BsSearch size={24} />
@@ -189,7 +189,7 @@ function FriendList() {
           </div>
         </div>
         {/* archive list */}
-        <div className="bg-white rounded-3xl w-[calc(96%/2)] h-[500px] pt-5 pb-6 flex flex-col items-center">
+        <div className="bg-white rounded-3xl w-[calc(96%/2)] h-[600px] pt-5 pb-6 flex flex-col items-center">
           {/* <div className="bg-white rounded-3xl w-[calc(96%/2)] h-full pt-5 pb-6 flex flex-col items-center"> */}
           <div className="w-[calc(100%-50px)] text-xl font-bold mb-2">
             <p className="mt-2 mb-2 mx-2 px-2.5">{rightTitle}</p>
