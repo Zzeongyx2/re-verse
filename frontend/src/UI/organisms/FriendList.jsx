@@ -5,7 +5,7 @@ import { FiMinusCircle } from "react-icons/fi";
 import { BiLogIn } from "react-icons/bi";
 import { HiOutlineTrash } from "react-icons/hi";
 
-import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
+import { Avatar } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
 
 function FriendList() {
@@ -85,6 +85,7 @@ function FriendList() {
     }
   }, []);
 
+  // FIXME: 처음에는 빈간이였다가, 나중에 친구 이름 눌렀을 때 오른쪽 화면에 보여야 함!
   useEffect(() => {
     // TODO: 선택 유저 바뀔때마다 아카이브 목록 가져오기
     console.log(selectFriend.nickname, "아카이브 목록 가져옴");
@@ -119,10 +120,10 @@ function FriendList() {
   }, [selectFriend]);
 
   return (
-    <div>
+    <div className="text-base2">
       {/* friend list */}
-      <div className="">
-        <div className="bg-white rounded-3xl w-2/5 h-full pt-5 pb-6 flex flex-col items-center">
+      <div className="flex justify-between">
+        <div className="bg-white rounded-3xl w-[calc(96%/2)] h-[500px] pt-5 pb-6 flex flex-col items-center">
           {/* search */}
           <div className="w-[calc(100%-70px)] flex justify-center items-center px-4 py-2 mb-3 border-2 border-base1/20 rounded-2xl">
             <BsSearch size={24} />
@@ -134,14 +135,8 @@ function FriendList() {
               className="w-full focus:outline-none pl-3.5 text-sm"
             />
           </div>
-          {/* friend list */}
-          {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
-          {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
-          {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
-          {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
-          {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
-          {/* // FIXME: border box 설정할 것 !!!!!!!!!!!!!!!!! */}
-          <div className="w-[calc(100%-70px)] h-[500px] overflow-auto scrollbar-hide">
+          {/* friend info */}
+          <div className="w-[calc(100%-70px)] overflow-auto scrollbar-hide">
             {friendList
               .filter((friend) => {
                 if (findNickName.trim() === "") {
@@ -162,8 +157,15 @@ function FriendList() {
                         {/* <img src={friend.avatar} alt={friend.nickname} /> */}
                         <Avatar name="profileImg" src={profileImg} size="sm" />
                         <div className="text-base1 px-3">
-                          <p className="text-sm font-bold">{friend.nickname}</p>
-                          <p className="overflow-hidden text-ellipsis line-clamp-1 text-sm">
+                          <p
+                            onClick={() => {
+                              clickNickname(friend);
+                            }}
+                            className="cursor-pointer text-sm font-bold"
+                          >
+                            {friend.nickname}
+                          </p>
+                          <p className="overflow-hidden text-ellipsis line-clamp-1 text-xs text-zinc-500">
                             {friend.message}
                           </p>
                           {/* <div className="whitespace-nowrap overflow-hidden text-ellipsis">
@@ -171,8 +173,12 @@ function FriendList() {
                       </div> */}
                         </div>
                       </div>
-                      <button className="">
-                        <FiMinusCircle className="text-[#FF7067]" />
+                      <button
+                        onClick={() => {
+                          friendDelete(friend.email);
+                        }}
+                      >
+                        <FiMinusCircle className="text-sub3" size={20} />
                       </button>
                       {/* </div> */}
                     </div>
@@ -180,6 +186,58 @@ function FriendList() {
                   </div>
                 );
               })}
+          </div>
+        </div>
+        {/* archive list */}
+        <div className="bg-white rounded-3xl w-[calc(96%/2)] h-[500px] pt-5 pb-6 flex flex-col items-center">
+          {/* <div className="bg-white rounded-3xl w-[calc(96%/2)] h-full pt-5 pb-6 flex flex-col items-center"> */}
+          <div className="w-[calc(100%-50px)] text-xl font-bold mb-2">
+            <p className="mt-2 mb-2 mx-2 px-2.5">{rightTitle}</p>
+            <Divider />
+          </div>
+          <div className="w-[calc(100%-50px)] overflow-auto scrollbar-hide">
+            {archiveList.map((archive, index) => {
+              return (
+                <div>
+                  <div
+                    key={index}
+                    className="flex items-center justify-between px-2 py-1"
+                  >
+                    <div className="text-base1 px-3">
+                      <p className="text-sm font-bold">{archive.title}</p>
+                      <p className="text-xs overflow-hidden text-ellipsis line-clamp-1 text-zinc-500">
+                        {archive.description}
+                      </p>
+                    </div>
+                    <div>
+                      <button
+                        onClick={() => {
+                          enterArchive(archive.archiveId);
+                        }}
+                        className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
+                      >
+                        <BiLogIn
+                          size={14}
+                          className="text-white m-0.5 -translate-x-0.5"
+                        />
+                      </button>
+                      <button
+                        onClick={() => {
+                          archiveDelete(archive.archiveId);
+                        }}
+                        className="bg-sub3 border-2 border-basic3 rounded-full"
+                      >
+                        <HiOutlineTrash
+                          size={14}
+                          className="text-white m-0.5"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                  <Divider />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
