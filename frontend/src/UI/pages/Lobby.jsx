@@ -1,13 +1,12 @@
-import { Box } from "@chakra-ui/react";
 import Navbar from "../organisms/Navbar";
 
 function Lobby() {
   return (
-    <Box>
-      <Box className="">
+    <div className="mt-8">
+      <div className="">
         <Navbar />
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }
 
