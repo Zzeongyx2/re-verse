@@ -3,8 +3,6 @@ import NeonLightBG from "../atoms/NeonLightBG";
 import LobbyProfile from "../organisms/LobbyProfile";
 import Navbar from "../organisms/Navbar";
 
-import ProfileTest from "../organisms/ProfileTest";
-
 function Lobby() {
   return (
     <div className="mt-8">
@@ -36,7 +34,6 @@ function Lobby() {
             from={"from-main2"}
             to={"to-sub2"}
           />
-          {/* <ProfileTest /> */}
           <LobbyProfile />
         </div>
       </div>
