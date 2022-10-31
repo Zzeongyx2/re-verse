@@ -314,7 +314,7 @@ function ArchiveMy() {
   );
 }
 
-export default ArchiveMy;
+export default ArchiveMyTemp;
 
 
 
