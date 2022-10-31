@@ -1,3 +1,5 @@
+const { scaleFadeConfig } = require("@chakra-ui/react");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
@@ -54,6 +56,7 @@ module.exports = {
         blinking2: "blinking 0.02s infinite alternate",
         fadein: "fadein 1s ease-in-out",
         fadeout: "fadeout 1s ease-in-out",
+        light: "light 15s linear infinite",
       },
       keyframes: {
         flicker: {
@@ -73,6 +76,10 @@ module.exports = {
           from: { opacity: 1 },
           to: { opacity: 0 },
         },
+        light: {
+          "0%": { transform: "translateY(100vh) scale(0)" },
+          "100%": { transform: "translateY(-10vh) scale(1)" },
+        },
       },
       boxShadow: {
         "3xl":
@@ -80,11 +87,14 @@ module.exports = {
 
         "4xl":
           "inset 0 0 18px rgba(251, 255, 0, 0.35), 0 0 18px 5px rgba(251, 255, 0, 0.35)",
+        "5xl": "0 0 0 10px #4fc3dc44, 0 0 50px #4fc3dc, 0 0 100px #4fc3dc",
+        "6xl": "0 0 0 10px #ff2d7544, 0 0 50px #ff2d75, 0 0 100px #ff2d75",
       },
     },
   },
   plugins: [
     require("@tailwindcss/line-clamp"),
     require("tailwind-scrollbar-hide"),
+    require("tailwindcss-animation-delay"),
   ],
 };
