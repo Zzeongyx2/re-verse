@@ -113,6 +113,7 @@ function ArchiveFriend() {
     ]);
   }, []);
 
+  console.log(archiveList);
   return (
     <div className="text-base2">
       <div className="bg-white rounded-3xl w-full h-full pt-5 pb-6 flex flex-col justify-center items-center">
@@ -156,13 +157,12 @@ function ArchiveFriend() {
                   <div className="w-40">
                     <AvatarGroup size="sm" max={5} spacing="-2">
                       {archive.members.map((member, index) => {
-                        console.log(member);
                         return (
                           <Avatar
-                            name="profileImg"
-                            scr={member.avatar}
-                            alt={index}
+                            name={member.nickname}
+                            src={member.avatar}
                             key={index}
+                            alt={index}
                           />
                         );
                       })}
@@ -174,7 +174,7 @@ function ArchiveFriend() {
                       onClick={() => {
                         enterArchive(archive.archiveId);
                       }}
-                      className="bg-main1 border-2 border-basic3 rounded-full mx-1.5 mx-1.5"
+                      className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
                     >
                       <BiLogIn
                         size={18}
