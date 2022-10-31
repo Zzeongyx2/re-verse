@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class NicknameDuplicateException extends RuntimeException {
 
-    private final ErrorCode errorCode;
+//    private final ErrorCode errorCode;
 
 }
 
