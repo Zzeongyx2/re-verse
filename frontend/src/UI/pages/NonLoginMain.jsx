@@ -1,13 +1,13 @@
-import { Box } from "@chakra-ui/react";
 import NeonLogo from "../atoms/NeonLogo";
 
 function NonLoginMain() {
   return (
-    // <Link to="/login">
-    <Box className="bg-base2 h-screen flex items-center">
+    // <div className="flex h-full justify-center items-center">
+    //   <NeonLogo />
+    // </div>
+    <div className="flex justify-center h-screen">
       <NeonLogo />
-    </Box>
-    // </Link>
+    </div>
   );
 }
 
