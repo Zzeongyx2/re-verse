@@ -36,8 +36,8 @@ function Lobby() {
             from={"from-main2"}
             to={"to-sub2"}
           />
-          <ProfileTest />
-          {/* <LobbyProfile /> */}
+          {/* <ProfileTest /> */}
+          <LobbyProfile />
         </div>
       </div>
     </div>
