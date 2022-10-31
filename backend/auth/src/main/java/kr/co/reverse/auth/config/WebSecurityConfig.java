@@ -1,8 +1,6 @@
 package kr.co.reverse.auth.config;
 
-import kr.co.reverse.auth.common.jwt.JwtAuthenticationFilter;
-import kr.co.reverse.auth.common.jwt.JwtSecurityConfig;
-import kr.co.reverse.auth.common.jwt.JwtTokenProvider;
+import kr.co.reverse.auth.common.jwt.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -25,7 +23,9 @@ import java.util.List;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final JwtTokenProvider jwtTokenProvider;;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Override
     public void configure(WebSecurity web) {
@@ -49,17 +49,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll();
 
         http
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
+
+                .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
                 .and()
                 .authorizeRequests()
 
-                .antMatchers("/swagger-ui/**", "/api/v1/**", "/test").permitAll() // swagger
+//                .antMatchers("/swagger-ui/**", "/api/v1/**", "/test").permitAll() // swagger
 //                .antMatchers(HttpMethod.GET, "/image/**").permitAll()
 
-//                .antMatchers("/api/v1/auth/sign-up", "/api/v1/auth/login", "/api/v1/auth/reissue").permitAll()
-//                .anyRequest().authenticated() // 나머지는 전부 인증 필요
-                .antMatchers("/api/v1/**").permitAll()
+                .antMatchers("/api/v1/auth/sign-up", "/api/v1/auth/login", "/api/v1/auth/reissue").permitAll()
+                .anyRequest().authenticated() // 나머지는 전부 인증 필요
+//                .antMatchers("/api/v1/**").permitAll()
                 .and()
                 .apply(new JwtSecurityConfig(jwtTokenProvider));
     }
