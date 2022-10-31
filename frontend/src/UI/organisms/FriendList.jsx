@@ -178,7 +178,7 @@ function FriendList() {
                           friendDelete(friend.email);
                         }}
                       >
-                        <FiMinusCircle className="text-sub3" size={20} />
+                        <FiMinusCircle className="text-sub3" size={24} />
                       </button>
                       {/* </div> */}
                     </div>
@@ -217,7 +217,7 @@ function FriendList() {
                         className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
                       >
                         <BiLogIn
-                          size={14}
+                          size={18}
                           className="text-white m-0.5 -translate-x-0.5"
                         />
                       </button>
@@ -228,7 +228,7 @@ function FriendList() {
                         className="bg-sub3 border-2 border-basic3 rounded-full"
                       >
                         <HiOutlineTrash
-                          size={14}
+                          size={18}
                           className="text-white m-0.5"
                         />
                       </button>
