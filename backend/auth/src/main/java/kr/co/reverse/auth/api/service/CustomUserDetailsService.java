@@ -1,5 +1,6 @@
 package kr.co.reverse.auth.api.service;
 
+import kr.co.reverse.auth.common.exception.IncorrectEmailOrPasswordException;
 import kr.co.reverse.auth.db.entity.Auth;
 import kr.co.reverse.auth.db.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +28,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return authRepository.findByEmail(username)
+
+        System.out.println("==================");
+        UserDetails user =  authRepository.findByEmail(username)
                 .map(this::createUserDetails)
+//                .orElseThrow(() -> new IllegalArgumentException());
                 .orElseThrow(() -> new UsernameNotFoundException("해당하는 유저를 찾을 수 없습니다."));
+
+        System.out.println("--------------------- " + user.getUsername() + " " + user.getPassword());
+
+        return user;
     }
 
     private UserDetails createUserDetails(Auth auth){

@@ -14,4 +14,6 @@ public class AuthRes {
     private String refreshToken;
     private Long accessTokenExpirationTime;
     private Long refreshTokenExpirationTime;
+
+
 }

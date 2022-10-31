@@ -5,6 +5,9 @@ import kr.co.reverse.auth.api.request.SignupReq;
 import kr.co.reverse.auth.api.request.TokenReq;
 import kr.co.reverse.auth.api.response.AuthRes;
 import kr.co.reverse.auth.api.response.TokenRes;
+import kr.co.reverse.auth.common.error.ErrorCode;
+import kr.co.reverse.auth.common.exception.EmailDuplicateException;
+import kr.co.reverse.auth.common.exception.IncorrectEmailOrPasswordException;
 import kr.co.reverse.auth.common.jwt.JwtTokenProvider;
 import kr.co.reverse.auth.common.util.CookieUtil;
 import kr.co.reverse.auth.db.entity.Auth;
@@ -35,12 +38,13 @@ public class AuthService {
     private final AuthRepository authRepository;
     private final CookieUtil cookieUtil;
 
-    public boolean signUp(SignupReq signInfo){
+    @Transactional
+    public void signUp(SignupReq signInfo){
 
 //        validateSignUpInfo(signInfo);
 
         if(authRepository.existsByEmail(signInfo.getEmail())){
-            return false;
+            throw new IllegalArgumentException();
         }else{
             Auth auth = Auth.builder()
                     .id(UUID.randomUUID().toString())
@@ -49,15 +53,14 @@ public class AuthService {
                     .authority(Authority.ROLE_USER)
                     .build();
             authRepository.save(auth);
-
-            return true;
         }
     }
 
-    public TokenRes login(LoginReq loginInfo, HttpServletResponse response) {
+    public AuthRes login(LoginReq loginInfo, HttpServletResponse response) {
 
         if(authRepository.findByEmail(loginInfo.getEmail()).orElse(null) == null){
-            return null;
+            throw new IllegalArgumentException();
+//            return null;
         }else{
             //1. email, password를 기반으로 authentication 객체 생성
             UsernamePasswordAuthenticationToken authenticationToken = loginInfo.toAuthentication();
@@ -72,8 +75,7 @@ public class AuthService {
             //4. redis에 refresh token 저장
             redisService.setValues(authentication.getName(), tokenInfo.getRefreshToken());
 
-            TokenRes token = new TokenRes(tokenInfo.getAccessToken(), tokenInfo.getRefreshToken());
-
+//            TokenRes token = new TokenRes(tokenInfo.getAccessToken(), tokenInfo.getRefreshToken());
 //            HttpHeaders httpHeaders = new HttpHeaders();
 //            httpHeaders.add("Authorization", "Bearer " + tokenInfo.getAccessToken());
 //            response.setHeader("Authorization", "Bearer " + tokenInfo.getAccessToken());
@@ -84,12 +86,12 @@ public class AuthService {
             Cookie refreshToken = cookieUtil.addRefreshCookie(tokenInfo.getRefreshToken());
             response.addCookie(refreshToken);
 
-            return token;
+            return tokenInfo;
         }
     }
 
     @Transactional
-    public TokenRes reissue(TokenReq tokenInfo) {
+    public AuthRes reissue(TokenReq tokenInfo) {
 //        // 1. Refresh Token 검증
 //        if (!tokenProvider.validateToken(tokenRequestDto.getRefreshToken())) {
 //            throw new RuntimeException("Refresh Token 이 유효하지 않습니다.");
@@ -122,9 +124,9 @@ public class AuthService {
         redisService.checkRefreshToken(authentication.getName(), tokenInfo.getRefreshToken());
 
         // 예외 처리 통과후 토큰 재생성
-        AuthRes tokenDto = jwtTokenProvider.generateTokenDto(authentication);
-        TokenRes tokenResponseDto = new TokenRes(tokenDto.getAccessToken(), tokenDto.getRefreshToken());
-        return tokenResponseDto;
+        AuthRes token = jwtTokenProvider.generateTokenDto(authentication);
+//        TokenRes tokenResponseDto = new TokenRes(tokenDto.getAccessToken(), tokenDto.getRefreshToken());
+        return token;
     }
 
 }
