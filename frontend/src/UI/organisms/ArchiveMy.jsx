@@ -265,7 +265,14 @@ function ArchiveMy() {
                   <div className="w-40">
                     <AvatarGroup size="sm" max={5} spacing="-2">
                       {archive.members.map((member, index) => {
-                        return <Avatar name="profileImg" src={member.avatar} />;
+                        return (
+                          <Avatar
+                            name="profileImg"
+                            src={member.avatar}
+                            key={index}
+                            alt={index}
+                          />
+                        );
                       })}
                     </AvatarGroup>
                   </div>
