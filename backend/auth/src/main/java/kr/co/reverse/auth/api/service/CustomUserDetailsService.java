@@ -29,13 +29,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        System.out.println("==================");
         UserDetails user =  authRepository.findByEmail(username)
                 .map(this::createUserDetails)
 //                .orElseThrow(() -> new IllegalArgumentException());
                 .orElseThrow(() -> new UsernameNotFoundException("해당하는 유저를 찾을 수 없습니다."));
-
-        System.out.println("--------------------- " + user.getUsername() + " " + user.getPassword());
 
         return user;
     }

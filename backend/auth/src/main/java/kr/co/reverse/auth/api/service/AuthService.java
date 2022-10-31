@@ -6,6 +6,7 @@ import kr.co.reverse.auth.api.request.TokenReq;
 import kr.co.reverse.auth.api.response.AuthRes;
 import kr.co.reverse.auth.api.response.TokenRes;
 import kr.co.reverse.auth.common.error.ErrorCode;
+import kr.co.reverse.auth.common.error.UserErrorCode;
 import kr.co.reverse.auth.common.exception.EmailDuplicateException;
 import kr.co.reverse.auth.common.exception.IncorrectEmailOrPasswordException;
 import kr.co.reverse.auth.common.jwt.JwtTokenProvider;
@@ -18,6 +19,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,7 +61,9 @@ public class AuthService {
     public AuthRes login(LoginReq loginInfo, HttpServletResponse response) {
 
         if(authRepository.findByEmail(loginInfo.getEmail()).orElse(null) == null){
-            throw new IllegalArgumentException();
+//            throw new IncorrectEmailOrPasswordException(UserErrorCode.INCORRECT_EMAIL_OR_PASSWORD);
+            throw new IncorrectEmailOrPasswordException();
+//            throw new IllegalArgumentException();
 //            return null;
         }else{
             //1. email, password를 기반으로 authentication 객체 생성
@@ -67,7 +71,12 @@ public class AuthService {
 
             //2. 실제 검증(비밀번호 체크)
             // authenticate 매서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드가 실행
-            Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+            Authentication authentication = null;
+            try{
+                authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+            }catch (AuthenticationException e){
+                throw new IllegalArgumentException();
+            }
 
             //3. 토큰 생성
             AuthRes tokenInfo = jwtTokenProvider.generateTokenDto(authentication);
