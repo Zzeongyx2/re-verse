@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
-import { Box, Grid, GridItem, Input, Textarea } from "@chakra-ui/react";
 
 function LobbyProfile() {
   const [userInfo, setUserInfo] = useState({
     nickName: "Zl존윤sun",
     message: "늦었다고 생각할때가 진짜 너무 늦었다",
   });
-  const [isEdit, setIsEdit] = useState(false);
+  const [isEdited, setIsEdited] = useState(true);
   const [editNickName, setEditNickName] = useState("");
   const [editMessage, setEditMessage] = useState("");
   const [editNickNameValid, setEditNickNameValid] = useState({
-    isValid: false,
+    isValid: true,
     message: "",
   });
 
@@ -23,7 +22,7 @@ function LobbyProfile() {
   const editNickNameHandleChange = (e) => {
     setEditNickName(e.target.value);
   };
-  const ediMessageHandleChange = (e) => {
+  const editMessageHandleChange = (e) => {
     setEditMessage(e.target.value);
   };
   const editNickNameBlurHandle = (e) => {
@@ -31,18 +30,18 @@ function LobbyProfile() {
     if (!nickNameRE.test(editNickName)) {
       // TODO: 몇글자인지 정하기
       setEditNickNameValid({
-        isValid: true,
+        isValid: false,
         message: "*2~12글자 사이로 입력해주세요.",
       });
       return;
     }
-    setEditNickNameValid({ isValid: false, message: "" });
+    setEditNickNameValid({ isValid: true, message: "" });
     //axios 요청으로 닉네임 중복검사하기
     // setNickNameValid({ isValid: true, message: "이미 가입된 닉네임입니다." });
   };
 
   const editOnOff = () => {
-    if (!isEdit) {
+    if (isEdited) {
       setEditNickName(userInfo.nickName);
       setEditMessage(userInfo.message);
     } else {
@@ -51,7 +50,7 @@ function LobbyProfile() {
       }
       changeProfile();
     }
-    setIsEdit(!isEdit);
+    setIsEdited(!isEdited);
   };
 
   const changeProfile = async () => {
@@ -63,158 +62,119 @@ function LobbyProfile() {
     });
   };
 
+  const handleEnter = (e) => e.key === "Enter" && e.preventDefault();
+
   return (
-    <Box
-      className="mt-28 w-full"
-      borderRadius="24"
-      border="1px"
-      borderColor="white"
-      backgroundColor="white"
-    >
-      {!isEdit ? (
-        <Grid templateColumns="repeat(5)" templateRows="repeat(4)">
-          <GridItem
-            rowSpan={1}
-            colSpan={5}
-            h="64px"
-            border="1px"
-            // borderColor="white"
-            // p="2"
-            color="white"
-            borderTopRadius="24"
-            className="bg-gradient-to-t from-main1 to-sub1"
-          >
-            <div className="h-full flex justify-center items-center">
-              <p className="font-bold text-2xl drop-shadow">프로필</p>
-            </div>
-          </GridItem>
-          <GridItem
-            rowSpan={1}
-            colSpan={5}
-            h="48px"
-            borderRadius="10"
-            px="16px"
-            py="8px"
-            m="5"
-            className="shadow"
-          >
-            <div className="text-lg">{userInfo.nickName}</div>
-          </GridItem>
-          <GridItem
-            rowSpan={1}
-            colSpan={5}
-            h="175px"
-            borderRadius="10"
-            px="16px"
-            py="8px"
-            mx="5"
-            className="shadow"
-          >
-            <div className="text-lg">{userInfo.message}</div>
-          </GridItem>
-          <GridItem
-            rowSpan={1}
-            colSpan={5}
-            textAlign="center"
-            border="1px"
-            borderColor="white"
-            borderRadius="24"
-            color="white"
-            h="64px"
-            m="5"
-          >
-            <button
-              onClick={() => {
-                editOnOff();
-              }}
-              className="h-full w-full font-bold text-lg drop-shadow border border-1 border-white rounded-xl bg-gradient-to-t from-extra1 to-extra2"
-            >
-              프로필 편집
-            </button>
-          </GridItem>
-        </Grid>
-      ) : (
-        <Grid templateColumns="repeat(5)" templateRows="repeat(4)">
-          <GridItem
-            rowSpan={1}
-            colSpan={5}
-            h="64px"
-            border="1px"
-            borderColor="white"
-            p="2"
-            backgroundColor="#00BEFF"
-            color="white"
-            borderTopRadius="24"
-          >
-            <div className="h-full flex justify-center items-center">
-              <p className="font-bold text-2xl drop-shadow">프로필</p>
-            </div>
-          </GridItem>
-          <GridItem
-            rowSpan={1}
-            colSpan={5}
-            borderRadius="10"
-            m="5"
-            className="shadow outline-none"
-          >
-            <Input
-              focusBorderColor="none"
+    <div className="flex flex-col items-center w-full mt-28 border border-1 border-white rounded-2xl bg-white">
+      {/* header */}
+      <div className="flex justify-center items-center text-white w-full rounded-tl-2xl rounded-tr-2xl bg-gradient-to-t from-main1 to-sub1">
+        <p className="text-2xl drop-shadow font-bold my-4">프로필</p>
+      </div>
+      <form
+        onSubmit={changeProfile}
+        onKeyPress={handleEnter}
+        className="flex flex-col w-full items-center"
+      >
+        <div className="w-11/12 my-3">
+          {/* nickname */}
+          <div>
+            <input
+              disabled={isEdited}
+              type="text"
               placeholder="닉네임"
               value={editNickName}
               onChange={editNickNameHandleChange}
               onBlur={editNickNameBlurHandle}
-              border={editNickNameValid.isValid ? "1px" : "0px"}
-              borderColor={editNickNameValid.isValid ? "red" : null}
-              borderRadius="10"
-              _hover={{}}
-              h="48px"
+              className={
+                `h-12 focus:outline-none rounded-lg w-full px-3` +
+                // editNickNameValid가 True이면 유효한거..
+                (editNickNameValid.isValid
+                  ? " border-2 border-base2/20"
+                  : " border-2 border-red-500/80")
+              }
             />
-            <p className="text-red-500 m-[5px] text-[10px]">
+            <p className="text-red-500 ml-1 mt-1 text-[10px]">
               {editNickNameValid.message}
             </p>
-          </GridItem>
-          <GridItem
-            rowSpan={1}
-            colSpan={5}
-            h="175px"
-            borderRadius="10"
-            p="2"
-            mx="5"
-            className="shadow"
-          >
-            <Textarea
-              focusBorderColor="none"
-              placeholder="상태 메시지를 입력하세요"
+          </div>
+          {/* comments */}
+          <div className="pt-2">
+            <textarea
+              disabled={isEdited}
+              placeholder="상태 메세지를 입력하세요"
+              className="w-full py-2 focus:outline-none rounded-lg resize-none mb-4 px-2 border-2 border-base2/20"
+              rows={6}
+              name="comments"
+              id="comments"
+              onChange={editMessageHandleChange}
               value={editMessage}
-              onChange={ediMessageHandleChange}
-              border="none"
-              h="160px"
+            ></textarea>
+          </div>
+          {/* submit button */}
+          <button className="font-bold text-lg drop-shadow text-white bg-gradient-to-t from-extra1 to-extra2 h-14 w-full rounded-2xl ">
+            {isEdited ? "편집 완료" : "편집 하기"}
+          </button>
+        </div>
+      </form>
+      {/* nickname input & comment input */}
+      {/* {!edit ? (
+        <div className="flex flex-col w-full items-center">
+          <div className="w-11/12 my-3">
+            <input
+              type="text"
+              placeholder="닉네임"
+              className="w-full py-4 focus:outline-none rounded-lg shadow mb-4 px-2"
             />
-          </GridItem>
-          <GridItem
-            rowSpan={1}
-            colSpan={5}
-            textAlign="center"
-            border="1px"
-            borderColor="white"
-            borderRadius="24"
-            backgroundColor="#FACC04"
-            color="white"
-            h="64px"
-            m="5"
-          >
+          </div>
+          <textarea
+            placeholder="상태 메세지를 입력하세요"
+            className="w-11/12 py-4 focus:outline-none rounded-lg resize-none shadow mb-4 px-2"
+            rows={6}
+            name="comments"
+            id="comments"
+          ></textarea>
+
+          <div className="mb-6 w-11/12 h-16 flex items-center justify-center border border-1 border-white rounded-3xl bg-gradient-to-t from-extra1 to-extra2">
             <button
               onClick={() => {
                 editOnOff();
               }}
-              className="h-full w-full font-bold text-lg drop-shadow"
+              className="font-bold text-lg drop-shadow text-white "
             >
               편집 완료
             </button>
-          </GridItem>
-        </Grid>
-      )}
-    </Box>
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col w-full items-center">
+          <div className="w-11/12 my-3">
+            <input
+              type="text"
+              placeholder="닉네임"
+              className="w-full py-4 focus:outline-none rounded-lg shadow mb-4 px-2"
+            />
+          </div>
+          <textarea
+            placeholder="상태 메세지를 입력하세요"
+            className="w-11/12 py-4 focus:outline-none rounded-lg resize-none shadow mb-4 px-2"
+            rows={6}
+            name="comments"
+            id="comments"
+          ></textarea>
+
+          <div className="mb-6 w-11/12 h-16 flex items-center justify-center border border-1 border-white rounded-3xl bg-gradient-to-t from-extra1 to-extra2">
+            <button
+              onClick={() => {
+                editOnOff();
+              }}
+              className="font-bold text-lg drop-shadow text-white "
+            >
+              편집 완료
+            </button>
+          </div>
+        </div>
+      )} */}
+    </div>
   );
 }
 
