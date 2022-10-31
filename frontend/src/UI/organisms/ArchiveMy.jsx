@@ -249,7 +249,7 @@ function ArchiveMy() {
             return (
               <div>
                 <div
-                  key={index}
+                  key={`archive-${index}`}
                   className="flex items-center justify-between px-2 py-1 mx-4"
                 >
                   {/* blank */}
@@ -269,7 +269,7 @@ function ArchiveMy() {
                           <Avatar
                             name="profileImg"
                             src={member.avatar}
-                            key={index}
+                            key={`avatar-${index}`}
                             alt={index}
                           />
                         );
