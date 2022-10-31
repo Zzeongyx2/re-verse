@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
 import { Box, Grid, GridItem, Input, Textarea } from "@chakra-ui/react";
-import LobbyButton from "../atoms/LobbyButton";
 
-function DashboardProfile() {
+function LobbyProfile() {
   const [userInfo, setUserInfo] = useState({
-    userImg:
-      "https://ggotmari.s3.ap-northeast-2.amazonaws.com/profile/3ae5d166-833f-492f-a36f-32110569d100_%EB%9D%BC%EC%9D%B4%EC%96%B8.jfif",
     nickName: "Zl존윤sun",
     message: "늦었다고 생각할때가 진짜 너무 늦었다",
   });
@@ -67,11 +64,12 @@ function DashboardProfile() {
   };
 
   return (
-    <div
-      className="w-[545px]"
+    <Box
+      className="mt-28 w-full"
       borderRadius="24"
       border="1px"
       borderColor="white"
+      backgroundColor="white"
     >
       {!isEdit ? (
         <Grid templateColumns="repeat(5)" templateRows="repeat(4)">
@@ -80,11 +78,11 @@ function DashboardProfile() {
             colSpan={5}
             h="64px"
             border="1px"
-            borderColor="white"
-            p="2"
-            backgroundColor="#00BEFF"
+            // borderColor="white"
+            // p="2"
             color="white"
             borderTopRadius="24"
+            className="bg-gradient-to-t from-main1 to-sub1"
           >
             <div className="h-full flex justify-center items-center">
               <p className="font-bold text-2xl drop-shadow">프로필</p>
@@ -121,7 +119,6 @@ function DashboardProfile() {
             border="1px"
             borderColor="white"
             borderRadius="24"
-            backgroundColor="#FACC04"
             color="white"
             h="64px"
             m="5"
@@ -130,7 +127,7 @@ function DashboardProfile() {
               onClick={() => {
                 editOnOff();
               }}
-              className="h-full w-full font-bold text-lg drop-shadow"
+              className="h-full w-full font-bold text-lg drop-shadow border border-1 border-white rounded-xl bg-gradient-to-t from-extra1 to-extra2"
             >
               프로필 편집
             </button>
@@ -217,15 +214,8 @@ function DashboardProfile() {
           </GridItem>
         </Grid>
       )}
-      <LobbyButton
-        linkTo="/"
-        textcolor="white"
-        backcolor="#00BEFF"
-        buttonTitle="대표아카이브 바로가기"
-        buttonMessage="지존아카이브"
-      />
-    </div>
+    </Box>
   );
 }
 
-export default DashboardProfile;
+export default LobbyProfile;
