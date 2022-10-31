@@ -1,15 +1,23 @@
 package kr.co.reverse.auth.api.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class TokenRes {
+@Setter
+public class TokenRes{
     private String accessToken;
     private String refreshToken;
+
+    public static TokenRes of(AuthRes auth){
+        if(auth == null){
+            return null;
+        }
+
+        TokenRes res = new TokenRes();
+
+        res.setAccessToken(auth.getAccessToken());
+        res.setRefreshToken(auth.getRefreshToken());
+
+        return res;
+    }
 }

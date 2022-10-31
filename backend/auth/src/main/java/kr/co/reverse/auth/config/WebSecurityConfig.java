@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,10 +22,10 @@ import java.util.List;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final JwtTokenProvider jwtTokenProvider;
-    private final RedisTemplate redisTemplate;
+    private final JwtTokenProvider jwtTokenProvider;;
 
     @Override
     public void configure(WebSecurity web) {
@@ -53,11 +54,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
 
-                .antMatchers("/swagger-ui/**", "/v1/**", "/test").permitAll() // swagger
-                .antMatchers(HttpMethod.GET, "/image/**").permitAll()
+                .antMatchers("/swagger-ui/**", "/api/v1/**", "/test").permitAll() // swagger
+//                .antMatchers(HttpMethod.GET, "/image/**").permitAll()
 
-                .antMatchers("/api/v1/auth/sign-up", "/api/v1/auth/login", "/api/v1/auth/reissue").permitAll()
-                .anyRequest().authenticated() // 나머지는 전부 인증 필요
+//                .antMatchers("/api/v1/auth/sign-up", "/api/v1/auth/login", "/api/v1/auth/reissue").permitAll()
+//                .anyRequest().authenticated() // 나머지는 전부 인증 필요
+                .antMatchers("/api/v1/**").permitAll()
                 .and()
                 .apply(new JwtSecurityConfig(jwtTokenProvider));
     }
