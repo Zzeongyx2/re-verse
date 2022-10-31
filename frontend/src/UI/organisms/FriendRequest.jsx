@@ -102,7 +102,7 @@ function FriendRequest() {
                           friendRequest(friend.email);
                         }}
                       >
-                        <FiPlusCircle className="text-[#3F81FB]" size={20} />
+                        <FiPlusCircle className="text-[#3F81FB]" size={24} />
                       </button>
                     </div>
                     <Divider />

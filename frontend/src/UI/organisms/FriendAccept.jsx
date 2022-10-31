@@ -81,14 +81,14 @@ function FriendAccept() {
                           friendAccept(friend.email);
                         }}
                       >
-                        <BsCheckCircle className="text-[#4ECB71]" size={18} />
+                        <BsCheckCircle className="text-[#4ECB71]" size={22} />
                       </button>
                       <button
                         onClick={() => {
                           friendRefuse(friend.email);
                         }}
                       >
-                        <BsXCircle className="text-sub4" size={18} />
+                        <BsXCircle className="text-sub4" size={22} />
                       </button>
                     </div>
                   </div>
