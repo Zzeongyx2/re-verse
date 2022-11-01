@@ -1,4 +1,5 @@
 package kr.co.reverse.auth.db.entity;
 
-public class StatusCode {
+public enum StatusCode {
+    ACTIVE, DELETED
 }

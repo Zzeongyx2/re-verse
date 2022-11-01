@@ -1,10 +1,16 @@
 package kr.co.reverse.auth.common.jwt;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.netty.util.internal.StringUtil;
+import kr.co.reverse.auth.common.error.AuthErrorCode;
+import kr.co.reverse.auth.common.exception.ExpiredTokenException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -15,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RequiredArgsConstructor
+@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";

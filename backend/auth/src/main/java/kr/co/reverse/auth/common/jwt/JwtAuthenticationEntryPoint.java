@@ -1,5 +1,8 @@
 package kr.co.reverse.auth.common.jwt;
 
+import kr.co.reverse.auth.common.error.AuthErrorCode;
+import kr.co.reverse.auth.common.exception.ExpiredTokenException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -15,6 +18,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
+
         // 유효한 자격증명을 제공하지 않고 접근하려 할때 401
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }

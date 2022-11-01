@@ -12,8 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.StringTokenizer;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -40,7 +42,22 @@ public class AuthController {
         return ResponseEntity.ok(TokenRes.of(auth));
     }
 
+    @PostMapping("/reissue")
+    public ResponseEntity<? extends TokenRes>  reissue(HttpServletRequest request) {
+
+        AuthRes auth = authService.reissue(request);
+
+        return ResponseEntity.ok(TokenRes.of(auth));
+    }
+
     //TODO : 로그아웃
 
-    //TODO : 탈퇴하기
+
+    @DeleteMapping("/sign-out")
+    public ResponseEntity deleteUser(){
+
+        authService.deleteUser();
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
 }
