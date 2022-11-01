@@ -1,12 +1,14 @@
 import Navbar from "../organisms/Navbar";
+import SelectCharacter from "../organisms/SelectCharacter";
 
-function SelectCharacter() {
+function Character() {
   return (
     <div className="mt-8">
       <Navbar />
-      <div className="text-white">this is selecting character page</div>
+      <SelectCharacter />
+      {/* <div className="text-white">this is selecting character page</div> */}
     </div>
   );
 }
 
-export default SelectCharacter;
+export default Character;

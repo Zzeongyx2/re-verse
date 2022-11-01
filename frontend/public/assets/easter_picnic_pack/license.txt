@@ -1,0 +1,8 @@
+Model Information:
+* title:	Easter Picnic Pack
+* source:	https://sketchfab.com/3d-models/easter-picnic-pack-7dac71c6f31b45bebb38a9ba55a8ebe2
+* author:	L3X (https://sketchfab.com/L3X)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
