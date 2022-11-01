@@ -32,9 +32,9 @@ public class Archive {
 
     private LocalDateTime createdTime;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner")
+    private User owner;
 
 //    private List<Stuff> stuffs = new ArrayList<>();
 
@@ -47,12 +47,12 @@ public class Archive {
 //    private List<GuestBook> guestBooks = new ArrayList<>();
 
     @Builder
-    public Archive(String title, String description, Boolean isDeleted, LocalDateTime createdTime, User user, List<User> members) {
+    public Archive(String title, String description, Boolean isDeleted, LocalDateTime createdTime, User owner, List<User> members) {
         this.title = title;
         this.description = description;
         this.isDeleted = isDeleted;
         this.createdTime = createdTime;
-        this.user = user;
+        this.owner = owner;
 //        this.members = members;
     }
 }

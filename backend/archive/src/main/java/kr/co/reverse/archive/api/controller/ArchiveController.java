@@ -31,18 +31,19 @@ public class ArchiveController {
 
     @GetMapping
     public ResponseEntity<? extends ArchivesRes> getArchives(@RequestParam(name = "type") Integer type) {
+        User user = User.builder().nickname("test").build();
 
         if (type == 0) { // 내 아카이브 조회
             // TODO: redis에서 cookie 내 access token에 해당하는 정보를 갖고 와서, user 정보 불러오기
-            User user = User.builder().nickname("test").build();
 
             List<Archive> myArchives = archiveService.getArchives(user);
 
             return ResponseEntity.ok(ArchivesRes.of(myArchives));
         }
 
-        // TODO: Friend API 완성 이후, 친구 아카이브 목록 리스트 조회 기능 추가
-        return ResponseEntity.ok(ArchivesRes.of(null));
+        List<ArchiveRes> friendArchives = archiveService.getFriendArchives(user);
+
+        return ResponseEntity.ok(ArchivesRes.create(friendArchives));
     }
 
     @GetMapping("/{archive_id}")

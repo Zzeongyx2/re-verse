@@ -37,14 +37,17 @@ public class User {
 
     private LocalDate createdTime;
 
-    @OneToMany(mappedBy = "user")
-    private  List<Archive> myArchives;
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    private List<Archive> myArchives;
 
-    @OneToMany(mappedBy = "user")
-    private List<Archive> friendArchives;
+//    @OneToMany(mappedBy = "user")
+//    private List<Archive> friendArchives;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Friend> myFriends;
 
     @Builder
-    public User(String nickname, String message, Integer avatar, LocalDate createdTime){
+    public User(String nickname, String message, Integer avatar, LocalDate createdTime) {
         this.nickname = nickname;
 //        this.email = email;
         this.message = message;

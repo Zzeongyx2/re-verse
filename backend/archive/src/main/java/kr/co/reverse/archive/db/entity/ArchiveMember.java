@@ -27,7 +27,7 @@ public class ArchiveMember {
     private Role role;
 
     @Builder
-    public ArchiveMember(Archive archive, Friend friend, Role role){
+    public ArchiveMember(Archive archive, Friend friend, Role role) {
         this.archive = archive;
         this.friend = friend;
         this.role = role;

@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.UUID;
 
-public interface ArchiveRepository extends JpaRepository<Archive, UUID> {
+public interface ArchiveRepository extends JpaRepository<Archive, UUID>, ArchiveRepositoryCustom {
 
-    List<Archive> findAllByUser(User user);
+    List<Archive> findAllByOwner(User user);
 
 }
