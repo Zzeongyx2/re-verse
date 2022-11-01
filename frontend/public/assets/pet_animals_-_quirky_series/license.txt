@@ -1,0 +1,8 @@
+Model Information:
+* title:	Pet Animals - Quirky Series
+* source:	https://sketchfab.com/3d-models/pet-animals-quirky-series-dab93c74a0934e4893e390332b79c441
+* author:	Omabuarts Studio (https://sketchfab.com/omabuarts)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
