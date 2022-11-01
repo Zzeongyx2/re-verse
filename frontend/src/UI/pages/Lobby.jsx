@@ -2,6 +2,7 @@ import LobbyButton from "../atoms/LobbyButton";
 import NeonLightBG from "../atoms/NeonLightBG";
 import LobbyProfile from "../organisms/LobbyProfile";
 import Navbar from "../organisms/Navbar";
+import ThreeTest from "../organisms/ThreeTest";
 
 function Lobby() {
   return (
@@ -11,8 +12,12 @@ function Lobby() {
       </div>
       <div className="flex justify-between">
         {/* left side: character */}
-        <div className="rounded-3xl w-[calc(96%/3*2)]">
-          <NeonLightBG />
+        <div className="rounded-3xl w-[calc(96%/3*2)] relative" id="three-div">
+          <NeonLightBG></NeonLightBG>
+          <div className="absolute "></div>
+          <div className="bg-opacity-50 bg-white">
+            <ThreeTest></ThreeTest>
+          </div>
         </div>
         {/* right side: shortcut btn, profile */}
         <div className="w-[calc(96%/3)]">
