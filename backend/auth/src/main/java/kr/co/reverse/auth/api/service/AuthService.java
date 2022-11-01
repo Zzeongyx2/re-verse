@@ -70,6 +70,13 @@ public class AuthService {
         if(authRepository.findByEmail(loginInfo.getEmail()).orElse(null) == null){
             throw new IncorrectEmailOrPasswordException();
         }else{
+
+            //탈퇴한 회원이면 로그인 불가능
+            Auth auth = authRepository.findByEmail(loginInfo.getEmail()).get();
+            if(auth.getUserStatus().getUserStatusCode().equals(StatusCode.DELETED)){
+                throw new IncorrectEmailOrPasswordException();
+            }
+
             //1. email, password를 기반으로 authentication 객체 생성
             UsernamePasswordAuthenticationToken authenticationToken = loginInfo.toAuthentication();
 
@@ -79,13 +86,6 @@ public class AuthService {
             try{
                 authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
             }catch (AuthenticationException e){
-                throw new IllegalArgumentException();
-            }
-
-            //탈퇴한 회원이면 로그인 불가능
-            Auth auth = authRepository.findByEmail(authentication.getName()).get();
-
-            if(auth.getUserStatus().getUserStatusCode().equals(StatusCode.DELETED)){
                 throw new IncorrectEmailOrPasswordException();
             }
 
@@ -115,10 +115,8 @@ public class AuthService {
 
         redisService.checkRefreshToken(authentication.getName(), refreshToken);
 
-
         // 예외 처리 통과후 토큰 재생성
         AuthRes token = jwtTokenProvider.generateTokenDto(authentication);
-//        TokenRes tokenResponseDto = new TokenRes(tokenDto.getAccessToken(), tokenDto.getRefreshToken());
         return token;
     }
 
