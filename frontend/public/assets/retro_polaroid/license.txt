@@ -1,0 +1,8 @@
+Model Information:
+* title:	Retro Polaroid
+* source:	https://sketchfab.com/3d-models/retro-polaroid-93862442911e4fe598d2b8bf04cee421
+* author:	L3X (https://sketchfab.com/L3X)
+
+Model License:
+* license type:	SKETCHFAB Editorial (https://sketchfab.com/licenses)
+* requirements:	Use only in connection with events that are newsworthy or of public interest

@@ -1,0 +1,517 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 17669,
+      "max": [
+        26.439361572265625,
+        28.137033462524414,
+        23.53445053100586
+      ],
+      "min": [
+        -28.055950164794922,
+        -28.13702964782715,
+        -23.53445053100586
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 212028,
+      "componentType": 5126,
+      "count": 17669,
+      "max": [
+        0.9999999403953552,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 17669,
+      "max": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 17669,
+      "max": [
+        0.9860996007919312,
+        0.9822361469268799
+      ],
+      "min": [
+        0.013900402933359146,
+        0.01384786143898964
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 96837,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 424056,
+      "componentType": 5126,
+      "count": 623,
+      "max": [
+        24.34005355834961,
+        6.007396221160889,
+        22.305809020996094
+      ],
+      "min": [
+        -18.41965103149414,
+        -24.513263702392578,
+        5.269025802612305
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 431532,
+      "componentType": 5126,
+      "count": 623,
+      "max": [
+        0.9999960064888,
+        0.47212302684783936,
+        0.47212299704551697
+      ],
+      "min": [
+        -1.0,
+        -0.47212255001068115,
+        -0.47212234139442444
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 141352,
+      "componentType": 5126,
+      "count": 623,
+      "max": [
+        0.9867440462112427,
+        0.9887783527374268
+      ],
+      "min": [
+        0.013255947269499302,
+        0.013143324293196201
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 387348,
+      "componentType": 5125,
+      "count": 3408,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 439008,
+      "componentType": 5126,
+      "count": 72,
+      "max": [
+        -2.387298583984375,
+        23.165742874145508,
+        -17.64704132080078
+      ],
+      "min": [
+        -45.21819305419922,
+        -23.165742874145508,
+        -19.7845458984375
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 439872,
+      "componentType": 5126,
+      "count": 72,
+      "max": [
+        0.03964149206876755,
+        0.9856216907501221,
+        0.9992141723632813
+      ],
+      "min": [
+        -0.9909753203392029,
+        -0.9856216907501221,
+        -0.9992148280143738
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 146336,
+      "componentType": 5126,
+      "count": 72,
+      "max": [
+        0.9858864545822144,
+        0.980641782283783
+      ],
+      "min": [
+        0.016899149864912033,
+        0.16319860517978668
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 400980,
+      "componentType": 5125,
+      "count": 258,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "L3X (https://sketchfab.com/L3X)",
+      "license": "SKETCHFAB Editorial (https://sketchfab.com/licenses)",
+      "source": "https://sketchfab.com/3d-models/retro-polaroid-93862442911e4fe598d2b8bf04cee421",
+      "title": "Retro Polaroid"
+    },
+    "generator": "Sketchfab-12.68.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 402012,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 146912,
+      "byteOffset": 402012,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 440736,
+      "byteOffset": 548924,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 282704,
+      "byteOffset": 989660,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 1272364,
+      "uri": "scene.bin"
+    }
+  ],
+  "extensionsUsed": [
+    "KHR_materials_transmission",
+    "KHR_materials_clearcoat"
+  ],
+  "images": [
+    {
+      "uri": "textures/Mat_plastic_baseColor.png"
+    },
+    {
+      "uri": "textures/Mat_plastic_metallicRoughness.png"
+    },
+    {
+      "uri": "textures/Mat_plastic_normal.png"
+    },
+    {
+      "uri": "textures/Mat_glass_metallicRoughness.png"
+    },
+    {
+      "uri": "textures/Mat_photo_baseColor.png"
+    },
+    {
+      "uri": "textures/Mat_photo_metallicRoughness.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0.011128684054434202,
+        0.002654200535294308,
+        0.017015470824889183
+      ],
+      "name": "Mat_plastic",
+      "normalTexture": {
+        "index": 2
+      },
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.5185247675853808,
+          0.5185247675853808,
+          0.5185247675853808,
+          1.0
+        ],
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      }
+    },
+    {
+      "alphaMode": "BLEND",
+      "doubleSided": true,
+      "extensions": {
+        "KHR_materials_transmission": {
+          "transmissionFactor": 0.22389481707317072
+        }
+      },
+      "name": "Mat_glass",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.009559092560626798,
+          0.0015972070516176102,
+          0.061168677160403105,
+          0.7761051829268293
+        ],
+        "metallicRoughnessTexture": {
+          "index": 3
+        }
+      }
+    },
+    {
+      "doubleSided": true,
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 1.0,
+          "clearcoatRoughnessFactor": 0.0
+        }
+      },
+      "name": "Mat_photo",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.7252506551386584,
+          0.7252506551386584,
+          0.7252506551386584,
+          1.0
+        ],
+        "baseColorTexture": {
+          "index": 4
+        },
+        "metallicRoughnessTexture": {
+          "index": 5
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Polaroid_01_Mat_plastic_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Polaroid_01_Mat_glass_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 6,
+            "POSITION": 5,
+            "TEXCOORD_0": 7
+          },
+          "indices": 8,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Polaroid_01_Mat_photo_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 10,
+            "POSITION": 9,
+            "TEXCOORD_0": 11
+          },
+          "indices": 12,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "e01edc3998e44fe994a11921228d23cc.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4,
+        5,
+        6
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        -14.724609375,
+        23.618215560913086,
+        3.0219058990478516,
+        1.0
+      ],
+      "name": "Polaroid_01"
+    },
+    {
+      "mesh": 0,
+      "name": "Polaroid_01_Mat_plastic_0"
+    },
+    {
+      "mesh": 1,
+      "name": "Polaroid_01_Mat_glass_0"
+    },
+    {
+      "mesh": 2,
+      "name": "Polaroid_01_Mat_photo_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    },
+    {
+      "sampler": 0,
+      "source": 3
+    },
+    {
+      "sampler": 0,
+      "source": 4
+    },
+    {
+      "sampler": 0,
+      "source": 5
+    }
+  ]
+}
