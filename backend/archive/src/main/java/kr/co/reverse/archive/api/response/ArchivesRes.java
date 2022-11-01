@@ -14,12 +14,22 @@ public class ArchivesRes {
     private List<ArchiveRes> archives = new ArrayList<>();
 
     public static ArchivesRes of(List<Archive> archives) {
-        if(archives == null) {
+        if (archives == null) {
             return null;
         }
 
         ArchivesRes res = new ArchivesRes();
         res.setArchives(archives);
+        return res;
+    }
+
+    public static ArchivesRes create(List<ArchiveRes> archives) {
+        if (archives == null) {
+            return null;
+        }
+
+        ArchivesRes res = new ArchivesRes();
+        res.archives = archives;
         return res;
     }
 
