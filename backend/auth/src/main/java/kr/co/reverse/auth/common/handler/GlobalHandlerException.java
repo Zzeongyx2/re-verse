@@ -1,13 +1,12 @@
 package kr.co.reverse.auth.common.handler;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import io.lettuce.core.RedisException;
+import kr.co.reverse.auth.common.error.AuthErrorCode;
 import kr.co.reverse.auth.common.error.CommonErrorCode;
 import kr.co.reverse.auth.common.error.ErrorCode;
 import kr.co.reverse.auth.common.error.UserErrorCode;
-import kr.co.reverse.auth.common.exception.EmailDuplicateException;
-import kr.co.reverse.auth.common.exception.IncorrectEmailOrPasswordException;
-import kr.co.reverse.auth.common.exception.NicknameDuplicateException;
-import kr.co.reverse.auth.common.exception.UnauthorizedException;
+import kr.co.reverse.auth.common.exception.*;
 import kr.co.reverse.auth.common.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -31,6 +30,10 @@ public class GlobalHandlerException extends ResponseEntityExceptionHandler {
      * HTTP status code만 응답으로 제공해줌
      */
 
+    @ExceptionHandler(ExpiredTokenException.class)
+    public ResponseEntity<? extends ErrorResponse> handleAuthenticationException(ExpiredTokenException e) {
+        return handleExceptionInternal(HttpStatus.UNAUTHORIZED, AuthErrorCode.EXPIRE_TOKEN);
+    }
     @ExceptionHandler(EmailDuplicateException.class)
     public ResponseEntity<? extends ErrorResponse> handleDuplicateException(EmailDuplicateException e) {
         return handleExceptionInternal(HttpStatus.CONFLICT, UserErrorCode.EMAIL_DUPLICATE);

@@ -4,8 +4,13 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import kr.co.reverse.auth.api.response.AuthRes;
+import kr.co.reverse.auth.common.error.AuthErrorCode;
+import kr.co.reverse.auth.common.exception.ExpiredTokenException;
+import kr.co.reverse.auth.common.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,7 +31,7 @@ public class JwtTokenProvider {
 
     private static final String AUTHORITIES_KEY = "auth";
     private static final String BEARER_TYPE = "bearer";
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24;            // 1시간 * 24 = 24시간(-Dev)
+    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60;            // 1시간 * 24 = 24시간(-Dev)
     private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7;  // 7일
 
     private final Key key;
@@ -68,6 +73,7 @@ public class JwtTokenProvider {
     }
 
     public Authentication getAuthentication(String accessToken) {
+
         // 토큰 복호화
         Claims claims = parseClaims(accessToken);
 
@@ -102,7 +108,6 @@ public class JwtTokenProvider {
         }
         return false;
     }
-
     private Claims parseClaims(String accessToken) {
         try {
             return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(accessToken).getBody();

@@ -1,5 +1,6 @@
 package kr.co.reverse.auth.common.response;
 
+import kr.co.reverse.auth.common.error.AuthErrorCode;
 import lombok.Getter;
 import lombok.Setter;
 
