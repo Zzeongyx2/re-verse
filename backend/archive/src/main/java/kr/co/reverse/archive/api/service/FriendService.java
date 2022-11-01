@@ -51,7 +51,7 @@ public class FriendService {
             friendRepository.save(new Friend(user, target));
         }
 
-        FriendInvitation friendInvitation = friendInvitationRepository.findByInvitationUserAAndInvitationTarget(user, target);
+        FriendInvitation friendInvitation = friendInvitationRepository.findByInvitationUserAndInvitationTarget(user, target);
         friendInvitationRepository.delete(friendInvitation);
     }
 
