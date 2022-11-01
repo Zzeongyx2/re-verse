@@ -13,10 +13,11 @@ function Lobby() {
       <div className="flex justify-between">
         {/* left side: character */}
         <div className="rounded-3xl w-[calc(96%/3*2)] relative" id="three-div">
-          <NeonLightBG></NeonLightBG>
-          <div className="absolute "></div>
-          <div className="bg-opacity-50 bg-white">
-            <ThreeTest></ThreeTest>
+          <div className="absolute w-full h-full">
+            <NeonLightBG />
+          </div>
+          <div className="absolute bg-opacity-0 w-full h-full">
+            <ThreeTest />
           </div>
         </div>
         {/* right side: shortcut btn, profile */}
