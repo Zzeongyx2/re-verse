@@ -128,6 +128,17 @@ public class AuthService {
 
         auth.getUserStatus().setUserStatusCode(StatusCode.DELETED);
 
+        //레디스에 해당 유저 삭제
+        redisService.deleteValues(auth.getEmail());
     }
 
+    public void logout() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        Auth auth = authRepository.findByEmail(authentication.getName()).get();
+
+        //레디스에 해당 유저 삭제
+        redisService.deleteValues(auth.getEmail());
+
+    }
 }

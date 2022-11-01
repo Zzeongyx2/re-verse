@@ -51,6 +51,13 @@ public class AuthController {
     }
 
     //TODO : 로그아웃
+    @GetMapping("/logout")
+    public ResponseEntity logout(){
+
+        authService.logout();
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
 
 
     @DeleteMapping("/sign-out")
