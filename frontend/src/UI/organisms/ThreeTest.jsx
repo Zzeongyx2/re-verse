@@ -41,7 +41,7 @@ function ThreeTest() {
     const controls = new OrbitControls(camera, renderer.domElement);
 
     const gltfLoader = new GLTFLoader();
-    gltfLoader.load("/assets/retro_polaroid/scene.gltf", (gltf) => {
+    gltfLoader.load("/assets/cartoon_characters_pack_all/scene.gltf", (gltf) => {
       console.log(gltf.scene.children[0]);
       const mesh = gltf.scene.children[0];
       scene.add(mesh);
