@@ -1,28 +1,15 @@
 import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
 
-import { avatarAnatomy } from "@chakra-ui/anatomy";
-import { createMultiStyleConfigHelpers, defineStyle } from "@chakra-ui/react";
-
-const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(avatarAnatomy.keys);
-
-const superLg = defineStyle({
-  width: 40,
-  height: 40,
-  fontSize: "6xl",
-});
-
-const sizes = {
-  superLg: definePartsStyle({ container: superLg }),
-};
-
-export const avatarTheme = defineMultiStyleConfig({ sizes });
-
-function SelectCharacterBtn({ imgUrl, name }) {
+function SelectCharacterBtn({ imgUrl, name, selected }) {
   return (
     <>
       <div>
-        <Avatar size="xl" alt={name} src={imgUrl} className="p-2" />
+        <Avatar
+          size="xl"
+          alt={name}
+          src={imgUrl}
+          className="cursor-pointer hover:scale-105 hover:duration-300"
+        />
       </div>
     </>
     // <button>
