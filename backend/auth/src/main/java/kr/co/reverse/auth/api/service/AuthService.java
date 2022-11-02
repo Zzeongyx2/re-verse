@@ -3,9 +3,10 @@ package kr.co.reverse.auth.api.service;
 import kr.co.reverse.auth.api.request.LoginReq;
 import kr.co.reverse.auth.api.request.SignupReq;
 import kr.co.reverse.auth.api.request.TokenReq;
+import kr.co.reverse.auth.api.request.UserReq;
 import kr.co.reverse.auth.api.response.AuthRes;
+import kr.co.reverse.auth.api.response.UserRes;
 import kr.co.reverse.auth.common.exception.EmailDuplicateException;
-import kr.co.reverse.auth.common.exception.ExpiredTokenException;
 import kr.co.reverse.auth.common.exception.IncorrectEmailOrPasswordException;
 import kr.co.reverse.auth.common.jwt.JwtTokenProvider;
 import kr.co.reverse.auth.common.util.CookieUtil;
@@ -16,6 +17,8 @@ import kr.co.reverse.auth.db.entity.UserStatus;
 import kr.co.reverse.auth.db.repository.AuthRepository;
 import kr.co.reverse.auth.db.repository.UserStatusRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -24,13 +27,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.UUID;
+import java.net.URI;
 
 @RequiredArgsConstructor
 @Service
@@ -43,6 +45,9 @@ public class AuthService {
     private final AuthRepository authRepository;
     private final CookieUtil cookieUtil;
     private final UserStatusRepository userStatusRepository;
+
+    @Value("${user.redirect-uri}")
+    private String USER_REDIRECT_URI;
 
     @Transactional
     public void signUp(SignupReq signInfo){
@@ -63,6 +68,15 @@ public class AuthService {
                     .userStatus(status)
                     .build();
             authRepository.save(auth);
+
+            //user 객체에 데이터 넣기
+            UserReq req = UserReq.builder()
+                    .authId(auth.getId().toString())
+                    .nickname(signInfo.getNickname())
+                    .build();
+
+            connectCreateUser(req);
+
         }
     }
 
@@ -93,9 +107,13 @@ public class AuthService {
             //3. 토큰 생성
             AuthRes tokenInfo = jwtTokenProvider.generateTokenDto(authentication);
 
+
+            String userId = connectLoginUser(auth.getId().toString());
+
+
             //4. redis에 refresh token 저장
-            redisService.setValues(tokenInfo.getRefreshToken(), authentication.getName());
-            redisService.setValues(tokenInfo.getAccessToken(), authentication.getName());
+            redisService.setValues(tokenInfo.getRefreshToken(), userId);
+            redisService.setValues(tokenInfo.getAccessToken(), userId);
 
             return tokenInfo;
         }
@@ -149,6 +167,33 @@ public class AuthService {
         if(auth != null){
             throw new EmailDuplicateException();
         }
+    }
+
+
+    public ResponseEntity connectCreateUser(UserReq req){
+        RestTemplate restTemplate = new RestTemplate();
+
+        URI uri = UriComponentsBuilder.fromUriString(USER_REDIRECT_URI)
+                .path("/create")
+                .encode().build().toUri();
+
+        ResponseEntity result = restTemplate.postForEntity(uri, req, ResponseEntity.class);
+        return result;
+    }
+
+    public String connectLoginUser(String authId){
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        URI uri = UriComponentsBuilder.fromUriString(USER_REDIRECT_URI)
+                .path("/id/{auth_id}")
+                .encode().build()
+                .expand(authId)
+                .toUri();
+
+        ResponseEntity<UserRes> result = restTemplate.getForEntity(uri,UserRes.class);
+
+        return result.getBody().getId();
 
     }
 }
