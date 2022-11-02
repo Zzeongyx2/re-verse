@@ -6,6 +6,7 @@ import { Divider } from "@chakra-ui/react";
 import { FiSettings } from "react-icons/fi";
 import { BiLogIn, BiPencil } from "react-icons/bi";
 import EditArchiveModal from "./EditArchiveModal";
+import SettingArchiveModal from "./SettingArchiveModal";
 
 function ArchiveMy() {
   const [archiveList, setArchiveList] = useState([]);
@@ -292,15 +293,8 @@ function ArchiveMy() {
                     {/* 아카이브 수정 */}
                     <EditArchiveModal />
 
-                    {/* 아카이브 권한 수정 */}
-                    <button
-                      className="bg-basic1 border-2 border-basic3 rounded-full"
-                      onClick={() => {
-                        settingArchive(archive.archiveId);
-                      }}
-                    >
-                      <FiSettings size={18} className="text-white m-0.5" />
-                    </button>
+                    {/* 아카이브 권한 설정 */}
+                    <SettingArchiveModal />
                   </div>
                 </div>
                 <Divider />
