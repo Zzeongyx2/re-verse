@@ -6,8 +6,6 @@ import kr.co.reverse.archive.api.response.FriendRes;
 import kr.co.reverse.archive.db.entity.QFriend;
 import kr.co.reverse.archive.db.entity.QUser;
 import kr.co.reverse.archive.db.entity.User;
-import lombok.RequiredArgsConstructor;
-import org.hibernate.criterion.Projection;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -30,7 +28,7 @@ public class FriendRepositoryImpl implements FriendRepositoryCustom {
                         QFriend.friend.target.avatar,
                         QFriend.friend.target.message))
                 .from(QFriend.friend)
-                .join(QFriend.friend.user, QUser.user).fetchJoin()
+//                .join(QFriend.friend.user, QUser.user).fetchJoin()
                 .where(
                       QFriend.friend.user.id.eq(user.getId())
                 )
