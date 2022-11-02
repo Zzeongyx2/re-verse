@@ -40,7 +40,8 @@ public class User {
     private LocalDate createdTime;
 
     @Builder
-    public User(String nickname, String message, Integer avatar, LocalDate createdTime){
+    public User(String authId, String nickname, String message, Integer avatar, LocalDate createdTime){
+        this.authId = authId;
         this.nickname = nickname;
 //        this.email = email;
         this.message = message;

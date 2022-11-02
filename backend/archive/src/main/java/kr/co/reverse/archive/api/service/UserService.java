@@ -1,6 +1,7 @@
 package kr.co.reverse.archive.api.service;
 
 
+import kr.co.reverse.archive.api.request.SigninUserReq;
 import kr.co.reverse.archive.api.request.UserReq;
 import kr.co.reverse.archive.common.exception.NicknameDuplicateException;
 import kr.co.reverse.archive.db.entity.User;
@@ -13,9 +14,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
+import java.time.LocalDate;
+import java.util.UUID;
 
 
 @Service
@@ -27,8 +27,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final RedisService redisService;
 
-    public User getPlayer(String id){
-        return userRepository.findById(id).get();
+    public User getPlayer(String userId){
+        return userRepository.findById(UUID.fromString(userId)).get();
     }
 
     public String getUserId(){
@@ -46,20 +46,45 @@ public class UserService {
 
     }
 
+    public String getUserIdByAuthId(String authId){
+        User user = userRepository.findUserByAuthId(authId);
 
-    public void checkDuplicateNickname(String nickname) {
+        return user.getId().toString();
+    }
+
+
+    public boolean checkDuplicateNickname(String nickname) {
         User user = userRepository.findByNickname(nickname);
 
         if(user != null){
             throw new NicknameDuplicateException();
         }
+
+        return true;
     }
     @Transactional
     public void updateUser(String userId, UserReq userInfo) {
-        User user = userRepository.findById(userId).get();
+        User user = getPlayer(userId);
 
         user.setNickname(userInfo.getNickname());
         user.setMessage(userInfo.getMessage());
+
+    }
+
+    @Transactional
+    public void createUser(SigninUserReq userInfo) {
+
+        if(checkDuplicateNickname(userInfo.getNickname())){
+            User user = User.builder()
+                    .authId(userInfo.getAuthId())
+                    .nickname(userInfo.getNickname())
+                    .avatar(1)
+                    .message("리버스로 놀러오세요 :)")
+                    .createdTime(LocalDate.now())
+                    .build();
+
+            userRepository.save(user);
+        }
 
     }
 }
