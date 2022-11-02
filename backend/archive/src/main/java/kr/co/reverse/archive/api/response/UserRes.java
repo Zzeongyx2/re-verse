@@ -1,13 +1,12 @@
 package kr.co.reverse.archive.api.response;
 
 import com.querydsl.core.annotations.QueryProjection;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 public class UserRes {
 
     private UUID userId;

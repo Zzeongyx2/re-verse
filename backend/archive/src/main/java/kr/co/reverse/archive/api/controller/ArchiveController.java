@@ -2,6 +2,7 @@ package kr.co.reverse.archive.api.controller;
 
 import kr.co.reverse.archive.api.request.ArchiveReq;
 import kr.co.reverse.archive.api.response.ArchiveRes;
+import kr.co.reverse.archive.api.response.ArchivesRes;
 import kr.co.reverse.archive.api.service.ArchiveService;
 import kr.co.reverse.archive.db.entity.Archive;
 import kr.co.reverse.archive.db.entity.User;
@@ -44,12 +45,12 @@ public class ArchiveController {
 
             List<ArchiveRes> myArchives = archiveService.getArchives(test);
 
-            return ResponseEntity.ok(myArchives);
+            return ResponseEntity.ok(ArchivesRes.of(myArchives));
         }
 
         List<ArchiveRes> friendArchives = archiveService.getFriendArchives(test);
 
-        return ResponseEntity.ok(friendArchives);
+        return ResponseEntity.ok(ArchivesRes.of(friendArchives));
     }
 
     @GetMapping("/{archive_id}")
