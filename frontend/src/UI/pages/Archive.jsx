@@ -11,6 +11,7 @@ import Button from "../atoms/Button";
 import ArchiveFriend from "../organisms/ArchiveFriend";
 import ArchiveLike from "../organisms/ArchiveLike";
 import ArchiveMy from "../organisms/ArchiveMy";
+import CreateArchiveModal from "../organisms/CreateArchiveModal";
 import Navbar from "../organisms/Navbar";
 
 function Archive() {
@@ -33,11 +34,6 @@ function Archive() {
     }
   }, [location]);
 
-  // FIXME: avatar component, layout, remove chakra grid, etc.
-  // FIXME: avatar component, layout, remove chakra grid, etc.
-  // FIXME: avatar component, layout, remove chakra grid, etc.
-  // FIXME: avatar component, layout, remove chakra grid, etc.
-  // FIXME: avatar component, layout, remove chakra grid, etc.
   return (
     <div className="mt-8">
       <Navbar />
@@ -81,16 +77,7 @@ function Archive() {
             </Link>
           </div>
         </div>
-        <div className="w-60 border border-white rounded-3xl bg-gradient-to-t to-extra2 from-extra1 font-bold flex justify-center">
-          {/* <div className="w-60 border border-white rounded-3xl bg-[#FACC04] font-bold flex justify-center"> */}
-          <button
-            onClick={() => {
-              createArchive();
-            }}
-          >
-            새 아카이브 생성
-          </button>
-        </div>
+        <CreateArchiveModal />
       </div>
       <div>
         <Routes>
@@ -98,7 +85,7 @@ function Archive() {
           <Route path="/friend" element={<ArchiveFriend />} />
           <Route path="/like" element={<ArchiveLike />} />
         </Routes>
-      </div>{" "}
+      </div>
     </div>
   );
 }
