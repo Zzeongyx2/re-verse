@@ -49,6 +49,7 @@ public class FriendService {
 
         if(isAccepted){
             friendRepository.save(new Friend(user, target));
+            friendRepository.save(new Friend(target, user));
         }
 
         FriendInvitation friendInvitation = friendInvitationRepository.findByInvitationUserAAndInvitationTarget(user, target);
