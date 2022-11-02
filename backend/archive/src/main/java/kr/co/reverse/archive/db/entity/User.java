@@ -37,8 +37,8 @@ public class User {
 
     private LocalDate createdTime;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
-    private List<Archive> myArchives;
+//    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+//    private List<Archive> myArchives;
 
 //    @OneToMany(mappedBy = "user")
 //    private List<Archive> friendArchives;
