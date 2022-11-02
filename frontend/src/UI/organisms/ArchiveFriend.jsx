@@ -121,10 +121,7 @@ function ArchiveFriend() {
           {archiveList.map((archive, index) => {
             return (
               <div key={`archiveList-${index}`}>
-                <div
-                  key={index}
-                  className="flex items-center justify-between px-2 py-1 mx-4"
-                >
+                <div className="flex items-center justify-between px-2 py-1 mx-4">
                   <div className="flex">
                     {/* 즐겨찾기 */}
                     <button
