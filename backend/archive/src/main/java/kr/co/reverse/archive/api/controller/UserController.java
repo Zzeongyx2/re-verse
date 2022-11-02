@@ -1,6 +1,7 @@
 package kr.co.reverse.archive.api.controller;
 
 import kr.co.reverse.archive.api.request.ArchiveReq;
+import kr.co.reverse.archive.api.request.UserReq;
 import kr.co.reverse.archive.api.response.ArchiveRes;
 import kr.co.reverse.archive.api.response.UserRes;
 import kr.co.reverse.archive.api.service.UserService;
@@ -26,12 +27,23 @@ public class UserController {
         return ResponseEntity.ok(UserRes.of(user));
     }
 
-    @GetMapping("/user/{nickname}")
+    @GetMapping("/{nickname}")
     public ResponseEntity checkDuplicateNickname(@PathVariable(name = "nicknmame") String nickname) {
 
         userService.checkDuplicateNickname(nickname);
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    @PatchMapping
+    public ResponseEntity updateUser(@RequestBody UserReq userInfo){
+
+        String userId = userService.getUserId();
+
+        userService.updateUser(userId, userInfo);
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+
     }
 
 
