@@ -44,4 +44,12 @@ public class UserService {
 
     }
 
+
+    public void checkDuplicateNickname(String nickname) {
+        User user = userRepository.findByNickname(nickname);
+
+        if(user != null){
+            throw new NicknameDuplicateException();
+        }
+    }
 }
