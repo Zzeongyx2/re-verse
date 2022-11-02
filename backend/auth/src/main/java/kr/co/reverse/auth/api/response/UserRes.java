@@ -6,5 +6,5 @@ import lombok.*;
 @Setter
 @RequiredArgsConstructor
 public class UserRes {
-    private String id;
+    private String userId;
 }

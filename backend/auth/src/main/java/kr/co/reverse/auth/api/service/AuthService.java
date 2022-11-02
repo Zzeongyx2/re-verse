@@ -193,7 +193,7 @@ public class AuthService {
 
         ResponseEntity<UserRes> result = restTemplate.getForEntity(uri,UserRes.class);
 
-        return result.getBody().getId();
+        return result.getBody().getUserId();
 
     }
 }
