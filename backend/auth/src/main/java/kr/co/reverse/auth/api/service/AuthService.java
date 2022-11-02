@@ -33,6 +33,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
+import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Service
@@ -162,10 +163,11 @@ public class AuthService {
 
     public void checkDuplicateEmail(String email) {
 
-        Auth auth = authRepository.findByEmail(email).get();
-
-        if(auth != null){
+        try{
+            authRepository.findByEmail(email).get();
             throw new EmailDuplicateException();
+        }catch (NoSuchElementException e){
+            return;
         }
     }
 
