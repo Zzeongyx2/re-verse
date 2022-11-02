@@ -148,11 +148,8 @@ function FriendList() {
               .map((friend, index) => {
                 return (
                   // <div key={index}>
-                  <div>
-                    <div
-                      key={`friend-${index}`}
-                      className="flex items-center justify-between px-2 py-1"
-                    >
+                  <div key={`friend-${index}`}>
+                    <div className="flex items-center justify-between px-2 py-1">
                       <div className="flex items-center">
                         {/* <img src={friend.avatar} alt={friend.nickname} /> */}
                         <Avatar name="profileImg" src={profileImg} size="sm" />
@@ -198,11 +195,8 @@ function FriendList() {
           <div className="w-[calc(100%-50px)] overflow-auto scrollbar-hide">
             {archiveList.map((archive, index) => {
               return (
-                <div>
-                  <div
-                    key={index}
-                    className="flex items-center justify-between px-2 py-1"
-                  >
+                <div key={`archiveList-${index}`}>
+                  <div className="flex items-center justify-between px-2 py-1">
                     <div className="text-base1 px-3">
                       <p className="text-sm font-bold">{archive.title}</p>
                       <p className="text-xs overflow-hidden text-ellipsis line-clamp-1 text-zinc-500">
