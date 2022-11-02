@@ -1,11 +1,13 @@
 package kr.co.reverse.archive.api.service;
 
 
+import kr.co.reverse.archive.api.request.UserReq;
 import kr.co.reverse.archive.common.exception.NicknameDuplicateException;
 import kr.co.reverse.archive.db.entity.User;
 import kr.co.reverse.archive.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -51,5 +53,13 @@ public class UserService {
         if(user != null){
             throw new NicknameDuplicateException();
         }
+    }
+    @Transactional
+    public void updateUser(String userId, UserReq userInfo) {
+        User user = userRepository.findById(userId).get();
+
+        user.setNickname(userInfo.getNickname());
+        user.setMessage(userInfo.getMessage());
+
     }
 }
