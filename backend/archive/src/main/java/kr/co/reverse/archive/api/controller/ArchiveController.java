@@ -2,10 +2,10 @@ package kr.co.reverse.archive.api.controller;
 
 import kr.co.reverse.archive.api.request.ArchiveReq;
 import kr.co.reverse.archive.api.response.ArchiveRes;
-import kr.co.reverse.archive.api.response.ArchivesRes;
 import kr.co.reverse.archive.api.service.ArchiveService;
 import kr.co.reverse.archive.db.entity.Archive;
 import kr.co.reverse.archive.db.entity.User;
+import kr.co.reverse.archive.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,29 +21,35 @@ public class ArchiveController {
 
     private final ArchiveService archiveService;
 
+    private final UserRepository userRepository;
+
 
     @PostMapping
     public ResponseEntity createArchive(@RequestBody ArchiveReq archiveReq) {
-        archiveService.createArchive(archiveReq);
+        // TODO: redis에서 cookie 내 access token에 해당하는 정보를 갖고 와서, user 정보 불러오기
+        User user = User.builder().nickname("test").build();
+        userRepository.save(user);
+
+        archiveService.createArchive(archiveReq, user);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
-    public ResponseEntity<? extends ArchivesRes> getArchives(@RequestParam(name = "type") Integer type) {
-        User user = User.builder().nickname("test").build();
+    public ResponseEntity getArchives(@RequestParam(name = "type") Integer type) {
+        User test = userRepository.findByNickname("test");
 
         if (type == 0) { // 내 아카이브 조회
             // TODO: redis에서 cookie 내 access token에 해당하는 정보를 갖고 와서, user 정보 불러오기
 
-            List<Archive> myArchives = archiveService.getArchives(user);
+            List<ArchiveRes> myArchives = archiveService.getArchives(test);
 
-            return ResponseEntity.ok(ArchivesRes.of(myArchives));
+            return ResponseEntity.ok(myArchives);
         }
 
-        List<ArchiveRes> friendArchives = archiveService.getFriendArchives(user);
+        List<ArchiveRes> friendArchives = archiveService.getFriendArchives(test);
 
-        return ResponseEntity.ok(ArchivesRes.create(friendArchives));
+        return ResponseEntity.ok(friendArchives);
     }
 
     @GetMapping("/{archive_id}")
@@ -53,7 +59,9 @@ public class ArchiveController {
 
         Archive archive = archiveService.getArchive(UUID.fromString(archiveId));
 
-        return ResponseEntity.ok(ArchiveRes.of(archive));
+//        return ResponseEntity.ok(ArchiveRes.of(archive));
+        return ResponseEntity.ok(null);
+
     }
 
     @PatchMapping("/{archive_id}")

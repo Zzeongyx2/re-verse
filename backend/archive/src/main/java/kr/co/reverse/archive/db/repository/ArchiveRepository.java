@@ -9,6 +9,4 @@ import java.util.UUID;
 
 public interface ArchiveRepository extends JpaRepository<Archive, UUID>, ArchiveRepositoryCustom {
 
-    List<Archive> findAllByOwner(User user);
-
 }
