@@ -63,6 +63,9 @@ class FriendRepositoryTest {
         User user = userRepository.findByNickname("a");
         List<FriendRes> list = friendRepository.list(user);
 
+        for(FriendRes friendRes : list){
+            System.out.println(friendRes.getNickname());
+        }
         assertEquals(list.size(), 1);
 
     }
