@@ -26,6 +26,15 @@ public class UserController {
         return ResponseEntity.ok(UserRes.of(user));
     }
 
+    @GetMapping("/user/{nickname}")
+    public ResponseEntity checkDuplicateNickname(@PathVariable(name = "nicknmame") String nickname) {
+
+        userService.checkDuplicateNickname(nickname);
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+
 
 
 }
