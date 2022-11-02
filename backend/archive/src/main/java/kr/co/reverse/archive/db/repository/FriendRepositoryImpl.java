@@ -28,7 +28,7 @@ public class FriendRepositoryImpl implements FriendRepositoryCustom {
                         QFriend.friend.target.avatar,
                         QFriend.friend.target.message))
                 .from(QFriend.friend)
-//                .join(QFriend.friend.user, QUser.user).fetchJoin()
+                .join(QFriend.friend.user, QUser.user)
                 .where(
                       QFriend.friend.user.id.eq(user.getId())
                 )
