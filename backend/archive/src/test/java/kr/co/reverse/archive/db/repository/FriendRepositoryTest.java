@@ -1,6 +1,7 @@
 package kr.co.reverse.archive.db.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import kr.co.reverse.archive.api.response.FriendRes;
 import kr.co.reverse.archive.db.entity.Friend;
 import kr.co.reverse.archive.db.entity.QUser;
 import kr.co.reverse.archive.db.entity.User;
@@ -53,6 +54,16 @@ class FriendRepositoryTest {
                 .fetchOne();
 
         assertEquals("a", user1.getNickname());
+
+    }
+
+    @Test
+    public void test(){
+
+        User user = userRepository.findByNickname("a");
+        List<FriendRes> list = friendRepository.list(user);
+
+        assertEquals(list.size(), 1);
 
     }
 
