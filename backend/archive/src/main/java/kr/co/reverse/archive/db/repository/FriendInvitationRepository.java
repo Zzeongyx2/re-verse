@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FriendInvitationRepository extends JpaRepository<FriendInvitation, Integer>, FriendInvitationRepositoryCustom {
 
-    public FriendInvitation findByInvitationUserAAndInvitationTarget(User user, User target);
+    public FriendInvitation findFriendInvitationByInvitationUserAndInvitationTarget(User user, User target);
 
 }
