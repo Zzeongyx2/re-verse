@@ -37,12 +37,6 @@ public class User {
 
     private LocalDate createdTime;
 
-    @OneToMany(mappedBy = "user")
-    private  List<Archive> myArchives;
-
-    @OneToMany(mappedBy = "user")
-    private List<Archive> friendArchives;
-
     @Builder
     public User(String nickname, String message, Integer avatar, LocalDate createdTime){
         this.nickname = nickname;
