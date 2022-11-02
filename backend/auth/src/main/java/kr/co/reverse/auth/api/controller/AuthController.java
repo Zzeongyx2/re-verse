@@ -51,7 +51,15 @@ public class AuthController {
         return ResponseEntity.ok(TokenRes.of(auth));
     }
 
-    //TODO : 로그아웃
+    @GetMapping("/{email}")
+    public ResponseEntity checkDuplicateEmail(@PathVariable(name = "email") String email){
+
+        authService.checkDuplicateEmail(email);
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+
+    }
+
     @GetMapping("/logout")
     public ResponseEntity logout(@RequestBody TokenReq tokenInfo){
 
