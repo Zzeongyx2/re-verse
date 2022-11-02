@@ -11,6 +11,7 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
+import { postArchive } from "../../api/archive";
 
 function CreateArchiveModal({ handleOpen, handleClose }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,8 +29,25 @@ function CreateArchiveModal({ handleOpen, handleClose }) {
 
   const [clickBtn, setClickBtn] = useState(false);
 
-  const handleArchiveSubmit = (e) => {
-    e.preventDefault();
+  const handleArchiveSubmit = () => {
+    const formData = new FormData();
+    const content = {
+      newTitle: newTitle,
+      newMessage: newMessage,
+    };
+    const json = JSON.stringify(content);
+    formData.append("content", json);
+
+    postArchive(
+      json,
+      (res) => {
+        setNewTitle(res.data.newTitle);
+        setNewMessage(res.data.newMessage);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   };
 
   return (
@@ -78,7 +96,10 @@ function CreateArchiveModal({ handleOpen, handleClose }) {
               취소하기
             </button>
             <button
-              onClick={onClose}
+              onClick={() => {
+                handleArchiveSubmit();
+                onClose();
+              }}
               className="font-bold bg-extra1 px-6 py-2 rounded-xl text-sm"
             >
               생성하기

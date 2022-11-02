@@ -60,11 +60,8 @@ function FriendAccept() {
           <div className="w-[calc(100%-70px)] overflow-auto scrollbar-hide">
             {friendAcceptList.map((friend, index) => {
               return (
-                <div>
-                  <div
-                    key={index}
-                    className="flex items-center justify-between px-2 py-1"
-                  >
+                <div key={`friendAcceptList-${index}`}>
+                  <div className="flex items-center justify-between px-2 py-1">
                     <div className="flex items-center">
                       <Avatar name="profileImg" src={profileImg} size="sm" />
                       <div className="text-base1 px-3">

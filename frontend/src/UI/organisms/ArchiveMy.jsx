@@ -247,11 +247,8 @@ function ArchiveMy() {
         <div className="w-[calc(100%-50px)] overflow-auto scrollbar-hide">
           {archiveList.map((archive, index) => {
             return (
-              <div>
-                <div
-                  key={`archive-${index}`}
-                  className="flex items-center justify-between px-2 py-1 mx-4"
-                >
+              <div key={`archive-${index}`}>
+                <div className="flex items-center justify-between px-2 py-1 mx-4">
                   {/* blank */}
                   {/* 아카이브 이름 */}
                   <p className="text-sm font-bold overflow-hidden text-ellipsis line-clamp-1 md:w-44 sm:w-36">
