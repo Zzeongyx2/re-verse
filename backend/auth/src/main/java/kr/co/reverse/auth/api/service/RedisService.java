@@ -1,5 +1,6 @@
 package kr.co.reverse.auth.api.service;
 
+import kr.co.reverse.auth.common.exception.ExpiredTokenException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -32,9 +33,9 @@ public class RedisService {
     }
 
     public void checkRefreshToken(String username, String refreshToken) {
-        String redisRT = this.getValues(username);
-        if(!refreshToken.equals(redisRT)) {
-//            throw new TokenExpiredException();
+        String tokenUser = this.getValues(refreshToken);
+        if(!username.equals(tokenUser)) {
+            throw new ExpiredTokenException();
         }
     }
 }

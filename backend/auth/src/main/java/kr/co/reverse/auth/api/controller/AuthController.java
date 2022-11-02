@@ -2,6 +2,7 @@ package kr.co.reverse.auth.api.controller;
 
 import kr.co.reverse.auth.api.request.LoginReq;
 import kr.co.reverse.auth.api.request.SignupReq;
+import kr.co.reverse.auth.api.request.TokenReq;
 import kr.co.reverse.auth.api.response.AuthRes;
 import kr.co.reverse.auth.api.response.BaseResponseBody;
 import kr.co.reverse.auth.api.response.TokenRes;
@@ -43,27 +44,27 @@ public class AuthController {
     }
 
     @PostMapping("/reissue")
-    public ResponseEntity<? extends TokenRes>  reissue(HttpServletRequest request) {
+    public ResponseEntity<? extends TokenRes>  reissue(@RequestBody TokenReq tokenInfo) {
 
-        AuthRes auth = authService.reissue(request);
+        AuthRes auth = authService.reissue(tokenInfo);
 
         return ResponseEntity.ok(TokenRes.of(auth));
     }
 
     //TODO : 로그아웃
     @GetMapping("/logout")
-    public ResponseEntity logout(){
+    public ResponseEntity logout(@RequestBody TokenReq tokenInfo){
 
-        authService.logout();
+        authService.logout(tokenInfo);
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
 
     @DeleteMapping("/sign-out")
-    public ResponseEntity deleteUser(){
+    public ResponseEntity deleteUser(@RequestBody TokenReq tokenInfo){
 
-        authService.deleteUser();
+        authService.deleteUser(tokenInfo);
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
