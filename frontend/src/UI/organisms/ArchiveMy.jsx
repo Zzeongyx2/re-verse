@@ -5,6 +5,7 @@ import { Divider } from "@chakra-ui/react";
 
 import { FiSettings } from "react-icons/fi";
 import { BiLogIn, BiPencil } from "react-icons/bi";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import EditArchiveModal from "./EditArchiveModal";
 import SettingArchiveModal from "./SettingArchiveModal";
 
@@ -26,6 +27,17 @@ function ArchiveMy() {
   const settingArchive = (archiveId) => {
     // TODO: 아카이브 공유 관리
     console.log(archiveId, "관리");
+  };
+  const bookmarkTrigger = (archive, index) => {
+    // TODO: 즐겨찾기 상태 변경 보내기
+    setArchiveList((list) => {
+      return [...list].filter((item, idx) => {
+        if (idx === index) {
+          item.bookmarks = !item.bookmarks;
+        }
+        return item;
+      });
+    });
   };
 
   useEffect(() => {
@@ -251,11 +263,25 @@ function ArchiveMy() {
             return (
               <div key={`archive-${index}`}>
                 <div className="flex items-center justify-between px-2 py-1 mx-4">
-                  {/* blank */}
-                  {/* 아카이브 이름 */}
-                  <p className="text-sm font-bold overflow-hidden text-ellipsis line-clamp-1 md:w-44 sm:w-36">
-                    {archive.title}
-                  </p>
+                  <div className="flex">
+                    {/* 즐겨찾기 */}
+                    <button
+                      onClick={() => {
+                        bookmarkTrigger(archive, index);
+                      }}
+                      className="w-14 text-extra1"
+                    >
+                      {archive.bookmarks ? (
+                        <AiFillStar size={18} />
+                      ) : (
+                        <AiOutlineStar size={18} />
+                      )}
+                    </button>
+                    {/* 아카이브 이름 */}
+                    <p className="text-sm font-bold overflow-hidden text-ellipsis line-clamp-1 md:w-44 sm:w-36">
+                      {archive.title}
+                    </p>
+                  </div>
                   {/* 아카이브 설명 */}
                   <p className="text-sm text-zinc-500 overflow-hidden text-ellipsis line-clamp-1 md:w-56 sm:w-52">
                     {archive.description}
