@@ -4,6 +4,7 @@ import kr.co.reverse.auth.api.request.LoginReq;
 import kr.co.reverse.auth.api.request.SignupReq;
 import kr.co.reverse.auth.api.request.TokenReq;
 import kr.co.reverse.auth.api.response.AuthRes;
+import kr.co.reverse.auth.common.exception.EmailDuplicateException;
 import kr.co.reverse.auth.common.exception.ExpiredTokenException;
 import kr.co.reverse.auth.common.exception.IncorrectEmailOrPasswordException;
 import kr.co.reverse.auth.common.jwt.JwtTokenProvider;
@@ -138,6 +139,16 @@ public class AuthService {
         //레디스에 해당 유저 삭제
         redisService.deleteValues(tokenInfo.getAccessToken());
         redisService.deleteValues(tokenInfo.getRefreshToken());
+
+    }
+
+    public void checkDuplicateEmail(String email) {
+
+        Auth auth = authRepository.findByEmail(email).get();
+
+        if(auth != null){
+            throw new EmailDuplicateException();
+        }
 
     }
 }
