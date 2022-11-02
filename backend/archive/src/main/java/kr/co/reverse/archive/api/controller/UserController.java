@@ -1,8 +1,10 @@
 package kr.co.reverse.archive.api.controller;
 
 import kr.co.reverse.archive.api.request.ArchiveReq;
+import kr.co.reverse.archive.api.request.SigninUserReq;
 import kr.co.reverse.archive.api.request.UserReq;
 import kr.co.reverse.archive.api.response.ArchiveRes;
+import kr.co.reverse.archive.api.response.LoginUserRes;
 import kr.co.reverse.archive.api.response.UserRes;
 import kr.co.reverse.archive.api.service.UserService;
 import kr.co.reverse.archive.db.entity.User;
@@ -18,17 +20,19 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping
+    @GetMapping
     public ResponseEntity<? extends UserRes> getPlayer() {
 
         String userId = userService.getUserId();
+
         User user = userService.getPlayer(userId);
 
         return ResponseEntity.ok(UserRes.of(user));
+//        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
     @GetMapping("/{nickname}")
-    public ResponseEntity checkDuplicateNickname(@PathVariable(name = "nicknmame") String nickname) {
+    public ResponseEntity checkDuplicateNickname(@PathVariable(name = "nickname") String nickname) {
 
         userService.checkDuplicateNickname(nickname);
 
@@ -47,6 +51,20 @@ public class UserController {
     }
 
 
+    @PostMapping("/create")
+    public ResponseEntity createUser(@RequestBody SigninUserReq userInfo){
+        userService.createUser(userInfo);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/id/{auth_id}")
+    public ResponseEntity<LoginUserRes> loginUser(@PathVariable(name = "auth_id") String authId){
+
+        String userId = userService.getUserIdByAuthId(authId);
+
+        return ResponseEntity.ok(LoginUserRes.of(userId));
+    }
 
 
 }
