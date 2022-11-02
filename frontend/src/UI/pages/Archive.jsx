@@ -81,7 +81,7 @@ function Archive() {
             </Link>
           </div>
         </div>
-        <div className="w-60 border border-white rounded-3xl bg-gradient-to-t to-extra1 from-extra2 font-bold flex justify-center">
+        <div className="w-60 border border-white rounded-3xl bg-gradient-to-t to-extra2 from-extra1 font-bold flex justify-center">
           {/* <div className="w-60 border border-white rounded-3xl bg-[#FACC04] font-bold flex justify-center"> */}
           <button
             onClick={() => {

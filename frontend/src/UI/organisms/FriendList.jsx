@@ -150,7 +150,7 @@ function FriendList() {
                   // <div key={index}>
                   <div>
                     <div
-                      key={index}
+                      key={`friend-${index}`}
                       className="flex items-center justify-between px-2 py-1"
                     >
                       <div className="flex items-center">

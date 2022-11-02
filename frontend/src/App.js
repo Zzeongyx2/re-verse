@@ -14,7 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       {/* <div className="bg-base2 h-screen mx-auto px-14 my-auto py-10 font-sans"> */}
-      <div className="container mx-auto">
+      <div className="container mx-auto ">
         <Routes>
           <Route path="/" element={<NonLoginMain />} />
           <Route path="/login" element={<Login />} />
