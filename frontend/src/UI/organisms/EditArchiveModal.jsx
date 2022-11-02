@@ -11,53 +11,24 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
-import { postArchive } from "../../api/archive";
 
-function CreateArchiveModal() {
+import { BiPencil } from "react-icons/bi";
+
+// TODO: 기존 내용 가져와야 함
+function EditArchiveModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [newTitle, setNewTitle] = useState("");
-  const [newMessage, setNewMessage] = useState("");
-
-  const handleNewTitle = (e) => {
-    setNewTitle(e.target.value);
-  };
-
-  const handleNewMessage = (e) => {
-    setNewMessage(e.target.value);
-  };
-
-  const [clickBtn, setClickBtn] = useState(false);
-
-  const handleArchiveSubmit = () => {
-    const formData = new FormData();
-    const content = {
-      newTitle: newTitle,
-      newMessage: newMessage,
-    };
-    const json = JSON.stringify(content);
-    formData.append("content", json);
-
-    postArchive(
-      json,
-      (res) => {
-        setNewTitle(res.data.newTitle);
-        setNewMessage(res.data.newMessage);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  };
+  const [editTitle, setEditTitle] = useState("");
+  const [editMessage, setEditMessage] = useState("");
 
   return (
     <>
       {/* modal button */}
       <button
-        className="border border-white rounded-3xl bg-gradient-to-t to-extra2 from-extra1 font-bold px-6"
+        className="bg-main3 border-2 border-basic3 rounded-full mx-1.5"
         onClick={onOpen}
       >
-        새 아카이브 생성
+        <BiPencil size={18} className="text-white m-0.5" />
       </button>
 
       {/* create archive modal */}
@@ -65,7 +36,7 @@ function CreateArchiveModal() {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader mb={4} textAlign="center">
-            새 아카이브 생성
+            아카이브 수정
           </ModalHeader>
           <ModalCloseButton mt={1.5} />
           <ModalBody className="">
@@ -111,4 +82,4 @@ function CreateArchiveModal() {
   );
 }
 
-export default CreateArchiveModal;
+export default EditArchiveModal;
