@@ -78,11 +78,8 @@ function FriendRequest() {
               })
               .map((friend, index) => {
                 return (
-                  <div>
-                    <div
-                      key={index}
-                      className="flex items-center justify-between px-2 py-1"
-                    >
+                  <div key={`userList-${index}`}>
+                    <div className="flex items-center justify-between px-2 py-1">
                       <div className="flex items-center">
                         <Avatar name="profileImg" src={profileImg} size="sm" />
                         <div className="text-base1 px-3">
