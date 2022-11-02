@@ -93,35 +93,32 @@ public class AuthService {
             AuthRes tokenInfo = jwtTokenProvider.generateTokenDto(authentication);
 
             //4. redis에 refresh token 저장
-            redisService.setValues(authentication.getName(), tokenInfo.getRefreshToken());
-
-            Cookie accessToken = cookieUtil.addAccessCookie(tokenInfo.getAccessToken());
-            response.addCookie(accessToken);
-
-            Cookie refreshToken = cookieUtil.addRefreshCookie(tokenInfo.getRefreshToken());
-            response.addCookie(refreshToken);
+            redisService.setValues(tokenInfo.getRefreshToken(), authentication.getName());
+            redisService.setValues(tokenInfo.getAccessToken(), authentication.getName());
 
             return tokenInfo;
         }
     }
 
     @Transactional
-    public AuthRes reissue(HttpServletRequest request) {
+    public AuthRes reissue(TokenReq tokenInfo) {
 
-        String accessToken = request.getHeader("Authorization");
-        String refreshToken = request.getHeader("RefreshToken");
+        Authentication authentication = jwtTokenProvider.getAuthentication(tokenInfo.getAccessToken());
 
-        Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
-
-        redisService.checkRefreshToken(authentication.getName(), refreshToken);
+        redisService.checkRefreshToken(authentication.getName(), tokenInfo.getRefreshToken());
 
         // 예외 처리 통과후 토큰 재생성
         AuthRes token = jwtTokenProvider.generateTokenDto(authentication);
+
+        //redis에 이전 accesstoken 삭제 후 새로운거 추가
+        redisService.deleteValues(tokenInfo.getAccessToken());
+        redisService.setValues(token.getAccessToken(), authentication.getName());
+
         return token;
     }
 
     @Transactional
-    public void deleteUser(){
+    public void deleteUser(TokenReq tokenInfo){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         Auth auth = authRepository.findByEmail(authentication.getName()).get();
@@ -129,16 +126,18 @@ public class AuthService {
         auth.getUserStatus().setUserStatusCode(StatusCode.DELETED);
 
         //레디스에 해당 유저 삭제
-        redisService.deleteValues(auth.getEmail());
+        redisService.deleteValues(tokenInfo.getAccessToken());
+        redisService.deleteValues(tokenInfo.getRefreshToken());;
     }
 
-    public void logout() {
+    public void logout(TokenReq tokenInfo) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         Auth auth = authRepository.findByEmail(authentication.getName()).get();
 
         //레디스에 해당 유저 삭제
-        redisService.deleteValues(auth.getEmail());
+        redisService.deleteValues(tokenInfo.getAccessToken());
+        redisService.deleteValues(tokenInfo.getRefreshToken());
 
     }
 }
