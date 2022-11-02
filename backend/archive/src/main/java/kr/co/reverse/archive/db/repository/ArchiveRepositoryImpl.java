@@ -1,5 +1,6 @@
 package kr.co.reverse.archive.db.repository;
 
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.reverse.archive.api.response.ArchiveRes;
@@ -18,27 +19,23 @@ public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom {
     private final JPAQueryFactory jpaQueryFactory;
 
     /*
-    * 나의 Archive 정보 리스트 가져오기
-    * */
+     * 나의 Archive 정보 리스트 가져오기
+     * */
     @Override
     public List<ArchiveRes> getMyArchives(UUID userId) {
         return jpaQueryFactory
                 .select(
-                        Projections.bean(ArchiveRes.class,
+                        new QArchiveRes(
+                                QArchive.archive.id,
+                                new QUserRes(
+                                        QUser.user.id,
+                                        QUser.user.nickname,
+                                        QUser.user.message,
+                                        QUser.user.avatar
+                                ),
                                 QArchive.archive.title,
-                                QArchive.archive.description)
-//                        new QArchiveRes(
-//                                QArchive.archive.id,
-//                                new QUserRes(
-//                                        QUser.user.id,
-//                                        QUser.user.nickname,
-//                                        QUser.user.message,
-//                                        QUser.user.avatar
-//                                ),
-//                                QArchive.archive.title,
-//                                QArchive.archive.description,
-//                                null
-//                        )
+                                QArchive.archive.description
+                        )
                 )
                 .from(QArchive.archive)
                 .leftJoin(QUser.user)
@@ -48,8 +45,8 @@ public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom {
     }
 
     /*
-    * 내가 멤버로 속한 Archive 정보 리스트 가져오기
-    * */
+     * 내가 멤버로 속한 Archive 정보 리스트 가져오기
+     * */
     @Override
     public List<ArchiveRes> getFriendArchives(UUID userId) {
         return jpaQueryFactory
@@ -63,8 +60,7 @@ public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom {
                                         QUser.user.avatar
                                 ),
                                 QArchive.archive.title,
-                                QArchive.archive.description,
-                                null
+                                QArchive.archive.description
                         )
                 )
                 .from(QArchive.archive)

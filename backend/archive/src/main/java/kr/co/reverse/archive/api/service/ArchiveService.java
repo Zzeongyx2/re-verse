@@ -55,10 +55,12 @@ public class ArchiveService {
     public List<ArchiveRes> getArchives(User user) {
         List<ArchiveRes> myArchives = archiveRepository.getMyArchives(user.getId());
 
-        for (ArchiveRes archiveRes : myArchives) {
-            UUID archiveId = archiveRes.getArchiveId();
-            List<UserRes> members = archiveRepository.getMembers(archiveId);
-            archiveRes.setMembers(members);
+        if (myArchives != null) {
+            for (ArchiveRes archiveRes : myArchives) {
+                UUID archiveId = archiveRes.getArchiveId();
+                List<UserRes> members = archiveRepository.getMembers(archiveId);
+                archiveRes.setMembers(members);
+            }
         }
 
         // TODO: Bookmark response 추가
@@ -69,10 +71,12 @@ public class ArchiveService {
     public List<ArchiveRes> getFriendArchives(User user) {
         List<ArchiveRes> friendArchives = archiveRepository.getFriendArchives(user.getId());
 
-        for (ArchiveRes archiveRes : friendArchives) {
-            UUID archiveId = archiveRes.getArchiveId();
-            List<UserRes> members = archiveRepository.getMembers(archiveId);
-            archiveRes.setMembers(members);
+        if (friendArchives != null) {
+            for (ArchiveRes archiveRes : friendArchives) {
+                UUID archiveId = archiveRes.getArchiveId();
+                List<UserRes> members = archiveRepository.getMembers(archiveId);
+                archiveRes.setMembers(members);
+            }
         }
 
         // TODO: Bookmark response 추가
