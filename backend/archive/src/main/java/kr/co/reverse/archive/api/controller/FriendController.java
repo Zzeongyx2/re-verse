@@ -1,13 +1,16 @@
 package kr.co.reverse.archive.api.controller;
 
+import kr.co.reverse.archive.api.request.BookmarkReq;
 import kr.co.reverse.archive.api.request.FriendInvitationReq;
 import kr.co.reverse.archive.api.request.InvitationReplyReq;
 import kr.co.reverse.archive.api.response.FriendInvitationRes;
 import kr.co.reverse.archive.api.response.FriendInvitationsRes;
 import kr.co.reverse.archive.api.response.FriendRes;
 import kr.co.reverse.archive.api.response.FriendsRes;
+import kr.co.reverse.archive.api.service.ArchiveService;
 import kr.co.reverse.archive.api.service.FriendService;
 import kr.co.reverse.archive.api.service.UserService;
+import kr.co.reverse.archive.db.entity.Archive;
 import kr.co.reverse.archive.db.entity.Friend;
 import kr.co.reverse.archive.db.entity.FriendInvitation;
 import kr.co.reverse.archive.db.entity.User;
@@ -27,6 +30,8 @@ public class FriendController {
     private final FriendService friendService;
 
     private final UserService userService;
+
+    private final ArchiveService archiveService;
 
     @GetMapping
     public ResponseEntity<? extends FriendsRes> getFriends(){
@@ -95,6 +100,36 @@ public class FriendController {
         friendService.deleteFriend(user, target);
 
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PostMapping("/bookmark")
+    public ResponseEntity createBookmark(@RequestBody BookmarkReq bookmarkReq){
+
+        UUID userId = null;
+        User user = null;
+        Archive archive = null;
+//        User user = userService.getUser(userId);
+//        Archive archive = archiveService.getArchive(bookmarkReq.getArchiveId());
+
+
+        friendService.createBookmark(archive, user);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+
+    }
+
+    @DeleteMapping("/bookmark/{archive_id}")
+    public ResponseEntity deleteBookmark(@PathVariable UUID archive_id){
+
+        UUID userId = null;
+        User user = null;
+//        User user = userService.getUser(userId);
+        Archive archive = archiveService.getArchive(archive_id);
+
+        friendService.deleteBookmark(archive, user);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+
     }
 
 }
