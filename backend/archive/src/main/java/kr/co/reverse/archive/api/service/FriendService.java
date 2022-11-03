@@ -1,14 +1,9 @@
 package kr.co.reverse.archive.api.service;
 
-import kr.co.reverse.archive.api.request.FriendInvitationReq;
-import kr.co.reverse.archive.api.request.InvitationReplyReq;
 import kr.co.reverse.archive.api.response.FriendInvitationRes;
 import kr.co.reverse.archive.api.response.FriendRes;
 import kr.co.reverse.archive.db.entity.*;
-import kr.co.reverse.archive.db.repository.BookmarkRepository;
-import kr.co.reverse.archive.db.repository.FriendInvitationRepository;
-import kr.co.reverse.archive.db.repository.FriendRepository;
-import kr.co.reverse.archive.db.repository.UserRepository;
+import kr.co.reverse.archive.db.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +19,8 @@ public class FriendService {
     private final FriendInvitationRepository friendInvitationRepository;
 
     private final BookmarkRepository bookmarkRepository;
+
+    private final ArchiveMemberRepository archiveMemberRepository;
 
 
     public List<FriendRes> getFriends(User user) {
@@ -70,9 +67,26 @@ public class FriendService {
 
     }
 
+    @Transactional
     public void deleteBookmark(Archive archive, User user) {
 
         BookMark bookMark = bookmarkRepository.findBookMarkByArchiveAndUser(archive, user);
         bookmarkRepository.delete(bookMark);
+    }
+
+    public void createArchiveMember(Archive archive, User user, Role role) {
+
+        archiveMemberRepository.save(new ArchiveMember(archive,user, role));
+    }
+
+    @Transactional
+    public void deleteArchiveMember(Archive archive, User user){
+        ArchiveMember archiveMember = archiveMemberRepository.findArchiveMemberByArchiveAndUser(archive, user);
+    }
+
+    public boolean checkFriend(User user, User target) {
+
+        Friend friend = friendRepository.findFriendByUserAndTarget(user, target);
+        return friend == null;
     }
 }
