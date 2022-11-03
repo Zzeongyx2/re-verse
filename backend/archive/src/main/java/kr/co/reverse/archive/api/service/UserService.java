@@ -1,6 +1,7 @@
 package kr.co.reverse.archive.api.service;
 
 
+import kr.co.reverse.archive.api.request.AvatarReq;
 import kr.co.reverse.archive.api.request.SigninUserReq;
 import kr.co.reverse.archive.api.request.UserReq;
 import kr.co.reverse.archive.common.exception.NicknameDuplicateException;
@@ -85,6 +86,15 @@ public class UserService {
 
             userRepository.save(user);
         }
+
+    }
+
+    @Transactional
+    public void changeAvatar(String userId, AvatarReq avatarInfo) {
+
+        User user = getPlayer(userId);
+
+        user.setAvatar(avatarInfo.getAvatar());
 
     }
 }

@@ -1,6 +1,7 @@
 package kr.co.reverse.archive.api.controller;
 
 import kr.co.reverse.archive.api.request.ArchiveReq;
+import kr.co.reverse.archive.api.request.AvatarReq;
 import kr.co.reverse.archive.api.request.SigninUserReq;
 import kr.co.reverse.archive.api.request.UserReq;
 import kr.co.reverse.archive.api.response.ArchiveRes;
@@ -50,7 +51,19 @@ public class UserController {
 
     }
 
+    @PatchMapping("/avatar")
+    public ResponseEntity updateAvatar(@RequestBody AvatarReq avatarInfo){
 
+        String userId = userService.getUserId();
+
+        userService.changeAvatar(userId, avatarInfo);
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+
+
+    //auth server 통신
     @PostMapping("/create")
     public ResponseEntity createUser(@RequestBody SigninUserReq userInfo){
         userService.createUser(userInfo);
@@ -65,6 +78,5 @@ public class UserController {
 
         return ResponseEntity.ok(LoginUserRes.of(userId));
     }
-
 
 }
