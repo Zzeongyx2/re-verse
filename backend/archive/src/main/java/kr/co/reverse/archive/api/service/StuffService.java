@@ -1,5 +1,6 @@
 package kr.co.reverse.archive.api.service;
 
+import kr.co.reverse.archive.api.response.StuffRes;
 import kr.co.reverse.archive.db.entity.Archive;
 import kr.co.reverse.archive.db.entity.Stuff;
 import kr.co.reverse.archive.db.entity.StuffType;
@@ -35,7 +36,7 @@ public class StuffService {
         stuffRepository.save(stuff);
     }
 
-    public List<Stuff> getStuffs(UUID archiveId) {
+    public List<StuffRes> getStuffs(UUID archiveId) {
         return stuffRepository.getStuffs(archiveId);
     }
 
