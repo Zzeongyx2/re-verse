@@ -59,11 +59,12 @@ public class ArchiveService {
             for (ArchiveRes archiveRes : myArchives) {
                 UUID archiveId = archiveRes.getArchiveId();
                 List<UserRes> members = archiveRepository.getMembers(archiveId);
+                Boolean isBookmark = archiveRepository.checkBookmark(archiveId, user.getId());
+
                 archiveRes.setMembers(members);
+                archiveRes.setBookmark(isBookmark);
             }
         }
-
-        // TODO: Bookmark response 추가
 
         return myArchives;
     }
@@ -75,11 +76,12 @@ public class ArchiveService {
             for (ArchiveRes archiveRes : friendArchives) {
                 UUID archiveId = archiveRes.getArchiveId();
                 List<UserRes> members = archiveRepository.getMembers(archiveId);
+                Boolean isBookmark = archiveRepository.checkBookmark(archiveId, user.getId());
+
                 archiveRes.setMembers(members);
+                archiveRes.setBookmark(isBookmark);
             }
         }
-
-        // TODO: Bookmark response 추가
 
         return friendArchives;
     }
