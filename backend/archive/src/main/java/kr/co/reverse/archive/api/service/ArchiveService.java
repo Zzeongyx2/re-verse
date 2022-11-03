@@ -1,7 +1,9 @@
 package kr.co.reverse.archive.api.service;
 
 import kr.co.reverse.archive.api.request.ArchiveReq;
+import kr.co.reverse.archive.api.response.ArchiveDetailRes;
 import kr.co.reverse.archive.api.response.ArchiveRes;
+import kr.co.reverse.archive.api.response.StuffRes;
 import kr.co.reverse.archive.api.response.UserRes;
 import kr.co.reverse.archive.db.entity.Archive;
 import kr.co.reverse.archive.db.entity.ArchiveMember;
@@ -9,6 +11,7 @@ import kr.co.reverse.archive.db.entity.Role;
 import kr.co.reverse.archive.db.entity.User;
 import kr.co.reverse.archive.db.repository.ArchiveMemberRepository;
 import kr.co.reverse.archive.db.repository.ArchiveRepository;
+import kr.co.reverse.archive.db.repository.StuffRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +28,8 @@ public class ArchiveService {
     private final ArchiveRepository archiveRepository;
 
     private final ArchiveMemberRepository archiveMemberRepository;
+
+    private final StuffRepository stuffRepository;
 
     @Transactional
     public Archive createArchive(ArchiveReq archiveReq, User user) {
@@ -88,9 +93,25 @@ public class ArchiveService {
         return friendArchives;
     }
 
+
+    public ArchiveDetailRes getArchiveDetail(UUID archiveId) {
+        ArchiveDetailRes archiveDetailRes = archiveRepository.getArchiveDetail(archiveId);
+
+        if (archiveDetailRes == null) {
+            throw new NoSuchElementException();
+        }
+
+        List<StuffRes> stuffs = stuffRepository.getStuffs(archiveId);
+        List<UserRes> members = archiveRepository.getMembers(archiveId);
+
+        archiveDetailRes.setStuffs(stuffs);
+        archiveDetailRes.setMembers(members);
+
+        return archiveDetailRes;
+    }
+
     public Archive getArchive(UUID archiveId) {
-        return archiveRepository
-                .findById(archiveId)
+        return archiveRepository.findById(archiveId)
                 .orElseThrow(() -> new NoSuchElementException());
     }
 
