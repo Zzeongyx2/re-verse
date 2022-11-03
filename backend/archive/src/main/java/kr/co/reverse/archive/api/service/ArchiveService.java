@@ -27,7 +27,7 @@ public class ArchiveService {
     private final ArchiveMemberRepository archiveMemberRepository;
 
     @Transactional
-    public void createArchive(ArchiveReq archiveReq, User user) {
+    public Archive createArchive(ArchiveReq archiveReq, User user) {
         String title = archiveReq.getTitle();
         String description = archiveReq.getDescription();
 
@@ -50,6 +50,8 @@ public class ArchiveService {
                 .role(Role.READ)
                 .build();
         archiveMemberRepository.save(archiveMember);
+
+        return archive;
     }
 
     public List<ArchiveRes> getArchives(User user) {
