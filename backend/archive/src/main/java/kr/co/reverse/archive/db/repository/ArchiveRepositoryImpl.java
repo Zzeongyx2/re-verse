@@ -1,12 +1,7 @@
 package kr.co.reverse.archive.db.repository;
 
-import com.querydsl.core.Tuple;
-import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import kr.co.reverse.archive.api.response.ArchiveRes;
-import kr.co.reverse.archive.api.response.QArchiveRes;
-import kr.co.reverse.archive.api.response.QUserRes;
-import kr.co.reverse.archive.api.response.UserRes;
+import kr.co.reverse.archive.api.response.*;
 import kr.co.reverse.archive.db.entity.*;
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +12,29 @@ import java.util.UUID;
 public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
+
+    @Override
+    public ArchiveDetailRes getArchiveDetail(UUID archiveId) {
+         return jpaQueryFactory
+                 .select(
+                         new QArchiveDetailRes(
+                                 QArchive.archive.id,
+                                 QArchive.archive.title,
+                                 QArchive.archive.description,
+                                 new QUserRes(
+                                         QUser.user.id,
+                                         QUser.user.nickname,
+                                         QUser.user.message,
+                                         QUser.user.avatar
+                                 )
+                         )
+                 )
+                 .from(QArchive.archive)
+                 .leftJoin(QUser.user)
+                 .on(QUser.user.id.eq(QArchive.archive.id))
+                 .where(QArchive.archive.id.eq(archiveId))
+                 .fetchOne();
+    }
 
     /*
      * 나의 Archive 정보 리스트 가져오기
