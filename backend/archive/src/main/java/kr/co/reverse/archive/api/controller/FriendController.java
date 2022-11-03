@@ -32,6 +32,9 @@ public class FriendController {
 
     private final ArchiveService archiveService;
 
+    private final UserRepository userRepository;
+
+
     @GetMapping
     public ResponseEntity<? extends FriendsRes> getFriends(){
 
@@ -104,14 +107,17 @@ public class FriendController {
     @PostMapping("/bookmark")
     public ResponseEntity createBookmark(@RequestBody BookmarkReq bookmarkReq){
 
+        User test = userRepository.findByNickname("test");
+
+
         UUID userId = null;
         User user = null;
-        Archive archive = null;
+//        Archive archive = null;
 //        User user = userService.getUser(userId);
-//        Archive archive = archiveService.getArchive(bookmarkReq.getArchiveId());
+        Archive archive = archiveService.getArchive(bookmarkReq.getArchiveId());
 
 
-        friendService.createBookmark(archive, user);
+        friendService.createBookmark(archive, test);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
