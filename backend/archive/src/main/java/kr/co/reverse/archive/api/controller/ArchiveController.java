@@ -1,6 +1,7 @@
 package kr.co.reverse.archive.api.controller;
 
 import kr.co.reverse.archive.api.request.ArchiveReq;
+import kr.co.reverse.archive.api.response.ArchiveDetailRes;
 import kr.co.reverse.archive.api.response.ArchiveRes;
 import kr.co.reverse.archive.api.response.ArchivesRes;
 import kr.co.reverse.archive.api.service.ArchiveService;
@@ -76,14 +77,13 @@ public class ArchiveController {
     }
 
     @GetMapping("/{archive_id}")
-    public ResponseEntity<? extends ArchiveRes> getArchive(@PathVariable(name = "archive_id") String archiveId) {
+    public ResponseEntity<? extends ArchiveDetailRes> getArchive(@PathVariable(name = "archive_id") String archiveId) {
         // TODO: Archive 접근 권한 여부 확인
         // return ResponseEntity.status(HttpStatus.FORBIDDEN).body()
 
-        Archive archive = archiveService.getArchive(UUID.fromString(archiveId));
+        ArchiveDetailRes archiveDetailRes = archiveService.getArchiveDetail(UUID.fromString(archiveId));
 
-//        return ResponseEntity.ok(ArchiveRes.of(archive));
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(archiveDetailRes);
 
     }
 

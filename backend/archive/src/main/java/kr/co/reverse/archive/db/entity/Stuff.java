@@ -43,7 +43,6 @@ public class Stuff {
     private List<Paper> papers = new ArrayList<>();
 
     @Builder
-
     public Stuff(Archive archive, String name, String position, Boolean isDeleted, LocalDateTime createdTime, StuffType type, List<Paper> papers) {
         this.archive = archive;
         this.name = name;
