@@ -90,4 +90,15 @@ public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom {
                 .fetch();
     }
 
+    @Override
+    public Boolean checkBookmark(UUID archiveId, UUID userId) {
+        Integer bookmarkId = jpaQueryFactory
+                .select(QBookMark.bookMark.id)
+                .from(QBookMark.bookMark)
+                .where(QBookMark.bookMark.archive.id.eq(archiveId)
+                        .and(QBookMark.bookMark.user.id.eq(userId)))
+                .fetchOne();
+
+        return bookmarkId != null;
+    }
 }

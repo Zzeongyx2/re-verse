@@ -14,6 +14,7 @@ import kr.co.reverse.archive.db.entity.Archive;
 import kr.co.reverse.archive.db.entity.Friend;
 import kr.co.reverse.archive.db.entity.FriendInvitation;
 import kr.co.reverse.archive.db.entity.User;
+import kr.co.reverse.archive.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,9 @@ public class FriendController {
     private final UserService userService;
 
     private final ArchiveService archiveService;
+
+    private final UserRepository userRepository;
+
 
     @GetMapping
     public ResponseEntity<? extends FriendsRes> getFriends(){
@@ -105,14 +109,17 @@ public class FriendController {
     @PostMapping("/bookmark")
     public ResponseEntity createBookmark(@RequestBody BookmarkReq bookmarkReq){
 
+        User test = userRepository.findByNickname("test");
+
+
         UUID userId = null;
         User user = null;
-        Archive archive = null;
+//        Archive archive = null;
 //        User user = userService.getUser(userId);
-//        Archive archive = archiveService.getArchive(bookmarkReq.getArchiveId());
+        Archive archive = archiveService.getArchive(bookmarkReq.getArchiveId());
 
 
-        friendService.createBookmark(archive, user);
+        friendService.createBookmark(archive, test);
 
         return ResponseEntity.status(HttpStatus.OK).build();
 
