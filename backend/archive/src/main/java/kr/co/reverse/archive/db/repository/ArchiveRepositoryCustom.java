@@ -14,4 +14,5 @@ public interface ArchiveRepositoryCustom {
 
     public List<UserRes> getMembers(UUID archiveId);
 
+    public Boolean checkBookmark(UUID archiveId, UUID userId);
 }

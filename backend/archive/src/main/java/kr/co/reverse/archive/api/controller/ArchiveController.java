@@ -28,10 +28,12 @@ public class ArchiveController {
     @PostMapping
     public ResponseEntity createArchive(@RequestBody ArchiveReq archiveReq) {
         // TODO: redis에서 cookie 내 access token에 해당하는 정보를 갖고 와서, user 정보 불러오기
-        User user = User.builder().nickname("test").build();
-        userRepository.save(user);
+//        User user = User.builder().nickname("test").build();
+//        userRepository.save(user);
 
-        archiveService.createArchive(archiveReq, user);
+        User test = userRepository.findByNickname("test");
+
+        archiveService.createArchive(archiveReq, test);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
