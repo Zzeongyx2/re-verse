@@ -199,8 +199,8 @@ function SignIn() {
             className={
               "text-[10px] mt-1 ml-1" +
               (pwValid.isValid
-                ? "text-transparent "
-                : "flex text-red-500 flex ")
+                ? "flex text-transparent "
+                : "flex text-red-500  ")
             }
           >
             {pwValid.message}
