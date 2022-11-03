@@ -15,19 +15,19 @@ function SignIn() {
   const [nickName, setNickName] = useState("");
 
   const [idValid, setIdValid] = useState({
-    isValid: false,
+    isValid: true,
     message: ".",
   });
   const [pwValid, setPwValid] = useState({
-    isValid: false,
+    isValid: true,
     message: ".",
   });
   const [pwCheckValid, setPwCheckValid] = useState({
-    isValid: false,
+    isValid: true,
     message: ".",
   });
   const [nickNameValid, setNickNameValid] = useState({
-    isValid: false,
+    isValid: true,
     message: ".",
   });
 
@@ -52,22 +52,22 @@ function SignIn() {
     let idRE = new RegExp("[a-zA-Z0-9]+@[a-zA-Z]+[.][a-zA-Z]{2,3}$");
     // let idRE = new RegExp("[a-zA-Z0-9]+@[a-zA-Z]+[.][a-zA-Z]$");
     if (!idRE.test(id)) {
-      setIdValid({ isValid: true, message: "*이메일 형식이 아닙니다." });
+      setIdValid({ isValid: false, message: "*이메일 형식이 아닙니다." });
       console.log(idValid);
       console.log(id);
       return;
     }
-    setIdValid({ isValid: false, message: "." });
+    setIdValid({ isValid: true, message: "." });
     // axios 요청으로 id 중복검사하기
     emailCheck(id, emailCheckSuccess, emailCheckFail);
     // setIdValid({ isValid: true, message: "이미 가입된 아이디입니다." });
   };
   const emailCheckSuccess = (res) => {
-    setIdValid({ isValid: false, message: "." });
+    setIdValid({ isValid: true, message: "." });
   };
   const emailCheckFail = (error) => {
     setIdValid({
-      isValid: true,
+      isValid: false,
       message: "*이미 가입된 아이디입니다.",
     });
   };
@@ -75,43 +75,44 @@ function SignIn() {
     let pwRE = new RegExp("^[a-zA-Z0-9~!@]{4,12}$");
     if (!pwRE.test(pw)) {
       setPwValid({
-        isValid: true,
-        message: "*4~12글자, 영문대소문자, 숫자, 특수문자(~,!,@)만 사용 가능합니다.",
+        isValid: false,
+        message:
+          "*4~12글자, 영문대소문자, 숫자, 특수문자(~,!,@)만 사용 가능합니다.",
       });
       return;
     }
-    setPwValid({ isValid: false, message: "." });
+    setPwValid({ isValid: true, message: "." });
   };
   const pwCheckBlurHandle = (e) => {
     if (pw !== pwCheck) {
       setPwCheckValid({
-        isValid: true,
+        isValid: false,
         message: "*비밀번호가 일치하지 않습니다.",
       });
       return;
     }
-    setPwCheckValid({ isValid: false, message: "." });
+    setPwCheckValid({ isValid: true, message: "." });
   };
   const nickNameBlurHandle = (e) => {
     let nickNameRE = new RegExp("^[a-zA-Z0-9가-힣_]{2,12}$");
     if (!nickNameRE.test(nickName)) {
       setNickNameValid({
-        isValid: true,
+        isValid: false,
         message: "*2~12글자 사이로 입력해주세요.",
         // TODO: 몇글자인지 정하기
       });
       return;
     }
-    setNickNameValid({ isValid: false, message: "." });
+    setNickNameValid({ isValid: true, message: "." });
     //axios 요청으로 닉네임 중복검사하기
     nicknameCheck(nickName, nickCheckSuccess, nickCheckFail);
   };
   const nickCheckSuccess = (res) => {
-    setNickNameValid({ isValid: false, message: "." });
+    setNickNameValid({ isValid: true, message: "." });
   };
   const nickCheckFail = (error) => {
     setNickNameValid({
-      isValid: true,
+      isValid: false,
       message: "*중복된 닉네임 입니다.",
     });
   };
@@ -130,10 +131,10 @@ function SignIn() {
       alert("닉네임을 입력하세요.");
       return;
     } else if (
-      idValid.isValid ||
-      pwValid.isValid ||
-      pwCheckValid.isValid ||
-      nickNameValid.isValid
+      !idValid.isValid ||
+      !pwValid.isValid ||
+      !pwCheckValid.isValid ||
+      !nickNameValid.isValid
     ) {
       return;
     }
@@ -147,7 +148,7 @@ function SignIn() {
         nickname: nickName,
       },
       signinSuccess,
-      signinFail
+      signinFail,
     );
   };
   const signinSuccess = () => {
@@ -176,7 +177,9 @@ function SignIn() {
           <p
             className={
               "text-[10px] mt-1 ml-1" +
-              (idValid.isValid ? " flex text-red-500" : " flex text-transparent")
+              (idValid.isValid
+                ? "flex text-transparent "
+                : "flex text-red-500 ")
             }
           >
             {idValid.message}
@@ -195,7 +198,9 @@ function SignIn() {
           <p
             className={
               "text-[10px] mt-1 ml-1" +
-              (pwValid.isValid ? " flex text-red-500" : " flex text-transparent")
+              (pwValid.isValid
+                ? "text-transparent "
+                : "flex text-red-500 flex ")
             }
           >
             {pwValid.message}
@@ -214,7 +219,9 @@ function SignIn() {
           <p
             className={
               "text-[10px] mt-1 ml-1" +
-              (pwCheckValid.isValid ? " flex text-red-500" : " flex text-transparent")
+              (pwCheckValid.isValid
+                ? "flex text-transparent "
+                : "flex text-red-500 ")
             }
           >
             {pwCheckValid.message}
@@ -234,7 +241,9 @@ function SignIn() {
           <p
             className={
               "text-[10px] mt-1 ml-1" +
-              (nickNameValid.isValid ? " flex text-red-500" : " flex text-transparent")
+              (nickNameValid.isValid
+                ? "flex text-transparent "
+                : "flex text-red-500 ")
             }
           >
             {nickNameValid.message}
