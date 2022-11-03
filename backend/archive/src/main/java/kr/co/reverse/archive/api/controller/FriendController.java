@@ -1,5 +1,6 @@
 package kr.co.reverse.archive.api.controller;
 
+import kr.co.reverse.archive.api.request.ArchiveMemberReq;
 import kr.co.reverse.archive.api.request.BookmarkReq;
 import kr.co.reverse.archive.api.request.FriendInvitationReq;
 import kr.co.reverse.archive.api.request.InvitationReplyReq;
@@ -10,10 +11,8 @@ import kr.co.reverse.archive.api.response.FriendsRes;
 import kr.co.reverse.archive.api.service.ArchiveService;
 import kr.co.reverse.archive.api.service.FriendService;
 import kr.co.reverse.archive.api.service.UserService;
-import kr.co.reverse.archive.db.entity.Archive;
-import kr.co.reverse.archive.db.entity.Friend;
-import kr.co.reverse.archive.db.entity.FriendInvitation;
-import kr.co.reverse.archive.db.entity.User;
+import kr.co.reverse.archive.common.exception.NotFriendException;
+import kr.co.reverse.archive.db.entity.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -115,21 +114,55 @@ public class FriendController {
         friendService.createBookmark(archive, user);
 
         return ResponseEntity.status(HttpStatus.OK).build();
-
     }
 
     @DeleteMapping("/bookmark/{archive_id}")
-    public ResponseEntity deleteBookmark(@PathVariable UUID archive_id){
+    public ResponseEntity deleteBookmark(@PathVariable(name = "archive_id") UUID archiveId){
 
         UUID userId = null;
         User user = null;
 //        User user = userService.getUser(userId);
-        Archive archive = archiveService.getArchive(archive_id);
+        Archive archive = archiveService.getArchive(archiveId);
 
         friendService.deleteBookmark(archive, user);
 
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
 
+    @PostMapping("/archive-member")
+    public ResponseEntity createArchiveMember(@RequestBody ArchiveMemberReq archiveMemberReq){
+
+        UUID userId = null;
+        User user = null;
+//        User user = userService.getUser(userId);
+
+        Archive archive = archiveService.getArchive(archiveMemberReq.getArchiveId());
+        User target = null;
+//        User target = userService.findByNickname(archiveMemberReq.getNickname());
+        if(friendService.checkFriend(user, target)) {
+            throw new NotFriendException();
+        }
+        friendService.createArchiveMember(archive, target, archiveMemberReq.getRole());
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("/archive-member/{archive_id}")
+    public ResponseEntity deleteArchiveMember(@PathVariable(name = "archive_id") UUID archiveId, @RequestParam(name = "nickname") String nickname){
+
+        User user = null;
+//        User user = userService.getUser(userId);
+
+        Archive archive = archiveService.getArchive(archiveId);
+        User target = null;
+//        User target = userService.findByNickname(nickname);
+
+        if(friendService.checkFriend(user, target)) {
+            throw new NotFriendException();
+        }
+        friendService.deleteArchiveMember(archive, target);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }
