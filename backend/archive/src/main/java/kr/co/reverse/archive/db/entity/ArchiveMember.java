@@ -21,17 +21,15 @@ public class ArchiveMember {
     private Archive archive;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "friend_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     private Role role;
 
     @Builder
-    public ArchiveMember(Archive archive, User user, Role role){
+    public ArchiveMember(Archive archive, User user, Role role) {
         this.archive = archive;
         this.user = user;
         this.role = role;
-
     }
-
 }

@@ -32,27 +32,30 @@ public class Archive {
 
     private LocalDateTime createdTime;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Type(type = "uuid-char")
+    @Column(name = "owner_id")
+    private UUID ownerId;
 
-//    private List<Stuff> stuffs = new ArrayList<>();
+    @OneToMany(mappedBy = "archive", fetch = FetchType.LAZY)
+    private List<Stuff> stuffs = new ArrayList<>();
 
-//    private List<User> members = new ArrayList<>();
+    @OneToMany(mappedBy = "archive", fetch = FetchType.LAZY)
+    private List<ArchiveMember> members = new ArrayList<>();
 
-//    private List<User> members = new ArrayList<>();
-
-//    private List<PhotoBook> photoBooks = new ArrayList<>();
+    @OneToMany(mappedBy = "archive", fetch = FetchType.LAZY)
+    private List<PhotoBook> photoBooks = new ArrayList<>();
 
 //    private List<GuestBook> guestBooks = new ArrayList<>();
 
     @Builder
-    public Archive(String title, String description, Boolean isDeleted, LocalDateTime createdTime, User user, List<User> members) {
+    public Archive(String title, String description, Boolean isDeleted, LocalDateTime createdTime, UUID ownerId, List<Stuff> stuffs, List<ArchiveMember> members, List<PhotoBook> photoBooks) {
         this.title = title;
         this.description = description;
         this.isDeleted = isDeleted;
         this.createdTime = createdTime;
-        this.user = user;
-//        this.members = members;
+        this.ownerId = ownerId;
+        this.stuffs = stuffs;
+        this.members = members;
+        this.photoBooks = photoBooks;
     }
 }
