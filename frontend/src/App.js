@@ -9,6 +9,7 @@ import Character from "./UI/pages/Character";
 import Friend from "./UI/pages/Friend";
 import Archive from "./UI/pages/Archive";
 import NeonTest from "./UI/pages/NeonTest";
+import Reverse from "./UI/pages/Reverse";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/friend/*" element={<Friend />} />
           <Route path="/archive/*" element={<Archive />} />
           <Route path="/neontest" element={<NeonTest />} />
+          <Route path="/reverse/:archiveId" element={<Reverse />} />
         </Routes>
       </div>
     </BrowserRouter>
