@@ -1,8 +1,13 @@
 package kr.co.reverse.archive.api.service;
 
 import kr.co.reverse.archive.api.request.ArchiveReq;
+import kr.co.reverse.archive.api.response.ArchiveRes;
+import kr.co.reverse.archive.api.response.UserRes;
 import kr.co.reverse.archive.db.entity.Archive;
+import kr.co.reverse.archive.db.entity.ArchiveMember;
+import kr.co.reverse.archive.db.entity.Role;
 import kr.co.reverse.archive.db.entity.User;
+import kr.co.reverse.archive.db.repository.ArchiveMemberRepository;
 import kr.co.reverse.archive.db.repository.ArchiveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,8 +24,10 @@ public class ArchiveService {
 
     private final ArchiveRepository archiveRepository;
 
+    private final ArchiveMemberRepository archiveMemberRepository;
+
     @Transactional
-    public void createArchive(ArchiveReq archiveReq) {
+    public void createArchive(ArchiveReq archiveReq, User user) {
         String title = archiveReq.getTitle();
         String description = archiveReq.getDescription();
 
@@ -32,15 +39,49 @@ public class ArchiveService {
                 .title(title)
                 .description(description)
                 .isDeleted(false)
-//                .user()
+                .ownerId(user.getId())
                 .createdTime(LocalDateTime.now())
                 .build();
-
         archiveRepository.save(archive);
+
+        ArchiveMember archiveMember = ArchiveMember.builder()
+                .archive(archive)
+                .user(user)
+                .role(Role.READ)
+                .build();
+        archiveMemberRepository.save(archiveMember);
     }
 
-    public List<Archive> getArchives(User user) {
-        return archiveRepository.findAllByUser(user);
+    public List<ArchiveRes> getArchives(User user) {
+        List<ArchiveRes> myArchives = archiveRepository.getMyArchives(user.getId());
+
+        if (myArchives != null) {
+            for (ArchiveRes archiveRes : myArchives) {
+                UUID archiveId = archiveRes.getArchiveId();
+                List<UserRes> members = archiveRepository.getMembers(archiveId);
+                archiveRes.setMembers(members);
+            }
+        }
+
+        // TODO: Bookmark response 추가
+
+        return myArchives;
+    }
+
+    public List<ArchiveRes> getFriendArchives(User user) {
+        List<ArchiveRes> friendArchives = archiveRepository.getFriendArchives(user.getId());
+
+        if (friendArchives != null) {
+            for (ArchiveRes archiveRes : friendArchives) {
+                UUID archiveId = archiveRes.getArchiveId();
+                List<UserRes> members = archiveRepository.getMembers(archiveId);
+                archiveRes.setMembers(members);
+            }
+        }
+
+        // TODO: Bookmark response 추가
+
+        return friendArchives;
     }
 
     public Archive getArchive(UUID archiveId) {
@@ -48,4 +89,5 @@ public class ArchiveService {
                 .findById(archiveId)
                 .orElseThrow(() -> new NoSuchElementException());
     }
+
 }
