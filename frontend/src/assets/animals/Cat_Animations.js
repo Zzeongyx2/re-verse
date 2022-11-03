@@ -38,6 +38,9 @@ export default function CatAnimations({ action }) {
             skeleton={nodes.Cat.skeleton}
             morphTargetDictionary={nodes.Cat.morphTargetDictionary}
             morphTargetInfluences={nodes.Cat.morphTargetInfluences}
+            // 그림자 설정은 여기에!
+            castShadow
+            receiveShadow
           />
         </group>
       </group>
