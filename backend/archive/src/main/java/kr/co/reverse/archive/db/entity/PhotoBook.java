@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -27,15 +28,19 @@ public class PhotoBook {
 
     private Integer location;
 
+    @Enumerated(EnumType.STRING)
     private Theme theme;
 
     private Boolean isDeleted;
 
+    private LocalDateTime createdTime;
+
     @Builder
-    public PhotoBook(Archive archive, Integer location, Theme theme, Boolean isDeleted) {
+    public PhotoBook(Archive archive, Integer location, Theme theme, Boolean isDeleted, LocalDateTime createdTime) {
         this.archive = archive;
         this.location = location;
         this.theme = theme;
         this.isDeleted = isDeleted;
+        this.createdTime = createdTime;
     }
 }

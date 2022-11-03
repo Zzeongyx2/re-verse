@@ -4,7 +4,10 @@ import kr.co.reverse.archive.api.request.ArchiveReq;
 import kr.co.reverse.archive.api.response.ArchiveRes;
 import kr.co.reverse.archive.api.response.ArchivesRes;
 import kr.co.reverse.archive.api.service.ArchiveService;
+import kr.co.reverse.archive.api.service.PhotoBookService;
+import kr.co.reverse.archive.api.service.StuffService;
 import kr.co.reverse.archive.db.entity.Archive;
+import kr.co.reverse.archive.db.entity.StuffType;
 import kr.co.reverse.archive.db.entity.User;
 import kr.co.reverse.archive.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,18 +25,35 @@ public class ArchiveController {
 
     private final ArchiveService archiveService;
 
+    private final PhotoBookService photoBookService;
+
+    private final StuffService stuffService;
+
     private final UserRepository userRepository;
 
 
     @PostMapping
     public ResponseEntity createArchive(@RequestBody ArchiveReq archiveReq) {
         // TODO: redis에서 cookie 내 access token에 해당하는 정보를 갖고 와서, user 정보 불러오기
-//        User user = User.builder().nickname("test").build();
-//        userRepository.save(user);
 
         User test = userRepository.findByNickname("test");
+        if(test == null) {
+            User user = User.builder().nickname("test").build();
+            userRepository.save(user);
+            test = userRepository.findByNickname("test");
+        }
 
-        archiveService.createArchive(archiveReq, test);
+
+        Archive archive = archiveService.createArchive(archiveReq, test);
+
+        for (int i = 1; i <= 3; i++) { // PhotoBook 생성
+            photoBookService.createPhotoBook(archive, i);
+        }
+
+        for (int i = 1; i <= 3; i++) { // 각 photobook 별 읽기 전용 / 쓰기 전용 stuff 생성
+            stuffService.createStuff(archive, StuffType.READ_ONLY);
+            stuffService.createStuff(archive, StuffType.WRITE_ONLY);
+        }
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
