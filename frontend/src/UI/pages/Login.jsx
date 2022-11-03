@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import { login } from "../../api/auth";
+
 import Logo from "../atoms/Logo";
 import NonLoginMain from "./NonLoginMain";
 
@@ -26,10 +28,6 @@ function Login() {
   };
 
   const clickLogin = () => {
-    //axios 요청 보내기
-    console.log("33줄");
-    console.log({ id: id, pw: pw });
-
     if (id.trim() === "") {
       alert("아이디를 입력하세요");
       return;
@@ -40,7 +38,13 @@ function Login() {
 
     console.log("axios 로그인 요청 ");
     //axios 로그인 요청 보내기
+    login({ email: id, password: pw }, loginSuccess, loginFail);
+  };
+  const loginSuccess = (res) => {
     window.location.href = "/lobby";
+  };
+  const loginFail = (error) => {
+    alert("로그인실패");
   };
 
   return (

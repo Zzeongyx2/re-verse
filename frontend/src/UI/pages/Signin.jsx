@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import Login from "./Login";
 import Logo from "../atoms/Logo";
 
+import { signin, emailCheck } from "../../api/auth";
+import { nicknameCheck } from "../../api/user";
+
 function SignIn() {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
@@ -56,15 +59,24 @@ function SignIn() {
     }
     setIdValid({ isValid: false, message: "." });
     // axios 요청으로 id 중복검사하기
+    emailCheck(id, emailCheckSuccess, emailCheckFail);
     // setIdValid({ isValid: true, message: "이미 가입된 아이디입니다." });
+  };
+  const emailCheckSuccess = (res) => {
+    setIdValid({ isValid: false, message: "." });
+  };
+  const emailCheckFail = (error) => {
+    setIdValid({
+      isValid: true,
+      message: "*이미 가입된 아이디입니다.",
+    });
   };
   const pwBlurHandle = (e) => {
     let pwRE = new RegExp("^[a-zA-Z0-9~!@]{4,12}$");
     if (!pwRE.test(pw)) {
       setPwValid({
         isValid: true,
-        message:
-          "*4~12글자, 영문대소문자, 숫자, 특수문자(~,!,@)만 사용 가능합니다.",
+        message: "*4~12글자, 영문대소문자, 숫자, 특수문자(~,!,@)만 사용 가능합니다.",
       });
       return;
     }
@@ -92,7 +104,16 @@ function SignIn() {
     }
     setNickNameValid({ isValid: false, message: "." });
     //axios 요청으로 닉네임 중복검사하기
-    // setNickNameValid({ isValid: true, message: "이미 가입된 닉네임입니다." });
+    nicknameCheck(nickName, nickCheckSuccess, nickCheckFail);
+  };
+  const nickCheckSuccess = (res) => {
+    setNickNameValid({ isValid: false, message: "." });
+  };
+  const nickCheckFail = (error) => {
+    setNickNameValid({
+      isValid: true,
+      message: "*중복된 닉네임 입니다.",
+    });
   };
 
   const clickSignin = () => {
@@ -119,7 +140,21 @@ function SignIn() {
 
     console.log("axios 회원가입 요청 ");
     //axios 회원가입 요청 보내기
+    signin(
+      {
+        email: id,
+        password: pw,
+        nickname: nickName,
+      },
+      signinSuccess,
+      signinFail
+    );
+  };
+  const signinSuccess = () => {
     window.location.href = "/login";
+  };
+  const signinFail = () => {
+    alert("회원가입 실패!");
   };
 
   return (
@@ -141,9 +176,7 @@ function SignIn() {
           <p
             className={
               "text-[10px] mt-1 ml-1" +
-              (idValid.isValid
-                ? " flex text-red-500"
-                : " flex text-transparent")
+              (idValid.isValid ? " flex text-red-500" : " flex text-transparent")
             }
           >
             {idValid.message}
@@ -162,9 +195,7 @@ function SignIn() {
           <p
             className={
               "text-[10px] mt-1 ml-1" +
-              (pwValid.isValid
-                ? " flex text-red-500"
-                : " flex text-transparent")
+              (pwValid.isValid ? " flex text-red-500" : " flex text-transparent")
             }
           >
             {pwValid.message}
@@ -183,9 +214,7 @@ function SignIn() {
           <p
             className={
               "text-[10px] mt-1 ml-1" +
-              (pwCheckValid.isValid
-                ? " flex text-red-500"
-                : " flex text-transparent")
+              (pwCheckValid.isValid ? " flex text-red-500" : " flex text-transparent")
             }
           >
             {pwCheckValid.message}
@@ -205,9 +234,7 @@ function SignIn() {
           <p
             className={
               "text-[10px] mt-1 ml-1" +
-              (nickNameValid.isValid
-                ? " flex text-red-500"
-                : " flex text-transparent")
+              (nickNameValid.isValid ? " flex text-red-500" : " flex text-transparent")
             }
           >
             {nickNameValid.message}
