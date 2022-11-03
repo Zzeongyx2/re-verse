@@ -1,16 +1,20 @@
+import * as THREE from "three";
 import React, { Suspense, useState } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
-import CatAnimations from "../../assets/animals/Cat_Animations.js";
 import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
-import { TextureLoader } from "three";
-// import { useLoader } from "@react-three/fiber";
-// import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { TextureLoader } from "three/src/loaders/TextureLoader";
+
+import CatAnimations from "../../assets/animals/Cat_Animations.js";
 
 function Reverse() {
   // default action = idle
   const [action, setAction] = useState("Idle_A");
-  const colorMap = useLoader(TextureLoader, "/assets/grid.png");
+  const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
+  if (floorTexture) {
+    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
+    floorTexture.repeat.x = 20;
+    floorTexture.repeat.y = 20;
+  }
   return (
     <div className="h-screen">
       <div className=" mt-4">
@@ -47,16 +51,26 @@ function Reverse() {
           walk
         </button>
       </div>
-      <Canvas>
+      <Canvas shadows camera={{ position: [-3, 2, 5], fov: 90 }}>
         <OrbitControls />
-        <directionalLight intensity={0.3} />
+        {/* light */}
+        <directionalLight
+          intensity={0.3}
+          position={[-5, 5, 5]}
+          castShadow
+          shadow-mapSize-width={1024}
+          shadow-mapSize-height={1024}
+        />
         <ambientLight intensity={0.2} />
-        <pointLight intensity={2} position={[-1, 1, 3]} color="red" />
-        <pointLight intensity={2} position={[1, 1, 3]} color="blue" />
-        <pointLight intensity={2} position={[0, 3, -10]} color="white" />
+        {/* character */}
         <Suspense fallback={null}>
           <CatAnimations action={action} />
         </Suspense>
+        {/* floor */}
+        <mesh rotation={[-0.5 * Math.PI, 0, 0]} receiveShadow>
+          <planeBufferGeometry attach="geometry" args={[1000, 1000]} />
+          <meshStandardMaterial map={floorTexture} />
+        </mesh>
       </Canvas>
     </div>
   );
