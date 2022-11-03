@@ -5,6 +5,7 @@ import kr.co.reverse.archive.api.request.PaperReq;
 import kr.co.reverse.archive.api.response.ArchiveDetailRes;
 import kr.co.reverse.archive.api.response.ArchiveRes;
 import kr.co.reverse.archive.api.response.ArchivesRes;
+import kr.co.reverse.archive.api.response.PapersRes;
 import kr.co.reverse.archive.api.service.ArchiveService;
 import kr.co.reverse.archive.api.service.PaperService;
 import kr.co.reverse.archive.api.service.PhotoBookService;
@@ -122,4 +123,10 @@ public class ArchiveController {
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+//    @GetMapping("/{archive_id}/stuff/{stuff_id}/paper")
+//    public ResponseEntity<? extends PapersRes> getPapers(@PathVariable(name = "archive_id") String archiveId,
+//                                                         @PathVariable(name = "stuff_id") String stuffId) {
+//        paperService.getPapers(stuff)
+//    }
 }
