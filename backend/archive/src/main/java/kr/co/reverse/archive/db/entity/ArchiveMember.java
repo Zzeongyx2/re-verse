@@ -24,6 +24,7 @@ public class ArchiveMember {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Builder
