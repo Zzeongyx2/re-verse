@@ -1,13 +1,16 @@
 import React, { Suspense, useState } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useLoader } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 import CatAnimations from "../../assets/animals/Cat_Animations.js";
 import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
+import { TextureLoader } from "three";
 // import { useLoader } from "@react-three/fiber";
 // import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 function Reverse() {
+  // default action = idle
   const [action, setAction] = useState("Idle_A");
+  const colorMap = useLoader(TextureLoader, "/assets/grid.png");
   return (
     <div className="h-screen">
       <div className=" mt-4">
