@@ -36,16 +36,20 @@ public class Stuff {
 
     private LocalDateTime createdTime;
 
+    @Enumerated(EnumType.STRING)
+    private StuffType type;
+
     @OneToMany(mappedBy = "stuff", fetch = FetchType.LAZY)
     private List<Paper> papers = new ArrayList<>();
 
     @Builder
-    public Stuff(Archive archive, String name, String position, Boolean isDeleted, LocalDateTime createdTime, List<Paper> papers) {
+    public Stuff(Archive archive, String name, String position, Boolean isDeleted, LocalDateTime createdTime, StuffType type, List<Paper> papers) {
         this.archive = archive;
         this.name = name;
         this.position = position;
         this.isDeleted = isDeleted;
         this.createdTime = createdTime;
+        this.type = type;
         this.papers = papers;
     }
 }

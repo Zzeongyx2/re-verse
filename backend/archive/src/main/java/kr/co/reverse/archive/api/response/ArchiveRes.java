@@ -20,8 +20,7 @@ public class ArchiveRes {
 
     private String description;
 
-    // TODO: bookmarks 필요 정보 추출
-//    private Boolean bookmark;
+    private Boolean bookmark;
 
     private List<UserRes> members;
 
