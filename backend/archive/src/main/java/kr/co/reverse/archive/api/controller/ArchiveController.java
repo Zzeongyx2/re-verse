@@ -2,10 +2,7 @@ package kr.co.reverse.archive.api.controller;
 
 import kr.co.reverse.archive.api.request.ArchiveReq;
 import kr.co.reverse.archive.api.request.PaperReq;
-import kr.co.reverse.archive.api.response.ArchiveDetailRes;
-import kr.co.reverse.archive.api.response.ArchiveRes;
-import kr.co.reverse.archive.api.response.ArchivesRes;
-import kr.co.reverse.archive.api.response.PapersRes;
+import kr.co.reverse.archive.api.response.*;
 import kr.co.reverse.archive.api.service.ArchiveService;
 import kr.co.reverse.archive.api.service.PaperService;
 import kr.co.reverse.archive.api.service.PhotoBookService;
@@ -112,9 +109,6 @@ public class ArchiveController {
     public ResponseEntity createPaper(@PathVariable(name = "archive_id") String archiveId,
                                       @PathVariable(name = "stuff_id") String stuffId,
                                       @RequestBody PaperReq paperReq) {
-
-        // TODO: stuff 의 type 검사 후, 맞지 않으면 exception 발생하기
-
         Stuff stuff = stuffService.getStuff(UUID.fromString(stuffId));
         User test = userRepository.findByNickname("test");
 
@@ -129,7 +123,15 @@ public class ArchiveController {
         Stuff stuff = stuffService.getStuff(UUID.fromString(stuffId));
         List<Paper> papers = paperService.getPapers(stuff);
 
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(PapersRes.of(papers));
+        return ResponseEntity.ok(PapersRes.of(papers));
+    }
+
+    @GetMapping("/{archive_id}/stuff/{stuff_id}/paper/{paper_id}")
+    public ResponseEntity<? extends PaperRes> getPaper(@PathVariable(name = "archive_id") String archiveId,
+                                                       @PathVariable(name = "stuff_id") String stuffId,
+                                                       @PathVariable(name = "paper_id") String paperId) {
+        Paper paper = paperService.getPaper(UUID.fromString(paperId));
+
+        return ResponseEntity.ok(PaperRes.of(paper));
     }
 }
