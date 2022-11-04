@@ -1,15 +1,13 @@
 package kr.co.reverse.archive.api.controller;
 
 import kr.co.reverse.archive.api.request.ArchiveReq;
-import kr.co.reverse.archive.api.response.ArchiveDetailRes;
-import kr.co.reverse.archive.api.response.ArchiveRes;
-import kr.co.reverse.archive.api.response.ArchivesRes;
+import kr.co.reverse.archive.api.request.PaperReq;
+import kr.co.reverse.archive.api.response.*;
 import kr.co.reverse.archive.api.service.ArchiveService;
+import kr.co.reverse.archive.api.service.PaperService;
 import kr.co.reverse.archive.api.service.PhotoBookService;
 import kr.co.reverse.archive.api.service.StuffService;
-import kr.co.reverse.archive.db.entity.Archive;
-import kr.co.reverse.archive.db.entity.StuffType;
-import kr.co.reverse.archive.db.entity.User;
+import kr.co.reverse.archive.db.entity.*;
 import kr.co.reverse.archive.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,6 +27,8 @@ public class ArchiveController {
     private final PhotoBookService photoBookService;
 
     private final StuffService stuffService;
+
+    private final PaperService paperService;
 
     private final UserRepository userRepository;
 
@@ -103,5 +103,35 @@ public class ArchiveController {
 //        archiveService.deleteArchive(UUID.fromString(archiveId));
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    @PostMapping("/{archive_id}/stuff/{stuff_id}/paper")
+    public ResponseEntity createPaper(@PathVariable(name = "archive_id") String archiveId,
+                                      @PathVariable(name = "stuff_id") String stuffId,
+                                      @RequestBody PaperReq paperReq) {
+        Stuff stuff = stuffService.getStuff(UUID.fromString(stuffId));
+        User test = userRepository.findByNickname("test");
+
+        paperService.createPaper(paperReq, stuff, test);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/{archive_id}/stuff/{stuff_id}/paper")
+    public ResponseEntity<? extends PapersRes> getPapers(@PathVariable(name = "archive_id") String archiveId,
+                                                         @PathVariable(name = "stuff_id") String stuffId) {
+        Stuff stuff = stuffService.getStuff(UUID.fromString(stuffId));
+        List<Paper> papers = paperService.getPapers(stuff);
+
+        return ResponseEntity.ok(PapersRes.of(papers));
+    }
+
+    @GetMapping("/{archive_id}/stuff/{stuff_id}/paper/{paper_id}")
+    public ResponseEntity<? extends PaperRes> getPaper(@PathVariable(name = "archive_id") String archiveId,
+                                                       @PathVariable(name = "stuff_id") String stuffId,
+                                                       @PathVariable(name = "paper_id") String paperId) {
+        Paper paper = paperService.getPaper(UUID.fromString(paperId));
+
+        return ResponseEntity.ok(PaperRes.of(paper));
     }
 }
