@@ -31,7 +31,7 @@ services:
         container_name: archiveback
         user: root
         environment:
-            SPRING_DATASOURCE_URL: jdbc:mysql://archive_mysql:3307/reverse-archive
+            SPRING_DATASOURCE_URL: jdbc:mysql://archive_mysql:3306/reverse-archive
             SPRING_DATASOURCE_USERNAME: root
             SPRING_DATASOURCE_PASSWORD: flQjtm1024
             SPRING_REDIS_HOST: auth_redis
