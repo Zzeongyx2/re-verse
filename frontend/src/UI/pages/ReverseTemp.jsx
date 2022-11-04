@@ -8,7 +8,7 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 import CatAnimations from "../../assets/animals/Cat_Animations.js";
 
-function Reverse() {
+function ReverseTemp() {
   // default action = idle
   const [action, setAction] = useState("Idle_A");
   const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
@@ -21,62 +21,62 @@ function Reverse() {
   // orthographic camera
   const aspect = window.innerWidth / window.innerHeight;
 
-  const scene = new THREE.Scene();
+  // const scene = new THREE.Scene();
 
-  // renderer
-  const renderer = new THREE.WebGLRenderer();
+  // // renderer
+  // const renderer = new THREE.WebGLRenderer();
 
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.innerHTML = "";
-  document.body.appendChild(renderer.domElement);
+  // renderer.setSize(window.innerWidth, window.innerHeight);
+  // document.body.innerHTML = "";
+  // document.body.appendChild(renderer.domElement);
 
-  // mesh
-  const meshes = [];
+  // // mesh
+  // const meshes = [];
 
-  // floormesh
-  const floorMesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(100, 100),
-    new THREE.MeshStandardMaterial({
-      map: floorTexture,
-    })
-  );
-  // console.log(floorMesh);
-  floorMesh.name = "floor";
-  floorMesh.rotation.x = -Math.PI / 2;
-  floorMesh.receiveShadow = true;
-  scene.add(floorMesh);
-  meshes.push(floorMesh);
+  // // floormesh
+  // const floorMesh = new THREE.Mesh(
+  //   new THREE.PlaneGeometry(100, 100),
+  //   new THREE.MeshStandardMaterial({
+  //     map: floorTexture,
+  //   })
+  // );
+  // // console.log(floorMesh);
+  // floorMesh.name = "floor";
+  // floorMesh.rotation.x = -Math.PI / 2;
+  // floorMesh.receiveShadow = true;
+  // scene.add(floorMesh);
+  // meshes.push(floorMesh);
 
-  // console.log(meshes);
+  // // console.log(meshes);
 
-  // pointermesh
-  const pointerMesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(1, 1),
-    new THREE.MeshBasicMaterial({
-      color: "black",
-      transparent: "true",
-      opacity: "0.2",
-    })
-  );
-  pointerMesh.rotation.x = -Math.PI / 2;
-  pointerMesh.position.y = 0.01;
-  pointerMesh.receiveShadow = true;
-  scene.add(pointerMesh);
+  // // pointermesh
+  // const pointerMesh = new THREE.Mesh(
+  //   new THREE.PlaneGeometry(1, 1),
+  //   new THREE.MeshBasicMaterial({
+  //     color: "black",
+  //     transparent: "true",
+  //     opacity: "0.2",
+  //   })
+  // );
+  // pointerMesh.rotation.x = -Math.PI / 2;
+  // pointerMesh.position.y = 0.01;
+  // pointerMesh.receiveShadow = true;
+  // scene.add(pointerMesh);
 
-  // spotmesh
-  const spotMesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(3, 3),
-    new THREE.MeshStandardMaterial({
-      color: "yellow",
-      transparent: true,
-      opacity: 0.4,
-    })
-  );
+  // // spotmesh
+  // const spotMesh = new THREE.Mesh(
+  //   new THREE.PlaneGeometry(3, 3),
+  //   new THREE.MeshStandardMaterial({
+  //     color: "yellow",
+  //     transparent: true,
+  //     opacity: 0.4,
+  //   })
+  // );
 
-  spotMesh.position.set(5, 0.005, 5);
-  spotMesh.rotation.x = -Math.PI / 2;
-  spotMesh.receiveShadow = true;
-  scene.add(spotMesh);
+  // spotMesh.position.set(5, 0.005, 5);
+  // spotMesh.rotation.x = -Math.PI / 2;
+  // spotMesh.receiveShadow = true;
+  // scene.add(spotMesh);
 
   return (
     <div className="h-screen overflow-hidden">
@@ -165,4 +165,4 @@ function Reverse() {
   );
 }
 
-export default Reverse;
+export default ReverseTemp;
