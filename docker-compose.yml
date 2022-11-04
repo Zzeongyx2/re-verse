@@ -61,7 +61,7 @@ services:
         volumes: # -v 옵션과 동일
             - archivedb:/var/lib/mysql
         environment: # 컨테이너 안의 환경변수 설정
-            - MYSQL_ROOT_PASSWORD=fPttlvl1024
+            - MYSQL_ROOT_PASSWORD=flQjtm1024
             - MYSQL_DATABASE=reverse-archive
         ports: # -p 옵션과 동일
             - "3307:3307"
