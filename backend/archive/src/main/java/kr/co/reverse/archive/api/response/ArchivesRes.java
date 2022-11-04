@@ -1,31 +1,21 @@
 package kr.co.reverse.archive.api.response;
 
-import kr.co.reverse.archive.db.entity.Archive;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 public class ArchivesRes {
 
     private List<ArchiveRes> archives = new ArrayList<>();
 
-    public static ArchivesRes of(List<Archive> archives) {
-        if(archives == null) {
-            return null;
-        }
-
+    public static ArchivesRes of(List<ArchiveRes> archives) {
         ArchivesRes res = new ArchivesRes();
         res.setArchives(archives);
         return res;
     }
 
-    public void setArchives(List<Archive> archives) {
-        for (Archive archive : archives) {
-            this.archives.add(ArchiveRes.of(archive));
-        }
-    }
 }

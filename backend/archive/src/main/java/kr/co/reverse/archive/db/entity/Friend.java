@@ -17,7 +17,7 @@ public class Friend {
     @Column(name = "friend_id")
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(referencedColumnName = "user_id", name = "user_id")
     private User user;      // 나
     @ManyToOne(fetch = FetchType.LAZY)

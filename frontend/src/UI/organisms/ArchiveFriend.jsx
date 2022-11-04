@@ -120,11 +120,8 @@ function ArchiveFriend() {
         <div className="w-[calc(100%-50px)] overflow-auto scrollbar-hide">
           {archiveList.map((archive, index) => {
             return (
-              <div>
-                <div
-                  key={index}
-                  className="flex items-center justify-between px-2 py-1 mx-4"
-                >
+              <div key={`archiveList-${index}`}>
+                <div className="flex items-center justify-between px-2 py-1 mx-4">
                   <div className="flex">
                     {/* 즐겨찾기 */}
                     <button
