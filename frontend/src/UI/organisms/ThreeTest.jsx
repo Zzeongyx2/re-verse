@@ -19,15 +19,16 @@ function ThreeTest() {
 
     const scene = new THREE.Scene();
 
+    // const camera = new THREE.PerspectiveCamera(
     const camera = new THREE.PerspectiveCamera(
-      75,
+      90,
       threeDiv.clientWidth / threeDiv.clientHeight,
-      0.1,
+      0.01,
       1000
     );
     camera.position.z = 80;
-    camera.position.y = 80;
-    camera.position.x = 5;
+    camera.position.y = 100;
+    camera.position.x = 20;
     scene.add(camera);
 
     const ambientLigth = new THREE.AmbientLight("white", 0.5);
@@ -43,14 +44,17 @@ function ThreeTest() {
     const gltfLoader = new GLTFLoader();
     let mixer;
     let mesh;
-    gltfLoader.load("/assets/tete.gltf", (gltf) => {
-      // gltfLoader.load("/assets/GLTF/cat.gltf", (gltf) => {
+    // gltfLoader.load("/assets/fall_guys/scene.gltf", (gltf) => {
+    gltfLoader.load("/assets/GLTF/cat.gltf", (gltf) => {
       console.log(gltf);
       console.log(gltf.animations);
       console.log(gltf.scene);
       console.log(gltf.scene.children);
       console.log(gltf.scene.children[0]);
       mesh = gltf.scene.children[0];
+      mesh.scale.x = 10;
+      mesh.scale.y = 10;
+      mesh.scale.z = 10;
       scene.add(mesh);
       // let list = [];
       // gltf.animations[0].tracks.filter((item, index) => {
@@ -67,31 +71,31 @@ function ThreeTest() {
       actions[0].play();
     });
 
-    gltfLoader.load("/assets/GLTF/Animations/Cat_Bounce.gltf", (gltf) => {
-      console.log(gltf.animations);
-      //   console.log(gltf);
-      //   console.log(gltf.scene);
-      //   console.log(gltf.scene.children);
-      //   console.log(gltf.scene.children[0]);
+    // gltfLoader.load("/assets/GLTF/Animations/Cat_Bounce.gltf", (gltf) => {
+    //   console.log(gltf.animations);
+    //   console.log(gltf);
+    //   console.log(gltf.scene);
+    //   console.log(gltf.scene.children);
+    //   console.log(gltf.scene.children[0]);
 
-      //   const mesh = gltf.scene.children[0];
-      //   scene.add(mesh);
-      //   let list = [];
-      //   gltf.animations[0].tracks.filter((item, index) => {
-      //     if (index > 3 && index < 6) {
-      //       list.push(item);
-      //       return item;
-      //     }
-      //   })
-      //   //   gltf.animations[0].tracks = list;
-      //   console.log(gltf.animations);
-      //   if (mesh) {
-      //     mixer = new THREE.AnimationMixer(mesh);
-      //     const actions = [];
-      //     actions[0] = mixer.clipAction(gltf.animations[0]);
-      //     actions[0].play();
-      //   }
-    });
+    //   const mesh = gltf.scene.children[0];
+    //   scene.add(mesh);
+    //   let list = [];
+    //   gltf.animations[0].tracks.filter((item, index) => {
+    //     if (index > 3 && index < 6) {
+    //       list.push(item);
+    //       return item;
+    //     }
+    //   })
+    //   //   gltf.animations[0].tracks = list;
+    //   console.log(gltf.animations);
+    //   if (mesh) {
+    //     mixer = new THREE.AnimationMixer(mesh);
+    //     const actions = [];
+    //     actions[0] = mixer.clipAction(gltf.animations[0]);
+    //     actions[0].play();
+    //   }
+    // });
 
     const clock = new THREE.Clock();
     scene.background = "white";
@@ -100,7 +104,7 @@ function ThreeTest() {
       //   console.log(delta);
 
       if (mixer) {
-        mixer.update(delta * 0.2);
+        mixer.update(delta);
       }
 
       renderer.render(scene, camera);
