@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk
+FROM openjdk:11-jdk
 
 #포트번호 설정
 EXPOSE 8080
