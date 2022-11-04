@@ -1,11 +1,15 @@
 package kr.co.reverse.archive.db.repository;
 
+import kr.co.reverse.archive.db.entity.Archive;
 import kr.co.reverse.archive.db.entity.ArchiveMember;
+import kr.co.reverse.archive.db.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ArchiveMemberRepository extends JpaRepository<ArchiveMember, Integer> {
+import java.util.UUID;
 
+public interface ArchiveMemberRepository extends JpaRepository<ArchiveMember, UUID> {
 
+    public ArchiveMember findArchiveMemberByArchiveAndUser(Archive archive, User user);
 
 
 }

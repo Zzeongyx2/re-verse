@@ -41,17 +41,67 @@ function ThreeTest() {
     const controls = new OrbitControls(camera, renderer.domElement);
 
     const gltfLoader = new GLTFLoader();
-    gltfLoader.load("/assets/cartoon_characters_pack_all/scene.gltf", (gltf) => {
+    let mixer;
+    let mesh;
+    gltfLoader.load("/assets/tete.gltf", (gltf) => {
+      // gltfLoader.load("/assets/GLTF/cat.gltf", (gltf) => {
+      console.log(gltf);
+      console.log(gltf.animations);
+      console.log(gltf.scene);
+      console.log(gltf.scene.children);
       console.log(gltf.scene.children[0]);
-      const mesh = gltf.scene.children[0];
+      mesh = gltf.scene.children[0];
       scene.add(mesh);
+      // let list = [];
+      // gltf.animations[0].tracks.filter((item, index) => {
+      //   if (index > 3 && index < 6) {
+      //     list.push(item);
+      //     return item;
+      //   }
+      // });
+      // gltf.animations[0].tracks = list;
+      // console.log(gltf.animations);
+      mixer = new THREE.AnimationMixer(mesh);
+      const actions = [];
+      actions[0] = mixer.clipAction(gltf.animations[0]);
+      actions[0].play();
+    });
+
+    gltfLoader.load("/assets/GLTF/Animations/Cat_Bounce.gltf", (gltf) => {
+      console.log(gltf.animations);
+      //   console.log(gltf);
+      //   console.log(gltf.scene);
+      //   console.log(gltf.scene.children);
+      //   console.log(gltf.scene.children[0]);
+
+      //   const mesh = gltf.scene.children[0];
+      //   scene.add(mesh);
+      //   let list = [];
+      //   gltf.animations[0].tracks.filter((item, index) => {
+      //     if (index > 3 && index < 6) {
+      //       list.push(item);
+      //       return item;
+      //     }
+      //   })
+      //   //   gltf.animations[0].tracks = list;
+      //   console.log(gltf.animations);
+      //   if (mesh) {
+      //     mixer = new THREE.AnimationMixer(mesh);
+      //     const actions = [];
+      //     actions[0] = mixer.clipAction(gltf.animations[0]);
+      //     actions[0].play();
+      //   }
     });
 
     const clock = new THREE.Clock();
     scene.background = "white";
     function draw() {
-      const elTime = clock.getElapsedTime();
-      //   console.log(elTime);
+      const delta = clock.getDelta();
+      //   console.log(delta);
+
+      if (mixer) {
+        mixer.update(delta * 0.2);
+      }
 
       renderer.render(scene, camera);
       renderer.setAnimationLoop(draw);
