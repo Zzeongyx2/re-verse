@@ -7,6 +7,7 @@ import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 import CatAnimations from "../../assets/animals/Cat_Animations.js";
+import { SkyTube } from "../../assets/deco/SkyTube.js";
 
 function ReverseTemp() {
   // default action = idle
@@ -139,11 +140,17 @@ function ReverseTemp() {
           castShadow
           shadow-mapSize-width={1024}
           shadow-mapSize-height={1024}
+          shadow-camera-far={50}
+          shadow-camera-left={-100}
+          shadow-camera-right={100}
+          shadow-camera-top={100}
+          shadow-camera-bottom={-100}
         />
         <ambientLight intensity={0.3} />
         {/* character */}
         <Suspense fallback={null}>
           <CatAnimations action={action} />
+          <SkyTube action={action} />
         </Suspense>
         {/* floor */}
         <mesh rotation={[-0.5 * Math.PI, 0, 0]} receiveShadow>
@@ -154,7 +161,6 @@ function ReverseTemp() {
         <mesh
           rotation={[-0.5 * Math.PI, 0, 0]}
           position={[0, 0.01, 0]}
-          castShadow
           receiveShadow
         >
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
