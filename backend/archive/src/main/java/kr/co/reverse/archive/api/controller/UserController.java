@@ -26,7 +26,11 @@ public class UserController {
 
         User user = userService.getPlayer(userId);
 
-        return ResponseEntity.ok(UserRes.of(user));
+        return ResponseEntity.ok(UserRes.builder()
+                .nickname(user.getNickname())
+                .message(user.getMessage())
+                .avatar(user.getAvatar())
+                .build());
     }
 
     @GetMapping("/{nickname}")
