@@ -97,4 +97,10 @@ public class UserService {
         user.setAvatar(avatarInfo.getAvatar());
 
     }
+
+    public String getUserIdByUserId(String userId) {
+        User user = userRepository.findById(UUID.fromString(userId)).get();
+
+        return user.getAuthId();
+    }
 }
