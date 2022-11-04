@@ -1,31 +1,27 @@
 package kr.co.reverse.archive.api.response;
 
-import kr.co.reverse.archive.db.entity.User;
-import lombok.Getter;
-import lombok.Setter;
+import com.querydsl.core.annotations.QueryProjection;
+import lombok.*;
 
+import java.util.UUID;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 public class UserRes {
 
+    private UUID userId;
 
     private String nickname;
-    private int avatar;
+
     private String message;
 
+    private Integer avatar;
 
-    public static UserRes of(User user) {
-        if(user == null) {
-            return null;
-        }
-
-        UserRes res = new UserRes();
-
-        res.setNickname(user.getNickname());
-        res.setAvatar(user.getAvatar());
-        res.setMessage(user.getMessage());
-
-        return res;
+    @QueryProjection
+    public UserRes(UUID userId, String nickname, String message, Integer avatar) {
+        this.userId = userId;
+        this.nickname = nickname;
+        this.message = message;
+        this.avatar = avatar;
     }
 }

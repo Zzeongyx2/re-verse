@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { nicknameCheck } from "../../api/user";
 
 function LobbyProfile() {
   const initialUserInfo = {
@@ -40,9 +41,20 @@ function LobbyProfile() {
     }
     setIsValid({ valid: true, message: "" });
     //axios 요청으로 닉네임 중복검사하기
-    // setNickNameValid({ isValid: true, message: "이미 가입된 닉네임입니다." });
+    nicknameCheck(userInfo.nickname, nickCheckSuccess, nickCheckFail);
   };
-
+  const nickCheckSuccess = (res) => {
+    setIsValid({ valid: true, message: "." });
+  };
+  const nickCheckFail = (error) => {
+    setIsValid({
+      valid: false,
+      message: "*중복된 닉네임 입니다.",
+    });
+  };
+  useEffect(() => {
+    // TODO: 처음에 토큰으로 로그인 된 유저 정보 가져오기
+  }, []);
   return (
     <div className="flex flex-col items-center w-full mt-28 border border-1 border-white rounded-2xl bg-white">
       {/* header */}
@@ -91,7 +103,11 @@ function LobbyProfile() {
           {edit && (
             <button
               type="submit"
-              onClick={() => setEdit(false)}
+              onClick={() => {
+                if (isValid.valid) {
+                  setEdit(false);
+                }
+              }}
               className="font-bold text-lg drop-shadow text-white bg-gradient-to-t from-extra1 to-extra2 h-14 w-full rounded-2xl"
             >
               편집 완료

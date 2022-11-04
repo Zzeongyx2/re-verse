@@ -1,11 +1,16 @@
 package kr.co.reverse.archive.api.controller;
 
 import kr.co.reverse.archive.api.request.ArchiveReq;
+import kr.co.reverse.archive.api.response.ArchiveDetailRes;
 import kr.co.reverse.archive.api.response.ArchiveRes;
 import kr.co.reverse.archive.api.response.ArchivesRes;
 import kr.co.reverse.archive.api.service.ArchiveService;
+import kr.co.reverse.archive.api.service.PhotoBookService;
+import kr.co.reverse.archive.api.service.StuffService;
 import kr.co.reverse.archive.db.entity.Archive;
+import kr.co.reverse.archive.db.entity.StuffType;
 import kr.co.reverse.archive.db.entity.User;
+import kr.co.reverse.archive.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,38 +26,65 @@ public class ArchiveController {
 
     private final ArchiveService archiveService;
 
+    private final PhotoBookService photoBookService;
+
+    private final StuffService stuffService;
+
+    private final UserRepository userRepository;
+
 
     @PostMapping
     public ResponseEntity createArchive(@RequestBody ArchiveReq archiveReq) {
-        archiveService.createArchive(archiveReq);
+        // TODO: redis에서 cookie 내 access token에 해당하는 정보를 갖고 와서, user 정보 불러오기
+
+        User test = userRepository.findByNickname("test");
+        if(test == null) {
+            User user = User.builder().nickname("test").build();
+            userRepository.save(user);
+            test = userRepository.findByNickname("test");
+        }
+
+
+        Archive archive = archiveService.createArchive(archiveReq, test);
+
+        for (int i = 1; i <= 3; i++) { // PhotoBook 생성
+            photoBookService.createPhotoBook(archive, i);
+        }
+
+        for (int i = 1; i <= 3; i++) { // 각 photobook 별 읽기 전용 / 쓰기 전용 stuff 생성
+            stuffService.createStuff(archive, StuffType.READ_ONLY);
+            stuffService.createStuff(archive, StuffType.WRITE_ONLY);
+        }
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
-    public ResponseEntity<? extends ArchivesRes> getArchives(@RequestParam(name = "type") Integer type) {
+    public ResponseEntity getArchives(@RequestParam(name = "type") Integer type) {
+        User test = userRepository.findByNickname("test");
 
         if (type == 0) { // 내 아카이브 조회
             // TODO: redis에서 cookie 내 access token에 해당하는 정보를 갖고 와서, user 정보 불러오기
-            User user = User.builder().nickname("test").build();
 
-            List<Archive> myArchives = archiveService.getArchives(user);
+            List<ArchiveRes> myArchives = archiveService.getArchives(test);
 
             return ResponseEntity.ok(ArchivesRes.of(myArchives));
         }
 
-        // TODO: Friend API 완성 이후, 친구 아카이브 목록 리스트 조회 기능 추가
-        return ResponseEntity.ok(ArchivesRes.of(null));
+        List<ArchiveRes> friendArchives = archiveService.getFriendArchives(test);
+
+        return ResponseEntity.ok(ArchivesRes.of(friendArchives));
     }
 
     @GetMapping("/{archive_id}")
-    public ResponseEntity<? extends ArchiveRes> getArchive(@PathVariable(name = "archive_id") String archiveId) {
+    public ResponseEntity<? extends ArchiveDetailRes> getArchive(@PathVariable(name = "archive_id") String archiveId) {
         // TODO: Archive 접근 권한 여부 확인
         // return ResponseEntity.status(HttpStatus.FORBIDDEN).body()
 
-        Archive archive = archiveService.getArchive(UUID.fromString(archiveId));
+        ArchiveDetailRes archiveDetailRes = archiveService.getArchiveDetail(UUID.fromString(archiveId));
 
-        return ResponseEntity.ok(ArchiveRes.of(archive));
+        return ResponseEntity.ok(archiveDetailRes);
+
     }
 
     @PatchMapping("/{archive_id}")

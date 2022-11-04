@@ -31,8 +31,6 @@ public class User {
 
     private String nickname;
 
-//    private String email;
-
     private String message;
 
     private Integer avatar;
@@ -43,7 +41,6 @@ public class User {
     public User(String authId, String nickname, String message, Integer avatar, LocalDate createdTime){
         this.authId = authId;
         this.nickname = nickname;
-//        this.email = email;
         this.message = message;
         this.avatar = avatar;
         this.createdTime = createdTime;

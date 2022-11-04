@@ -23,13 +23,13 @@ public class BookMark {
     private Archive archive;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "friend_id")
-    private Friend friend;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Builder
-    public BookMark(Archive archive, Friend friend){
+    public BookMark(Archive archive, User user){
         this.archive = archive;
-        this.friend = friend;
+        this.user = user;
     }
 
 
