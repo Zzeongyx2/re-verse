@@ -31,9 +31,12 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -49,6 +52,8 @@ public class AuthService {
 
     @Value("${user.redirect-uri}")
     private String USER_REDIRECT_URI;
+    private final String REFRESH_TOKEN = "refreshToken";
+    private final String AUTHORIZATION = "Authorization";
 
     @Transactional
     public void signUp(SignupReq signInfo){
@@ -109,55 +114,106 @@ public class AuthService {
             AuthRes tokenInfo = jwtTokenProvider.generateTokenDto(authentication);
 
 
-            String userId = connectLoginUser(auth.getId().toString());
+            String userId = connectGetUserId(auth.getId().toString());
 
 
             //4. redis에 refresh token 저장
             redisService.setValues(tokenInfo.getRefreshToken(), userId);
             redisService.setValues(tokenInfo.getAccessToken(), userId);
 
+            //cookie에 저장
+            response.addHeader(AUTHORIZATION, "Bearer " + tokenInfo.getAccessToken());
+//            Cookie cookie = new Cookie("accessToken", tokenInfo.getAccessToken());
+            Cookie cookie = new Cookie(REFRESH_TOKEN, tokenInfo.getRefreshToken());
+            response.addCookie(cookie);
+
             return tokenInfo;
         }
     }
 
     @Transactional
-    public AuthRes reissue(TokenReq tokenInfo) {
+    public AuthRes reissue(HttpServletRequest request, HttpServletResponse response) {
 
-        Authentication authentication = jwtTokenProvider.getAuthentication(tokenInfo.getAccessToken());
+        String accessToken = request.getHeader(AUTHORIZATION).substring(7);
+        Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
 
-        redisService.checkRefreshToken(authentication.getName(), tokenInfo.getRefreshToken());
+
+        Cookie[] cookies = request.getCookies();
+        String refreshToken = null;
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals(REFRESH_TOKEN)){
+                refreshToken = cookie.getValue();
+                break;
+            }
+        }
+
+        String userId = redisService.getValues(refreshToken);
+        Auth auth = authRepository.findById(UUID.fromString(connectGetAuthId(userId))).get();
+
+        redisService.checkRefreshToken(authentication.getName(), auth.getEmail());
 
         // 예외 처리 통과후 토큰 재생성
         AuthRes token = jwtTokenProvider.generateTokenDto(authentication);
 
         //redis에 이전 accesstoken 삭제 후 새로운거 추가
-        redisService.deleteValues(tokenInfo.getAccessToken());
+        redisService.deleteValues(accessToken);
         redisService.setValues(token.getAccessToken(), authentication.getName());
+
+        response.addHeader(AUTHORIZATION, "Bearer " + token.getAccessToken());
 
         return token;
     }
 
     @Transactional
-    public void deleteUser(TokenReq tokenInfo){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public void deleteUser(HttpServletRequest request, HttpServletResponse response){
+
+        String accessToken = request.getHeader(AUTHORIZATION).substring(7);
+        Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
+
+        Cookie[] cookies = request.getCookies();
+        String refreshToken = null;
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals(REFRESH_TOKEN)){
+                refreshToken = cookie.getValue();
+                break;
+            }
+        }
 
         Auth auth = authRepository.findByEmail(authentication.getName()).get();
 
         auth.getUserStatus().setUserStatusCode(StatusCode.DELETED);
 
         //레디스에 해당 유저 삭제
-        redisService.deleteValues(tokenInfo.getAccessToken());
-        redisService.deleteValues(tokenInfo.getRefreshToken());;
+        redisService.deleteValues(accessToken);
+        redisService.deleteValues(refreshToken);
+
+        response.addHeader(AUTHORIZATION, null);
+        Cookie cookie = new Cookie(REFRESH_TOKEN, null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
     }
 
-    public void logout(TokenReq tokenInfo) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
+        String accessToken = request.getHeader(AUTHORIZATION).substring(7);
 
-        Auth auth = authRepository.findByEmail(authentication.getName()).get();
+        Cookie[] cookies = request.getCookies();
+        String refreshToken = null;
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals(REFRESH_TOKEN)){
+                refreshToken = cookie.getValue();
+                break;
+            }
+        }
 
         //레디스에 해당 유저 삭제
-        redisService.deleteValues(tokenInfo.getAccessToken());
-        redisService.deleteValues(tokenInfo.getRefreshToken());
+        redisService.deleteValues(accessToken);
+        redisService.deleteValues(refreshToken);
+
+        //쿠키 삭제
+        response.addHeader(AUTHORIZATION, null);
+        Cookie cookie = new Cookie(REFRESH_TOKEN, null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
 
     }
 
@@ -183,19 +239,36 @@ public class AuthService {
         return result;
     }
 
-    public String connectLoginUser(String authId){
+    public String connectGetUserId(String authId){
 
         RestTemplate restTemplate = new RestTemplate();
 
         URI uri = UriComponentsBuilder.fromUriString(USER_REDIRECT_URI)
-                .path("/id/{auth_id}")
+                .path("/uid/{auth_id}")
                 .encode().build()
                 .expand(authId)
                 .toUri();
 
         ResponseEntity<UserRes> result = restTemplate.getForEntity(uri,UserRes.class);
 
-        return result.getBody().getUserId();
+        return result.getBody().getId();
+
+    }
+
+    public String connectGetAuthId(String userId){
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        URI uri = UriComponentsBuilder.fromUriString(USER_REDIRECT_URI)
+                .path("/aid/{user_id}")
+                .encode().build()
+                .expand(userId)
+                .toUri();
+
+        ResponseEntity<UserRes> result = restTemplate.getForEntity(uri,UserRes.class);
+
+        return result.getBody().getId();
+
 
     }
 }
