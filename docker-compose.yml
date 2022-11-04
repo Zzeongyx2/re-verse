@@ -2,7 +2,8 @@ version: "3.8"
 services:    
     auth_back:
         depends_on:
-            - authdb
+            - auth_mysql
+            - auth_redis
         build: 
             context: ./
             dockerfile: ./backend/auth/Dockerfile
@@ -10,15 +11,19 @@ services:
         container_name: authback
         user: root
         environment:
-            SPRING_DATASOURCE_URL: jdbc:mysql://authdb:3306/reverse-auth
+            SPRING_DATASOURCE_URL: jdbc:mysql://auth_mysql:3306/reverse-auth
             SPRING_DATASOURCE_USERNAME: root
             SPRING_DATASOURCE_PASSWORD: flQjtm1024
+            SPRING_REDIS_HOST: auth_redis
+            SPRING_REDIS_PORT: 6379
+            SPRING_REDIS_PASSWORD: flQjtm1024
         ports:
             - 8080:8080
 
     archive_back:
         depends_on:
-            - archivedb
+            - archive_mysql
+            - auth_cache
         build: 
             context: ./
             dockerfile: ./backend/archive/Dockerfile
@@ -26,9 +31,12 @@ services:
         container_name: archiveback
         user: root
         environment:
-            SPRING_DATASOURCE_URL: jdbc:mysql://archivedb:3307/reverse-archive
+            SPRING_DATASOURCE_URL: jdbc:mysql://archive_mysql:3307/reverse-archive
             SPRING_DATASOURCE_USERNAME: root
             SPRING_DATASOURCE_PASSWORD: flQjtm1024
+            SPRING_REDIS_HOST: auth_redis
+            SPRING_REDIS_PORT: 6379 
+            SPRING_REDIS_PASSWORD: flQjtm1024
         ports:
             - 8081:8081
 
