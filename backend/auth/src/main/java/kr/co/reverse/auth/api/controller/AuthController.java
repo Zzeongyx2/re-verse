@@ -44,9 +44,9 @@ public class AuthController {
     }
 
     @PostMapping("/reissue")
-    public ResponseEntity<? extends TokenRes>  reissue(@RequestBody TokenReq tokenInfo) {
+    public ResponseEntity<? extends TokenRes>  reissue(HttpServletRequest request, HttpServletResponse response) {
 
-        AuthRes auth = authService.reissue(tokenInfo);
+        AuthRes auth = authService.reissue(request, response);
 
         return ResponseEntity.ok(TokenRes.of(auth));
     }
@@ -61,18 +61,18 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity logout(@RequestBody TokenReq tokenInfo){
+    public ResponseEntity logout(HttpServletRequest request, HttpServletResponse response){
 
-        authService.logout(tokenInfo);
+        authService.logout(request, response);
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
 
     @DeleteMapping("/sign-out")
-    public ResponseEntity deleteUser(@RequestBody TokenReq tokenInfo){
+    public ResponseEntity deleteUser(HttpServletRequest request, HttpServletResponse response){
 
-        authService.deleteUser(tokenInfo);
+        authService.deleteUser(request, response);
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
