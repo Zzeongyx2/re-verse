@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -52,6 +54,11 @@ public class PaperService {
 
     public List<Paper> getPapers(Stuff stuff) {
         return paperRepository.findAllByStuffOrderByMemoryTimeAscCreatedTimeDesc(stuff);
+    }
+
+    public Paper getPaper(UUID paperId) {
+        return paperRepository.findById(paperId)
+                .orElseThrow(() -> new NoSuchElementException());
     }
 
 }
