@@ -1,15 +1,20 @@
 package kr.co.reverse.archive.api.service;
 
 import kr.co.reverse.archive.api.request.PaperReq;
+import kr.co.reverse.archive.common.error.CommonErrorCode;
+import kr.co.reverse.archive.common.exception.UnauthorizedException;
 import kr.co.reverse.archive.db.entity.Paper;
 import kr.co.reverse.archive.db.entity.Stuff;
+import kr.co.reverse.archive.db.entity.StuffType;
 import kr.co.reverse.archive.db.entity.User;
 import kr.co.reverse.archive.db.repository.PaperRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,9 +26,13 @@ public class PaperService {
     public void createPaper(PaperReq paperReq, Stuff stuff, User user) {
         String title = paperReq.getTitle();
         String content = paperReq.getContent();
-//        LocalDateTime memoryTime = paperReq.getMemoryTime();
+        LocalDate memoryTime = paperReq.getMemoryTime();
 
-        if (title == null || content == null) {
+        if (stuff.getType() == StuffType.READ_ONLY) {
+            throw new UnauthorizedException(CommonErrorCode.UNAUTHORIZED_ERROR);
+        }
+
+        if (title == null || content == null || memoryTime == null) {
             throw new IllegalArgumentException();
         }
 
@@ -39,6 +48,10 @@ public class PaperService {
                 .build();
 
         paperRepository.save(paper);
+    }
+
+    public List<Paper> getPapers(Stuff stuff) {
+        return paperRepository.findAllByStuffOrderByMemoryTimeAscCreatedTimeDesc(stuff);
     }
 
 }
