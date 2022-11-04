@@ -1,27 +1,27 @@
-package kr.co.reverse.auth.config;
+// package kr.co.reverse.auth.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
+// import org.springframework.context.annotation.Bean;
+// import org.springframework.context.annotation.Configuration;
+// import org.springframework.web.cors.CorsConfiguration;
+// import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+// import org.springframework.web.filter.CorsFilter;
 
-@Configuration
-public class CorsConfig {
+// @Configuration
+// public class CorsConfig {
 
-    @Bean
-    public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("http://localhost:3000"); // e.g. http://domain1.com
+//     @Bean
+//     public CorsFilter corsFilter() {
+//         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//         CorsConfiguration config = new CorsConfiguration();
+//         config.addAllowedOrigin("http://localhost:3000"); // e.g. http://domain1.com
 
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        config.setAllowCredentials(true);
-        config.setMaxAge(3600L);
+//         config.addAllowedHeader("*");
+//         config.addAllowedMethod("*");
+//         config.setAllowCredentials(true);
+//         config.setMaxAge(3600L);
 
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-    }
+//         source.registerCorsConfiguration("/**", config);
+//         return new CorsFilter(source);
+//     }
 
-}
+// }
