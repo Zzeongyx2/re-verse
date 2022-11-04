@@ -10,10 +10,7 @@ import kr.co.reverse.archive.api.service.ArchiveService;
 import kr.co.reverse.archive.api.service.PaperService;
 import kr.co.reverse.archive.api.service.PhotoBookService;
 import kr.co.reverse.archive.api.service.StuffService;
-import kr.co.reverse.archive.db.entity.Archive;
-import kr.co.reverse.archive.db.entity.Stuff;
-import kr.co.reverse.archive.db.entity.StuffType;
-import kr.co.reverse.archive.db.entity.User;
+import kr.co.reverse.archive.db.entity.*;
 import kr.co.reverse.archive.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -116,6 +113,8 @@ public class ArchiveController {
                                       @PathVariable(name = "stuff_id") String stuffId,
                                       @RequestBody PaperReq paperReq) {
 
+        // TODO: stuff 의 type 검사 후, 맞지 않으면 exception 발생하기
+
         Stuff stuff = stuffService.getStuff(UUID.fromString(stuffId));
         User test = userRepository.findByNickname("test");
 
@@ -124,9 +123,13 @@ public class ArchiveController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-//    @GetMapping("/{archive_id}/stuff/{stuff_id}/paper")
-//    public ResponseEntity<? extends PapersRes> getPapers(@PathVariable(name = "archive_id") String archiveId,
-//                                                         @PathVariable(name = "stuff_id") String stuffId) {
-//        paperService.getPapers(stuff)
-//    }
+    @GetMapping("/{archive_id}/stuff/{stuff_id}/paper")
+    public ResponseEntity<? extends PapersRes> getPapers(@PathVariable(name = "archive_id") String archiveId,
+                                                         @PathVariable(name = "stuff_id") String stuffId) {
+        Stuff stuff = stuffService.getStuff(UUID.fromString(stuffId));
+        List<Paper> papers = paperService.getPapers(stuff);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(PapersRes.of(papers));
+    }
 }

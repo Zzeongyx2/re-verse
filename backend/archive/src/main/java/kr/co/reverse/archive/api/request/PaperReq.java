@@ -3,7 +3,9 @@ package kr.co.reverse.archive.api.request;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -16,6 +18,7 @@ public class PaperReq {
 
     private String content;
 
-    private LocalDateTime memoryTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate memoryTime;
 
 }

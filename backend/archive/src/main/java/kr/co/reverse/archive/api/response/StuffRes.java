@@ -1,5 +1,6 @@
 package kr.co.reverse.archive.api.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.querydsl.core.annotations.QueryProjection;
 import kr.co.reverse.archive.db.entity.Paper;
 import kr.co.reverse.archive.db.entity.StuffType;
@@ -23,6 +24,7 @@ public class StuffRes {
 
 //    private String position;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime createdTime;
 
     private StuffType type;
