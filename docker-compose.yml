@@ -70,7 +70,7 @@ services:
         container_name: auth_cache
         user: root
         image: redis:latest
-        restarts: always
+        restart: always
         environment:
             - REDIS_PASSWORD=flQjtm1024
         volumes:
