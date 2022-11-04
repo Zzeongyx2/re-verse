@@ -64,7 +64,7 @@ services:
             - MYSQL_ROOT_PASSWORD=flQjtm1024
             - MYSQL_DATABASE=reverse-archive
         ports: # -p 옵션과 동일
-            - "3307:3307"
+            - "3307:3306"
 
     auth_redis:
         container_name: auth_cache
