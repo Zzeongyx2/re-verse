@@ -23,7 +23,7 @@ services:
     archive_back:
         depends_on:
             - archive_mysql
-            - auth_cache
+            - auth_redis
         build: 
             context: ./
             dockerfile: ./backend/archive/Dockerfile
