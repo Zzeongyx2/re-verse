@@ -32,9 +32,8 @@ public class RedisService {
         redisTemplate.delete(key);
     }
 
-    public void checkRefreshToken(String username, String refreshToken) {
-        String tokenUser = this.getValues(refreshToken);
-        if(!username.equals(tokenUser)) {
+    public void checkRefreshToken(String accessName, String refreshName) {
+        if(!accessName.equals(refreshName)) {
             throw new ExpiredTokenException();
         }
     }
