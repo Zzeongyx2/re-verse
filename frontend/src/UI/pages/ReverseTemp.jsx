@@ -8,6 +8,7 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 import CatAnimations from "../../assets/players/Cat_Animations.js";
 import { SkyTube } from "../../assets/deco/SkyTube.js";
+import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
 
 function ReverseTemp() {
   // default action = idle
@@ -18,8 +19,8 @@ function ReverseTemp() {
   const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
   if (floorTexture) {
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-    floorTexture.repeat.x = 30;
-    floorTexture.repeat.y = 30;
+    floorTexture.repeat.x = 10;
+    floorTexture.repeat.y = 10;
   }
 
   // orthographic camera
@@ -28,7 +29,7 @@ function ReverseTemp() {
   const [isPressed, setIsPressed] = useState(false);
 
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="h-screen overflow-hidden relative">
       {/* <div className=" mt-4">
         <button
           className="bg-white mx-2 text-lg px-4"
@@ -64,6 +65,9 @@ function ReverseTemp() {
         </button>
       </div> */}
       {/* <Canvas shadows camera={{ position: [-3, 2, 5], fov: 90 }}> */}
+      <div className="absolute z-10">
+        <ReverseNavbar className="" />
+      </div>
       <Canvas
         ref={refCanvas}
         shadows
@@ -74,12 +78,12 @@ function ReverseTemp() {
           right: `${aspect}`,
           top: 1,
           bottom: -1,
-          zoom: 30,
+          zoom: 28,
           near: -1000,
           far: 1000,
         }}
       >
-        {/* <OrbitControls /> */}
+        <OrbitControls />
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
         {/* light */}
@@ -116,7 +120,7 @@ function ReverseTemp() {
           rotation={[-0.5 * Math.PI, 0, 0]}
           receiveShadow
         >
-          <planeBufferGeometry attach="geometry" args={[1000, 1000]} />
+          <planeBufferGeometry attach="geometry" args={[300, 300]} />
           <meshStandardMaterial map={floorTexture} />
         </mesh>
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
