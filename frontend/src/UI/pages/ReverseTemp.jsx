@@ -6,7 +6,7 @@ import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 
-import CatAnimations from "../../assets/animals/Cat_Animations.js";
+import CatAnimations from "../../assets/players/Cat_Animations.js";
 import { SkyTube } from "../../assets/deco/SkyTube.js";
 
 function ReverseTemp() {
