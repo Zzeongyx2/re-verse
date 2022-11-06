@@ -1,12 +1,12 @@
 import * as THREE from "three";
-import React, { Suspense, useRef, useState, useEffect } from "react";
+import React, { Suspense, useRef, useState } from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { gsap } from "gsap";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { Canvas, useLoader } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 import { Player } from "../organisms/Player";
 import { House } from "../organisms/House";
+import { useEffect } from "react";
 
 function MyReverse() {
   const ref = useRef();
