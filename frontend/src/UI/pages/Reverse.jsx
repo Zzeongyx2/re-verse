@@ -125,6 +125,8 @@ function MyReverse() {
       modelSrc: "/assets/animals/GLTF/Animations/Cat_Animations.gltf",
     });
 
+    console.log(player);
+
     const raycaster = new THREE.Raycaster();
     let mouse = new THREE.Vector2();
     let destinationPoint = new THREE.Vector3();
@@ -217,6 +219,8 @@ function MyReverse() {
       // raycaster.setFromCamera(mouse, camera);
 
       const intersects = raycaster.intersectObjects(meshes);
+      console.log("====");
+      console.log(intersects);
       for (const item of intersects) {
         if (item.object.name === "floor") {
           destinationPoint.x = item.point.x;

@@ -15,7 +15,7 @@ export function SkyTube(props) {
     "/assets/sky_tube_dancing__animated/scene.gltf"
   );
   const { actions } = useAnimations(animations, group);
-  console.log(animations);
+  // console.log(animations);
   useEffect(() => {
     actions["Take 001"].play();
   });
