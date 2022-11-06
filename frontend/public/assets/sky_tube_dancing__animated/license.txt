@@ -1,0 +1,8 @@
+Model Information:
+* title:	Sky Tube Dancing  Animated
+* source:	https://sketchfab.com/3d-models/sky-tube-dancing-animated-e4803b61125e456da8c54be668aecf16
+* author:	bariacg (https://sketchfab.com/bariacg)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
