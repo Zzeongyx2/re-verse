@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useRef, useState } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 // import { OrthographicCamera } from "@react-three/drei";
@@ -11,7 +11,10 @@ import { SkyTube } from "../../assets/deco/SkyTube.js";
 
 function ReverseTemp() {
   // default action = idle
+  const refCanvas = useRef();
   const [action, setAction] = useState("Idle_A");
+  // const [characterPosition, setCharacterPosition] = useState();
+  const [destinationPoint, setDestinationPoint] = useState();
   const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
   if (floorTexture) {
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
@@ -22,66 +25,11 @@ function ReverseTemp() {
   // orthographic camera
   const aspect = window.innerWidth / window.innerHeight;
 
-  // const scene = new THREE.Scene();
-
-  // // renderer
-  // const renderer = new THREE.WebGLRenderer();
-
-  // renderer.setSize(window.innerWidth, window.innerHeight);
-  // document.body.innerHTML = "";
-  // document.body.appendChild(renderer.domElement);
-
-  // // mesh
-  // const meshes = [];
-
-  // // floormesh
-  // const floorMesh = new THREE.Mesh(
-  //   new THREE.PlaneGeometry(100, 100),
-  //   new THREE.MeshStandardMaterial({
-  //     map: floorTexture,
-  //   })
-  // );
-  // // console.log(floorMesh);
-  // floorMesh.name = "floor";
-  // floorMesh.rotation.x = -Math.PI / 2;
-  // floorMesh.receiveShadow = true;
-  // scene.add(floorMesh);
-  // meshes.push(floorMesh);
-
-  // // console.log(meshes);
-
-  // // pointermesh
-  // const pointerMesh = new THREE.Mesh(
-  //   new THREE.PlaneGeometry(1, 1),
-  //   new THREE.MeshBasicMaterial({
-  //     color: "black",
-  //     transparent: "true",
-  //     opacity: "0.2",
-  //   })
-  // );
-  // pointerMesh.rotation.x = -Math.PI / 2;
-  // pointerMesh.position.y = 0.01;
-  // pointerMesh.receiveShadow = true;
-  // scene.add(pointerMesh);
-
-  // // spotmesh
-  // const spotMesh = new THREE.Mesh(
-  //   new THREE.PlaneGeometry(3, 3),
-  //   new THREE.MeshStandardMaterial({
-  //     color: "yellow",
-  //     transparent: true,
-  //     opacity: 0.4,
-  //   })
-  // );
-
-  // spotMesh.position.set(5, 0.005, 5);
-  // spotMesh.rotation.x = -Math.PI / 2;
-  // spotMesh.receiveShadow = true;
-  // scene.add(spotMesh);
+  const [isPressed, setIsPressed] = useState(false);
 
   return (
     <div className="h-screen overflow-hidden">
-      <div className=" mt-4">
+      {/* <div className=" mt-4">
         <button
           className="bg-white mx-2 text-lg px-4"
           onClick={() => {
@@ -114,9 +62,10 @@ function ReverseTemp() {
         >
           walk
         </button>
-      </div>
+      </div> */}
       {/* <Canvas shadows camera={{ position: [-3, 2, 5], fov: 90 }}> */}
       <Canvas
+        ref={refCanvas}
         shadows
         orthographic
         camera={{
@@ -130,17 +79,18 @@ function ReverseTemp() {
           far: 1000,
         }}
       >
-        <OrbitControls />
+        {/* <OrbitControls /> */}
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
         {/* light */}
         <directionalLight
           intensity={0.4}
-          position={[-5, 5, 5]}
+          position={[-50, 50, 50]}
           castShadow
-          shadow-mapSize-width={1024}
-          shadow-mapSize-height={1024}
-          shadow-camera-far={50}
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
+          shadow-camera-near={-100}
+          shadow-camera-far={100}
           shadow-camera-left={-100}
           shadow-camera-right={100}
           shadow-camera-top={100}
@@ -149,11 +99,23 @@ function ReverseTemp() {
         <ambientLight intensity={0.3} />
         {/* character */}
         <Suspense fallback={null}>
-          <CatAnimations action={action} />
-          <SkyTube action={action} />
+          <CatAnimations
+            action={action}
+            destinationPoint={destinationPoint}
+            // position={characterPosition ? characterPosition : null}
+            isPressed={isPressed}
+          />
+          <SkyTube />
         </Suspense>
         {/* floor */}
-        <mesh rotation={[-0.5 * Math.PI, 0, 0]} receiveShadow>
+        <mesh
+          onPointerDown={(e) => {
+            // console.log(e);  // intersects와 동일한거
+            setDestinationPoint(e.point);
+          }}
+          rotation={[-0.5 * Math.PI, 0, 0]}
+          receiveShadow
+        >
           <planeBufferGeometry attach="geometry" args={[1000, 1000]} />
           <meshStandardMaterial map={floorTexture} />
         </mesh>
