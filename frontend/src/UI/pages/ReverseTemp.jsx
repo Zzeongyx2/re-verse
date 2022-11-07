@@ -7,6 +7,7 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 import CatAnimations from "../../assets/players/Cat_Animations.js";
 import { SkyTube } from "../../assets/deco/SkyTube.js";
 import { ObjectTest } from "../../assets/deco/ObjectTest.js";
+import { CampingPack } from "../../assets/deco/CampingPack.js";
 
 import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
 import { useEffect } from "react";
@@ -51,46 +52,8 @@ function ReverseTemp() {
     setVisible(data);
   };
 
-  // console.log("+==========");
-  // console.log(visible);
-
   return (
     <div className="h-screen overflow-hidden relative">
-      {/* <div className=" mt-4">
-        <button
-          className="bg-white mx-2 text-lg px-4"
-          onClick={() => {
-            setAction("Idle_A");
-          }}
-        >
-          idle
-        </button>
-        <button
-          className="bg-white mx-2 text-lg px-4"
-          onClick={() => {
-            setAction("Roll");
-          }}
-        >
-          roll
-        </button>
-        <button
-          className="bg-white mx-2 text-lg px-4"
-          onClick={() => {
-            setAction("Jump");
-          }}
-        >
-          jump
-        </button>
-        <button
-          className="bg-white mx-2 text-lg px-4"
-          onClick={() => {
-            setAction("Walk");
-          }}
-        >
-          walk
-        </button>
-      </div> */}
-      {/* <Canvas shadows camera={{ position: [-3, 2, 5], fov: 90 }}> */}
       <div className="w-full h-[0.15] absolute z-10">
         <ReverseNavbar />
       </div>
@@ -99,7 +62,9 @@ function ReverseTemp() {
         shadows
         orthographic
         camera={{
-          position: [1, 5, 5],
+          // player의 초기 위치: [-30, 0, -30]
+          position: [-29, 5, -25],
+          // position: [1, 5, 5],
           left: `-${aspect}`,
           right: `${aspect}`,
           top: 1,
@@ -120,25 +85,27 @@ function ReverseTemp() {
           shadow-mapSize-width={2048}
           shadow-mapSize-height={2048}
           shadow-camera-near={-100}
-          shadow-camera-far={100}
-          shadow-camera-left={-100}
-          shadow-camera-right={100}
-          shadow-camera-top={100}
-          shadow-camera-bottom={-100}
+          shadow-camera-far={2000}
+          shadow-camera-left={-2000}
+          shadow-camera-right={2000}
+          shadow-camera-top={2000}
+          shadow-camera-bottom={-2000}
         />
         <ambientLight intensity={0.3} />
         {/* character */}
         <Suspense fallback={null}>
-          <CatAnimations
-            action={action}
+          {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
+          {/* <CatAnimations
+            // action={action}
             destinationPoint={destinationPoint}
-            isPressed={isPressed}
+            // isPressed={isPressed}
             handleVisible={handleVisible}
             // handleCurrentPosition={handleCurrentPosition}
-          />
+          /> */}
           <SkyTube />
           <ObjectTest visible={visible} />
           {/* <ObjectTest currentPosition={currentPosition} /> */}
+          <CampingPack />
         </Suspense>
         {/* floor */}
         <mesh
@@ -149,7 +116,7 @@ function ReverseTemp() {
           rotation={[-0.5 * Math.PI, 0, 0]}
           receiveShadow
         >
-          <planeBufferGeometry attach="geometry" args={[300, 300]} />
+          <planeBufferGeometry attach="geometry" args={[250, 250]} />
           <meshStandardMaterial map={floorTexture} />
         </mesh>
         {/* 오브젝트 이벤트 발생 가능한 지점 */}
@@ -164,7 +131,7 @@ function ReverseTemp() {
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
         <mesh
           rotation={[-0.5 * Math.PI, 0, 0]}
-          position={[0, 0.01, 0]}
+          position={[-30, 0.01, -30]}
           receiveShadow
         >
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
