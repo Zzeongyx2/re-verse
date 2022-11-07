@@ -19,7 +19,7 @@ function ReverseSettingModal() {
     <div>
       <button
         onClick={onOpen}
-        className="bg-white flex items-center rounded-full mb-2"
+        className="bg-white flex items-center rounded-full mb-2 hover:animate-spin-slow"
       >
         <BiCog className="text-2xl m-1.5" />
       </button>
