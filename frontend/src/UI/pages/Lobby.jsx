@@ -4,8 +4,28 @@ import LobbyProfile from "../organisms/LobbyProfile";
 import Navbar from "../organisms/Navbar";
 import CharacterThree from "../organisms/CharacterThree";
 import ThreeTest from "../organisms/ThreeTest";
+import { useState, useEffect } from "react";
+import { getUserInfo } from "../../api/user";
 
 function Lobby() {
+  // TODO: 메인아카이브, 최근방문 아카이브 가져와서 넣어주기
+  const initialUserInfo = {
+    nickname: "",
+    message: "",
+    avatar: "Cat",
+  };
+
+  const [loginUser, setLoginUser] = useState(initialUserInfo);
+  useEffect(() => {
+    getUserInfo(getUserInfoSuccess, getUserInfoFail);
+  }, []);
+  const getUserInfoSuccess = (res) => {
+    setLoginUser(res.data);
+  };
+  const getUserInfoFail = (error) => {
+    console.log(error);
+  };
+
   return (
     <div className="mt-8">
       <div className="">
@@ -18,7 +38,7 @@ function Lobby() {
             <NeonLightBG />
           </div>
           <div className="absolute bg-opacity-0 w-full h-full">
-            <CharacterThree characterNum={"1"} />
+            <CharacterThree animalName={loginUser.avatar} />
           </div>
         </div>
         {/* right side: shortcut btn, profile */}
@@ -41,7 +61,7 @@ function Lobby() {
             from={"from-main2"}
             to={"to-sub2"}
           />
-          <LobbyProfile />
+          <LobbyProfile loginUser={loginUser} />
         </div>
       </div>
     </div>
