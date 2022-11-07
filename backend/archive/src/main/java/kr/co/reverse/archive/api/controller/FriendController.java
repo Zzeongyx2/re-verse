@@ -37,6 +37,7 @@ public class FriendController {
 
         // TODO: redis에서 access token을 가져와서 userId를 파싱하여 파라미터로 넘겨준다.
         UUID userId = null;
+
         User user = null;
 //        User user = userService.getUser(userId);
 
