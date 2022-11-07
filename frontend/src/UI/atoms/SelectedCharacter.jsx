@@ -8,18 +8,18 @@ import PigeonCharacter from "../../assets/characters/PigeonCharacter";
 import RabbitCharacter from "../../assets/characters/RabbitCharacter";
 import TortoiseCharacter from "../../assets/characters/TortoiseCharacter";
 
-function SelectedCharacter({ selectNum }) {
+function SelectedCharacter({ animalName }) {
   return (
     <group>
-      {selectNum === "1" ? <CatCharacter /> : null}
-      {selectNum === "2" ? <DogCharacter /> : null}
-      {selectNum === "3" ? <DoveCharacter /> : null}
-      {selectNum === "4" ? <GoldfishCharacter /> : null}
-      {selectNum === "5" ? <MouseCharacter /> : null}
-      {selectNum === "6" ? <ParrotCharacter /> : null}
-      {selectNum === "7" ? <PigeonCharacter /> : null}
-      {selectNum === "8" ? <RabbitCharacter /> : null}
-      {selectNum === "9" ? <TortoiseCharacter /> : null}
+      {animalName === "Cat" ? <CatCharacter /> : null}
+      {animalName === "Dog" ? <DogCharacter /> : null}
+      {animalName === "Dove" ? <DoveCharacter /> : null}
+      {animalName === "Goldfish" ? <GoldfishCharacter /> : null}
+      {animalName === "Mouse" ? <MouseCharacter /> : null}
+      {animalName === "Parrot" ? <ParrotCharacter /> : null}
+      {animalName === "Pigeon" ? <PigeonCharacter /> : null}
+      {animalName === "Rabbit" ? <RabbitCharacter /> : null}
+      {animalName === "Tortoise" ? <TortoiseCharacter /> : null}
     </group>
   );
 }
