@@ -11,6 +11,7 @@ import Archive from "./UI/pages/Archive";
 import NeonTest from "./UI/pages/NeonTest";
 import Reverse from "./UI/pages/Reverse";
 import ReverseTemp from "./UI/pages/ReverseTemp";
+import ReverseWebRTC from "./UI/pages/ReverseWebRTC";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/neontest" element={<NeonTest />} />
           <Route path="/reverse/:archiveId" element={<Reverse />} />
           <Route path="/reversetemp" element={<ReverseTemp />} />
+          <Route path="/reverse/rtc" element={<ReverseWebRTC />} />
         </Routes>
       </div>
     </BrowserRouter>
