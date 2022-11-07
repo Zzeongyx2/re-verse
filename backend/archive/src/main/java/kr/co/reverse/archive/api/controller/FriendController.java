@@ -133,6 +133,7 @@ public class FriendController {
     public ResponseEntity createArchiveMember(@RequestBody ArchiveMemberReq archiveMemberReq){
 
         UUID userId = null;
+
         User user = null;
 //        User user = userService.getUser(userId);
 
