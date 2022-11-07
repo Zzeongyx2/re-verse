@@ -74,6 +74,7 @@ function ReverseTemp() {
           far: 1000,
         }}
       >
+        {/* // TODO: 컴포넌트 배치할 때에는 키고 하는게 편함 */}
         <OrbitControls />
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
@@ -95,13 +96,13 @@ function ReverseTemp() {
         {/* character */}
         <Suspense fallback={null}>
           {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
-          {/* <CatAnimations
+          <CatAnimations
             // action={action}
             destinationPoint={destinationPoint}
             // isPressed={isPressed}
             handleVisible={handleVisible}
             // handleCurrentPosition={handleCurrentPosition}
-          /> */}
+          />
           <SkyTube />
           <ObjectTest visible={visible} />
           {/* <ObjectTest currentPosition={currentPosition} /> */}
@@ -119,15 +120,7 @@ function ReverseTemp() {
           <planeBufferGeometry attach="geometry" args={[300, 300]} />
           <meshStandardMaterial map={floorTexture} />
         </mesh>
-        {/* 오브젝트 이벤트 발생 가능한 지점 */}
-        {/* <mesh
-          rotation={[-0.5 * Math.PI, 0, 0]}
-          receiveShadow
-          position={[-20, 0.01, 3]}
-        >
-          <planeBufferGeometry attach="geometry" args={[8, 8]} />
-          <meshBasicMaterial color="yellow" opacity={0.5} transparent />
-        </mesh> */}
+
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
         <mesh
           rotation={[-0.5 * Math.PI, 0, 0]}
