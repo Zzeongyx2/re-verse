@@ -28,22 +28,31 @@ function ReverseTemp() {
   const aspect = window.innerWidth / window.innerHeight;
 
   const [isPressed, setIsPressed] = useState(false);
-  const [currentPosition, setCurrentPosition] = useState(); // player -> reverse
+  // const [currentPosition, setCurrentPosition] = useState(); // player -> reverse
 
-  const handleCurrentPosition = (data) => {
-    setCurrentPosition(data);
-    // console.log(currentPosition);
+  // const handleCurrentPosition = (data) => {
+  //   setCurrentPosition(data);
+  //   // console.log(currentPosition);
 
-    // setCurrentPlayerPosition(data);
+  //   // setCurrentPlayerPosition(data);
+  // };
+
+  // useEffect(
+  //   (data) => {
+  //     setCurrentPosition(data);
+  //     console.log(data);
+  //   },
+  //   [currentPosition]
+  // );
+
+  // player -> reverse
+  const [visible, setVisible] = useState(false);
+  const handleVisible = (data) => {
+    setVisible(data);
   };
 
-  useEffect(
-    (data) => {
-      setCurrentPosition(data);
-      console.log(data);
-    },
-    [currentPosition]
-  );
+  // console.log("+==========");
+  // console.log(visible);
 
   return (
     <div className="h-screen overflow-hidden relative">
@@ -124,10 +133,12 @@ function ReverseTemp() {
             action={action}
             destinationPoint={destinationPoint}
             isPressed={isPressed}
-            handleCurrentPosition={handleCurrentPosition}
+            handleVisible={handleVisible}
+            // handleCurrentPosition={handleCurrentPosition}
           />
           <SkyTube />
-          <ObjectTest currentPosition={currentPosition} />
+          <ObjectTest visible={visible} />
+          {/* <ObjectTest currentPosition={currentPosition} /> */}
         </Suspense>
         {/* floor */}
         <mesh
@@ -142,14 +153,14 @@ function ReverseTemp() {
           <meshStandardMaterial map={floorTexture} />
         </mesh>
         {/* 오브젝트 이벤트 발생 가능한 지점 */}
-        <mesh
+        {/* <mesh
           rotation={[-0.5 * Math.PI, 0, 0]}
           receiveShadow
           position={[-20, 0.01, 3]}
         >
           <planeBufferGeometry attach="geometry" args={[8, 8]} />
-          <meshBasicMaterial color="yellow" opacity={0.2} transparent />
-        </mesh>
+          <meshBasicMaterial color="yellow" opacity={0.5} transparent />
+        </mesh> */}
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
         <mesh
           rotation={[-0.5 * Math.PI, 0, 0]}
@@ -157,7 +168,7 @@ function ReverseTemp() {
           receiveShadow
         >
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
-          <meshBasicMaterial color="black" transparent opacity={0.5} />
+          <meshBasicMaterial color="black" transparent opacity={0.3} />
         </mesh>
       </Canvas>
     </div>
