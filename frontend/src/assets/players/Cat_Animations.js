@@ -7,7 +7,11 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import GLTFLoader from "gltfjsx/src/utils/glftLoader";
 import { useFrame } from "@react-three/fiber";
 
-export default function CatAnimations({ action, destinationPoint }) {
+export default function CatAnimations({
+  action,
+  destinationPoint,
+  handleCurrentPosition,
+}) {
   const group = useRef();
   // const previousAction = usePrevious(action);
   const { nodes, materials, animations } = useGLTF(
@@ -44,6 +48,10 @@ export default function CatAnimations({ action, destinationPoint }) {
 
         state.camera.position.x = 1 + group.current.position.x;
         state.camera.position.z = 5 + group.current.position.z;
+
+        // console.log(group.current.position);
+
+        handleCurrentPosition(group.current.position);
 
         actions["Idle_A"].stop();
         actions["Walk"].play();
