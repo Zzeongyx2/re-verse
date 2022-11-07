@@ -1,4 +1,10 @@
-import { BsFillPeopleFill, BsSearch, BsArrowLeftRight } from "react-icons/bs";
+import {
+  BsFillPeopleFill,
+  BsSearch,
+  BsArrowLeftRight,
+  BsFillPlusCircleFill,
+  BsFillDashCircleFill,
+} from "react-icons/bs";
 import { Avatar, AvatarGroup } from "@chakra-ui/react";
 
 import {
@@ -30,6 +36,7 @@ import { useState } from "react";
 
 function ReverseFriendModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [scrollBehavior, setScrollBehavior] = useState("inside");
 
   const [findNickName, setFindNickName] = useState("");
   const findNickNameHandleChange = (e) => {
@@ -43,24 +50,33 @@ function ReverseFriendModal() {
       >
         <BsFillPeopleFill className="text-2xl m-1.5" />
       </button>
-      <Modal isOpen={isOpen} onClose={onClose} size={"xl"} isCentered>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        size={"xl"}
+        // scrollBehavior={scrollBehavior}
+        isCentered
+      >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader mb={4} textAlign="center">
+          <ModalHeader mb={3} textAlign="center">
             친구관리
           </ModalHeader>
           <ModalCloseButton mt={1.5} />
           <ModalBody>
-            <div className="flex flex-col h-80 justify-between">
+            <div className="flex flex-col h-[400px] justify-between">
               {/* 현재 접속중인 친구 */}
-              <div className="p-2 border-2 border-basic3 rounded-lg w-full h-[calc(96%/3)]">
-                <p className="font-bold px-1 pt-0.5 pb-1">현재 접속중인 친구</p>
+              <div className="p-2 border-2 border-basic3 rounded-lg w-full h-[calc(96%/3-24px)]">
+                <p className="font-bold px-1 pt-0.5 pb-1.5">
+                  현재 접속중인 친구
+                </p>
                 {friendArr.map((info, idx) => {
                   return (
                     info.isAccessed && (
                       <Popover key={`isaccessed-${idx}`}>
                         <PopoverTrigger>
                           <Avatar
+                            key={`isaccessed-${idx}`}
                             name={info.nickname}
                             src={info.imgUrl}
                             cursor="pointer"
@@ -85,7 +101,7 @@ function ReverseFriendModal() {
               </div>
 
               {/* 아카이브 공유 관리 */}
-              <div className="p-2 border-2 border-basic3 rounded-lg w-full h-[calc(96%/3*2)]">
+              <div className="p-2 mb-4 border-2 border-basic3 rounded-lg w-full h-[calc(99%/3*2)] ">
                 <p className="font-bold px-1 pt-0.5 pb-1.5 mb-1.5">
                   아카이브 공유 관리
                 </p>
@@ -104,18 +120,80 @@ function ReverseFriendModal() {
                 <div className="flex justify-between">
                   {/* 공유되지 않은 친구 */}
                   <div className="w-[calc(90%/2)]">
-                    <p className="bg-basic2 w-full py-1 px-2 rounded-md">
+                    <p className="bg-basic2 w-full py-1 px-2 mb-1 rounded-md">
                       공유되지 않은 친구
                     </p>
-                    {friendArr.map((info, idx) => {})}
+                    <div className="h-28 overflow-auto scrollbar-hide">
+                      {friendArr
+                        .filter((info) => {
+                          if (findNickName.trim() === "") {
+                            return info;
+                          } else if (info.nickname.includes(findNickName)) {
+                            return info;
+                          }
+                        })
+                        .map((info, idx) => {
+                          return (
+                            !info.isShared && (
+                              <div key={`isShared-${idx}`}>
+                                <div className="flex items-center justify-between px-2 py-1">
+                                  <Avatar
+                                    size="sm"
+                                    name={info.nickname}
+                                    src={info.imgUrl}
+                                  />
+                                  <div className="font-bold overflow-hidden text-ellipsis line-clamp-1">
+                                    {info.nickname}
+                                  </div>
+                                  <button className="">
+                                    <BsFillPlusCircleFill className="text-[#7186B2] text-lg" />
+                                  </button>
+                                </div>
+                              </div>
+                            )
+                          );
+                        })}
+                    </div>
                   </div>
-                  <BsArrowLeftRight />
+
+                  <BsArrowLeftRight size={22} className="mt-1" />
 
                   {/* 공유된 친구 */}
                   <div className="w-[calc(90%/2)]">
-                    <p className="bg-basic2 w-full py-1 px-2 rounded-md">
+                    <p className="bg-basic2 w-full py-1 px-2 mb-1 rounded-md">
                       공유된 친구
                     </p>
+                    <div className="h-28 overflow-auto scrollbar-hide">
+                      {friendArr
+                        .filter((info) => {
+                          if (findNickName.trim() === "") {
+                            return info;
+                          } else if (info.nickname.includes(findNickName)) {
+                            return info;
+                          }
+                        })
+                        .map((info, idx) => {
+                          return (
+                            info.isShared && (
+                              <div key={`isNotShared-${idx}`}>
+                                <div className="flex items-center justify-between px-2 py-1">
+                                  <Avatar
+                                    size="sm"
+                                    name={info.nickname}
+                                    src={info.imgUrl}
+                                  />
+                                  <div className="font-bold overflow-hidden text-ellipsis line-clamp-1">
+                                    {info.nickname}
+                                  </div>
+                                  <button>
+                                    <BsFillDashCircleFill className="text-[#F8C67E] text-lg" />
+                                  </button>
+                                </div>
+                              </div>
+                            )
+                          );
+                        })}
+                    </div>
                   </div>
                 </div>
                 {/* {friendArr.map((info, idx) => {
@@ -124,7 +202,7 @@ function ReverseFriendModal() {
               </div>
             </div>
           </ModalBody>
-          <ModalFooter></ModalFooter>
+          {/* <ModalFooter></ModalFooter> */}
         </ModalContent>
       </Modal>
     </div>
@@ -158,7 +236,7 @@ const friendArr = [
     imgUrl:
       "https://images.unsplash.com/photo-1615751072497-5f5169febe17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80",
     isAccessed: true,
-    isShared: false,
+    isShared: true,
   },
   {
     nickname: "일이삼사오",
