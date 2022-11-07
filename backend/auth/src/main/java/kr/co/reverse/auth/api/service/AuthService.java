@@ -124,7 +124,8 @@ public class AuthService {
             //cookie에 저장
             response.addHeader(AUTHORIZATION, "Bearer " + tokenInfo.getAccessToken());
 //            Cookie cookie = new Cookie("accessToken", tokenInfo.getAccessToken());
-            Cookie cookie = new Cookie(REFRESH_TOKEN, tokenInfo.getRefreshToken());
+            // Cookie cookie = new Cookie(REFRESH_TOKEN, tokenInfo.getRefreshToken());
+            Cookie cookie = cookieUtil.addRefreshCookie(tokenInfo.getRefreshToken());
             response.addCookie(cookie);
 
             return tokenInfo;
