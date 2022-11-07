@@ -16,7 +16,7 @@ public class FriendRes {
 
     private String nickname;
 
-    private Integer avatar;
+    private String avatar;
 
     private String message;
 
@@ -27,7 +27,7 @@ public class FriendRes {
 
         friendRes.setFriendUserId(friend.getId());
         friendRes.setNickname(friend.getNickname());
-        friendRes.setAvatar(friend.getAvatar());
+        friendRes.setAvatar(friend.getAvatar().toString());
         friendRes.setMessage(friend.getMessage());
 
         return friendRes;

@@ -6,5 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AvatarReq {
-    private int avatar;
+    private String avatar;
 }

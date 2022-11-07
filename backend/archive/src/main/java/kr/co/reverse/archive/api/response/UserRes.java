@@ -17,11 +17,11 @@ public class UserRes {
 
     private String message;
 
-    private Integer avatar;
+    private String avatar;
 
     @QueryProjection
     @Builder
-    public UserRes(UUID userId, String nickname, String message, Integer avatar) {
+    public UserRes(UUID userId, String nickname, String message, String avatar) {
         this.userId = userId;
         this.nickname = nickname;
         this.message = message;
