@@ -116,7 +116,7 @@ function ReverseTemp() {
           rotation={[-0.5 * Math.PI, 0, 0]}
           receiveShadow
         >
-          <planeBufferGeometry attach="geometry" args={[250, 250]} />
+          <planeBufferGeometry attach="geometry" args={[300, 300]} />
           <meshStandardMaterial map={floorTexture} />
         </mesh>
         {/* 오브젝트 이벤트 발생 가능한 지점 */}

@@ -14,38 +14,180 @@ export function CampingPack(props) {
   return (
     <group {...props} dispose={null}>
       <group rotation={[-1.57, 0, 0]}>
-        {/* <group rotation={[-1.57, 0, 0]}> */}
         {/* <group position={[0, -139.52, -495.96]} rotation={[-1.57, 0, 0]}> */}
         <group rotation={[Math.PI / 2, 0, 0]}>
           {/* tree */}
-          {/* <group rotation={[-Math.PI / 2, 0, 0]}>
-            <group position={[679.83, 934.69, 7.33]}>
+          <group
+            rotation={[-Math.PI / 2, 0, 0]}
+            scale={[0.02, 0.02, 0.02]}
+            position={[38, 0.01, -115]}
+          >
+            <group>
               <mesh
                 geometry={nodes["Group002_Material_#11267_0"].geometry}
                 material={materials.Material_11267}
+                castShadow
+                receiveShadow
               />
             </group>
-          </group> */}
+          </group>
 
-          {/* left house */}
-          {/* <group rotation={[-Math.PI / 2, 0, 0]}>
-            <group position={[-789.8, 296.83, 392.15]}>
+          {/* tree */}
+          <group
+            rotation={[-Math.PI / 2, 0, 0]}
+            scale={[0.02, 0.02, 0.02]}
+            position={[80, 0.01, -75]}
+          >
+            <group>
+              <mesh
+                geometry={nodes["Group008_Material_#11267_0"].geometry}
+                material={materials.Material_11267}
+                castShadow
+                receiveShadow
+              />
+            </group>
+          </group>
+
+          {/* tree */}
+          <group
+            rotation={[-Math.PI / 2, 0, Math.PI / 12]}
+            scale={[0.02, 0.02, 0.02]}
+            position={[60, 0.01, -120]}
+          >
+            <group>
+              <mesh
+                geometry={nodes["Group011_Material_#11267_0"].geometry}
+                material={materials.Material_11267}
+                castShadow
+                receiveShadow
+              />
+            </group>
+          </group>
+
+          {/* tree */}
+          <group
+            rotation={[-Math.PI / 2, 0, 0]}
+            scale={[0.02, 0.02, 0.02]}
+            position={[75, 0.01, -100]}
+          >
+            <group>
+              <mesh
+                geometry={nodes["Group009_Material_#11267_0"].geometry}
+                material={materials.Material_11267}
+                castShadow
+                receiveShadow
+              />
+            </group>
+          </group>
+
+          {/* tree */}
+          <group
+            rotation={[-Math.PI / 2, 0, -Math.PI / 2]}
+            scale={[0.02, 0.02, 0.02]}
+            position={[100, 0.01, -65]}
+          >
+            <group>
+              <mesh
+                geometry={nodes["Group010_Material_#11267_0"].geometry}
+                material={materials.Material_11267}
+                castShadow
+                receiveShadow
+              />
+            </group>
+          </group>
+
+          {/* tree */}
+          <group
+            rotation={[-Math.PI / 2, 0, -Math.PI / 2]}
+            scale={[0.02, 0.02, 0.02]}
+            position={[98, 0.01, -90]}
+          >
+            <group>
+              <mesh
+                geometry={nodes["Group012_Material_#11267_0"].geometry}
+                material={materials.Material_11267}
+                castShadow
+                receiveShadow
+              />
+            </group>
+          </group>
+
+          {/* left big house */}
+          <group
+            rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
+            scale={[0.02, 0.02, 0.02]}
+            position={[43, 7.84, -92]}
+          >
+            <group>
               <mesh
                 geometry={nodes["Object179_12_-_Default_0"].geometry}
                 material={materials["12_-_Default"]}
+                castShadow
+                receiveShadow
               />
             </group>
-          </group> */}
+          </group>
 
-          {/* bbq */}
-          {/* <group rotation={[-Math.PI / 2, 0, 0]}>
-            <group position={[-131.15, 1246.83, -7.86]}>
+          {/* two small house */}
+          <group
+            rotation={[-Math.PI / 2, 0, -Math.PI / 3.2]}
+            scale={[0.02, 0.02, 0.02]}
+            position={[80, 8.2, -55]}
+          >
+            <group>
+              {/* <group position={[2450.44, 2.73, 405.74]}> */}
+              <mesh
+                geometry={nodes["Object180_12_-_Default_0"].geometry}
+                material={materials["12_-_Default_0"]}
+                castShadow
+                receiveShadow
+              />
+            </group>
+          </group>
+
+          {/* hamburger on roof */}
+          <group
+            rotation={[-Math.PI / 2, 0, -Math.PI / 5]}
+            scale={[0.02, 0.02, 0.02]}
+            position={[64, 17.5, -76]}
+          >
+            <group>
+              <mesh
+                geometry={nodes["Cylinder124_06_-_Default_0"].geometry}
+                material={materials["06_-_Default_0"]}
+              />
+            </group>
+          </group>
+
+          {/* icecream on house roof */}
+          <group
+            rotation={[-Math.PI / 2, 0, -Math.PI / 5]}
+            scale={[0.02, 0.02, 0.02]}
+            position={[79, 17, -54.5]}
+          >
+            <group>
+              <mesh
+                geometry={nodes["Object166_06_-_Default_0"].geometry}
+                material={materials["06_-_Default"]}
+              />
+            </group>
+          </group>
+
+          {/* pig rainbow sign */}
+          <group
+            rotation={[-Math.PI / 2, 0, -Math.PI / 8]}
+            scale={[0.02, 0.02, 0.02]}
+            position={[60, 0.01, -90]}
+          >
+            <group>
               <mesh
                 geometry={nodes["Cylinder002_05_-_Default_0"].geometry}
                 material={materials["05_-_Default"]}
+                castShadow
+                receiveShadow
               />
             </group>
-          </group> */}
+          </group>
 
           {/* parasol */}
           {/* <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -93,36 +235,6 @@ export function CampingPack(props) {
               <mesh
                 geometry={nodes.Object151_vbvbv_0.geometry}
                 material={materials.vbvbv}
-              />
-            </group>
-          </group> */}
-
-          {/* tree */}
-          {/* <group rotation={[-Math.PI / 2, 0, 0]}>
-            <group position={[1579.88, 1016.12, 0.6]}>
-              <mesh
-                geometry={nodes["Group008_Material_#11267_0"].geometry}
-                material={materials.Material_11267}
-              />
-            </group>
-          </group> */}
-
-          {/* tree */}
-          {/* <group rotation={[-Math.PI / 2, 0, 0]}>
-            <group position={[2696.68, 1046.21, 0.6]}>
-              <mesh
-                geometry={nodes["Group009_Material_#11267_0"].geometry}
-                material={materials.Material_11267}
-              />
-            </group>
-          </group> */}
-
-          {/* tree */}
-          {/* <group rotation={[-Math.PI / 2, 0, 0]}>
-            <group position={[-283.5, 1336.82, 0.6]}>
-              <mesh
-                geometry={nodes["Group010_Material_#11267_0"].geometry}
-                material={materials.Material_11267}
               />
             </group>
           </group> */}
@@ -183,43 +295,6 @@ export function CampingPack(props) {
             </group>
           </group> */}
 
-          {/* icecream on house roof */}
-          {/* <group rotation={[-Math.PI / 2, 0, 0]}>
-            <group position={[2469.16, -172.48, 932.84]}>
-              <mesh
-                geometry={nodes["Object166_06_-_Default_0"].geometry}
-                material={materials["06_-_Default"]}
-              />
-            </group>
-          </group> */}
-
-          {/* two main house */}
-          <group
-            rotation={[-Math.PI / 2, 0, -Math.PI / 3.2]}
-            scale={[0.02, 0.02, 0.02]}
-            position={[70, 8.2, -55]}
-          >
-            <group>
-              {/* <group position={[2450.44, 2.73, 405.74]}> */}
-              <mesh
-                geometry={nodes["Object180_12_-_Default_0"].geometry}
-                material={materials["12_-_Default_0"]}
-                castShadow
-                receiveShadow
-              />
-            </group>
-          </group>
-
-          {/* tree */}
-          {/* <group rotation={[-Math.PI / 2, 0, 0]}>
-            <group position={[1012.75, 1976.01, 0.6]}>
-              <mesh
-                geometry={nodes["Group011_Material_#11267_0"].geometry}
-                material={materials.Material_11267}
-              />
-            </group>
-          </group> */}
-
           {/* camping car */}
           {/* <group rotation={[-Math.PI / 2, 0, 0]}>
             <group position={[3301.24, -377.9, 41.6]}>
@@ -230,16 +305,6 @@ export function CampingPack(props) {
               <mesh
                 geometry={nodes.Object153_dsd_0.geometry}
                 material={materials.material}
-              />
-            </group>
-          </group> */}
-
-          {/* tree */}
-          {/* <group rotation={[-Math.PI / 2, 0, 0]}>
-            <group position={[3679.78, 284.67, 0.6]}>
-              <mesh
-                geometry={nodes["Group012_Material_#11267_0"].geometry}
-                material={materials.Material_11267}
               />
             </group>
           </group> */}
