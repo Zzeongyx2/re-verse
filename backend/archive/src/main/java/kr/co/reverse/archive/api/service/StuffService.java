@@ -36,6 +36,11 @@ public class StuffService {
         stuffRepository.save(stuff);
     }
 
+    public Stuff getStuff(UUID stuffId) {
+        return stuffRepository.findById(stuffId)
+                .orElseThrow(() -> new NoSuchElementException());
+    }
+
     public List<StuffRes> getStuffs(UUID archiveId) {
         return stuffRepository.getStuffs(archiveId);
     }

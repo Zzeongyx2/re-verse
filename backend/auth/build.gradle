@@ -6,7 +6,7 @@ plugins {
 
 group = 'kr.co.re-verse'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
@@ -16,6 +16,9 @@ configurations {
 
 repositories {
 	mavenCentral()
+}
+jar {
+	enabled = false
 }
 
 dependencies {
