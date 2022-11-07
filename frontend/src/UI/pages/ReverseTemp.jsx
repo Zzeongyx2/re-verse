@@ -65,7 +65,7 @@ function ReverseTemp() {
         </button>
       </div> */}
       {/* <Canvas shadows camera={{ position: [-3, 2, 5], fov: 90 }}> */}
-      <div className="w-full h-full absolute z-10">
+      <div className="w-full h-[0.15] absolute z-10">
         <ReverseNavbar />
       </div>
       <Canvas
