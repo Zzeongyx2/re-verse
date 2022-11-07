@@ -57,6 +57,7 @@ module.exports = {
         fadein: "fadein 1s ease-in-out",
         fadeout: "fadeout 1s ease-in-out",
         light: "light 15s linear infinite",
+        "spin-slow": "spin 3s linear infinite",
       },
       keyframes: {
         flicker: {
