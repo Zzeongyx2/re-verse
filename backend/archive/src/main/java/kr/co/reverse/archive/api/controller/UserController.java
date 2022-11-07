@@ -29,7 +29,7 @@ public class UserController {
         return ResponseEntity.ok(UserRes.builder()
                 .nickname(user.getNickname())
                 .message(user.getMessage())
-                .avatar(user.getAvatar())
+                .avatar(user.getAvatar().toString())
                 .build());
     }
 

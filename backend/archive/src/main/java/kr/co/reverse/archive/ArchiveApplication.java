@@ -10,4 +10,9 @@ public class ArchiveApplication {
 		SpringApplication.run(ArchiveApplication.class, args);
 	}
 
+	static{
+		System.setProperty("com.amazonaws.sdk.disableEc2Metadata", "true");
+	}
+
+
 }

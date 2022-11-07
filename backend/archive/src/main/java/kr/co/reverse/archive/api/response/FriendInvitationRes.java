@@ -9,7 +9,7 @@ public class FriendInvitationRes {
 
     private String nickname;
 
-    private Integer avatar;
+    private String avatar;
 
     public static FriendInvitationRes of(User user) {
         if (user == null) return null;
@@ -17,7 +17,7 @@ public class FriendInvitationRes {
         FriendInvitationRes friendInvitationRes = new FriendInvitationRes();
 
         friendInvitationRes.setNickname(user.getNickname());
-        friendInvitationRes.setAvatar(user.getAvatar());
+        friendInvitationRes.setAvatar(user.getAvatar().toString());
 
         return friendInvitationRes;
 
