@@ -33,17 +33,19 @@ public class User {
 
     private String message;
 
-    private Integer avatar;
+    @Enumerated(EnumType.STRING)
+    private Avatar avatar;
 
     private LocalDate createdTime;
 
     @Builder
-    public User(String authId, String nickname, String message, Integer avatar, LocalDate createdTime){
+    public User(String authId, String nickname, String message, Avatar avatar, LocalDate createdTime){
         this.authId = authId;
         this.nickname = nickname;
         this.message = message;
         this.avatar = avatar;
         this.createdTime = createdTime;
     }
+
 
 }
