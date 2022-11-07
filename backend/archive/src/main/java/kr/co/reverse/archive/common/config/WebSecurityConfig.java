@@ -77,13 +77,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.addAllowedOriginPattern("*");
+        // configuration.addAllowedOriginPattern("*");
+        configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedOrigin("https://re-verse.co.kr");
+        configuration.addAllowedOrigin("https://re-verse.co.kr:3000");
+        configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
+        configuration.addExposedHeader("Authorization");
+        configuration.addExposedHeader("Set-Cookie");
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
         configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 }
+
