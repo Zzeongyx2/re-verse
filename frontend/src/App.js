@@ -1,4 +1,5 @@
 import "./App.css";
+import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NonLoginMain from "./UI/pages/NonLoginMain";
 import Login from "./UI/pages/Login";
@@ -12,6 +13,8 @@ import NeonTest from "./UI/pages/NeonTest";
 import Reverse from "./UI/pages/Reverse";
 import ReverseTemp from "./UI/pages/ReverseTemp";
 import ReverseWebRTC from "./UI/pages/ReverseWebRTC";
+
+axios.defaults.withCredentials = true;
 
 function App() {
   return (
