@@ -36,7 +36,7 @@ export default function CatAnimations({
 
       group.current.name = "mememememe";
 
-      console.log(destinationPoint);
+      console.log(group.current);
     }
   }, [destinationPoint]);
   useFrame((state) => {

@@ -61,6 +61,7 @@ function ReverseTemp() {
         ref={refCanvas}
         shadows
         orthographic
+        dpr={[1, 2]}
         camera={{
           // player의 초기 위치: [-30, 0, -30]
           position: [-29, 5, -25],
