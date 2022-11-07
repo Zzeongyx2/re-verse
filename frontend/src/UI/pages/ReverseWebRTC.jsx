@@ -5,9 +5,6 @@ import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 // import { OrthographicCamera } from "@react-three/drei";
 
 import { TextureLoader } from "three/src/loaders/TextureLoader";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 import CatAnimations from "../../assets/players/Cat_Animations.js";
 import { SkyTube } from "../../assets/deco/SkyTube.js";
 import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
@@ -19,7 +16,7 @@ var audioMap = new Map();
 var rtcPeers = new Map();
 var ws1;
 let localStream;
-
+let audioMapIdx = 0;
 function ReverseWebRTC() {
   // default action = idle
   const refCanvas = useRef();
@@ -63,11 +60,11 @@ function ReverseWebRTC() {
   async function login() {
     let inputName = document.getElementById("myUsername");
     if (archiveId.length < 1) {
-      toast.error("archive Id cannot be blank");
+      alert("archive Id cannot be blank");
       return;
     }
     if (inputName.value.length < 1) {
-      toast.error("Username cannot be blank");
+      alert("Username cannot be blank");
       return;
     }
     await navigator.mediaDevices
@@ -107,9 +104,7 @@ function ReverseWebRTC() {
     };
 
     ws1.onerror = (error) => {
-      toast.error(
-        "Error connecting to signalling server, please try login again"
-      );
+      alert("Error connecting to signalling server, please try login again");
     };
 
     ws1.onclose = (event) => {
@@ -136,7 +131,6 @@ function ReverseWebRTC() {
         handleNewMemberAndOffer(data1);
       } else if (data1.type === "UserId") {
         setUserId(data1.data);
-
         userId2 = data1.data;
         // document.getElementById("status-offline").style.display = "none";
         // document.getElementById("status-online").style.display = "block";
@@ -150,7 +144,7 @@ function ReverseWebRTC() {
         // document.getElementById("h3-myStatus").innerText = "online";
         // document.getElementById("h3-myStatus").appendChild(myStatus);
         // document.getElementById('btnShowLogin').click();
-        toast.success(
+        alert(
           "Connected to Signalling Server. Please click the Show Login/Chat button"
         );
         newMember(userId2);
@@ -189,11 +183,11 @@ function ReverseWebRTC() {
         {
           urls: "stun:re-verse.co.kr:8997",
         },
-        {
-          urls: "turn:re-verse.co.kr:8997?transport=tcp",
-          username: "reverse",
-          credential: "flQjtm1024",
-        },
+        // {
+        //   urls: "turn:re-verse.co.kr:8997?transport=tcp",
+        //   username: "reverse",
+        //   credential: "flQjtm1024",
+        // },
       ],
     });
     console.log(localStream);
@@ -245,15 +239,16 @@ function ReverseWebRTC() {
     }
     rtcPeer.ondatachannel = (event) => {
       let channel2 = event.channel;
-      channelConfig(channel2);
+      channelConfig(channel2, peerId);
     };
     rtcPeer.ontrack = (event) => {
       console.log("here is ontrack phase");
       // console.log("this is answer ontrack");
       console.log(friendToName);
       console.log(peerId);
-      console.log(audioMap.size);
-      audioMap.set(peerId, "audio" + audioMap.size);
+
+      // console.log(audioMap.size());
+      // audioMap.set(peerId, "audio" + audioMap.size());
       console.log(audioMap);
 
       let newUser = document.createElement("li");
@@ -262,7 +257,7 @@ function ReverseWebRTC() {
       h2.innerText = peerId;
       let div2 = document.createElement("div");
       let userAudio = document.createElement("audio");
-      userAudio.id = audioMap.get(peerId);
+      userAudio.id = peerId;
       console.log("this is userAudio id : " + userAudio.id);
       userAudio.autoplay = true;
       userAudio.controls = true;
@@ -271,11 +266,11 @@ function ReverseWebRTC() {
       newUser.appendChild(div1);
       newUser.appendChild(div2);
       document.getElementById("user-audio").appendChild(newUser);
-      const peerAudio = document.getElementById(audioMap.get(peerId));
+      const peerAudio = document.getElementById(peerId);
       console.log(event.streams);
-      if (peerAudio.srcObject !== event.streams[0]) {
-        peerAudio.srcObject = event.streams[0];
-      }
+      // if (peerAudio.srcObject !== event.streams[0]) {
+      peerAudio.srcObject = event.streams[0];
+      // }
       console.log(event.streams);
       //console.lo(audioComp);
       //console.lo(peerAudio);
@@ -293,32 +288,42 @@ function ReverseWebRTC() {
         }
       }
     };
-    rtcPeer.onicecandidateerror = (event) => {};
+    rtcPeer.onicecandidateerror = (event) => {
+      console.log("ice error")
+    };
 
-    rtcPeer.onicegatheringstatechange = (event) => {};
+    // rtcPeer.onicegatheringstatechange = (event) => {};
 
-    rtcPeer.oniceconnectionstatechange = (event) => {};
+    // rtcPeer.oniceconnectionstatechange = (event) => {};
+
     rtcPeers.set(peerId, rtcPeer);
   }
-  function channelConfig(channel1: RTCDataChannel) {
+  function channelConfig(channel1: RTCDataChannel, peerId) {
     channel1.onclose = (event) => {
-      //console.lo("Close channel:");
+      console.log("Close channel:");
+      console.log(channel1);
+      console.log(event);
       let friendId = channelUsers.get(channel1);
-      document.getElementById(friendId).remove();
-
+      console.log(peerId)
+      if (peerId)
+        document.getElementById(peerId).remove();
+      else if(friendId){
+        document.getElementById(friendId).remove()
+      }
+      console.log(friendId);
       // addUserOnChat(friendToName.get(friendId), false);
       friendToName.delete(friendId);
     };
     channel1.onmessage = (event) => {
       //console.lo("Receive msg datachannel:" + event.data);
       let dataChat1 = JSON.parse(event.data);
-      // if (dataChat1.type === "message") {
-      //   addChatLine(dataChat1.data, "you", dataChat1.userId);
-      // } else {
-      //   friendToName.set(dataChat1.userId, dataChat1.data);
-      //   addUser(dataChat1.data, dataChat1.userId);
-      //   channelUsers.set(channel1, dataChat1.userId);
-      // }
+      if (dataChat1.type === "message") {
+        // addChatLine(dataChat1.data, "you", dataChat1.userId);
+      } else {
+        friendToName.set(dataChat1.userId, dataChat1.data);
+        // addUser(dataChat1.data, dataChat1.userId);
+        channelUsers.set(channel1, dataChat1.userId);
+      }
     };
 
     channel1.onopen = () => {
@@ -342,11 +347,23 @@ function ReverseWebRTC() {
   function disconnectAll() {
     ws1.close();
     rtcPeers.forEach((a, b) => {
+      const senders=a.getSenders();
+      senders.forEach((sender)=>a.removeTrack(sender));
+      // localStream.getTracks().forEach((track))
+      // localStream.getTracks().forEach((track)=>a.removeTrack(track));
       a.close();
     });
+    // localStream.getTracks().forEach((track) => track.stop());
+    const audioSet = document.getElementById("user-audio").childNodes;
+    for (let i = audioSet.length - 1; i >= 0; i--) {
+      console.log(audioSet);
+      audioSet[i].remove();
+    }
     rtcPeers.clear();
+    audioMap.clear();
+
     channels = [];
-    channelUsers.forEach((a, b) => document.getElementById(a).remove());
+    // channelUsers.forEach((a, b) => document.getElementById(a).remove());
     channelUsers.clear();
   }
 
@@ -411,6 +428,9 @@ function ReverseWebRTC() {
       {/* <Canvas shadows camera={{ position: [-3, 2, 5], fov: 90 }}> */}
       <div className="w-full h-[0.15] absolute z-10">
         <ReverseNavbar />
+      </div>
+      <div className="w-full h-[0.15] absolute z-10">
+        <ul id="user-audio"></ul>
       </div>
       <Canvas
         ref={refCanvas}
@@ -477,9 +497,6 @@ function ReverseWebRTC() {
           <meshBasicMaterial color="black" transparent opacity={0.2} />
         </mesh>
       </Canvas>
-      <div>
-        <ul id="user-audio"></ul>
-      </div>
     </div>
   );
 }
