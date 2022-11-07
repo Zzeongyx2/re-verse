@@ -31,10 +31,12 @@ export default function CatAnimations({
   useEffect(() => {
     if (destinationPoint) {
       setMoving(true);
-      console.log(group.current); // player.modelmesh
+      // console.log(group.current); // player.modelmesh
+      group.current.lookAt(destinationPoint);
 
       group.current.name = "mememememe";
-      group.current.lookAt(destinationPoint);
+
+      console.log(destinationPoint);
     }
   }, [destinationPoint]);
   useFrame((state) => {
@@ -55,7 +57,7 @@ export default function CatAnimations({
         state.camera.position.x = 1 + group.current.position.x;
         state.camera.position.z = 5 + group.current.position.z;
 
-        console.log(group.current.position);
+        // console.log(group.current.position);
 
         // handleCurrentPosition(group.current.position);
 
@@ -97,7 +99,8 @@ export default function CatAnimations({
   //   // actions.Idle_A.play();
   // }, [actions, action, previousAction]);
   return (
-    <group ref={group} dispose={null}>
+    // <group ref={group} dispose={null}>
+    <group ref={group} dispose={null} position={[-30, 0, -30]}>
       <group name="Scene">
         <group name="Rig">
           <primitive object={nodes.root} />
