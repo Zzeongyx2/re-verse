@@ -1,12 +1,12 @@
 import * as THREE from "three";
-import React, { Suspense, useRef, useState, useEffect } from "react";
+import React, { Suspense, useRef, useState } from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { gsap } from "gsap";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { Canvas, useLoader } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 import { Player } from "../organisms/Player";
 import { House } from "../organisms/House";
+import { useEffect } from "react";
 
 function MyReverse() {
   const ref = useRef();
@@ -125,8 +125,6 @@ function MyReverse() {
       modelSrc: "/assets/animals/GLTF/Animations/Cat_Animations.gltf",
     });
 
-    console.log(player);
-
     const raycaster = new THREE.Raycaster();
     let mouse = new THREE.Vector2();
     let destinationPoint = new THREE.Vector3();
@@ -219,8 +217,6 @@ function MyReverse() {
       // raycaster.setFromCamera(mouse, camera);
 
       const intersects = raycaster.intersectObjects(meshes);
-      console.log("====");
-      console.log(intersects);
       for (const item of intersects) {
         if (item.object.name === "floor") {
           destinationPoint.x = item.point.x;

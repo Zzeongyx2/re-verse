@@ -2,6 +2,7 @@ import LobbyButton from "../atoms/LobbyButton";
 import NeonLightBG from "../atoms/NeonLightBG";
 import LobbyProfile from "../organisms/LobbyProfile";
 import Navbar from "../organisms/Navbar";
+import CharacterThree from "../organisms/CharacterThree";
 import ThreeTest from "../organisms/ThreeTest";
 
 function Lobby() {
@@ -17,7 +18,7 @@ function Lobby() {
             <NeonLightBG />
           </div>
           <div className="absolute bg-opacity-0 w-full h-full">
-            <ThreeTest />
+            <CharacterThree characterNum={"1"} />
           </div>
         </div>
         {/* right side: shortcut btn, profile */}

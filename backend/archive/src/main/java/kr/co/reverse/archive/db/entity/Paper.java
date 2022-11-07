@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -28,6 +29,7 @@ public class Paper {
 
     private String title;
 
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
 
     private String writer;
@@ -38,10 +40,10 @@ public class Paper {
 
     private LocalDateTime lastEditedTime;
 
-    private LocalDateTime memoryTime;
+    private LocalDate memoryTime;
 
     @Builder
-    public Paper(Stuff stuff, String title, String content, String writer, Boolean isDeleted, LocalDateTime createdTime, LocalDateTime lastEditedTime, LocalDateTime memoryTime) {
+    public Paper(Stuff stuff, String title, String content, String writer, Boolean isDeleted, LocalDateTime createdTime, LocalDateTime lastEditedTime, LocalDate memoryTime) {
         this.stuff = stuff;
         this.title = title;
         this.content = content;
