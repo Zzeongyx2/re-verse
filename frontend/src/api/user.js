@@ -7,4 +7,8 @@ async function nicknameCheck(nickname, success, fail) {
   await api.get(`/user/${nickname}`).then(success).catch(fail);
 }
 
-export { nicknameCheck };
+async function getPlayerInfo(success, fail) {
+  await api.get(`/user`).then(success).catch(fail);
+}
+
+export { nicknameCheck, getPlayerInfo };
