@@ -5,6 +5,7 @@ import kr.co.reverse.archive.api.request.AvatarReq;
 import kr.co.reverse.archive.api.request.SigninUserReq;
 import kr.co.reverse.archive.api.request.UserReq;
 import kr.co.reverse.archive.common.exception.NicknameDuplicateException;
+import kr.co.reverse.archive.db.entity.Avatar;
 import kr.co.reverse.archive.db.entity.User;
 import kr.co.reverse.archive.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -76,10 +77,11 @@ public class UserService {
     public void createUser(SigninUserReq userInfo) {
 
         if(checkDuplicateNickname(userInfo.getNickname())){
+
             User user = User.builder()
                     .authId(userInfo.getAuthId())
                     .nickname(userInfo.getNickname())
-                    .avatar(1)
+                    .avatar(Avatar.Cat)
                     .message("리버스로 놀러오세요 :)")
                     .createdTime(LocalDate.now())
                     .build();
@@ -94,7 +96,7 @@ public class UserService {
 
         User user = getPlayer(userId);
 
-        user.setAvatar(avatarInfo.getAvatar());
+        user.setAvatar(Avatar.valueOf(avatarInfo.getAvatar()));
 
     }
 
