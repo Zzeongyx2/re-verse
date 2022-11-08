@@ -33,8 +33,8 @@ public class UserController {
                 .build());
     }
 
-    @GetMapping("{nickname}")
-    public ResponseEntity checkDuplicateNickname(@PathVariable(name = "nickname") String nickname) {
+    @GetMapping
+    public ResponseEntity checkDuplicateNickname(@RequestParam String nickname) {
 
         userService.checkDuplicateNickname(nickname);
 
