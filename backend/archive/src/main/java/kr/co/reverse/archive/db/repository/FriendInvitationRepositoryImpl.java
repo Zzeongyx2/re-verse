@@ -27,7 +27,8 @@ public class FriendInvitationRepositoryImpl implements FriendInvitationRepositor
                 .select(
                         new QFriendInvitationRes(
                             QFriendInvitation.friendInvitation.invitationTarget.nickname,
-                            Expressions.asString(String.valueOf(QFriendInvitation.friendInvitation.invitationTarget.avatar)),
+//                            Expressions.asString(String.valueOf(QFriendInvitation.friendInvitation.invitationTarget.avatar)),
+                            QFriendInvitation.friendInvitation.invitationTarget.avatar.stringValue(),
                             QFriendInvitation.friendInvitation.invitationTarget.message
                         )
                 )
@@ -45,7 +46,8 @@ public class FriendInvitationRepositoryImpl implements FriendInvitationRepositor
                 .select(
                         new QFriendInvitationRes(
                             QFriendInvitation.friendInvitation.invitationUser.nickname,
-                            Expressions.asString(String.valueOf(QFriendInvitation.friendInvitation.invitationUser.avatar)),
+//                            Expressions.asString(String.valueOf(QFriendInvitation.friendInvitation.invitationUser.avatar)),
+                            QFriendInvitation.friendInvitation.invitationUser.avatar.stringValue(),
                             QFriendInvitation.friendInvitation.invitationUser.message
                         )
                 )
