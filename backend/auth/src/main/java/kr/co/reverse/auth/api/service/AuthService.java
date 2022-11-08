@@ -53,6 +53,7 @@ public class AuthService {
     @Value("${user.redirect-uri}")
     private String USER_REDIRECT_URI;
     private final String REFRESH_TOKEN = "refreshToken";
+    private final String ACCESS_TOKEN = "accessToken";
     private final String AUTHORIZATION = "Authorization";
 
     @Transactional
@@ -122,11 +123,15 @@ public class AuthService {
             redisService.setValues(tokenInfo.getAccessToken(), userId);
 
             //cookie에 저장
-            response.addHeader(AUTHORIZATION, "Bearer " + tokenInfo.getAccessToken());
+//            response.addHeader(AUTHORIZATION, "Bearer " + tokenInfo.getAccessToken());
 //            Cookie cookie = new Cookie("accessToken", tokenInfo.getAccessToken());
             // Cookie cookie = new Cookie(REFRESH_TOKEN, tokenInfo.getRefreshToken());
-            Cookie cookie = cookieUtil.addRefreshCookie(tokenInfo.getRefreshToken());
-            response.addCookie(cookie);
+
+            Cookie accessCookie = cookieUtil.addAccessCookie(tokenInfo.getAccessToken());
+            response.addCookie(accessCookie);
+
+            Cookie refreshCookie = cookieUtil.addRefreshCookie(tokenInfo.getRefreshToken());
+            response.addCookie(refreshCookie);
 
             return tokenInfo;
         }
@@ -135,11 +140,19 @@ public class AuthService {
     @Transactional
     public AuthRes reissue(HttpServletRequest request, HttpServletResponse response) {
 
-        String accessToken = request.getHeader(AUTHORIZATION).substring(7);
+        String accessToken = null;
+        Cookie[] cookies = request.getCookies();
+
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals(ACCESS_TOKEN)){
+                accessToken = cookie.getValue();
+                break;
+            }
+        }
         Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
 
 
-        Cookie[] cookies = request.getCookies();
+        cookies = request.getCookies();
         String refreshToken = null;
         for(Cookie cookie : cookies){
             if(cookie.getName().equals(REFRESH_TOKEN)){
@@ -160,7 +173,10 @@ public class AuthService {
         redisService.deleteValues(accessToken);
         redisService.setValues(token.getAccessToken(), authentication.getName());
 
-        response.addHeader(AUTHORIZATION, "Bearer " + token.getAccessToken());
+//        response.addHeader(AUTHORIZATION, "Bearer " + token.getAccessToken());
+
+        Cookie accessCookie = cookieUtil.addAccessCookie(token.getAccessToken());
+        response.addCookie(accessCookie);
 
         return token;
     }
@@ -168,10 +184,19 @@ public class AuthService {
     @Transactional
     public void deleteUser(HttpServletRequest request, HttpServletResponse response){
 
-        String accessToken = request.getHeader(AUTHORIZATION).substring(7);
+        String accessToken = null;
+        Cookie[] cookies = request.getCookies();
+
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals(ACCESS_TOKEN)){
+                accessToken = cookie.getValue();
+                break;
+            }
+        }
         Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
 
-        Cookie[] cookies = request.getCookies();
+
+        cookies = request.getCookies();
         String refreshToken = null;
         for(Cookie cookie : cookies){
             if(cookie.getName().equals(REFRESH_TOKEN)){
@@ -188,16 +213,31 @@ public class AuthService {
         redisService.deleteValues(accessToken);
         redisService.deleteValues(refreshToken);
 
-        response.addHeader(AUTHORIZATION, null);
-        Cookie cookie = new Cookie(REFRESH_TOKEN, null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
+        Cookie accessCookie = new Cookie(REFRESH_TOKEN, null);
+        accessCookie.setMaxAge(0);
+        response.addCookie(accessCookie);
+
+        Cookie refreshCookie = new Cookie(REFRESH_TOKEN, null);
+        refreshCookie.setMaxAge(0);
+        response.addCookie(refreshCookie);
+
+
     }
 
     public void logout(HttpServletRequest request, HttpServletResponse response) {
-        String accessToken = request.getHeader(AUTHORIZATION).substring(7);
-
+        String accessToken = null;
         Cookie[] cookies = request.getCookies();
+
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals(ACCESS_TOKEN)){
+                accessToken = cookie.getValue();
+                break;
+            }
+        }
+
+        System.out.println("======= access " + accessToken);
+
+        cookies = request.getCookies();
         String refreshToken = null;
         for(Cookie cookie : cookies){
             if(cookie.getName().equals(REFRESH_TOKEN)){
@@ -211,10 +251,13 @@ public class AuthService {
         redisService.deleteValues(refreshToken);
 
         //쿠키 삭제
-        response.addHeader(AUTHORIZATION, null);
-        Cookie cookie = new Cookie(REFRESH_TOKEN, null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
+        Cookie accessCookie = new Cookie(REFRESH_TOKEN, null);
+        accessCookie.setMaxAge(0);
+        response.addCookie(accessCookie);
+
+        Cookie refreshCookie = new Cookie(REFRESH_TOKEN, null);
+        refreshCookie.setMaxAge(0);
+        response.addCookie(refreshCookie);
 
     }
 
