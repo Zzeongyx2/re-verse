@@ -19,5 +19,8 @@ async function editUserInfo(userInfo, success, fail) {
 async function getAvatars(success, fail) {
   await api.get(`/user/avatar`).then(success).catch(fail);
 }
+async function editAvatar(avatar, success, fail) {
+  await api.patch(`/user/avatar`, { avatar: avatar }).then(success).catch(fail);
+}
 
-export { nicknameCheck, getUserInfo, editUserInfo, getAvatars };
+export { nicknameCheck, getUserInfo, editUserInfo, getAvatars, editAvatar };
