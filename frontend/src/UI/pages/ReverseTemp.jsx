@@ -82,7 +82,7 @@ function ReverseTemp() {
         }}
       >
         {/* // TODO: 컴포넌트 배치할 때에는 키고 하는게 편함 */}
-        {/* <OrbitControls /> */}
+        <OrbitControls />
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
         {/* light */}
