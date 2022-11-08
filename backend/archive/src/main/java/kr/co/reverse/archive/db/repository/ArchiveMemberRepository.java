@@ -11,5 +11,4 @@ public interface ArchiveMemberRepository extends JpaRepository<ArchiveMember, UU
 
     public ArchiveMember findArchiveMemberByArchiveAndUser(Archive archive, User user);
 
-
 }
