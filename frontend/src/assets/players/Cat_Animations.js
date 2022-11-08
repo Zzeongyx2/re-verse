@@ -55,8 +55,8 @@ export default function CatAnimations({
           destinationPoint.z - group.current.position.z,
           destinationPoint.x - group.current.position.x
         );
-        group.current.position.x += Math.cos(angle) * 0.05;
-        group.current.position.z += Math.sin(angle) * 0.05;
+        group.current.position.x += Math.cos(angle) * 0.1;
+        group.current.position.z += Math.sin(angle) * 0.1;
 
         state.camera.position.x = 1 + group.current.position.x;
         state.camera.position.z = 5 + group.current.position.z;
@@ -91,8 +91,8 @@ export default function CatAnimations({
 
         // memory photobook, polaroid object
         if (
-          Math.abs(memoryPosition.x - group.current.position.x) < 7.5 &&
-          Math.abs(memoryPosition.z - group.current.position.z) < 7.5
+          Math.abs(memoryPosition.x - group.current.position.x) < 8 &&
+          Math.abs(memoryPosition.z - group.current.position.z) < 8
         ) {
           handleEvent(1);
         } else {

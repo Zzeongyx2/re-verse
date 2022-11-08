@@ -49,15 +49,8 @@ function ReverseTemp() {
   const [event, setEvent] = useState(0);
   const handleEvent = (data) => {
     setEvent(data);
-    console.log(event);
+    // console.log(event);
   };
-
-  // memory photobook, polaroid object
-  // const [memoryPolaroidVisible, setMemoryPolaroidVisible] = useState(false);
-  // const handleMemoryPolaroidVisible = (data) => {
-  //   setMemoryPolaroidVisible(data);
-  //   console.log(memoryPolaroidVisible);
-  // };
 
   return (
     <div className="h-screen overflow-hidden relative">
@@ -86,7 +79,7 @@ function ReverseTemp() {
         }}
       >
         {/* // TODO: 컴포넌트 배치할 때에는 키고 하는게 편함 */}
-        {/* <OrbitControls /> */}
+        <OrbitControls />
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
         {/* light */}
@@ -122,18 +115,13 @@ function ReverseTemp() {
           <FireAnimated />
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
-          <Polaroid
-            event={event}
-            // position={new THREE.Vector3(48.5, -0.8, -70)}
-            // eventPosition={new THREE.Vector3(37, 0.01, -68)}
-          />
+          <Polaroid event={event} />
           <Notebook event={event} />
           {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
         </Suspense>
         {/* floor */}
         <mesh
           onPointerDown={(e) => {
-            // console.log(e);  // intersects와 동일한거
             setDestinationPoint(e.point);
           }}
           rotation={[-0.5 * Math.PI, 0, 0]}
