@@ -54,7 +54,9 @@ function SelectCharacter() {
           {/* 캐릭터 선택 창 */}
           <div className="flex flex-col bg-white rounded-3xl pb-6 w-full">
             <div className="flex justify-center items-center w-full rounded-tl-3xl rounded-tr-3xl bg-gradient-to-t from-main1 to-sub1 mb-4">
-              <p className="text-2xl drop-shadow font-bold my-4 text-white">캐릭터 선택</p>
+              <p className="text-2xl drop-shadow font-bold my-4 text-white">
+                캐릭터 선택
+              </p>
             </div>
             <div className="grid grid-cols-8 gap-3 justify-items-center mx-4">
               {/* // FIXME: 캐릭터 선택 라디오 버튼 */}
@@ -69,7 +71,10 @@ function SelectCharacter() {
                     onChange={handleChange}
                     selected={ischecked}
                   />
-                  <SelectCharacterBtn imgUrl={s3Path + character + imageForm} name={character} />
+                  <SelectCharacterBtn
+                    imgUrl={s3Path + character + imageForm}
+                    name={character}
+                  />
                 </label>
               ))}
               {/* {characters.map((character, idx) => {

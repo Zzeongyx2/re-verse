@@ -4,24 +4,30 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { HiOutlineTrash } from "react-icons/hi";
 import { Avatar, AvatarGroup } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
+import { deleteBookmark, postBookmark } from "../../api/friend";
+import { getArchiveList } from "../../api/archive";
 
 function ArchiveFriend() {
   const [archiveList, setArchiveList] = useState([]);
-  // TODO: 이미지 저장용 변수 나중에 지우기
-  const [profileImg] = useState(
-    "https://images.unsplash.com/photo-1639503611585-1054af5dbfab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80"
-  );
-  // TODO:
+
   const enterArchive = (archiveId) => {
-    // TODO: 아카이브로 이동
     console.log(archiveId, "이동");
+    window.location.href = `/reverse/${archiveId}`;
   };
   const deleteArchive = (archiveId) => {
-    // TODO: 아카이브 공유 삭제
+    // TODO: 아카이브 공유 삭제 api가 없는거가틈
     console.log(archiveId, "나가기");
   };
   const bookmarkTrigger = (archive, index) => {
-    // TODO: 즐겨찾기 상태 변경 보내기
+    if (!archive.bookmarks) {
+      postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
+    } else {
+      deleteBookmark(
+        archive.archiveId,
+        bookmarkControlSuccess,
+        bookmarkControl,
+      );
+    }
     setArchiveList((list) => {
       return [...list].filter((item, idx) => {
         if (idx === index) {
@@ -31,87 +37,22 @@ function ArchiveFriend() {
       });
     });
   };
-
+  const bookmarkControlSuccess = (res) => {
+    console.log(res);
+  };
+  const bookmarkControl = (error) => {
+    console.log(error);
+  };
   useEffect(() => {
-    // TODO: 친구들의 아카이브 목록 가져오기
-    console.log("아카이브 목록 가져옴");
-    setArchiveList((list) => [
-      {
-        archiveId: "a1",
-        user: {
-          nickname: "KIN거운KAN쵸",
-          message: "칸쵸",
-        },
-        title: "KIN거운KAN쵸의 꿀사탕 여행",
-        description: "울면 꿀사탕소매넣기 산타가 다녀간대요",
-        level: 1,
-        bookmarks: false,
-        members: [
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-        ],
-      },
-      {
-        archiveId: "a3",
-        user: {
-          nickname: "zl존도ㅂlz",
-          message: "도비",
-        },
-        title: "zl존도ㅂlz VLOG 모음",
-        description: "도비의 대학원 브이로그",
-        level: 1,
-        bookmarks: false,
-        members: [
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-        ],
-      },
-    ]);
+    getArchiveList(1, getArchiveListSuccess, getArchiveListFail);
   }, []);
+  const getArchiveListSuccess = (res) => {
+    console.log(res);
+    setArchiveList(res.data.archives);
+  };
+  const getArchiveListFail = (error) => {
+    console.log(error);
+  };
 
   console.log(archiveList);
   return (
