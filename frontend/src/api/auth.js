@@ -8,7 +8,14 @@ async function signin(authInfo, success, fail) {
 }
 
 async function emailCheck(email, success, fail) {
-  await api.get(`/auth/${email}`).then(success).catch(fail);
+  await api
+    .get(`/auth/compare`, {
+      params: {
+        email: email,
+      },
+    })
+    .then(success)
+    .catch(fail);
 }
 
 async function login(loginInfo, success, fail) {
