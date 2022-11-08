@@ -33,7 +33,7 @@ public class UserController {
                 .build());
     }
 
-    @GetMapping
+    @GetMapping("/compare")
     public ResponseEntity checkDuplicateNickname(@RequestParam String nickname) {
 
         userService.checkDuplicateNickname(nickname);
