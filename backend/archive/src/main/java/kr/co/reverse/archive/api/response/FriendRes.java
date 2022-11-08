@@ -1,15 +1,15 @@
 package kr.co.reverse.archive.api.response;
 
+import com.querydsl.core.annotations.QueryProjection;
 import kr.co.reverse.archive.db.entity.Friend;
 import kr.co.reverse.archive.db.entity.User;
 import kr.co.reverse.archive.db.repository.FriendRepositoryCustom;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
 @Data
+@NoArgsConstructor
 public class FriendRes {
 
     private UUID friendUserId;
@@ -20,17 +20,14 @@ public class FriendRes {
 
     private String message;
 
-    public static FriendRes of(User friend){
-        if(friend == null) return null;
-
-        FriendRes friendRes = new FriendRes();
-
-        friendRes.setFriendUserId(friend.getId());
-        friendRes.setNickname(friend.getNickname());
-        friendRes.setAvatar(friend.getAvatar().toString());
-        friendRes.setMessage(friend.getMessage());
-
-        return friendRes;
+    @QueryProjection
+    @Builder
+    public FriendRes(UUID friendUserId, String nickname, String avatar, String message){
+        this.friendUserId = friendUserId;
+        this.nickname = nickname;
+        this.avatar = avatar;
+        this.message = message;
     }
+
 
 }
