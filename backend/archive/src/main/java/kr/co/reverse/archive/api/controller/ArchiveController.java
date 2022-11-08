@@ -54,22 +54,16 @@ public class ArchiveController {
     }
 
     @GetMapping
-    public ResponseEntity getArchives(@RequestParam(name = "nickname") String nickname) {
-
+    public ResponseEntity<? extends ArchivesRes> getArchives(@RequestParam(name = "type") Integer type) {
         String userId = userService.getUserId();
         User user = userService.getPlayer(userId);
 
-        if (user.getNickname().equals(nickname)) { // 본인인지 확인
+        if (type == 0) {
             List<ArchiveRes> myArchives = archiveService.getArchives(user);
             return ResponseEntity.ok(ArchivesRes.of(myArchives));
         }
 
-        User target = userService.getUserByNickname(nickname);
-        if (friendService.checkFriend(user, target)) { // 친구 여부 확인
-            throw new NotFriendException();
-        }
-
-        List<ArchiveRes> friendArchives = archiveService.getArchives(target);
+        List<ArchiveRes> friendArchives = archiveService.getFriendArchives(user);
         return ResponseEntity.ok(ArchivesRes.of(friendArchives));
     }
 
