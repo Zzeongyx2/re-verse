@@ -25,7 +25,8 @@ public class FriendInvitationRepositoryImpl implements FriendInvitationRepositor
         return jpaQueryFactory
                 .select(Projections.bean(FriendInvitationRes.class,
                         QFriendInvitation.friendInvitation.invitationTarget.nickname,
-                        QFriendInvitation.friendInvitation.invitationTarget.avatar))
+                        QFriendInvitation.friendInvitation.invitationTarget.avatar,
+                        QFriendInvitation.friendInvitation.invitationTarget.message))
                 .from(QFriendInvitation.friendInvitation)
                 .join(QFriendInvitation.friendInvitation.invitationUser, QUser.user).fetchJoin()
                 .where(
@@ -39,7 +40,8 @@ public class FriendInvitationRepositoryImpl implements FriendInvitationRepositor
         return jpaQueryFactory
                 .select(Projections.bean(FriendInvitationRes.class,
                         QFriendInvitation.friendInvitation.invitationUser.nickname,
-                        QFriendInvitation.friendInvitation.invitationUser.avatar))
+                        QFriendInvitation.friendInvitation.invitationUser.avatar,
+                        QFriendInvitation.friendInvitation.invitationUser.message))
                 .from(QFriendInvitation.friendInvitation)
                 .join(QFriendInvitation.friendInvitation.invitationTarget, QUser.user).fetchJoin()
                 .where(

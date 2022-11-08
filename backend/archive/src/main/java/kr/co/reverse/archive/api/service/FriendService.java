@@ -34,6 +34,12 @@ public class FriendService {
         friendInvitationRepository.save(new FriendInvitation(user, target));
     }
 
+    public FriendInvitation getFriendInvitationTo(User user, User target) {
+
+        return friendInvitationRepository.findFriendInvitationByInvitationUserAndInvitationTarget(user, target);
+
+    }
+
     public List<FriendInvitationRes> getFriendInvitationsTo(User user) {
         return friendInvitationRepository.waitingTo(user);
     }
@@ -52,6 +58,18 @@ public class FriendService {
 
         FriendInvitation friendInvitation = friendInvitationRepository.findFriendInvitationByInvitationUserAndInvitationTarget(user, target);
         friendInvitationRepository.delete(friendInvitation);
+    }
+
+    @Transactional
+    public void createFriend(User user, User target){
+        friendRepository.save(new Friend(user, target));
+        friendRepository.save(new Friend(target, user));
+    }
+
+    public void deleteFriendInvitation(User user, User target) {
+
+        friendInvitationRepository.delete(new FriendInvitation(user, target));
+
     }
 
     @Transactional
@@ -86,6 +104,7 @@ public class FriendService {
     @Transactional
     public void deleteArchiveMember(Archive archive, User user){
         ArchiveMember archiveMember = archiveMemberRepository.findArchiveMemberByArchiveAndUser(archive, user);
+        archiveMemberRepository.delete(archiveMember);
     }
 
     public boolean checkFriend(User user, User target) {
@@ -93,4 +112,5 @@ public class FriendService {
         Friend friend = friendRepository.findFriendByUserAndTarget(user, target);
         return friend == null;
     }
+
 }
