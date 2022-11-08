@@ -1,6 +1,9 @@
 import * as THREE from "three";
 import React, { Suspense, useRef, useState } from "react";
+import { useEffect } from "react";
+
 import { Canvas, useLoader } from "@react-three/fiber";
+
 import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 // import { OrthographicCamera } from "@react-three/drei";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
@@ -9,14 +12,14 @@ import { SkyTube } from "../../assets/deco/SkyTube.js";
 import { ObjectTest } from "../../assets/deco/ObjectTest.js";
 import { CampingPack } from "../../assets/deco/CampingPack.js";
 // import { FireAnimated } from "../../assets/deco/FireAnimated.js";
-
-import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
-import { useEffect } from "react";
-import ReverseFooter from "../organisms/ReverseFooter.jsx";
 import { Polaroid } from "../../assets/deco/Polaroid.js";
 import { CartoonCampingKit } from "../../assets/deco/CartoonCampingKit.js";
 import { FireAnimated } from "../../assets/deco/FireAnimated.js";
 import { Notebook } from "../../assets/deco/Notebook.js";
+
+import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
+import TravelWriteModal from "../organisms/TravelWriteModal.jsx";
+import ReverseFooter from "../organisms/ReverseFooter.jsx";
 
 function ReverseTemp() {
   // default action = idle
@@ -43,20 +46,13 @@ function ReverseTemp() {
     // console.log(visible);
   };
 
-  // memory photobook, polaroid object
+  // travel photobook, polaroid object
   // anniv photobook, polaroid object
   // diary photobook, polaroid object
-  const [event, setEvent] = useState(0);
-  const handleEvent = (data) => {
-    setEvent(data);
-    console.log(event);
-  };
-
-  // memory photobook, polaroid object
-  // const [memoryPolaroidVisible, setMemoryPolaroidVisible] = useState(false);
-  // const handleMemoryPolaroidVisible = (data) => {
-  //   setMemoryPolaroidVisible(data);
-  //   console.log(memoryPolaroidVisible);
+  // const [event, setEvent] = useState(0);
+  // const handleEvent = (data) => {
+  //   setEvent(data);
+  //   // console.log(event);
   // };
 
   return (
@@ -86,7 +82,7 @@ function ReverseTemp() {
         }}
       >
         {/* // TODO: 컴포넌트 배치할 때에는 키고 하는게 편함 */}
-        {/* <OrbitControls /> */}
+        <OrbitControls />
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
         {/* light */}
@@ -111,7 +107,7 @@ function ReverseTemp() {
           <CatAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
-            handleEvent={handleEvent}
+            // handleEvent={handleEvent}
           />
 
           <SkyTube />
@@ -122,18 +118,15 @@ function ReverseTemp() {
           <FireAnimated />
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
-          <Polaroid
-            event={event}
-            // position={new THREE.Vector3(48.5, -0.8, -70)}
-            // eventPosition={new THREE.Vector3(37, 0.01, -68)}
-          />
-          <Notebook event={event} />
+          <Polaroid />
+          <Notebook />
+          {/* <Polaroid event={event} />
+          <Notebook event={event} /> */}
           {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
         </Suspense>
         {/* floor */}
         <mesh
           onPointerDown={(e) => {
-            // console.log(e);  // intersects와 동일한거
             setDestinationPoint(e.point);
           }}
           rotation={[-0.5 * Math.PI, 0, 0]}
@@ -153,6 +146,7 @@ function ReverseTemp() {
           <meshBasicMaterial color="black" transparent opacity={0.3} />
         </mesh>
       </Canvas>
+      <TravelWriteModal />
     </div>
   );
 }

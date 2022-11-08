@@ -4,6 +4,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import { store } from "./modules/store";
 
 import { modalTheme } from "./theme/components/modal";
 
@@ -16,9 +18,11 @@ const theme = extendTheme({
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-  <ChakraProvider theme={theme}>
-    <App />
-  </ChakraProvider>
+  <Provider store={store}>
+    <ChakraProvider theme={theme}>
+      <App />
+    </ChakraProvider>
+  </Provider>
   // </React.StrictMode>
 );
 
