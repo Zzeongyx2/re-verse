@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getUserInfo } from "../../api/user";
 
 import SelectCharacterBtn from "../atoms/SelectCharacterBtn";
 import CharacterThree from "./CharacterThree";
@@ -6,16 +7,15 @@ import CharacterThree from "./CharacterThree";
 
 function SelectCharacter() {
   const initialData = {
-    name: "",
-    imgUrl: "",
+    nickname: "",
+    message: "",
+    avatar: "Cat",
   };
   const [mine, setMine] = useState(initialData);
-  const [selectNum, setSelectNum] = useState("2");
   const [ischecked, setIschecked] = useState(false);
 
   const handleChange = (e) => {
     console.log(e.target.value);
-    setSelectNum(e.target.value);
     // setMine(e.target.value);
     setMine((prev) => ({
       ...prev,
@@ -23,13 +23,23 @@ function SelectCharacter() {
     }));
     setIschecked((prev) => !prev);
   };
+  useEffect(() => {
+    getUserInfo(getUserInfoSuccess, getUserInfoFail);
+  }, []);
+  const getUserInfoSuccess = (res) => {
+    setMine(res.data);
+  };
+  const getUserInfoFail = (error) => {
+    console.log(error);
+  };
+
   return (
     <div className="text-base2">
       {/* <div>select character!</div> */}
       <div className="flex justify-between">
         {/* 캐릭터 렌더링 */}
         <div className="bg-white rounded-3xl w-[calc(96%/3)] pt-5 pb-6">
-          <CharacterThree characterNum={selectNum} />
+          <CharacterThree animalName={mine.avatar} />
         </div>
         <div className="flex flex-col w-[calc(96%/3*2)] items-end">
           {/* 캐릭터 선택 창 */}
