@@ -33,13 +33,10 @@ public class FriendController {
     private final ArchiveService archiveService;
 
     @GetMapping
-    public ResponseEntity<? extends FriendsRes> getFriends(){
+    public ResponseEntity<? extends FriendsRes> getFriends() {
 
-        // TODO: redis에서 access token을 가져와서 userId를 파싱하여 파라미터로 넘겨준다.
-        UUID userId = null;
-
-        User user = null;
-//        User user = userService.getUser(userId);
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
 
         List<FriendRes> myFriends = friendService.getFriends(user);
         return ResponseEntity.ok(FriendsRes.of(myFriends));
@@ -47,25 +44,37 @@ public class FriendController {
     }
 
     @PostMapping
-    public ResponseEntity createFriendInvitation(@RequestBody FriendInvitationReq friendInvitationReq){
+    public ResponseEntity createFriendInvitation(@RequestBody FriendInvitationReq friendInvitationReq) {
 
-        UUID userId = null;
-        User user = null;
-        User target = null;
-//        User user = userService.getUser(userId);
-//        User target = userService.getUserByNickname(friendInvitationReq.getNickname());
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
+        User target = userService.getUserByNickname(friendInvitationReq.getNickname());
 
-        friendService.createFriendInvitation(user, target);
+        // 2022-11-08
+        // 이미 요청을 보낸 관계면 요청을 만들지 않는다.
+        if (friendService.getFriendInvitationTo(user, target) != null) {
+
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+
+        } else if (friendService.getFriendInvitationTo(target, user) != null) {
+            // 유저와 타겟을 바꿔서 조회를 했는데 친구 요청이 이미 존재하면, 둘 다 서로에게 요청을 보낸 것이므로 친구 수락을 한뒤, 친구 요청을 1 row 지우고, 신규로 들어온 요청은 생성 X
+            friendService.deleteFriendInvitation(target, user);
+            friendService.createFriend(user, target);
+
+        } else {
+
+            friendService.createFriendInvitation(user, target);
+        }
+
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/reply")
-    public ResponseEntity<? extends FriendInvitationsRes> getFriendInvitations(){
+    public ResponseEntity<? extends FriendInvitationsRes> getFriendInvitations() {
 
-        UUID userId = null;
-        User user = null;
-//        User user = userService.getUser(userid);
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
 
         List<FriendInvitationRes> waitingTo = friendService.getFriendInvitationsTo(user);
         List<FriendInvitationRes> waitingFrom = friendService.getFriendInvitationsFrom(user);
@@ -74,13 +83,12 @@ public class FriendController {
     }
 
     @PostMapping("/reply")
-    public ResponseEntity reply (@RequestBody InvitationReplyReq invitationReplyReq){
+    public ResponseEntity reply(@RequestBody InvitationReplyReq invitationReplyReq) {
 
-        UUID userId = null;
-        User user = null;
-        User target = null;
-//        User user = userService.getUser(userId);
-//        User target = userService.getUser(invitationReplyReq.getNickname());
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
+        User target = userService.getUserByNickname(invitationReplyReq.getNickname());
+
         Boolean isAccepted = invitationReplyReq.getIsAccepted();
 
         friendService.reply(user, target, isAccepted);
@@ -89,13 +97,11 @@ public class FriendController {
     }
 
     @DeleteMapping
-    public ResponseEntity delete (@RequestParam(name = "nickname") String nickname){
+    public ResponseEntity delete(@RequestParam(name = "nickname") String nickname) {
 
-        UUID userId = null;
-        User user = null;
-        User target = null;
-//        User user = userService.getUser(userId);
-//        User target = userService.getUser(invitationReplyReq.getNickname());
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
+        User target = userService.getUserByNickname(nickname);
 
         friendService.deleteFriend(user, target);
 
@@ -103,7 +109,7 @@ public class FriendController {
     }
 
     @PostMapping("/bookmark")
-    public ResponseEntity createBookmark(@RequestBody BookmarkReq bookmarkReq){
+    public ResponseEntity createBookmark(@RequestBody BookmarkReq bookmarkReq) {
 
         UUID userId = null;
         User user = null;
@@ -118,11 +124,10 @@ public class FriendController {
     }
 
     @DeleteMapping("/bookmark/{archive_id}")
-    public ResponseEntity deleteBookmark(@PathVariable(name = "archive_id") UUID archiveId){
+    public ResponseEntity deleteBookmark(@PathVariable(name = "archive_id") UUID archiveId) {
 
-        UUID userId = null;
-        User user = null;
-//        User user = userService.getUser(userId);
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
         Archive archive = archiveService.getArchive(archiveId);
 
         friendService.deleteBookmark(archive, user);
@@ -131,17 +136,14 @@ public class FriendController {
     }
 
     @PostMapping("/archive-member")
-    public ResponseEntity createArchiveMember(@RequestBody ArchiveMemberReq archiveMemberReq){
+    public ResponseEntity createArchiveMember(@RequestBody ArchiveMemberReq archiveMemberReq) {
 
-        UUID userId = null;
-
-        User user = null;
-//        User user = userService.getUser(userId);
-
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
         Archive archive = archiveService.getArchive(archiveMemberReq.getArchiveId());
-        User target = null;
-//        User target = userService.findByNickname(archiveMemberReq.getNickname());
-        if(friendService.checkFriend(user, target)) {
+        User target = userService.getUserByNickname(archiveMemberReq.getNickname());
+
+        if (friendService.checkFriend(user, target)) {
             throw new NotFriendException();
         }
         friendService.createArchiveMember(archive, target, archiveMemberReq.getRole());
@@ -150,16 +152,14 @@ public class FriendController {
     }
 
     @DeleteMapping("/archive-member/{archive_id}")
-    public ResponseEntity deleteArchiveMember(@PathVariable(name = "archive_id") UUID archiveId, @RequestParam(name = "nickname") String nickname){
+    public ResponseEntity deleteArchiveMember(@PathVariable(name = "archive_id") UUID archiveId, @RequestParam(name = "nickname") String nickname) {
 
-        User user = null;
-//        User user = userService.getUser(userId);
-
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
+        User target = userService.getUserByNickname(nickname);
         Archive archive = archiveService.getArchive(archiveId);
-        User target = null;
-//        User target = userService.findByNickname(nickname);
 
-        if(friendService.checkFriend(user, target)) {
+        if (friendService.checkFriend(user, target)) {
             throw new NotFriendException();
         }
         friendService.deleteArchiveMember(archive, target);
