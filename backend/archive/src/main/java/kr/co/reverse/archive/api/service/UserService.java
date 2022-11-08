@@ -105,4 +105,8 @@ public class UserService {
 
         return user.getAuthId();
     }
+
+    public User getUserByNickname(String nickname) {
+        return userRepository.findByNickname(nickname);
+    }
 }
