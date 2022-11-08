@@ -27,6 +27,21 @@ async function acceptFriend(acceptRequest, success, fail) {
 async function getAcceptFriendList(success, fail) {
   await api.get(`/friend/reply`).then(success).catch(fail);
 }
+async function getFriendArchiveList(nickname, success, fail) {
+  await api
+    .get(`/friend/archive-member`, { params: { nickname: nickname } })
+    .then(success)
+    .catch(fail);
+}
+async function postBookmark(archiveId, success, fail) {
+  await api
+    .post(`/friend/bookmark`, { archiveId: archiveId })
+    .then(success)
+    .catch(fail);
+}
+async function deleteBookmark(archiveId, success, fail) {
+  await api.delete(`/friend/bookmark/${archiveId}`).then(success).catch(fail);
+}
 
 export {
   deleteFriend,
@@ -35,4 +50,7 @@ export {
   searchUser,
   acceptFriend,
   getAcceptFriendList,
+  getFriendArchiveList,
+  postBookmark,
+  deleteBookmark,
 };

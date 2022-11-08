@@ -8,28 +8,27 @@ import { BiLogIn, BiPencil } from "react-icons/bi";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import EditArchiveModal from "./EditArchiveModal";
 import SettingArchiveModal from "./SettingArchiveModal";
+import { getArchiveList } from "../../api/archive";
+import { deleteBookmark, postBookmark } from "../../api/friend";
 
 function ArchiveMy() {
   const [archiveList, setArchiveList] = useState([]);
-  // TODO: 이미지 저장용 변수 나중에 지우기
-  const [profileImg] = useState(
-    "https://images.unsplash.com/photo-1639503611585-1054af5dbfab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80"
-  );
-  // TODO:
+
   const enterArchive = (archiveId) => {
-    // TODO: 아카이브로 이동
     console.log(archiveId, "이동");
+    window.location.href = `/reverse/${archiveId}`;
   };
-  const editArchive = (archiveId) => {
-    // TODO: 아카이브 이름 설정 변겅
-    console.log(archiveId, "수정");
-  };
-  const settingArchive = (archiveId) => {
-    // TODO: 아카이브 공유 관리
-    console.log(archiveId, "관리");
-  };
+
   const bookmarkTrigger = (archive, index) => {
-    // TODO: 즐겨찾기 상태 변경 보내기
+    if (!archive.bookmarks) {
+      postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
+    } else {
+      deleteBookmark(
+        archive.archiveId,
+        bookmarkControlSuccess,
+        bookmarkControl,
+      );
+    }
     setArchiveList((list) => {
       return [...list].filter((item, idx) => {
         if (idx === index) {
@@ -39,221 +38,23 @@ function ArchiveMy() {
       });
     });
   };
+  const bookmarkControlSuccess = (res) => {
+    console.log(res);
+  };
+  const bookmarkControl = (error) => {
+    console.log(error);
+  };
 
   useEffect(() => {
-    // TODO: 내 아카이브 목록 가져오기
-    console.log("아카이브 목록 가져옴");
-    setArchiveList((list) => [
-      {
-        archiveId: "a1",
-        title: "zl존윤sun의 메인 아카이브",
-        description: "지존윤선의 아카이브에 초대하노라",
-        level: 1,
-        bookmarks: false,
-        members: [
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-        ],
-      },
-      {
-        archiveId: "a3",
-        title: "나의 여행 일지 (1)",
-        description: "제주도 한 달 살기 기록 아카이브",
-        level: 1,
-        bookmarks: false,
-        members: [
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-        ],
-      },
-      {
-        archiveId: "a2",
-        title: "나의 여행 일지 (2)",
-        description: "놀러가요 동물의 숲",
-        level: 1,
-        bookmarks: true,
-        members: [
-          {
-            nickname: "String",
-            avatar: profileImg,
-          },
-        ],
-      },
-      {
-        archiveId: "a1",
-        title: "zl존윤sun의 메인 아카이브",
-        description: "지존윤선의 아카이브에 초대하노라",
-        level: 1,
-        bookmarks: false,
-        members: [
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-        ],
-      },
-      {
-        archiveId: "a3",
-        title: "나의 여행 일지 (1)",
-        description: "제주도 한 달 살기 기록 아카이브",
-        level: 1,
-        bookmarks: false,
-        members: [
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-        ],
-      },
-      {
-        archiveId: "a2",
-        title: "나의 여행 일지 (2)",
-        description: "놀러가요 동물의 숲",
-        level: 1,
-        bookmarks: true,
-        members: [
-          {
-            nickname: "String",
-            avatar: profileImg,
-          },
-        ],
-      },
-      {
-        archiveId: "a1",
-        title: "zl존윤sun의 메인 아카이브",
-        description: "지존윤선의 아카이브에 초대하노라",
-        level: 1,
-        bookmarks: false,
-        members: [
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-        ],
-      },
-      {
-        archiveId: "a3",
-        title: "나의 여행 일지 (1)",
-        description: "제주도 한 달 살기 기록 아카이브",
-        level: 1,
-        bookmarks: false,
-        members: [
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-        ],
-      },
-      {
-        archiveId: "a2",
-        title: "나의 여행 일지 (2)",
-        description: "놀러가요 동물의 숲",
-        level: 1,
-        bookmarks: true,
-        members: [
-          {
-            nickname: "String",
-            avatar: profileImg,
-          },
-        ],
-      },
-      {
-        archiveId: "a1",
-        title: "zl존윤sun의 메인 아카이브",
-        description: "지존윤선의 아카이브에 초대하노라",
-        level: 1,
-        bookmarks: false,
-        members: [
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-        ],
-      },
-      {
-        archiveId: "a1",
-        title: "zl존윤sun의 메인 아카이브",
-        description: "지존윤선의 아카이브에 초대하노라",
-        level: 1,
-        bookmarks: false,
-        members: [
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-        ],
-      },
-      {
-        archiveId: "a1",
-        title: "zl존윤sun의 메인 아카이브",
-        description: "지존윤선의 아카이브에 초대하노라",
-        level: 1,
-        bookmarks: false,
-        members: [
-          {
-            nickname: "name",
-            avatar: profileImg,
-          },
-        ],
-      },
-    ]);
+    getArchiveList(0, getArchiveListSuccess, getArchiveListFail);
   }, []);
+  const getArchiveListSuccess = (res) => {
+    console.log(res);
+    setArchiveList(res.data.archives);
+  };
+  const getArchiveListFail = (error) => {
+    console.log(error);
+  };
 
   return (
     <div className="text-base2">
@@ -315,11 +116,10 @@ function ArchiveMy() {
                         className="text-white m-0.5 -translate-x-0.5"
                       />
                     </button>
-
                     {/* 아카이브 수정 */}
-                    <EditArchiveModal />
-
+                    <EditArchiveModal archive={archive} />
                     {/* 아카이브 권한 설정 */}
+                    {/* TODO: 아카이브id 주고 친구 목록중에 초대 했는지 안했는지 알아와야댐*/}
                     <SettingArchiveModal />
                   </div>
                 </div>
