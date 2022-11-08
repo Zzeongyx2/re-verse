@@ -15,13 +15,6 @@ export function ObjectTest({ visible }) {
   const houseRef = useRef();
   const spotRef = useRef();
 
-  console.log("+==========");
-  // console.log(visible);
-
-  // useEffect(() => {
-  //   if (visible) {
-  //   }
-  // }, [visible]);
   useFrame((state) => {
     if (visible) {
       // console.log("나와라!");
