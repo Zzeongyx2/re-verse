@@ -3,10 +3,8 @@ package kr.co.reverse.archive.api.controller;
 import kr.co.reverse.archive.api.request.ArchiveReq;
 import kr.co.reverse.archive.api.request.PaperReq;
 import kr.co.reverse.archive.api.response.*;
-import kr.co.reverse.archive.api.service.ArchiveService;
-import kr.co.reverse.archive.api.service.PaperService;
-import kr.co.reverse.archive.api.service.PhotoBookService;
-import kr.co.reverse.archive.api.service.StuffService;
+import kr.co.reverse.archive.api.service.*;
+import kr.co.reverse.archive.common.exception.NotFriendException;
 import kr.co.reverse.archive.db.entity.*;
 import kr.co.reverse.archive.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +28,10 @@ public class ArchiveController {
 
     private final PaperService paperService;
 
+    private final UserService userService;
+
+    private final FriendService friendService;
+
     private final UserRepository userRepository;
 
 
@@ -38,7 +40,7 @@ public class ArchiveController {
         // TODO: redis에서 cookie 내 access token에 해당하는 정보를 갖고 와서, user 정보 불러오기
 
         User test = userRepository.findByNickname("test");
-        if(test == null) {
+        if (test == null) {
             User user = User.builder().nickname("test").build();
             userRepository.save(user);
             test = userRepository.findByNickname("test");
@@ -60,19 +62,22 @@ public class ArchiveController {
     }
 
     @GetMapping
-    public ResponseEntity getArchives(@RequestParam(name = "type") Integer type) {
-        User test = userRepository.findByNickname("test");
+    public ResponseEntity getArchives(@RequestParam(name = "nickname") String nickname) {
 
-        if (type == 0) { // 내 아카이브 조회
-            // TODO: redis에서 cookie 내 access token에 해당하는 정보를 갖고 와서, user 정보 불러오기
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
 
-            List<ArchiveRes> myArchives = archiveService.getArchives(test);
-
+        if (user.getNickname().equals(nickname)) { // 본인인지 확인
+            List<ArchiveRes> myArchives = archiveService.getArchives(user);
             return ResponseEntity.ok(ArchivesRes.of(myArchives));
         }
 
-        List<ArchiveRes> friendArchives = archiveService.getFriendArchives(test);
+        User target = userService.getUserByNickname(nickname);
+        if (friendService.checkFriend(user, target)) { // 친구 여부 확인
+            throw new NotFriendException();
+        }
 
+        List<ArchiveRes> friendArchives = archiveService.getArchives(target);
         return ResponseEntity.ok(ArchivesRes.of(friendArchives));
     }
 
