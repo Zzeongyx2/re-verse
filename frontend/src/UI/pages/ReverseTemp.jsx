@@ -11,6 +11,7 @@ import { CampingPack } from "../../assets/deco/CampingPack.js";
 
 import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
 import { useEffect } from "react";
+import ReverseFooter from "../organisms/ReverseFooter.jsx";
 
 function ReverseTemp() {
   // default action = idle
@@ -28,24 +29,6 @@ function ReverseTemp() {
   // orthographic camera
   const aspect = window.innerWidth / window.innerHeight;
 
-  const [isPressed, setIsPressed] = useState(false);
-  // const [currentPosition, setCurrentPosition] = useState(); // player -> reverse
-
-  // const handleCurrentPosition = (data) => {
-  //   setCurrentPosition(data);
-  //   // console.log(currentPosition);
-
-  //   // setCurrentPlayerPosition(data);
-  // };
-
-  // useEffect(
-  //   (data) => {
-  //     setCurrentPosition(data);
-  //     console.log(data);
-  //   },
-  //   [currentPosition]
-  // );
-
   // player -> reverse
   const [visible, setVisible] = useState(false);
   const handleVisible = (data) => {
@@ -56,6 +39,14 @@ function ReverseTemp() {
     <div className="h-screen overflow-hidden relative">
       <div className="w-full h-[0.15] absolute z-10">
         <ReverseNavbar />
+      </div>
+      {/* // TODO: 기연아 채팅창 ReverseFooter 들어가서 만들면 돼!! */}
+      {/* // TODO: 기연아 채팅창 ReverseFooter 들어가서 만들면 돼!! */}
+      {/* // TODO: 기연아 채팅창 ReverseFooter 들어가서 만들면 돼!! */}
+      {/* // TODO: 기연아 채팅창 ReverseFooter 들어가서 만들면 돼!! */}
+      {/* // TODO: 기연아 채팅창 ReverseFooter 들어가서 만들면 돼!! */}
+      <div className="w-1/4 h-2/5 absolute z-20 bottom-0">
+        <ReverseFooter />
       </div>
       <Canvas
         ref={refCanvas}
