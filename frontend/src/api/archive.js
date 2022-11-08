@@ -16,10 +16,7 @@ async function deleteArchive(archiveId, success, fail) {
   await api.delete(`/archive/${archiveId}`).then(success).catch(fail);
 }
 async function editArchive(archiveId, editArchiveReq, success, fail) {
-  await api
-    .patch(`/archive/${archiveId}`, editArchiveReq)
-    .then(success)
-    .catch(fail);
+  await api.patch(`/archive/${archiveId}`, editArchiveReq).then(success).catch(fail);
 }
 
 export { postArchive, getArchiveList, deleteArchive, editArchive };
