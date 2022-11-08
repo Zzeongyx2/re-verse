@@ -100,7 +100,7 @@ public class FriendService {
     @Transactional
     public void deleteArchiveMember(Archive archive, User user){
         ArchiveMember archiveMember = archiveMemberRepository.findArchiveMemberByArchiveAndUser(archive, user);
-        // delete
+        archiveMemberRepository.delete(archiveMember);
     }
 
     public boolean checkFriend(User user, User target) {
