@@ -11,8 +11,10 @@ import { useGLTF } from "@react-three/drei";
 
 export function CampingPack(props) {
   const { nodes, materials } = useGLTF("/assets/camping_pack/scene.gltf");
+  const ref = useRef();
+  console.log(ref.current);
   return (
-    <group {...props} dispose={null}>
+    <group ref={ref} {...props} dispose={null}>
       <group rotation={[-1.57, 0, 0]}>
         {/* <group position={[0, -139.52, -495.96]} rotation={[-1.57, 0, 0]}> */}
         <group rotation={[Math.PI / 2, 0, 0]}>
@@ -189,6 +191,25 @@ export function CampingPack(props) {
             </group>
           </group>
 
+          {/* camping car */}
+          <group
+            rotation={[-Math.PI / 2, 0, 0]}
+            scale={[0.02, 0.02, 0.02]}
+            position={[65, 0.8, -60]}
+          >
+            <group>
+              {/* <group position={[3301.24, -377.9, 41.6]}> */}
+              <mesh
+                geometry={nodes.Object153_Roulotte_0.geometry}
+                material={materials.Roulotte}
+              />
+              <mesh
+                geometry={nodes.Object153_dsd_0.geometry}
+                material={materials.material}
+              />
+            </group>
+          </group>
+
           {/* parasol */}
           {/* <group rotation={[-Math.PI / 2, 0, 0]}>
             <group position={[1218.67, -896.99, 215.29]}>
@@ -291,30 +312,6 @@ export function CampingPack(props) {
               <mesh
                 geometry={nodes.df_pancartes_0.geometry}
                 material={materials.pancartes_0}
-              />
-            </group>
-          </group> */}
-
-          {/* camping car */}
-          {/* <group rotation={[-Math.PI / 2, 0, 0]}>
-            <group position={[3301.24, -377.9, 41.6]}>
-              <mesh
-                geometry={nodes.Object153_Roulotte_0.geometry}
-                material={materials.Roulotte}
-              />
-              <mesh
-                geometry={nodes.Object153_dsd_0.geometry}
-                material={materials.material}
-              />
-            </group>
-          </group> */}
-
-          {/* hamburger on roof */}
-          {/* <group rotation={[-Math.PI / 2, 0, 0]}>
-            <group position={[1153.99, -186.7, 954.48]}>
-              <mesh
-                geometry={nodes["Cylinder124_06_-_Default_0"].geometry}
-                material={materials["06_-_Default_0"]}
               />
             </group>
           </group> */}
