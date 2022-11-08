@@ -11,7 +11,8 @@ import { useGLTF } from "@react-three/drei";
 import { gsap } from "gsap";
 import { useFrame } from "@react-three/fiber";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setOpen } from "../../modules/archive";
 
 export function Notebook({ props, event }) {
   const { nodes, materials } = useGLTF("/assets/notebook/scene.gltf");
@@ -19,43 +20,39 @@ export function Notebook({ props, event }) {
   // console.log("notebook");
   // console.log(event);
 
-  const isOpen = useSelector((state) => state.archive.isOpen);
-
-  // open write modal
-  const { openModal, setOpenModal } = useState(false);
-  const handleOpenModal = () => {
-    setOpenModal(true);
-  };
-
   useFrame((state) => {
     if (event === 1) {
       gsap.to(memoryObject.current.position, {
-        duration: 0.2,
+        duration: 0.3,
         y: 0.4,
         ease: "Bounce.easeOut",
       });
     } else if (event !== 1) {
       gsap.to(memoryObject.current.position, {
-        duration: 0.2,
+        duration: 0.4,
         y: -2.2,
         ease: "Bounce.easeOut",
       });
     }
   });
+
+  // modal창 열어주세요
+  const dispatch = useDispatch();
+
   return (
     <group
       {...props}
       dispose={null}
       onClick={() => {
         console.log("노트북 눌렀따");
-        handleOpenModal();
+        dispatch(setOpen());
       }}
     >
       <group
         ref={memoryObject}
         rotation={[-Math.PI / 2, 0, -Math.PI / 6]}
         scale={0.05}
-        position={[43.5, -2, -73.5]}
+        position={[42, -2, -73.5]}
         // position={[46.5, 0.12, -72]}
       >
         <group rotation={[Math.PI / 2, 0, 0]}>

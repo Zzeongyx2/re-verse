@@ -17,6 +17,7 @@ import { Polaroid } from "../../assets/deco/Polaroid.js";
 import { CartoonCampingKit } from "../../assets/deco/CartoonCampingKit.js";
 import { FireAnimated } from "../../assets/deco/FireAnimated.js";
 import { Notebook } from "../../assets/deco/Notebook.js";
+import MemoryWriteModal from "../organisms/MemoryWriteModal.jsx";
 
 function ReverseTemp() {
   // default action = idle
@@ -79,7 +80,7 @@ function ReverseTemp() {
         }}
       >
         {/* // TODO: 컴포넌트 배치할 때에는 키고 하는게 편함 */}
-        <OrbitControls />
+        {/* <OrbitControls /> */}
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
         {/* light */}
@@ -141,6 +142,7 @@ function ReverseTemp() {
           <meshBasicMaterial color="black" transparent opacity={0.3} />
         </mesh>
       </Canvas>
+      <MemoryWriteModal />
     </div>
   );
 }

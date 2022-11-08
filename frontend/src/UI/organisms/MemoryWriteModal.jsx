@@ -8,21 +8,35 @@ import {
   ModalCloseButton,
   useDisclosure,
   FormControl,
-  FormLabel,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 
+import { useSelector, useDispatch } from "react-redux";
+import { setOpen } from "../../modules/archive";
+
 function MemoryWriteModal({}) {
+  const openModal = useSelector((state) => state.archive.isOpen);
+  // console.log(openModal);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  console.log(onOpen);
+  // console.log(onClose);
+  // console.log(onClose());
+  const dispatch = useDispatch();
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size={"lg"} isCentered>
+      {/* <Modal isOpen={isOpen} onClose={onClose} size={"lg"} isCentered> */}
+      <Modal
+        isOpen={openModal}
+        // onClose={dispatch(setOpen())}
+        size={"lg"}
+        isCentered
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader mb={4} textAlign="center">
             아카이브 수정
           </ModalHeader>
-          <ModalCloseButton mt={1.5} />
+          {/* <ModalCloseButton mt={1.5} /> */}
           <ModalBody className="">
             <FormControl>
               <input
@@ -45,7 +59,9 @@ function MemoryWriteModal({}) {
 
           <ModalFooter pt={0}>
             <button
-              onClick={onClose}
+              onClick={() => {
+                dispatch(setOpen());
+              }}
               className="font-bold bg-[#d9d9d9] px-6 py-2 rounded-xl text-sm mx-3"
             >
               취소하기
@@ -53,7 +69,7 @@ function MemoryWriteModal({}) {
             <button
               onClick={() => {
                 // handleArchiveSubmit();
-                onClose();
+                // onClose;
               }}
               className="font-bold bg-extra1 px-6 py-2 rounded-xl text-sm"
             >

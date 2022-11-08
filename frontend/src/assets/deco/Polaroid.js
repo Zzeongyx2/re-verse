@@ -24,7 +24,7 @@ export function Polaroid({ props, position, event }) {
       memorySpot.current.children[0].material.color.b = 1;
 
       gsap.to(memoryObject.current.position, {
-        duration: 0.2,
+        duration: 0.3,
         y: 1.1,
         ease: "Bounce.easeOut",
       });
@@ -36,7 +36,7 @@ export function Polaroid({ props, position, event }) {
       memorySpot.current.children[0].material.color.r = 0;
       memorySpot.current.children[0].material.color.b = 1;
       gsap.to(memoryObject.current.position, {
-        duration: 0.2,
+        duration: 0.4,
         y: -2,
         ease: "Bounce.easeOut",
       });
@@ -53,7 +53,7 @@ export function Polaroid({ props, position, event }) {
         ref={memoryObject}
         rotation={[-Math.PI / 2, 0, Math.PI / 6]}
         scale={0.05}
-        position={[48.5, -1, -70]}
+        position={[46, -1, -70]}
         // position={[48.5, 0.8, -70]}
         // position={position}
       >
@@ -86,7 +86,7 @@ export function Polaroid({ props, position, event }) {
         <mesh
           rotation={[-0.5 * Math.PI, 0, -0.2 * Math.PI]}
           receiveShadow
-          position={[40, 0.01, -68]}
+          position={[38, 0.01, -68]}
         >
           <planeBufferGeometry attach="geometry" args={[20, 20]} />
           <meshBasicMaterial color="blue" opacity={0.5} transparent />
