@@ -4,6 +4,7 @@ package kr.co.reverse.archive.api.service;
 import kr.co.reverse.archive.api.request.AvatarReq;
 import kr.co.reverse.archive.api.request.SigninUserReq;
 import kr.co.reverse.archive.api.request.UserReq;
+import kr.co.reverse.archive.api.response.UserRes;
 import kr.co.reverse.archive.common.exception.NicknameDuplicateException;
 import kr.co.reverse.archive.db.entity.Avatar;
 import kr.co.reverse.archive.db.entity.User;
@@ -116,7 +117,7 @@ public class UserService {
 
     }
 
-    public String getUserIdByUserId(String userId) {
+    public String getAuthIdByUserId(String userId) {
         User user = userRepository.findById(UUID.fromString(userId)).get();
 
         return user.getAuthId();
@@ -130,5 +131,12 @@ public class UserService {
 
         return avatars;
 
+    }
+
+    public List<User> getUsers(String nickname) {
+
+        List<User> users = userRepository.findByNicknameContaining(nickname);
+
+        return users;
     }
 }
