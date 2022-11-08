@@ -16,7 +16,8 @@ export function Polaroid({ props, position, event }) {
 
   const memoryObject = useRef();
   const memorySpot = useRef();
-
+  console.log("======================[polaroid]======================");
+  console.log(event);
   useFrame((state) => {
     if (event === 1) {
       memorySpot.current.children[0].material.color.r = 1;
@@ -24,7 +25,7 @@ export function Polaroid({ props, position, event }) {
 
       gsap.to(memoryObject.current.position, {
         duration: 0.2,
-        y: 0.8,
+        y: 1.1,
         ease: "Bounce.easeOut",
       });
       gsap.to(state.camera.position, {
@@ -36,7 +37,7 @@ export function Polaroid({ props, position, event }) {
       memorySpot.current.children[0].material.color.b = 1;
       gsap.to(memoryObject.current.position, {
         duration: 0.2,
-        y: -1,
+        y: -2,
         ease: "Bounce.easeOut",
       });
       gsap.to(state.camera.position, {
@@ -51,7 +52,7 @@ export function Polaroid({ props, position, event }) {
       <group
         ref={memoryObject}
         rotation={[-Math.PI / 2, 0, Math.PI / 6]}
-        scale={0.025}
+        scale={0.05}
         position={[48.5, -1, -70]}
         // position={[48.5, 0.8, -70]}
         // position={position}

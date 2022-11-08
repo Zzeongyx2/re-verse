@@ -12,7 +12,7 @@ export default function CatAnimations({
   // handleCurrentPosition,
   destinationPoint,
   handleVisible, // test object event handler
-  handleEvent,
+  handleEvent, // memory, anniv, diary event handler
 }) {
   const group = useRef();
   // const previousAction = usePrevious(action);
