@@ -9,16 +9,51 @@ title: Retro Polaroid
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+import { gsap } from "gsap";
 
-export function Polaroid({ props, position }) {
+export function Polaroid({ props, position, event }) {
   const { nodes, materials } = useGLTF("/assets/retro_polaroid/scene.gltf");
+
+  const memoryObject = useRef();
+  const memorySpot = useRef();
+
+  useFrame((state) => {
+    if (event === 1) {
+      memorySpot.current.children[0].material.color.r = 1;
+      memorySpot.current.children[0].material.color.b = 1;
+
+      gsap.to(memoryObject.current.position, {
+        duration: 0.2,
+        y: 0.8,
+        ease: "Bounce.easeOut",
+      });
+      gsap.to(state.camera.position, {
+        duration: 1,
+        y: 3,
+      });
+    } else if (event !== 1) {
+      memorySpot.current.children[0].material.color.r = 0;
+      memorySpot.current.children[0].material.color.b = 1;
+      gsap.to(memoryObject.current.position, {
+        duration: 0.2,
+        y: -1,
+        ease: "Bounce.easeOut",
+      });
+      gsap.to(state.camera.position, {
+        duration: 1,
+        y: 5,
+      });
+    }
+  });
 
   return (
     <group {...props} dispose={null}>
       <group
+        ref={memoryObject}
         rotation={[-Math.PI / 2, 0, Math.PI / 6]}
         scale={0.025}
-        position={[48.5, 0.8, -70]}
+        position={[48.5, -1, -70]}
+        // position={[48.5, 0.8, -70]}
         // position={position}
       >
         <group rotation={[Math.PI / 2, 0, 0]}>
@@ -41,7 +76,7 @@ export function Polaroid({ props, position }) {
         </group>
       </group>
       {/* 오브젝트 나타나는 지점 */}
-      <group>
+      <group ref={memorySpot}>
         <mesh
           rotation={[-0.5 * Math.PI, 0, -0.2 * Math.PI]}
           receiveShadow
