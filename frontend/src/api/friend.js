@@ -34,10 +34,7 @@ async function getFriendArchiveList(nickname, success, fail) {
     .catch(fail);
 }
 async function postBookmark(archiveId, success, fail) {
-  await api
-    .post(`/friend/bookmark`, { archiveId: archiveId })
-    .then(success)
-    .catch(fail);
+  await api.post(`/friend/bookmark`, { archiveId: archiveId }).then(success).catch(fail);
 }
 async function deleteBookmark(archiveId, success, fail) {
   await api.delete(`/friend/bookmark/${archiveId}`).then(success).catch(fail);
