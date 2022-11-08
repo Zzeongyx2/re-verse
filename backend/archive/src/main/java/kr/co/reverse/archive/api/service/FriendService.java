@@ -51,6 +51,10 @@ public class FriendService {
     @Transactional
     public void reply(User user, User target, Boolean isAccepted) {
 
+        if(friendRepository.findFriendByUserAndTarget(user, target) != null) {
+            return;
+        }
+
         if(isAccepted){
             friendRepository.save(new Friend(user, target));
             friendRepository.save(new Friend(target, user));
