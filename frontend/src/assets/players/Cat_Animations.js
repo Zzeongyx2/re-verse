@@ -91,8 +91,8 @@ export default function CatAnimations({
 
         // memory photobook, polaroid object
         if (
-          Math.abs(memoryPosition.x - group.current.position.x) < 8 &&
-          Math.abs(memoryPosition.z - group.current.position.z) < 8
+          Math.abs(memoryPosition.x - group.current.position.x) < 10 &&
+          Math.abs(memoryPosition.z - group.current.position.z) < 10
         ) {
           handleEvent(1);
         } else {
