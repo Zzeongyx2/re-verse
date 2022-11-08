@@ -6,8 +6,6 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { store } from "./modules/store";
-import { PersistGate } from "redux-persist/integration/react";
-import persistStore from "redux-persist/es/persistStore";
 
 import { modalTheme } from "./theme/components/modal";
 
@@ -18,7 +16,6 @@ const theme = extendTheme({
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-export const persistor = persistStore(store);
 root.render(
   // <React.StrictMode>
   <Provider store={store}>
