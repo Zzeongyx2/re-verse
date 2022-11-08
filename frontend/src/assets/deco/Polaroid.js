@@ -14,16 +14,16 @@ import { gsap } from "gsap";
 export function Polaroid({ props, position, event }) {
   const { nodes, materials } = useGLTF("/assets/retro_polaroid/scene.gltf");
 
-  const memoryObject = useRef();
-  const memorySpot = useRef();
+  const travelObject = useRef();
+  const travelSpot = useRef();
   console.log("======================[polaroid]======================");
   console.log(event);
   useFrame((state) => {
     if (event === 1) {
-      memorySpot.current.children[0].material.color.r = 1;
-      memorySpot.current.children[0].material.color.b = 1;
+      travelSpot.current.children[0].material.color.r = 1;
+      travelSpot.current.children[0].material.color.b = 1;
 
-      gsap.to(memoryObject.current.position, {
+      gsap.to(travelObject.current.position, {
         duration: 0.3,
         y: 1.1,
         ease: "Bounce.easeOut",
@@ -33,9 +33,9 @@ export function Polaroid({ props, position, event }) {
         y: 3,
       });
     } else if (event !== 1) {
-      memorySpot.current.children[0].material.color.r = 0;
-      memorySpot.current.children[0].material.color.b = 1;
-      gsap.to(memoryObject.current.position, {
+      travelSpot.current.children[0].material.color.r = 0;
+      travelSpot.current.children[0].material.color.b = 1;
+      gsap.to(travelObject.current.position, {
         duration: 0.4,
         y: -2,
         ease: "Bounce.easeOut",
@@ -50,7 +50,7 @@ export function Polaroid({ props, position, event }) {
   return (
     <group {...props} dispose={null}>
       <group
-        ref={memoryObject}
+        ref={travelObject}
         rotation={[-Math.PI / 2, 0, Math.PI / 6]}
         scale={0.05}
         position={[46, -1, -70]}
@@ -82,7 +82,7 @@ export function Polaroid({ props, position, event }) {
         </group>
       </group>
       {/* 오브젝트 나타나는 지점 */}
-      <group ref={memorySpot}>
+      <group ref={travelSpot}>
         <mesh
           rotation={[-0.5 * Math.PI, 0, -0.2 * Math.PI]}
           receiveShadow

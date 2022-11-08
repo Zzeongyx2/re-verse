@@ -16,19 +16,19 @@ import { setOpen } from "../../modules/archive";
 
 export function Notebook({ props, event }) {
   const { nodes, materials } = useGLTF("/assets/notebook/scene.gltf");
-  const memoryObject = useRef();
+  const travelWriteObject = useRef();
   // console.log("notebook");
   // console.log(event);
 
   useFrame((state) => {
     if (event === 1) {
-      gsap.to(memoryObject.current.position, {
+      gsap.to(travelWriteObject.current.position, {
         duration: 0.3,
         y: 0.4,
         ease: "Bounce.easeOut",
       });
     } else if (event !== 1) {
-      gsap.to(memoryObject.current.position, {
+      gsap.to(travelWriteObject.current.position, {
         duration: 0.4,
         y: -2.2,
         ease: "Bounce.easeOut",
@@ -49,7 +49,7 @@ export function Notebook({ props, event }) {
       }}
     >
       <group
-        ref={memoryObject}
+        ref={travelWriteObject}
         rotation={[-Math.PI / 2, 0, -Math.PI / 6]}
         scale={0.05}
         position={[42, -2, -73.5]}

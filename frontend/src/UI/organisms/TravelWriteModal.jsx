@@ -5,8 +5,6 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
-  useDisclosure,
   FormControl,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
@@ -14,13 +12,8 @@ import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setOpen } from "../../modules/archive";
 
-function MemoryWriteModal({}) {
+function TravelWriteModal() {
   const openModal = useSelector((state) => state.archive.isOpen);
-  // console.log(openModal);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log(onOpen);
-  // console.log(onClose);
-  // console.log(onClose());
   const dispatch = useDispatch();
   return (
     <>
@@ -28,33 +21,43 @@ function MemoryWriteModal({}) {
       <Modal
         isOpen={openModal}
         // onClose={dispatch(setOpen())}
-        size={"lg"}
+        size={"3xl"}
         isCentered
       >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader mb={4} textAlign="center">
-            아카이브 수정
+            새 글 작성하기
           </ModalHeader>
           {/* <ModalCloseButton mt={1.5} /> */}
           <ModalBody className="">
-            <FormControl>
-              <input
-                type="text"
-                placeholder="아카이브 이름"
-                className="w-full focus:outline-none border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1 focus:border-extra1"
-              />
-            </FormControl>
+            <div className="flex justify-between">
+              {/* 글 제목 */}
+              <div className="w-[calc(98%/3*2)] border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1">
+                <p className="text-xs text-basic1">글 제목</p>
+                <input
+                  type="text"
+                  className="w-full focus:outline-none mt-0.5"
+                />
+              </div>
+              {/* 기록 날짜 */}
+              <div className="w-[calc(98%/3)] border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1">
+                <p className="text-xs text-basic1">기록 날짜</p>
+                <input
+                  type="text"
+                  className="w-full focus:outline-none mt-0.5"
+                />
+              </div>
+            </div>
 
-            <FormControl mt={4}>
-              <textarea
-                placeholder="아카이브 설명"
-                name="message"
-                id="message"
-                rows="4"
-                className="w-full focus:outline-none resize-none border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1 focus:border-extra1"
-              ></textarea>
-            </FormControl>
+            {/* // TODO: draft js!!!!!
+            // TODO: draft js!!!!!
+            // TODO: draft js!!!!!
+            // TODO: draft js!!!!!
+            // TODO: draft js!!!!! */}
+            <div className="mt-3.5 w-full h-full border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1">
+              <p className="text-xs text-basic1">draft js 적용하기 !!!</p>
+            </div>
           </ModalBody>
 
           <ModalFooter pt={0}>
@@ -68,12 +71,13 @@ function MemoryWriteModal({}) {
             </button>
             <button
               onClick={() => {
+                console.log("article is posted!");
                 // handleArchiveSubmit();
                 // onClose;
               }}
               className="font-bold bg-extra1 px-6 py-2 rounded-xl text-sm"
             >
-              생성하기
+              게시하기
             </button>
           </ModalFooter>
         </ModalContent>
@@ -82,4 +86,4 @@ function MemoryWriteModal({}) {
   );
 }
 
-export default MemoryWriteModal;
+export default TravelWriteModal;
