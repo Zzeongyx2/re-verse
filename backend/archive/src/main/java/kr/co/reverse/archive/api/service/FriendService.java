@@ -79,6 +79,10 @@ public class FriendService {
         archiveMemberRepository.save(new ArchiveMember(archive,user, role));
     }
 
+    public Boolean checkArchiveMember(Archive archive, User user) {
+        return archiveMemberRepository.findArchiveMemberByArchiveAndUser(archive, user) != null;
+    }
+
     @Transactional
     public void deleteArchiveMember(Archive archive, User user){
         ArchiveMember archiveMember = archiveMemberRepository.findArchiveMemberByArchiveAndUser(archive, user);
