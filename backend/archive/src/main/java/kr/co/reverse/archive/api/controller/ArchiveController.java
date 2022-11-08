@@ -3,10 +3,10 @@ package kr.co.reverse.archive.api.controller;
 import kr.co.reverse.archive.api.request.ArchiveReq;
 import kr.co.reverse.archive.api.request.PaperReq;
 import kr.co.reverse.archive.api.response.*;
-import kr.co.reverse.archive.api.service.ArchiveService;
-import kr.co.reverse.archive.api.service.PaperService;
-import kr.co.reverse.archive.api.service.PhotoBookService;
-import kr.co.reverse.archive.api.service.StuffService;
+import kr.co.reverse.archive.api.service.*;
+import kr.co.reverse.archive.common.error.CommonErrorCode;
+import kr.co.reverse.archive.common.exception.NotFriendException;
+import kr.co.reverse.archive.common.exception.UnauthorizedException;
 import kr.co.reverse.archive.db.entity.*;
 import kr.co.reverse.archive.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,22 +30,16 @@ public class ArchiveController {
 
     private final PaperService paperService;
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
+    private final FriendService friendService;
 
     @PostMapping
     public ResponseEntity createArchive(@RequestBody ArchiveReq archiveReq) {
-        // TODO: redis에서 cookie 내 access token에 해당하는 정보를 갖고 와서, user 정보 불러오기
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
 
-        User test = userRepository.findByNickname("test");
-        if(test == null) {
-            User user = User.builder().nickname("test").build();
-            userRepository.save(user);
-            test = userRepository.findByNickname("test");
-        }
-
-
-        Archive archive = archiveService.createArchive(archiveReq, test);
+        Archive archive = archiveService.createArchive(archiveReq, user);
 
         for (int i = 1; i <= 3; i++) { // PhotoBook 생성
             photoBookService.createPhotoBook(archive, i);
@@ -60,36 +54,49 @@ public class ArchiveController {
     }
 
     @GetMapping
-    public ResponseEntity getArchives(@RequestParam(name = "type") Integer type) {
-        User test = userRepository.findByNickname("test");
+    public ResponseEntity getArchives(@RequestParam(name = "nickname") String nickname) {
 
-        if (type == 0) { // 내 아카이브 조회
-            // TODO: redis에서 cookie 내 access token에 해당하는 정보를 갖고 와서, user 정보 불러오기
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
 
-            List<ArchiveRes> myArchives = archiveService.getArchives(test);
-
+        if (user.getNickname().equals(nickname)) { // 본인인지 확인
+            List<ArchiveRes> myArchives = archiveService.getArchives(user);
             return ResponseEntity.ok(ArchivesRes.of(myArchives));
         }
 
-        List<ArchiveRes> friendArchives = archiveService.getFriendArchives(test);
+        User target = userService.getUserByNickname(nickname);
+        if (friendService.checkFriend(user, target)) { // 친구 여부 확인
+            throw new NotFriendException();
+        }
 
+        List<ArchiveRes> friendArchives = archiveService.getArchives(target);
         return ResponseEntity.ok(ArchivesRes.of(friendArchives));
     }
 
     @GetMapping("/{archive_id}")
     public ResponseEntity<? extends ArchiveDetailRes> getArchive(@PathVariable(name = "archive_id") String archiveId) {
-        // TODO: Archive 접근 권한 여부 확인
-        // return ResponseEntity.status(HttpStatus.FORBIDDEN).body()
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
+        Archive archive = archiveService.getArchive(UUID.fromString(archiveId));
+
+        if (!friendService.checkArchiveMember(archive, user)) { // Archive 접근 권한 여부 확인
+            throw new UnauthorizedException(CommonErrorCode.UNAUTHORIZED_ERROR);
+        }
 
         ArchiveDetailRes archiveDetailRes = archiveService.getArchiveDetail(UUID.fromString(archiveId));
-
         return ResponseEntity.ok(archiveDetailRes);
-
     }
 
     @PatchMapping("/{archive_id}")
     public ResponseEntity updateArchive(@PathVariable(name = "archive_id") String archiveId,
                                         @RequestBody ArchiveReq archiveReq) {
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
+
+        Boolean isOwner = archiveService.checkOwner(UUID.fromString(archiveId), UUID.fromString(userId));
+        if (!isOwner) { // Archive 글쓰기 권한 확인
+            throw new UnauthorizedException(CommonErrorCode.UNAUTHORIZED_ERROR);
+        }
 
 //        archiveService.updateArchive(UUID.fromString(archiveId));
 
@@ -98,7 +105,13 @@ public class ArchiveController {
 
     @DeleteMapping("/{archive_id}")
     public ResponseEntity deleteArchive(@PathVariable(name = "archive_id") String archiveId) {
-        // TODO: Archive 삭제 권한 여부 확인
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
+
+        Boolean isOwner = archiveService.checkOwner(UUID.fromString(archiveId), UUID.fromString(userId));
+        if (!isOwner) { // Archive 글쓰기 권한 확인
+            throw new UnauthorizedException(CommonErrorCode.UNAUTHORIZED_ERROR);
+        }
 
 //        archiveService.deleteArchive(UUID.fromString(archiveId));
 
@@ -110,9 +123,14 @@ public class ArchiveController {
                                       @PathVariable(name = "stuff_id") String stuffId,
                                       @RequestBody PaperReq paperReq) {
         Stuff stuff = stuffService.getStuff(UUID.fromString(stuffId));
-        User test = userRepository.findByNickname("test");
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
 
-        paperService.createPaper(paperReq, stuff, test);
+        Boolean isOwner = archiveService.checkOwner(UUID.fromString(archiveId), UUID.fromString(userId));
+        if (!isOwner) { // Archive 글쓰기 권한 확인
+            throw new UnauthorizedException(CommonErrorCode.UNAUTHORIZED_ERROR);
+        }
+        paperService.createPaper(paperReq, stuff, user);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

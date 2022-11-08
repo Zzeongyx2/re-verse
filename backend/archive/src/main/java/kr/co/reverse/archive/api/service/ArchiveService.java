@@ -115,4 +115,10 @@ public class ArchiveService {
                 .orElseThrow(() -> new NoSuchElementException());
     }
 
+    public Boolean checkOwner(UUID archiveId, UUID userId) {
+        Archive archive = getArchive(archiveId);
+
+        return archive.getOwnerId().equals(userId);
+    }
+
 }

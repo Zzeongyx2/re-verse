@@ -139,4 +139,8 @@ public class UserService {
 
         return users;
     }
+
+    public User getUserByNickname(String nickname) {
+        return userRepository.findByNickname(nickname);
+    }
 }
