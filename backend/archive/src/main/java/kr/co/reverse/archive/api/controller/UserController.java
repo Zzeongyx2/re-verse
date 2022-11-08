@@ -3,14 +3,19 @@ package kr.co.reverse.archive.api.controller;
 import kr.co.reverse.archive.api.request.AvatarReq;
 import kr.co.reverse.archive.api.request.SigninUserReq;
 import kr.co.reverse.archive.api.request.UserReq;
+import kr.co.reverse.archive.api.response.ArchivesRes;
+import kr.co.reverse.archive.api.response.AvatarRes;
 import kr.co.reverse.archive.api.response.UserIdRes;
 import kr.co.reverse.archive.api.response.UserRes;
 import kr.co.reverse.archive.api.service.UserService;
+import kr.co.reverse.archive.db.entity.Avatar;
 import kr.co.reverse.archive.db.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -60,6 +65,14 @@ public class UserController {
         userService.changeAvatar(userId, avatarInfo);
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    @GetMapping("/avatar")
+    public ResponseEntity<? extends AvatarRes> getAvatarList(){
+
+        List<String> avatars = userService.getAvatars();
+
+        return ResponseEntity.ok(AvatarRes.of(avatars));
     }
 
 
