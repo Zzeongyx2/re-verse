@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { imageForm, s3Path } from "../../api";
-import { getAvatars, getUserInfo } from "../../api/user";
+import { editAvatar, getAvatars, getUserInfo } from "../../api/user";
 
 import SelectCharacterBtn from "../atoms/SelectCharacterBtn";
 import CharacterThree from "./CharacterThree";
@@ -41,7 +41,15 @@ function SelectCharacter() {
   const getUserInfoFail = (error) => {
     console.log(error);
   };
-
+  const clickEditBtn = () => {
+    editAvatar(mine.avatar, editAvatarSuccess, editAvatarFail);
+  };
+  const editAvatarSuccess = (res) => {
+    console.log(res);
+  };
+  const editAvatarFail = (error) => {
+    console.log(error);
+  };
   return (
     <div className="text-base2">
       {/* <div>select character!</div> */}
@@ -54,9 +62,7 @@ function SelectCharacter() {
           {/* 캐릭터 선택 창 */}
           <div className="flex flex-col bg-white rounded-3xl pb-6 w-full">
             <div className="flex justify-center items-center w-full rounded-tl-3xl rounded-tr-3xl bg-gradient-to-t from-main1 to-sub1 mb-4">
-              <p className="text-2xl drop-shadow font-bold my-4 text-white">
-                캐릭터 선택
-              </p>
+              <p className="text-2xl drop-shadow font-bold my-4 text-white">캐릭터 선택</p>
             </div>
             <div className="grid grid-cols-8 gap-3 justify-items-center mx-4">
               {/* // FIXME: 캐릭터 선택 라디오 버튼 */}
@@ -71,10 +77,7 @@ function SelectCharacter() {
                     onChange={handleChange}
                     selected={ischecked}
                   />
-                  <SelectCharacterBtn
-                    imgUrl={s3Path + character + imageForm}
-                    name={character}
-                  />
+                  <SelectCharacterBtn imgUrl={s3Path + character + imageForm} name={character} />
                 </label>
               ))}
               {/* {characters.map((character, idx) => {
@@ -101,7 +104,12 @@ function SelectCharacter() {
               })} */}
             </div>
           </div>
-          <button className="text-white font-bold bg-gradient-to-t from-extra1 to-extra2 text-xl w-fit px-12 py-2 mt-4 border rounded-3xl">
+          <button
+            className="text-white font-bold bg-gradient-to-t from-extra1 to-extra2 text-xl w-fit px-12 py-2 mt-4 border rounded-3xl"
+            onClick={() => {
+              clickEditBtn();
+            }}
+          >
             <span className="drop-shadow-xl">적용하기</span>
           </button>
         </div>
