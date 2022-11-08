@@ -7,7 +7,11 @@ import { HiOutlineTrash } from "react-icons/hi";
 
 import { Avatar } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
-import { deleteFriend, getFriendList } from "../../api/friend";
+import {
+  deleteFriend,
+  getFriendArchiveList,
+  getFriendList,
+} from "../../api/friend";
 import { imageForm, s3Path } from "../../api";
 
 function FriendList() {
@@ -53,46 +57,27 @@ function FriendList() {
 
   const getFriendSuccess = (res) => {
     console.log(res);
-    setFriendList(res.data.friends);
+    setFriendList(res.data.friendList);
   };
   const getFriendFail = (error) => {
     console.log(error);
   };
 
-  // FIXME: 처음에는 빈간이였다가, 나중에 친구 이름 눌렀을 때 오른쪽 화면에 보여야 함!
   useEffect(() => {
-    // TODO: 선택 유저 바뀔때마다 아카이브 목록 가져오기
+    getFriendArchiveList(
+      selectFriend.nickname,
+      getFriendArchiveListSuccess,
+      getFriendArchiveListFail,
+    );
     console.log(selectFriend?.nickname, "아카이브 목록 가져옴");
-    setArchiveList([
-      {
-        archiveId: "a1",
-        title: "놀러와요 KAN쵸월드",
-        description: "하루에 3번, 3분씩 3개의 칸쵸를 먹자",
-        level: 1,
-        bookmarks: false,
-        members: [
-          {
-            nickname: "name",
-            avatar: "aaa",
-          },
-        ],
-      },
-      {
-        archiveId: "a2",
-        title: "놀러와요 KAN쵸월드 (2)",
-        description: "하루에 6번, 6분씩 6개의 칸쵸를 먹자",
-        level: 1,
-        bookmarks: true,
-        members: [
-          {
-            nickname: "String",
-            avatar: "112",
-          },
-        ],
-      },
-    ]);
   }, [selectFriend]);
-
+  const getFriendArchiveListSuccess = (res) => {
+    setArchiveList(res.data.archives);
+    console.log(res);
+  };
+  const getFriendArchiveListFail = (error) => {
+    console.log(error);
+  };
   return (
     <div className="text-base2">
       {/* friend list */}
@@ -189,7 +174,10 @@ function FriendList() {
                           }}
                           className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
                         >
-                          <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
+                          <BiLogIn
+                            size={18}
+                            className="text-white m-0.5 -translate-x-0.5"
+                          />
                         </button>
                         <button
                           onClick={() => {
@@ -197,7 +185,10 @@ function FriendList() {
                           }}
                           className="bg-sub3 border-2 border-basic3 rounded-full"
                         >
-                          <HiOutlineTrash size={18} className="text-white m-0.5" />
+                          <HiOutlineTrash
+                            size={18}
+                            className="text-white m-0.5"
+                          />
                         </button>
                       </div>
                     </div>
