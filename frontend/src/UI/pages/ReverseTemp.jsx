@@ -8,10 +8,14 @@ import CatAnimations from "../../assets/players/Cat_Animations.js";
 import { SkyTube } from "../../assets/deco/SkyTube.js";
 import { ObjectTest } from "../../assets/deco/ObjectTest.js";
 import { CampingPack } from "../../assets/deco/CampingPack.js";
+// import { FireAnimated } from "../../assets/deco/FireAnimated.js";
 
 import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
 import { useEffect } from "react";
 import ReverseFooter from "../organisms/ReverseFooter.jsx";
+import { Polaroid } from "../../assets/deco/Polaroid.js";
+import { CartoonCampingKit } from "../../assets/deco/CartoonCampingKit.js";
+import { FireAnimated } from "../../assets/deco/FireAnimated.js";
 
 function ReverseTemp() {
   // default action = idle
@@ -30,21 +34,26 @@ function ReverseTemp() {
   const aspect = window.innerWidth / window.innerHeight;
 
   // player -> reverse
+
+  // test object
   const [visible, setVisible] = useState(false);
   const handleVisible = (data) => {
     setVisible(data);
+    console.log(visible);
   };
+
+  // memory photobook, polaroid object
+  // const [memoryPolaroidVisible, setMemoryPolaroidVisible] = useState(false);
+  // const handleMemoryPolaroidVisible = (data) => {
+  //   setMemoryPolaroidVisible(data);
+  //   console.log(memoryPolaroidVisible);
+  // };
 
   return (
     <div className="h-screen overflow-hidden relative">
       <div className="w-full h-[0.15] absolute z-10">
         <ReverseNavbar />
       </div>
-      {/* // TODO: 기연아 채팅창 ReverseFooter 들어가서 만들면 돼!! */}
-      {/* // TODO: 기연아 채팅창 ReverseFooter 들어가서 만들면 돼!! */}
-      {/* // TODO: 기연아 채팅창 ReverseFooter 들어가서 만들면 돼!! */}
-      {/* // TODO: 기연아 채팅창 ReverseFooter 들어가서 만들면 돼!! */}
-      {/* // TODO: 기연아 채팅창 ReverseFooter 들어가서 만들면 돼!! */}
       <div className="w-1/4 h-2/5 absolute z-20 bottom-0">
         <ReverseFooter />
       </div>
@@ -67,7 +76,7 @@ function ReverseTemp() {
         }}
       >
         {/* // TODO: 컴포넌트 배치할 때에는 키고 하는게 편함 */}
-        <OrbitControls />
+        {/* <OrbitControls /> */}
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
         {/* light */}
@@ -85,20 +94,26 @@ function ReverseTemp() {
           shadow-camera-bottom={-2000}
         />
         <ambientLight intensity={0.3} />
+        <spotLight intensity={0.5} position={[100, 1000, 100]} />
         {/* character */}
         <Suspense fallback={null}>
           {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
           <CatAnimations
-            // action={action}
             destinationPoint={destinationPoint}
-            // isPressed={isPressed}
             handleVisible={handleVisible}
-            // handleCurrentPosition={handleCurrentPosition}
           />
+
           <SkyTube />
           <ObjectTest visible={visible} />
           {/* <ObjectTest currentPosition={currentPosition} /> */}
           <CampingPack />
+          <CartoonCampingKit />
+          <Polaroid
+          // position={new THREE.Vector3(48.5, -0.8, -70)}
+          // eventPosition={new THREE.Vector3(37, 0.01, -68)}
+          />
+          {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
+          <FireAnimated />
         </Suspense>
         {/* floor */}
         <mesh
