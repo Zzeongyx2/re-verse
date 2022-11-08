@@ -22,4 +22,8 @@ function fileApiInstance() {
   return instance;
 }
 
-export { apiInstance, fileApiInstance };
+const s3Path = "https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/avatar/";
+
+const imageForm = ".PNG";
+
+export { apiInstance, fileApiInstance, s3Path, imageForm };
