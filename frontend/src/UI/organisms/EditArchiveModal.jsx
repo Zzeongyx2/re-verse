@@ -35,7 +35,6 @@ function EditArchiveModal({ archive }) {
       {
         title: editTitle,
         description: editMessage,
-        level: 1,
       },
       editArchiveSuccess,
       editArchiveFail,

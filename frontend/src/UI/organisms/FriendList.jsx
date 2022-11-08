@@ -64,12 +64,14 @@ function FriendList() {
   };
 
   useEffect(() => {
-    getFriendArchiveList(
-      selectFriend.nickname,
-      getFriendArchiveListSuccess,
-      getFriendArchiveListFail,
-    );
-    console.log(selectFriend?.nickname, "아카이브 목록 가져옴");
+    if (selectFriend) {
+      getFriendArchiveList(
+        selectFriend.nickname,
+        getFriendArchiveListSuccess,
+        getFriendArchiveListFail,
+      );
+      console.log(selectFriend?.nickname, "아카이브 목록 가져옴");
+    }
   }, [selectFriend]);
   const getFriendArchiveListSuccess = (res) => {
     setArchiveList(res.data.archives);
