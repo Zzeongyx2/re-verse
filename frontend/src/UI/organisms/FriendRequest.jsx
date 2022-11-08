@@ -62,7 +62,7 @@ function FriendRequest() {
                     <div className="flex items-center">
                       <Avatar
                         name="profileImg"
-                        src={s3Path + friend.avater + imageForm}
+                        src={s3Path + friend.avatar + imageForm}
                         size="sm"
                       />
                       <div className="text-base1 px-3">
