@@ -51,7 +51,7 @@ public class AuthController {
         return ResponseEntity.ok(TokenRes.of(auth));
     }
 
-    @GetMapping
+    @GetMapping("/compare")
     public ResponseEntity checkDuplicateEmail(@RequestParam String email){
 
         authService.checkDuplicateEmail(email);

@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/swagger-ui/**", "/api/v1/**", "/test").permitAll() // swagger
 //                .antMatchers(HttpMethod.GET, "/image/**").permitAll()
 
-                .antMatchers("/api/v1/user/create", "/api/v1/user/uid/**", "/api/v1/user/aid/**", "/api/v1/user?nickname={nickname}").permitAll()
+                .antMatchers("/api/v1/user/create", "/api/v1/user/uid/**", "/api/v1/user/aid/**", "/api/v1/user/compare?nickname={nickname}").permitAll()
                 .anyRequest().authenticated() // 나머지는 전부 인증 필요
 //                .antMatchers("/api/v1/**").permitAll()
 
