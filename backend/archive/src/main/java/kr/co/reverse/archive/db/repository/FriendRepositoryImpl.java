@@ -27,7 +27,8 @@ public class FriendRepositoryImpl implements FriendRepositoryCustom {
                         new QFriendRes(
                             QFriend.friend.target.id,
                             QFriend.friend.target.nickname,
-                                Expressions.asString(String.valueOf(QFriend.friend.target.avatar)),
+//                                Expressions.asString(String.valueOf(QFriend.friend.target.avatar)),
+                            QFriend.friend.target.avatar.stringValue(),
                             QFriend.friend.target.message
                         )
                 )
