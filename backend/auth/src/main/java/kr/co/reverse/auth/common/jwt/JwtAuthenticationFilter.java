@@ -16,6 +16,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.*;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -26,6 +27,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String BEARER_PREFIX = "Bearer ";
+    public static final String ACCESS_TOKEN = "accessToken";
+    public static final String REFRESH_TOKEN = "refreshToken";
 
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -35,7 +38,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
 
         // 1. Request Header 에서 토큰을 꺼냄
-        String jwt = resolveToken(request);
+        String jwt = null;
+        Cookie[] cookies = request.getCookies();
+
+        if(cookies != null){
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals(ACCESS_TOKEN)){
+                    jwt = cookie.getValue();
+                    break;
+                }
+            }
+        }
 
         // 2. validateToken 으로 토큰 유효성 검사
         // 정상 토큰이면 해당 토큰으로 Authentication 을 가져와서 SecurityContext 에 저장
