@@ -14,50 +14,55 @@ import { gsap } from "gsap";
 export function Polaroid({ props, position, event }) {
   const { nodes, materials } = useGLTF("/assets/retro_polaroid/scene.gltf");
 
-  const memoryObject = useRef();
-  const memorySpot = useRef();
-  console.log("======================[polaroid]======================");
-  console.log(event);
-  useFrame((state) => {
-    if (event === 1) {
-      memorySpot.current.children[0].material.color.r = 1;
-      memorySpot.current.children[0].material.color.b = 1;
+  const travelObject = useRef();
+  const travelSpot = useRef();
+  // console.log("======================[polaroid]======================");
+  // console.log(event);
+  // useFrame((state) => {
+  //   if (event === 1) {
+  //     travelSpot.current.children[0].material.color.r = 1;
+  //     travelSpot.current.children[0].material.color.b = 1;
 
-      gsap.to(memoryObject.current.position, {
-        duration: 0.2,
-        y: 1.1,
-        ease: "Bounce.easeOut",
-      });
-      gsap.to(state.camera.position, {
-        duration: 1,
-        y: 3,
-      });
-    } else if (event !== 1) {
-      memorySpot.current.children[0].material.color.r = 0;
-      memorySpot.current.children[0].material.color.b = 1;
-      gsap.to(memoryObject.current.position, {
-        duration: 0.2,
-        y: -2,
-        ease: "Bounce.easeOut",
-      });
-      gsap.to(state.camera.position, {
-        duration: 1,
-        y: 5,
-      });
-    }
-  });
+  //     gsap.to(travelObject.current.position, {
+  //       duration: 0.3,
+  //       y: 1.1,
+  //       ease: "Bounce.easeOut",
+  //     });
+  //     gsap.to(state.camera.position, {
+  //       duration: 1,
+  //       y: 3,
+  //     });
+  //   } else if (event !== 1) {
+  //     travelSpot.current.children[0].material.color.r = 0;
+  //     travelSpot.current.children[0].material.color.b = 1;
+  //     gsap.to(travelObject.current.position, {
+  //       duration: 0.4,
+  //       y: -2,
+  //       ease: "Bounce.easeOut",
+  //     });
+  //     gsap.to(state.camera.position, {
+  //       duration: 1,
+  //       y: 5,
+  //     });
+  //   }
+  // });
 
   return (
     <group {...props} dispose={null}>
       <group
-        ref={memoryObject}
+        ref={travelObject}
         rotation={[-Math.PI / 2, 0, Math.PI / 6]}
         scale={0.05}
-        position={[48.5, -1, -70]}
+        position={[46, 1.1, -70]}
         // position={[48.5, 0.8, -70]}
         // position={position}
       >
-        <group rotation={[Math.PI / 2, 0, 0]}>
+        <group
+          rotation={[Math.PI / 2, 0, 0]}
+          onClick={() => {
+            console.log("폴라로이드 눌렀다");
+          }}
+        >
           <group rotation={[-Math.PI / 2, 0, 0]}>
             <mesh
               geometry={nodes.Polaroid_01_Mat_plastic_0.geometry}
@@ -76,17 +81,19 @@ export function Polaroid({ props, position, event }) {
           </group>
         </group>
       </group>
-      {/* 오브젝트 나타나는 지점 */}
-      <group ref={memorySpot}>
+
+      {/* // FIXME: 다른 에셋에서 애니메이션 적용할구야 */}
+      {/* 오브젝트 나타나는 지점
+      <group ref={travelSpot}>
         <mesh
           rotation={[-0.5 * Math.PI, 0, -0.2 * Math.PI]}
           receiveShadow
-          position={[37, 0.01, -68]}
+          position={[38, 0.01, -68]}
         >
-          <planeBufferGeometry attach="geometry" args={[20, 15]} />
+          <planeBufferGeometry attach="geometry" args={[20, 20]} />
           <meshBasicMaterial color="blue" opacity={0.5} transparent />
         </mesh>
-      </group>
+      </group> */}
     </group>
   );
 }
