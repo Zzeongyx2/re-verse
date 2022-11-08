@@ -137,7 +137,7 @@ function FriendList() {
                       </div>
                       <button
                         onClick={() => {
-                          friendDelete(friend.email);
+                          friendDelete(friend.nickname);
                         }}
                       >
                         <FiMinusCircle className="text-sub3" size={24} />
