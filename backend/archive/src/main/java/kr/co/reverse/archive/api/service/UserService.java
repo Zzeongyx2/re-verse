@@ -18,7 +18,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service
@@ -117,5 +120,15 @@ public class UserService {
         User user = userRepository.findById(UUID.fromString(userId)).get();
 
         return user.getAuthId();
+    }
+
+    public List<String> getAvatars() {
+
+        List<String> avatars = Stream.of(Avatar.values())
+                .map(Enum::toString)
+                .collect(Collectors.toList());
+
+        return avatars;
+
     }
 }
