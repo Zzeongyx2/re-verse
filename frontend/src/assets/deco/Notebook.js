@@ -6,38 +6,53 @@ source: https://sketchfab.com/3d-models/cartoon-notebook-pencil-bd3831c95ab04e71
 title: Cartoon Notebook & Pencil
 */
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { gsap } from "gsap";
 import { useFrame } from "@react-three/fiber";
 
+import { useSelector, useDispatch } from "react-redux";
+import { setOpen } from "../../modules/archive";
+
 export function Notebook({ props, event }) {
   const { nodes, materials } = useGLTF("/assets/notebook/scene.gltf");
-  const memoryObject = useRef();
-  console.log("notebook");
-  console.log(event);
-  useFrame((state) => {
-    if (event === 1) {
-      gsap.to(memoryObject.current.position, {
-        duration: 0.2,
-        y: 0.4,
-        ease: "Bounce.easeOut",
-      });
-    } else if (event !== 1) {
-      gsap.to(memoryObject.current.position, {
-        duration: 0.2,
-        y: -2.2,
-        ease: "Bounce.easeOut",
-      });
-    }
-  });
+  const travelWriteObject = useRef();
+  // console.log("notebook");
+  // console.log(event);
+
+  // useFrame((state) => {
+  //   if (event === 1) {
+  //     gsap.to(travelWriteObject.current.position, {
+  //       duration: 0.3,
+  //       y: 0.4,
+  //       ease: "Bounce.easeOut",
+  //     });
+  //   } else if (event !== 1) {
+  //     gsap.to(travelWriteObject.current.position, {
+  //       duration: 0.4,
+  //       y: -2.2,
+  //       ease: "Bounce.easeOut",
+  //     });
+  //   }
+  // });
+
+  // modal창 열어주세요
+  const dispatch = useDispatch();
+
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      onClick={() => {
+        console.log("노트북 눌렀따");
+        dispatch(setOpen());
+      }}
+    >
       <group
-        ref={memoryObject}
+        ref={travelWriteObject}
         rotation={[-Math.PI / 2, 0, -Math.PI / 6]}
         scale={0.05}
-        position={[43.5, -2, -73.5]}
+        position={[42, 0.4, -73.5]}
         // position={[46.5, 0.12, -72]}
       >
         <group rotation={[Math.PI / 2, 0, 0]}>
