@@ -39,7 +39,16 @@ function ReverseTemp() {
   const [visible, setVisible] = useState(false);
   const handleVisible = (data) => {
     setVisible(data);
-    console.log(visible);
+    // console.log(visible);
+  };
+
+  // memory photobook, polaroid object
+  // anniv photobook, polaroid object
+  // diary photobook, polaroid object
+  const [event, setEvent] = useState(0);
+  const handleEvent = (data) => {
+    setEvent(data);
+    console.log(event);
   };
 
   // memory photobook, polaroid object
@@ -101,6 +110,7 @@ function ReverseTemp() {
           <CatAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
+            handleEvent={handleEvent}
           />
 
           <SkyTube />
@@ -109,8 +119,9 @@ function ReverseTemp() {
           <CampingPack />
           <CartoonCampingKit />
           <Polaroid
-          // position={new THREE.Vector3(48.5, -0.8, -70)}
-          // eventPosition={new THREE.Vector3(37, 0.01, -68)}
+            event={event}
+            // position={new THREE.Vector3(48.5, -0.8, -70)}
+            // eventPosition={new THREE.Vector3(37, 0.01, -68)}
           />
           {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
           <FireAnimated />

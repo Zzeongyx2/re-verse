@@ -12,6 +12,7 @@ export default function CatAnimations({
   // handleCurrentPosition,
   destinationPoint,
   handleVisible, // test object event handler
+  handleEvent,
 }) {
   const group = useRef();
   // const previousAction = usePrevious(action);
@@ -29,7 +30,7 @@ export default function CatAnimations({
   // const [visible, setVisible] = useState(false);
 
   // 추억 포토북, 글 보기 오브젝트 이벤트
-  const memoryPolaroidPosition = new THREE.Vector3(37, 0.01, -68);
+  const memoryPosition = new THREE.Vector3(37, 0.01, -68);
 
   useEffect(() => {
     if (destinationPoint) {
@@ -86,6 +87,16 @@ export default function CatAnimations({
           handleVisible(true);
         } else {
           handleVisible(false);
+        }
+
+        // memory photobook, polaroid object
+        if (
+          Math.abs(memoryPosition.x - group.current.position.x) < 7.5 &&
+          Math.abs(memoryPosition.z - group.current.position.z) < 7.5
+        ) {
+          handleEvent(1);
+        } else {
+          handleEvent(0);
         }
 
         // 메모리 아카이브 - 글 보기 폴라로이드 오브젝트
