@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -24,8 +25,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserService {
 
-    public static final String AUTHORIZATION_HEADER = "Authorization";
-    public static final String BEARER_PREFIX = "Bearer ";
+//    public static final String AUTHORIZATION_HEADER = "Authorization";
+//    public static final String BEARER_PREFIX = "Bearer ";
+    public static final String ACCESS_TOKEN = "accessToken";
+    public static final String REFRESH_TOKEN = "refreshToken";
     private final UserRepository userRepository;
     private final RedisService redisService;
 
@@ -37,10 +40,20 @@ public class UserService {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
-        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
-            bearerToken = bearerToken.substring(7);
+//        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+        String bearerToken = null;
+        Cookie[] cookies = request.getCookies();
+
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals(ACCESS_TOKEN)){
+                bearerToken = cookie.getValue();
+                break;
+            }
         }
+
+//        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
+//            bearerToken = bearerToken.substring(7);
+//        }
 
         String userId = redisService.getValues(bearerToken);
 
