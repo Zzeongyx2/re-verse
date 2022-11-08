@@ -41,8 +41,7 @@ function Login() {
     login({ email: id, password: pw }, loginSuccess, loginFail);
   };
   const loginSuccess = (res) => {
-    console.log(res);
-    // window.location.href = "/lobby";
+    window.location.href = "/lobby";
   };
   const loginFail = (error) => {
     alert("로그인실패");

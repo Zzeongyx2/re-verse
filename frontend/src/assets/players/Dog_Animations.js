@@ -7,17 +7,17 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import GLTFLoader from "gltfjsx/src/utils/glftLoader";
 import { useFrame } from "@react-three/fiber";
 
-export default function CatAnimations({
-  // action,
-  // handleCurrentPosition,
+export default function DogAnimations({
+  action,
   destinationPoint,
-  handleVisible, // test object event handler
-  handleEvent, // memory, anniv, diary event handler
+  handleCurrentPosition,
+  handleVisible,
+  userName
 }) {
   const group = useRef();
   // const previousAction = usePrevious(action);
   const { nodes, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Cat_Animations.gltf"
+    "/assets/animals/GLTF/Animations/Dog_Animations.gltf"
   );
   const { actions } = useAnimations(animations, group);
 
@@ -29,16 +29,15 @@ export default function CatAnimations({
   // console.log(objectPosition);
   // const [visible, setVisible] = useState(false);
 
-  // 추억 포토북, 글 보기 오브젝트 이벤트
-  const memoryPosition = new THREE.Vector3(37, 0.01, -68);
-
   useEffect(() => {
     if (destinationPoint) {
       setMoving(true);
-      // console.log(group.current); // player.modelmesh
-      group.current.lookAt(destinationPoint);
+      console.log(123123);
+      console.log(destinationPoint);
+      console.log(group.current); // player.modelmesh
+      // group.current.lookAt(destinationPoint);
 
-      group.current.name = "mememememe";
+      group.current.name = userName;
 
       console.log(group.current);
     }
@@ -46,7 +45,7 @@ export default function CatAnimations({
   useFrame((state) => {
     actions["Idle_A"].play();
     if (group.current) {
-      state.camera.lookAt(group.current.position);
+      // state.camera.lookAt(group.current.position);
     }
 
     if (group.current) {
@@ -58,8 +57,8 @@ export default function CatAnimations({
         group.current.position.x += Math.cos(angle) * 0.05;
         group.current.position.z += Math.sin(angle) * 0.05;
 
-        state.camera.position.x = 1 + group.current.position.x;
-        state.camera.position.z = 5 + group.current.position.z;
+        // state.camera.position.x = 1 + group.current.position.x;
+        // state.camera.position.z = 5 + group.current.position.z;
 
         // console.log(group.current.position);
 
@@ -67,7 +66,7 @@ export default function CatAnimations({
 
         actions["Idle_A"].stop();
         actions["Walk"].play();
-        console.log("우리 고양이 걷는다");
+        console.log("우리 강아지 걷는다");
 
         if (
           Math.abs(destinationPoint.x - group.current.position.x) < 0.03 &&
@@ -76,7 +75,7 @@ export default function CatAnimations({
           setMoving(false);
           actions["Walk"].stop();
           actions["Idle_A"].play();
-          console.log("우리 고양이 멈춘다");
+          console.log("우리 강아지 멈춘다");
         }
 
         // 오브젝트 visible event
@@ -85,30 +84,10 @@ export default function CatAnimations({
           Math.abs(objectPosition.z - group.current.position.z) < 4
         ) {
           handleVisible(true);
+          // setVisible(true);
         } else {
           handleVisible(false);
         }
-
-        // memory photobook, polaroid object
-        if (
-          Math.abs(memoryPosition.x - group.current.position.x) < 7.5 &&
-          Math.abs(memoryPosition.z - group.current.position.z) < 7.5
-        ) {
-          handleEvent(1);
-        } else {
-          handleEvent(0);
-        }
-
-        // 메모리 아카이브 - 글 보기 폴라로이드 오브젝트
-        // if (
-        //   Math.abs(memoryPolaroidPosition.x - group.current.position.x) < 10 &&
-        //   Math.abs(memoryPolaroidPosition.z - group.current.position.z) < 7.5
-        // ) {
-        //   handleMemoryPolaroidVisible(true);
-        //   // setVisible(true);
-        // } else {
-        //   handleMemoryPolaroidVisible(false);
-        // }
       }
     }
   });
@@ -129,12 +108,12 @@ export default function CatAnimations({
         <group name="Rig">
           <primitive object={nodes.root} />
           <skinnedMesh
-            name="Cat"
-            geometry={nodes.Cat.geometry}
-            material={materials.M_Cat}
-            skeleton={nodes.Cat.skeleton}
-            morphTargetDictionary={nodes.Cat.morphTargetDictionary}
-            morphTargetInfluences={nodes.Cat.morphTargetInfluences}
+            name="Dog"
+            geometry={nodes.Dog.geometry}
+            material={materials.M_Dog}
+            skeleton={nodes.Dog.skeleton}
+            morphTargetDictionary={nodes.Dog.morphTargetDictionary}
+            morphTargetInfluences={nodes.Dog.morphTargetInfluences}
             // 그림자 설정은 여기에!
             castShadow
             receiveShadow
@@ -145,7 +124,7 @@ export default function CatAnimations({
   );
 }
 
-useGLTF.preload("/Cat_Animations.gltf");
+useGLTF.preload("/Dog_Animations.gltf");
 
 function usePrevious(value) {
   const ref = useRef();

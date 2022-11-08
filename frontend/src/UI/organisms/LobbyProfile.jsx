@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
-import { nicknameCheck } from "../../api/user";
+import { editUserInfo, getUserInfo, nicknameCheck } from "../../api/user";
 
-function LobbyProfile() {
-  const initialUserInfo = {
-    nickname: "zl존윤sun",
-    message: "늦었다고 생각할 때가 진짜 너무 늦었다",
-  };
+function LobbyProfile({ loginUser }) {
+  // const initialUserInfo = {
+  //   nickname: "zl존윤sun",
+  //   message: "늦었다고 생각할 때가 진짜 너무 늦었다",
+  // };
 
-  const [userInfo, setUserInfo] = useState(initialUserInfo);
+  const [userInfo, setUserInfo] = useState(loginUser);
   console.log(userInfo);
+  useEffect(() => {
+    setUserInfo(loginUser);
+  }, [loginUser]);
+
   // edit ? "편집하는 중!" : "편집 안하는 중"
   const [edit, setEdit] = useState(false);
 
@@ -52,9 +56,13 @@ function LobbyProfile() {
       message: "*중복된 닉네임 입니다.",
     });
   };
-  useEffect(() => {
-    // TODO: 처음에 토큰으로 로그인 된 유저 정보 가져오기
-  }, []);
+  const editUserInfoSuccess = (res) => {
+    console.log(res);
+  };
+  const editUserInfoFail = (error) => {
+    console.log(error);
+  };
+
   return (
     <div className="flex flex-col items-center w-full mt-28 border border-1 border-white rounded-2xl bg-white">
       {/* header */}
@@ -62,10 +70,7 @@ function LobbyProfile() {
         <p className="text-2xl drop-shadow font-bold my-4 text-white">프로필</p>
       </div>
       {/* profile contents */}
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col w-full items-center"
-      >
+      <form onSubmit={handleSubmit} className="flex flex-col w-full items-center">
         {/* nickname */}
         <div className="w-11/12 my-3">
           <div>
@@ -82,9 +87,7 @@ function LobbyProfile() {
                 (isValid.valid ? " border-base2/20" : " border-red-500/80")
               }
             />
-            <p className="text-red-500 ml-1 mt-1 text-[10px]">
-              {isValid.message}
-            </p>
+            <p className="text-red-500 ml-1 mt-1 text-[10px]">{isValid.message}</p>
           </div>
           {/* comments */}
           <div>
@@ -105,6 +108,12 @@ function LobbyProfile() {
               type="submit"
               onClick={() => {
                 if (isValid.valid) {
+                  editUserInfo(
+                    { nickname: userInfo.nickname, message: userInfo.message },
+                    editUserInfoSuccess,
+                    editUserInfoFail
+                  );
+
                   setEdit(false);
                 }
               }}

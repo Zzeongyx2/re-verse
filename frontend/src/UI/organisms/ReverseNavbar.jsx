@@ -47,7 +47,7 @@ function ReverseNavbar() {
             }
           });
         }}
-        className="font-bold text-2xl drop-shadow cursor-pointer h-fit hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-main1 hover:to-main2 "
+        className="font-bold text-2xl drop-shadow cursor-pointer h-fit hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-main1 hover:to-main2 hover:-scale-x-100 transition hover:duration-500 duration-500"
       >
         REVERSE
       </div>
