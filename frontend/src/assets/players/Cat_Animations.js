@@ -8,10 +8,10 @@ import GLTFLoader from "gltfjsx/src/utils/glftLoader";
 import { useFrame } from "@react-three/fiber";
 
 export default function CatAnimations({
-  action,
+  // action,
+  // handleCurrentPosition,
   destinationPoint,
-  handleCurrentPosition,
-  handleVisible,
+  handleVisible, // test object event handler
 }) {
   const group = useRef();
   // const previousAction = usePrevious(action);
@@ -27,6 +27,9 @@ export default function CatAnimations({
   const objectPosition = new THREE.Vector3(-20, 0.01, 3);
   // console.log(objectPosition);
   // const [visible, setVisible] = useState(false);
+
+  // 추억 포토북, 글 보기 오브젝트 이벤트
+  const memoryPolaroidPosition = new THREE.Vector3(37, 0.01, -68);
 
   useEffect(() => {
     if (destinationPoint) {
@@ -81,10 +84,20 @@ export default function CatAnimations({
           Math.abs(objectPosition.z - group.current.position.z) < 4
         ) {
           handleVisible(true);
-          // setVisible(true);
         } else {
           handleVisible(false);
         }
+
+        // 메모리 아카이브 - 글 보기 폴라로이드 오브젝트
+        // if (
+        //   Math.abs(memoryPolaroidPosition.x - group.current.position.x) < 10 &&
+        //   Math.abs(memoryPolaroidPosition.z - group.current.position.z) < 7.5
+        // ) {
+        //   handleMemoryPolaroidVisible(true);
+        //   // setVisible(true);
+        // } else {
+        //   handleMemoryPolaroidVisible(false);
+        // }
       }
     }
   });
