@@ -1,6 +1,9 @@
 import * as THREE from "three";
 import React, { Suspense, useRef, useState } from "react";
+import { useEffect } from "react";
+
 import { Canvas, useLoader } from "@react-three/fiber";
+
 import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 // import { OrthographicCamera } from "@react-three/drei";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
@@ -9,15 +12,14 @@ import { SkyTube } from "../../assets/deco/SkyTube.js";
 import { ObjectTest } from "../../assets/deco/ObjectTest.js";
 import { CampingPack } from "../../assets/deco/CampingPack.js";
 // import { FireAnimated } from "../../assets/deco/FireAnimated.js";
-
-import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
-import { useEffect } from "react";
-import ReverseFooter from "../organisms/ReverseFooter.jsx";
 import { Polaroid } from "../../assets/deco/Polaroid.js";
 import { CartoonCampingKit } from "../../assets/deco/CartoonCampingKit.js";
 import { FireAnimated } from "../../assets/deco/FireAnimated.js";
 import { Notebook } from "../../assets/deco/Notebook.js";
-import MemoryWriteModal from "../organisms/MemoryWriteModal.jsx";
+
+import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
+import TravelWriteModal from "../organisms/TravelWriteModal.jsx";
+import ReverseFooter from "../organisms/ReverseFooter.jsx";
 
 function ReverseTemp() {
   // default action = idle
@@ -44,7 +46,7 @@ function ReverseTemp() {
     // console.log(visible);
   };
 
-  // memory photobook, polaroid object
+  // travel photobook, polaroid object
   // anniv photobook, polaroid object
   // diary photobook, polaroid object
   const [event, setEvent] = useState(0);
@@ -142,7 +144,7 @@ function ReverseTemp() {
           <meshBasicMaterial color="black" transparent opacity={0.3} />
         </mesh>
       </Canvas>
-      <MemoryWriteModal />
+      <TravelWriteModal />
     </div>
   );
 }

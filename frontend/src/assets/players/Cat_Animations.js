@@ -12,7 +12,7 @@ export default function CatAnimations({
   // handleCurrentPosition,
   destinationPoint,
   handleVisible, // test object event handler
-  handleEvent, // memory, anniv, diary event handler
+  handleEvent, // travel, anniv, diary event handler
 }) {
   const group = useRef();
   // const previousAction = usePrevious(action);
@@ -29,8 +29,8 @@ export default function CatAnimations({
   // console.log(objectPosition);
   // const [visible, setVisible] = useState(false);
 
-  // 추억 포토북, 글 보기 오브젝트 이벤트
-  const memoryPosition = new THREE.Vector3(37, 0.01, -68);
+  // 여행 포토북, 글 보기 오브젝트 이벤트
+  const travelPosition = new THREE.Vector3(37, 0.01, -68);
 
   useEffect(() => {
     if (destinationPoint) {
@@ -89,10 +89,10 @@ export default function CatAnimations({
           handleVisible(false);
         }
 
-        // memory photobook, polaroid object
+        // travel photobook, polaroid object
         if (
-          Math.abs(memoryPosition.x - group.current.position.x) < 10 &&
-          Math.abs(memoryPosition.z - group.current.position.z) < 10
+          Math.abs(travelPosition.x - group.current.position.x) < 10 &&
+          Math.abs(travelPosition.z - group.current.position.z) < 10
         ) {
           handleEvent(1);
         } else {
@@ -101,13 +101,13 @@ export default function CatAnimations({
 
         // 메모리 아카이브 - 글 보기 폴라로이드 오브젝트
         // if (
-        //   Math.abs(memoryPolaroidPosition.x - group.current.position.x) < 10 &&
-        //   Math.abs(memoryPolaroidPosition.z - group.current.position.z) < 7.5
+        //   Math.abs(travelPolaroidPosition.x - group.current.position.x) < 10 &&
+        //   Math.abs(travelPolaroidPosition.z - group.current.position.z) < 7.5
         // ) {
-        //   handleMemoryPolaroidVisible(true);
+        //   handleTravelPolaroidVisible(true);
         //   // setVisible(true);
         // } else {
-        //   handleMemoryPolaroidVisible(false);
+        //   handleTravelPolaroidVisible(false);
         // }
       }
     }
