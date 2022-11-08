@@ -1,12 +1,9 @@
 package kr.co.reverse.archive.db.repository;
 
-import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.reverse.archive.api.response.FriendInvitationRes;
 import kr.co.reverse.archive.api.response.QFriendInvitationRes;
-import kr.co.reverse.archive.db.entity.QFriendInvitation;
-import kr.co.reverse.archive.db.entity.QUser;
 import kr.co.reverse.archive.db.entity.User;
 
 import javax.persistence.EntityManager;
