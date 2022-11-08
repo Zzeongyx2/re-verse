@@ -4,10 +4,7 @@ import kr.co.reverse.archive.api.request.ArchiveMemberReq;
 import kr.co.reverse.archive.api.request.BookmarkReq;
 import kr.co.reverse.archive.api.request.FriendInvitationReq;
 import kr.co.reverse.archive.api.request.InvitationReplyReq;
-import kr.co.reverse.archive.api.response.FriendInvitationRes;
-import kr.co.reverse.archive.api.response.FriendInvitationsRes;
-import kr.co.reverse.archive.api.response.FriendRes;
-import kr.co.reverse.archive.api.response.FriendsRes;
+import kr.co.reverse.archive.api.response.*;
 import kr.co.reverse.archive.api.service.ArchiveService;
 import kr.co.reverse.archive.api.service.FriendService;
 import kr.co.reverse.archive.api.service.UserService;
@@ -133,6 +130,20 @@ public class FriendController {
         friendService.deleteBookmark(archive, user);
 
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/archive-member")
+    public ResponseEntity<? extends ArchivesRes> getFriendArchives(@RequestParam(name = "nickname") String nickname) {
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
+        User target = userService.getUserByNickname(nickname);
+
+        if (friendService.checkFriend(user, target)) { // 친구 여부 확인
+            throw new NotFriendException();
+        }
+
+        List<ArchiveRes> friendArchives = archiveService.getArchives(target);
+        return ResponseEntity.ok(ArchivesRes.of(friendArchives));
     }
 
     @PostMapping("/archive-member")
