@@ -16,6 +16,7 @@ import ReverseFooter from "../organisms/ReverseFooter.jsx";
 import { Polaroid } from "../../assets/deco/Polaroid.js";
 import { CartoonCampingKit } from "../../assets/deco/CartoonCampingKit.js";
 import { FireAnimated } from "../../assets/deco/FireAnimated.js";
+import { Notebook } from "../../assets/deco/Notebook.js";
 
 function ReverseTemp() {
   // default action = idle
@@ -118,13 +119,16 @@ function ReverseTemp() {
           {/* <ObjectTest currentPosition={currentPosition} /> */}
           <CampingPack />
           <CartoonCampingKit />
+          <FireAnimated />
+
+          {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
           <Polaroid
             event={event}
             // position={new THREE.Vector3(48.5, -0.8, -70)}
             // eventPosition={new THREE.Vector3(37, 0.01, -68)}
           />
+          <Notebook event={event} />
           {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
-          <FireAnimated />
         </Suspense>
         {/* floor */}
         <mesh
