@@ -16,36 +16,36 @@ export function Polaroid({ props, position, event }) {
 
   const travelObject = useRef();
   const travelSpot = useRef();
-  console.log("======================[polaroid]======================");
-  console.log(event);
-  useFrame((state) => {
-    if (event === 1) {
-      travelSpot.current.children[0].material.color.r = 1;
-      travelSpot.current.children[0].material.color.b = 1;
+  // console.log("======================[polaroid]======================");
+  // console.log(event);
+  // useFrame((state) => {
+  //   if (event === 1) {
+  //     travelSpot.current.children[0].material.color.r = 1;
+  //     travelSpot.current.children[0].material.color.b = 1;
 
-      gsap.to(travelObject.current.position, {
-        duration: 0.3,
-        y: 1.1,
-        ease: "Bounce.easeOut",
-      });
-      gsap.to(state.camera.position, {
-        duration: 1,
-        y: 3,
-      });
-    } else if (event !== 1) {
-      travelSpot.current.children[0].material.color.r = 0;
-      travelSpot.current.children[0].material.color.b = 1;
-      gsap.to(travelObject.current.position, {
-        duration: 0.4,
-        y: -2,
-        ease: "Bounce.easeOut",
-      });
-      gsap.to(state.camera.position, {
-        duration: 1,
-        y: 5,
-      });
-    }
-  });
+  //     gsap.to(travelObject.current.position, {
+  //       duration: 0.3,
+  //       y: 1.1,
+  //       ease: "Bounce.easeOut",
+  //     });
+  //     gsap.to(state.camera.position, {
+  //       duration: 1,
+  //       y: 3,
+  //     });
+  //   } else if (event !== 1) {
+  //     travelSpot.current.children[0].material.color.r = 0;
+  //     travelSpot.current.children[0].material.color.b = 1;
+  //     gsap.to(travelObject.current.position, {
+  //       duration: 0.4,
+  //       y: -2,
+  //       ease: "Bounce.easeOut",
+  //     });
+  //     gsap.to(state.camera.position, {
+  //       duration: 1,
+  //       y: 5,
+  //     });
+  //   }
+  // });
 
   return (
     <group {...props} dispose={null}>
@@ -53,7 +53,7 @@ export function Polaroid({ props, position, event }) {
         ref={travelObject}
         rotation={[-Math.PI / 2, 0, Math.PI / 6]}
         scale={0.05}
-        position={[46, -1, -70]}
+        position={[46, 1.1, -70]}
         // position={[48.5, 0.8, -70]}
         // position={position}
       >
@@ -81,7 +81,9 @@ export function Polaroid({ props, position, event }) {
           </group>
         </group>
       </group>
-      {/* 오브젝트 나타나는 지점 */}
+
+      {/* // FIXME: 다른 에셋에서 애니메이션 적용할구야 */}
+      {/* 오브젝트 나타나는 지점
       <group ref={travelSpot}>
         <mesh
           rotation={[-0.5 * Math.PI, 0, -0.2 * Math.PI]}
@@ -91,7 +93,7 @@ export function Polaroid({ props, position, event }) {
           <planeBufferGeometry attach="geometry" args={[20, 20]} />
           <meshBasicMaterial color="blue" opacity={0.5} transparent />
         </mesh>
-      </group>
+      </group> */}
     </group>
   );
 }

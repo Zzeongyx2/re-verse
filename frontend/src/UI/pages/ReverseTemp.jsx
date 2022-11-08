@@ -49,11 +49,11 @@ function ReverseTemp() {
   // travel photobook, polaroid object
   // anniv photobook, polaroid object
   // diary photobook, polaroid object
-  const [event, setEvent] = useState(0);
-  const handleEvent = (data) => {
-    setEvent(data);
-    // console.log(event);
-  };
+  // const [event, setEvent] = useState(0);
+  // const handleEvent = (data) => {
+  //   setEvent(data);
+  //   // console.log(event);
+  // };
 
   return (
     <div className="h-screen overflow-hidden relative">
@@ -107,7 +107,7 @@ function ReverseTemp() {
           <CatAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
-            handleEvent={handleEvent}
+            // handleEvent={handleEvent}
           />
 
           <SkyTube />
@@ -118,8 +118,10 @@ function ReverseTemp() {
           <FireAnimated />
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
-          <Polaroid event={event} />
-          <Notebook event={event} />
+          <Polaroid />
+          <Notebook />
+          {/* <Polaroid event={event} />
+          <Notebook event={event} /> */}
           {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
         </Suspense>
         {/* floor */}
