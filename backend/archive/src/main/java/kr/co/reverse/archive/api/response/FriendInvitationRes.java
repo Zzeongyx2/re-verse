@@ -11,6 +11,8 @@ public class FriendInvitationRes {
 
     private String avatar;
 
+    private String message;
+
     public static FriendInvitationRes of(User user) {
         if (user == null) return null;
 
@@ -18,6 +20,7 @@ public class FriendInvitationRes {
 
         friendInvitationRes.setNickname(user.getNickname());
         friendInvitationRes.setAvatar(user.getAvatar().toString());
+        friendInvitationRes.setMessage(user.getMessage());
 
         return friendInvitationRes;
 
