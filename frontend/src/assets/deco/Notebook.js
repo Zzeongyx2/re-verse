@@ -6,16 +6,27 @@ source: https://sketchfab.com/3d-models/cartoon-notebook-pencil-bd3831c95ab04e71
 title: Cartoon Notebook & Pencil
 */
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { gsap } from "gsap";
 import { useFrame } from "@react-three/fiber";
 
+import { useSelector } from "react-redux";
+
 export function Notebook({ props, event }) {
   const { nodes, materials } = useGLTF("/assets/notebook/scene.gltf");
   const memoryObject = useRef();
-  console.log("notebook");
-  console.log(event);
+  // console.log("notebook");
+  // console.log(event);
+
+  const isOpen = useSelector((state) => state.archive.isOpen);
+
+  // open write modal
+  const { openModal, setOpenModal } = useState(false);
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
   useFrame((state) => {
     if (event === 1) {
       gsap.to(memoryObject.current.position, {
@@ -32,7 +43,14 @@ export function Notebook({ props, event }) {
     }
   });
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      onClick={() => {
+        console.log("노트북 눌렀따");
+        handleOpenModal();
+      }}
+    >
       <group
         ref={memoryObject}
         rotation={[-Math.PI / 2, 0, -Math.PI / 6]}

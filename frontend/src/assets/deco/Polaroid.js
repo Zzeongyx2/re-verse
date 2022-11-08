@@ -57,7 +57,12 @@ export function Polaroid({ props, position, event }) {
         // position={[48.5, 0.8, -70]}
         // position={position}
       >
-        <group rotation={[Math.PI / 2, 0, 0]}>
+        <group
+          rotation={[Math.PI / 2, 0, 0]}
+          onClick={() => {
+            console.log("폴라로이드 눌렀다");
+          }}
+        >
           <group rotation={[-Math.PI / 2, 0, 0]}>
             <mesh
               geometry={nodes.Polaroid_01_Mat_plastic_0.geometry}
@@ -81,9 +86,9 @@ export function Polaroid({ props, position, event }) {
         <mesh
           rotation={[-0.5 * Math.PI, 0, -0.2 * Math.PI]}
           receiveShadow
-          position={[37, 0.01, -68]}
+          position={[40, 0.01, -68]}
         >
-          <planeBufferGeometry attach="geometry" args={[20, 15]} />
+          <planeBufferGeometry attach="geometry" args={[20, 20]} />
           <meshBasicMaterial color="blue" opacity={0.5} transparent />
         </mesh>
       </group>
