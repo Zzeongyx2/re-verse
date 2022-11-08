@@ -7,33 +7,29 @@ import { HiOutlineTrash } from "react-icons/hi";
 
 import { Avatar } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
+import { deleteFriend, getFriendList } from "../../api/friend";
+import { imageForm, s3Path } from "../../api";
 
 function FriendList() {
-  // temporary data
-  // TODO: 이미지 저장용 변수 나중에 지우기
-  const [profileImg] = useState(
-    "https://images.unsplash.com/photo-1638643391904-9b551ba91eaa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2592&q=80"
-  );
-
-  // TODO:
   const [findNickName, setFindNickName] = useState("");
   const [friendList, setFriendList] = useState([]);
   const [archiveList, setArchiveList] = useState([]);
-  const [selectFriend, setSelectFriend] = useState({
-    email: "",
-    nickname: "",
-    avatar: "",
-    message: "",
-  });
+  const [selectFriend, setSelectFriend] = useState();
   const [rightTitle, setRightTitle] = useState("");
 
   const findNickNameHandleChange = (e) => {
     setFindNickName(e.target.value);
   };
 
-  const friendDelete = (email) => {
-    // TODO: 친구삭제 하기
-    console.log("친구삭제", email);
+  const friendDelete = (nickname) => {
+    deleteFriend(nickname, deleteFriendSuccess, deleteFriendFail);
+    console.log("친구삭제", nickname);
+  };
+  const deleteFriendSuccess = (res) => {
+    console.log(res);
+  };
+  const deleteFriendFail = (error) => {
+    console.log(error);
   };
 
   const clickNickname = (friend) => {
@@ -52,43 +48,21 @@ function FriendList() {
   };
 
   useEffect(() => {
-    // TODO: axios 요청으로 친구 목록 받기
-    setFriendList((list) => {
-      return [
-        ...list,
-        {
-          email: "email@naver.com",
-          nickname: "KIN거운KAN쵸",
-          avatar: profileImg,
-          message: "엉망으로 살아야 해! 인생은 한 번이야!",
-        },
-        {
-          email: "email@naver.com",
-          nickname: "oO강약약강Oo",
-          avatar: profileImg,
-          message: "가는 말이 고우면, 얕본다.",
-        },
-        {
-          email: "email@naver.com",
-          nickname: "zl존윤sun2",
-          avatar: profileImg,
-          message:
-            "새벽에 먹는 맥주와 치킨은 0 칼로리다.새벽에 먹는 맥주와 치킨은 0 칼로리다.새벽에 먹는 맥주와 치킨은 0 칼로리다.",
-        },
-      ];
-    });
-    if (friendList.length > 0) {
-      setSelectFriend(friendList[0]);
-      setRightTitle(`나와함께하는 '${friendList[0].nickname}'의 아카이브`);
-    } else {
-      setRightTitle("함께하는 친구가 없습니다");
-    }
+    getFriendList(getFriendSuccess, getFriendFail);
   }, []);
+
+  const getFriendSuccess = (res) => {
+    console.log(res);
+    setFriendList(res.data.friends);
+  };
+  const getFriendFail = (error) => {
+    console.log(error);
+  };
 
   // FIXME: 처음에는 빈간이였다가, 나중에 친구 이름 눌렀을 때 오른쪽 화면에 보여야 함!
   useEffect(() => {
     // TODO: 선택 유저 바뀔때마다 아카이브 목록 가져오기
-    console.log(selectFriend.nickname, "아카이브 목록 가져옴");
+    console.log(selectFriend?.nickname, "아카이브 목록 가져옴");
     setArchiveList([
       {
         archiveId: "a1",
@@ -152,7 +126,11 @@ function FriendList() {
                     <div className="flex items-center justify-between px-2 py-1">
                       <div className="flex items-center">
                         {/* <img src={friend.avatar} alt={friend.nickname} /> */}
-                        <Avatar name="profileImg" src={profileImg} size="sm" />
+                        <Avatar
+                          name="profileImg"
+                          src={s3Path + friend.avatar + imageForm}
+                          size="sm"
+                        />
                         <div className="text-base1 px-3">
                           <p
                             onClick={() => {
@@ -186,54 +164,59 @@ function FriendList() {
           </div>
         </div>
         {/* archive list */}
-        <div className="bg-white rounded-3xl w-[calc(96%/2)] h-[600px] pt-5 pb-6 flex flex-col items-center">
-          {/* <div className="bg-white rounded-3xl w-[calc(96%/2)] h-full pt-5 pb-6 flex flex-col items-center"> */}
-          <div className="w-[calc(100%-50px)] text-xl font-bold mb-2">
-            <p className="mt-2 mb-2 mx-2 px-2.5">{rightTitle}</p>
-            <Divider />
-          </div>
-          <div className="w-[calc(100%-50px)] overflow-auto scrollbar-hide">
-            {archiveList.map((archive, index) => {
-              return (
-                <div key={`archiveList-${index}`}>
-                  <div className="flex items-center justify-between px-2 py-1">
-                    <div className="text-base1 px-3">
-                      <p className="text-sm font-bold">{archive.title}</p>
-                      <p className="text-xs overflow-hidden text-ellipsis line-clamp-1 text-zinc-500">
-                        {archive.description}
-                      </p>
+        {selectFriend ? (
+          <div className="bg-white rounded-3xl w-[calc(96%/2)] h-[600px] pt-5 pb-6 flex flex-col items-center">
+            {/* <div className="bg-white rounded-3xl w-[calc(96%/2)] h-full pt-5 pb-6 flex flex-col items-center"> */}
+            <div className="w-[calc(100%-50px)] text-xl font-bold mb-2">
+              <p className="mt-2 mb-2 mx-2 px-2.5">{rightTitle}</p>
+              <Divider />
+            </div>
+            <div className="w-[calc(100%-50px)] overflow-auto scrollbar-hide">
+              {archiveList.map((archive, index) => {
+                return (
+                  <div key={`archiveList-${index}`}>
+                    <div className="flex items-center justify-between px-2 py-1">
+                      <div className="text-base1 px-3">
+                        <p className="text-sm font-bold">{archive.title}</p>
+                        <p className="text-xs overflow-hidden text-ellipsis line-clamp-1 text-zinc-500">
+                          {archive.description}
+                        </p>
+                      </div>
+                      <div>
+                        <button
+                          onClick={() => {
+                            enterArchive(archive.archiveId);
+                          }}
+                          className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
+                        >
+                          <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
+                        </button>
+                        <button
+                          onClick={() => {
+                            archiveDelete(archive.archiveId);
+                          }}
+                          className="bg-sub3 border-2 border-basic3 rounded-full"
+                        >
+                          <HiOutlineTrash size={18} className="text-white m-0.5" />
+                        </button>
+                      </div>
                     </div>
-                    <div>
-                      <button
-                        onClick={() => {
-                          enterArchive(archive.archiveId);
-                        }}
-                        className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
-                      >
-                        <BiLogIn
-                          size={18}
-                          className="text-white m-0.5 -translate-x-0.5"
-                        />
-                      </button>
-                      <button
-                        onClick={() => {
-                          archiveDelete(archive.archiveId);
-                        }}
-                        className="bg-sub3 border-2 border-basic3 rounded-full"
-                      >
-                        <HiOutlineTrash
-                          size={18}
-                          className="text-white m-0.5"
-                        />
-                      </button>
-                    </div>
+                    <Divider />
                   </div>
-                  <Divider />
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="bg-white rounded-3xl w-[calc(96%/2)] h-[600px] pt-5 pb-6 flex flex-col items-center justify-center">
+            <p className="font-bold text-3xl mb-6">사랑~해요~</p>
+            <img
+              className="aspect-square rounded-full w-3/5"
+              src="https://images.velog.io/images/sdp1123/post/ea263380-9ae0-4850-bd69-6af4dcf3e8e6/%EB%9A%B1%EC%9D%B41.jpg"
+              alt="nothing"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
