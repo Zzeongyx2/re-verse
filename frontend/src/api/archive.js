@@ -18,5 +18,8 @@ async function deleteArchive(archiveId, success, fail) {
 async function editArchive(archiveId, editArchiveReq, success, fail) {
   await api.patch(`/archive/${archiveId}`, editArchiveReq).then(success).catch(fail);
 }
+async function getArchiveLike(success, fail) {
+  await api.get(`/friend/bookmark`).then(success).catch(fail);
+}
 
-export { postArchive, getArchiveList, deleteArchive, editArchive };
+export { postArchive, getArchiveList, deleteArchive, editArchive, getArchiveLike };
