@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -122,6 +121,7 @@ public class ArchiveService {
         return archive.getOwnerId().equals(userId);
     }
 
+    @Transactional
     public void updateArchive(UUID archiveId, ArchiveReq archiveReq) {
         Archive archive = archiveRepository.findById(archiveId)
                 .orElseThrow(() -> new NoSuchElementException());
@@ -137,6 +137,7 @@ public class ArchiveService {
         archive.setDescription(description);
     }
 
+    @Transactional
     public void deleteArchive(UUID archiveId) {
         archiveRepository.deleteById(archiveId);
     }
