@@ -11,6 +11,7 @@ import { useRef, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setOpen } from "../../modules/archive";
+import ArchiveDatePicker from "../molecules/DatePicker";
 
 function TravelWriteModal() {
   const openModal = useSelector((state) => state.archive.isOpen);
@@ -43,10 +44,7 @@ function TravelWriteModal() {
               {/* 기록 날짜 */}
               <div className="w-[calc(98%/3)] border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1">
                 <p className="text-xs text-basic1">기록 날짜</p>
-                <input
-                  type="text"
-                  className="w-full focus:outline-none mt-0.5"
-                />
+                <ArchiveDatePicker />
               </div>
             </div>
 
