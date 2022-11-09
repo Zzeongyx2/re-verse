@@ -11,6 +11,9 @@ import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { gsap } from "gsap";
 
+import { useDispatch } from "react-redux";
+import { setOpen } from "../../modules/archive";
+
 export function Polaroid({ props, position, event }) {
   const { nodes, materials } = useGLTF("/assets/retro_polaroid/scene.gltf");
 
@@ -47,23 +50,38 @@ export function Polaroid({ props, position, event }) {
   //   }
   // });
 
+  // modal창 열어주세요
+  const dispatch = useDispatch();
+
+  console.log(travelObject.current);
+
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      onClick={() => {
+        console.log("폴라로이드 눌렀다");
+        dispatch(setOpen());
+      }}
+    >
       <group
         ref={travelObject}
         rotation={[-Math.PI / 2, 0, Math.PI / 6]}
         scale={0.05}
-        position={[46, 1.1, -70]}
+        position={[20, 1.1, -70]}
         // position={[48.5, 0.8, -70]}
         // position={position}
       >
-        <group
-          rotation={[Math.PI / 2, 0, 0]}
-          onClick={() => {
-            console.log("폴라로이드 눌렀다");
-          }}
-        >
-          <group rotation={[-Math.PI / 2, 0, 0]}>
+        <group rotation={[Math.PI / 2, 0, 0]}>
+          <group
+            rotation={[-Math.PI / 2, 0, 0]}
+            onPointerOver={(e) => {
+              document.getElementsByTagName("body")[0].style.cursor = "pointer";
+            }}
+            onPointerLeave={(e) => {
+              document.getElementsByTagName("body")[0].style.cursor = "";
+            }}
+          >
             <mesh
               geometry={nodes.Polaroid_01_Mat_plastic_0.geometry}
               material={materials.Mat_plastic}
