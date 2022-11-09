@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface BookmarkRepository extends JpaRepository<BookMark, Integer> {
+public interface BookmarkRepository extends JpaRepository<BookMark, Integer>, BookmarkRepositoryCustom {
 
     public BookMark findBookMarkByArchiveAndUser(Archive archive, User user);
 }
