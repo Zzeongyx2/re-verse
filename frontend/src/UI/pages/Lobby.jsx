@@ -12,7 +12,7 @@ function Lobby() {
   const initialUserInfo = {
     nickname: "",
     message: "",
-    avatar: "Cat",
+    avatar: "",
   };
 
   const [loginUser, setLoginUser] = useState(initialUserInfo);

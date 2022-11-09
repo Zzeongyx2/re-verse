@@ -10,7 +10,7 @@ function SelectCharacter() {
   const initialData = {
     nickname: "",
     message: "",
-    avatar: "Cat",
+    avatar: "",
   };
   const [mine, setMine] = useState(initialData);
   const [ischecked, setIschecked] = useState(false);
