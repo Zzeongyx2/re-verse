@@ -12,7 +12,7 @@ public class CookieUtil {
     public Cookie addRefreshCookie(String refreshToken) {
         Cookie cookie = new Cookie("refreshToken", refreshToken);
         cookie.setMaxAge(86400 * 1000);
-        cookie.setSecure(true);
+        cookie.setSecure(false);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         return cookie;
@@ -21,7 +21,7 @@ public class CookieUtil {
     public Cookie addAccessCookie(String accessToken) {
         Cookie accessCookie = new Cookie("accessToken", accessToken);
         accessCookie.setMaxAge((int)System.currentTimeMillis() * 1800 * 1000);
-        accessCookie.setSecure(true);
+        accessCookie.setSecure(false);
         accessCookie.setHttpOnly(true);
         accessCookie.setPath("/");
         return accessCookie;

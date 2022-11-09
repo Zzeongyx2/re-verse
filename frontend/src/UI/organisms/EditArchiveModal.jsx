@@ -13,21 +13,43 @@ import {
 import { useRef, useState } from "react";
 
 import { BiPencil } from "react-icons/bi";
+import { editArchive } from "../../api/archive";
 
 // TODO: 기존 내용 가져와야 함
-function EditArchiveModal() {
+function EditArchiveModal({ archive }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [editTitle, setEditTitle] = useState("");
-  const [editMessage, setEditMessage] = useState("");
+  const [editTitle, setEditTitle] = useState(archive.title);
+  const [editMessage, setEditMessage] = useState(archive.description);
+  const [clickBtn, setClickBtn] = useState(false);
 
+  const editTitleHandle = (e) => {
+    setEditTitle(e.target.value);
+  };
+  const editMessageHandle = (e) => {
+    setEditMessage(e.target.value);
+  };
+  const handleArchiveSubmit = () => {
+    editArchive(
+      archive.archiveId,
+      {
+        title: editTitle,
+        description: editMessage,
+      },
+      editArchiveSuccess,
+      editArchiveFail
+    );
+  };
+  const editArchiveSuccess = (res) => {
+    console.log(res);
+  };
+  const editArchiveFail = (error) => {
+    console.log(error);
+  };
   return (
     <>
       {/* modal button */}
-      <button
-        className="bg-main3 border-2 border-basic3 rounded-full mx-1.5"
-        onClick={onOpen}
-      >
+      <button className="bg-main3 border-2 border-basic3 rounded-full mx-1.5" onClick={onOpen}>
         <BiPencil size={18} className="text-white m-0.5" />
       </button>
 
@@ -43,6 +65,8 @@ function EditArchiveModal() {
             <FormControl>
               <input
                 type="text"
+                value={editTitle}
+                onChange={editTitleHandle}
                 placeholder="아카이브 이름"
                 className="w-full focus:outline-none border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1 focus:border-extra1"
               />
@@ -54,6 +78,8 @@ function EditArchiveModal() {
                 name="message"
                 id="message"
                 rows="4"
+                value={editMessage}
+                onChange={editMessageHandle}
                 className="w-full focus:outline-none resize-none border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1 focus:border-extra1"
               ></textarea>
             </FormControl>
@@ -68,12 +94,14 @@ function EditArchiveModal() {
             </button>
             <button
               onClick={() => {
-                // handleArchiveSubmit();
+                setClickBtn(true);
+                handleArchiveSubmit();
                 onClose();
               }}
               className="font-bold bg-extra1 px-6 py-2 rounded-xl text-sm"
+              disabled={clickBtn}
             >
-              생성하기
+              수정하기
             </button>
           </ModalFooter>
         </ModalContent>

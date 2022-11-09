@@ -1,8 +1,9 @@
 package kr.co.reverse.archive.db.repository;
 
-import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.reverse.archive.api.response.FriendInvitationRes;
+import kr.co.reverse.archive.api.response.QFriendInvitationRes;
 import kr.co.reverse.archive.db.entity.QFriendInvitation;
 import kr.co.reverse.archive.db.entity.QUser;
 import kr.co.reverse.archive.db.entity.User;
@@ -23,11 +24,16 @@ public class FriendInvitationRepositoryImpl implements FriendInvitationRepositor
     public List<FriendInvitationRes> waitingTo(User user) {
 
         return jpaQueryFactory
-                .select(Projections.bean(FriendInvitationRes.class,
-                        QFriendInvitation.friendInvitation.invitationTarget.nickname,
-                        QFriendInvitation.friendInvitation.invitationTarget.avatar))
+                .select(
+                        new QFriendInvitationRes(
+                            QFriendInvitation.friendInvitation.invitationTarget.nickname,
+//                            Expressions.asString(String.valueOf(QFriendInvitation.friendInvitation.invitationTarget.avatar)),
+                            QFriendInvitation.friendInvitation.invitationTarget.avatar.stringValue(),
+                            QFriendInvitation.friendInvitation.invitationTarget.message
+                        )
+                )
                 .from(QFriendInvitation.friendInvitation)
-                .join(QFriendInvitation.friendInvitation.invitationUser, QUser.user).fetchJoin()
+                .join(QFriendInvitation.friendInvitation.invitationUser, QUser.user)
                 .where(
                         QFriendInvitation.friendInvitation.invitationUser.id.eq(user.getId())
                 ).fetch();
@@ -37,11 +43,16 @@ public class FriendInvitationRepositoryImpl implements FriendInvitationRepositor
     public List<FriendInvitationRes> waitingFrom(User user) {
 
         return jpaQueryFactory
-                .select(Projections.bean(FriendInvitationRes.class,
-                        QFriendInvitation.friendInvitation.invitationUser.nickname,
-                        QFriendInvitation.friendInvitation.invitationUser.avatar))
+                .select(
+                        new QFriendInvitationRes(
+                            QFriendInvitation.friendInvitation.invitationUser.nickname,
+//                            Expressions.asString(String.valueOf(QFriendInvitation.friendInvitation.invitationUser.avatar)),
+                            QFriendInvitation.friendInvitation.invitationUser.avatar.stringValue(),
+                            QFriendInvitation.friendInvitation.invitationUser.message
+                        )
+                )
                 .from(QFriendInvitation.friendInvitation)
-                .join(QFriendInvitation.friendInvitation.invitationTarget, QUser.user).fetchJoin()
+                .join(QFriendInvitation.friendInvitation.invitationTarget, QUser.user)
                 .where(
                         QFriendInvitation.friendInvitation.invitationTarget.id.eq(user.getId())
                 ).fetch();
