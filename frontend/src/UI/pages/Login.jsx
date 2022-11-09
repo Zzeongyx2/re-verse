@@ -41,10 +41,6 @@ function Login() {
     login({ email: id, password: pw }, loginSuccess, loginFail);
   };
   const loginSuccess = (res) => {
-    console.log(res.data);
-    window.localStorage.setItem("Authorization", res.headers.authorization);
-    window.document.cookie = `refreshToken=${res.data.refreshToken}`;
-    console.log(window.document.cookie);
     window.location.href = "/lobby";
   };
   const loginFail = (error) => {

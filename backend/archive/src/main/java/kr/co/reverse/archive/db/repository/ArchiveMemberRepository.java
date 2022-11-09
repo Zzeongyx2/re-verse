@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface ArchiveMemberRepository extends JpaRepository<ArchiveMember, UUID> {
+public interface ArchiveMemberRepository extends JpaRepository<ArchiveMember, UUID>, ArchiveMemberRepositoryCustom {
 
     public ArchiveMember findArchiveMemberByArchiveAndUser(Archive archive, User user);
 

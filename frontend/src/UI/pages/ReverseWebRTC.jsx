@@ -6,8 +6,13 @@ import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import CatAnimations from "../../assets/players/Cat_Animations.js";
+import DogAnimations from "../../assets/players/Dog_Animations.js";
 import { SkyTube } from "../../assets/deco/SkyTube.js";
 import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
+import ReverseFooter from "../organisms/ReverseFooter.jsx";
+import { ObjectTest } from "../../assets/deco/ObjectTest.js";
+import { CampingPack } from "../../assets/deco/CampingPack.js";
+import { arraySlice } from "three/src/animation/AnimationUtils.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -29,13 +34,20 @@ function ReverseWebRTC() {
     floorTexture.repeat.x = 10;
     floorTexture.repeat.y = 10;
   }
+  const [visible, setVisible] = useState(false);
+  const handleVisible = (data) => {
+    setVisible(data);
+  };
 
   // orthographic camera
   const aspect = window.innerWidth / window.innerHeight;
 
   const [isPressed, setIsPressed] = useState(false);
-
+  const [others, setOthers] = useState([]);
   const [userId, setUserId] = useState("");
+
+  const [otherCharacterMap,setMap] = useState({});
+
   const [archiveId, setArchiveId] = useState("");
   const [rtcPeers2, setRtcPeers2] = useState("");
   const offerOptions = {
@@ -48,7 +60,7 @@ function ReverseWebRTC() {
     toUid: null,
     archiveId: null,
   };
-  var chatData = {
+  var channelData = {
     userId: null,
     data: null,
     type: null,
@@ -289,7 +301,7 @@ function ReverseWebRTC() {
       }
     };
     rtcPeer.onicecandidateerror = (event) => {
-      console.log("ice error")
+      console.log("ice error");
     };
 
     // rtcPeer.onicegatheringstatechange = (event) => {};
@@ -298,44 +310,136 @@ function ReverseWebRTC() {
 
     rtcPeers.set(peerId, rtcPeer);
   }
-  function channelConfig(channel1: RTCDataChannel, peerId) {
+  function channelConfig(channel1, peerId) {
     channel1.onclose = (event) => {
       console.log("Close channel:");
       console.log(channel1);
       console.log(event);
       let friendId = channelUsers.get(channel1);
-      console.log(peerId)
-      if (peerId)
-        document.getElementById(peerId).remove();
-      else if(friendId){
-        document.getElementById(friendId).remove()
+      console.log(peerId);
+      if (peerId) document.getElementById(peerId).remove();
+      else if (friendId) {
+        document.getElementById(friendId).remove();
       }
       console.log(friendId);
-      // addUserOnChat(friendToName.get(friendId), false);
+      addUserOnChat(friendToName.get(friendId), false);
       friendToName.delete(friendId);
     };
     channel1.onmessage = (event) => {
       //console.lo("Receive msg datachannel:" + event.data);
-      let dataChat1 = JSON.parse(event.data);
-      if (dataChat1.type === "message") {
-        // addChatLine(dataChat1.data, "you", dataChat1.userId);
-      } else {
-        friendToName.set(dataChat1.userId, dataChat1.data);
-        // addUser(dataChat1.data, dataChat1.userId);
-        channelUsers.set(channel1, dataChat1.userId);
+      let dataChannel1 = JSON.parse(event.data);
+      if (dataChannel1.type === "message") {
+        addChatLine(dataChannel1.data, "you", dataChannel1.userId);
+      } else if (dataChannel1.type === "handshake") {
+        setOthers((other) => {
+          return [...other, dataChannel1.userId];
+        });
+        console.log(dataChannel1.userId);
+        setMap((other)=> ({
+          ...other,
+          [dataChannel1.userId]: dataChannel1.data.position,
+        }));
+        // otherCharacterMap.set(dataChannel1.userId, dataChannel1.data.position);
+        friendToName.set(dataChannel1.userId, dataChannel1.data.username);
+        // addUser(dataChannel1.data, dataChannel1.userId);
+        channelUsers.set(channel1, dataChannel1.userId);
+      } else if (dataChannel1.type === "move") {
+        console.log("moving phase");
+        console.log(dataChannel1);
+        setMap((other) => ({
+          ...other,
+          [dataChannel1.userId]: dataChannel1.data,
+        }));
+        // otherCharacterMap.set(dataChannel1.userId,dataChannel1.data);
+        console.log(otherCharacterMap)
       }
     };
 
     channel1.onopen = () => {
       //console.lo("Now it's open");
-      chatData.userId = userId2;
-      chatData.type = "handshake";
-      chatData.data = document.getElementById("myUsername").value;
-      channel1.send(JSON.stringify(chatData));
+      channelData.userId = document.getElementById("myUsername").value;
+      channelData.type = "handshake";
+      channelData.data = {
+        position: destinationPoint,
+        username: document.getElementById("myUsername").value,
+      };
+      channel1.send(JSON.stringify(channelData));
     };
     channels.push(channel1);
   }
-  function newMember(data1: String) {
+  function addChatLine(data1, listClass, pengirim) {
+    let list = document.createElement("li");
+    list.className = listClass;
+    let entete = document.createElement("div");
+    entete.className = "entete";
+    let span1 = document.createElement("span");
+    let h2 = document.createElement("h2");
+    let h3 = document.createElement("h3");
+    h2.innerText = pengirim;
+    h2.className = "m-2";
+    h3.innerText = new Date().toLocaleTimeString();
+    entete.appendChild(h3);
+    entete.appendChild(h2);
+
+    let triangle = document.createElement("div");
+    triangle.className = "triangle";
+    let message = document.createElement("message");
+    message.className = "message";
+    message.innerHTML = data1;
+    list.appendChild(entete);
+    if (listClass === "you") {
+      list.appendChild(triangle);
+    }
+    list.appendChild(message);
+
+    let chatWindow = document.getElementById("chat");
+    chatWindow.appendChild(list);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }
+  function addUserOnChat(pengirim, join1) {
+    let chatWindow = document.getElementById("chat");
+    let child1 = document.createElement("p");
+    if (join1) {
+      child1.className = "text-white text-center m-2 bg-success";
+      child1.innerText = pengirim + " joined";
+    } else {
+      child1.className = "text-white text-center m-2 bg-danger";
+      child1.innerText = pengirim + " leaved";
+    }
+
+    chatWindow.appendChild(child1);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }
+
+  function sendChat() {
+    console.log("here is sendchat");
+    channels.forEach((a) => {
+      let dataToSend = document.getElementById("toSend").value;
+      channelData.userId = document.getElementById("myUsername").value;
+      channelData.type = "message";
+      channelData.data = dataToSend;
+      //console.lo("Send chat:" + JSON.stringify(channelData));
+      if (a.readyState === "open") {
+        a.send(JSON.stringify(channelData));
+      }
+    });
+    addChatLine(document.getElementById("toSend").value, "me", "Me");
+    document.getElementById("toSend").value = "";
+  }
+
+  function sendPosition(position) {
+    console.log(position);
+    channels.forEach((a) => {
+      channelData.userId = document.getElementById("myUsername").value;
+      channelData.type = "move";
+      channelData.data = position;
+      //console.lo("Send chat:" + JSON.stringify(channelData));
+      if (a.readyState === "open") {
+        a.send(JSON.stringify(channelData));
+      }
+    });
+  }
+  function newMember(data1) {
     signal1.userId = data1;
     signal1.type = "NewMember";
     signal1.toUid = "signaling";
@@ -347,8 +451,10 @@ function ReverseWebRTC() {
   function disconnectAll() {
     ws1.close();
     rtcPeers.forEach((a, b) => {
-      const senders=a.getSenders();
-      senders.forEach((sender)=>a.removeTrack(sender));
+      const senders = a.getSenders();
+
+      // 만약 안들린다면 삭제해보기
+      senders.forEach((sender) => a.removeTrack(sender));
       // localStream.getTracks().forEach((track))
       // localStream.getTracks().forEach((track)=>a.removeTrack(track));
       a.close();
@@ -432,12 +538,58 @@ function ReverseWebRTC() {
       <div className="w-full h-[0.15] absolute z-10">
         <ul id="user-audio"></ul>
       </div>
+      <div className="w-1/4 h-2/5 absolute z-20 bottom-0">
+        <ul id="chat" className="h-[80%] border overflow-y-scroll">
+          {/* <li className="you">
+                  <div className="entete">
+                    <span className="status green"></span>
+                    <h2>Vincent</h2>
+                    <h3>10:12AM, Today</h3>
+                  </div>
+                  <div className="triangle"></div>
+                  <div className="message">
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                  </div>
+                </li> */}
+          {/* <li className="me">
+                  <div className="entete">
+                    <h3 >10:12AM, Today</h3>
+                    <h2 className='m-2'>Vincent</h2>
+                    
+                  </div>
+                  <div className="triangle"></div>
+                  <div className="message">
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                  </div>
+                </li> */}
+        </ul>
+        <main className="h-[10%]">
+          <footer>
+            <textarea placeholder="Type your message" id="toSend"></textarea>
+            <button id="btnSend" onClick={() => sendChat()}>
+              Send
+            </button>
+            <br />
+            <br />
+            <div className="col-md-12 text-center bg-black text-white">
+              <p>
+                Copyright ©
+                <script>document.write(new Date().getFullYear());</script>
+                2022 Rizky Satrio All rights reserved
+              </p>
+            </div>
+          </footer>
+        </main>
+      </div>
       <Canvas
         ref={refCanvas}
         shadows
         orthographic
+        dpr={[1, 2]}
         camera={{
-          position: [1, 5, 5],
+          // player의 초기 위치: [-30, 0, -30]
+          position: [-29, 5, -25],
+          // position: [1, 5, 5],
           left: `-${aspect}`,
           right: `${aspect}`,
           top: 1,
@@ -447,6 +599,7 @@ function ReverseWebRTC() {
           far: 1000,
         }}
       >
+        {/* // TODO: 컴포넌트 배치할 때에는 키고 하는게 편함 */}
         <OrbitControls />
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
@@ -458,28 +611,50 @@ function ReverseWebRTC() {
           shadow-mapSize-width={2048}
           shadow-mapSize-height={2048}
           shadow-camera-near={-100}
-          shadow-camera-far={100}
-          shadow-camera-left={-100}
-          shadow-camera-right={100}
-          shadow-camera-top={100}
-          shadow-camera-bottom={-100}
+          shadow-camera-far={2000}
+          shadow-camera-left={-2000}
+          shadow-camera-right={2000}
+          shadow-camera-top={2000}
+          shadow-camera-bottom={-2000}
         />
         <ambientLight intensity={0.3} />
         {/* character */}
         <Suspense fallback={null}>
+          {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
+          {others.map((other, idx) => {
+            console.log(other);
+            console.log(otherCharacterMap)
+            console.log(otherCharacterMap[other])
+            return (
+              <DogAnimations
+              key={idx}
+                // action={action}
+                destinationPoint={otherCharacterMap[other]}
+                // isPressed={isPressed}
+                handleVisible={handleVisible}
+                userName={other}
+                // handleCurrentPosition={handleCurrentPosition}
+              />
+            );
+          })}
           <CatAnimations
-            action={action}
+            // action={action}
             destinationPoint={destinationPoint}
-            // position={characterPosition ? characterPosition : null}
-            isPressed={isPressed}
+            // isPressed={isPressed}
+            handleVisible={handleVisible}
+            // handleCurrentPosition={handleCurrentPosition}
           />
           <SkyTube />
+          <ObjectTest visible={visible} />
+          {/* <ObjectTest currentPosition={currentPosition} /> */}
+          <CampingPack />
         </Suspense>
         {/* floor */}
         <mesh
           onPointerDown={(e) => {
             // console.log(e);  // intersects와 동일한거
             setDestinationPoint(e.point);
+            sendPosition(e.point);
           }}
           rotation={[-0.5 * Math.PI, 0, 0]}
           receiveShadow
@@ -487,14 +662,15 @@ function ReverseWebRTC() {
           <planeBufferGeometry attach="geometry" args={[300, 300]} />
           <meshStandardMaterial map={floorTexture} />
         </mesh>
+
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
         <mesh
           rotation={[-0.5 * Math.PI, 0, 0]}
-          position={[0, 0.01, 0]}
+          position={[-30, 0.01, -30]}
           receiveShadow
         >
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
-          <meshBasicMaterial color="black" transparent opacity={0.2} />
+          <meshBasicMaterial color="black" transparent opacity={0.3} />
         </mesh>
       </Canvas>
     </div>

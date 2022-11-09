@@ -1,6 +1,5 @@
 package kr.co.reverse.archive.db.repository;
 
-import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.reverse.archive.api.response.*;
 import kr.co.reverse.archive.db.entity.*;
@@ -26,7 +25,7 @@ public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom {
                                          QUser.user.id,
                                          QUser.user.nickname,
                                          QUser.user.message,
-                                         Expressions.asString(String.valueOf(QUser.user.avatar))
+                                         QUser.user.avatar.stringValue()
                                  )
                          )
                  )
@@ -50,7 +49,7 @@ public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom {
                                         QUser.user.id,
                                         QUser.user.nickname,
                                         QUser.user.message,
-                                        Expressions.asString(String.valueOf(QUser.user.avatar))
+                                        QUser.user.avatar.stringValue()
                                 ),
                                 QArchive.archive.title,
                                 QArchive.archive.description
@@ -76,7 +75,7 @@ public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom {
                                         QUser.user.id,
                                         QUser.user.nickname,
                                         QUser.user.message,
-                                        Expressions.asString(String.valueOf(QUser.user.avatar))
+                                        QUser.user.avatar.stringValue()
                                 ),
                                 QArchive.archive.title,
                                 QArchive.archive.description
@@ -100,7 +99,7 @@ public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom {
                                 QUser.user.id,
                                 QUser.user.nickname,
                                 QUser.user.message,
-                                Expressions.asString(String.valueOf(QUser.user.avatar))
+                                QUser.user.avatar.stringValue()
                         )
                 )
                 .from(QArchiveMember.archiveMember)

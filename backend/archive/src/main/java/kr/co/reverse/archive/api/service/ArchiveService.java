@@ -115,4 +115,31 @@ public class ArchiveService {
                 .orElseThrow(() -> new NoSuchElementException());
     }
 
+    public Boolean checkOwner(UUID archiveId, UUID userId) {
+        Archive archive = getArchive(archiveId);
+
+        return archive.getOwnerId().equals(userId);
+    }
+
+    @Transactional
+    public void updateArchive(UUID archiveId, ArchiveReq archiveReq) {
+        Archive archive = archiveRepository.findById(archiveId)
+                .orElseThrow(() -> new NoSuchElementException());
+
+        String title = archiveReq.getTitle();
+        String description = archiveReq.getDescription();
+
+        if (title == null || description == null) {
+            throw new IllegalArgumentException();
+        }
+
+        archive.setTitle(title);
+        archive.setDescription(description);
+    }
+
+    @Transactional
+    public void deleteArchive(UUID archiveId) {
+        archiveRepository.deleteById(archiveId);
+    }
+
 }

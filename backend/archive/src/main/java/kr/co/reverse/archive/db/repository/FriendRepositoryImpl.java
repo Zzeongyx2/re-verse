@@ -1,8 +1,9 @@
 package kr.co.reverse.archive.db.repository;
 
-import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.reverse.archive.api.response.FriendRes;
+import kr.co.reverse.archive.api.response.QFriendRes;
 import kr.co.reverse.archive.db.entity.QFriend;
 import kr.co.reverse.archive.db.entity.QUser;
 import kr.co.reverse.archive.db.entity.User;
@@ -22,11 +23,15 @@ public class FriendRepositoryImpl implements FriendRepositoryCustom {
     @Override
     public List<FriendRes> list(User user) {
         return jpaQueryFactory
-                .select(Projections.bean(FriendRes.class,
-                        QFriend.friend.target.id,
-                        QFriend.friend.target.nickname,
-                        QFriend.friend.target.avatar,
-                        QFriend.friend.target.message))
+                .select(
+                        new QFriendRes(
+                            QFriend.friend.target.id,
+                            QFriend.friend.target.nickname,
+//                                Expressions.asString(String.valueOf(QFriend.friend.target.avatar)),
+                            QFriend.friend.target.avatar.stringValue(),
+                            QFriend.friend.target.message
+                        )
+                )
                 .from(QFriend.friend)
                 .join(QFriend.friend.user, QUser.user)
                 .where(
