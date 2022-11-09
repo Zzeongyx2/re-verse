@@ -4,35 +4,60 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { HiOutlineTrash } from "react-icons/hi";
 import { Avatar, AvatarGroup } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
-import { deleteBookmark, postBookmark } from "../../api/friend";
+import {
+  deleteArchiveMember,
+  deleteBookmark,
+  postBookmark,
+} from "../../api/friend";
 import { getArchiveList } from "../../api/archive";
 import { imageForm, s3Path } from "../../api";
+import { useDispatch, useSelector } from "react-redux";
+import { setFriendArchiveList } from "../../modules/archive";
+import { useNavigate } from "react-router-dom";
 
-function ArchiveFriend() {
-  const [archiveList, setArchiveList] = useState([]);
+function ArchiveFriend({ loginUser }) {
+  // const [archiveList, setArchiveList] = useState([]);
+  const archiveList = useSelector((state) => state.archive.friendArchiveList);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const enterArchive = (archiveId) => {
     console.log(archiveId, "이동");
-    window.location.href = `/reverse/${archiveId}`;
+    navigate(`/reverse/${archiveId}`);
   };
-  const deleteArchive = (archiveId) => {
-    // TODO: 아카이브 공유 삭제 api가 없는거가틈
+
+  const deleteArchive = async (archiveId) => {
+    await deleteArchiveMember(
+      archiveId,
+      loginUser.nickname,
+      deleteArchiveMemberSuccess,
+      deleteArchiveMemberFail,
+    );
     console.log(archiveId, "나가기");
+    await getList();
   };
-  const bookmarkTrigger = (archive, index) => {
+  const deleteArchiveMemberSuccess = (res) => {
+    console.log(res);
+  };
+  const deleteArchiveMemberFail = (error) => {
+    console.log(error);
+  };
+  const bookmarkTrigger = async (archive, index) => {
     if (!archive.bookmarks) {
-      postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
+      await postBookmark(
+        archive.archiveId,
+        bookmarkControlSuccess,
+        bookmarkControl,
+      );
     } else {
-      deleteBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
+      await deleteBookmark(
+        archive.archiveId,
+        bookmarkControlSuccess,
+        bookmarkControl,
+      );
     }
-    setArchiveList((list) => {
-      return [...list].filter((item, idx) => {
-        if (idx === index) {
-          item.bookmarks = !item.bookmarks;
-        }
-        return item;
-      });
-    });
+
+    await getList();
   };
   const bookmarkControlSuccess = (res) => {
     console.log(res);
@@ -41,17 +66,19 @@ function ArchiveFriend() {
     console.log(error);
   };
   useEffect(() => {
-    getArchiveList(1, getArchiveListSuccess, getArchiveListFail);
+    getList();
   }, []);
+  const getList = async () => {
+    await getArchiveList(1, getArchiveListSuccess, getArchiveListFail);
+  };
   const getArchiveListSuccess = (res) => {
     console.log(res);
-    setArchiveList(res.data.archives);
+    dispatch(setFriendArchiveList(res.data.archives));
   };
   const getArchiveListFail = (error) => {
     console.log(error);
   };
 
-  console.log(archiveList);
   return (
     <div className="text-base2">
       <div className="bg-white rounded-3xl w-full h-full pt-5 pb-6 flex flex-col justify-center items-center">
@@ -68,7 +95,11 @@ function ArchiveFriend() {
                       }}
                       className="w-14 text-extra1"
                     >
-                      {archive.bookmark ? <AiFillStar size={18} /> : <AiOutlineStar size={18} />}
+                      {archive.bookmark ? (
+                        <AiFillStar size={18} />
+                      ) : (
+                        <AiOutlineStar size={18} />
+                      )}
                     </button>
                     {/* 유저 이름 */}
                     <div className="font-bold text-sm overflow-hidden text-ellipsis line-clamp-1 md:w-44 sm:w-36">
@@ -107,7 +138,10 @@ function ArchiveFriend() {
                       }}
                       className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
                     >
-                      <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
+                      <BiLogIn
+                        size={18}
+                        className="text-white m-0.5 -translate-x-0.5"
+                      />
                     </button>
                     <button
                       onClick={() => {

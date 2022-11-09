@@ -11,8 +11,9 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
-import { postArchive } from "../../api/archive";
+import { getArchiveList, postArchive } from "../../api/archive";
 import { useDispatch } from "react-redux";
+import { setMyArchiveList } from "../../modules/archive";
 
 function CreateArchiveModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,8 +44,10 @@ function CreateArchiveModal() {
     await postArchive(
       { title: newTitle, description: newMessage },
       postArchiveSuccess,
-      postArchiveFail
+      postArchiveFail,
     );
+
+    await getList();
   };
   const postArchiveSuccess = (res) => {
     console.log(res);
@@ -52,7 +55,16 @@ function CreateArchiveModal() {
   const postArchiveFail = (error) => {
     console.log(error);
   };
-
+  const getList = async () => {
+    await getArchiveList(0, getArchiveListSuccess, getArchiveListFail);
+  };
+  const getArchiveListSuccess = (res) => {
+    console.log(res);
+    dispatch(setMyArchiveList(res.data.archives));
+  };
+  const getArchiveListFail = (error) => {
+    console.log(error);
+  };
   return (
     <>
       {/* modal button */}
