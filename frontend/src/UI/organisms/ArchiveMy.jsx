@@ -11,29 +11,25 @@ import SettingArchiveModal from "./SettingArchiveModal";
 import { getArchiveList } from "../../api/archive";
 import { deleteBookmark, postBookmark } from "../../api/friend";
 import { imageForm, s3Path } from "../../api";
-
+import { useSelector, useDispatch } from "react-redux";
+import { setMyArchiveList } from "../../modules/archive";
 function ArchiveMy() {
-  const [archiveList, setArchiveList] = useState([]);
+  // const [archiveList, setArchiveList] = useState([]);
+  const archiveList = useSelector((state) => state.archive.myArchiveList);
+  const dispatch = useDispatch();
 
   const enterArchive = (archiveId) => {
     console.log(archiveId, "이동");
     window.location.href = `/reverse/${archiveId}`;
   };
 
-  const bookmarkTrigger = (archive, index) => {
+  const bookmarkTrigger = async (archive, index) => {
     if (!archive.bookmark) {
       postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     } else {
       deleteBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     }
-    setArchiveList((list) => {
-      return [...list].filter((item, idx) => {
-        if (idx === index) {
-          item.bookmark = !item.bookmark;
-        }
-        return item;
-      });
-    });
+    await getList();
   };
   const bookmarkControlSuccess = (res) => {
     console.log(res);
@@ -43,11 +39,14 @@ function ArchiveMy() {
   };
 
   useEffect(() => {
-    getArchiveList(0, getArchiveListSuccess, getArchiveListFail);
+    getList();
   }, []);
+  const getList = async () => {
+    await getArchiveList(0, getArchiveListSuccess, getArchiveListFail);
+  };
   const getArchiveListSuccess = (res) => {
     console.log(res);
-    setArchiveList(res.data.archives);
+    dispatch(setMyArchiveList(res.data.archives));
   };
   const getArchiveListFail = (error) => {
     console.log(error);
