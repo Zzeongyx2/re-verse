@@ -84,8 +84,10 @@ public class FriendService {
         friendRepository.delete(friend1);
         friendRepository.delete(friend2);
         // user와 친구의 아카이브 멤버도 모두 삭제할것
-        List<ArchiveMember> archiveMembers = archiveMemberRepository.archiveMemberList(user, target);
-        archiveMemberRepository.deleteAll(archiveMembers);
+        List<ArchiveMember> archiveMembers1 = archiveMemberRepository.archiveMemberList(user, target);
+        List<ArchiveMember> archiveMembers2 = archiveMemberRepository.archiveMemberList(user, target);
+        archiveMemberRepository.deleteAll(archiveMembers1);
+        archiveMemberRepository.deleteAll(archiveMembers2);
     }
 
     public void createBookmark(Archive archive, User user) {
