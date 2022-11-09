@@ -119,4 +119,27 @@ public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom {
 
         return bookmarkId != null;
     }
+
+    @Override
+    public List<ArchiveRes> getBookmarkArchive(UUID userId) {
+        return jpaQueryFactory
+                .select(
+                        new QArchiveRes(
+                                QArchive.archive.id,
+                                new QUserRes(
+                                        QUser.user.id,
+                                        QUser.user.nickname,
+                                        QUser.user.message,
+                                        QUser.user.avatar.stringValue()
+                                ),
+                                QArchive.archive.title,
+                                QArchive.archive.description
+                        )
+                )
+                .from(QBookMark.bookMark)
+                .join(QBookMark.bookMark.archive, QArchive.archive)
+                .leftJoin(QUser.user)
+                .on(QArchive.archive.ownerId.eq(QUser.user.id))
+                .fetch();
+    }
 }
