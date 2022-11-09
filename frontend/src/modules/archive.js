@@ -4,6 +4,11 @@ import * as THREE from "three";
 const initialState = {
   isOpen: false,
   isCampfireOn: 0,
+  article: {
+    title: "",
+    content: "",
+    memoryDate: "",
+  },
 };
 
 const reducers = {
