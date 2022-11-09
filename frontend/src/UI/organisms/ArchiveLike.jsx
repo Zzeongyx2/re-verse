@@ -3,7 +3,7 @@ import { BiLogIn } from "react-icons/bi";
 import { AiFillStar } from "react-icons/ai";
 import { HiOutlineTrash } from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import { Avatar, AvatarGroup, Divider } from "@chakra-ui/react";
 import { getArchiveLike } from "../../api/archive";
 import { setLikeArchiveList } from "../../modules/archive";
@@ -14,10 +14,11 @@ function ArchiveLike() {
   // const archiveList = useState([]);
   const archiveList = useSelector((state) => state.archive.likeArchiveList);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const enterArchive = (archiveId) => {
-    // TODO: 아카이브로 이동
     console.log(archiveId, "이동");
+    navigate(`/reverse/${archiveId}`);
   };
   const deleteArchive = (archiveId) => {
     // TODO: 아카이브 공유 삭제
@@ -25,9 +26,9 @@ function ArchiveLike() {
   };
   const bookmarkTrigger = async (archive, index) => {
     if (!archive.bookmark) {
-      postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
+      await postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     } else {
-      deleteBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
+      await deleteBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     }
     await getLikeList();
   };
