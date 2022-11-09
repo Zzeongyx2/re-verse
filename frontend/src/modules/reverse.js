@@ -20,12 +20,12 @@ const reducers = {
   },
 };
 
-export const archiveSlice = createSlice({
-  name: "archive",
+export const reverseSlice = createSlice({
+  name: "reverse",
   initialState,
   reducers,
 });
 
-export const { setOpen, setCampfireOn } = archiveSlice.actions;
+export const { setOpen, setCampfireOn } = reverseSlice.actions;
 
-export default archiveSlice.reducer;
+export default reverseSlice.reducer;

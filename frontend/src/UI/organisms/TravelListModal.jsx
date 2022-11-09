@@ -8,10 +8,10 @@ import {
   FormControl,
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
-import { setOpen } from "../../modules/archive";
+import { setOpen } from "../../modules/reverse";
 
 function TravelListModal() {
-  const openModal = useSelector((state) => state.archive.isOpen);
+  const openModal = useSelector((state) => state.reverse.isOpen);
   const dispatch = useDispatch();
   return (
     <>
