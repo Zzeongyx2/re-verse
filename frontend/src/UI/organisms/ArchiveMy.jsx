@@ -10,6 +10,7 @@ import EditArchiveModal from "./EditArchiveModal";
 import SettingArchiveModal from "./SettingArchiveModal";
 import { getArchiveList } from "../../api/archive";
 import { deleteBookmark, postBookmark } from "../../api/friend";
+import { imageForm, s3Path } from "../../api";
 
 function ArchiveMy() {
   const [archiveList, setArchiveList] = useState([]);
@@ -23,11 +24,7 @@ function ArchiveMy() {
     if (!archive.bookmarks) {
       postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     } else {
-      deleteBookmark(
-        archive.archiveId,
-        bookmarkControlSuccess,
-        bookmarkControl,
-      );
+      deleteBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     }
     setArchiveList((list) => {
       return [...list].filter((item, idx) => {
@@ -72,11 +69,7 @@ function ArchiveMy() {
                       }}
                       className="w-14 text-extra1"
                     >
-                      {archive.bookmarks ? (
-                        <AiFillStar size={18} />
-                      ) : (
-                        <AiOutlineStar size={18} />
-                      )}
+                      {archive.bookmarks ? <AiFillStar size={18} /> : <AiOutlineStar size={18} />}
                     </button>
                     {/* 아카이브 이름 */}
                     <p className="text-sm font-bold overflow-hidden text-ellipsis line-clamp-1 md:w-44 sm:w-36">
@@ -94,7 +87,7 @@ function ArchiveMy() {
                         return (
                           <Avatar
                             name="profileImg"
-                            src={member.avatar}
+                            src={s3Path + member.avatar + imageForm}
                             key={`avatar-${index}`}
                             alt={index}
                           />
@@ -111,10 +104,7 @@ function ArchiveMy() {
                         enterArchive(archive.archiveId);
                       }}
                     >
-                      <BiLogIn
-                        size={18}
-                        className="text-white m-0.5 -translate-x-0.5"
-                      />
+                      <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
                     </button>
                     {/* 아카이브 수정 */}
                     <EditArchiveModal archive={archive} />
