@@ -11,7 +11,7 @@ import { useRef, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setOpen } from "../../modules/reverse";
-import ArchiveDatePicker from "../molecules/DatePicker";
+import ArchiveDatePicker from "../molecules/ReverseDatePicker";
 
 function TravelWriteModal() {
   const openModal = useSelector((state) => state.reverse.isOpen);
