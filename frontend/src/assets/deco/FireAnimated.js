@@ -8,9 +8,14 @@ title: Fire Animation
 
 import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import gsap from "gsap";
+
+import { useSelector } from "react-redux";
+import { useFrame } from "@react-three/fiber";
 
 export function FireAnimated(props) {
   const group = useRef();
+  const eventSpot = useRef();
   const { nodes, materials, animations } = useGLTF(
     "/assets/fire_animation/scene.gltf"
   );
@@ -19,9 +24,41 @@ export function FireAnimated(props) {
   useEffect(() => {
     actions["Take 001"].play();
   });
+
+  const campfire = useSelector((state) => state.archive.isCampfireOn);
+  console.log(campfire);
+  useFrame((state) => {
+    if (campfire) {
+      eventSpot.current.children[0].material.color.r = 1;
+      eventSpot.current.children[0].material.color.b = 1;
+
+      gsap.to(group.current.position, {
+        duration: 0.3,
+        y: 1.4,
+        ease: "Bounce.easeOut",
+      });
+      gsap.to(state.camera.position, {
+        duration: 1,
+        y: 3,
+      });
+    } else {
+      eventSpot.current.children[0].material.color.r = 0;
+      eventSpot.current.children[0].material.color.b = 1;
+
+      gsap.to(group.current.position, {
+        duration: 0.2,
+        y: -5,
+        ease: "Bounce.easeOut",
+      });
+      gsap.to(state.camera.position, {
+        duration: 1,
+        y: 5,
+      });
+    }
+  });
   return (
     <group>
-      <group ref={group} {...props} dispose={null} position={[53, 1.4, -67.3]}>
+      <group ref={group} {...props} dispose={null} position={[53, -5, -67.3]}>
         <group name="Sketchfab_Scene">
           <group
             name="Sketchfab_model"
@@ -160,7 +197,7 @@ export function FireAnimated(props) {
         </group>
       </group>
       {/* 오브젝트 나타나는 지점 */}
-      <group>
+      <group ref={eventSpot}>
         <mesh
           rotation={[-0.5 * Math.PI, 0, -0.2 * Math.PI]}
           receiveShadow

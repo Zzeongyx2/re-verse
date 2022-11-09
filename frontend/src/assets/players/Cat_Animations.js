@@ -7,6 +7,9 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import GLTFLoader from "gltfjsx/src/utils/glftLoader";
 import { useFrame } from "@react-three/fiber";
 
+import { useDispatch } from "react-redux";
+import { setCampfireOn } from "../../modules/archive";
+
 export default function CatAnimations({
   // action,
   // handleCurrentPosition,
@@ -31,7 +34,10 @@ export default function CatAnimations({
 
   //// 여행 포토북, 글 보기 오브젝트 이벤트
   // FIXME: 그냥 다른 에셋에 적용할거임
-  const travelPosition = new THREE.Vector3(37, 0.01, -68);
+  // const travelPosition = new THREE.Vector3(37, 0.01, -68);
+
+  const dispatch = useDispatch();
+  const campfirePosition = new THREE.Vector3(37, 0.01, -68);
 
   useEffect(() => {
     if (destinationPoint) {
@@ -87,14 +93,14 @@ export default function CatAnimations({
         }
 
         // travel photobook, polaroid object
-        // if (
-        //   Math.abs(travelPosition.x - group.current.position.x) < 10 &&
-        //   Math.abs(travelPosition.z - group.current.position.z) < 10
-        // ) {
-        //   handleEvent(1);
-        // } else {
-        //   handleEvent(0);
-        // }
+        if (
+          Math.abs(campfirePosition.x - group.current.position.x) < 10 &&
+          Math.abs(campfirePosition.z - group.current.position.z) < 10
+        ) {
+          dispatch(setCampfireOn(1));
+        } else {
+          dispatch(setCampfireOn(0));
+        }
       }
     }
   });
