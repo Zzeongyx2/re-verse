@@ -12,9 +12,11 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { postArchive } from "../../api/archive";
+import { useDispatch } from "react-redux";
 
 function CreateArchiveModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useDispatch();
 
   const [newTitle, setNewTitle] = useState("");
   const [newMessage, setNewMessage] = useState("");
@@ -29,7 +31,7 @@ function CreateArchiveModal() {
 
   const [clickBtn, setClickBtn] = useState(false);
 
-  const handleArchiveSubmit = () => {
+  const handleArchiveSubmit = async () => {
     // const formData = new FormData();
     // const content = {
     //   newTitle: newTitle,
@@ -38,10 +40,10 @@ function CreateArchiveModal() {
     // const json = JSON.stringify(content);
     // formData.append("content", json);
 
-    postArchive(
+    await postArchive(
       { title: newTitle, description: newMessage },
       postArchiveSuccess,
-      postArchiveFail,
+      postArchiveFail
     );
   };
   const postArchiveSuccess = (res) => {
