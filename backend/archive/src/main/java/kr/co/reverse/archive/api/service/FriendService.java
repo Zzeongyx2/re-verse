@@ -51,11 +51,11 @@ public class FriendService {
     @Transactional
     public void reply(User user, User target, Boolean isAccepted) {
 
-        if(friendRepository.findFriendByUserAndTarget(user, target) != null) {
+        if (friendRepository.findFriendByUserAndTarget(user, target) != null) {
             return;
         }
 
-        if(isAccepted){
+        if (isAccepted) {
             friendRepository.save(new Friend(user, target));
             friendRepository.save(new Friend(target, user));
         }
@@ -65,7 +65,7 @@ public class FriendService {
     }
 
     @Transactional
-    public void createFriend(User user, User target){
+    public void createFriend(User user, User target) {
         friendRepository.save(new Friend(user, target));
         friendRepository.save(new Friend(target, user));
     }
@@ -79,13 +79,23 @@ public class FriendService {
     @Transactional
     public void deleteFriend(User user, User target) {
 
-        Friend friend = friendRepository.findFriendByUserAndTarget(user, target);
-        friendRepository.delete(friend);
+        Friend friend1 = friendRepository.findFriendByUserAndTarget(user, target);
+        Friend friend2 = friendRepository.findFriendByUserAndTarget(target, user);
+        friendRepository.delete(friend1);
+        friendRepository.delete(friend2);
+        // user와 친구의 아카이브 멤버도 모두 삭제할것
+        List<ArchiveMember> archiveMembers = archiveMemberRepository.archiveMemberList(user, target);
+        archiveMemberRepository.deleteAll(archiveMembers);
     }
 
     public void createBookmark(Archive archive, User user) {
 
-        bookmarkRepository.save(new BookMark(archive, user));
+        BookMark bookMark = BookMark.builder()
+                .archive(archive)
+                .user(user)
+                .build();
+
+        bookmarkRepository.save(bookMark);
 
     }
 
@@ -98,7 +108,7 @@ public class FriendService {
 
     public void createArchiveMember(Archive archive, User user, Role role) {
 
-        archiveMemberRepository.save(new ArchiveMember(archive,user, role));
+        archiveMemberRepository.save(new ArchiveMember(archive, user, role));
     }
 
     public Boolean checkArchiveMember(Archive archive, User user) {
@@ -106,7 +116,7 @@ public class FriendService {
     }
 
     @Transactional
-    public void deleteArchiveMember(Archive archive, User user){
+    public void deleteArchiveMember(Archive archive, User user) {
         ArchiveMember archiveMember = archiveMemberRepository.findArchiveMemberByArchiveAndUser(archive, user);
         archiveMemberRepository.delete(archiveMember);
     }
