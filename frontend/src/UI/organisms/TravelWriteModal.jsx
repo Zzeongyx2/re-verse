@@ -10,11 +10,11 @@ import {
 import { useRef, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setOpen } from "../../modules/archive";
+import { setOpen } from "../../modules/reverse";
 import ArchiveDatePicker from "../molecules/DatePicker";
 
 function TravelWriteModal() {
-  const openModal = useSelector((state) => state.archive.isOpen);
+  const openModal = useSelector((state) => state.reverse.isOpen);
   const dispatch = useDispatch();
   return (
     <>

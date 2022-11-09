@@ -12,7 +12,7 @@ import { gsap } from "gsap";
 import { useFrame } from "@react-three/fiber";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setOpen } from "../../modules/archive";
+import { setOpen } from "../../modules/reverse";
 
 export function Notebook({ props, event }) {
   const { nodes, materials } = useGLTF("/assets/notebook/scene.gltf");

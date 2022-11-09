@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import archiveReducer from "./archive";
+import reverseReducer from "./reverse";
 
 export const store = configureStore({
   reducer: {
-    archive: archiveReducer,
+    reverse: reverseReducer,
   },
 });
 
