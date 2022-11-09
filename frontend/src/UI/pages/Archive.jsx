@@ -7,6 +7,7 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import { getUserInfo } from "../../api/user";
 import Button from "../atoms/Button";
 import ArchiveFriend from "../organisms/ArchiveFriend";
 import ArchiveLike from "../organisms/ArchiveLike";
@@ -18,7 +19,22 @@ function Archive() {
   const [selectTap, setSelectTap] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
+  const initialUserInfo = {
+    nickname: "",
+    message: "",
+    avatar: "",
+  };
 
+  const [loginUser, setLoginUser] = useState(initialUserInfo);
+  useEffect(() => {
+    getUserInfo(getUserInfoSuccess, getUserInfoFail);
+  }, []);
+  const getUserInfoSuccess = (res) => {
+    setLoginUser(res.data);
+  };
+  const getUserInfoFail = (error) => {
+    console.log(error);
+  };
   const createArchive = () => {
     // TODO: 새 아카이브 만들기
     navigate("/archive/my");
@@ -82,8 +98,11 @@ function Archive() {
       <div>
         <Routes>
           <Route path="/my" element={<ArchiveMy />} />
-          <Route path="/friend" element={<ArchiveFriend />} />
-          <Route path="/like" element={<ArchiveLike />} />
+          <Route
+            path="/friend"
+            element={<ArchiveFriend loginUser={loginUser} />}
+          />
+          <Route path="/like" element={<ArchiveLike loginUser={loginUser} />} />
         </Routes>
       </div>
     </div>

@@ -13,11 +13,14 @@ import {
 import { useRef, useState } from "react";
 
 import { BiPencil } from "react-icons/bi";
-import { editArchive } from "../../api/archive";
+import { useDispatch } from "react-redux";
+import { editArchive, getArchiveList } from "../../api/archive";
+import { setMyArchiveList } from "../../modules/archive";
 
 // TODO: 기존 내용 가져와야 함
 function EditArchiveModal({ archive }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useDispatch();
 
   const [editTitle, setEditTitle] = useState(archive.title);
   const [editMessage, setEditMessage] = useState(archive.description);
@@ -29,16 +32,17 @@ function EditArchiveModal({ archive }) {
   const editMessageHandle = (e) => {
     setEditMessage(e.target.value);
   };
-  const handleArchiveSubmit = () => {
-    editArchive(
+  const handleArchiveSubmit = async () => {
+    await editArchive(
       archive.archiveId,
       {
         title: editTitle,
         description: editMessage,
       },
       editArchiveSuccess,
-      editArchiveFail
+      editArchiveFail,
     );
+    await getList();
   };
   const editArchiveSuccess = (res) => {
     console.log(res);
@@ -46,10 +50,23 @@ function EditArchiveModal({ archive }) {
   const editArchiveFail = (error) => {
     console.log(error);
   };
+  const getList = async () => {
+    await getArchiveList(0, getArchiveListSuccess, getArchiveListFail);
+  };
+  const getArchiveListSuccess = (res) => {
+    console.log(res);
+    dispatch(setMyArchiveList(res.data.archives));
+  };
+  const getArchiveListFail = (error) => {
+    console.log(error);
+  };
   return (
     <>
       {/* modal button */}
-      <button className="bg-main3 border-2 border-basic3 rounded-full mx-1.5" onClick={onOpen}>
+      <button
+        className="bg-main3 border-2 border-basic3 rounded-full mx-1.5"
+        onClick={onOpen}
+      >
         <BiPencil size={18} className="text-white m-0.5" />
       </button>
 

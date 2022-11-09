@@ -8,11 +8,13 @@ import { HiOutlineTrash } from "react-icons/hi";
 import { Avatar } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
 import {
+  deleteArchiveMember,
   deleteFriend,
   getFriendArchiveList,
   getFriendList,
 } from "../../api/friend";
 import { imageForm, s3Path } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 function FriendList() {
   const [findNickName, setFindNickName] = useState("");
@@ -20,14 +22,17 @@ function FriendList() {
   const [archiveList, setArchiveList] = useState([]);
   const [selectFriend, setSelectFriend] = useState();
   const [rightTitle, setRightTitle] = useState("");
+  const navigate = useNavigate();
 
   const findNickNameHandleChange = (e) => {
     setFindNickName(e.target.value);
   };
 
-  const friendDelete = (nickname) => {
-    deleteFriend(nickname, deleteFriendSuccess, deleteFriendFail);
+  const friendDelete = async (nickname) => {
+    await deleteFriend(nickname, deleteFriendSuccess, deleteFriendFail);
     console.log("친구삭제", nickname);
+    await settingFriendList();
+    setSelectFriend(null);
   };
   const deleteFriendSuccess = (res) => {
     console.log(res);
@@ -42,18 +47,33 @@ function FriendList() {
   };
 
   const enterArchive = (archiveId) => {
-    // TODO: 아카이브로 이동
     console.log(archiveId, "이동");
+    navigate(`/reverse/${archiveId}`);
   };
 
-  const archiveDelete = (archiveId) => {
-    // TODO: 공유된 아카이브 삭제
+  const archiveDelete = async (archiveId) => {
+    await deleteArchiveMember(
+      archiveId,
+      selectFriend.nickname,
+      deleteArchiveMemberSuccess,
+      deleteArchiveMemberFail,
+    );
     console.log(archiveId, "삭제");
+    await settingFriendArchiveList();
+  };
+  const deleteArchiveMemberSuccess = (res) => {
+    console.log(res);
+  };
+  const deleteArchiveMemberFail = (error) => {
+    console.log(error);
   };
 
   useEffect(() => {
-    getFriendList(getFriendSuccess, getFriendFail);
+    settingFriendList();
   }, []);
+  const settingFriendList = async () => {
+    await getFriendList(getFriendSuccess, getFriendFail);
+  };
 
   const getFriendSuccess = (res) => {
     console.log(res);
@@ -65,14 +85,17 @@ function FriendList() {
 
   useEffect(() => {
     if (selectFriend) {
-      getFriendArchiveList(
-        selectFriend.nickname,
-        getFriendArchiveListSuccess,
-        getFriendArchiveListFail,
-      );
+      settingFriendArchiveList();
       console.log(selectFriend?.nickname, "아카이브 목록 가져옴");
     }
   }, [selectFriend]);
+  const settingFriendArchiveList = async () => {
+    await getFriendArchiveList(
+      selectFriend.nickname,
+      getFriendArchiveListSuccess,
+      getFriendArchiveListFail,
+    );
+  };
   const getFriendArchiveListSuccess = (res) => {
     setArchiveList(res.data.archives);
     console.log(res);
