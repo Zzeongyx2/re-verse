@@ -1,13 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
+import * as THREE from "three";
 
 const initialState = {
   isOpen: false,
-  isUser: false,
+  isCampfireOn: 0,
 };
 
 const reducers = {
   setOpen: (state, action) => {
     state.isOpen = !state.isOpen;
+  },
+  setCampfireOn: (state, action) => {
+    state.isCampfireOn = action.payload;
   },
 };
 
@@ -17,6 +21,6 @@ export const archiveSlice = createSlice({
   reducers,
 });
 
-export const { setOpen } = archiveSlice.actions;
+export const { setOpen, setCampfireOn } = archiveSlice.actions;
 
 export default archiveSlice.reducer;
