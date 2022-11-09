@@ -12,7 +12,7 @@ import { useFrame } from "@react-three/fiber";
 import { gsap } from "gsap";
 
 import { useDispatch } from "react-redux";
-import { setOpen } from "../../modules/archive";
+import { setOpen } from "../../modules/reverse";
 
 export function Polaroid({ props, position, event }) {
   const { nodes, materials } = useGLTF("/assets/retro_polaroid/scene.gltf");
