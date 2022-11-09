@@ -6,13 +6,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import GLTFLoader from "gltfjsx/src/utils/glftLoader";
 import { useFrame } from "@react-three/fiber";
+import { Vector3 } from "three";
 
 export default function DogAnimations({
   action,
   destinationPoint,
   handleCurrentPosition,
   handleVisible,
-  userName
+  userName,
 }) {
   const group = useRef();
   // const previousAction = usePrevious(action);
@@ -20,36 +21,50 @@ export default function DogAnimations({
     "/assets/animals/GLTF/Animations/Dog_Animations.gltf"
   );
   const { actions } = useAnimations(animations, group);
+  const [initPosition, setInitPosition] = useState();
+  // const [moving, setMoving] = useState(false);
+  let moving = false;
 
-  const [moving, setMoving] = useState(false);
+  const setMoving = (isMoving) => {
+    moving = isMoving;
+  };
   let angle = 0;
 
   // 이벤트 발생할 오브젝트의 좌표
   const objectPosition = new THREE.Vector3(-20, 0.01, 3);
   // console.log(objectPosition);
   // const [visible, setVisible] = useState(false);
-
+  useEffect(() => {
+    console.log("destination point");
+    console.log(destinationPoint);
+    setInitPosition(
+      new Vector3(destinationPoint.x, 0, destinationPoint.z)
+    );
+  }, []);
   useEffect(() => {
     if (destinationPoint) {
       setMoving(true);
       console.log(123123);
       console.log(destinationPoint);
-      console.log(group.current); // player.modelmesh
-      // group.current.lookAt(destinationPoint);
-
+      // console.log(group.current); // player.modelmesh
+      // console.log(group.current.lookAt(destinationPoint));
+      group.current.lookAt(
+        new Vector3(destinationPoint.x, 1, destinationPoint.z)
+      );
       group.current.name = userName;
 
       console.log(group.current);
     }
   }, [destinationPoint]);
+
   useFrame((state) => {
-    actions["Idle_A"].play();
+    // actions["Idle_A"].play();
     if (group.current) {
       // state.camera.lookAt(group.current.position);
     }
 
     if (group.current) {
-      if (moving) {
+      if (true) {
         angle = Math.atan2(
           destinationPoint.z - group.current.position.z,
           destinationPoint.x - group.current.position.x
@@ -64,18 +79,18 @@ export default function DogAnimations({
 
         // handleCurrentPosition(group.current.position);
 
-        actions["Idle_A"].stop();
-        actions["Walk"].play();
-        console.log("우리 강아지 걷는다");
+        // actions["Idle_A"].stop();
+        // actions["Walk"].play();
+        // console.log("우리 강아지 걷는다");
 
         if (
           Math.abs(destinationPoint.x - group.current.position.x) < 0.03 &&
           Math.abs(destinationPoint.z - group.current.position.z) < 0.03
         ) {
-          setMoving(false);
-          actions["Walk"].stop();
-          actions["Idle_A"].play();
-          console.log("우리 강아지 멈춘다");
+          // setMoving(false);
+          // actions["Walk"].stop();
+          // actions["Idle_A"].play();
+          // console.log("우리 강아지 멈춘다");
         }
 
         // 오브젝트 visible event
@@ -103,12 +118,11 @@ export default function DogAnimations({
   // }, [actions, action, previousAction]);
   return (
     // <group ref={group} dispose={null}>
-    <group ref={group} dispose={null} position={[-30, 0, -30]}>
-      <group name="Scene">
-        <group name="Rig">
+    <group ref={group} position={initPosition}>
+      <group>
+        <group>
           <primitive object={nodes.root} />
-          <skinnedMesh
-            name="Dog"
+          <mesh
             geometry={nodes.Dog.geometry}
             material={materials.M_Dog}
             skeleton={nodes.Dog.skeleton}
@@ -124,7 +138,7 @@ export default function DogAnimations({
   );
 }
 
-useGLTF.preload("/Dog_Animations.gltf");
+// useGLTF.preload("/Dog_Animations.gltf");
 
 function usePrevious(value) {
   const ref = useRef();
