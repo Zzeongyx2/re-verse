@@ -25,9 +25,9 @@ function ArchiveMy() {
 
   const bookmarkTrigger = async (archive, index) => {
     if (!archive.bookmark) {
-      postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
+      await postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     } else {
-      deleteBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
+      await deleteBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     }
     await getList();
   };
