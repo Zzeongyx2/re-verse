@@ -46,6 +46,7 @@ function ArchiveLike() {
     await getArchiveLike(getArchiveLikeSuccess, getArchiveLikeFail);
   };
   const getArchiveLikeSuccess = (res) => {
+    console.log(res);
     dispatch(setLikeArchiveList(res.data.archives));
   };
   const getArchiveLikeFail = (error) => {
@@ -72,7 +73,7 @@ function ArchiveLike() {
                     </button>
                     {/* 유저 이름 */}
                     <div className="font-bold text-sm overflow-hidden text-ellipsis line-clamp-1 md:w-44 sm:w-36">
-                      {archive.user.nickname}
+                      {archive.owner.nickname}
                     </div>
                   </div>
 
