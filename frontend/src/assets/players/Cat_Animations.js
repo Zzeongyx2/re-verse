@@ -8,7 +8,7 @@ import GLTFLoader from "gltfjsx/src/utils/glftLoader";
 import { useFrame } from "@react-three/fiber";
 
 import { useDispatch } from "react-redux";
-import { setCampfireOn } from "../../modules/archive";
+import { setCampfireOn } from "../../modules/reverse";
 
 export default function CatAnimations({
   // action,
