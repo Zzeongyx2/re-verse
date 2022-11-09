@@ -171,7 +171,7 @@ public class AuthService {
 
         //redis에 이전 accesstoken 삭제 후 새로운거 추가
         redisService.deleteValues(accessToken);
-        redisService.setValues(token.getAccessToken(), authentication.getName());
+        redisService.setValues(token.getAccessToken(), userId);
 
 //        response.addHeader(AUTHORIZATION, "Bearer " + token.getAccessToken());
 
