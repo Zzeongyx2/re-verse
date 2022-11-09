@@ -111,11 +111,9 @@ public class FriendController {
     @PostMapping("/bookmark")
     public ResponseEntity createBookmark(@RequestBody BookmarkReq bookmarkReq) {
 
-        UUID userId = null;
-        User user = null;
-        Archive archive = null;
-//        User user = userService.getUser(userId);
-//        Archive archive = archiveService.getArchive(bookmarkReq.getArchiveId());
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
+        Archive archive = archiveService.getArchive(bookmarkReq.getArchiveId());
 
 
         friendService.createBookmark(archive, user);
@@ -159,10 +157,14 @@ public class FriendController {
         User target = userService.getUserByNickname(nickname);
         Archive archive = archiveService.getArchive(archiveId);
 
-        if (friendService.checkFriend(user, target)) {
-            throw new NotFriendException();
+        if(user.getNickname().equals(target.getNickname())){
+            friendService.deleteArchiveMember(archive, target);
+
+        } else if (friendService.checkFriend(user, target)) {
+                throw new NotFriendException();
+        } else{
+            friendService.deleteArchiveMember(archive, target);
         }
-        friendService.deleteArchiveMember(archive, target);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
