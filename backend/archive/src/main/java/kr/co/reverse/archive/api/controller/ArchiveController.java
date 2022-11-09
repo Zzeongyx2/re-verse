@@ -92,7 +92,7 @@ public class ArchiveController {
             throw new UnauthorizedException(CommonErrorCode.UNAUTHORIZED_ERROR);
         }
 
-//        archiveService.updateArchive(UUID.fromString(archiveId));
+        archiveService.updateArchive(UUID.fromString(archiveId), archiveReq);
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
@@ -107,7 +107,7 @@ public class ArchiveController {
             throw new UnauthorizedException(CommonErrorCode.UNAUTHORIZED_ERROR);
         }
 
-//        archiveService.deleteArchive(UUID.fromString(archiveId));
+        archiveService.deleteArchive(UUID.fromString(archiveId));
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }

@@ -3,6 +3,7 @@ package kr.co.reverse.archive.db.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -46,6 +47,14 @@ public class Archive {
     private List<PhotoBook> photoBooks = new ArrayList<>();
 
 //    private List<GuestBook> guestBooks = new ArrayList<>();
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @Builder
     public Archive(String title, String description, Boolean isDeleted, LocalDateTime createdTime, UUID ownerId, List<Stuff> stuffs, List<ArchiveMember> members, List<PhotoBook> photoBooks) {

@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -119,6 +120,25 @@ public class ArchiveService {
         Archive archive = getArchive(archiveId);
 
         return archive.getOwnerId().equals(userId);
+    }
+
+    public void updateArchive(UUID archiveId, ArchiveReq archiveReq) {
+        Archive archive = archiveRepository.findById(archiveId)
+                .orElseThrow(() -> new NoSuchElementException());
+
+        String title = archiveReq.getTitle();
+        String description = archiveReq.getDescription();
+
+        if (title == null || description == null) {
+            throw new IllegalArgumentException();
+        }
+
+        archive.setTitle(title);
+        archive.setDescription(description);
+    }
+
+    public void deleteArchive(UUID archiveId) {
+        archiveRepository.deleteById(archiveId);
     }
 
 }
