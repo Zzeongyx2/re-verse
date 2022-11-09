@@ -21,7 +21,7 @@ function ArchiveMy() {
   };
 
   const bookmarkTrigger = (archive, index) => {
-    if (!archive.bookmarks) {
+    if (!archive.bookmark) {
       postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     } else {
       deleteBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
@@ -29,7 +29,7 @@ function ArchiveMy() {
     setArchiveList((list) => {
       return [...list].filter((item, idx) => {
         if (idx === index) {
-          item.bookmarks = !item.bookmarks;
+          item.bookmark = !item.bookmark;
         }
         return item;
       });
@@ -69,7 +69,7 @@ function ArchiveMy() {
                       }}
                       className="w-14 text-extra1"
                     >
-                      {archive.bookmarks ? <AiFillStar size={18} /> : <AiOutlineStar size={18} />}
+                      {archive.bookmark ? <AiFillStar size={18} /> : <AiOutlineStar size={18} />}
                     </button>
                     {/* 아카이브 이름 */}
                     <p className="text-sm font-bold overflow-hidden text-ellipsis line-clamp-1 md:w-44 sm:w-36">
