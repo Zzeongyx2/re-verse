@@ -52,8 +52,14 @@ export function Notebook({ props, event }) {
         ref={travelWriteObject}
         rotation={[-Math.PI / 2, 0, -Math.PI / 6]}
         scale={0.05}
-        position={[42, 0.4, -73.5]}
+        position={[24, 0.4, -73.5]}
         // position={[46.5, 0.12, -72]}
+        onPointerOver={(e) => {
+          document.getElementsByTagName("body")[0].style.cursor = "pointer";
+        }}
+        onPointerLeave={(e) => {
+          document.getElementsByTagName("body")[0].style.cursor = "";
+        }}
       >
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group
