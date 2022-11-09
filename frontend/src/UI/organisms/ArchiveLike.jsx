@@ -7,10 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { Avatar, AvatarGroup, Divider } from "@chakra-ui/react";
 import { getArchiveLike } from "../../api/archive";
 import { setLikeArchiveList } from "../../modules/archive";
-import { deleteBookmark, postBookmark } from "../../api/friend";
+import {
+  deleteArchiveMember,
+  deleteBookmark,
+  postBookmark,
+} from "../../api/friend";
 import { imageForm, s3Path } from "../../api";
 
-function ArchiveLike() {
+function ArchiveLike({ loginUser }) {
   // const archiveList = useState([]);
   const archiveList = useSelector((state) => state.archive.likeArchiveList);
   const dispatch = useDispatch();
@@ -20,15 +24,35 @@ function ArchiveLike() {
     console.log(archiveId, "이동");
     navigate(`/reverse/${archiveId}`);
   };
-  const deleteArchive = (archiveId) => {
-    // TODO: 아카이브 공유 삭제
+  const deleteArchive = async (archiveId) => {
+    await deleteArchiveMember(
+      archiveId,
+      loginUser.nickname,
+      deleteArchiveMemberSuccess,
+      deleteArchiveMemberFail,
+    );
     console.log(archiveId, "나가기");
+    await getLikeList();
+  };
+  const deleteArchiveMemberSuccess = (res) => {
+    console.log(res);
+  };
+  const deleteArchiveMemberFail = (error) => {
+    console.log(error);
   };
   const bookmarkTrigger = async (archive, index) => {
     if (!archive.bookmark) {
-      await postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
+      await postBookmark(
+        archive.archiveId,
+        bookmarkControlSuccess,
+        bookmarkControl,
+      );
     } else {
-      await deleteBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
+      await deleteBookmark(
+        archive.archiveId,
+        bookmarkControlSuccess,
+        bookmarkControl,
+      );
     }
     await getLikeList();
   };
@@ -109,16 +133,25 @@ function ArchiveLike() {
                       }}
                       className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
                     >
-                      <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
+                      <BiLogIn
+                        size={18}
+                        className="text-white m-0.5 -translate-x-0.5"
+                      />
                     </button>
-                    <button
-                      onClick={() => {
-                        deleteArchive(archive.archiveId);
-                      }}
-                      className="bg-sub3 border-2 border-basic3 rounded-full"
-                    >
-                      <HiOutlineTrash size={18} className="text-white m-0.5" />
-                    </button>
+                    {/* 아카이브 주인이 로그인한 유저면 아카이브 나가는 버튼 없게하기 */}
+                    {archive.owner.nickname === loginUser.nickname ? null : (
+                      <button
+                        onClick={() => {
+                          deleteArchive(archive.archiveId);
+                        }}
+                        className="bg-sub3 border-2 border-basic3 rounded-full"
+                      >
+                        <HiOutlineTrash
+                          size={18}
+                          className="text-white m-0.5"
+                        />
+                      </button>
+                    )}
                   </div>
                 </div>
                 <Divider />

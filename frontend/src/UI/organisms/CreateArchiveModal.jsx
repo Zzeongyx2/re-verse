@@ -11,10 +11,13 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
-import { postArchive } from "../../api/archive";
+import { getArchiveList, postArchive } from "../../api/archive";
+import { useDispatch } from "react-redux";
+import { setMyArchiveList } from "../../modules/archive";
 
 function CreateArchiveModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useDispatch();
 
   const [newTitle, setNewTitle] = useState("");
   const [newMessage, setNewMessage] = useState("");
@@ -29,7 +32,7 @@ function CreateArchiveModal() {
 
   const [clickBtn, setClickBtn] = useState(false);
 
-  const handleArchiveSubmit = () => {
+  const handleArchiveSubmit = async () => {
     // const formData = new FormData();
     // const content = {
     //   newTitle: newTitle,
@@ -38,11 +41,13 @@ function CreateArchiveModal() {
     // const json = JSON.stringify(content);
     // formData.append("content", json);
 
-    postArchive(
+    await postArchive(
       { title: newTitle, description: newMessage },
       postArchiveSuccess,
       postArchiveFail,
     );
+
+    await getList();
   };
   const postArchiveSuccess = (res) => {
     console.log(res);
@@ -50,7 +55,16 @@ function CreateArchiveModal() {
   const postArchiveFail = (error) => {
     console.log(error);
   };
-
+  const getList = async () => {
+    await getArchiveList(0, getArchiveListSuccess, getArchiveListFail);
+  };
+  const getArchiveListSuccess = (res) => {
+    console.log(res);
+    dispatch(setMyArchiveList(res.data.archives));
+  };
+  const getArchiveListFail = (error) => {
+    console.log(error);
+  };
   return (
     <>
       {/* modal button */}
