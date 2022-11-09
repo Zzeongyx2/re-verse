@@ -6,6 +6,7 @@ import { Avatar, AvatarGroup } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
 import { deleteBookmark, postBookmark } from "../../api/friend";
 import { getArchiveList } from "../../api/archive";
+import { imageForm, s3Path } from "../../api";
 
 function ArchiveFriend() {
   const [archiveList, setArchiveList] = useState([]);
@@ -22,11 +23,7 @@ function ArchiveFriend() {
     if (!archive.bookmarks) {
       postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     } else {
-      deleteBookmark(
-        archive.archiveId,
-        bookmarkControlSuccess,
-        bookmarkControl,
-      );
+      deleteBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     }
     setArchiveList((list) => {
       return [...list].filter((item, idx) => {
@@ -71,11 +68,7 @@ function ArchiveFriend() {
                       }}
                       className="w-14 text-extra1"
                     >
-                      {archive.bookmarks ? (
-                        <AiFillStar size={18} />
-                      ) : (
-                        <AiOutlineStar size={18} />
-                      )}
+                      {archive.bookmark ? <AiFillStar size={18} /> : <AiOutlineStar size={18} />}
                     </button>
                     {/* 유저 이름 */}
                     <div className="font-bold text-sm overflow-hidden text-ellipsis line-clamp-1 md:w-44 sm:w-36">
@@ -98,7 +91,7 @@ function ArchiveFriend() {
                         return (
                           <Avatar
                             name={member.nickname}
-                            src={member.avatar}
+                            src={s3Path + member.avatar + imageForm}
                             key={index}
                             alt={index}
                           />
@@ -114,10 +107,7 @@ function ArchiveFriend() {
                       }}
                       className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
                     >
-                      <BiLogIn
-                        size={18}
-                        className="text-white m-0.5 -translate-x-0.5"
-                      />
+                      <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
                     </button>
                     <button
                       onClick={() => {
