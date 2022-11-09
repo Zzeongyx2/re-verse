@@ -93,6 +93,21 @@ public class ArchiveService {
         return friendArchives;
     }
 
+    public List<ArchiveRes> getMyBookmarkArchive(UUID userId) {
+        List<ArchiveRes> bookmarkArchives = archiveRepository.getBookmarkArchive(userId);
+
+        if (bookmarkArchives != null) {
+            for (ArchiveRes archiveRes : bookmarkArchives) {
+                UUID archiveId = archiveRes.getArchiveId();
+                List<UserRes> members = archiveRepository.getMembers(archiveId);
+
+                archiveRes.setMembers(members);
+                archiveRes.setBookmark(true);
+            }
+        }
+
+        return bookmarkArchives;
+    }
 
     public ArchiveDetailRes getArchiveDetail(UUID archiveId) {
         ArchiveDetailRes archiveDetailRes = archiveRepository.getArchiveDetail(archiveId);
@@ -141,5 +156,4 @@ public class ArchiveService {
     public void deleteArchive(UUID archiveId) {
         archiveRepository.deleteById(archiveId);
     }
-
 }

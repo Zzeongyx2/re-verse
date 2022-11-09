@@ -105,6 +105,16 @@ public class FriendController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @GetMapping("/bookmark")
+    public ResponseEntity<? extends ArchivesRes> getBookmarks() {
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
+
+        List<ArchiveRes> myBookmarkArchive = archiveService.getMyBookmarkArchive(UUID.fromString(userId));
+
+        return ResponseEntity.ok(ArchivesRes.of(myBookmarkArchive));
+    }
+
     @PostMapping("/bookmark")
     public ResponseEntity createBookmark(@RequestBody BookmarkReq bookmarkReq) {
 
