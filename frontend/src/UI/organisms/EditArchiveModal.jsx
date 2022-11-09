@@ -37,7 +37,7 @@ function EditArchiveModal({ archive }) {
         description: editMessage,
       },
       editArchiveSuccess,
-      editArchiveFail,
+      editArchiveFail
     );
   };
   const editArchiveSuccess = (res) => {
@@ -49,10 +49,7 @@ function EditArchiveModal({ archive }) {
   return (
     <>
       {/* modal button */}
-      <button
-        className="bg-main3 border-2 border-basic3 rounded-full mx-1.5"
-        onClick={onOpen}
-      >
+      <button className="bg-main3 border-2 border-basic3 rounded-full mx-1.5" onClick={onOpen}>
         <BiPencil size={18} className="text-white m-0.5" />
       </button>
 
@@ -104,7 +101,7 @@ function EditArchiveModal({ archive }) {
               className="font-bold bg-extra1 px-6 py-2 rounded-xl text-sm"
               disabled={clickBtn}
             >
-              생성하기
+              수정하기
             </button>
           </ModalFooter>
         </ModalContent>
