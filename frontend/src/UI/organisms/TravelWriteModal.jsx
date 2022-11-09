@@ -14,6 +14,7 @@ import { setOpen } from "../../modules/reverse";
 import ArchiveDatePicker from "../molecules/ReverseDatePicker";
 
 import { AiOutlineCalendar } from "react-icons/ai";
+import { EditorComponent } from "./TextEditor";
 
 function TravelWriteModal() {
   const openModal = useSelector((state) => state.reverse.isOpen);
@@ -59,7 +60,7 @@ function TravelWriteModal() {
             // TODO: draft js!!!!!
             // TODO: draft js!!!!! */}
             <div className="mt-3.5 w-full h-full border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1">
-              <p className="text-xs text-basic1">draft js 적용하기 !!!</p>
+              <EditorComponent />
             </div>
           </ModalBody>
 
