@@ -25,16 +25,16 @@ function TravelWriteModal() {
       <Modal
         isOpen={openModal}
         // onClose={dispatch(setOpen())}
-        size={"3xl"}
+        size={"4xl"}
         isCentered
       >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent minH={"750"}>
           <ModalHeader mb={4} textAlign="center">
             새 글 작성하기
           </ModalHeader>
           {/* <ModalCloseButton mt={1.5} /> */}
-          <ModalBody className="">
+          <ModalBody>
             <div className="flex justify-between">
               {/* 글 제목 */}
               <div className="w-[calc(98%/3*2)] border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1">
@@ -54,12 +54,7 @@ function TravelWriteModal() {
               </div>
             </div>
 
-            {/* // TODO: draft js!!!!!
-            // TODO: draft js!!!!!
-            // TODO: draft js!!!!!
-            // TODO: draft js!!!!!
-            // TODO: draft js!!!!! */}
-            <div className="mt-3.5 w-full h-full border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1">
+            <div className="mt-3.5 w-full h-[520px] border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1 overflow-auto">
               <EditorComponent />
             </div>
           </ModalBody>
