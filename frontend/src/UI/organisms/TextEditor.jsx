@@ -28,7 +28,7 @@ export const EditorComponent = () => {
   console.log(getHTML);
 
   return (
-    <div>
+    <div className="h-full">
       <Editor
         // 에디터 & 툴바 모두 적용되는 클래스
         wrapperClassName="wrapper"
@@ -43,10 +43,10 @@ export const EditorComponent = () => {
           // list: { inDropdown: true },
           link: { inDropdown: true },
           history: { inDropdown: true },
-          image: {
-            uploadCallback: uploadImageCallBack,
-            alt: { present: true, mandatory: true },
-          },
+          // image: {
+          //   uploadCallback: uploadImageCallBack,
+          //   alt: { present: true, mandatory: true },
+          // },
           textAlign: { className: "textalign" },
           // colorPicker: { component: ColorPic },
         }}
@@ -59,7 +59,7 @@ export const EditorComponent = () => {
         // 에디터의 값이 변경될 때마다 호출하는 함수
         onEditorStateChange={onEditorStateChange}
       />
-      <button onClick={handleHTML}>CLICK THIS</button>
+      <button onClick={handleHTML}>click me</button>
     </div>
   );
 };

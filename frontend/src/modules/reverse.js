@@ -18,6 +18,9 @@ const reducers = {
   setCampfireOn: (state, action) => {
     state.isCampfireOn = action.payload;
   },
+  createArticle: (state, action) => {
+    state.article = action.payload;
+  },
 };
 
 export const reverseSlice = createSlice({
@@ -26,6 +29,6 @@ export const reverseSlice = createSlice({
   reducers,
 });
 
-export const { setOpen, setCampfireOn } = reverseSlice.actions;
+export const { setOpen, setCampfireOn, createArticle } = reverseSlice.actions;
 
 export default reverseSlice.reducer;
