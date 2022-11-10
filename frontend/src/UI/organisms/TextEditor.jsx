@@ -2,6 +2,7 @@ import React, { Component, useState } from "react";
 import { convertFromRaw, convertToRaw, EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
+// import htmlToDraft from "html-to-draftjs";  // 글 수정할 때 필요함
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../styles/draft.css";
 
