@@ -38,6 +38,7 @@ public class UsersRes {
         List<UserRes> userResList = new ArrayList<>();
         for(UserDocument user : users){
             UserRes userRes = new UserRes();
+            userRes.setUserId(user.getUserId());
             userRes.setMessage(user.getMessage());
             userRes.setNickname(user.getNickname());
             userRes.setAvatar(user.getAvatar().toString());
