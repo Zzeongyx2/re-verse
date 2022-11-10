@@ -1,5 +1,11 @@
 import * as THREE from "three";
-import React, { Suspense, useRef, useState, useEffect } from "react";
+import React, {
+  Suspense,
+  useRef,
+  useState,
+  useEffect,
+  useHistory,
+} from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 // import { OrthographicCamera } from "@react-three/drei";
@@ -50,7 +56,24 @@ function ReverseWebRTC() {
   const [isPressed, setIsPressed] = useState(false);
   const [others, setOthers] = useState([]);
   const [userId, setUserId] = useState("");
-
+  const othersRef = useRef(others);
+  const addOther = (value) => {
+    setOthers((others) => {
+      let temp = [...others, value];
+      othersRef.current = temp;
+      return temp;
+    });
+  };
+  const removeOther = (value) => {
+    setOthers((others) => {
+      console.log(value);
+      console.log(others);
+      let temp = othersRef.current.filter((other) => other !== value);
+      console.log(temp);
+      othersRef.current = temp;
+      return temp;
+    });
+  };
   // const [otherCharacterMap, setMap] = useState({});
   const [otherCharacterMap, setMap] = useState(new Map());
   const addMap = (key, value) => {
@@ -64,17 +87,32 @@ function ReverseWebRTC() {
 
   useEffect(() => {
     console.log(others);
+    othersRef.current = others;
   }, [others]);
   useEffect(() => {
-    console.log(otherCharacterMap);
+    // console.log(otherCharacterMap);
   }, [otherCharacterMap]);
   useEffect(() => {
-    console.log(destRef.current);
+    // console.log(destRef.current);
     destRef.current = destinationPoint;
-    console.log(destRef.current);
-    console.log(destinationPoint);
+    // console.log(destRef.current);
+    // console.log(destinationPoint);
   }, [destinationPoint]);
 
+  const preventClose = (e: BeforeUnloadEvent) => {
+    // console.log(e)
+    // e.preventDefault();
+    disconnectAll();
+    // console.log(e);
+    // console.log("hihihihi");
+    // e.returnValue = ""; //Chrome에서 동작하도록; deprecated
+  };
+  // console.log(preventClose);
+  useEffect(() => {
+    (() => {
+      window.addEventListener("unload", preventClose);
+    })();
+  }, []);
   var signal1 = {
     userId: null,
     type: null,
@@ -125,7 +163,7 @@ function ReverseWebRTC() {
   function startWebSocket() {
     console.log("startWebSocket");
     ws1 = new WebSocket("wss://re-verse.co.kr/socket");
-    console.log(ws1);
+    // console.log(ws1);
     let sessionStorage = window.sessionStorage;
     sessionStorage.setItem("archive", archiveId);
 
@@ -142,6 +180,11 @@ function ReverseWebRTC() {
     };
 
     ws1.onclose = (event) => {
+      console.log(channels);
+      console.log(channelUsers);
+      console.log(friendToName);
+      console.log(audioMap);
+      console.log(rtcPeers);
       // document.getElementById("status-offline").style.display = "block";
       // document.getElementById("status-online").style.display = "none";
       // document.getElementById("myUsername").removeAttribute("readOnly");
@@ -156,7 +199,7 @@ function ReverseWebRTC() {
 
     ws1.onmessage = (event) => {
       var data1 = JSON.parse(event.data);
-      console.log(data1);
+      // console.log(data1);
       var data2 = null;
       console.log("here is onmessage");
       if (data1.userId === userId2 || data1.userId.length < 2) {
@@ -200,7 +243,7 @@ function ReverseWebRTC() {
       } else if (data1.type === "Answer") {
         console.log("Receive answer:");
         data2 = JSON.parse(data1.data);
-        console.log(data2);
+        // console.log(data2);
         let peer1 = rtcPeers.get(data1.userId);
         peer1.setRemoteDescription(new RTCSessionDescription(data2));
       }
@@ -211,7 +254,7 @@ function ReverseWebRTC() {
     console.log("handle new member");
     let data3 = JSON.parse(data1.data);
     let peerId = data1.userId;
-    console.log(peerId);
+    // console.log(peerId);
     let rtcPeer = new RTCPeerConnection({
       offerToReceiveAudio: true,
       iceServers: [
@@ -225,7 +268,7 @@ function ReverseWebRTC() {
         // },
       ],
     });
-    console.log(localStream);
+    // console.log(localStream);
     localStream.getTracks().forEach((track) => {
       console.log("in the rtcpeer make phase track");
       rtcPeer.addTrack(track, localStream);
@@ -244,7 +287,7 @@ function ReverseWebRTC() {
         .createOffer()
         .then((a) => {
           console.log("Sending offer");
-          console.log(a);
+          // console.log(a);
           signal1.userId = userId2;
           signal1.type = "Offer";
           signal1.data = JSON.stringify(a);
@@ -279,12 +322,12 @@ function ReverseWebRTC() {
     rtcPeer.ontrack = (event) => {
       console.log("here is ontrack phase");
       // console.log("this is answer ontrack");
-      console.log(friendToName);
-      console.log(peerId);
+      // console.log(friendToName);
+      // console.log(peerId);
 
       // console.log(audioMap.size());
       // audioMap.set(peerId, "audio" + audioMap.size());
-      console.log(audioMap);
+      // console.log(audioMap);
 
       let newUser = document.createElement("li");
       let div1 = document.createElement("div");
@@ -302,11 +345,11 @@ function ReverseWebRTC() {
       newUser.appendChild(div2);
       document.getElementById("user-audio").appendChild(newUser);
       const peerAudio = document.getElementById(peerId);
-      console.log(event.streams);
+      // console.log(event.streams);
       // if (peerAudio.srcObject !== event.streams[0]) {
       peerAudio.srcObject = event.streams[0];
       // }
-      console.log(event.streams);
+      // console.log(event.streams);
       //console.lo(audioComp);
       //console.lo(peerAudio);
     };
@@ -327,7 +370,10 @@ function ReverseWebRTC() {
       console.log("ice error");
     };
 
-    // rtcPeer.onicegatheringstatechange = (event) => {};
+    rtcPeer.onicegatheringstatechange = (event) => {
+      console.log("ice change phase");
+      console.log(event);
+    };
 
     // rtcPeer.oniceconnectionstatechange = (event) => {};
 
@@ -336,18 +382,24 @@ function ReverseWebRTC() {
   function channelConfig(channel1, peerId) {
     channel1.onclose = (event) => {
       console.log("Close channel:");
-      console.log(channel1);
-      console.log(event);
-      console.log(channelUsers);
+      // console.log(channel1);
+      // console.log(event);
+      // console.log(channelUsers);
       let friendId = channelUsers.get(channel1);
-      console.log(peerId);
+      let friendName = friendToName.get(friendId);
+      // console.log(peerId);
       console.log(friendId);
+      console.log(event);
+      console.log(friendName);
+      console.log("=======================");
       // if (peerId) document.getElementById(peerId).remove();
       // else
-      if (friendId) {
+      if (friendName) {
         document.getElementById(friendId).remove();
+        removeOther(friendName);
+        console.log(othersRef.current);
       }
-      console.log(friendId);
+      // console.log(friendId);
       addUserOnChat(friendToName.get(friendId), false);
       friendToName.delete(friendId);
     };
@@ -360,7 +412,7 @@ function ReverseWebRTC() {
         addChatLine(dataChannel1.data, "you", dataChannel1.userId);
       } else if (dataChannel1.type === "handshake") {
         console.log("this is handshake phase");
-        console.log(dataChannel1);
+        // console.log(dataChannel1);
         // setOthers((other) => {
         //   return [...other, dataChannel1.userId];
         // });
@@ -398,8 +450,8 @@ function ReverseWebRTC() {
       console.log("here is datachannel open");
       channelData.userId = document.getElementById("myUsername").value;
       channelData.type = "handshake";
-      console.log(peerId);
-      console.log(destRef.current);
+      // console.log(peerId);
+      // console.log(destRef.current);
       channelData.data = {
         position: { x: destRef.current.x, y: 1, z: destRef.current.z },
         username: document.getElementById("myUsername").value,
@@ -506,9 +558,13 @@ function ReverseWebRTC() {
     for (let i = audioSet.length - 1; i >= 0; i--) {
       audioSet[i].remove();
     }
+    for (let i = others.length - 1; i >= 0; i--) {
+      console.log(others[i]);
+      removeOther(others[i]);
+      console.log(othersRef.current);
+    }
     rtcPeers.clear();
     audioMap.clear();
-
     channels = [];
     // channelUsers.forEach((a, b) => document.getElementById(a).remove());
     channelUsers.clear();
@@ -665,7 +721,7 @@ function ReverseWebRTC() {
           {others.map((other, idx) => {
             console.log(other);
             console.log(others);
-            console.log(idx);
+            // console.log(idx);
             console.log(otherCharacterMap);
             // console.log(otherCharacterMap[other]);
             return (
