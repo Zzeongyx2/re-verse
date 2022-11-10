@@ -22,7 +22,7 @@ export default function DogAnimations({
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
-  console.log(nodes);
+  // console.log(nodes);
   const { actions } = useAnimations(animations, group);
   const [initPosition, setInitPosition] = useState();
   const [moving, setMoving] = useState(false);
@@ -34,8 +34,8 @@ export default function DogAnimations({
   // console.log(objectPosition);
   // const [visible, setVisible] = useState(false);
   useEffect(() => {
-    console.log("destination point");
-    console.log(destinationPoint);
+    // console.log("destination point");
+    // console.log(destinationPoint);
     setInitPosition(new Vector3(destinationPoint.x, 0, destinationPoint.z));
   }, []);
   useEffect(() => {
@@ -43,11 +43,11 @@ export default function DogAnimations({
       // setMoving(true);
       setMoving((prev) => {
         moveRef.current = true;
-        console.log(moveRef);
+        // console.log(moveRef);
         prev = true;
       });
-      console.log(123123);
-      console.log(destinationPoint);
+      // console.log(123123);
+      // console.log(destinationPoint);
       // console.log(group.current); // player.modelmesh
       // console.log(group.current.lookAt(destinationPoint));
       group.current.lookAt(
@@ -55,7 +55,7 @@ export default function DogAnimations({
       );
       group.current.name = userName;
 
-      console.log(group.current);
+      // console.log(group.current);
     }
   }, [destinationPoint]);
 
@@ -91,7 +91,7 @@ export default function DogAnimations({
         ) {
           // setMoving(false);
           setMoving((prev) => {
-            console.log(moveRef);
+            // console.log(moveRef);
             moveRef.current = false;
             prev = false;
           });
