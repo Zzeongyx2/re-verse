@@ -22,8 +22,9 @@ export default function CatAnimations({
   const { nodes, materials, animations } = useGLTF(
     "/assets/animals/GLTF/Animations/Cat_Animations.gltf"
   );
+  console.log(nodes)
   const { actions } = useAnimations(animations, group);
-
+    console.log(actions);
   const [moving, setMoving] = useState(false);
   let angle = 0;
 
@@ -44,7 +45,6 @@ export default function CatAnimations({
       setMoving(true);
       // console.log(group.current); // player.modelmesh
       group.current.lookAt(destinationPoint);
-
       group.current.name = "mememememe";
 
       console.log(group.current);
@@ -70,7 +70,7 @@ export default function CatAnimations({
 
         actions["Idle_A"].stop();
         actions["Walk"].play();
-        console.log("우리 고양이 걷는다");
+        // console.log("우리 고양이 걷는다");
 
         if (
           Math.abs(destinationPoint.x - group.current.position.x) < 0.03 &&
@@ -79,7 +79,7 @@ export default function CatAnimations({
           setMoving(false);
           actions["Walk"].stop();
           actions["Idle_A"].play();
-          console.log("우리 고양이 멈춘다");
+          // console.log("우리 고양이 멈춘다");
         }
 
         // 오브젝트 visible event
