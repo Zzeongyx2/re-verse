@@ -6,16 +6,15 @@ import draftToHtml from "draftjs-to-html";
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../styles/draft.css";
 
-function uploadImageCallBack(file) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://");
-  });
-}
+// function uploadImageCallBack(file) {
+//   return new Promise((resolve, reject) => {
+//     const xhr = new XMLHttpRequest();
+//     xhr.open("POST", "http://");
+//   });
+// }
 
 export const EditorComponent = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-
   const onEditorStateChange = (editorState) => {
     setEditorState(editorState);
   };
