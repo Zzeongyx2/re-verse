@@ -50,6 +50,10 @@ public class FriendController {
         User user = userService.getPlayer(userId);
         User target = userService.getUserByNickname(friendInvitationReq.getNickname());
 
+        if(friendService.checkFriend(user, target)){
+            throw new NotFriendException();
+        }
+
         // 2022-11-08
         // 이미 요청을 보낸 관계면 요청을 만들지 않는다.
         if (friendService.getFriendInvitationTo(user, target) != null) {
@@ -114,7 +118,6 @@ public class FriendController {
         String userId = userService.getUserId();
         User user = userService.getPlayer(userId);
         Archive archive = archiveService.getArchive(bookmarkReq.getArchiveId());
-
 
         friendService.createBookmark(archive, user);
 
