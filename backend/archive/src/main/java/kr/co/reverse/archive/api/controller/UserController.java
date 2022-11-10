@@ -4,15 +4,18 @@ import kr.co.reverse.archive.api.request.AvatarReq;
 import kr.co.reverse.archive.api.request.SigninUserReq;
 import kr.co.reverse.archive.api.request.UserReq;
 import kr.co.reverse.archive.api.response.*;
+import kr.co.reverse.archive.api.service.UserSearchService;
 import kr.co.reverse.archive.api.service.UserService;
 import kr.co.reverse.archive.db.entity.Avatar;
 import kr.co.reverse.archive.db.entity.User;
+import kr.co.reverse.archive.db.entity.UserDocument;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -20,6 +23,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final UserSearchService userSearchService;
 
     @GetMapping
     public ResponseEntity<? extends UserRes> getPlayer() {
@@ -75,9 +79,10 @@ public class UserController {
     @GetMapping("/search")
     public ResponseEntity<? extends UsersRes> searchUsers(@RequestParam String nickname){
 
-        List<User> users = userService.getUsers(nickname);
+//        List<User> users = userService.getUsers(nickname);
+        List<UserDocument> users = userSearchService.searchUser(nickname);
 
-        return ResponseEntity.ok(UsersRes.of(users));
+        return ResponseEntity.ok(UsersRes.ofDocument(users));
     }
 
 
@@ -104,5 +109,17 @@ public class UserController {
 
         return ResponseEntity.ok(UserIdRes.of(authId));
     }
+
+    @DeleteMapping("/delete/{auth_id}")
+    public void deleteUser(@PathVariable(name = "auth_id") String authId){
+
+
+        User user = userService.getUserByAuthId(authId);
+
+        userSearchService.deleteUser(user);
+
+//        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
 
 }
