@@ -32,7 +32,7 @@ function ReverseWebRTC() {
   const [destinationPoint, setDestinationPoint] = useState(
     new Vector3(-30, 0, -30)
   );
-  const destRef=useRef(destinationPoint);
+  const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
   if (floorTexture) {
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
@@ -70,8 +70,8 @@ function ReverseWebRTC() {
   }, [otherCharacterMap]);
   useEffect(() => {
     console.log(destRef.current);
-    destRef.current=destinationPoint;
-    console.log(destRef.current)
+    destRef.current = destinationPoint;
+    console.log(destRef.current);
     console.log(destinationPoint);
   }, [destinationPoint]);
 
@@ -401,7 +401,7 @@ function ReverseWebRTC() {
       console.log(peerId);
       console.log(destRef.current);
       channelData.data = {
-        position: {x:destRef.current.x,y:1,z:destRef.current.z},
+        position: { x: destRef.current.x, y: 1, z: destRef.current.z },
         username: document.getElementById("myUsername").value,
         uuid: userId2,
       };

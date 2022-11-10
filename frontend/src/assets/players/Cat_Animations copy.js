@@ -19,6 +19,7 @@ export default function CatAnimations({
     "/assets/animals/GLTF/Animations/Cat_Animations.gltf"
   );
   const { actions } = useAnimations(animations, group);
+    console.log(actions);
 
   const [moving, setMoving] = useState(false);
   let angle = 0;
