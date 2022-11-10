@@ -17,6 +17,6 @@ public interface UserSearchRepository extends ElasticsearchRepository<UserDocume
 
     List<UserDocument> findByNicknameContaining(String nickname);
 
-    UserDocument findByUserId(UUID userId);
+//    UserDocument findByUserId(UUID userId);
 
 }
