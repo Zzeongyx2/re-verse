@@ -1,19 +1,9 @@
 import React, { Component, useState } from "react";
 import { convertFromRaw, convertToRaw, EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
+import draftToHtml from "draftjs-to-html";
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../styles/draft.css";
-import { convertToHTML, convertFromHTML } from "draft-convert";
-import draftToHtml from "draftjs-to-html";
-import htmlToDraft from "html-to-draftjs";
-
-// import { SketchPicker } from "react-color";
-// import ColorPic from "../molecules/ColorPicker";
-
-// export const EditorComponent = () => (
-//   // <Editor />
-//   <Editor toolbarClassName="" />
-// );
 
 function uploadImageCallBack(file) {
   return new Promise((resolve, reject) => {
@@ -29,22 +19,12 @@ export const EditorComponent = () => {
     setEditorState(editorState);
   };
 
-  const [exportContent, setExportContent] = useState();
-  const exportHTML = () => {
-    setExportContent({
-      convertedContent: convertToHTML(editorState.getCurrentContent()),
-    });
+  const [getHTML, setGetHTML] = useState();
+  const handleHTML = () => {
+    setGetHTML(draftToHtml(convertToRaw(editorState.getCurrentContent())));
   };
 
-  console.log(exportContent);
-
-  // const [updateContent, setUpdateContent] = useState();
-  // const updateHTML = (e) => {
-  //   e.preventDefault();
-  //   setUpdateContent({ convertedContent: e.target.value });
-  // };
-
-
+  console.log(getHTML);
 
   return (
     <div>
@@ -78,9 +58,7 @@ export const EditorComponent = () => {
         // 에디터의 값이 변경될 때마다 호출하는 함수
         onEditorStateChange={onEditorStateChange}
       />
-      <button onClick={exportHTML}>convert to HTML</button>
-      {/* importHTML */}
-      <input type="text" />
+      <button onClick={handleHTML}>CLICK THIS</button>
     </div>
   );
 };
