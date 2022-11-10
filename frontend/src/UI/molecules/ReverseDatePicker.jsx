@@ -1,63 +1,24 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useRef } from "react";
+import { forwardRef, useState } from "react";
 import DatePicker from "react-datepicker";
 
-import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
+import "react-datepicker/dist/react-datepicker.css";
 
-function ReverseDatePicker({
-  setSearchDateString,
-  setSelectedEndDateString,
-  isRangeSearch,
-}) {
+function ReverseDatePicker() {
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
-  const onChange = (dates) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
-  };
-  const [isCalendarOpen, setIsCalenderOpen] = useState(false);
-
-  const DateInput = ({ value, onClick }) => (
-    <button>
+  const InputBtn = forwardRef(({ value, onClick }, ref) => (
+    <button className="mt-0.5 font-semibold" onClick={onClick} ref={ref}>
       {value}
-      {setIsCalenderOpen ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
     </button>
-  );
-
-  // const dateToString = (date) => {
-  //   return (
-  //     date.getFullYear() +
-  //     "-" +
-  //     (date.getMonth() + 1).toString().padStart(2, "0") +
-  //     "-" +
-  //     date.getDate().toString().padStart(2, "0")
-  //   );
-  // };
+  ));
   return (
     <DatePicker
+      dateFormat="yyyy.MM.dd (eee)"
       selected={startDate}
-      onChange={onChange}
-      startDate={startDate}
-      endDate={endDate}
-      selectsRange
+      onChange={(date) => setStartDate(date)}
+      customInput={<InputBtn />}
+      maxDate={new Date()}
     />
-    // <div>
-    //   <DatePicker
-    //     selected={startDate}
-    //     selectsStart
-    //     maxDate={new Date()}
-    //     customInput={<DateInput />}
-    //   />
-    //   <DatePicker
-    //     selected={endDate}
-    //     selectsEnd
-    //     startDate={startDate}
-    //     minDate={startDate}
-    //     maxDate={new Date()}
-    //     customInput={<DateInput />}
-    //   />
-    // </div>
   );
 }
 
