@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
@@ -31,6 +32,7 @@ public class ArchiveController {
     private final UserService userService;
 
     private final FriendService friendService;
+    private final FileService fileService;
 
     @PostMapping
     public ResponseEntity createArchive(@RequestBody ArchiveReq archiveReq) {
@@ -143,5 +145,13 @@ public class ArchiveController {
         Paper paper = paperService.getPaper(UUID.fromString(paperId));
 
         return ResponseEntity.ok(PaperRes.of(paper));
+    }
+
+    @PostMapping("/image")
+    public ResponseEntity<? extends ImageRes> createImageUrl(@RequestPart(name = "images") List<MultipartFile> multipartFiles){
+
+        List<String> urls = fileService.uploadFiles(multipartFiles);
+
+        return ResponseEntity.ok(ImageRes.builder().urls(urls).build());
     }
 }
