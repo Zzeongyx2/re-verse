@@ -2,7 +2,6 @@ package kr.co.reverse.auth.api.service;
 
 import kr.co.reverse.auth.api.request.LoginReq;
 import kr.co.reverse.auth.api.request.SignupReq;
-import kr.co.reverse.auth.api.request.TokenReq;
 import kr.co.reverse.auth.api.request.UserReq;
 import kr.co.reverse.auth.api.response.AuthRes;
 import kr.co.reverse.auth.api.response.UserRes;
@@ -23,7 +22,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -209,6 +207,8 @@ public class AuthService {
 
         auth.getUserStatus().setUserStatusCode(StatusCode.DELETED);
 
+//        connectDeleteUser();
+
         //레디스에 해당 유저 삭제
         redisService.deleteValues(accessToken);
         redisService.deleteValues(refreshToken);
@@ -220,6 +220,8 @@ public class AuthService {
         Cookie refreshCookie = new Cookie(REFRESH_TOKEN, null);
         refreshCookie.setMaxAge(0);
         response.addCookie(refreshCookie);
+
+        connectDeleteUser(auth.getId().toString());
 
 
     }
@@ -314,5 +316,17 @@ public class AuthService {
         return result.getBody().getId();
 
 
+    }
+
+    public void connectDeleteUser(String authId){
+        RestTemplate restTemplate = new RestTemplate();
+
+        URI uri = UriComponentsBuilder.fromUriString(USER_REDIRECT_URI)
+                .path("/delete/{auth_id}")
+                .encode().build()
+                .expand(authId)
+                .toUri();
+
+        restTemplate.delete(uri);
     }
 }
