@@ -3,10 +3,7 @@ package kr.co.reverse.archive.api.controller;
 import kr.co.reverse.archive.api.request.ArchiveReq;
 import kr.co.reverse.archive.api.request.PaperReq;
 import kr.co.reverse.archive.api.response.*;
-import kr.co.reverse.archive.api.service.ArchiveService;
-import kr.co.reverse.archive.api.service.PaperService;
-import kr.co.reverse.archive.api.service.PhotoBookService;
-import kr.co.reverse.archive.api.service.StuffService;
+import kr.co.reverse.archive.api.service.*;
 import kr.co.reverse.archive.db.entity.*;
 import kr.co.reverse.archive.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,21 +28,25 @@ public class ArchiveController {
     private final PaperService paperService;
 
     private final UserRepository userRepository;
+    private final UserService userService;
 
 
     @PostMapping
     public ResponseEntity createArchive(@RequestBody ArchiveReq archiveReq) {
         // TODO: redis에서 cookie 내 access token에 해당하는 정보를 갖고 와서, user 정보 불러오기
 
-        User test = userRepository.findByNickname("test");
-        if(test == null) {
-            User user = User.builder().nickname("test").build();
-            userRepository.save(user);
-            test = userRepository.findByNickname("test");
-        }
+//        User test = userRepository.findByNickname("test");
+//        if(test == null) {
+//            User user = User.builder().nickname("test").build();
+//            userRepository.save(user);
+//            test = userRepository.findByNickname("test");
+//        }
+
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
 
 
-        Archive archive = archiveService.createArchive(archiveReq, test);
+        Archive archive = archiveService.createArchive(archiveReq, user);
 
         for (int i = 1; i <= 3; i++) { // PhotoBook 생성
             photoBookService.createPhotoBook(archive, i);
@@ -61,17 +62,18 @@ public class ArchiveController {
 
     @GetMapping
     public ResponseEntity getArchives(@RequestParam(name = "type") Integer type) {
-        User test = userRepository.findByNickname("test");
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
 
         if (type == 0) { // 내 아카이브 조회
             // TODO: redis에서 cookie 내 access token에 해당하는 정보를 갖고 와서, user 정보 불러오기
 
-            List<ArchiveRes> myArchives = archiveService.getArchives(test);
+            List<ArchiveRes> myArchives = archiveService.getArchives(user);
 
             return ResponseEntity.ok(ArchivesRes.of(myArchives));
         }
 
-        List<ArchiveRes> friendArchives = archiveService.getFriendArchives(test);
+        List<ArchiveRes> friendArchives = archiveService.getFriendArchives(user);
 
         return ResponseEntity.ok(ArchivesRes.of(friendArchives));
     }
