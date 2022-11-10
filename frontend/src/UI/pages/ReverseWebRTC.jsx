@@ -1,11 +1,11 @@
 import * as THREE from "three";
-import React, { Suspense, useRef, useState } from "react";
+import React, { Suspense, useRef, useState, useEffect } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 // import { OrthographicCamera } from "@react-three/drei";
 
 import { TextureLoader } from "three/src/loaders/TextureLoader";
-import CatAnimations from "../../assets/players/Cat_Animations.js";
+import CatAnimations from "../../assets/players/Cat_Animations copy";
 import DogAnimations from "../../assets/players/Dog_Animations.js";
 import { SkyTube } from "../../assets/deco/SkyTube.js";
 import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
@@ -13,6 +13,8 @@ import ReverseFooter from "../organisms/ReverseFooter.jsx";
 import { ObjectTest } from "../../assets/deco/ObjectTest.js";
 import { CampingPack } from "../../assets/deco/CampingPack.js";
 import { arraySlice } from "three/src/animation/AnimationUtils.js";
+import { Vector3 } from "three";
+import { data } from "autoprefixer";
 
 var channels = [];
 var channelUsers = new Map();
@@ -27,7 +29,10 @@ function ReverseWebRTC() {
   const refCanvas = useRef();
   const [action, setAction] = useState("Idle_A");
   // const [characterPosition, setCharacterPosition] = useState();
-  const [destinationPoint, setDestinationPoint] = useState();
+  const [destinationPoint, setDestinationPoint] = useState(
+    new Vector3(-30, 0, -30)
+  );
+  const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
   if (floorTexture) {
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
@@ -46,13 +51,30 @@ function ReverseWebRTC() {
   const [others, setOthers] = useState([]);
   const [userId, setUserId] = useState("");
 
-  const [otherCharacterMap,setMap] = useState({});
-
+  // const [otherCharacterMap, setMap] = useState({});
+  const [otherCharacterMap, setMap] = useState(new Map());
+  const addMap = (key, value) => {
+    setMap((prev) => new Map([...prev, [key, value]]));
+  };
+  const upsertMap = (key, value) => {
+    setMap((prev) => new Map(prev).set(key, value));
+  };
   const [archiveId, setArchiveId] = useState("");
   const [rtcPeers2, setRtcPeers2] = useState("");
-  const offerOptions = {
-    offerToReceiveAudio: true,
-  };
+
+  useEffect(() => {
+    console.log(others);
+  }, [others]);
+  useEffect(() => {
+    console.log(otherCharacterMap);
+  }, [otherCharacterMap]);
+  useEffect(() => {
+    console.log(destRef.current);
+    destRef.current = destinationPoint;
+    console.log(destRef.current);
+    console.log(destinationPoint);
+  }, [destinationPoint]);
+
   var signal1 = {
     userId: null,
     type: null,
@@ -134,7 +156,7 @@ function ReverseWebRTC() {
 
     ws1.onmessage = (event) => {
       var data1 = JSON.parse(event.data);
-
+      console.log(data1);
       var data2 = null;
       console.log("here is onmessage");
       if (data1.userId === userId2 || data1.userId.length < 2) {
@@ -189,6 +211,7 @@ function ReverseWebRTC() {
     console.log("handle new member");
     let data3 = JSON.parse(data1.data);
     let peerId = data1.userId;
+    console.log(peerId);
     let rtcPeer = new RTCPeerConnection({
       offerToReceiveAudio: true,
       iceServers: [
@@ -315,53 +338,72 @@ function ReverseWebRTC() {
       console.log("Close channel:");
       console.log(channel1);
       console.log(event);
+      console.log(channelUsers);
       let friendId = channelUsers.get(channel1);
       console.log(peerId);
-      if (peerId) document.getElementById(peerId).remove();
-      else if (friendId) {
+      console.log(friendId);
+      // if (peerId) document.getElementById(peerId).remove();
+      // else
+      if (friendId) {
         document.getElementById(friendId).remove();
       }
       console.log(friendId);
       addUserOnChat(friendToName.get(friendId), false);
       friendToName.delete(friendId);
     };
+
     channel1.onmessage = (event) => {
       //console.lo("Receive msg datachannel:" + event.data);
       let dataChannel1 = JSON.parse(event.data);
+      // console.log(dataChannel1);
       if (dataChannel1.type === "message") {
         addChatLine(dataChannel1.data, "you", dataChannel1.userId);
       } else if (dataChannel1.type === "handshake") {
+        console.log("this is handshake phase");
+        console.log(dataChannel1);
+        // setOthers((other) => {
+        //   return [...other, dataChannel1.userId];
+        // });
+        // setMap((other) => ({
+        //   ...other,
+        //   [dataChannel1.userId]: dataChannel1.data.position,
+        // }));
+        // setOthers((other) => {
+        //   return [...other, dataChannel1.userId];
+        // });
+        // upsertMap(dataChannel1.userId, dataChannel1.data.position);
+
+        // otherCharacterMap.set(dataChannel1.userId, dataChannel1.data.position);
+        friendToName.set(dataChannel1.data.uuid, dataChannel1.data.username);
+        // addUser(dataChannel1.data, dataChannel1.userId);
+        channelUsers.set(channel1, dataChannel1.data.uuid);
+        // console.log(friendToName);
+        // console.log(channelUsers);
+        upsertMap(dataChannel1.userId, dataChannel1.data.position);
         setOthers((other) => {
           return [...other, dataChannel1.userId];
         });
-        console.log(dataChannel1.userId);
-        setMap((other)=> ({
-          ...other,
-          [dataChannel1.userId]: dataChannel1.data.position,
-        }));
-        // otherCharacterMap.set(dataChannel1.userId, dataChannel1.data.position);
-        friendToName.set(dataChannel1.userId, dataChannel1.data.username);
-        // addUser(dataChannel1.data, dataChannel1.userId);
-        channelUsers.set(channel1, dataChannel1.userId);
       } else if (dataChannel1.type === "move") {
-        console.log("moving phase");
-        console.log(dataChannel1);
-        setMap((other) => ({
-          ...other,
-          [dataChannel1.userId]: dataChannel1.data,
-        }));
-        // otherCharacterMap.set(dataChannel1.userId,dataChannel1.data);
-        console.log(otherCharacterMap)
+        console.log("==================== moving phase");
+        // setMap((other) => ({
+        //   ...other,
+        //   [dataChannel1.userId]: dataChannel1.data,
+        // }));
+        upsertMap(dataChannel1.userId, dataChannel1.data);
       }
     };
 
     channel1.onopen = () => {
       //console.lo("Now it's open");
+      console.log("here is datachannel open");
       channelData.userId = document.getElementById("myUsername").value;
       channelData.type = "handshake";
+      console.log(peerId);
+      console.log(destRef.current);
       channelData.data = {
-        position: destinationPoint,
+        position: { x: destRef.current.x, y: 1, z: destRef.current.z },
         username: document.getElementById("myUsername").value,
+        uuid: userId2,
       };
       channel1.send(JSON.stringify(channelData));
     };
@@ -428,7 +470,6 @@ function ReverseWebRTC() {
   }
 
   function sendPosition(position) {
-    console.log(position);
     channels.forEach((a) => {
       channelData.userId = document.getElementById("myUsername").value;
       channelData.type = "move";
@@ -460,9 +501,9 @@ function ReverseWebRTC() {
       a.close();
     });
     // localStream.getTracks().forEach((track) => track.stop());
+    console.log("disconnect phase");
     const audioSet = document.getElementById("user-audio").childNodes;
     for (let i = audioSet.length - 1; i >= 0; i--) {
-      console.log(audioSet);
       audioSet[i].remove();
     }
     rtcPeers.clear();
@@ -623,13 +664,15 @@ function ReverseWebRTC() {
           {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
           {others.map((other, idx) => {
             console.log(other);
-            console.log(otherCharacterMap)
-            console.log(otherCharacterMap[other])
+            console.log(others);
+            console.log(idx);
+            console.log(otherCharacterMap);
+            // console.log(otherCharacterMap[other]);
             return (
               <DogAnimations
-              key={idx}
+                key={idx}
                 // action={action}
-                destinationPoint={otherCharacterMap[other]}
+                destinationPoint={otherCharacterMap.get(other)}
                 // isPressed={isPressed}
                 handleVisible={handleVisible}
                 userName={other}
@@ -637,6 +680,7 @@ function ReverseWebRTC() {
               />
             );
           })}
+
           <CatAnimations
             // action={action}
             destinationPoint={destinationPoint}
@@ -645,7 +689,7 @@ function ReverseWebRTC() {
             // handleCurrentPosition={handleCurrentPosition}
           />
           <SkyTube />
-          <ObjectTest visible={visible} />
+          {/* <ObjectTest visible={visible} /> */}
           {/* <ObjectTest currentPosition={currentPosition} /> */}
           <CampingPack />
         </Suspense>
