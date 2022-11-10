@@ -39,7 +39,8 @@ public class UserSearchService {
     @Async
     public void updateUser(User user){
 
-        UserDocument userDocument = userSearchRepository.findByUserId(user.getId());
+//        UserDocument userDocument = userSearchRepository.findByUserId(user.getId());
+        UserDocument userDocument = userSearchRepository.findById(user.getId()).get();
 
         userDocument.setNickname(user.getNickname());
         userDocument.setMessage(user.getMessage());
@@ -53,7 +54,8 @@ public class UserSearchService {
     @Async
     public void updateAvatar(User user){
 
-        UserDocument userDocument = userSearchRepository.findByUserId(user.getId());
+//        UserDocument userDocument = userSearchRepository.findByUserId(user.getId());
+        UserDocument userDocument = userSearchRepository.findById(user.getId()).get();
 
         userDocument.setAvatar(user.getAvatar());
 
@@ -64,7 +66,8 @@ public class UserSearchService {
     @Async
     public void deleteUser(User user){
 
-        UserDocument userDocument = userSearchRepository.findByUserId(user.getId());
+//        UserDocument userDocument = userSearchRepository.findByUserId(user.getId());
+        UserDocument userDocument = userSearchRepository.findById(user.getId()).get();
 
         userSearchRepository.delete(userDocument);
 
