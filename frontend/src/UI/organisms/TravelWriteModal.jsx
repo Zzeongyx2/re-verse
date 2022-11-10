@@ -13,6 +13,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { setOpen } from "../../modules/reverse";
 import ArchiveDatePicker from "../molecules/ReverseDatePicker";
 
+import { AiOutlineCalendar } from "react-icons/ai";
+import { EditorComponent } from "./TextEditor";
+
 function TravelWriteModal() {
   const openModal = useSelector((state) => state.reverse.isOpen);
   const dispatch = useDispatch();
@@ -44,7 +47,10 @@ function TravelWriteModal() {
               {/* 기록 날짜 */}
               <div className="w-[calc(98%/3)] border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1">
                 <p className="text-xs text-basic1">기록 날짜</p>
-                <ArchiveDatePicker />
+                <div className="flex items-center justify-between mr-1">
+                  <ArchiveDatePicker />
+                  <AiOutlineCalendar className="text-lg" />
+                </div>
               </div>
             </div>
 
@@ -54,7 +60,7 @@ function TravelWriteModal() {
             // TODO: draft js!!!!!
             // TODO: draft js!!!!! */}
             <div className="mt-3.5 w-full h-full border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1">
-              <p className="text-xs text-basic1">draft js 적용하기 !!!</p>
+              <EditorComponent />
             </div>
           </ModalBody>
 
