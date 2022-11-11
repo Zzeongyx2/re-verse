@@ -159,7 +159,12 @@ public class AuthService {
             }
         }
 
+        System.out.println("=========== refresh " + refreshToken);
+
         String userId = redisService.getValues(refreshToken);
+
+        System.out.println("=========== userId " + userId);
+
         Auth auth = authRepository.findById(UUID.fromString(connectGetAuthId(userId))).get();
 
         redisService.checkRefreshToken(authentication.getName(), auth.getEmail());
@@ -304,8 +309,6 @@ public class AuthService {
     public String connectGetAuthId(String userId){
 
         RestTemplate restTemplate = new RestTemplate();
-
-        System.out.println("===================== " + userId);
 
         URI uri = UriComponentsBuilder.fromUriString(USER_REDIRECT_URI)
                 .path("/aid/{user_id}")
