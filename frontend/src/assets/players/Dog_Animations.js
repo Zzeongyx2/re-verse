@@ -39,6 +39,11 @@ export default function DogAnimations({
     setInitPosition(new Vector3(destinationPoint.x, 0, destinationPoint.z));
   }, []);
   useEffect(() => {
+    // console.log("destination point");
+    // console.log(destinationPoint);
+    setInitPosition(new Vector3(destinationPoint.x, 0, destinationPoint.z));
+  }, [userName]);
+  useEffect(() => {
     if (destinationPoint) {
       // setMoving(true);
       setMoving((prev) => {
@@ -54,7 +59,7 @@ export default function DogAnimations({
         new Vector3(destinationPoint.x, 1, destinationPoint.z)
       );
       group.current.name = userName;
-
+      console.log(group.current.name)
       // console.log(group.current);
     }
   }, [destinationPoint]);
