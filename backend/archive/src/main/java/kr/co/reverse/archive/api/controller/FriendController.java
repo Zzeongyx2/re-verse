@@ -8,6 +8,7 @@ import kr.co.reverse.archive.api.response.*;
 import kr.co.reverse.archive.api.service.ArchiveService;
 import kr.co.reverse.archive.api.service.FriendService;
 import kr.co.reverse.archive.api.service.UserService;
+import kr.co.reverse.archive.common.exception.AlreadyFriendException;
 import kr.co.reverse.archive.common.exception.NotFriendException;
 import kr.co.reverse.archive.db.entity.*;
 import lombok.RequiredArgsConstructor;
@@ -47,8 +48,8 @@ public class FriendController {
         User user = userService.getPlayer(userId);
         User target = userService.getUserByNickname(friendInvitationReq.getNickname());
 
-        if(friendService.checkFriend(user, target)){
-            throw new NotFriendException();
+        if(!friendService.checkFriend(user, target)){
+            throw new AlreadyFriendException();
         }
 
         // 2022-11-08
