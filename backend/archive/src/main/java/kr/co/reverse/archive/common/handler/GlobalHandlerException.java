@@ -4,10 +4,7 @@ import io.lettuce.core.RedisException;
 import kr.co.reverse.archive.common.error.CommonErrorCode;
 import kr.co.reverse.archive.common.error.ErrorCode;
 import kr.co.reverse.archive.common.error.UserErrorCode;
-import kr.co.reverse.archive.common.exception.EmailDuplicateException;
-import kr.co.reverse.archive.common.exception.NicknameDuplicateException;
-import kr.co.reverse.archive.common.exception.NotFriendException;
-import kr.co.reverse.archive.common.exception.UnauthorizedException;
+import kr.co.reverse.archive.common.exception.*;
 import kr.co.reverse.archive.common.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -44,6 +41,11 @@ public class GlobalHandlerException extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NotFriendException.class)
     public ResponseEntity<? extends ErrorResponse> handleRedisException(NotFriendException e) {
         return handleExceptionInternal(HttpStatus.UNAUTHORIZED, UserErrorCode.NOT_FRIEND);
+    }
+
+    @ExceptionHandler(AlreadyFriendException.class)
+    public ResponseEntity<? extends ErrorResponse> handleRedisException(AlreadyFriendException e) {
+        return handleExceptionInternal(HttpStatus.UNAUTHORIZED, UserErrorCode.ALREADY_FRIEND);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

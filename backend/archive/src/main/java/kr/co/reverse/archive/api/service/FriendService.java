@@ -60,8 +60,14 @@ public class FriendService {
             friendRepository.save(new Friend(target, user));
         }
 
-        FriendInvitation friendInvitation = friendInvitationRepository.findFriendInvitationByInvitationUserAndInvitationTarget(user, target);
-        friendInvitationRepository.delete(friendInvitation);
+        FriendInvitation friendInvitation = friendInvitationRepository.findFriendInvitationByInvitationUserAndInvitationTarget(target, user);
+        if(friendInvitation != null){
+            friendInvitationRepository.delete(friendInvitation);
+        }
+        FriendInvitation friendInvitation1 = friendInvitationRepository.findFriendInvitationByInvitationUserAndInvitationTarget(user, target);
+        if(friendInvitation1 != null){
+            friendInvitationRepository.delete(friendInvitation1);
+        }
     }
 
     @Transactional
