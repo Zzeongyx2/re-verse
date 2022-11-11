@@ -59,9 +59,9 @@ public class UserService {
 //            bearerToken = bearerToken.substring(7);
 //        }
 
-        String userId = redisService.getValues(bearerToken);
+        // String userId = redisService.getValues(bearerToken);
 
-        return userId;
+        return "410d4d91-99b9-43af-ab9c-69192ce0d1c7";
 
     }
 
