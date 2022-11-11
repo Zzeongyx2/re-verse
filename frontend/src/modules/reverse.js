@@ -7,7 +7,7 @@ const initialState = {
   article: {
     title: "",
     content: "",
-    memoryDate: "",
+    memoryDate: `${new Date()}`,
   },
 };
 
@@ -18,6 +18,12 @@ const reducers = {
   setCampfireOn: (state, action) => {
     state.isCampfireOn = action.payload;
   },
+  createArticle: (state, action) => {
+    state.article = action.payload;
+    // state.article.title = action.payload;
+    // state.article.content = action.payload;
+    // state.article.memoryDate = action.payload;
+  },
 };
 
 export const reverseSlice = createSlice({
@@ -26,6 +32,6 @@ export const reverseSlice = createSlice({
   reducers,
 });
 
-export const { setOpen, setCampfireOn } = reverseSlice.actions;
+export const { setOpen, setCampfireOn, createArticle } = reverseSlice.actions;
 
 export default reverseSlice.reducer;

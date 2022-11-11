@@ -1,7 +1,10 @@
 .wrapper {
+  height: 100%;
+  overflow: hidden;
 }
 .editor {
-  line-height: 80%;
+  height: 100%;
+  overflow: auto;
 }
 .toolbar {
 }

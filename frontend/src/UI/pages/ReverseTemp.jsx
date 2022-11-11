@@ -20,8 +20,9 @@ import { Notebook } from "../../assets/deco/Notebook.js";
 import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
 import TravelWriteModal from "../organisms/TravelWriteModal.jsx";
 import ReverseFooter from "../organisms/ReverseFooter.jsx";
+import { getArchiveDetail } from "../../api/reverse.js";
 
-function ReverseTemp() {
+function ReverseTemp({ archiveId }) {
   // default action = idle
   const refCanvas = useRef();
   const [action, setAction] = useState("Idle_A");
@@ -43,7 +44,6 @@ function ReverseTemp() {
   const [visible, setVisible] = useState(false);
   const handleVisible = (data) => {
     setVisible(data);
-    // console.log(visible);
   };
 
   // travel photobook, polaroid object
@@ -53,6 +53,23 @@ function ReverseTemp() {
   // const handleEvent = (data) => {
   //   setEvent(data);
   //   // console.log(event);
+  // };
+
+  // useEffect(() => {
+  //   getArchiveDetail(
+  //     archiveId,
+
+  //     getArchiveDetailSuccess,
+  //     getArchiveDetailFail
+  //   );
+  // });
+
+  // const getArchiveDetailSuccess = (res) => {
+  //   console.log(res);
+  // };
+
+  // const getArchiveDetailFail = (err) => {
+  //   console.log(err);
   // };
 
   return (

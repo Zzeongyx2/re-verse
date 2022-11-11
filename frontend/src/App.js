@@ -14,6 +14,7 @@ import Reverse from "./UI/pages/Reverse";
 import ReverseTemp from "./UI/pages/ReverseTemp";
 import ReverseWebRTC from "./UI/pages/ReverseWebRTC";
 import { EditorComponent } from "./UI/organisms/TextEditor";
+import ReverseTextEditor from "./UI/organisms/ReverseTextEditor";
 
 axios.defaults.withCredentials = true;
 
@@ -35,7 +36,7 @@ function App() {
           <Route path="/reverse/:archiveId" element={<Reverse />} />
           <Route path="/reversetemp" element={<ReverseTemp />} />
           <Route path="/reverse/rtc" element={<ReverseWebRTC />} />
-          <Route path="/texteditor" element={<EditorComponent />} />
+          <Route path="/texteditor" element={<ReverseTextEditor />} />
         </Routes>
       </div>
     </BrowserRouter>
