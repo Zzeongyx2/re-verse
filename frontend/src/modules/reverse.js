@@ -7,7 +7,7 @@ const initialState = {
   article: {
     title: "",
     content: "",
-    memoryDate: "",
+    memoryDate: `${new Date()}`,
   },
 };
 
@@ -20,6 +20,9 @@ const reducers = {
   },
   createArticle: (state, action) => {
     state.article = action.payload;
+    // state.article.title = action.payload;
+    // state.article.content = action.payload;
+    // state.article.memoryDate = action.payload;
   },
 };
 

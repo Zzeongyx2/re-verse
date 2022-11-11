@@ -8,7 +8,7 @@ import { fileApiInstance } from "../../api";
 
 Quill.register("modules/ImageResize", ImageResize);
 
-function EditorTest() {
+function ReverseTextEditor() {
   const imageHandler = () => {
     const input = document.createElement("input");
     input.setAttribute("type", "file");
@@ -150,4 +150,4 @@ function EditorTest() {
   );
 }
 
-export default EditorTest;
+export default ReverseTextEditor;
