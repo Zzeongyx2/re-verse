@@ -9,7 +9,7 @@ public enum UserErrorCode implements ErrorCode {
     EMAIL_DUPLICATE(4090, "EMAIL DUPLICATED"),
     NICKNAME_DUPLICATE(4091, "NICKNAME DUPLICATED"),
 
-    NOT_FRIEND(4031, "CHO HYE EUN");
+    NOT_FRIEND(4031, "Not Friend");
 
     private final int statusCode;
     private final String message;
