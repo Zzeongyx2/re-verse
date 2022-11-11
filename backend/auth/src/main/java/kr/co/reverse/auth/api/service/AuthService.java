@@ -305,6 +305,8 @@ public class AuthService {
 
         RestTemplate restTemplate = new RestTemplate();
 
+        System.out.println("===================== " + userId);
+
         URI uri = UriComponentsBuilder.fromUriString(USER_REDIRECT_URI)
                 .path("/aid/{user_id}")
                 .encode().build()
