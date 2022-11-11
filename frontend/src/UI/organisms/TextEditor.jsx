@@ -1,53 +1,33 @@
 import React, { Component, useState } from "react";
 import { convertFromRaw, convertToRaw, EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
+import draftToHtml from "draftjs-to-html";
+// import htmlToDraft from "html-to-draftjs";  // 글 수정할 때 필요함
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../styles/draft.css";
-import { convertToHTML, convertFromHTML } from "draft-convert";
-import draftToHtml from "draftjs-to-html";
-import htmlToDraft from "html-to-draftjs";
 
-// import { SketchPicker } from "react-color";
-// import ColorPic from "../molecules/ColorPicker";
-
-// export const EditorComponent = () => (
-//   // <Editor />
-//   <Editor toolbarClassName="" />
-// );
-
-function uploadImageCallBack(file) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://");
-  });
-}
+// function uploadImageCallBack(file) {
+//   return new Promise((resolve, reject) => {
+//     const xhr = new XMLHttpRequest();
+//     xhr.open("POST", "http://");
+//   });
+// }
 
 export const EditorComponent = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-
   const onEditorStateChange = (editorState) => {
     setEditorState(editorState);
   };
 
-  const [exportContent, setExportContent] = useState();
-  const exportHTML = () => {
-    setExportContent({
-      convertedContent: convertToHTML(editorState.getCurrentContent()),
-    });
+  const [getHTML, setGetHTML] = useState();
+  const handleHTML = () => {
+    setGetHTML(draftToHtml(convertToRaw(editorState.getCurrentContent())));
   };
 
-  console.log(exportContent);
-
-  // const [updateContent, setUpdateContent] = useState();
-  // const updateHTML = (e) => {
-  //   e.preventDefault();
-  //   setUpdateContent({ convertedContent: e.target.value });
-  // };
-
-
+  console.log(getHTML);
 
   return (
-    <div>
+    <div className="h-full">
       <Editor
         // 에디터 & 툴바 모두 적용되는 클래스
         wrapperClassName="wrapper"
@@ -62,10 +42,10 @@ export const EditorComponent = () => {
           // list: { inDropdown: true },
           link: { inDropdown: true },
           history: { inDropdown: true },
-          image: {
-            uploadCallback: uploadImageCallBack,
-            alt: { present: true, mandatory: true },
-          },
+          // image: {
+          //   uploadCallback: uploadImageCallBack,
+          //   alt: { present: true, mandatory: true },
+          // },
           textAlign: { className: "textalign" },
           // colorPicker: { component: ColorPic },
         }}
@@ -78,9 +58,7 @@ export const EditorComponent = () => {
         // 에디터의 값이 변경될 때마다 호출하는 함수
         onEditorStateChange={onEditorStateChange}
       />
-      <button onClick={exportHTML}>convert to HTML</button>
-      {/* importHTML */}
-      <input type="text" />
+      <button onClick={handleHTML}>click me</button>
     </div>
   );
 };
