@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://re-verse.co.kr:3307/reverse_archive?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: flQjtm1024
+    url: jdbc:mysql://localhost:3306/reverse_archive?serverTimezone=UTC&characterEncoding=UTF-8
+    username: ssafy
+    password: ssafy
   jpa:
     generate-ddl: true
     show-sql: true
@@ -27,6 +27,19 @@ spring:
     password: reverse
 #  main:
 #    allow-bean-definition-overriding: true
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIA35FT7NQ63VIMM2LP
+      secret-key: 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
+    s3:
+      bucket: re-verse-bucket
+#        url: https://s3.ap-northeast-2.amazonaws.com/re-verse-bucket
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
 
 logging:
   level:

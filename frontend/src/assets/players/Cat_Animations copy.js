@@ -7,24 +7,20 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import GLTFLoader from "gltfjsx/src/utils/glftLoader";
 import { useFrame } from "@react-three/fiber";
 
-import { useDispatch } from "react-redux";
-import { setCampfireOn } from "../../modules/reverse";
-
 export default function CatAnimations({
-  // action,
-  // handleCurrentPosition,
+  action,
   destinationPoint,
-  handleVisible, // test object event handler
-  handleEvent, // travel, anniv, diary event handler
+  handleCurrentPosition,
+  handleVisible,
 }) {
   const group = useRef();
   // const previousAction = usePrevious(action);
   const { nodes, materials, animations } = useGLTF(
     "/assets/animals/GLTF/Animations/Cat_Animations.gltf"
   );
-  console.log(nodes)
   const { actions } = useAnimations(animations, group);
-    console.log(actions);
+    // console.log(actions);
+
   const [moving, setMoving] = useState(false);
   let angle = 0;
 
@@ -33,13 +29,6 @@ export default function CatAnimations({
   // console.log(objectPosition);
   // const [visible, setVisible] = useState(false);
 
-  //// 여행 포토북, 글 보기 오브젝트 이벤트
-  // FIXME: 그냥 다른 에셋에 적용할거임
-  // const travelPosition = new THREE.Vector3(37, 0.01, -68);
-
-  const dispatch = useDispatch();
-  const campfirePosition = new THREE.Vector3(37, 0.01, -68);
-
   useEffect(() => {
     if (destinationPoint) {
       setMoving(true);
@@ -47,7 +36,7 @@ export default function CatAnimations({
       group.current.lookAt(destinationPoint);
       group.current.name = "mememememe";
 
-      console.log(group.current);
+      // console.log(group.current);
     }
   }, [destinationPoint]);
   useFrame((state) => {
@@ -62,11 +51,15 @@ export default function CatAnimations({
           destinationPoint.z - group.current.position.z,
           destinationPoint.x - group.current.position.x
         );
-        group.current.position.x += Math.cos(angle) * 0.065;
-        group.current.position.z += Math.sin(angle) * 0.065;
+        group.current.position.x += Math.cos(angle) * 0.05;
+        group.current.position.z += Math.sin(angle) * 0.05;
 
         state.camera.position.x = 1 + group.current.position.x;
         state.camera.position.z = 5 + group.current.position.z;
+
+        // console.log(group.current.position);
+
+        // handleCurrentPosition(group.current.position);
 
         actions["Idle_A"].stop();
         actions["Walk"].play();
@@ -88,23 +81,23 @@ export default function CatAnimations({
           Math.abs(objectPosition.z - group.current.position.z) < 4
         ) {
           handleVisible(true);
+          // setVisible(true);
         } else {
           handleVisible(false);
-        }
-
-        // travel photobook, polaroid object
-        if (
-          Math.abs(campfirePosition.x - group.current.position.x) < 10 &&
-          Math.abs(campfirePosition.z - group.current.position.z) < 10
-        ) {
-          dispatch(setCampfireOn(1));
-        } else {
-          dispatch(setCampfireOn(0));
         }
       }
     }
   });
 
+  // useEffect(() => {
+  //   if (previousAction) {
+  //     actions[previousAction].fadeOut(0.2);
+  //     actions[action].stop();
+  //   }
+  //   actions[action].play();
+  //   actions[action].fadeIn(0.2);
+  //   // actions.Idle_A.play();
+  // }, [actions, action, previousAction]);
   return (
     // <group ref={group} dispose={null}>
     <group ref={group} dispose={null} position={[-30, 0, -30]}>

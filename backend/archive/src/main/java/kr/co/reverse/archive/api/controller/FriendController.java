@@ -8,6 +8,7 @@ import kr.co.reverse.archive.api.response.*;
 import kr.co.reverse.archive.api.service.ArchiveService;
 import kr.co.reverse.archive.api.service.FriendService;
 import kr.co.reverse.archive.api.service.UserService;
+import kr.co.reverse.archive.common.exception.AlreadyFriendException;
 import kr.co.reverse.archive.common.exception.NotFriendException;
 import kr.co.reverse.archive.db.entity.*;
 import lombok.RequiredArgsConstructor;
@@ -47,22 +48,20 @@ public class FriendController {
         User user = userService.getPlayer(userId);
         User target = userService.getUserByNickname(friendInvitationReq.getNickname());
 
+        if(!friendService.checkFriend(user, target)){
+            throw new AlreadyFriendException();
+        }
+
         // 2022-11-08
         // 이미 요청을 보낸 관계면 요청을 만들지 않는다.
         if (friendService.getFriendInvitationTo(user, target) != null) {
 
             return ResponseEntity.status(HttpStatus.CREATED).build();
 
-        } else if (friendService.getFriendInvitationTo(target, user) != null) {
-            // 유저와 타겟을 바꿔서 조회를 했는데 친구 요청이 이미 존재하면, 둘 다 서로에게 요청을 보낸 것이므로 친구 수락을 한뒤, 친구 요청을 1 row 지우고, 신규로 들어온 요청은 생성 X
-            friendService.deleteFriendInvitation(target, user);
-            friendService.createFriend(user, target);
-
-        } else {
+        }  else {
 
             friendService.createFriendInvitation(user, target);
         }
-
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -121,7 +120,6 @@ public class FriendController {
         String userId = userService.getUserId();
         User user = userService.getPlayer(userId);
         Archive archive = archiveService.getArchive(bookmarkReq.getArchiveId());
-
 
         friendService.createBookmark(archive, user);
 
