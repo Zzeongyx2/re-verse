@@ -82,6 +82,13 @@ function ReverseWebRTC() {
   const upsertMap = (key, value) => {
     setMap((prev) => new Map(prev).set(key, value));
   };
+  const deleteMap= (key) => {
+  setMap((prev) => {
+    const newState = new Map(prev);
+    newState.delete(key);
+    return newState;
+  });
+}
   const [archiveId, setArchiveId] = useState("");
   const [rtcPeers2, setRtcPeers2] = useState("");
 
@@ -397,6 +404,7 @@ function ReverseWebRTC() {
       if (friendName) {
         document.getElementById(friendId).remove();
         removeOther(friendName);
+        deleteMap(friendName);
         console.log(othersRef.current);
       }
       // console.log(friendId);
