@@ -159,11 +159,7 @@ public class AuthService {
             }
         }
 
-        System.out.println("=========== refresh " + refreshToken);
-
         String userId = redisService.getValues(refreshToken);
-
-        System.out.println("=========== userId " + userId);
 
         Auth auth = authRepository.findById(UUID.fromString(connectGetAuthId(userId))).get();
 
@@ -241,8 +237,6 @@ public class AuthService {
                 break;
             }
         }
-
-        System.out.println("======= access " + accessToken);
 
         cookies = request.getCookies();
         String refreshToken = null;
