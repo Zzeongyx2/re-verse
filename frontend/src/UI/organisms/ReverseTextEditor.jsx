@@ -5,6 +5,9 @@ import "react-quill/dist/quill.snow.css";
 import ImageResize from "quill-image-resize";
 import axios from "axios";
 import { fileApiInstance } from "../../api";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createArticle } from "../../modules/reverse";
 
 Quill.register("modules/ImageResize", ImageResize);
 
@@ -129,11 +132,28 @@ function ReverseTextEditor() {
     "image",
   ];
 
+  const dispatch = useDispatch();
+  const reverse = useSelector((state) => state.reverse);
+  const [content, setContent] = useState("");
+  useEffect(() => {
+    console.log(reverse);
+  }, [reverse]);
+
   const [text, setText] = useState("");
   const handleText = (value) => {
     console.log(value);
     setText(value);
+    // saveContent();
   };
+
+  const saveContent = () => {
+    dispatch(createArticle({ ...reverse.article, content: text }));
+  };
+
+  // 이거.. 왜 돼...? 너 뭐야...??
+  useEffect(() => {
+    saveContent();
+  }, [text]);
 
   return (
     <div className="bg-white">
@@ -145,6 +165,12 @@ function ReverseTextEditor() {
         formats={formats}
         value={text}
         onChange={handleText}
+        // onChange={(value) => {
+        //   setText(value);
+        //   console.log(value);
+
+        // dispatch(createArticle({ ...reverse.article, content: `${value}` }));
+        // }}
       />
     </div>
   );
