@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import * as THREE from "three";
 
 const initialState = {
   myArchiveList: [],
@@ -19,12 +18,12 @@ const reducers = {
   },
 };
 
-export const reverseSlice = createSlice({
+export const archiveSlice = createSlice({
   name: "archive",
   initialState,
   reducers,
 });
 
-export const { setMyArchiveList, setFriendArchiveList, setLikeArchiveList } = reverseSlice.actions;
+export const { setMyArchiveList, setFriendArchiveList, setLikeArchiveList } = archiveSlice.actions;
 
-export default reverseSlice.reducer;
+export default archiveSlice.reducer;
