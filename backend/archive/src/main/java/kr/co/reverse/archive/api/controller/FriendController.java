@@ -58,16 +58,10 @@ public class FriendController {
 
             return ResponseEntity.status(HttpStatus.CREATED).build();
 
-        } else if (friendService.getFriendInvitationTo(target, user) != null) {
-            // 유저와 타겟을 바꿔서 조회를 했는데 친구 요청이 이미 존재하면, 둘 다 서로에게 요청을 보낸 것이므로 친구 수락을 한뒤, 친구 요청을 1 row 지우고, 신규로 들어온 요청은 생성 X
-            friendService.deleteFriendInvitation(target, user);
-            friendService.createFriend(user, target);
-
-        } else {
+        }  else {
 
             friendService.createFriendInvitation(user, target);
         }
-
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
