@@ -19,9 +19,6 @@ function ReverseDatePicker() {
     </button>
   ));
 
-  useEffect(() => {
-    console.log(reverse);
-  }, [reverse]);
   return (
     <DatePicker
       dateFormat="yyyy.MM.dd (eee)"

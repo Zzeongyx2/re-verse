@@ -55,7 +55,6 @@ function ReverseTextEditor() {
       toolbar: {
         handlers: { image: imageHandler },
         container: [
-          [{ font: [] }],
           [{ header: [1, 2, 3, 4, 5, 6, false] }],
           [{ font: [] }],
           [{ align: [] }],
@@ -135,13 +134,10 @@ function ReverseTextEditor() {
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
   const [content, setContent] = useState("");
-  useEffect(() => {
-    console.log(reverse);
-  }, [reverse]);
 
   const [text, setText] = useState("");
   const handleText = (value) => {
-    console.log(value);
+    // console.log(value);
     setText(value);
     // saveContent();
   };
@@ -165,12 +161,6 @@ function ReverseTextEditor() {
         formats={formats}
         value={text}
         onChange={handleText}
-        // onChange={(value) => {
-        //   setText(value);
-        //   console.log(value);
-
-        // dispatch(createArticle({ ...reverse.article, content: `${value}` }));
-        // }}
       />
     </div>
   );
