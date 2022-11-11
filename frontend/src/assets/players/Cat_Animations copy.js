@@ -19,7 +19,7 @@ export default function CatAnimations({
     "/assets/animals/GLTF/Animations/Cat_Animations.gltf"
   );
   const { actions } = useAnimations(animations, group);
-    console.log(actions);
+    // console.log(actions);
 
   const [moving, setMoving] = useState(false);
   let angle = 0;
@@ -36,7 +36,7 @@ export default function CatAnimations({
       group.current.lookAt(destinationPoint);
       group.current.name = "mememememe";
 
-      console.log(group.current);
+      // console.log(group.current);
     }
   }, [destinationPoint]);
   useFrame((state) => {
