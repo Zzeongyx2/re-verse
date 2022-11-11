@@ -15,10 +15,14 @@ import {
 } from "../../api/friend";
 import { imageForm, s3Path } from "../../api";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setFriendList } from "../../modules/friend";
 
 function FriendList() {
+  // const [friendList, setFriendList] = useState([]);
+  const friendList = useSelector((state) => state.friend.friendList);
+  const dispatch = useDispatch();
   const [findNickName, setFindNickName] = useState("");
-  const [friendList, setFriendList] = useState([]);
   const [archiveList, setArchiveList] = useState([]);
   const [selectFriend, setSelectFriend] = useState();
   const [rightTitle, setRightTitle] = useState("");
@@ -56,7 +60,7 @@ function FriendList() {
       archiveId,
       selectFriend.nickname,
       deleteArchiveMemberSuccess,
-      deleteArchiveMemberFail,
+      deleteArchiveMemberFail
     );
     console.log(archiveId, "삭제");
     await settingFriendArchiveList();
@@ -77,7 +81,7 @@ function FriendList() {
 
   const getFriendSuccess = (res) => {
     console.log(res);
-    setFriendList(res.data.friendList);
+    dispatch(setFriendList(res.data.friendList));
   };
   const getFriendFail = (error) => {
     console.log(error);
@@ -93,7 +97,7 @@ function FriendList() {
     await getFriendArchiveList(
       selectFriend.nickname,
       getFriendArchiveListSuccess,
-      getFriendArchiveListFail,
+      getFriendArchiveListFail
     );
   };
   const getFriendArchiveListSuccess = (res) => {
@@ -199,10 +203,7 @@ function FriendList() {
                           }}
                           className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
                         >
-                          <BiLogIn
-                            size={18}
-                            className="text-white m-0.5 -translate-x-0.5"
-                          />
+                          <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
                         </button>
                         <button
                           onClick={() => {
@@ -210,10 +211,7 @@ function FriendList() {
                           }}
                           className="bg-sub3 border-2 border-basic3 rounded-full"
                         >
-                          <HiOutlineTrash
-                            size={18}
-                            className="text-white m-0.5"
-                          />
+                          <HiOutlineTrash size={18} className="text-white m-0.5" />
                         </button>
                       </div>
                     </div>
