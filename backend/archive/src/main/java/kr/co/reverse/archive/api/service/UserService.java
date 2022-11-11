@@ -42,18 +42,18 @@ public class UserService {
 
     public String getUserId(){
 
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+//         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
-//        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
-        String bearerToken = null;
-        Cookie[] cookies = request.getCookies();
+// //        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+//         String bearerToken = null;
+//         Cookie[] cookies = request.getCookies();
 
-        for(Cookie cookie : cookies){
-            if(cookie.getName().equals(ACCESS_TOKEN)){
-                bearerToken = cookie.getValue();
-                break;
-            }
-        }
+//         for(Cookie cookie : cookies){
+//             if(cookie.getName().equals(ACCESS_TOKEN)){
+//                 bearerToken = cookie.getValue();
+//                 break;
+//             }
+//         }
 
 //        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
 //            bearerToken = bearerToken.substring(7);
