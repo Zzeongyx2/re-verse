@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import * as THREE from "three";
 
 const initialState = {
   isOpen: false,
