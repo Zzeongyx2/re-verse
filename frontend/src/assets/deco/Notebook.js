@@ -12,7 +12,7 @@ import { gsap } from "gsap";
 import { useFrame } from "@react-three/fiber";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setOpen } from "../../modules/reverse";
+import { setTravelWriteIsOpen } from "../../modules/reverse";
 
 export function Notebook({ props, event }) {
   const { nodes, materials } = useGLTF("/assets/notebook/scene.gltf");
@@ -45,7 +45,7 @@ export function Notebook({ props, event }) {
       dispose={null}
       onClick={() => {
         console.log("노트북 눌렀따");
-        dispatch(setOpen());
+        dispatch(setTravelWriteIsOpen());
       }}
     >
       <group
