@@ -147,8 +147,40 @@ public class ArchiveController {
         return ResponseEntity.ok(PaperRes.of(paper));
     }
 
+    @PatchMapping("/{archive_id}/stuff/{stuff_id}/paper/{paper_id}")
+    public ResponseEntity<? extends PaperRes> updatePaper(@PathVariable(name = "archive_id") String archiveId,
+                                                          @PathVariable(name = "stuff_id") String stuffId,
+                                                          @PathVariable(name = "paper_id") String paperId,
+                                                          @RequestBody PaperReq paperReq) {
+        Stuff stuff = stuffService.getStuff(UUID.fromString(stuffId));
+        String userId = userService.getUserId();
+
+        Boolean isOwner = archiveService.checkOwner(UUID.fromString(archiveId), UUID.fromString(userId));
+        if (!isOwner) { // Archive 수정 권한 확인
+            throw new UnauthorizedException(CommonErrorCode.UNAUTHORIZED_ERROR);
+        }
+        paperService.updatePaper(paperReq, stuff, UUID.fromString(paperId));
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    @DeleteMapping("/{archive_id}/stuff/{stuff_id}/paper/{paper_id}")
+    public ResponseEntity deletePaper(@PathVariable(name = "archive_id") String archiveId,
+                                      @PathVariable(name = "stuff_id") String stuffId,
+                                      @PathVariable(name = "paper_id") String paperId) {
+        String userId = userService.getUserId();
+
+        Boolean isOwner = archiveService.checkOwner(UUID.fromString(archiveId), UUID.fromString(userId));
+        if (!isOwner) { // Archive 삭제 권한 확인
+            throw new UnauthorizedException(CommonErrorCode.UNAUTHORIZED_ERROR);
+        }
+        paperService.deletePaper(UUID.fromString(paperId));
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
     @PostMapping("/image")
-    public ResponseEntity<? extends ImageRes> createImageUrl(@RequestPart(name = "images") List<MultipartFile> multipartFiles){
+    public ResponseEntity<? extends ImageRes> createImageUrl(@RequestPart(name = "images") List<MultipartFile> multipartFiles) {
 
         List<String> urls = fileService.uploadFiles(multipartFiles);
 
