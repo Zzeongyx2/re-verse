@@ -22,14 +22,15 @@ function ArchiveLike({ loginUser }) {
 
   const enterArchive = (archiveId) => {
     console.log(archiveId, "이동");
-    navigate(`/reverse/${archiveId}`);
+    // navigate(`/reverse/${archiveId}`);
+    navigate(`/reversetemp/${archiveId}`);
   };
   const deleteArchive = async (archiveId) => {
     await deleteArchiveMember(
       archiveId,
       loginUser.nickname,
       deleteArchiveMemberSuccess,
-      deleteArchiveMemberFail,
+      deleteArchiveMemberFail
     );
     console.log(archiveId, "나가기");
     await getLikeList();
@@ -45,13 +46,13 @@ function ArchiveLike({ loginUser }) {
       await postBookmark(
         archive.archiveId,
         bookmarkControlSuccess,
-        bookmarkControl,
+        bookmarkControl
       );
     } else {
       await deleteBookmark(
         archive.archiveId,
         bookmarkControlSuccess,
-        bookmarkControl,
+        bookmarkControl
       );
     }
     await getLikeList();

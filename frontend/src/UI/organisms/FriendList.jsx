@@ -48,7 +48,8 @@ function FriendList() {
 
   const enterArchive = (archiveId) => {
     console.log(archiveId, "이동");
-    navigate(`/reverse/${archiveId}`);
+    // navigate(`/reverse/${archiveId}`);
+    navigate(`/reversetemp/${archiveId}`);
   };
 
   const archiveDelete = async (archiveId) => {
@@ -56,7 +57,7 @@ function FriendList() {
       archiveId,
       selectFriend.nickname,
       deleteArchiveMemberSuccess,
-      deleteArchiveMemberFail,
+      deleteArchiveMemberFail
     );
     console.log(archiveId, "삭제");
     await settingFriendArchiveList();
@@ -93,7 +94,7 @@ function FriendList() {
     await getFriendArchiveList(
       selectFriend.nickname,
       getFriendArchiveListSuccess,
-      getFriendArchiveListFail,
+      getFriendArchiveListFail
     );
   };
   const getFriendArchiveListSuccess = (res) => {
