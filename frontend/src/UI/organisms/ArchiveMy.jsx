@@ -29,13 +29,13 @@ function ArchiveMy() {
       await postBookmark(
         archive.archiveId,
         bookmarkControlSuccess,
-        bookmarkControl
+        bookmarkControl,
       );
     } else {
       await deleteBookmark(
         archive.archiveId,
         bookmarkControlSuccess,
-        bookmarkControl
+        bookmarkControl,
       );
     }
     await getList();
@@ -125,7 +125,7 @@ function ArchiveMy() {
                     <EditArchiveModal archive={archive} />
                     {/* 아카이브 권한 설정 */}
                     {/* TODO: 아카이브id 주고 친구 목록중에 초대 했는지 안했는지 알아와야댐*/}
-                    <SettingArchiveModal />
+                    <SettingArchiveModal archive={archive} />
                   </div>
                 </div>
                 <Divider />
