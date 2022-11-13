@@ -5,6 +5,7 @@ const initialState = {
   info: {
     archiveId: "",
     stuffs: [],
+    details: null,
   },
   travelWriteIsOpen: false,
   travelReadIsOpen: false,
