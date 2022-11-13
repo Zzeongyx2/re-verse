@@ -21,6 +21,7 @@ module.exports = {
         sub4: "#EF5DA8",
         extra1: "#FACC04",
         extra2: "#FAB504",
+        extra3: "#7186B2",
       },
       fontFamily: {
         neon: ["Beon", "sans-serif"],
