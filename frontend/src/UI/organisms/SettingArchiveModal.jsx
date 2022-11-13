@@ -11,15 +11,20 @@ import {
   FormLabel,
   Avatar,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { FiSettings } from "react-icons/fi";
 import { BsSearch } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { imageForm, s3Path } from "../../api";
-import { createArchiveMember, deleteArchiveMember } from "../../api/friend";
+import {
+  createArchiveMember,
+  deleteArchiveMember,
+  getFriendList,
+} from "../../api/friend";
 import { getArchiveList } from "../../api/archive";
 import { setMyArchiveList } from "../../modules/archive";
+import { setFriendList } from "../../modules/friend";
 
 // TODO: 기존 내용 가져와야 함
 function SettingArchiveModal({ archive }) {
@@ -32,7 +37,20 @@ function SettingArchiveModal({ archive }) {
   const handleChangeNickname = (e) => {
     setFindNickname(e.target.value);
   };
+  useEffect(() => {
+    settingFriendList();
+  }, []);
+  const settingFriendList = async () => {
+    await getFriendList(getFriendSuccess, getFriendFail);
+  };
 
+  const getFriendSuccess = (res) => {
+    console.log(res);
+    dispatch(setFriendList(res.data.friendList));
+  };
+  const getFriendFail = (error) => {
+    console.log(error);
+  };
   const shareMember = async (nickname) => {
     await createArchiveMember(
       archive.archiveId,
@@ -105,10 +123,10 @@ function SettingArchiveModal({ archive }) {
                     .filter((logo) => {
                       for (
                         let index = 0;
-                        index < archive.member.length;
+                        index < archive.members.length;
                         index++
                       ) {
-                        const element = archive.member[index];
+                        const element = archive.members[index];
                         if (logo.nickname === element.nickname) {
                           return;
                         }
@@ -163,10 +181,10 @@ function SettingArchiveModal({ archive }) {
                     .filter((logo) => {
                       for (
                         let index = 0;
-                        index < archive.member.length;
+                        index < archive.members.length;
                         index++
                       ) {
-                        const element = archive.member[index];
+                        const element = archive.members[index];
                         if (logo.nickname === element.nickname) {
                           if (findNickname.trim() === "") {
                             return logo;
