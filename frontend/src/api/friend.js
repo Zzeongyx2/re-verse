@@ -50,6 +50,16 @@ async function deleteArchiveMember(archiveId, nickname, success, fail) {
     .then(success)
     .catch(fail);
 }
+async function createArchiveMember(archiveId, nickname, success, fail) {
+  await api
+    .post(`/friend/archive-member`, {
+      archiveId: archiveId,
+      nickname: nickname,
+      role: "READ",
+    })
+    .then(success)
+    .catch(fail);
+}
 
 export {
   deleteFriend,
@@ -62,4 +72,5 @@ export {
   postBookmark,
   deleteBookmark,
   deleteArchiveMember,
+  createArchiveMember,
 };
