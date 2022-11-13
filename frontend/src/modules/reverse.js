@@ -2,6 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   // isOpen: false,
+  info: {
+    archiveId: "",
+    stuffs: [],
+    details: null,
+  },
   travelWriteIsOpen: false,
   travelReadIsOpen: false,
   annivWriteIsOpen: false,
@@ -14,9 +19,24 @@ const initialState = {
     content: "",
     memoryDate: `${new Date()}`,
   },
+  travel: {
+    articleList: [],
+    timelines: [],
+  },
+  anniv: {
+    articleList: [],
+    timelines: [],
+  },
+  diary: {
+    articleList: [],
+    timelines: [],
+  },
 };
 
 const reducers = {
+  setInfo: (state, action) => {
+    state.info = action.payload;
+  },
   setTravelWriteIsOpen: (state, action) => {
     state.travelWriteIsOpen = !state.travelWriteIsOpen;
   },
@@ -40,9 +60,15 @@ const reducers = {
   },
   createArticle: (state, action) => {
     state.article = action.payload;
-    // state.article.title = action.payload;
-    // state.article.content = action.payload;
-    // state.article.memoryDate = action.payload;
+  },
+  setTravel: (state, action) => {
+    state.travel = action.payload;
+  },
+  setAnniv: (state, action) => {
+    state.anniv = action.payload;
+  },
+  setDiary: (state, action) => {
+    state.diary = action.payload;
   },
 };
 
@@ -53,6 +79,7 @@ export const reverseSlice = createSlice({
 });
 
 export const {
+  setInfo,
   setTravelWriteIsOpen,
   setTravelReadIsOpen,
   setAnnivWriteIsOpen,
@@ -61,6 +88,9 @@ export const {
   setDiaryReadIsOpen,
   setCampfireOn,
   createArticle,
+  setTravel,
+  setAnniv,
+  setDiary,
 } = reverseSlice.actions;
 
 export default reverseSlice.reducer;
