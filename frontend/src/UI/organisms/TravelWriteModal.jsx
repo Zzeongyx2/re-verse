@@ -20,7 +20,7 @@ import { getPaper, getStuffDetail, postPaper } from "../../api/reverse";
 
 import moment from "moment/moment";
 
-function TravelWriteModal({ archiveId, stuffId }) {
+function TravelWriteModal() {
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
   // console.log(reverse);
@@ -32,8 +32,8 @@ function TravelWriteModal({ archiveId, stuffId }) {
   // 글 하나 게시하기
   const handlePostPaper = async () => {
     await postPaper(
-      archiveId,
-      stuffId,
+      reverse.info.archiveId,
+      reverse.info.stuffs[0].id,
       {
         title: title,
         content: reverse.article.content,
