@@ -26,6 +26,7 @@ function FriendList() {
   const [archiveList, setArchiveList] = useState([]);
   const [selectFriend, setSelectFriend] = useState();
   const [rightTitle, setRightTitle] = useState("");
+  const loginUser = useSelector((state) => state.user.loginUser);
   const navigate = useNavigate();
 
   const findNickNameHandleChange = (e) => {
@@ -59,9 +60,9 @@ function FriendList() {
   const archiveDelete = async (archiveId) => {
     await deleteArchiveMember(
       archiveId,
-      selectFriend.nickname,
+      loginUser.nickname,
       deleteArchiveMemberSuccess,
-      deleteArchiveMemberFail
+      deleteArchiveMemberFail,
     );
     console.log(archiveId, "삭제");
     await settingFriendArchiveList();
@@ -98,7 +99,7 @@ function FriendList() {
     await getFriendArchiveList(
       selectFriend.nickname,
       getFriendArchiveListSuccess,
-      getFriendArchiveListFail
+      getFriendArchiveListFail,
     );
   };
   const getFriendArchiveListSuccess = (res) => {
@@ -204,7 +205,10 @@ function FriendList() {
                           }}
                           className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
                         >
-                          <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
+                          <BiLogIn
+                            size={18}
+                            className="text-white m-0.5 -translate-x-0.5"
+                          />
                         </button>
                         <button
                           onClick={() => {
@@ -212,7 +216,10 @@ function FriendList() {
                           }}
                           className="bg-sub3 border-2 border-basic3 rounded-full"
                         >
-                          <HiOutlineTrash size={18} className="text-white m-0.5" />
+                          <HiOutlineTrash
+                            size={18}
+                            className="text-white m-0.5"
+                          />
                         </button>
                       </div>
                     </div>
