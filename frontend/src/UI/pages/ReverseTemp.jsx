@@ -23,6 +23,8 @@ import ReverseFooter from "../organisms/ReverseFooter.jsx";
 import { getArchiveDetail } from "../../api/reverse.js";
 import { useLocation } from "react-router-dom";
 import TravelReadModal from "../organisms/TravelReadModal.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { setInfo } from "../../modules/reverse.js";
 
 function ReverseTemp() {
   const location = useLocation();
@@ -30,14 +32,22 @@ function ReverseTemp() {
   console.log(location.pathname.substring(13));
   const archiveId = location.pathname.substring(13);
 
+  const dispatch = useDispatch();
+  const reverse = useSelector((state) => state.reverse);
+
   useEffect(() => {
     getArchiveDetail(archiveId, getArchiveDetailSuccess, getArchiveDetailFail);
   }, []);
-  const [stuffs, setStuffs] = useState([]);
 
   const getArchiveDetailSuccess = (res) => {
-    setStuffs(res.data.stuffs);
     console.log(res);
+    dispatch(
+      setInfo({
+        ...reverse.info,
+        archiveId: archiveId,
+        stuffs: res.data.stuffs,
+      })
+    );
   };
 
   const getArchiveDetailFail = (err) => {
@@ -58,22 +68,11 @@ function ReverseTemp() {
   // orthographic camera
   const aspect = window.innerWidth / window.innerHeight;
 
-  // player -> reverse
-
   // test object
   const [visible, setVisible] = useState(false);
   const handleVisible = (data) => {
     setVisible(data);
   };
-
-  // travel photobook, polaroid object
-  // anniv photobook, polaroid object
-  // diary photobook, polaroid object
-  // const [event, setEvent] = useState(0);
-  // const handleEvent = (data) => {
-  //   setEvent(data);
-  //   // console.log(event);
-  // };
 
   useEffect(() => {}, []);
 
@@ -169,10 +168,16 @@ function ReverseTemp() {
         </mesh>
       </Canvas>
       {/* // TODO: travel = 0, anniv = 1, diary = 2 */}
-      {stuffs.length > 0 && (
+      {reverse.info.stuffs.length > 0 && (
         <>
-          <TravelWriteModal archiveId={archiveId} stuffId={stuffs[0].id} />
-          <TravelReadModal archiveId={archiveId} stuffId={stuffs[0].id} />
+          <TravelWriteModal
+          // archiveId={reverse.info.archiveId}
+          // stuffId={reverse.info.stuffsId[0]}
+          />
+          <TravelReadModal
+          // archiveId={reverse.info.archiveId}
+          // stuffId={reverse.info.stuffsId[0]}
+          />
         </>
       )}
     </div>

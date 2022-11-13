@@ -30,18 +30,12 @@ function ReverseTextEditor() {
         api
           .post("/archive/image", formData)
           .then((res) => {
-            console.log("성공했나,,?");
             console.log(res);
-            console.log(res.data.urls);
             const IMG_URL = res.data.urls[0];
-            console.log(IMG_URL);
 
             const editor = quillRef.current.getEditor();
             const range = editor.getSelection();
             editor.insertEmbed(range, "image", IMG_URL);
-
-            console.log(range);
-            console.log(editor);
           })
           .catch((err) => {
             console.log(err);
@@ -59,7 +53,12 @@ function ReverseTextEditor() {
           [{ font: [] }],
           [{ align: [] }],
           ["bold", "italic", "underline", "strike", "blockquote"],
-          [{ list: "ordered" }, { list: "bullet" }, "link"],
+          [
+            { list: "ordered" },
+            { list: "bullet" },
+            { indent: "-1" },
+            { indent: "+1" },
+          ],
           [
             {
               color: [
@@ -103,7 +102,7 @@ function ReverseTextEditor() {
             },
             { background: [] },
           ],
-          ["image", "video"],
+          ["link", "image", "video"],
           ["clean"],
         ],
         // handlers: {
@@ -123,12 +122,17 @@ function ReverseTextEditor() {
     "bold",
     "italic",
     "underline",
+    "strike",
+    "blockquote",
     "list",
+    "indent",
     "bullet",
     "align",
     "color",
     "background",
+    "link",
     "image",
+    "video",
   ];
 
   const dispatch = useDispatch();
@@ -155,7 +159,7 @@ function ReverseTextEditor() {
     <div className="bg-white">
       <ReactQuill
         ref={quillRef}
-        style={{ height: "600px" }}
+        className="h-[455px]"
         theme="snow"
         modules={modules}
         formats={formats}
