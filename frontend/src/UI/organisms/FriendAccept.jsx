@@ -4,13 +4,15 @@ import { Avatar } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
 
 import { BsCheckCircle, BsXCircle } from "react-icons/bs";
-import { acceptFriend, getAcceptFriendList } from "../../api/friend";
+import { acceptFriend, getAcceptFriendList, getFriendList } from "../../api/friend";
 import { imageForm, s3Path } from "../../api";
+import { useDispatch } from "react-redux";
+import { setFriendList } from "../../modules/friend";
 
 function FriendAccept() {
   const [friendAcceptList, setFriendAcceptList] = useState([]);
+  const dispatch = useDispatch();
 
-  // TODO:
   const friendAccept = (nickname) => {
     acceptFriend({ nickname: nickname, isAccepted: true }, acceptSuccess, acceptFail);
     console.log("친구수락", nickname);
@@ -32,9 +34,21 @@ function FriendAccept() {
   useEffect(() => {
     getAcceptList();
   }, []);
-  const getAcceptListSuccess = (res) => {
+  const getAcceptListSuccess = async (res) => {
     console.log(res);
     setFriendAcceptList(res.data.waitingFrom);
+    await settingFriendList();
+  };
+  const settingFriendList = async () => {
+    await getFriendList(getFriendSuccess, getFriendFail);
+  };
+
+  const getFriendSuccess = (res) => {
+    console.log(res);
+    dispatch(setFriendList(res.data.friendList));
+  };
+  const getFriendFail = (error) => {
+    console.log(error);
   };
   const getAcceptListFail = (error) => {
     console.log(error);

@@ -6,21 +6,21 @@ import CharacterThree from "../organisms/CharacterThree";
 import ThreeTest from "../organisms/ThreeTest";
 import { useState, useEffect } from "react";
 import { getUserInfo } from "../../api/user";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoginUser } from "../../modules/user";
 
 function Lobby() {
   // TODO: 메인아카이브, 최근방문 아카이브 가져와서 넣어주기
-  const initialUserInfo = {
-    nickname: "",
-    message: "",
-    avatar: "",
-  };
 
-  const [loginUser, setLoginUser] = useState(initialUserInfo);
+  // const [loginUser, setLoginUser] = useState(initialUserInfo);
+  const loginUser = useSelector((state) => state.user.loginUser);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     getUserInfo(getUserInfoSuccess, getUserInfoFail);
   }, []);
   const getUserInfoSuccess = (res) => {
-    setLoginUser(res.data);
+    dispatch(setLoginUser(res.data));
   };
   const getUserInfoFail = (error) => {
     console.log(error);

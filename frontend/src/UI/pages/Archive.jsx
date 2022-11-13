@@ -1,13 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import {
-  Link,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
-import { getUserInfo } from "../../api/user";
+import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Button from "../atoms/Button";
 import ArchiveFriend from "../organisms/ArchiveFriend";
 import ArchiveLike from "../organisms/ArchiveLike";
@@ -19,22 +12,7 @@ function Archive() {
   const [selectTap, setSelectTap] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-  const initialUserInfo = {
-    nickname: "",
-    message: "",
-    avatar: "",
-  };
 
-  const [loginUser, setLoginUser] = useState(initialUserInfo);
-  useEffect(() => {
-    getUserInfo(getUserInfoSuccess, getUserInfoFail);
-  }, []);
-  const getUserInfoSuccess = (res) => {
-    setLoginUser(res.data);
-  };
-  const getUserInfoFail = (error) => {
-    console.log(error);
-  };
   const createArchive = () => {
     // TODO: 새 아카이브 만들기
     navigate("/archive/my");
@@ -59,9 +37,7 @@ function Archive() {
             <Link to="my">
               <Button
                 color={selectTap === "나의아카이브" ? "white" : "black"}
-                from={
-                  selectTap === "나의아카이브" ? "from-main1" : "from-main2"
-                }
+                from={selectTap === "나의아카이브" ? "from-main1" : "from-main2"}
                 to={selectTap === "나의아카이브" ? "to-sub1" : "to-sub2"}
                 text={"나의 아카이브"}
                 click={() => {}}
@@ -72,9 +48,7 @@ function Archive() {
             <Link to="friend">
               <Button
                 color={selectTap === "친구아카이브" ? "white" : "black"}
-                from={
-                  selectTap === "친구아카이브" ? "from-main1" : "from-main2"
-                }
+                from={selectTap === "친구아카이브" ? "from-main1" : "from-main2"}
                 to={selectTap === "친구아카이브" ? "to-sub1" : "to-sub2"}
                 text={"친구의 아카이브"}
                 click={() => {}}
@@ -98,11 +72,8 @@ function Archive() {
       <div>
         <Routes>
           <Route path="/my" element={<ArchiveMy />} />
-          <Route
-            path="/friend"
-            element={<ArchiveFriend loginUser={loginUser} />}
-          />
-          <Route path="/like" element={<ArchiveLike loginUser={loginUser} />} />
+          <Route path="/friend" element={<ArchiveFriend />} />
+          <Route path="/like" element={<ArchiveLike />} />
         </Routes>
       </div>
     </div>

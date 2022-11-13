@@ -4,22 +4,19 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { HiOutlineTrash } from "react-icons/hi";
 import { Avatar, AvatarGroup } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
-import {
-  deleteArchiveMember,
-  deleteBookmark,
-  postBookmark,
-} from "../../api/friend";
+import { deleteArchiveMember, deleteBookmark, postBookmark } from "../../api/friend";
 import { getArchiveList } from "../../api/archive";
 import { imageForm, s3Path } from "../../api";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriendArchiveList } from "../../modules/archive";
 import { useNavigate } from "react-router-dom";
 
-function ArchiveFriend({ loginUser }) {
+function ArchiveFriend() {
   // const [archiveList, setArchiveList] = useState([]);
   const archiveList = useSelector((state) => state.archive.friendArchiveList);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const loginUser = useSelector((state) => state.user.loginUser);
 
   const enterArchive = (archiveId) => {
     console.log(archiveId, "이동");
@@ -45,17 +42,9 @@ function ArchiveFriend({ loginUser }) {
   };
   const bookmarkTrigger = async (archive, index) => {
     if (!archive.bookmarks) {
-      await postBookmark(
-        archive.archiveId,
-        bookmarkControlSuccess,
-        bookmarkControl
-      );
+      await postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     } else {
-      await deleteBookmark(
-        archive.archiveId,
-        bookmarkControlSuccess,
-        bookmarkControl
-      );
+      await deleteBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     }
 
     await getList();
@@ -96,11 +85,7 @@ function ArchiveFriend({ loginUser }) {
                       }}
                       className="w-14 text-extra1"
                     >
-                      {archive.bookmark ? (
-                        <AiFillStar size={18} />
-                      ) : (
-                        <AiOutlineStar size={18} />
-                      )}
+                      {archive.bookmark ? <AiFillStar size={18} /> : <AiOutlineStar size={18} />}
                     </button>
                     {/* 유저 이름 */}
                     <div className="font-bold text-sm overflow-hidden text-ellipsis line-clamp-1 md:w-44 sm:w-36">
@@ -139,10 +124,7 @@ function ArchiveFriend({ loginUser }) {
                       }}
                       className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
                     >
-                      <BiLogIn
-                        size={18}
-                        className="text-white m-0.5 -translate-x-0.5"
-                      />
+                      <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
                     </button>
                     <button
                       onClick={() => {

@@ -1,33 +1,28 @@
 import { useEffect, useState } from "react";
 import { imageForm, s3Path } from "../../api";
-import { editAvatar, getAvatars, getUserInfo } from "../../api/user";
+import { editAvatar, getAvatars } from "../../api/user";
 
 import SelectCharacterBtn from "../atoms/SelectCharacterBtn";
 import CharacterThree from "./CharacterThree";
-// import "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80fDB8fHx8&auto=format&fit=crop&w=735&q=80" from "../../assets/new-moon.png";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoginUser } from "../../modules/user";
 
 function SelectCharacter() {
-  const initialData = {
-    nickname: "",
-    message: "",
-    avatar: "",
-  };
-  const [mine, setMine] = useState(initialData);
+  // const [mine, setMine] = useState(initialData);
+  const mine = useSelector((state) => state.user.loginUser);
+  const dispatch = useDispatch();
   const [ischecked, setIschecked] = useState(false);
+  const [selectCharacter, setSelectCharacter] = useState("");
   const [characters, setCharacters] = useState([]);
 
   const handleChange = (e) => {
     console.log(e.target.value);
-    // setMine(e.target.value);
-    setMine((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    setSelectCharacter(e.target.value);
     setIschecked((prev) => !prev);
   };
   useEffect(() => {
     getAvatars(getAvatarsSuccess, getAvatarsFail);
-    getUserInfo(getUserInfoSuccess, getUserInfoFail);
+    setSelectCharacter(mine.avatar);
   }, []);
   const getAvatarsSuccess = (res) => {
     setCharacters(res.data.avatars);
@@ -35,17 +30,13 @@ function SelectCharacter() {
   const getAvatarsFail = (error) => {
     console.log(error);
   };
-  const getUserInfoSuccess = (res) => {
-    setMine(res.data);
-  };
-  const getUserInfoFail = (error) => {
-    console.log(error);
-  };
+
   const clickEditBtn = () => {
-    editAvatar(mine.avatar, editAvatarSuccess, editAvatarFail);
+    editAvatar(selectCharacter, editAvatarSuccess, editAvatarFail);
   };
   const editAvatarSuccess = (res) => {
     console.log(res);
+    dispatch(setLoginUser({ ...mine, avatar: selectCharacter }));
   };
   const editAvatarFail = (error) => {
     console.log(error);
@@ -56,7 +47,7 @@ function SelectCharacter() {
       <div className="flex justify-between">
         {/* 캐릭터 렌더링 */}
         <div className="bg-white rounded-3xl w-[calc(96%/3)] pt-5 pb-6">
-          <CharacterThree animalName={mine.avatar} />
+          <CharacterThree animalName={selectCharacter} />
         </div>
         <div className="flex flex-col w-[calc(96%/3*2)] items-end">
           {/* 캐릭터 선택 창 */}
