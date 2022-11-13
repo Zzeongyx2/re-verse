@@ -21,8 +21,28 @@ import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
 import TravelWriteModal from "../organisms/TravelWriteModal.jsx";
 import ReverseFooter from "../organisms/ReverseFooter.jsx";
 import { getArchiveDetail } from "../../api/reverse.js";
+import { useLocation } from "react-router-dom";
+import TravelReadModal from "../organisms/TravelReadModal.jsx";
 
-function ReverseTemp({ archiveId }) {
+function ReverseTemp() {
+  const location = useLocation();
+  console.log(location.pathname);
+  console.log(location.pathname.substring(13));
+  const archiveId = location.pathname.substring(13);
+
+  useEffect(() => {
+    getArchiveDetail(archiveId, getArchiveDetailSuccess, getArchiveDetailFail);
+  }, []);
+  const [stuffs, setStuffs] = useState([]);
+
+  const getArchiveDetailSuccess = (res) => {
+    setStuffs(res.data.stuffs);
+    console.log(res);
+  };
+
+  const getArchiveDetailFail = (err) => {
+    console.log(err);
+  };
   // default action = idle
   const refCanvas = useRef();
   const [action, setAction] = useState("Idle_A");
@@ -55,22 +75,7 @@ function ReverseTemp({ archiveId }) {
   //   // console.log(event);
   // };
 
-  // useEffect(() => {
-  //   getArchiveDetail(
-  //     archiveId,
-
-  //     getArchiveDetailSuccess,
-  //     getArchiveDetailFail
-  //   );
-  // });
-
-  // const getArchiveDetailSuccess = (res) => {
-  //   console.log(res);
-  // };
-
-  // const getArchiveDetailFail = (err) => {
-  //   console.log(err);
-  // };
+  useEffect(() => {}, []);
 
   return (
     <div className="h-screen overflow-hidden relative">
@@ -163,7 +168,13 @@ function ReverseTemp({ archiveId }) {
           <meshBasicMaterial color="black" transparent opacity={0.3} />
         </mesh>
       </Canvas>
-      <TravelWriteModal />
+      {/* // TODO: travel = 0, anniv = 1, diary = 2 */}
+      {stuffs.length > 0 && (
+        <>
+          <TravelWriteModal archiveId={archiveId} stuffId={stuffs[0].id} />
+          <TravelReadModal archiveId={archiveId} stuffId={stuffs[0].id} />
+        </>
+      )}
     </div>
   );
 }
