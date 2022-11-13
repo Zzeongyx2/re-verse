@@ -117,9 +117,9 @@ function SettingArchiveModal({ archive }) {
             {/* friend info */}
             <FormControl>
               {/* 친구중에 아직 공유를 안한 친구들 */}
-              {friendList.length && (
-                <div className="border-2 border-[#d9d9d9] rounded-lg h-96 w-full overflow-hidden scrollbar-hide py-2">
-                  {friendList
+              <div className="border-2 border-[#d9d9d9] rounded-lg h-96 w-full overflow-hidden scrollbar-hide py-2">
+                {friendList.length &&
+                  friendList
                     .filter((logo) => {
                       for (
                         let index = 0;
@@ -172,12 +172,9 @@ function SettingArchiveModal({ archive }) {
                         </div>
                       );
                     })}
-                </div>
-              )}
-              {/* 친구중에 이미 공유를 한 친구들 */}
-              {friendList.length && (
-                <div className="border-2 border-[#d9d9d9] rounded-lg h-96 w-full overflow-hidden scrollbar-hide py-2">
-                  {friendList
+                {/* 친구중에 이미 공유를 한 친구들 */}
+                {friendList.length &&
+                  friendList
                     .filter((logo) => {
                       for (
                         let index = 0;
@@ -228,8 +225,7 @@ function SettingArchiveModal({ archive }) {
                         </div>
                       );
                     })}
-                </div>
-              )}
+              </div>
             </FormControl>
           </ModalBody>
 
