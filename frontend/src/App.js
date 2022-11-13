@@ -34,7 +34,7 @@ function App() {
           <Route path="/archive/*" element={<Archive />} />
           <Route path="/neontest" element={<NeonTest />} />
           <Route path="/reverse/:archiveId" element={<Reverse />} />
-          <Route path="/reversetemp" element={<ReverseTemp />} />
+          <Route path="/reversetemp/:archiveId" element={<ReverseTemp />} />
           <Route path="/reverse/rtc" element={<ReverseWebRTC />} />
           <Route path="/texteditor" element={<ReverseTextEditor />} />
         </Routes>

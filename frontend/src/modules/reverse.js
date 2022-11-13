@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isOpen: false,
+  // isOpen: false,
+  travelWriteIsOpen: false,
+  travelReadIsOpen: false,
+  annivWriteIsOpen: false,
+  annivReadIsOpen: false,
+  diaryWriteIsOpen: false,
+  diaryReadIsOpen: false,
   isCampfireOn: 0,
   article: {
     title: "",
@@ -11,8 +17,23 @@ const initialState = {
 };
 
 const reducers = {
-  setOpen: (state, action) => {
-    state.isOpen = !state.isOpen;
+  setTravelWriteIsOpen: (state, action) => {
+    state.travelWriteIsOpen = !state.travelWriteIsOpen;
+  },
+  setTravelReadIsOpen: (state, action) => {
+    state.travelReadIsOpen = !state.travelReadIsOpen;
+  },
+  setAnnivWriteIsOpen: (state, action) => {
+    state.annivWriteIsOpen = !state.annivWriteIsOpen;
+  },
+  setAnnivReadIsOpen: (state, action) => {
+    state.annivReadIsOpen = !state.annivReadIsOpen;
+  },
+  setDiaryWriteIsOpen: (state, action) => {
+    state.diaryWriteIsOpen = !state.diaryWriteIsOpen;
+  },
+  setDiaryReadIsOpen: (state, action) => {
+    state.diaryReadIsOpen = !state.diaryReadIsOpen;
   },
   setCampfireOn: (state, action) => {
     state.isCampfireOn = action.payload;
@@ -31,6 +52,15 @@ export const reverseSlice = createSlice({
   reducers,
 });
 
-export const { setOpen, setCampfireOn, createArticle } = reverseSlice.actions;
+export const {
+  setTravelWriteIsOpen,
+  setTravelReadIsOpen,
+  setAnnivWriteIsOpen,
+  setAnnivReadIsOpen,
+  setDiaryWriteIsOpen,
+  setDiaryReadIsOpen,
+  setCampfireOn,
+  createArticle,
+} = reverseSlice.actions;
 
 export default reverseSlice.reducer;
