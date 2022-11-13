@@ -154,6 +154,7 @@ public class ArchiveService {
 
     @Transactional
     public void deleteArchive(UUID archiveId) {
+        // TODO: isDeleted로 변경
         archiveRepository.deleteById(archiveId);
     }
 }

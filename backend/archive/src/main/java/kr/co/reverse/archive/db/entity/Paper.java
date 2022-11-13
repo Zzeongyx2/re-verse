@@ -42,6 +42,22 @@ public class Paper {
 
     private LocalDate memoryTime;
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setLastEditedTime(LocalDateTime lastEditedTime) {
+        this.lastEditedTime = lastEditedTime;
+    }
+
+    public void setMemoryTime(LocalDate memoryTime) {
+        this.memoryTime = memoryTime;
+    }
+
     @Builder
     public Paper(Stuff stuff, String title, String content, String writer, Boolean isDeleted, LocalDateTime createdTime, LocalDateTime lastEditedTime, LocalDate memoryTime) {
         this.stuff = stuff;

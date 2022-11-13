@@ -56,6 +56,35 @@ public class PaperService {
         return paperRepository.findAllByStuffOrderByMemoryTimeAscCreatedTimeDesc(stuff);
     }
 
+    @Transactional
+    public void updatePaper(PaperReq paperReq, Stuff stuff, UUID paperId) {
+        Paper paper = paperRepository.findById(paperId)
+                .orElseThrow(() -> new NoSuchElementException());
+
+        String title = paperReq.getTitle();
+        String content = paperReq.getContent();
+        LocalDate memoryTime = paperReq.getMemoryTime();
+
+        if (stuff.getType() == StuffType.READ_ONLY) {
+            throw new UnauthorizedException(CommonErrorCode.UNAUTHORIZED_ERROR);
+        }
+
+        if (title == null || content == null || memoryTime == null) {
+            throw new IllegalArgumentException();
+        }
+
+        paper.setTitle(title);
+        paper.setContent(content);
+        paper.setMemoryTime(memoryTime);
+        paper.setLastEditedTime(LocalDateTime.now());
+    }
+
+    @Transactional
+    public void deletePaper(UUID paperId) {
+        // TODO: isDeleted로 변경
+        paperRepository.deleteById(paperId);
+    }
+
     public Paper getPaper(UUID paperId) {
         return paperRepository.findById(paperId)
                 .orElseThrow(() -> new NoSuchElementException());
