@@ -4,12 +4,17 @@ import { BsSearch } from "react-icons/bs";
 import { FiPlusCircle } from "react-icons/fi";
 
 import { Avatar, Divider } from "@chakra-ui/react";
-import { requestFriend, searchUser } from "../../api/friend";
+import { getFriendList, requestFriend, searchUser } from "../../api/friend";
 import { imageForm, s3Path } from "../../api";
+import { useSelector, useDispatch } from "react-redux";
+import { setFriendList } from "../../modules/friend";
 
 function FriendRequest() {
   const [findNickName, setFindNickName] = useState("");
   const [userList, setUserList] = useState([]);
+  const loginUser = useSelector((state) => state.user.loginUser);
+  const friendList = useSelector((state) => state.friend.friendList);
+  const dispatch = useDispatch();
 
   const findNickNameHandleChange = (e) => {
     setFindNickName(e.target.value);
@@ -20,8 +25,20 @@ function FriendRequest() {
     console.log("친구요청", nickname);
   };
   const requestFriendSuccess = async (res) => {
-    await searchUser(findNickName, searchUserSuccess, searchUserFail);
+    await settingFriendList();
+
     console.log(res);
+  };
+  const settingFriendList = async () => {
+    await getFriendList(getFriendSuccess, getFriendFail);
+  };
+
+  const getFriendSuccess = (res) => {
+    console.log(res);
+    dispatch(setFriendList(res.data.friendList));
+  };
+  const getFriendFail = (error) => {
+    console.log(error);
   };
   const requestFriendFail = (error) => {
     console.log(error);
@@ -55,38 +72,51 @@ function FriendRequest() {
           </div>
           {/* user lifo */}
           <div className="w-[calc(100%-70px)] overflow-auto scrollbar-hide">
-            {userList.map((friend, index) => {
-              return (
-                <div key={`userList-${index}`}>
-                  <div className="flex items-center justify-between px-2 py-1">
-                    <div className="flex items-center">
-                      <Avatar
-                        name="profileImg"
-                        src={s3Path + friend.avatar + imageForm}
-                        size="sm"
-                      />
-                      <div className="text-base1 px-3">
-                        <p className="cursor-pointer text-sm font-bold">{friend.nickname}</p>
-                        <p className="overflow-hidden text-ellipsis line-clamp-1 text-xs text-zinc-500">
-                          {friend.message}
-                        </p>
-                        {/* <div className="whitespace-nowrap overflow-hidden text-ellipsis">
+            {userList
+              .filter((user) => {
+                if (user.nickname === loginUser.nickname) {
+                  return;
+                }
+                for (let index = 0; index < friendList.length; index++) {
+                  const friend = friendList[index];
+                  if (friend.nickname === user.nickname) {
+                    return;
+                  }
+                }
+                return user;
+              })
+              .map((friend, index) => {
+                return (
+                  <div key={`userList-${index}`}>
+                    <div className="flex items-center justify-between px-2 py-1">
+                      <div className="flex items-center">
+                        <Avatar
+                          name="profileImg"
+                          src={s3Path + friend.avatar + imageForm}
+                          size="sm"
+                        />
+                        <div className="text-base1 px-3">
+                          <p className="cursor-pointer text-sm font-bold">{friend.nickname}</p>
+                          <p className="overflow-hidden text-ellipsis line-clamp-1 text-xs text-zinc-500">
+                            {friend.message}
+                          </p>
+                          {/* <div className="whitespace-nowrap overflow-hidden text-ellipsis">
                         {friend.message}
                       </div> */}
+                        </div>
                       </div>
+                      <button
+                        onClick={() => {
+                          friendRequest(friend.nickname);
+                        }}
+                      >
+                        <FiPlusCircle className="text-[#3F81FB]" size={24} />
+                      </button>
                     </div>
-                    <button
-                      onClick={() => {
-                        friendRequest(friend.nickname);
-                      }}
-                    >
-                      <FiPlusCircle className="text-[#3F81FB]" size={24} />
-                    </button>
+                    <Divider />
                   </div>
-                  <Divider />
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
         <div className="bg-white rounded-3xl w-[calc(96%/2)] h-[600px] pt-5 pb-6 flex flex-col items-center justify-center">

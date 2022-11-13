@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { editUserInfo, getUserInfo, nicknameCheck } from "../../api/user";
+import { editUserInfo, nicknameCheck } from "../../api/user";
 
 function LobbyProfile({ loginUser }) {
   // const initialUserInfo = {
