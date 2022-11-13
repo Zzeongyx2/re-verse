@@ -12,7 +12,7 @@ import { useFrame } from "@react-three/fiber";
 import { gsap } from "gsap";
 
 import { useDispatch } from "react-redux";
-import { setOpen } from "../../modules/reverse";
+import { setTravelReadIsOpen } from "../../modules/reverse";
 
 export function Polaroid({ props, position, event }) {
   const { nodes, materials } = useGLTF("/assets/retro_polaroid/scene.gltf");
@@ -61,7 +61,7 @@ export function Polaroid({ props, position, event }) {
       dispose={null}
       onClick={() => {
         console.log("폴라로이드 눌렀다");
-        dispatch(setOpen());
+        dispatch(setTravelReadIsOpen());
       }}
     >
       <group

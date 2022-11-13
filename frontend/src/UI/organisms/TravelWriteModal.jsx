@@ -10,14 +10,17 @@ import {
 import { useEffect, useRef, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { createArticle, setOpen } from "../../modules/reverse";
+import { createArticle, setTravelWriteIsOpen } from "../../modules/reverse";
 import ArchiveDatePicker from "../molecules/ReverseDatePicker";
 
 import { AiOutlineCalendar } from "react-icons/ai";
 import { EditorComponent } from "./TextEditor";
 import ReverseTextEditor from "./ReverseTextEditor";
+import { getPaper, getStuffDetail, postPaper } from "../../api/reverse";
 
-function TravelWriteModal() {
+import moment from "moment/moment";
+
+function TravelWriteModal({ archiveId, stuffId }) {
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
   // console.log(reverse);
@@ -26,14 +29,32 @@ function TravelWriteModal() {
   // 글 제목
   const [title, setTitle] = useState("");
 
-  useEffect(() => {
-    console.log(reverse);
-  }, [reverse]);
+  // 글 하나 게시하기
+  const handlePostPaper = async () => {
+    await postPaper(
+      archiveId,
+      stuffId,
+      {
+        title: title,
+        content: reverse.article.content,
+        memoryTime: moment(reverse.article.memoryDate).format("yyyy-MM-DD"),
+      },
+      success,
+      fail
+    );
+  };
+  const success = (res) => {
+    console.log(res);
+  };
+  const fail = (err) => {
+    console.log(err);
+  };
+
   return (
     <>
       {/* <Modal isOpen={isOpen} onClose={onClose} size={"lg"} isCentered> */}
       <Modal
-        isOpen={reverse.isOpen}
+        isOpen={reverse.travelWriteIsOpen}
         // onClose={dispatch(setOpen())}
         size={"4xl"}
         isCentered
@@ -76,7 +97,7 @@ function TravelWriteModal() {
           <ModalFooter pt={0}>
             <button
               onClick={() => {
-                dispatch(setOpen());
+                dispatch(setTravelWriteIsOpen());
               }}
               className="font-bold bg-[#d9d9d9] px-6 py-2 rounded-xl text-sm mx-3"
             >
@@ -84,9 +105,10 @@ function TravelWriteModal() {
             </button>
             <button
               onClick={() => {
-                console.log("article is posted!");
-
+                console.log("travel article is posted!");
                 dispatch(createArticle({ ...reverse.article, title: title }));
+                handlePostPaper();
+                dispatch(setTravelWriteIsOpen());
               }}
               className="font-bold bg-extra1 px-6 py-2 rounded-xl text-sm"
             >
