@@ -52,7 +52,8 @@ function FriendList() {
 
   const enterArchive = (archiveId) => {
     console.log(archiveId, "이동");
-    navigate(`/reverse/${archiveId}`);
+    // navigate(`/reverse/${archiveId}`);
+    navigate(`/reversetemp/${archiveId}`);
   };
 
   const archiveDelete = async (archiveId) => {
