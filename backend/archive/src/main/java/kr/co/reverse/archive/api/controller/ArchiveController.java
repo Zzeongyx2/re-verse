@@ -46,7 +46,7 @@ public class ArchiveController {
         }
 
         for (int i = 1; i <= 3; i++) { // 각 photobook 별 읽기 전용 / 쓰기 전용 stuff 생성
-            stuffService.createStuff(archive, StuffType.READ_ONLY);
+//            stuffService.createStuff(archive, StuffType.READ_ONLY);
             stuffService.createStuff(archive, StuffType.WRITE_ONLY);
         }
 
@@ -112,6 +112,15 @@ public class ArchiveController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
+    @GetMapping("/{archive_id}/stuff/{stuff_id}")
+    public ResponseEntity<? extends PapersRes> getPapers(@PathVariable(name = "archive_id") String archiveId,
+                                                         @PathVariable(name = "stuff_id") String stuffId) {
+        Stuff stuff = stuffService.getStuff(UUID.fromString(stuffId));
+        List<Paper> papers = paperService.getPapers(stuff);
+
+        return ResponseEntity.ok(PapersRes.of(papers));
+    }
+
     @PostMapping("/{archive_id}/stuff/{stuff_id}/paper")
     public ResponseEntity createPaper(@PathVariable(name = "archive_id") String archiveId,
                                       @PathVariable(name = "stuff_id") String stuffId,
@@ -127,15 +136,6 @@ public class ArchiveController {
         paperService.createPaper(paperReq, stuff, user);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
-    @GetMapping("/{archive_id}/stuff/{stuff_id}/paper")
-    public ResponseEntity<? extends PapersRes> getPapers(@PathVariable(name = "archive_id") String archiveId,
-                                                         @PathVariable(name = "stuff_id") String stuffId) {
-        Stuff stuff = stuffService.getStuff(UUID.fromString(stuffId));
-        List<Paper> papers = paperService.getPapers(stuff);
-
-        return ResponseEntity.ok(PapersRes.of(papers));
     }
 
     @GetMapping("/{archive_id}/stuff/{stuff_id}/paper/{paper_id}")
