@@ -41,4 +41,19 @@ async function deletePaper(archiveId, stuffId, paperId, success, fail) {
     .catch(fail);
 }
 
-export { getArchiveDetail, getPaper, postPaper, editPaper, deletePaper };
+// 물건 상세 조회
+async function getStuffDetail(archiveId, stuffId, success, fail) {
+  await api
+    .get(`/archive/${archiveId}/stuff/${stuffId}`)
+    .then(success)
+    .catch(fail);
+}
+
+export {
+  getArchiveDetail,
+  getPaper,
+  postPaper,
+  editPaper,
+  deletePaper,
+  getStuffDetail,
+};

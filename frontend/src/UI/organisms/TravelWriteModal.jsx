@@ -16,7 +16,7 @@ import ArchiveDatePicker from "../molecules/ReverseDatePicker";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { EditorComponent } from "./TextEditor";
 import ReverseTextEditor from "./ReverseTextEditor";
-import { postPaper } from "../../api/reverse";
+import { getPaper, getStuffDetail, postPaper } from "../../api/reverse";
 
 import moment from "moment/moment";
 
@@ -35,7 +35,7 @@ function TravelWriteModal({ archiveId, stuffId }) {
       archiveId,
       stuffId,
       {
-        title: reverse.article.title,
+        title: title,
         content: reverse.article.content,
         memoryTime: moment(reverse.article.memoryDate).format("yyyy-MM-DD"),
       },
@@ -105,10 +105,10 @@ function TravelWriteModal({ archiveId, stuffId }) {
             </button>
             <button
               onClick={() => {
-                console.log("article is posted!");
-
+                console.log("travel article is posted!");
                 dispatch(createArticle({ ...reverse.article, title: title }));
                 handlePostPaper();
+                dispatch(setTravelWriteIsOpen());
               }}
               className="font-bold bg-extra1 px-6 py-2 rounded-xl text-sm"
             >

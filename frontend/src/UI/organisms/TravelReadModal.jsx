@@ -9,11 +9,22 @@ import {
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { getStuffDetail } from "../../api/reverse";
 import { setTravelReadIsOpen } from "../../modules/reverse";
 
-function TravelReadModal() {
+function TravelReadModal({ archiveId, stuffId }) {
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
+
+  useEffect(() => {
+    getStuffDetail(archiveId, stuffId, getDetailSuccess, getDetailFail);
+  }, []);
+  const getDetailSuccess = (res) => {
+    console.log(res);
+  };
+  const getDetailFail = (err) => {
+    console.log(err);
+  };
 
   return (
     <>
