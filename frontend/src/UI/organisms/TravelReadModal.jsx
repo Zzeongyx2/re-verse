@@ -13,7 +13,8 @@ import { getStuffDetail } from "../../api/reverse";
 import { setTravel, setTravelReadIsOpen } from "../../modules/reverse";
 
 import { AiOutlineClose } from "react-icons/ai";
-import ArticlesTimeline from "./Timeline";
+import ArticlesTimeline from "./TravelTimeline";
+import ArticleDetail from "./ArticleDetail";
 
 function TravelReadModal() {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ function TravelReadModal() {
         isCentered
       >
         <ModalOverlay />
-        <ModalContent minH={"750"}>
+        <ModalContent minH={"500"}>
           <ModalHeader mb={4} textAlign="center">
             <div className="flex justify-between items-center">
               윤선이의 여행 기록
@@ -69,14 +70,16 @@ function TravelReadModal() {
           <ModalBody>
             <div className="flex justify-between">
               {/* timeline */}
-              <div className="bg-white rounded-3xl w-[calc(96%/3)] h-[700px] border-2">
+              <div className="bg-white border-basic3 rounded-lg w-[calc(96%/3)] h-[500px] border-2">
                 <div className="font-bold text-center py-3">timeline</div>
-                <div className=" h-[625px] overflow-auto scrollbar-hide">
+                <div className="h-[calc(90%)] overflow-auto scrollbar-hide">
                   <ArticlesTimeline />
                 </div>
               </div>
               {/* article detail */}
-              <div className="bg-white rounded-3xl w-[calc(96%/3*2)] h-full border-2"></div>
+              <div className="bg-white border-basic3 rounded-lg w-[calc(96%/3*2)]  border-2 p-4">
+                <ArticleDetail />
+              </div>
             </div>
 
             {/* {reverse.travelArticleList.map((article, idx) => {

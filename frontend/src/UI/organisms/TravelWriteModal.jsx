@@ -88,7 +88,7 @@ function TravelWriteModal() {
               </div>
             </div>
 
-            <div className="my-3.5 w-full h-[520px] border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1 overflow-auto">
+            <div className="my-3.5 w-full h-[520px] border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1 overflow-auto scrollbar-hide">
               {/* <EditorComponent /> */}
               <ReverseTextEditor />
             </div>
