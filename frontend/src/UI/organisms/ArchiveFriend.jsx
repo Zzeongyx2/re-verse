@@ -23,7 +23,8 @@ function ArchiveFriend({ loginUser }) {
 
   const enterArchive = (archiveId) => {
     console.log(archiveId, "이동");
-    navigate(`/reverse/${archiveId}`);
+    // navigate(`/reverse/${archiveId}`);
+    navigate(`/reversetemp/${archiveId}`);
   };
 
   const deleteArchive = async (archiveId) => {
@@ -31,7 +32,7 @@ function ArchiveFriend({ loginUser }) {
       archiveId,
       loginUser.nickname,
       deleteArchiveMemberSuccess,
-      deleteArchiveMemberFail,
+      deleteArchiveMemberFail
     );
     console.log(archiveId, "나가기");
     await getList();
@@ -47,13 +48,13 @@ function ArchiveFriend({ loginUser }) {
       await postBookmark(
         archive.archiveId,
         bookmarkControlSuccess,
-        bookmarkControl,
+        bookmarkControl
       );
     } else {
       await deleteBookmark(
         archive.archiveId,
         bookmarkControlSuccess,
-        bookmarkControl,
+        bookmarkControl
       );
     }
 
