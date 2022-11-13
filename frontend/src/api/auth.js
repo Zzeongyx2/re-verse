@@ -21,5 +21,8 @@ async function emailCheck(email, success, fail) {
 async function login(loginInfo, success, fail) {
   await api.post("/auth/login", loginInfo).then(success).catch(fail);
 }
+async function logout(success, fail) {
+  await api.get("/auth/logout").then(success).catch(fail);
+}
 
-export { signin, emailCheck, login };
+export { signin, emailCheck, login, logout };
