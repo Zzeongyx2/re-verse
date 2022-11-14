@@ -14,9 +14,9 @@ export function Christmas(props) {
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
-        <group rotation={[Math.PI / 2, 0, 0]}>
+        <group rotation={[Math.PI / 2, -Math.PI / 12, 0]}>
           <group rotation={[-Math.PI / 2, 0, 0]}>
-            <group position={[80, -80, 0]} scale={0.27}>
+            <group position={[80, -60, 0]} scale={0.28}>
               <mesh
                 geometry={
                   nodes.Christmas_Pack_Mesh_Mat_Christmas_Pack_0.geometry
