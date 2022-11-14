@@ -33,6 +33,7 @@ import TravelWriteModal from "../organisms/TravelWriteModal.jsx";
 import TravelReadModal from "../organisms/TravelReadModal.jsx";
 
 import { IoIosSend } from "react-icons/io";
+import { HackerRoom } from "../../assets/deco/HackerRoom.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -806,6 +807,7 @@ function Reverse() {
           <Christmas />
 
           {/* diary zone */}
+          <HackerRoom />
 
           {/* easter egg zone */}
           <EasterPack />
