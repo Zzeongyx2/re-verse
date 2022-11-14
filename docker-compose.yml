@@ -6,7 +6,7 @@ services:
             dockerfile: ./signal/Dockerfile
             network: my_net
         user: root
-        container_name: authback
+        container_name: signalserver
         ports:
             - 8998:8998
 
