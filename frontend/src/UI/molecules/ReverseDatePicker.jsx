@@ -19,7 +19,7 @@ function ReverseDatePicker() {
     </button>
   ));
 
-  const [editDate, setEditDate] = useState(reverse.info.details.memoryTime);
+  const [editDate, setEditDate] = useState(reverse.info.details?.memoryTime);
   const handleEditDate = (e) => {
     setEditDate(e.target.value);
   };
@@ -51,9 +51,7 @@ function ReverseDatePicker() {
         selected={startDate}
         onChange={(date) => {
           setStartDate(date);
-          dispatch(
-            createArticle({ ...reverse.article, memoryDate: `${date}` })
-          );
+          dispatch(createArticle({ ...reverse.article, memoryDate: `${date}` }));
         }}
         customInput={<InputBtn />}
         maxDate={new Date()}

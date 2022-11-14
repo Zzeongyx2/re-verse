@@ -56,7 +56,9 @@ function ReverseFriendModal() {
   };
   useEffect(() => {
     console.log(reverse);
-    getArchiveDetail(reverse.info.archiveId, getArchiveDetailSuccess, getArchiveDetailFail);
+    if (reverse.info.archiveId) {
+      getArchiveDetail(reverse.info.archiveId, getArchiveDetailSuccess, getArchiveDetailFail);
+    }
   }, [reverse.info.archiveId]);
   useEffect(() => {
     if (archive) {
