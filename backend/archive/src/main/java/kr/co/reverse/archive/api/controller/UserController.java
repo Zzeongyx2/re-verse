@@ -1,10 +1,10 @@
 package kr.co.reverse.archive.api.controller;
 
-import kr.co.reverse.archive.api.request.AvatarReq;
-import kr.co.reverse.archive.api.request.SigninUserReq;
-import kr.co.reverse.archive.api.request.UserReq;
+import kr.co.reverse.archive.api.request.*;
 import kr.co.reverse.archive.api.response.*;
+import kr.co.reverse.archive.api.service.ArchiveService;
 import kr.co.reverse.archive.api.service.UserService;
+import kr.co.reverse.archive.db.entity.Archive;
 import kr.co.reverse.archive.db.entity.Avatar;
 import kr.co.reverse.archive.db.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -21,17 +21,20 @@ public class UserController {
 
     private final UserService userService;
 
+    private final ArchiveService archiveService;
+
     @GetMapping
-    public ResponseEntity<? extends UserRes> getPlayer() {
+    public ResponseEntity<? extends UserDetailRes> getPlayer() {
 
         String userId = userService.getUserId();
 
         User user = userService.getPlayer(userId);
 
-        return ResponseEntity.ok(UserRes.builder()
+        return ResponseEntity.ok(UserDetailRes.builder()
                 .nickname(user.getNickname())
                 .message(user.getMessage())
                 .avatar(user.getAvatar().toString())
+                .bestArchiveId(user.getBestArchiveId())
                 .build());
     }
 
@@ -44,7 +47,7 @@ public class UserController {
     }
 
     @PatchMapping
-    public ResponseEntity updateUser(@RequestBody UserReq userInfo){
+    public ResponseEntity updateUser(@RequestBody UserReq userInfo) {
 
         String userId = userService.getUserId();
 
@@ -55,7 +58,7 @@ public class UserController {
     }
 
     @PatchMapping("/avatar")
-    public ResponseEntity updateAvatar(@RequestBody AvatarReq avatarInfo){
+    public ResponseEntity updateAvatar(@RequestBody AvatarReq avatarInfo) {
 
         String userId = userService.getUserId();
 
@@ -64,8 +67,17 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
+    @PatchMapping("/archive")
+    public ResponseEntity updateBestArchive(@RequestBody BestArchiveReq bestArchiveReq) {
+        String userId = userService.getUserId();
+
+        userService.updateBestArchive(userId, bestArchiveReq.getArchiveId());
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
     @GetMapping("/avatar")
-    public ResponseEntity<? extends AvatarRes> getAvatarList(){
+    public ResponseEntity<? extends AvatarRes> getAvatarList() {
 
         List<String> avatars = userService.getAvatars();
 
@@ -73,7 +85,7 @@ public class UserController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<? extends UsersRes> searchUsers(@RequestParam String nickname){
+    public ResponseEntity<? extends UsersRes> searchUsers(@RequestParam String nickname) {
 
         List<User> users = userService.getUsers(nickname);
 
@@ -83,14 +95,20 @@ public class UserController {
 
     //auth server 통신
     @PostMapping("/create")
-    public ResponseEntity createUser(@RequestBody SigninUserReq userInfo){
-        userService.createUser(userInfo);
+    public ResponseEntity createUser(@RequestBody SigninUserReq userInfo) {
+        User user = userService.createUser(userInfo);
+
+        if (user != null) {
+            Archive archive = archiveService.createArchive(
+                    ArchiveReq.of("나의 첫 아카이브", "친구와 나의 추억을 공유해보세요 :)"), user);
+            userService.updateBestArchive(user.getId().toString(), archive.getId().toString());
+        }
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/uid/{auth_id}")
-    public ResponseEntity<UserIdRes> getUserId(@PathVariable(name = "auth_id") String authId){
+    public ResponseEntity<UserIdRes> getUserId(@PathVariable(name = "auth_id") String authId) {
 
         String userId = userService.getUserIdByAuthId(authId);
 
@@ -98,7 +116,7 @@ public class UserController {
     }
 
     @GetMapping("/aid/{user_id}")
-    public ResponseEntity<UserIdRes> getAuthId(@PathVariable(name = "user_id") String userId){
+    public ResponseEntity<UserIdRes> getAuthId(@PathVariable(name = "user_id") String userId) {
 
         String authId = userService.getAuthIdByUserId(userId);
 
