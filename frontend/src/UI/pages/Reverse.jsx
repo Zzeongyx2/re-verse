@@ -34,6 +34,7 @@ import TravelReadModal from "../organisms/TravelReadModal.jsx";
 
 import { IoIosSend } from "react-icons/io";
 import { HackerRoom } from "../../assets/deco/HackerRoom.js";
+import { Fireworks } from "../../assets/deco/Fireworks.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -811,6 +812,9 @@ function Reverse() {
 
           {/* easter egg zone */}
           <EasterPack />
+
+          {/* etc */}
+          <Fireworks />
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
           <Polaroid />
