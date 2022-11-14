@@ -7,7 +7,7 @@ import axios from "axios";
 import { fileApiInstance } from "../../api";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createArticle } from "../../modules/reverse";
+import { createArticle, setInfo } from "../../modules/reverse";
 
 Quill.register("modules/ImageResize", ImageResize);
 
@@ -137,7 +137,7 @@ function ReverseTextEditor() {
 
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
-  const [content, setContent] = useState("");
+  console.log(reverse.info.details);
 
   const [text, setText] = useState("");
   const handleText = (value) => {
@@ -150,12 +150,36 @@ function ReverseTextEditor() {
     dispatch(createArticle({ ...reverse.article, content: text }));
   };
 
+  const [editText, setEditText] = useState(reverse.info.details.content);
+  const handleEditText = (value) => {
+    setEditText(value);
+    console.log(editText);
+  };
+
+  const editSaveContent = () => {
+    // dispatch(createArticle({ ...reverse.article, content: editText }));
+    dispatch(
+      setInfo({
+        archiveId: reverse.info.archiveId,
+        stuffs: reverse.info.stuffs,
+        details: { ...reverse.info.details, content: editText },
+      })
+    );
+    console.log(editText);
+    console.log(reverse.info.details);
+  };
+
   // 이거.. 왜 돼...? 너 뭐야...??
   useEffect(() => {
     saveContent();
   }, [text]);
 
-  return (
+  useEffect(() => {
+    editSaveContent();
+    console.log(editText);
+  }, [editText]);
+
+  return !reverse.editBtn ? (
     <div className="bg-white">
       <ReactQuill
         ref={quillRef}
@@ -165,6 +189,21 @@ function ReverseTextEditor() {
         formats={formats}
         value={text}
         onChange={handleText}
+      />
+    </div>
+  ) : (
+    <div className="bg-white">
+      <ReactQuill
+        ref={quillRef}
+        className="h-[455px]"
+        theme="snow"
+        modules={modules}
+        formats={formats}
+        value={editText}
+        // onchange={(e) => {
+        //   handleEditText(e);
+        // }}
+        onChange={handleEditText}
       />
     </div>
   );
