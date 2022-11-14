@@ -795,7 +795,6 @@ function Reverse() {
             // handleEvent={handleEvent}
           /> */}
 
-          <SkyTube />
           <ObjectTest visible={visible} />
           {/* <ObjectTest currentPosition={currentPosition} /> */}
 
@@ -815,6 +814,7 @@ function Reverse() {
 
           {/* etc */}
           <Fireworks />
+          <SkyTube />
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
           <Polaroid />
