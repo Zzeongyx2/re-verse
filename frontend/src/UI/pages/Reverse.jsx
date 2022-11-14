@@ -40,9 +40,7 @@ let audioMapIdx = 0;
 function Reverse() {
   // default action = idle
   // const [characterPosition, setCharacterPosition] = useState();
-  const [destinationPoint, setDestinationPoint] = useState(
-    new Vector3(-30, 0, -30)
-  );
+  const [destinationPoint, setDestinationPoint] = useState(new Vector3(-30, 0, -30));
   const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
   if (floorTexture) {
@@ -270,9 +268,7 @@ function Reverse() {
           let peer1 = rtcPeers.get(data1.userId);
 
           if (peer1) {
-            peer1
-              .addIceCandidate(new RTCIceCandidate(data2))
-              .catch((error) => {});
+            peer1.addIceCandidate(new RTCIceCandidate(data2)).catch((error) => {});
           }
         }
       } else if (data1.type === "Answer") {
@@ -312,9 +308,7 @@ function Reverse() {
     setRtcPeers2(rtcPeers2);
 
     if (data1.type === "NewMember") {
-      let channel1 = rtcPeer.createDataChannel(
-        Math.floor(Math.random() * 10000000000)
-      );
+      let channel1 = rtcPeer.createDataChannel(Math.floor(Math.random() * 10000000000));
       channelConfig(channel1);
 
       //create offer
@@ -656,7 +650,6 @@ function Reverse() {
   //   setVisible(data);
   // };
 
-
   return (
     <div className="h-screen overflow-hidden relative">
       <audio id="myAudio" autoPlay hidden muted controls></audio>
@@ -706,8 +699,7 @@ function Reverse() {
             <br />
             <div className="col-md-12 text-center bg-black text-white">
               <p>
-                Copyright ©
-                <script>document.write(new Date().getFullYear());</script>
+                Copyright ©<script>document.write(new Date().getFullYear());</script>
                 2022 Rizky Satrio All rights reserved
               </p>
             </div>
@@ -767,7 +759,7 @@ function Reverse() {
               <DogAnimations
                 key={idx}
                 // action={action}
-                destinationPoint={otherCharacterMap.get(other)} 
+                destinationPoint={otherCharacterMap.get(other)}
                 // isPressed={isPressed}
                 handleVisible={handleVisible}
                 userName={other}
@@ -809,11 +801,7 @@ function Reverse() {
         </mesh>
 
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
-        <mesh
-          rotation={[-0.5 * Math.PI, 0, 0]}
-          position={[-30, 0.01, -30]}
-          receiveShadow
-        >
+        <mesh rotation={[-0.5 * Math.PI, 0, 0]} position={[-30, 0.01, -30]} receiveShadow>
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
           <meshBasicMaterial color="black" transparent opacity={0.3} />
         </mesh>

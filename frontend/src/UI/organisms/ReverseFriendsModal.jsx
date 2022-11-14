@@ -192,7 +192,7 @@ function ReverseFriendModal() {
                     <div className="h-28 overflow-auto scrollbar-hide">
                       {friendList
                         .filter((info) => {
-                          for (let index = 0; index < archive.members.length; index++) {
+                          for (let index = 0; index < archive?.members.length; index++) {
                             const element = archive.members[index];
                             if (info.nickname === element.nickname) {
                               return;
@@ -239,7 +239,7 @@ function ReverseFriendModal() {
                     <div className="h-28 overflow-auto scrollbar-hide">
                       {friendList
                         .filter((info) => {
-                          for (let index = 0; index < archive.members.length; index++) {
+                          for (let index = 0; index < archive?.members.length; index++) {
                             const element = archive.members[index];
                             if (info.nickname === element.nickname) {
                               if (findNickName.trim() === "") {
