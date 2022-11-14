@@ -225,16 +225,6 @@ export function CampingPack(props) {
             </group>
           </group>
 
-          {/* bbq grill */}
-          <group rotation={[-Math.PI / 2, 0, 0]}>
-            <group position={[1758.3, -540.54, 72.62]}>
-              <mesh
-                geometry={nodes.Object151_vbvbv_0.geometry}
-                material={materials.vbvbv}
-              />
-            </group>
-          </group>
-
           {/* parasol */}
           {/* <group rotation={[-Math.PI / 2, 0, 0]}>
             <group position={[1218.67, -896.99, 215.29]}>

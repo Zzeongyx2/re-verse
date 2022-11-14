@@ -35,6 +35,7 @@ import TravelReadModal from "../organisms/TravelReadModal.jsx";
 import { IoIosSend } from "react-icons/io";
 import { HackerRoom } from "../../assets/deco/HackerRoom.js";
 import { Fireworks } from "../../assets/deco/Fireworks.js";
+import { Park } from "../../assets/deco/Park.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -815,6 +816,7 @@ function Reverse() {
           {/* etc */}
           <Fireworks />
           <SkyTube />
+          <Park />
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
           <Polaroid />
