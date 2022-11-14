@@ -5,6 +5,7 @@ const initialState = {
     nickname: "",
     message: "",
     avatar: "",
+    bestArchiveId: "",
   },
 };
 

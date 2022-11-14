@@ -45,7 +45,7 @@ function Lobby() {
         <div className="w-[calc(96%/3)]">
           {/* // FIXME: 나중에 linkto 속성값 변경해야 함 */}
           <LobbyButton
-            linkTo={"/lobby"}
+            linkTo={`/reverse/${loginUser.bestArchiveId}`}
             buttonTitle={"대표 아카이브 바로가기"}
             buttonMessage={"zl존윤sun의 메인 아카이브"}
             textcolor={"text-white"}
