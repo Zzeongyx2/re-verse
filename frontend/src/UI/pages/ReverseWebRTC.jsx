@@ -21,7 +21,8 @@ import { CampingPack } from "../../assets/deco/CampingPack.js";
 import { arraySlice } from "three/src/animation/AnimationUtils.js";
 import { Vector3 } from "three";
 import { data } from "autoprefixer";
-
+import { useSelector, useDispatch } from "react-redux";
+import webrtc from "../../modules/webrtc";
 var channels = [];
 var channelUsers = new Map();
 var friendToName = new Map();
@@ -82,13 +83,13 @@ function ReverseWebRTC() {
   const upsertMap = (key, value) => {
     setMap((prev) => new Map(prev).set(key, value));
   };
-  const deleteMap= (key) => {
-  setMap((prev) => {
-    const newState = new Map(prev);
-    newState.delete(key);
-    return newState;
-  });
-}
+  const deleteMap = (key) => {
+    setMap((prev) => {
+      const newState = new Map(prev);
+      newState.delete(key);
+      return newState;
+    });
+  };
   const [archiveId, setArchiveId] = useState("");
   const [rtcPeers2, setRtcPeers2] = useState("");
 
@@ -106,7 +107,7 @@ function ReverseWebRTC() {
     // console.log(destinationPoint);
   }, [destinationPoint]);
 
-  const preventClose = (e: BeforeUnloadEvent) => {
+  const preventClose = (e) => {
     // console.log(e)
     // e.preventDefault();
     disconnectAll();
@@ -136,6 +137,38 @@ function ReverseWebRTC() {
     setArchiveId(e.target.value);
   };
   var userId2 = "";
+
+  const webrtcRedux = useSelector((state) => state.webrtc);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (localStream) {
+      if (webrtcRedux.micCheck) {
+        localStream.getAudioTracks().forEach((element) => {
+          element.enabled = true;
+        });
+      } else {
+        localStream.getAudioTracks().forEach((element) => {
+          element.enabled = false;
+        });
+      }
+      console.log(localStream.getAudioTracks());
+    }
+  }, [webrtcRedux.micCheck]);
+  useEffect(() => {
+    const audioSet = document.getElementById("user-audio").childNodes;
+    if (audioSet) {
+      if (webrtcRedux.headCheck) {
+        for (let i = audioSet.length - 1; i >= 0; i--) {
+          audioSet[i].muted = false;
+        }
+      } else {
+        for (let i = audioSet.length - 1; i >= 0; i--) {
+          audioSet[i].muted = true;
+        }
+      }
+      console.log(audioSet)
+    }
+  }, [webrtcRedux.headCheck]);
   async function login() {
     let inputName = document.getElementById("myUsername");
     if (archiveId.length < 1) {
@@ -346,11 +379,12 @@ function ReverseWebRTC() {
       console.log("this is userAudio id : " + userAudio.id);
       userAudio.autoplay = true;
       userAudio.controls = true;
+      userAudio.hidden = true;
       div2.appendChild(userAudio);
       div1.appendChild(h2);
       newUser.appendChild(div1);
       newUser.appendChild(div2);
-      document.getElementById("user-audio").appendChild(newUser);
+      document.getElementById("user-audio").appendChild(userAudio);
       const peerAudio = document.getElementById(peerId);
       // console.log(event.streams);
       // if (peerAudio.srcObject !== event.streams[0]) {
