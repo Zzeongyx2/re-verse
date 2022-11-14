@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  micCheck: false,
-  headCheck: false,
-  bgmCheck:false,
+  micCheck: true,
+  headCheck: true,
+  bgmCheck:true,
 };
 
 const reducers = {
