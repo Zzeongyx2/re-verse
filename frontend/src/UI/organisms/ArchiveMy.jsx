@@ -5,7 +5,7 @@ import { Divider } from "@chakra-ui/react";
 
 import { FiSettings } from "react-icons/fi";
 import { BiLogIn, BiPencil } from "react-icons/bi";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { RiVipCrownFill, RiVipCrownLine } from "react-icons/ri";
 import EditArchiveModal from "./EditArchiveModal";
 import SettingArchiveModal from "./SettingArchiveModal";
 import { getArchiveList } from "../../api/archive";
@@ -13,9 +13,12 @@ import { deleteBookmark, postBookmark } from "../../api/friend";
 import { imageForm, s3Path } from "../../api";
 import { useSelector, useDispatch } from "react-redux";
 import { setMyArchiveList } from "../../modules/archive";
+import { editBestArchive, getUserInfo } from "../../api/user";
+import { setLoginUser } from "../../modules/user";
 function ArchiveMy() {
   // const [archiveList, setArchiveList] = useState([]);
   const archiveList = useSelector((state) => state.archive.myArchiveList);
+  const loginUser = useSelector((state) => state.user.loginUser);
   const dispatch = useDispatch();
 
   const enterArchive = (archiveId) => {
@@ -23,19 +26,25 @@ function ArchiveMy() {
     window.location.href = `/reverse/${archiveId}`;
     // window.location.href = `/reversetemp/${archiveId}`;
   };
-
-  const bookmarkTrigger = async (archive, index) => {
-    if (!archive.bookmark) {
-      await postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
-    } else {
-      await deleteBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
-    }
-    await getList();
+  const changeBestArchive = (archive) => {
+    console.log(archive);
+    editBestArchive(
+      archive.archiveId,
+      editBestArchiveSuccess,
+      editBestArchiveFail,
+    );
   };
-  const bookmarkControlSuccess = (res) => {
+  const editBestArchiveSuccess = (res) => {
     console.log(res);
+    getUserInfo(getUserInfoSuccess, getUserInfoFail);
   };
-  const bookmarkControl = (error) => {
+  const editBestArchiveFail = (error) => {
+    console.log(error);
+  };
+  const getUserInfoSuccess = (res) => {
+    dispatch(setLoginUser(res.data));
+  };
+  const getUserInfoFail = (error) => {
     console.log(error);
   };
 
@@ -62,14 +71,19 @@ function ArchiveMy() {
               <div key={`archive-${index}`}>
                 <div className="flex items-center justify-between px-2 py-1 mx-4">
                   <div className="flex">
-                    {/* 즐겨찾기 */}
+                    {/* 대표아카이브 설정 */}
                     <button
+                      disabled={loginUser.bestArchiveId === archive.archiveId}
                       onClick={() => {
-                        bookmarkTrigger(archive, index);
+                        changeBestArchive(archive);
                       }}
                       className="w-14 text-extra1"
                     >
-                      {archive.bookmark ? <AiFillStar size={18} /> : <AiOutlineStar size={18} />}
+                      {archive.archiveId === loginUser.bestArchiveId ? (
+                        <RiVipCrownFill size={18} />
+                      ) : (
+                        <RiVipCrownLine size={18} />
+                      )}
                     </button>
                     {/* 아카이브 이름 */}
                     <p className="text-sm font-bold overflow-hidden text-ellipsis line-clamp-1 md:w-44 sm:w-36">
@@ -104,7 +118,10 @@ function ArchiveMy() {
                         enterArchive(archive.archiveId);
                       }}
                     >
-                      <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
+                      <BiLogIn
+                        size={18}
+                        className="text-white m-0.5 -translate-x-0.5"
+                      />
                     </button>
                     {/* 아카이브 수정 */}
                     <EditArchiveModal archive={archive} />
