@@ -10,7 +10,11 @@ import {
 import { useEffect, useRef, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { createArticle, setTravelWriteIsOpen } from "../../modules/reverse";
+import {
+  createArticle,
+  setTravel,
+  setTravelWriteIsOpen,
+} from "../../modules/reverse";
 import ArchiveDatePicker from "../molecules/ReverseDatePicker";
 
 import { AiOutlineCalendar } from "react-icons/ai";
@@ -45,7 +49,25 @@ function TravelWriteModal() {
   };
   const success = (res) => {
     console.log(res);
+    getStuffDetail(
+      reverse.info.archiveId,
+      reverse.info.stuffs[0].id,
+      stuffSuccess,
+      stuffFail
+    );
   };
+
+  const stuffSuccess = (res) => {
+    console.log(res);
+    dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
+    // dispatch(setInfo({ ...reverse.info, details: null }));
+    // console.log(res.data);
+  };
+
+  const stuffFail = (err) => {
+    console.log(err);
+  };
+
   const fail = (err) => {
     console.log(err);
   };
