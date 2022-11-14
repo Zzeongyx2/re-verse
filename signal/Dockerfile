@@ -5,7 +5,7 @@ FROM openjdk:11-jdk
 EXPOSE 8998
 ENV TZ=Asia/Seoul
 #가져올 파일 jar또는 war
-ARG JAR_FILE=./backend/build/libs/*.jar
+ARG JAR_FILE=./signal/build/libs/*.jar
 
 #war파일 복사
 COPY ${JAR_FILE} app.jar
