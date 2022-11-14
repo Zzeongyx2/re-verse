@@ -14,11 +14,12 @@ export function CartoonCampingKit(props) {
     "/assets/cartoon_camping_kit/scene.gltf"
   );
   return (
+    // campfire
     <group {...props} dispose={null} scale={130} position={[-13, 0.35, -92]}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group position={[0, 0, 0.19]} scale={0.01}>
-            <group position={[50.88, 0.4, 0]}>
+            <group position={[44, 1, 0]} scale={2}>
               <mesh
                 geometry={nodes.Campfire_03_Camping_mat_0.geometry}
                 material={materials.Camping_mat}
