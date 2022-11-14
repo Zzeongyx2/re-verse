@@ -161,7 +161,7 @@ public class UserService {
             Archive archive = archiveRepository.findById(UUID.fromString(archiveId))
                     .orElseThrow(() -> new NoSuchElementException());
 
-            if (user.getId() != archive.getOwnerId()) {
+            if (!user.getId().equals(archive.getOwnerId())) {
                 throw new UnauthorizedException(CommonErrorCode.UNAUTHORIZED_ERROR);
             }
         }
