@@ -1,13 +1,19 @@
-import * as THREE from "three";
 import React, { Suspense, useRef, useState } from "react";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
+import * as THREE from "three";
+import { Vector3 } from "three";
 import { Canvas, useLoader } from "@react-three/fiber";
-
 import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 // import { OrthographicCamera } from "@react-three/drei";
+
 import { TextureLoader } from "three/src/loaders/TextureLoader";
-import CatAnimations from "../../assets/players/Cat_Animations.js";
+import { getArchiveDetail } from "../../api/reverse.js";
+
+import { setInfo } from "../../modules/reverse.js";
+
 import { SkyTube } from "../../assets/deco/SkyTube.js";
 import { ObjectTest } from "../../assets/deco/ObjectTest.js";
 import { CampingPack } from "../../assets/deco/CampingPack.js";
@@ -16,19 +22,21 @@ import { Polaroid } from "../../assets/deco/Polaroid.js";
 import { CartoonCampingKit } from "../../assets/deco/CartoonCampingKit.js";
 import { FireAnimated } from "../../assets/deco/FireAnimated.js";
 import { Notebook } from "../../assets/deco/Notebook.js";
+import { Christmas } from "../../assets/deco/Christmas.js";
+import { EasterPack } from "../../assets/deco/EasterPack.js";
+
+import CatAnimations from "../../assets/players/Cat_Animations.js";
+import DogAnimations from "../../assets/players/Dog_Animations.js";
 
 import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
 import TravelWriteModal from "../organisms/TravelWriteModal.jsx";
-import ReverseFooter from "../organisms/ReverseFooter.jsx";
-import { getArchiveDetail } from "../../api/reverse.js";
-import { useLocation } from "react-router-dom";
 import TravelReadModal from "../organisms/TravelReadModal.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { setInfo } from "../../modules/reverse.js";
-import { Vector3 } from "three";
-import DogAnimations from "../../assets/players/Dog_Animations.js";
 
 import { IoIosSend } from "react-icons/io";
+import { HackerRoom } from "../../assets/deco/HackerRoom.js";
+import { Fireworks } from "../../assets/deco/Fireworks.js";
+import { Park } from "../../assets/deco/Park.js";
+import { ForestKit } from "../../assets/deco/ForestKit.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -644,27 +652,10 @@ function Reverse() {
   const getArchiveDetailFail = (err) => {
     console.log(err);
   };
-  // default action = idle
+
   const refCanvas = useRef();
-  const [action, setAction] = useState("Idle_A");
-  // const [characterPosition, setCharacterPosition] = useState();
-  // const [destinationPoint, setDestinationPoint] = useState();
-  // const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
-  // if (floorTexture) {
-  //   floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-  //   floorTexture.repeat.x = 10;
-  //   floorTexture.repeat.y = 10;
-  // }
 
-  // orthographic camera
-  // const aspect = window.innerWidth / window.innerHeight;
-
-  // // test object
-  // const [visible, setVisible] = useState(false);
-  // const handleVisible = (data) => {
-  //   setVisible(data);
-  // };
-
+  // 채팅 메세지 아무것도 없는 경우 못보내게
   const [checkNull, setCheckNull] = useState("");
   console.log(checkNull.length);
   console.log("kfjlaijfliaejflj");
@@ -780,7 +771,9 @@ function Reverse() {
         {/* character */}
         <Suspense fallback={null}>
           {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
-          {others.map((other, idx) => {
+
+          {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
+          {/* {others.map((other, idx) => {
             console.log(other);
             console.log(others);
             // console.log(idx);
@@ -802,14 +795,32 @@ function Reverse() {
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
             // handleEvent={handleEvent}
-          />
+          /> */}
 
-          <SkyTube />
           <ObjectTest visible={visible} />
           {/* <ObjectTest currentPosition={currentPosition} /> */}
+
+          {/* travel zone */}
           <CampingPack />
           <CartoonCampingKit />
           <FireAnimated />
+
+          {/* anniv zone */}
+          <Christmas />
+
+          {/* diary zone */}
+          <HackerRoom />
+
+          {/* easter egg zone */}
+          <EasterPack />
+
+          {/* etc */}
+          <Fireworks />
+          <SkyTube />
+          <Park />
+
+          {/* floor */}
+          {/* <ForestKit /> */}
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
           <Polaroid />
@@ -844,14 +855,13 @@ function Reverse() {
       {/* // TODO: travel = 0, anniv = 1, diary = 2 */}
       {reverse.info.stuffs.length > 0 && (
         <>
-          <TravelWriteModal
-          // archiveId={reverse.info.archiveId}
-          // stuffId={reverse.info.stuffsId[0]}
-          />
-          <TravelReadModal
-          // archiveId={reverse.info.archiveId}
-          // stuffId={reverse.info.stuffsId[0]}
-          />
+          {/* travel */}
+          <TravelWriteModal />
+          <TravelReadModal />
+
+          {/* anniv */}
+
+          {/* diary */}
         </>
       )}
     </div>

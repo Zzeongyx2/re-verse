@@ -40,23 +40,23 @@ export function FireAnimated(props) {
 
       gsap.to(group.current.position, {
         duration: 0.2,
-        y: -5,
+        y: -10,
         ease: "Bounce.easeOut",
       });
       gsap.to(state.camera.position, {
         duration: 1,
-        y: 5,
+        y: 6,
       });
     }
   });
   return (
     <group>
-      <group ref={group} {...props} dispose={null} position={[53, -5, -67.3]}>
+      <group ref={group} {...props} dispose={null} position={[43.5, -10, -67]}>
         <group name="Sketchfab_Scene">
           <group
             name="Sketchfab_model"
             rotation={[-Math.PI / 2, 0, 0]}
-            scale={1.2}
+            scale={1.3}
           >
             <group
               name="7932a0dac3824e028da37f46ce28fafdfbx"
@@ -196,7 +196,7 @@ export function FireAnimated(props) {
           receiveShadow
           position={[38, 0.01, -68]}
         >
-          <planeBufferGeometry attach="geometry" args={[20, 20]} />
+          <planeBufferGeometry attach="geometry" args={[35, 25]} />
           <meshBasicMaterial color="blue" opacity={0.5} transparent />
         </mesh>
       </group>
