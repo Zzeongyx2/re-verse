@@ -7,6 +7,7 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import GLTFLoader from "gltfjsx/src/utils/glftLoader";
 import { useFrame, useGraph } from "@react-three/fiber";
 import { Vector3 } from "three";
+import { useBox } from "@react-three/cannon";
 import * as SkeletonUtils from "three/examples/jsm/utils/SkeletonUtils";
 export default function DogAnimations({
   action,
@@ -55,11 +56,9 @@ export default function DogAnimations({
       // console.log(destinationPoint);
       // console.log(group.current); // player.modelmesh
       // console.log(group.current.lookAt(destinationPoint));
-      group.current.lookAt(
-        new Vector3(destinationPoint.x, 0, destinationPoint.z)
-      );
+      group.current.lookAt(new Vector3(destinationPoint.x, 0, destinationPoint.z));
       group.current.name = userName;
-      console.log(group.current.name)
+      console.log(group.current.name);
       // console.log(group.current);
     }
   }, [destinationPoint]);

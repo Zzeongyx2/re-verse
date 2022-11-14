@@ -117,7 +117,7 @@ function ReverseSettingModal() {
                   id="bgm"
                   isChecked={webrtcRedux.bgmCheck}
                   onChange={() => {
-                    dispatch(setMicCheck(!webrtcRedux.micCheck));
+                    dispatch(setMicCheck(!webrtcRedux.bgmCheck));
                   }}
                 />
               </FormControl>

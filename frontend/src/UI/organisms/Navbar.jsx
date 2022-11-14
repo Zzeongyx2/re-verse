@@ -22,65 +22,47 @@ function Navbar() {
     <div className="flex justify-between pb-14">
       <div>
         <Breadcrumb separator="">
-          <div className="relative">
-            <div className="absolute z-50">
-              <BreadcrumbItem>
-                <Link to="/lobby">
-                  <BreadCrumbBtn
-                    text={"RE-VERSE"}
-                    from={"from-main1"}
-                    to={"to-sub1"}
-                  />
-                </Link>
-              </BreadcrumbItem>
-            </div>
-            <div className="absolute left-40 ">
-              {location.pathname === "/lobby" && (
+          <>
+            <div className="relative">
+              <div className="absolute z-50">
                 <BreadcrumbItem>
                   <Link to="/lobby">
-                    <BreadCrumbBtn
-                      text={"로비"}
-                      from={"from-main2"}
-                      to={"to-sub2"}
-                    />
+                    <BreadCrumbBtn text={"RE-VERSE"} from={"from-main1"} to={"to-sub1"} />
                   </Link>
                 </BreadcrumbItem>
-              )}
-              {location.pathname.includes("/friend/") && (
-                <BreadcrumbItem>
-                  <Link to="/friend/list">
-                    <BreadCrumbBtn
-                      text={"친구"}
-                      from={"from-main2"}
-                      to={"to-sub2"}
-                    />
-                  </Link>
-                </BreadcrumbItem>
-              )}
-              {location.pathname.includes("/archive/") && (
-                <BreadcrumbItem>
-                  <Link to="/archive/my">
-                    <BreadCrumbBtn
-                      text={"아카이브"}
-                      from={"from-main2"}
-                      to={"to-sub2"}
-                    />
-                  </Link>
-                </BreadcrumbItem>
-              )}
-              {location.pathname === "/character" && (
-                <BreadcrumbItem>
-                  <Link to="/character">
-                    <BreadCrumbBtn
-                      text={"캐릭터 선택"}
-                      from={"from-main2"}
-                      to={"to-sub2"}
-                    />
-                  </Link>
-                </BreadcrumbItem>
-              )}
+              </div>
+              <div className="absolute left-40 ">
+                {location.pathname === "/lobby" && (
+                  <BreadcrumbItem>
+                    <Link to="/lobby">
+                      <BreadCrumbBtn text={"로비"} from={"from-main2"} to={"to-sub2"} />
+                    </Link>
+                  </BreadcrumbItem>
+                )}
+                {location.pathname.includes("/friend/") && (
+                  <BreadcrumbItem>
+                    <Link to="/friend/list">
+                      <BreadCrumbBtn text={"친구"} from={"from-main2"} to={"to-sub2"} />
+                    </Link>
+                  </BreadcrumbItem>
+                )}
+                {location.pathname.includes("/archive/") && (
+                  <BreadcrumbItem>
+                    <Link to="/archive/my">
+                      <BreadCrumbBtn text={"아카이브"} from={"from-main2"} to={"to-sub2"} />
+                    </Link>
+                  </BreadcrumbItem>
+                )}
+                {location.pathname === "/character" && (
+                  <BreadcrumbItem>
+                    <Link to="/character">
+                      <BreadCrumbBtn text={"캐릭터 선택"} from={"from-main2"} to={"to-sub2"} />
+                    </Link>
+                  </BreadcrumbItem>
+                )}
+              </div>
             </div>
-          </div>
+          </>
         </Breadcrumb>
       </div>
       {/* <div className=""> */}
@@ -135,9 +117,7 @@ function Navbar() {
         <Link to="/character">
           {location.pathname === "/character" ? (
             <NavBtn
-              icon={
-                <TbHanger className="text-3xl text-gray-800 -scale-x-100" />
-              }
+              icon={<TbHanger className="text-3xl text-gray-800 -scale-x-100" />}
               from={"from-main2"}
               to={"to-sub2"}
             />
