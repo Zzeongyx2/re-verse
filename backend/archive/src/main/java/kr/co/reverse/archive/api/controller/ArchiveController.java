@@ -108,7 +108,10 @@ public class ArchiveController {
         }
 
         archiveService.deleteArchive(UUID.fromString(archiveId));
-        userService.updateBestArchive(userId, null);
+
+        if (user.getBestArchiveId().equals(archiveId)) {
+            userService.updateBestArchive(userId, null);
+        }
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
