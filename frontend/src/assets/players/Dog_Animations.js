@@ -56,7 +56,7 @@ export default function DogAnimations({
       // console.log(group.current); // player.modelmesh
       // console.log(group.current.lookAt(destinationPoint));
       group.current.lookAt(
-        new Vector3(destinationPoint.x, 1, destinationPoint.z)
+        new Vector3(destinationPoint.x, 0, destinationPoint.z)
       );
       group.current.name = userName;
       console.log(group.current.name)
