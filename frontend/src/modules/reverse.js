@@ -7,12 +7,14 @@ const initialState = {
     stuffs: [],
     details: null,
   },
+  editBtn: false,
   travelWriteIsOpen: false,
   travelReadIsOpen: false,
   annivWriteIsOpen: false,
   annivReadIsOpen: false,
   diaryWriteIsOpen: false,
   diaryReadIsOpen: false,
+  modalIsOpen: false,
   isCampfireOn: 0,
   article: {
     title: "",
@@ -37,6 +39,9 @@ const reducers = {
   setInfo: (state, action) => {
     state.info = action.payload;
   },
+  setEditBtn: (state, action) => {
+    state.editBtn = !state.editBtn;
+  },
   setTravelWriteIsOpen: (state, action) => {
     state.travelWriteIsOpen = !state.travelWriteIsOpen;
   },
@@ -54,6 +59,9 @@ const reducers = {
   },
   setDiaryReadIsOpen: (state, action) => {
     state.diaryReadIsOpen = !state.diaryReadIsOpen;
+  },
+  setModalIsOpen: (state, action) => {
+    state.modalIsOpen = !state.modalIsOpen;
   },
   setCampfireOn: (state, action) => {
     state.isCampfireOn = action.payload;
@@ -80,12 +88,14 @@ export const reverseSlice = createSlice({
 
 export const {
   setInfo,
+  setEditBtn,
   setTravelWriteIsOpen,
   setTravelReadIsOpen,
   setAnnivWriteIsOpen,
   setAnnivReadIsOpen,
   setDiaryWriteIsOpen,
   setDiaryReadIsOpen,
+  setModalIsOpen,
   setCampfireOn,
   createArticle,
   setTravel,
