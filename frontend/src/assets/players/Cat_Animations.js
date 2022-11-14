@@ -22,9 +22,9 @@ export default function CatAnimations({
   const { nodes, materials, animations } = useGLTF(
     "/assets/animals/GLTF/Animations/Cat_Animations.gltf"
   );
-  console.log(nodes)
+  console.log(nodes);
   const { actions } = useAnimations(animations, group);
-    console.log(actions);
+  console.log(actions);
   const [moving, setMoving] = useState(false);
   let angle = 0;
 
@@ -92,10 +92,10 @@ export default function CatAnimations({
           handleVisible(false);
         }
 
-        // travel photobook, polaroid object
+        // travel zone, campfire animation
         if (
-          Math.abs(campfirePosition.x - group.current.position.x) < 10 &&
-          Math.abs(campfirePosition.z - group.current.position.z) < 10
+          Math.abs(campfirePosition.x - group.current.position.x) < 17 &&
+          Math.abs(campfirePosition.z - group.current.position.z) < 12
         ) {
           dispatch(setCampfireOn(1));
         } else {
