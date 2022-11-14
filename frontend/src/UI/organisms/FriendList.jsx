@@ -53,8 +53,8 @@ function FriendList() {
 
   const enterArchive = (archiveId) => {
     console.log(archiveId, "이동");
-    // navigate(`/reverse/${archiveId}`);
-    navigate(`/reversetemp/${archiveId}`);
+    navigate(`/reverse/${archiveId}`);
+    // navigate(`/reversetemp/${archiveId}`);
   };
 
   const archiveDelete = async (archiveId) => {
@@ -62,7 +62,7 @@ function FriendList() {
       archiveId,
       loginUser.nickname,
       deleteArchiveMemberSuccess,
-      deleteArchiveMemberFail,
+      deleteArchiveMemberFail
     );
     console.log(archiveId, "삭제");
     await settingFriendArchiveList();
@@ -99,7 +99,7 @@ function FriendList() {
     await getFriendArchiveList(
       selectFriend.nickname,
       getFriendArchiveListSuccess,
-      getFriendArchiveListFail,
+      getFriendArchiveListFail
     );
   };
   const getFriendArchiveListSuccess = (res) => {
@@ -205,10 +205,7 @@ function FriendList() {
                           }}
                           className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
                         >
-                          <BiLogIn
-                            size={18}
-                            className="text-white m-0.5 -translate-x-0.5"
-                          />
+                          <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
                         </button>
                         <button
                           onClick={() => {
@@ -216,10 +213,7 @@ function FriendList() {
                           }}
                           className="bg-sub3 border-2 border-basic3 rounded-full"
                         >
-                          <HiOutlineTrash
-                            size={18}
-                            className="text-white m-0.5"
-                          />
+                          <HiOutlineTrash size={18} className="text-white m-0.5" />
                         </button>
                       </div>
                     </div>

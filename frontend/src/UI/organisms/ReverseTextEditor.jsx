@@ -53,12 +53,7 @@ function ReverseTextEditor() {
           [{ font: [] }],
           [{ align: [] }],
           ["bold", "italic", "underline", "strike", "blockquote"],
-          [
-            { list: "ordered" },
-            { list: "bullet" },
-            { indent: "-1" },
-            { indent: "+1" },
-          ],
+          [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
           [
             {
               color: [
@@ -150,7 +145,7 @@ function ReverseTextEditor() {
     dispatch(createArticle({ ...reverse.article, content: text }));
   };
 
-  const [editText, setEditText] = useState(reverse.info.details.content);
+  const [editText, setEditText] = useState(reverse.info.details?.content);
   const handleEditText = (value) => {
     setEditText(value);
     console.log(editText);

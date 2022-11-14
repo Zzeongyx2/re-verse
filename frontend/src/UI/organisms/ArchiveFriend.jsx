@@ -20,8 +20,8 @@ function ArchiveFriend() {
 
   const enterArchive = (archiveId) => {
     console.log(archiveId, "이동");
-    // navigate(`/reverse/${archiveId}`);
-    navigate(`/reversetemp/${archiveId}`);
+    navigate(`/reverse/${archiveId}`);
+    // navigate(`/reversetemp/${archiveId}`);
   };
 
   const deleteArchive = async (archiveId) => {
