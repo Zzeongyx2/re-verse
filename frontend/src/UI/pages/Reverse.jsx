@@ -1,301 +1,183 @@
 import * as THREE from "three";
-import React, { Suspense, useRef, useState, useEffect } from "react";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { gsap } from "gsap";
-import { TextureLoader } from "three/src/loaders/TextureLoader";
+import React, { Suspense, useRef, useState } from "react";
+import { useEffect } from "react";
+
 import { Canvas, useLoader } from "@react-three/fiber";
+
 import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
-import { Player } from "../organisms/Player";
-import { House } from "../organisms/House";
+// import { OrthographicCamera } from "@react-three/drei";
+import { TextureLoader } from "three/src/loaders/TextureLoader";
+import CatAnimations from "../../assets/players/Cat_Animations.js";
+import { SkyTube } from "../../assets/deco/SkyTube.js";
+import { ObjectTest } from "../../assets/deco/ObjectTest.js";
+import { CampingPack } from "../../assets/deco/CampingPack.js";
+// import { FireAnimated } from "../../assets/deco/FireAnimated.js";
+import { Polaroid } from "../../assets/deco/Polaroid.js";
+import { CartoonCampingKit } from "../../assets/deco/CartoonCampingKit.js";
+import { FireAnimated } from "../../assets/deco/FireAnimated.js";
+import { Notebook } from "../../assets/deco/Notebook.js";
 
-function MyReverse() {
-  const ref = useRef();
+import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
+import TravelWriteModal from "../organisms/TravelWriteModal.jsx";
+import ReverseFooter from "../organisms/ReverseFooter.jsx";
+import { getArchiveDetail } from "../../api/reverse.js";
+import { useLocation } from "react-router-dom";
+import TravelReadModal from "../organisms/TravelReadModal.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { setInfo } from "../../modules/reverse.js";
+
+function Reverse() {
+  const location = useLocation();
+  console.log(location.pathname);
+  console.log(location.pathname.substring(9));
+  const archiveId = location.pathname.substring(9);
+
+  const dispatch = useDispatch();
+  const reverse = useSelector((state) => state.reverse);
+
   useEffect(() => {
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(
-      -(window.innerWidth / window.innerWidth), // left
-      window.innerWidth / window.innerWidth, // right
-      1, // top
-      -1, // bottom
-      -1000, // near
-      1000 // far
-    );
+    getArchiveDetail(archiveId, getArchiveDetailSuccess, getArchiveDetailFail);
+  }, []);
 
-    const cameraPosition = new THREE.Vector3(1, 5, 5);
-    camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
-    camera.zoom = 0.1;
-    camera.updateProjectionMatrix();
-    scene.add(camera);
-
-    // renderer
-    const canvas = ref.current;
-    console.log(canvas);
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-    // light
-    const ambientLight = new THREE.AmbientLight("white", 0.7);
-    scene.add(ambientLight);
-
-    const directionalLight = new THREE.DirectionalLight("white", 0.5);
-    const directionalLightOriginPosition = new THREE.Vector3(1, 1, 1);
-    directionalLight.position.x = directionalLightOriginPosition.x;
-    directionalLight.position.y = directionalLightOriginPosition.y;
-    directionalLight.position.z = directionalLightOriginPosition.z;
-    directionalLight.castShadow = true;
-
-    // mapSize 세팅으로 그림자 퀄리티 설정
-    directionalLight.shadow.mapSize.width = 2048;
-    directionalLight.shadow.mapSize.height = 2048;
-    // 그림자 범위
-    directionalLight.shadow.camera.left = -100;
-    directionalLight.shadow.camera.right = 100;
-    directionalLight.shadow.camera.top = 100;
-    directionalLight.shadow.camera.bottom = -100;
-    directionalLight.shadow.camera.near = -100;
-    directionalLight.shadow.camera.far = 100;
-    scene.add(directionalLight);
-
-    // texture
-    const textureLoader = new THREE.TextureLoader();
-    const floorTexture = textureLoader.load("/textures/grid.png");
-    if (floorTexture) {
-      floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-      floorTexture.repeat.x = 10;
-      floorTexture.repeat.y = 10;
-    }
-    // mesh
-    const meshes = [];
-    const floorMesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(100, 100),
-      new THREE.MeshStandardMaterial({
-        map: floorTexture,
+  const getArchiveDetailSuccess = (res) => {
+    console.log(res);
+    dispatch(
+      setInfo({
+        ...reverse.info,
+        archiveId: archiveId,
+        stuffs: res.data.stuffs,
       })
     );
-    floorMesh.name = "floor";
-    floorMesh.rotation.x = -Math.PI / 2;
-    floorMesh.receiveShadow = true;
-    scene.add(floorMesh);
-    meshes.push(floorMesh);
+  };
 
-    const pointerMesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(1, 1),
-      new THREE.MeshBasicMaterial({
-        color: "crimson",
-        transparent: true,
-        opacity: 0.5,
-      })
-    );
-    pointerMesh.rotation.x = -Math.PI / 2;
-    pointerMesh.position.y = 0.01;
-    pointerMesh.receiveShadow = true;
-    scene.add(pointerMesh);
+  const getArchiveDetailFail = (err) => {
+    console.log(err);
+  };
+  // default action = idle
+  const refCanvas = useRef();
+  const [action, setAction] = useState("Idle_A");
+  // const [characterPosition, setCharacterPosition] = useState();
+  const [destinationPoint, setDestinationPoint] = useState();
+  const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
+  if (floorTexture) {
+    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
+    floorTexture.repeat.x = 10;
+    floorTexture.repeat.y = 10;
+  }
 
-    const spotMesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(3, 3),
-      new THREE.MeshStandardMaterial({
-        color: "yellow",
-        transparent: true,
-        opacity: 0.5,
-      })
-    );
-    spotMesh.position.set(5, 0.005, 5);
-    spotMesh.rotation.x = -Math.PI / 2;
-    spotMesh.receiveShadow = true;
-    scene.add(spotMesh);
+  // orthographic camera
+  const aspect = window.innerWidth / window.innerHeight;
 
-    const gltfLoader = new GLTFLoader();
+  // test object
+  const [visible, setVisible] = useState(false);
+  const handleVisible = (data) => {
+    setVisible(data);
+  };
 
-    const house = new House({
-      gltfLoader,
-      scene,
-      modelSrc: "/textures/house.glb",
-      x: 5,
-      y: -1.3,
-      z: 2,
-    });
+  useEffect(() => {}, []);
 
-    const player = new Player({
-      scene,
-      meshes,
-      gltfLoader,
-      modelSrc: "/assets/animals/GLTF/Animations/Cat_Animations.gltf",
-    });
+  return (
+    <div className="h-screen overflow-hidden relative">
+      <div className="w-full h-[0.15] absolute z-10">
+        <ReverseNavbar />
+      </div>
+      <div className="w-1/4 h-2/5 absolute z-20 bottom-0">
+        <ReverseFooter />
+      </div>
+      <Canvas
+        ref={refCanvas}
+        shadows
+        orthographic
+        dpr={[1, 2]}
+        camera={{
+          // player의 초기 위치: [-30, 0, -30]
+          position: [-29, 5, -25],
+          // position: [1, 5, 5],
+          left: `-${aspect}`,
+          right: `${aspect}`,
+          top: 1,
+          bottom: -1,
+          zoom: 28,
+          near: -1000,
+          far: 1000,
+        }}
+      >
+        {/* // TODO: 컴포넌트 배치할 때에는 키고 하는게 편함 */}
+        <OrbitControls />
+        {/* camera */}
+        {/* perspective; 원근감 o, ortho; 원근감 x */}
+        {/* light */}
+        <directionalLight
+          intensity={0.4}
+          position={[-50, 50, 50]}
+          castShadow
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
+          shadow-camera-near={-100}
+          shadow-camera-far={2000}
+          shadow-camera-left={-2000}
+          shadow-camera-right={2000}
+          shadow-camera-top={2000}
+          shadow-camera-bottom={-2000}
+        />
+        <ambientLight intensity={0.3} />
+        <spotLight intensity={0.5} position={[100, 1000, 100]} />
+        {/* character */}
+        <Suspense fallback={null}>
+          {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
+          <CatAnimations
+            destinationPoint={destinationPoint}
+            handleVisible={handleVisible}
+            // handleEvent={handleEvent}
+          />
 
-    console.log(player);
+          <SkyTube />
+          <ObjectTest visible={visible} />
+          {/* <ObjectTest currentPosition={currentPosition} /> */}
+          <CampingPack />
+          <CartoonCampingKit />
+          <FireAnimated />
 
-    const raycaster = new THREE.Raycaster();
-    let mouse = new THREE.Vector2();
-    let destinationPoint = new THREE.Vector3();
-    let angle = 0;
-    let isPressed = false; // 마우스를 누르고 있는 상태
+          {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
+          <Polaroid />
+          <Notebook />
+          {/* <Polaroid event={event} />
+          <Notebook event={event} /> */}
+          {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
+        </Suspense>
+        {/* floor */}
+        <mesh
+          onPointerDown={(e) => {
+            setDestinationPoint(e.point);
+          }}
+          rotation={[-0.5 * Math.PI, 0, 0]}
+          receiveShadow
+        >
+          <planeBufferGeometry attach="geometry" args={[300, 300]} />
+          <meshStandardMaterial map={floorTexture} />
+        </mesh>
 
-    // 그리기
-    const clock = new THREE.Clock();
-
-    function draw() {
-      const delta = clock.getDelta();
-
-      if (player.mixer) player.mixer.update(delta);
-
-      if (player.modelMesh) {
-        camera.lookAt(player.modelMesh.position);
-      }
-
-      if (player.modelMesh) {
-        if (isPressed) {
-          raycasting();
-        }
-
-        if (player.moving) {
-          // 걸어가는 상태
-          angle = Math.atan2(
-            destinationPoint.z - player.modelMesh.position.z,
-            destinationPoint.x - player.modelMesh.position.x
-          );
-          player.modelMesh.position.x += Math.cos(angle) * 0.05;
-          player.modelMesh.position.z += Math.sin(angle) * 0.05;
-
-          camera.position.x = cameraPosition.x + player.modelMesh.position.x;
-          camera.position.z = cameraPosition.z + player.modelMesh.position.z;
-
-          player.actions[0].stop();
-          player.actions[1].play();
-
-          if (
-            Math.abs(destinationPoint.x - player.modelMesh.position.x) < 0.03 &&
-            Math.abs(destinationPoint.z - player.modelMesh.position.z) < 0.03
-          ) {
-            player.moving = false;
-            console.log("멈춤");
-          }
-
-          if (
-            Math.abs(spotMesh.position.x - player.modelMesh.position.x) < 1.5 &&
-            Math.abs(spotMesh.position.z - player.modelMesh.position.z) < 1.5
-          ) {
-            if (!house.visible) {
-              console.log("나와");
-              house.visible = true;
-              spotMesh.material.color.set("seagreen");
-              gsap.to(house.modelMesh.position, {
-                duration: 1,
-                y: 1,
-                ease: "Bounce.easeOut",
-              });
-              gsap.to(camera.position, {
-                duration: 1,
-                y: 3,
-              });
-            }
-          } else if (house.visible) {
-            console.log("들어가");
-            house.visible = false;
-            spotMesh.material.color.set("yellow");
-            gsap.to(house.modelMesh.position, {
-              duration: 0.5,
-              y: -1.3,
-            });
-            gsap.to(camera.position, {
-              duration: 1,
-              y: 5,
-            });
-          }
-        } else {
-          // 서 있는 상태
-          player.actions[1].stop();
-          player.actions[0].play();
-        }
-      }
-
-      renderer.render(scene, camera);
-      renderer.setAnimationLoop(draw);
-    }
-
-    function checkIntersects() {
-      // raycaster.setFromCamera(mouse, camera);
-
-      const intersects = raycaster.intersectObjects(meshes);
-      console.log("====");
-      console.log(intersects);
-      for (const item of intersects) {
-        if (item.object.name === "floor") {
-          destinationPoint.x = item.point.x;
-          destinationPoint.y = 0.3;
-          destinationPoint.z = item.point.z;
-          player.modelMesh.lookAt(destinationPoint);
-
-          // console.log(item.point)
-
-          player.moving = true;
-
-          pointerMesh.position.x = destinationPoint.x;
-          pointerMesh.position.z = destinationPoint.z;
-        }
-        break;
-      }
-    }
-
-    function setSize() {
-      camera.left = -(window.innerWidth / window.innerHeight);
-      camera.right = window.innerWidth / window.innerHeight;
-      camera.top = 1;
-      camera.bottom = -1;
-
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.render(scene, camera);
-    }
-
-    // 이벤트
-    window.addEventListener("resize", setSize);
-
-    // 마우스 좌표를 three.js에 맞게 변환
-    function calculateMousePosition(e) {
-      mouse.x = (e.clientX / canvas.clientWidth) * 2 - 1;
-      mouse.y = -((e.clientY / canvas.clientHeight) * 2 - 1);
-    }
-
-    // 변환된 마우스 좌표를 이용해 래이캐스팅
-    function raycasting() {
-      raycaster.setFromCamera(mouse, camera);
-      checkIntersects();
-    }
-
-    // 마우스 이벤트
-    canvas.addEventListener("mousedown", (e) => {
-      isPressed = true;
-      calculateMousePosition(e);
-    });
-    canvas.addEventListener("mouseup", () => {
-      isPressed = false;
-    });
-    canvas.addEventListener("mousemove", (e) => {
-      if (isPressed) {
-        calculateMousePosition(e);
-      }
-    });
-
-    // 터치 이벤트
-    canvas.addEventListener("touchstart", (e) => {
-      isPressed = true;
-      calculateMousePosition(e.touches[0]);
-    });
-    canvas.addEventListener("touchend", () => {
-      isPressed = false;
-    });
-    canvas.addEventListener("touchmove", (e) => {
-      if (isPressed) {
-        calculateMousePosition(e.touches[0]);
-      }
-    });
-
-    draw();
-  });
-  return <canvas ref={ref}></canvas>;
+        {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
+        <mesh rotation={[-0.5 * Math.PI, 0, 0]} position={[-30, 0.01, -30]} receiveShadow>
+          <planeBufferGeometry attach="geometry" args={[5, 5]} />
+          <meshBasicMaterial color="black" transparent opacity={0.3} />
+        </mesh>
+      </Canvas>
+      {/* // TODO: travel = 0, anniv = 1, diary = 2 */}
+      {reverse.info.stuffs.length > 0 && (
+        <>
+          <TravelWriteModal
+          // archiveId={reverse.info.archiveId}
+          // stuffId={reverse.info.stuffsId[0]}
+          />
+          <TravelReadModal
+          // archiveId={reverse.info.archiveId}
+          // stuffId={reverse.info.stuffsId[0]}
+          />
+        </>
+      )}
+    </div>
+  );
 }
 
-export default MyReverse;
+export default Reverse;
