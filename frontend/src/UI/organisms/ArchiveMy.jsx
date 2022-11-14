@@ -20,23 +20,15 @@ function ArchiveMy() {
 
   const enterArchive = (archiveId) => {
     console.log(archiveId, "이동");
-    // window.location.href = `/reverse/${archiveId}`;
-    window.location.href = `/reversetemp/${archiveId}`;
+    window.location.href = `/reverse/${archiveId}`;
+    // window.location.href = `/reversetemp/${archiveId}`;
   };
 
   const bookmarkTrigger = async (archive, index) => {
     if (!archive.bookmark) {
-      await postBookmark(
-        archive.archiveId,
-        bookmarkControlSuccess,
-        bookmarkControl,
-      );
+      await postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     } else {
-      await deleteBookmark(
-        archive.archiveId,
-        bookmarkControlSuccess,
-        bookmarkControl,
-      );
+      await deleteBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
     }
     await getList();
   };
@@ -77,11 +69,7 @@ function ArchiveMy() {
                       }}
                       className="w-14 text-extra1"
                     >
-                      {archive.bookmark ? (
-                        <AiFillStar size={18} />
-                      ) : (
-                        <AiOutlineStar size={18} />
-                      )}
+                      {archive.bookmark ? <AiFillStar size={18} /> : <AiOutlineStar size={18} />}
                     </button>
                     {/* 아카이브 이름 */}
                     <p className="text-sm font-bold overflow-hidden text-ellipsis line-clamp-1 md:w-44 sm:w-36">
@@ -116,10 +104,7 @@ function ArchiveMy() {
                         enterArchive(archive.archiveId);
                       }}
                     >
-                      <BiLogIn
-                        size={18}
-                        className="text-white m-0.5 -translate-x-0.5"
-                      />
+                      <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
                     </button>
                     {/* 아카이브 수정 */}
                     <EditArchiveModal archive={archive} />
