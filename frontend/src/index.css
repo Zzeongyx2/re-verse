@@ -45,6 +45,23 @@
   }
 }
 
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #b2c8df;
+    border-radius: 100vh;
+    border: 1px solid #f6f7ed;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #709fb0;
+  }
+}
+
 html,
 body,
 main {

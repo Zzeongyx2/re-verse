@@ -38,25 +38,30 @@
 }
 
 #chat .message {
-  padding: 20px;
+  padding-left: 4px;
   color: #fff;
-  line-height: 25px;
+  text-shadow: 1px 1px 2px #1587f1;
+  /* line-height: 25px; */
   /* max-width:90%; */
   display: inline-block;
   text-align: left;
   border-radius: 5px;
+  font-size: 14px;
+}
+#chat .others-message {
+  padding-left: 4px;
+  color: #fff;
+  text-shadow: 1px 1px 2px #757575;
+  /* line-height: 25px; */
+  /* max-width:90%; */
+  display: inline-block;
+  text-align: left;
+  border-radius: 5px;
+  font-size: 14px;
 }
 
 #chat .me {
-  text-align: right;
-}
-
-#chat .you .message {
-  background-color: #58b666;
-}
-
-#chat .me .message {
-  background-color: #6fbced;
+  text-align: left;
 }
 
 #chat .triangle {
@@ -74,4 +79,14 @@
 #chat .me .triangle {
   border-color: transparent transparent #6fbced transparent;
   /* margin-left:375px; */
+}
+
+#my-name {
+  color: #fff;
+  text-shadow: 1px 1px 2px #1587f1;
+}
+
+#others-name {
+  color: #fff;
+  text-shadow: 1px 1px 2px #757575;
 }

@@ -28,6 +28,8 @@ import { setInfo } from "../../modules/reverse.js";
 import { Vector3 } from "three";
 import DogAnimations from "../../assets/players/Dog_Animations.js";
 
+import { IoIosSend } from "react-icons/io";
+
 var channels = [];
 var channelUsers = new Map();
 var friendToName = new Map();
@@ -40,7 +42,9 @@ let audioMapIdx = 0;
 function Reverse() {
   // default action = idle
   // const [characterPosition, setCharacterPosition] = useState();
-  const [destinationPoint, setDestinationPoint] = useState(new Vector3(-30, 0, -30));
+  const [destinationPoint, setDestinationPoint] = useState(
+    new Vector3(-30, 0, -30)
+  );
   const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
   if (floorTexture) {
@@ -268,7 +272,9 @@ function Reverse() {
           let peer1 = rtcPeers.get(data1.userId);
 
           if (peer1) {
-            peer1.addIceCandidate(new RTCIceCandidate(data2)).catch((error) => {});
+            peer1
+              .addIceCandidate(new RTCIceCandidate(data2))
+              .catch((error) => {});
           }
         }
       } else if (data1.type === "Answer") {
@@ -308,7 +314,9 @@ function Reverse() {
     setRtcPeers2(rtcPeers2);
 
     if (data1.type === "NewMember") {
-      let channel1 = rtcPeer.createDataChannel(Math.floor(Math.random() * 10000000000));
+      let channel1 = rtcPeer.createDataChannel(
+        Math.floor(Math.random() * 10000000000)
+      );
       channelConfig(channel1);
 
       //create offer
@@ -494,28 +502,34 @@ function Reverse() {
   }
   function addChatLine(data1, listClass, pengirim) {
     let list = document.createElement("li");
-    list.className = listClass;
+    // list.className = listClass;
+    list.className = "flex my-0.5";
     let entete = document.createElement("div");
     entete.className = "entete";
     let span1 = document.createElement("span");
     let h2 = document.createElement("h2");
-    let h3 = document.createElement("h3");
+    // let h3 = document.createElement("h3");
     h2.innerText = pengirim;
-    h2.className = "m-2";
-    h3.innerText = new Date().toLocaleTimeString();
-    entete.appendChild(h3);
+    if (h2.innerText === "나 : ") {
+      h2.id = "my-name";
+    } else {
+      h2.id = "others-name";
+    }
+    h2.className = "mt-0.5 text-sm font-semibold whitespace-nowrap";
+    // h3.innerText = new Date().toLocaleTimeString();
     entete.appendChild(h2);
+    // entete.appendChild(h3);
 
-    let triangle = document.createElement("div");
-    triangle.className = "triangle";
+    // let triangle = document.createElement("div");
+    // triangle.className = "triangle";
     let message = document.createElement("message");
     message.className = "message";
     message.innerHTML = data1;
     list.appendChild(entete);
-    if (listClass === "you") {
-      list.appendChild(triangle);
-    }
     list.appendChild(message);
+    if (listClass === "you") {
+      message.className = "others-message";
+    }
 
     let chatWindow = document.getElementById("chat");
     chatWindow.appendChild(list);
@@ -540,7 +554,7 @@ function Reverse() {
     console.log("here is sendchat");
     channels.forEach((a) => {
       let dataToSend = document.getElementById("toSend").value;
-      channelData.userId = loginUser.nickname;
+      channelData.userId = `${loginUser.nickname} : `;
       channelData.type = "message";
       channelData.data = dataToSend;
       //console.lo("Send chat:" + JSON.stringify(channelData));
@@ -548,7 +562,8 @@ function Reverse() {
         a.send(JSON.stringify(channelData));
       }
     });
-    addChatLine(document.getElementById("toSend").value, "me", "Me");
+    addChatLine(document.getElementById("toSend").value, "me", "나 : ");
+    // if (channelData.data.length > 0)
     document.getElementById("toSend").value = "";
   }
 
@@ -650,6 +665,14 @@ function Reverse() {
   //   setVisible(data);
   // };
 
+  const [checkNull, setCheckNull] = useState("");
+  console.log(checkNull.length);
+  console.log("kfjlaijfliaejflj");
+  const handleCheckNull = (e) => {
+    setCheckNull(e.target.value);
+    console.log(checkNull);
+  };
+
   return (
     <div className="h-screen overflow-hidden relative">
       <audio id="myAudio" autoPlay hidden muted controls></audio>
@@ -664,47 +687,55 @@ function Reverse() {
       </div> */}
 
       {/* chatting */}
-      <div className="w-1/4 h-2/5 absolute z-20 bottom-0">
-        <ul id="chat" className="h-[80%] border overflow-y-scroll">
-          {/* <li className="you">
-                  <div className="entete">
-                    <span className="status green"></span>
-                    <h2>Vincent</h2>
-                    <h3>10:12AM, Today</h3>
-                  </div>
-                  <div className="triangle"></div>
-                  <div className="message">
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                  </div>
-                </li> */}
-          {/* <li className="me">
-                  <div className="entete">
-                    <h3 >10:12AM, Today</h3>
-                    <h2 className='m-2'>Vincent</h2>
-                    
-                  </div>
-                  <div className="triangle"></div>
-                  <div className="message">
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                  </div>
-                </li> */}
-        </ul>
-        <main className="h-[10%]">
-          <footer>
-            <textarea placeholder="Type your message" id="toSend"></textarea>
-            <button id="btnSend" onClick={() => sendChat()}>
-              Send
-            </button>
-            <br />
-            <br />
-            <div className="col-md-12 text-center bg-black text-white">
-              <p>
-                Copyright ©<script>document.write(new Date().getFullYear());</script>
-                2022 Rizky Satrio All rights reserved
-              </p>
+      <div className="w-1/4 h-2/5 min-w-[240px] absolute z-20 bottom-0 ml-4">
+        <div
+          id="chat"
+          className="h-4/5 bg-base1/10 p-1.5 rounded-md overflow-y-scroll scrollbar list-none"
+        ></div>
+        {checkNull.length ? (
+          <div className="flex justify-between items-center border rounded-md bg-white mt-1 px-0.5">
+            <input
+              id="toSend"
+              type="text"
+              className="text-sm placeholder:text-sm px-2 w-5/6 py-1.5 focus:outline-none"
+              placeholder="메세지를 입력해 보세요"
+              onChange={handleCheckNull}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  sendChat();
+                  setCheckNull("");
+                }
+              }}
+            />
+
+            <div
+              id="btnSend"
+              className="w-1/6 cursor-pointer mr-1 flex justify-center font-semibold text-basic3 hover:text-extra3 pb-0.5"
+              onClick={() => {
+                sendChat();
+                setCheckNull("");
+              }}
+            >
+              send
             </div>
-          </footer>
-        </main>
+          </div>
+        ) : (
+          <div className="flex justify-between items-center border rounded-md bg-white mt-1 px-0.5">
+            <input
+              id="toSend"
+              type="text"
+              className="text-sm placeholder:text-sm px-2 w-5/6 py-1.5 focus:outline-none"
+              placeholder="메세지를 입력해 보세요"
+              onChange={handleCheckNull}
+            />
+            <div
+              id="btnSend"
+              className="w-1/6 cursor-pointer mr-1 flex justify-center font-semibold text-basic3 hover:text-extra3 pb-0.5"
+            >
+              send
+            </div>{" "}
+          </div>
+        )}
       </div>
       {/* chatting */}
 
@@ -801,7 +832,11 @@ function Reverse() {
         </mesh>
 
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
-        <mesh rotation={[-0.5 * Math.PI, 0, 0]} position={[-30, 0.01, -30]} receiveShadow>
+        <mesh
+          rotation={[-0.5 * Math.PI, 0, 0]}
+          position={[-30, 0.01, -30]}
+          receiveShadow
+        >
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
           <meshBasicMaterial color="black" transparent opacity={0.3} />
         </mesh>
