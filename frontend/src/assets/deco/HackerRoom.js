@@ -12,7 +12,7 @@ import { useGLTF } from "@react-three/drei";
 export function HackerRoom(props) {
   const { nodes, materials } = useGLTF("/assets/hacker_room/scene.gltf");
   return (
-    <group {...props} dispose={null} scale={5} position={[-120, 0, -120]}>
+    <group {...props} dispose={null} scale={4} position={[-120, 0, -120]}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group position={[0, 0.34, 0]}>

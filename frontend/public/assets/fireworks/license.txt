@@ -1,0 +1,8 @@
+Model Information:
+* title:	Fireworks
+* source:	https://sketchfab.com/3d-models/fireworks-1be81e40ce1e4658a1fba6d59ae53af1
+* author:	Zacxophone (https://sketchfab.com/Zacxophone)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
