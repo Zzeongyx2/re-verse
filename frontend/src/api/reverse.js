@@ -26,9 +26,9 @@ async function postPaper(archiveId, stuffId, reverseReq, success, fail) {
 // async function postPaper()
 
 // 글 하나 수정
-async function editPaper(archiveId, stuffId, success, fail) {
+async function editPaper(archiveId, stuffId, paperId, editReq, success, fail) {
   await api
-    .patch(`/archive/${archiveId}/stuff/${stuffId}/paper`)
+    .patch(`/archive/${archiveId}/stuff/${stuffId}/paper/${paperId}`, editReq)
     .then(success)
     .catch(fail);
 }
