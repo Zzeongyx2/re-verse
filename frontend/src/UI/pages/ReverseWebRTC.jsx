@@ -23,6 +23,7 @@ import { Vector3 } from "three";
 import { data } from "autoprefixer";
 import { useSelector, useDispatch } from "react-redux";
 import webrtc from "../../modules/webrtc";
+import { Physics } from "@react-three/cannon";
 var channels = [];
 var channelUsers = new Map();
 var friendToName = new Map();
@@ -166,7 +167,7 @@ function ReverseWebRTC() {
           audioSet[i].muted = true;
         }
       }
-      console.log(audioSet)
+      console.log(audioSet);
     }
   }, [webrtcRedux.headCheck]);
   async function login() {
@@ -760,32 +761,34 @@ function ReverseWebRTC() {
         {/* character */}
         <Suspense fallback={null}>
           {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
-          {others.map((other, idx) => {
-            console.log(other);
-            console.log(others);
-            // console.log(idx);
-            console.log(otherCharacterMap);
-            // console.log(otherCharacterMap[other]);
-            return (
-              <DogAnimations
-                key={idx}
-                // action={action}
-                destinationPoint={otherCharacterMap.get(other)}
-                // isPressed={isPressed}
-                handleVisible={handleVisible}
-                userName={other}
-                // handleCurrentPosition={handleCurrentPosition}
-              />
-            );
-          })}
+          <Physics>
+            {others.map((other, idx) => {
+              console.log(other);
+              console.log(others);
+              // console.log(idx);
+              console.log(otherCharacterMap);
+              // console.log(otherCharacterMap[other]);
+              return (
+                <DogAnimations
+                  key={idx}
+                  // action={action}
+                  destinationPoint={otherCharacterMap.get(other)}
+                  // isPressed={isPressed}
+                  handleVisible={handleVisible}
+                  userName={other}
+                  // handleCurrentPosition={handleCurrentPosition}
+                />
+              );
+            })}
+            <CatAnimations
+              // action={action}
+              destinationPoint={destinationPoint}
+              // isPressed={isPressed}
+              handleVisible={handleVisible}
+              // handleCurrentPosition={handleCurrentPosition}
+            />
+          </Physics>
 
-          <CatAnimations
-            // action={action}
-            destinationPoint={destinationPoint}
-            // isPressed={isPressed}
-            handleVisible={handleVisible}
-            // handleCurrentPosition={handleCurrentPosition}
-          />
           <SkyTube />
           {/* <ObjectTest visible={visible} /> */}
           {/* <ObjectTest currentPosition={currentPosition} /> */}

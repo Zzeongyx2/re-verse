@@ -7,6 +7,7 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import GLTFLoader from "gltfjsx/src/utils/glftLoader";
 import { useFrame, useGraph } from "@react-three/fiber";
 import { Vector3 } from "three";
+import { useBox } from "@react-three/cannon";
 import * as SkeletonUtils from "three/examples/jsm/utils/SkeletonUtils";
 export default function DogAnimations({
   action,
@@ -28,6 +29,18 @@ export default function DogAnimations({
   const [moving, setMoving] = useState(false);
   const moveRef = useRef(moving);
   let angle = 0;
+  const Box = () => {
+    const [BoxRef] = useBox(() => ({
+      mass: 1,
+      position: new Vector3(destinationPoint.x, 0, destinationPoint.z),
+    }));
+    return (
+      <mesh ref={BoxRef}>
+        <boxGeometry args={[1, 5, 5]} />
+        <meshStandardMaterial roughness={0} color="pink" />
+      </mesh>
+    );
+  };
 
   // 이벤트 발생할 오브젝트의 좌표
   const objectPosition = new THREE.Vector3(-20, 0.01, 3);
@@ -59,7 +72,7 @@ export default function DogAnimations({
         new Vector3(destinationPoint.x, 0, destinationPoint.z)
       );
       group.current.name = userName;
-      console.log(group.current.name)
+      console.log(group.current.name);
       // console.log(group.current);
     }
   }, [destinationPoint]);
@@ -131,7 +144,7 @@ export default function DogAnimations({
   return (
     // <group ref={group} dispose={null}>
     <group ref={group} position={initPosition}>
-      <group>
+      <group ref={Box}>
         <group>
           <primitive object={nodes.root} />
           <skinnedMesh
