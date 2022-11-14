@@ -117,6 +117,7 @@ function Reverse() {
   useEffect(() => {
     // console.log(destRef.current);
     destRef.current = destinationPoint;
+    console.log(destRef.current);
     // console.log(destRef.current);
     // console.log(destinationPoint);
   }, [destinationPoint]);
@@ -169,6 +170,10 @@ function Reverse() {
       console.log(localStream.getAudioTracks());
     }
   }, [webrtcRedux.micCheck]);
+
+  const audioChristmas = require("../../assets/bgm/Ikson - Christmas.wav");
+  const audioTravel = require("../../assets/bgm/세계인-아스라이.mp3");
+  const audioDiary = require("../../assets/bgm/Japan by uniq.mp3");
   useEffect(() => {
     const audioSet = document.getElementById("user-audio").childNodes;
     if (audioSet) {
@@ -184,6 +189,20 @@ function Reverse() {
       console.log(audioSet);
     }
   }, [webrtcRedux.headCheck]);
+
+  useEffect(() => {
+    const bgmChristmas = document.getElementById("bgm-christmas");
+    const bgmTravel = document.getElementById("bgm-travel");
+    const bgmDiary = document.getElementById("bgm-diary");
+    const bgm = bgmDiary;
+    console.log(bgmChristmas);
+    bgm.volume = 0.01;
+    if (webrtcRedux.bgmCheck) {
+      bgm.muted = false;
+    } else {
+      bgm.muted = true;
+    }
+  }, [webrtcRedux.bgmCheck]);
   // ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
   async function login() {
     await navigator.mediaDevices
@@ -626,8 +645,8 @@ function Reverse() {
 
   //ddddddddddddddddddddddddddddddd
   const location = useLocation();
-  console.log(location.pathname);
-  console.log(location.pathname.substring(9));
+  // console.log(location.pathname);
+  // console.log(location.pathname.substring(9));
   const archiveId = location.pathname.substring(9);
   const loginUser = useSelector((state) => state.user.loginUser);
 
@@ -639,7 +658,7 @@ function Reverse() {
   }, []);
 
   const getArchiveDetailSuccess = (res) => {
-    console.log(res);
+    // console.log(res);
     dispatch(
       setInfo({
         ...reverse.info,
@@ -650,18 +669,18 @@ function Reverse() {
   };
 
   const getArchiveDetailFail = (err) => {
-    console.log(err);
+    // console.log(err);
   };
 
   const refCanvas = useRef();
 
   // 채팅 메세지 아무것도 없는 경우 못보내게
   const [checkNull, setCheckNull] = useState("");
-  console.log(checkNull.length);
-  console.log("kfjlaijfliaejflj");
+  // console.log(checkNull.length);
+  // console.log("kfjlaijfliaejflj");
   const handleCheckNull = (e) => {
     setCheckNull(e.target.value);
-    console.log(checkNull);
+    // console.log(checkNull);
   };
 
   return (
@@ -671,7 +690,7 @@ function Reverse() {
         <ul id="user-audio"></ul>
       </div>
       <div className="w-full h-[0.15] absolute z-10">
-        <ReverseNavbar />
+        <ReverseNavbar destinationPoint={destinationPoint} />
       </div>
       {/* <div className="w-1/4 h-2/5 absolute z-20 bottom-0">
         <ReverseFooter />
@@ -730,6 +749,18 @@ function Reverse() {
       </div>
       {/* chatting */}
 
+      <audio id="bgm-christmas" autoPlay controls loop hidden muted>
+        <source src={audioChristmas}></source>
+        does it not work?
+      </audio>
+      <audio id="bgm-travel" autoPlay controls muted loop hidden>
+        <source src={audioTravel}></source>
+        does it not work?
+      </audio>
+      <audio id="bgm-diary" autoPlay controls muted loop hidden>
+        <source src={audioDiary}></source>
+        does it not work?
+      </audio>
       <Canvas
         ref={refCanvas}
         shadows
@@ -773,9 +804,9 @@ function Reverse() {
           {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
 
           {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-          {/* {others.map((other, idx) => {
-            console.log(other);
-            console.log(others);
+          {others.map((other, idx) => {
+            // console.log(other);
+            // console.log(others);
             // console.log(idx);
             console.log(otherCharacterMap);
             // console.log(otherCharacterMap[other]);
@@ -795,7 +826,7 @@ function Reverse() {
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
             // handleEvent={handleEvent}
-          /> */}
+          />
 
           <ObjectTest visible={visible} />
           {/* <ObjectTest currentPosition={currentPosition} /> */}
