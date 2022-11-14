@@ -113,7 +113,13 @@ function ReverseSettingModal() {
                   <BsMusicNoteBeamed size={24} />
                   <p className="text-sm">배경음악</p>
                 </FormLabel>
-                <Switch id="bgm" />
+                <Switch
+                  id="bgm"
+                  isChecked={webrtcRedux.bgmCheck}
+                  onChange={() => {
+                    dispatch(setMicCheck(!webrtcRedux.micCheck));
+                  }}
+                />
               </FormControl>
             </div>
           </ModalBody>
