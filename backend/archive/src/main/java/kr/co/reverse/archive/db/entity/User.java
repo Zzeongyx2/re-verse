@@ -9,8 +9,6 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -33,16 +31,19 @@ public class User {
 
     private String message;
 
+    private String bestArchiveId;
+
     @Enumerated(EnumType.STRING)
     private Avatar avatar;
 
     private LocalDate createdTime;
 
     @Builder
-    public User(String authId, String nickname, String message, Avatar avatar, LocalDate createdTime){
+    public User(String authId, String nickname, String message, String bestArchiveId, Avatar avatar, LocalDate createdTime){
         this.authId = authId;
         this.nickname = nickname;
         this.message = message;
+        this.bestArchiveId = bestArchiveId;
         this.avatar = avatar;
         this.createdTime = createdTime;
     }
