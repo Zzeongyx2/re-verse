@@ -34,6 +34,21 @@ export function CampingPack(props) {
             </group>
           </group>
 
+          <group
+            rotation={[-Math.PI / 2, 0, 0]}
+            scale={[0.02, 0.02, 0.02]}
+            position={[100, 0.01, -110]}
+          >
+            <group>
+              <mesh
+                geometry={nodes["Group002_Material_#11267_0"].geometry}
+                material={materials.Material_11267}
+                castShadow
+                receiveShadow
+              />
+            </group>
+          </group>
+
           {/* tree */}
           <group
             rotation={[-Math.PI / 2, 0, 0]}

@@ -29,6 +29,7 @@ import { Vector3 } from "three";
 import DogAnimations from "../../assets/players/Dog_Animations.js";
 
 import { IoIosSend } from "react-icons/io";
+import { Christmas } from "../../assets/deco/Christmas.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -644,27 +645,10 @@ function Reverse() {
   const getArchiveDetailFail = (err) => {
     console.log(err);
   };
-  // default action = idle
+
   const refCanvas = useRef();
-  const [action, setAction] = useState("Idle_A");
-  // const [characterPosition, setCharacterPosition] = useState();
-  // const [destinationPoint, setDestinationPoint] = useState();
-  // const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
-  // if (floorTexture) {
-  //   floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-  //   floorTexture.repeat.x = 10;
-  //   floorTexture.repeat.y = 10;
-  // }
 
-  // orthographic camera
-  // const aspect = window.innerWidth / window.innerHeight;
-
-  // // test object
-  // const [visible, setVisible] = useState(false);
-  // const handleVisible = (data) => {
-  //   setVisible(data);
-  // };
-
+  // 채팅 메세지 아무것도 없는 경우 못보내게
   const [checkNull, setCheckNull] = useState("");
   console.log(checkNull.length);
   console.log("kfjlaijfliaejflj");
@@ -780,7 +764,9 @@ function Reverse() {
         {/* character */}
         <Suspense fallback={null}>
           {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
-          {others.map((other, idx) => {
+
+          {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
+          {/* {others.map((other, idx) => {
             console.log(other);
             console.log(others);
             // console.log(idx);
@@ -802,14 +788,21 @@ function Reverse() {
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
             // handleEvent={handleEvent}
-          />
+          /> */}
 
           <SkyTube />
           <ObjectTest visible={visible} />
           {/* <ObjectTest currentPosition={currentPosition} /> */}
+
+          {/* travel zone */}
           <CampingPack />
           <CartoonCampingKit />
           <FireAnimated />
+
+          {/* anniv zone */}
+          <Christmas />
+
+          {/* diary zone */}
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
           <Polaroid />
