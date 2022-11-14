@@ -36,6 +36,7 @@ import { IoIosSend } from "react-icons/io";
 import { HackerRoom } from "../../assets/deco/HackerRoom.js";
 import { Fireworks } from "../../assets/deco/Fireworks.js";
 import { Park } from "../../assets/deco/Park.js";
+import { ForestKit } from "../../assets/deco/ForestKit.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -817,6 +818,9 @@ function Reverse() {
           <Fireworks />
           <SkyTube />
           <Park />
+
+          {/* floor */}
+          {/* <ForestKit /> */}
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
           <Polaroid />
