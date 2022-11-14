@@ -22,5 +22,18 @@ async function getAvatars(success, fail) {
 async function editAvatar(avatar, success, fail) {
   await api.patch(`/user/avatar`, { avatar: avatar }).then(success).catch(fail);
 }
+async function editBestArchive(archiveId, success, fail) {
+  await api
+    .patch(`/user/archive`, { archiveId: archiveId })
+    .then(success)
+    .catch(fail);
+}
 
-export { nicknameCheck, getUserInfo, editUserInfo, getAvatars, editAvatar };
+export {
+  nicknameCheck,
+  getUserInfo,
+  editUserInfo,
+  getAvatars,
+  editAvatar,
+  editBestArchive,
+};
