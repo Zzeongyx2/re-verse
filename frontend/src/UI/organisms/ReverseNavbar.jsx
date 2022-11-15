@@ -12,10 +12,8 @@ import { Toast } from "../atoms/Toast";
 
 import ReverseSettingModal from "./ReverseSettingModal";
 import ReverseFriendModal from "./ReverseFriendsModal";
-
-function ReverseNavbar() {
+function ReverseNavbar({ destinationPoint }) {
   const navigate = useNavigate();
-
   return (
     <div className="my-2 mx-4 flex justify-between">
       {/* 리버스 로고 버튼 - 메인 로비로 가기 버튼 & 로그아웃 버튼 모달 */}
@@ -51,7 +49,10 @@ function ReverseNavbar() {
       >
         REVERSE
       </div>
-
+      {/* <audio id="bgm-christmas" autoPlay controls loop hidden>
+        <source src={audioChristmas}></source>
+        does it not work?
+      </audio> */}
       <div>
         {/* 환경설정 버튼 - 음성, 마이크, 배경음악 */}
         <ReverseSettingModal />
