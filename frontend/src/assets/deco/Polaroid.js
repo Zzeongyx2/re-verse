@@ -68,9 +68,9 @@ export function Polaroid({ props, position, event }) {
         ref={travelObject}
         rotation={[-Math.PI / 2, 0, Math.PI / 6]}
         scale={0.05}
-        position={[20, 1.1, -70]}
+        // position={[20, 1.1, -70]}
         // position={[48.5, 0.8, -70]}
-        // position={position}
+        position={position}
       >
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group
