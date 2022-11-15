@@ -33,6 +33,7 @@ const initialState = {
     articleList: [],
     timelines: [],
   },
+  selectStuff: 0,
 };
 
 const reducers = {
@@ -78,6 +79,9 @@ const reducers = {
   setDiary: (state, action) => {
     state.diary = action.payload;
   },
+  setSelectStuff: (state, action) => {
+    state.selectStuff = action.payload;
+  },
 };
 
 export const reverseSlice = createSlice({
@@ -101,6 +105,7 @@ export const {
   setTravel,
   setAnniv,
   setDiary,
+  setSelectStuff,
 } = reverseSlice.actions;
 
 export default reverseSlice.reducer;

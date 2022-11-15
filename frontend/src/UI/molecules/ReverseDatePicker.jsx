@@ -23,7 +23,13 @@ function ReverseDatePicker() {
   const handleEditDate = (e) => {
     setEditDate(e.target.value);
   };
-
+  useEffect(() => {
+    if (!reverse.editBtn) {
+      dispatch(
+        createArticle({ ...reverse.article, memoryDate: `${startDate}` }),
+      );
+    }
+  }, [reverse.travelWriteIsOpen]);
   // useEffect(() => {
   //   dispatch(
   //     createArticle({
@@ -51,7 +57,9 @@ function ReverseDatePicker() {
         selected={startDate}
         onChange={(date) => {
           setStartDate(date);
-          dispatch(createArticle({ ...reverse.article, memoryDate: `${date}` }));
+          dispatch(
+            createArticle({ ...reverse.article, memoryDate: `${date}` }),
+          );
         }}
         customInput={<InputBtn />}
         maxDate={new Date()}
@@ -67,7 +75,7 @@ function ReverseDatePicker() {
               archiveId: reverse.info.archiveId,
               stuffs: reverse.info.stuffs,
               details: { ...reverse.info.details, memoryTime: date },
-            })
+            }),
           );
           // dispatch(
           //   createArticle({ ...reverse.article, memoryDate: `${date}` })
