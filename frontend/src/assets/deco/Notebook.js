@@ -14,7 +14,7 @@ import { useFrame } from "@react-three/fiber";
 import { useSelector, useDispatch } from "react-redux";
 import { setTravelWriteIsOpen } from "../../modules/reverse";
 
-export function Notebook({ props, event }) {
+export function Notebook({ props, event, position }) {
   const { nodes, materials } = useGLTF("/assets/notebook/scene.gltf");
   const travelWriteObject = useRef();
   // console.log("notebook");
@@ -52,7 +52,8 @@ export function Notebook({ props, event }) {
         ref={travelWriteObject}
         rotation={[-Math.PI / 2, 0, -Math.PI / 6]}
         scale={0.05}
-        position={[24, 0.4, -73.5]}
+        // position={[24, 0.4, -73.5]}
+        position={position}
         // position={[46.5, 0.12, -72]}
         onPointerOver={(e) => {
           document.getElementsByTagName("body")[0].style.cursor = "pointer";

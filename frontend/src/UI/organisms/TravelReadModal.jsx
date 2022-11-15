@@ -12,6 +12,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { editPaper, getPaper, getStuffDetail } from "../../api/reverse";
 import {
   createArticle,
+  setAnniv,
+  setDiary,
   setEditBtn,
   setInfo,
   setModalIsOpen,
@@ -47,10 +49,10 @@ function TravelReadModal() {
   const handleGetDetail = async () => {
     await getPaper(
       reverse.info.archiveId,
-      reverse.info.stuffs[0].id,
+      reverse.info.stuffs[reverse.selectStuff].id,
       reverse.info.details.id,
       success,
-      fail
+      fail,
     );
   };
   const success = (res) => {
@@ -68,7 +70,7 @@ function TravelReadModal() {
         archiveId: reverse.info.archiveId,
         stuffs: reverse.info.stuffs,
         details: { ...reverse.info.details, title: editTitle },
-      })
+      }),
     );
   };
 
@@ -79,18 +81,18 @@ function TravelReadModal() {
   const handleEditSubmit = async () => {
     await editPaper(
       reverse.info.archiveId,
-      reverse.info.stuffs[0].id,
+      reverse.info.stuffs[reverse.selectStuff].id,
       reverse.info.details.id,
 
       {
         title: editTitle,
         content: reverse.info.details.content,
         memoryTime: moment(reverse.info.details.memoryTime).format(
-          "yyyy-MM-DD"
+          "yyyy-MM-DD",
         ),
       },
       editSuccess,
-      editFail
+      editFail,
     );
   };
 
@@ -98,15 +100,21 @@ function TravelReadModal() {
     // console.log(res);
     getStuffDetail(
       reverse.info.archiveId,
-      reverse.info.stuffs[0].id,
+      reverse.info.stuffs[reverse.selectStuff].id,
       stuffSuccess,
-      stuffFail
+      stuffFail,
     );
   };
 
   const stuffSuccess = (res) => {
     // console.log(res);
-    dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
+    if (reverse.selectStuff == 0) {
+      dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
+    } else if (reverse.selectStuff == 1) {
+      dispatch(setAnniv({ ...reverse.anniv, articleList: res.data.papers }));
+    } else if (reverse.selectStuff == 2) {
+      dispatch(setDiary({ ...reverse.diary, articleList: res.data.papers }));
+    }
     // dispatch(setInfo({ ...reverse.info, details: null }));
     // console.log(res.data);
   };
@@ -125,12 +133,14 @@ function TravelReadModal() {
   const getDetailSuccess = (res) => {
     // console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     // console.log(res);
-    dispatch(
-      setTravel({
-        ...reverse.travel,
-        articleList: res.data.papers,
-      })
-    );
+    if (reverse.selectStuff == 0) {
+      dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
+    } else if (reverse.selectStuff == 1) {
+      dispatch(setAnniv({ ...reverse.anniv, articleList: res.data.papers }));
+    } else if (reverse.selectStuff == 2) {
+      dispatch(setDiary({ ...reverse.diary, articleList: res.data.papers }));
+    }
+    // dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
   };
   const getDetailFail = (err) => {
     // console.log(err);
@@ -138,11 +148,20 @@ function TravelReadModal() {
   useEffect(() => {
     getStuffDetail(
       reverse.info.archiveId,
-      reverse.info.stuffs[0].id,
+      reverse.info.stuffs[reverse.selectStuff].id,
       getDetailSuccess,
-      getDetailFail
+      getDetailFail,
     );
   }, []);
+  useEffect(() => {
+    getStuffDetail(
+      reverse.info.archiveId,
+      reverse.info.stuffs[reverse.selectStuff].id,
+      getDetailSuccess,
+      getDetailFail,
+    );
+    dispatch(setInfo({ ...reverse.info, details: null }));
+  }, [reverse.selectStuff]);
 
   return (
     <>
