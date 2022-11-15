@@ -196,7 +196,7 @@ function Reverse() {
     const bgmDiary = document.getElementById("bgm-diary");
     const bgm = bgmDiary;
     console.log(bgmChristmas);
-    bgm.volume = 0.01;
+    bgm.volume = 0.1;
     if (webrtcRedux.bgmCheck) {
       bgm.muted = false;
     } else {
