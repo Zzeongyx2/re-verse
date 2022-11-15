@@ -38,6 +38,7 @@ import { HackerRoom } from "../../assets/deco/HackerRoom.js";
 import { Fireworks } from "../../assets/deco/Fireworks.js";
 import { Park } from "../../assets/deco/Park.js";
 import { ForestKit } from "../../assets/deco/ForestKit.js";
+import { ReverseFloor } from "../../assets/deco/ReverseFloor.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -55,7 +56,7 @@ function Reverse() {
     new Vector3(-30, 0, -30)
   );
   const destRef = useRef(destinationPoint);
-  const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
+  const floorTexture = useLoader(TextureLoader, "/textures/map_texture.jpg");
   if (floorTexture) {
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
     floorTexture.repeat.x = 10;
@@ -821,6 +822,7 @@ function Reverse() {
           <Park />
 
           {/* floor */}
+          <ReverseFloor />
           {/* <ForestKit /> */}
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
