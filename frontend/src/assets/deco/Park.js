@@ -19,20 +19,12 @@ export function Park(props) {
     <group {...props} dispose={null} scale={6} position={[65, 0, -10]}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
-          <mesh
-            geometry={nodes.Object_4.geometry}
-            material={materials.Material}
-          />
-          <mesh
-            geometry={nodes.Object_6.geometry}
-            material={materials.Material}
-          />
+          {/* <mesh geometry={nodes.Object_4.geometry} material={materials.Material} />
+          <mesh geometry={nodes.Object_6.geometry} material={materials.Material} />
           <group position={[2.98, 0, -2.98]}>
-            <mesh
-              geometry={nodes.Object_8.geometry}
-              material={materials.Material}
-            />
-          </group>
+            <mesh geometry={nodes.Object_8.geometry} material={materials.Material} />
+          </group> */}
+          {/* 다리 */}
           <group position={[0.25, 0, 0.25]}>
             <mesh
               geometry={nodes.Object_12.geometry}
@@ -47,438 +39,162 @@ export function Park(props) {
               material={materials.Material}
             />
           </group>
-          <group position={[-2.52, 0.18, 2.71]}>
-            <group
-              position={[0, 2.32, -0.58]}
-              rotation={[-0.11, -0.01, 0.02]}
-              scale={1.37}
-            >
-              <mesh
-                geometry={nodes.Object_18.geometry}
-                material={materials.Material}
-              />
+          {/* <group position={[-2.52, 0.18, 2.71]}>
+            <group position={[0, 2.32, -0.58]} rotation={[-0.11, -0.01, 0.02]} scale={1.37}>
+              <mesh geometry={nodes.Object_18.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[-0.24, 2.18, 0.23]}
-              rotation={[-0.18, 0.03, -0.18]}
-            >
-              <mesh
-                geometry={nodes.Object_20.geometry}
-                material={materials.Material}
-              />
+            <group position={[-0.24, 2.18, 0.23]} rotation={[-0.18, 0.03, -0.18]}>
+              <mesh geometry={nodes.Object_20.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[-0.52, 1.62, 0.45]}
-              rotation={[0.02, 0.82, -0.39]}
-              scale={1.24}
-            >
-              <mesh
-                geometry={nodes.Object_22.geometry}
-                material={materials.Material}
-              />
+            <group position={[-0.52, 1.62, 0.45]} rotation={[0.02, 0.82, -0.39]} scale={1.24}>
+              <mesh geometry={nodes.Object_22.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[-0.62, 1.13, 0.64]}
-              rotation={[0.44, -0.67, 0.25]}
-              scale={1.23}
-            >
-              <mesh
-                geometry={nodes.Object_24.geometry}
-                material={materials.Material}
-              />
+            <group position={[-0.62, 1.13, 0.64]} rotation={[0.44, -0.67, 0.25]} scale={1.23}>
+              <mesh geometry={nodes.Object_24.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[0.12, 1.83, -0.73]}
-              rotation={[-0.17, -0.25, -0.06]}
-              scale={1.02}
-            >
-              <mesh
-                geometry={nodes.Object_26.geometry}
-                material={materials.Material}
-              />
+            <group position={[0.12, 1.83, -0.73]} rotation={[-0.17, -0.25, -0.06]} scale={1.02}>
+              <mesh geometry={nodes.Object_26.geometry} material={materials.Material} />
             </group>
             <group position={[0.69, 1.81, 0.42]}>
-              <mesh
-                geometry={nodes.Object_28.geometry}
-                material={materials.Material}
-              />
+              <mesh geometry={nodes.Object_28.geometry} material={materials.Material} />
             </group>
             <group position={[0.72, 1.5, 0.46]}>
-              <mesh
-                geometry={nodes.Object_30.geometry}
-                material={materials.Material}
-              />
+              <mesh geometry={nodes.Object_30.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[-0.47, 1.21, -0.28]}
-              rotation={[0.09, 0.77, 0]}
-              scale={1.08}
-            >
-              <mesh
-                geometry={nodes.Object_32.geometry}
-                material={materials.Material}
-              />
+            <group position={[-0.47, 1.21, -0.28]} rotation={[0.09, 0.77, 0]} scale={1.08}>
+              <mesh geometry={nodes.Object_32.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[0.52, 1.21, -0.36]}
-              rotation={[-0.41, 1.44, 0.24]}
-              scale={1.13}
-            >
-              <mesh
-                geometry={nodes.Object_34.geometry}
-                material={materials.Material}
-              />
+            <group position={[0.52, 1.21, -0.36]} rotation={[-0.41, 1.44, 0.24]} scale={1.13}>
+              <mesh geometry={nodes.Object_34.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[0.46, 2.12, -0.23]}
-              rotation={[0.58, -0.67, 0.02]}
-              scale={1.27}
-            >
-              <mesh
-                geometry={nodes.Object_36.geometry}
-                material={materials.Material}
-              />
+            <group position={[0.46, 2.12, -0.23]} rotation={[0.58, -0.67, 0.02]} scale={1.27}>
+              <mesh geometry={nodes.Object_36.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[0.13, 1.59, 0.69]}
-              rotation={[-0.27, -0.65, 0.19]}
-              scale={1.14}
-            >
-              <mesh
-                geometry={nodes.Object_38.geometry}
-                material={materials.Material}
-              />
+            <group position={[0.13, 1.59, 0.69]} rotation={[-0.27, -0.65, 0.19]} scale={1.14}>
+              <mesh geometry={nodes.Object_38.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[-0.33, 1.81, -0.27]}
-              rotation={[-2.66, -1.33, -1.84]}
-              scale={0.79}
-            >
-              <mesh
-                geometry={nodes.Object_40.geometry}
-                material={materials.Material}
-              />
+            <group position={[-0.33, 1.81, -0.27]} rotation={[-2.66, -1.33, -1.84]} scale={0.79}>
+              <mesh geometry={nodes.Object_40.geometry} material={materials.Material} />
             </group>
-            <mesh
-              geometry={nodes.Object_16.geometry}
-              material={materials.Material}
-            />
+            <mesh geometry={nodes.Object_16.geometry} material={materials.Material} />
           </group>
-          <group
-            position={[-2.52, 0.18, -2.62]}
-            rotation={[-Math.PI, 1.2, -Math.PI]}
-            scale={0.81}
-          >
-            <group
-              position={[0, 2.32, -0.58]}
-              rotation={[-0.11, -0.01, 0.02]}
-              scale={1.37}
-            >
-              <mesh
-                geometry={nodes.Object_44.geometry}
-                material={materials.Material}
-              />
+          <group position={[-2.52, 0.18, -2.62]} rotation={[-Math.PI, 1.2, -Math.PI]} scale={0.81}>
+            <group position={[0, 2.32, -0.58]} rotation={[-0.11, -0.01, 0.02]} scale={1.37}>
+              <mesh geometry={nodes.Object_44.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[-0.24, 2.18, 0.23]}
-              rotation={[-0.18, 0.03, -0.18]}
-            >
-              <mesh
-                geometry={nodes.Object_46.geometry}
-                material={materials.Material}
-              />
+            <group position={[-0.24, 2.18, 0.23]} rotation={[-0.18, 0.03, -0.18]}>
+              <mesh geometry={nodes.Object_46.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[-0.52, 1.62, 0.45]}
-              rotation={[0.02, 0.82, -0.39]}
-              scale={1.24}
-            >
-              <mesh
-                geometry={nodes.Object_48.geometry}
-                material={materials.Material}
-              />
+            <group position={[-0.52, 1.62, 0.45]} rotation={[0.02, 0.82, -0.39]} scale={1.24}>
+              <mesh geometry={nodes.Object_48.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[-0.62, 1.13, 0.64]}
-              rotation={[0.44, -0.67, 0.25]}
-              scale={1.23}
-            >
-              <mesh
-                geometry={nodes.Object_50.geometry}
-                material={materials.Material}
-              />
+            <group position={[-0.62, 1.13, 0.64]} rotation={[0.44, -0.67, 0.25]} scale={1.23}>
+              <mesh geometry={nodes.Object_50.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[0.12, 1.83, -0.73]}
-              rotation={[-0.17, -0.25, -0.06]}
-              scale={1.02}
-            >
-              <mesh
-                geometry={nodes.Object_52.geometry}
-                material={materials.Material}
-              />
+            <group position={[0.12, 1.83, -0.73]} rotation={[-0.17, -0.25, -0.06]} scale={1.02}>
+              <mesh geometry={nodes.Object_52.geometry} material={materials.Material} />
             </group>
             <group position={[0.69, 1.81, 0.42]}>
-              <mesh
-                geometry={nodes.Object_54.geometry}
-                material={materials.Material}
-              />
+              <mesh geometry={nodes.Object_54.geometry} material={materials.Material} />
             </group>
             <group position={[0.72, 1.5, 0.46]}>
-              <mesh
-                geometry={nodes.Object_56.geometry}
-                material={materials.Material}
-              />
+              <mesh geometry={nodes.Object_56.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[-0.47, 1.21, -0.28]}
-              rotation={[0.09, 0.77, 0]}
-              scale={1.08}
-            >
-              <mesh
-                geometry={nodes.Object_58.geometry}
-                material={materials.Material}
-              />
+            <group position={[-0.47, 1.21, -0.28]} rotation={[0.09, 0.77, 0]} scale={1.08}>
+              <mesh geometry={nodes.Object_58.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[0.52, 1.21, -0.36]}
-              rotation={[-0.41, 1.44, 0.24]}
-              scale={1.13}
-            >
-              <mesh
-                geometry={nodes.Object_60.geometry}
-                material={materials.Material}
-              />
+            <group position={[0.52, 1.21, -0.36]} rotation={[-0.41, 1.44, 0.24]} scale={1.13}>
+              <mesh geometry={nodes.Object_60.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[0.46, 2.12, -0.23]}
-              rotation={[0.58, -0.67, 0.02]}
-              scale={1.44}
-            >
-              <mesh
-                geometry={nodes.Object_62.geometry}
-                material={materials.Material}
-              />
+            <group position={[0.46, 2.12, -0.23]} rotation={[0.58, -0.67, 0.02]} scale={1.44}>
+              <mesh geometry={nodes.Object_62.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[0.13, 1.59, 0.69]}
-              rotation={[-0.27, -0.65, 0.19]}
-              scale={1.14}
-            >
-              <mesh
-                geometry={nodes.Object_64.geometry}
-                material={materials.Material}
-              />
+            <group position={[0.13, 1.59, 0.69]} rotation={[-0.27, -0.65, 0.19]} scale={1.14}>
+              <mesh geometry={nodes.Object_64.geometry} material={materials.Material} />
             </group>
-            <group
-              position={[-0.33, 1.81, -0.27]}
-              rotation={[-2.66, -1.33, -1.84]}
-              scale={0.79}
-            >
-              <mesh
-                geometry={nodes.Object_66.geometry}
-                material={materials.Material}
-              />
+            <group position={[-0.33, 1.81, -0.27]} rotation={[-2.66, -1.33, -1.84]} scale={0.79}>
+              <mesh geometry={nodes.Object_66.geometry} material={materials.Material} />
             </group>
-            <mesh
-              geometry={nodes.Object_42.geometry}
-              material={materials.Material}
-            />
+            <mesh geometry={nodes.Object_42.geometry} material={materials.Material} />
           </group>
           <group position={[2.55, 0.18, 2.5]} scale={0.8}>
-            <mesh
-              geometry={nodes.Object_70.geometry}
-              material={materials.Material}
-            />
-            <mesh
-              geometry={nodes.Object_72.geometry}
-              material={materials.Material}
-            />
-            <mesh
-              geometry={nodes.Object_68.geometry}
-              material={materials.Material}
-            />
+            <mesh geometry={nodes.Object_70.geometry} material={materials.Material} />
+            <mesh geometry={nodes.Object_72.geometry} material={materials.Material} />
+            <mesh geometry={nodes.Object_68.geometry} material={materials.Material} />
           </group>
           <group position={[3.62, 0.18, 3.59]}>
-            <mesh
-              geometry={nodes.Object_74.geometry}
-              material={materials.Material}
-            />
+            <mesh geometry={nodes.Object_74.geometry} material={materials.Material} />
           </group>
-          <group
-            position={[1.45, 0.18, 2.93]}
-            rotation={[0, -0.7, 0]}
-            scale={1.14}
-          >
-            <mesh
-              geometry={nodes.Object_76.geometry}
-              material={materials.Material}
-            />
+          <group position={[1.45, 0.18, 2.93]} rotation={[0, -0.7, 0]} scale={1.14}>
+            <mesh geometry={nodes.Object_76.geometry} material={materials.Material} />
           </group>
-          <group
-            position={[3.74, 0.18, 1.17]}
-            rotation={[0, 0.88, 0]}
-            scale={0.88}
-          >
-            <mesh
-              geometry={nodes.Object_78.geometry}
-              material={materials.Material}
-            />
+          <group position={[3.74, 0.18, 1.17]} rotation={[0, 0.88, 0]} scale={0.88}>
+            <mesh geometry={nodes.Object_78.geometry} material={materials.Material} />
           </group>
-          <group
-            position={[-2.05, 0.18, 3.13]}
-            rotation={[0, 1.38, 0]}
-            scale={1.35}
-          >
-            <mesh
-              geometry={nodes.Object_80.geometry}
-              material={materials.Material}
-            />
+          <group position={[-2.05, 0.18, 3.13]} rotation={[0, 1.38, 0]} scale={1.35}>
+            <mesh geometry={nodes.Object_80.geometry} material={materials.Material} />
           </group>
-          <group
-            position={[-1.89, 0.2, 2.85]}
-            rotation={[0, 1.38, 0]}
-            scale={1.26}
-          >
-            <mesh
-              geometry={nodes.Object_82.geometry}
-              material={materials.Material}
-            />
+          <group position={[-1.89, 0.2, 2.85]} rotation={[0, 1.38, 0]} scale={1.26}>
+            <mesh geometry={nodes.Object_82.geometry} material={materials.Material} />
           </group>
-          <group
-            position={[-3.11, 0.2, 3.27]}
-            rotation={[0, 1.31, 0]}
-            scale={1.26}
-          >
-            <mesh
-              geometry={nodes.Object_84.geometry}
-              material={materials.Material}
-            />
+          <group position={[-3.11, 0.2, 3.27]} rotation={[0, 1.31, 0]} scale={1.26}>
+            <mesh geometry={nodes.Object_84.geometry} material={materials.Material} />
           </group>
-          <group
-            position={[-2.99, 0.2, -2.14]}
-            rotation={[0, 0.69, 0]}
-            scale={1.26}
-          >
-            <mesh
-              geometry={nodes.Object_86.geometry}
-              material={materials.Material}
-            />
+          <group position={[-2.99, 0.2, -2.14]} rotation={[0, 0.69, 0]} scale={1.26}>
+            <mesh geometry={nodes.Object_86.geometry} material={materials.Material} />
           </group>
-          <group
-            position={[-2.07, 0.2, -2.61]}
-            rotation={[0, -0.29, 0]}
-            scale={1.49}
-          >
-            <mesh
-              geometry={nodes.Object_88.geometry}
-              material={materials.Material}
-            />
+          <group position={[-2.07, 0.2, -2.61]} rotation={[0, -0.29, 0]} scale={1.49}>
+            <mesh geometry={nodes.Object_88.geometry} material={materials.Material} />
           </group>
-          <group
-            position={[-2.51, 0.2, -2.17]}
-            rotation={[0, -0.69, 0]}
-            scale={1.49}
-          >
-            <mesh
-              geometry={nodes.Object_90.geometry}
-              material={materials.Material}
-            />
+          <group position={[-2.51, 0.2, -2.17]} rotation={[0, -0.69, 0]} scale={1.49}>
+            <mesh geometry={nodes.Object_90.geometry} material={materials.Material} />
           </group>
-          <group
-            position={[1.68, 0.2, -3.25]}
-            rotation={[0, -0.69, 0]}
-            scale={1.29}
-          >
-            <mesh
-              geometry={nodes.Object_92.geometry}
-              material={materials.Material}
-            />
+          <group position={[1.68, 0.2, -3.25]} rotation={[0, -0.69, 0]} scale={1.29}>
+            <mesh geometry={nodes.Object_92.geometry} material={materials.Material} />
           </group>
-          <group
-            position={[2.7, 0.2, -1.8]}
-            rotation={[0, -0.69, 0]}
-            scale={1.29}
-          >
-            <mesh
-              geometry={nodes.Object_94.geometry}
-              material={materials.Material}
-            />
+          <group position={[2.7, 0.2, -1.8]} rotation={[0, -0.69, 0]} scale={1.29}>
+            <mesh geometry={nodes.Object_94.geometry} material={materials.Material} />
           </group>
           <group position={[-1.95, 0.18, 1.75]}>
-            <mesh
-              geometry={nodes.Object_96.geometry}
-              material={materials.Material}
-            />
+            <mesh geometry={nodes.Object_96.geometry} material={materials.Material} />
           </group>
           <group position={[-1.34, 0.1, 2.57]} rotation={[0, 1.22, 0]}>
-            <mesh
-              geometry={nodes.Object_98.geometry}
-              material={materials.Material}
-            />
+            <mesh geometry={nodes.Object_98.geometry} material={materials.Material} />
           </group>
           <group position={[2.11, 0.22, -1.79]} rotation={[0, -0.09, 0]}>
-            <mesh
-              geometry={nodes.Object_100.geometry}
-              material={materials.Material}
-            />
+            <mesh geometry={nodes.Object_100.geometry} material={materials.Material} />
           </group>
           <group position={[1.42, -0.43, -0.37]} rotation={[0, -1.22, 0]}>
-            <mesh
-              geometry={nodes.Object_102.geometry}
-              material={materials.Material}
-            />
+            <mesh geometry={nodes.Object_102.geometry} material={materials.Material} />
           </group>
           <group position={[1.42, -0.43, 0.83]} rotation={[0, -0.31, 0]}>
-            <mesh
-              geometry={nodes.Object_104.geometry}
-              material={materials.Material}
-            />
+            <mesh geometry={nodes.Object_104.geometry} material={materials.Material} />
           </group>
           <group position={[2.85, -0.49, -0.64]} rotation={[0, -0.05, 0]}>
-            <mesh
-              geometry={nodes.Object_106.geometry}
-              material={materials.Material}
-            />
+            <mesh geometry={nodes.Object_106.geometry} material={materials.Material} />
           </group>
-          <group
-            position={[3.19, 0.4, -3.08]}
-            rotation={[0, -0.09, 0]}
-            scale={1.27}
-          >
-            <mesh
-              geometry={nodes.Object_108.geometry}
-              material={materials.Material}
-            />
+          <group position={[3.19, 0.4, -3.08]} rotation={[0, -0.09, 0]} scale={1.27}>
+            <mesh geometry={nodes.Object_108.geometry} material={materials.Material} />
           </group>
           <group position={[2.75, 0.18, 1.39]}>
-            <mesh
-              geometry={nodes.Object_110.geometry}
-              material={materials.MaterialMetal}
-            />
-            <mesh
-              geometry={nodes.Object_111.geometry}
-              material={materials.MaterialEM}
-            />
+            <mesh geometry={nodes.Object_110.geometry} material={materials.MaterialMetal} />
+            <mesh geometry={nodes.Object_111.geometry} material={materials.MaterialEM} />
           </group>
           <group position={[-1.55, 0.18, -3.26]}>
-            <mesh
-              geometry={nodes.Object_113.geometry}
-              material={materials.MaterialMetal}
-            />
-            <mesh
-              geometry={nodes.Object_114.geometry}
-              material={materials.MaterialEM}
-            />
-          </group>
+            <mesh geometry={nodes.Object_113.geometry} material={materials.MaterialMetal} />
+            <mesh geometry={nodes.Object_114.geometry} material={materials.MaterialEM} />
+          </group> */}
+          {/* 다리바닥 */}
           <mesh
             geometry={nodes.Object_116.geometry}
             material={materials.Material}
           />
+          {/* 다리 밑 물 */}
           <mesh
             geometry={nodes.Object_118.geometry}
             material={materials.MaterialRough}
           />
+          {/* 장식 돌 */}
           <group position={[-0.16, 0, 2.13]}>
             <mesh
               geometry={nodes.Object_120.geometry}
