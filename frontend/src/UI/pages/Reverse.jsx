@@ -10,6 +10,7 @@ import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 // import { OrthographicCamera } from "@react-three/drei";
 
 import { TextureLoader } from "three/src/loaders/TextureLoader";
+
 import { getArchiveDetail } from "../../api/reverse.js";
 
 import { setInfo } from "../../modules/reverse.js";
