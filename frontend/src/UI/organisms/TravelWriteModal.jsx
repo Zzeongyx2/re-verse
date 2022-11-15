@@ -12,6 +12,8 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   createArticle,
+  setAnniv,
+  setDiary,
   setTravel,
   setTravelWriteIsOpen,
 } from "../../modules/reverse";
@@ -37,29 +39,36 @@ function TravelWriteModal() {
   const handlePostPaper = async () => {
     await postPaper(
       reverse.info.archiveId,
-      reverse.info.stuffs[0].id,
+      reverse.info.stuffs[reverse.selectStuff].id,
       {
         title: title,
         content: reverse.article.content,
         memoryTime: moment(reverse.article.memoryDate).format("yyyy-MM-DD"),
       },
       success,
-      fail
+      fail,
     );
   };
   const success = (res) => {
     console.log(res);
     getStuffDetail(
       reverse.info.archiveId,
-      reverse.info.stuffs[0].id,
+      reverse.info.stuffs[reverse.selectStuff].id,
       stuffSuccess,
-      stuffFail
+      stuffFail,
     );
   };
 
   const stuffSuccess = (res) => {
     console.log(res);
-    dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
+    if (reverse.selectStuff == 0) {
+      dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
+    } else if (reverse.selectStuff == 1) {
+      dispatch(setAnniv({ ...reverse.anniv, articleList: res.data.papers }));
+    } else if (reverse.selectStuff == 2) {
+      dispatch(setDiary({ ...reverse.diary, articleList: res.data.papers }));
+    }
+    // dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
     // dispatch(setInfo({ ...reverse.info, details: null }));
     // console.log(res.data);
   };
