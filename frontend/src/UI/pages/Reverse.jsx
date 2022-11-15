@@ -12,7 +12,7 @@ import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { getArchiveDetail } from "../../api/reverse.js";
 
-import { setInfo } from "../../modules/reverse.js";
+import { setInfo, setSelectStuff } from "../../modules/reverse.js";
 
 import { SkyTube } from "../../assets/deco/SkyTube.js";
 import { ObjectTest } from "../../assets/deco/ObjectTest.js";
@@ -51,7 +51,7 @@ function Reverse() {
   // default action = idle
   // const [characterPosition, setCharacterPosition] = useState();
   const [destinationPoint, setDestinationPoint] = useState(
-    new Vector3(-30, 0, -30)
+    new Vector3(-30, 0, -30),
   );
   const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
@@ -120,6 +120,14 @@ function Reverse() {
     console.log(destRef.current);
     // console.log(destRef.current);
     // console.log(destinationPoint);
+    if (destinationPoint.x > 0 && destinationPoint.z < 0) {
+      dispatch(setSelectStuff(0));
+    } else if (destinationPoint.x < 0 && destinationPoint.z < 0) {
+      dispatch(setSelectStuff(2));
+    } else if (destinationPoint.x > 0 && destinationPoint.z > 0) {
+      dispatch(setSelectStuff(1));
+    }
+    console.log(reverse);
   }, [destinationPoint]);
 
   const preventClose = (e) => {
@@ -342,7 +350,7 @@ function Reverse() {
 
     if (data1.type === "NewMember") {
       let channel1 = rtcPeer.createDataChannel(
-        Math.floor(Math.random() * 10000000000)
+        Math.floor(Math.random() * 10000000000),
       );
       channelConfig(channel1);
 
@@ -664,7 +672,7 @@ function Reverse() {
         ...reverse.info,
         archiveId: archiveId,
         stuffs: res.data.stuffs,
-      })
+      }),
     );
   };
 
@@ -854,8 +862,15 @@ function Reverse() {
           {/* <ForestKit /> */}
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
-          <Polaroid />
-          <Notebook />
+          {/* 여행 */}
+          <Polaroid position={[20, 1.1, -70]} />
+          <Notebook position={[24, 0.4, -73.5]} />
+          {/* 기념일 */}
+          <Polaroid position={[35, 1.1, 57]} />
+          <Notebook position={[30, 1.1, 61]} />
+          {/* 일기 */}
+          <Polaroid position={[-115, 9, -129]} />
+          <Notebook position={[-110, 9, -130]} />
           {/* <Polaroid event={event} />
           <Notebook event={event} /> */}
           {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
