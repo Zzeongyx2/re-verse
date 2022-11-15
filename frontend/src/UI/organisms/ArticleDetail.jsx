@@ -14,7 +14,13 @@ import {
 
 import { BsThreeDots } from "react-icons/bs";
 import { deletePaper, getPaper, getStuffDetail } from "../../api/reverse";
-import { setEditBtn, setInfo, setTravel } from "../../modules/reverse";
+import reverse, {
+  setAnniv,
+  setDiary,
+  setEditBtn,
+  setInfo,
+  setTravel,
+} from "../../modules/reverse";
 import { useState } from "react";
 
 import ArchiveDatePicker from "../molecules/ReverseDatePicker";
@@ -26,26 +32,39 @@ function ArticleDetail() {
   const info = useSelector((state) => state.reverse.info);
   const travel = useSelector((state) => state.reverse.travel);
   const edit = useSelector((state) => state.reverse.editBtn);
+  const reverse = useSelector((state) => state.reverse);
   const weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
   const handleDelete = async () => {
     await deletePaper(
       info.archiveId,
-      info.stuffs[0].id,
+      info.stuffs[reverse.selectStuff].id,
       info.details.id,
       deleteSuccess,
-      deleteFail
+      deleteFail,
     );
   };
 
   const deleteSuccess = (res) => {
     console.log(res);
-    getStuffDetail(info.archiveId, info.stuffs[0].id, stuffSuccess, stuffFail);
+    getStuffDetail(
+      info.archiveId,
+      info.stuffs[reverse.selectStuff].id,
+      stuffSuccess,
+      stuffFail,
+    );
   };
 
   const stuffSuccess = (res) => {
     console.log(res);
-    dispatch(setTravel({ ...travel, articleList: res.data.papers }));
+    if (reverse.selectStuff == 0) {
+      dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
+    } else if (reverse.selectStuff == 1) {
+      dispatch(setAnniv({ ...reverse.anniv, articleList: res.data.papers }));
+    } else if (reverse.selectStuff == 2) {
+      dispatch(setDiary({ ...reverse.diary, articleList: res.data.papers }));
+    }
+    // dispatch(setTravel({ ...travel, articleList: res.data.papers }));
     dispatch(setInfo({ ...info, details: null }));
   };
 
