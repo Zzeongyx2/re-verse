@@ -13,7 +13,7 @@ import {
 import { BiCog, BiHeadphone } from "react-icons/bi";
 import { BsFillMicFill, BsMusicNoteBeamed } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import { setHeadCheck, setMicCheck } from "../../modules/webrtc";
+import { setHeadCheck, setMicCheck, setBgmCheck } from "../../modules/webrtc";
 function ReverseSettingModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const webrtcRedux = useSelector((state) => state.webrtc);
@@ -60,7 +60,7 @@ function ReverseSettingModal() {
                   isChecked={webrtcRedux.headCheck}
                   onChange={() => {
                     dispatch(setHeadCheck(!webrtcRedux.headCheck));
-                    console.log(webrtcRedux);
+                    // console.log(webrtcRedux);
                   }}
                 />
               </FormControl>
@@ -89,7 +89,7 @@ function ReverseSettingModal() {
                   isChecked={webrtcRedux.micCheck}
                   onChange={() => {
                     dispatch(setMicCheck(!webrtcRedux.micCheck));
-                    console.log(webrtcRedux);
+                    // console.log(webrtcRedux);
                   }}
                 />
               </FormControl>
@@ -117,7 +117,7 @@ function ReverseSettingModal() {
                   id="bgm"
                   isChecked={webrtcRedux.bgmCheck}
                   onChange={() => {
-                    dispatch(setMicCheck(!webrtcRedux.bgmCheck));
+                    dispatch(setBgmCheck(!webrtcRedux.bgmCheck));
                   }}
                 />
               </FormControl>
