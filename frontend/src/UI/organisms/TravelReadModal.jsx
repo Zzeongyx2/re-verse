@@ -33,8 +33,8 @@ function TravelReadModal() {
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
 
-  console.log("____________________");
-  console.log(reverse.info);
+  // console.log("____________________");
+  // console.log(reverse.info);
 
   const [editTitle, setEditTitle] = useState("");
   useEffect(() => {
@@ -54,12 +54,12 @@ function TravelReadModal() {
     );
   };
   const success = (res) => {
-    console.log(res);
+    // console.log(res);
     dispatch(setInfo({ ...reverse.info, details: res.data }));
   };
 
   const fail = (err) => {
-    console.log(err);
+    // console.log(err);
   };
   const editSaveContent = () => {
     // dispatch(createArticle({ ...reverse.article, content: editText }));
@@ -95,7 +95,7 @@ function TravelReadModal() {
   };
 
   const editSuccess = (res) => {
-    console.log(res);
+    // console.log(res);
     getStuffDetail(
       reverse.info.archiveId,
       reverse.info.stuffs[0].id,
@@ -105,26 +105,26 @@ function TravelReadModal() {
   };
 
   const stuffSuccess = (res) => {
-    console.log(res);
+    // console.log(res);
     dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
     // dispatch(setInfo({ ...reverse.info, details: null }));
     // console.log(res.data);
   };
 
   const stuffFail = (err) => {
-    console.log(err);
+    // console.log(err);
   };
 
   const editFail = (err) => {
-    console.log(err);
+    // console.log(err);
   };
 
   // useEffect(() => {
   //   getStuffDetail(archiveId, stuffId, getDetailSuccess, getDetailFail);
   // }, []);
   const getDetailSuccess = (res) => {
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    console.log(res);
+    // console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    // console.log(res);
     dispatch(
       setTravel({
         ...reverse.travel,
@@ -133,7 +133,7 @@ function TravelReadModal() {
     );
   };
   const getDetailFail = (err) => {
-    console.log(err);
+    // console.log(err);
   };
   useEffect(() => {
     getStuffDetail(
@@ -161,7 +161,7 @@ function TravelReadModal() {
                 <AiOutlineClose
                   className="cursor-pointer"
                   onClick={() => {
-                    console.log("닫기 버튼");
+                    // console.log("닫기 버튼");
                     dispatch(setTravelReadIsOpen());
                   }}
                 />
