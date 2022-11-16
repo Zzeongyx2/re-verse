@@ -1,9 +1,17 @@
-import CatAnimations from "../../assets/players/Cat_Animations";
 import { useSelector, useDispatch } from "react-redux";
-import DogAnimations from "../../assets/players/Dog_Animations";
+import DogAnimations from "../../assets/players/other/OtherDogAnimations";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
 import { useBox, useCylinder } from "@react-three/cannon";
+import OtherCatAnimations from "../../assets/players/other/OtherCatAnimations";
+import OtherDogAnimations from "../../assets/players/other/OtherDogAnimations";
+import OtherDoveAnimations from "../../assets/players/other/OtherDoveAnimations";
+import OtherGoldfishAnimations from "../../assets/players/other/OtherGoldfishAnimations";
+import OtherMouseAnimations from "../../assets/players/other/OtherMouseAnimations";
+import OtherParrotAnimations from "../../assets/players/other/OtherParrotAnimations";
+import OtherPigeonAnimations from "../../assets/players/other/OtherPigeonAnimations";
+import OtherRabbitAnimations from "../../assets/players/other/OtherRabbitAnimations";
+import OtherTortoiseAnimations from "../../assets/players/other/OtherTortoiseAnimations";
 
 function SelectedOtherPlayer({ destinationPoint, handleVisible, userName }) {
   const archiveList = useSelector((state) => state.archive.myArchiveList);
@@ -31,55 +39,55 @@ function SelectedOtherPlayer({ destinationPoint, handleVisible, userName }) {
   return (
     <group ref={playerOtherCharacter}>
       {selectAvartar === "Cat" ? (
-        <DogAnimations
+        <OtherCatAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
         />
       ) : null}
       {selectAvartar === "Dog" ? (
-        <DogAnimations
+        <OtherDogAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
         />
       ) : null}
       {selectAvartar === "Dove" ? (
-        <DogAnimations
+        <OtherDoveAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
         />
       ) : null}
       {selectAvartar === "Goldfish" ? (
-        <DogAnimations
+        <OtherGoldfishAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
         />
       ) : null}
       {selectAvartar === "Mouse" ? (
-        <DogAnimations
+        <OtherMouseAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
         />
       ) : null}
       {selectAvartar === "Parrot" ? (
-        <DogAnimations
+        <OtherParrotAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
         />
       ) : null}
       {selectAvartar === "Pigeon" ? (
-        <DogAnimations
+        <OtherPigeonAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
         />
       ) : null}
       {selectAvartar === "Rabbit" ? (
-        <DogAnimations
+        <OtherRabbitAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
         />
       ) : null}
       {selectAvartar === "Tortoise" ? (
-        <DogAnimations
+        <OtherTortoiseAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
         />

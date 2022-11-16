@@ -1,4 +1,3 @@
-import CatAnimations from "../../assets/players/Cat_Animations";
 import { useSelector, useDispatch } from "react-redux";
 import { useBox, useCylinder, useCompoundBody } from "@react-three/cannon";
 import { useFrame } from "@react-three/fiber";
@@ -6,6 +5,16 @@ import { Vector3 } from "three";
 import userEvent from "@testing-library/user-event";
 import { useRef } from "react";
 import { Box } from "./Collider.jsx";
+import MyCatAnimations from "../../assets/players/my/MyCatAnimations.js";
+import MyDogAnimations from "../../assets/players/my/MyDogAnimations.js";
+import MyDoveAnimations from "../../assets/players/my/MyDoveAnimations.js";
+import MyGoldfishAnimations from "../../assets/players/my/MyGoldfishAnimations.js";
+import MyMouseAnimations from "../../assets/players/my/MyMouseAnimations.js";
+import MyParrotAnimations from "../../assets/players/my/MyParrotAnimations.js";
+import MyPigeonAnimations from "../../assets/players/my/MyPigeonAnimations.js";
+import MyRabbitAnimations from "../../assets/players/my/MyRabbitAnimations.js";
+import MyTortoiseAnimations from "../../assets/players/my/MyTortoiseAnimations.js";
+
 function SelectedMyPlayer({ destinationPoint, handleVisible }) {
   const loginUser = useSelector((state) => state.user.loginUser);
   const playerCharacter = useRef();
@@ -20,55 +29,55 @@ function SelectedMyPlayer({ destinationPoint, handleVisible }) {
       <Box destinationPoint={new Vector3(5, 2, 5)} />
       <group>
         {loginUser.avatar === "Cat" ? (
-          <CatAnimations
+          <MyCatAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
           />
         ) : null}
         {loginUser.avatar === "Dog" ? (
-          <CatAnimations
+          <MyDogAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
           />
         ) : null}
         {loginUser.avatar === "Dove" ? (
-          <CatAnimations
+          <MyDoveAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
           />
         ) : null}
         {loginUser.avatar === "Goldfish" ? (
-          <CatAnimations
+          <MyGoldfishAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
           />
         ) : null}
         {loginUser.avatar === "Mouse" ? (
-          <CatAnimations
+          <MyMouseAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
           />
         ) : null}
         {loginUser.avatar === "Parrot" ? (
-          <CatAnimations
+          <MyParrotAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
           />
         ) : null}
         {loginUser.avatar === "Pigeon" ? (
-          <CatAnimations
+          <MyPigeonAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
           />
         ) : null}
         {loginUser.avatar === "Rabbit" ? (
-          <CatAnimations
+          <MyRabbitAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
           />
         ) : null}
         {loginUser.avatar === "Tortoise" ? (
-          <CatAnimations
+          <MyTortoiseAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
           />
