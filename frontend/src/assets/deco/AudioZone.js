@@ -16,43 +16,43 @@ export default function AudioZone(params) {
     }
   }, [webrtcRedux.bgmCheck]);
 
-  const musicList = [
-    <PositionalAudio
-      ref={audioref}
-      autoplay
-      loop
-      url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/Sweet-Mood_AdobeStock_452607713_preview.m4a"
-      distance={2}
-    />,
-    <PositionalAudio
-      ref={audioref}
-      autoplay
-      loop
-      url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/TheCats.m4a"
-      distance={2}
-    />,
-    <PositionalAudio
-      ref={audioref}
-      autoplay
-      loop
-      url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/A-Picnic-With-My-Family_AdobeStock_452603097_preview.m4a"
-      distance={2}
-    />,
-    <PositionalAudio
-      ref={audioref}
-      autoplay
-      loop
-      url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/We-Wish-You-A-Merry-Christmas_AdobeStock_353746933_preview.m4a"
-      distance={2}
-    />,
-    <PositionalAudio
-      ref={audioref}
-      autoplay
-      loop
-      url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/Emotional-Cinematic-Music-Box_AdobeStock_528505763_preview.m4a"
-      distance={2}
-    />,
-  ];
+  // const musicList = [
+  //   <PositionalAudio
+  //     ref={audioref}
+  //     autoplay
+  //     loop
+  //     url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/Sweet-Mood_AdobeStock_452607713_preview.m4a"
+  //     distance={2}
+  //   />,
+  //   <PositionalAudio
+  //     ref={audioref}
+  //     autoplay
+  //     loop
+  //     url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/TheCats.m4a"
+  //     distance={2}
+  //   />,
+  //   <PositionalAudio
+  //     ref={audioref}
+  //     autoplay
+  //     loop
+  //     url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/A-Picnic-With-My-Family_AdobeStock_452603097_preview.m4a"
+  //     distance={2}
+  //   />,
+  //   <PositionalAudio
+  //     ref={audioref}
+  //     autoplay
+  //     loop
+  //     url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/We-Wish-You-A-Merry-Christmas_AdobeStock_353746933_preview.m4a"
+  //     distance={2}
+  //   />,
+  //   <PositionalAudio
+  //     ref={audioref}
+  //     autoplay
+  //     loop
+  //     url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/Emotional-Cinematic-Music-Box_AdobeStock_528505763_preview.m4a"
+  //     distance={2}
+  //   />,
+  // ];
 
   return (
     <group>
@@ -66,8 +66,8 @@ export default function AudioZone(params) {
       </mesh>
 
       <group>
-        {webrtcRedux.bgmCheck && musicList[webrtcRedux.musicTheme]}
-        {/* {webrtcRedux.bgmCheck && webrtcRedux.musicTheme === 0 ? (
+        {/* {webrtcRedux.bgmCheck && musicList[webrtcRedux.musicTheme]} */}
+        {webrtcRedux.bgmCheck && webrtcRedux.musicTheme === 0 ? (
           <PositionalAudio
             ref={audioref}
             autoplay
@@ -111,7 +111,7 @@ export default function AudioZone(params) {
             url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/TheCats.m4a"
             distance={2}
           />
-        ) : null} */}
+        ) : null}
       </group>
     </group>
   );
