@@ -9,7 +9,7 @@ import { useFrame } from "@react-three/fiber";
 
 import { useDispatch } from "react-redux";
 import { setCampfireOn } from "../../modules/reverse";
-import { useBox } from "@react-three/cannon";
+import { useBox, useConvexPolyhedron } from "@react-three/cannon";
 
 export default function CatAnimations({
   // action,
@@ -33,7 +33,7 @@ export default function CatAnimations({
   // console.log(actions);
   const [moving, setMoving] = useState(false);
   let angle = 0;
-
+  const [isCollided, setCollision] = useState(false);
   // 이벤트 발생할 오브젝트의 좌표
   const objectPosition = new THREE.Vector3(-20, 0.01, 3);
   // console.log(objectPosition);
@@ -47,12 +47,20 @@ export default function CatAnimations({
   const campfirePosition = new THREE.Vector3(37, 0.01, -68);
 
   const [ref, api] = useBox(() => ({
-    rotation: [Math.PI / 4, 0, Math.PI / 4],
+    rotation: [0, 0, 0],
     mass: 1,
     args: [2, 1, 2],
-    // type: "Dynamic",
+    // type: "Static",
     // args: [1, 5, 1],
-    position: [destinationPoint.x, 1, destinationPoint.z],
+    position: [destinationPoint.x, 1.1, destinationPoint.z],
+    onCollideBegin: (e) => {
+      console.log("아야");
+      console.log(e);
+      // setMoving(false);
+      setCollision(true);
+      actions["Walk"].stop();
+      actions["Idle_A"].play();
+    },
   }));
 
   //   const realRef = useRef(ref);
@@ -79,8 +87,15 @@ export default function CatAnimations({
           destinationPoint.z - group.current.position.z,
           destinationPoint.x - group.current.position.x
         );
-        group.current.position.x += Math.cos(angle) * 0.065;
-        group.current.position.z += Math.sin(angle) * 0.065;
+        if (isCollided) {
+          group.current.position.x -= Math.cos(angle) * 0.3;
+          group.current.position.z -= Math.sin(angle) * 0.3;
+          setMoving(false);
+          setCollision(false);
+        } else {
+          group.current.position.x += Math.cos(angle) * 0.065;
+          group.current.position.z += Math.sin(angle) * 0.065;
+        }
         api.position.set(group.current.position.x, 0, group.current.position.z);
         state.camera.position.x = 1 + group.current.position.x;
         state.camera.position.z = 5 + group.current.position.z;
