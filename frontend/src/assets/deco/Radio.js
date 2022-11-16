@@ -15,14 +15,15 @@ export function Radio(props) {
   const { nodes, materials } = useGLTF("/assets/radio/scene.gltf");
   const dispatch = useDispatch();
   const webrtcRedux = useSelector((state) => state.webrtc);
-  const [click, setClick] = useState(0);
+  // const [click, setClick] = useState(0);
   const handleClick = () => {
-    setClick((prev) => (prev + 1) % 5);
-    dispatch(setMusicTheme(click));
+    dispatch(setMusicTheme((webrtcRedux.musicTheme + 1) % 5));
+    // setClick((prev) => (prev + 1) % 5);
+    // dispatch(setMusicTheme(click));
   };
   // useEffect(() => {
   //   dispatch(setMusicTheme(click));
-  // }, []);
+  // }, [click]);
   console.log(webrtcRedux);
 
   return (
@@ -37,13 +38,15 @@ export function Radio(props) {
       onPointerLeave={(e) => {
         document.getElementsByTagName("body")[0].style.cursor = "";
       }}
-      onClick={() => {
-        handleClick();
-      }}
     >
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
-          <group rotation={[-Math.PI / 2, 0, 0]}>
+          <group
+            rotation={[-Math.PI / 2, 0, 0]}
+            onClick={() => {
+              handleClick();
+            }}
+          >
             <group
               position={[-14.17, -5.67, 7.89]}
               rotation={[Math.PI / 2, 0, 0]}

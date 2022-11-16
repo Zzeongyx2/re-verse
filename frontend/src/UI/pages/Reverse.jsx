@@ -40,7 +40,7 @@ import { Park } from "../../assets/deco/Park.js";
 import { ForestKit } from "../../assets/deco/ForestKit.js";
 import { ReverseFloor } from "../../assets/deco/ReverseFloor.js";
 import { CampingMod } from "../../assets/deco/CampMod.js";
-import MusicTest from "../../assets/deco/MusicTest.js";
+import MusicTest from "../../assets/deco/AudioZone.js";
 
 var channels = [];
 var channelUsers = new Map();
