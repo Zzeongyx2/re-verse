@@ -26,7 +26,7 @@ export default function CatAnimations({
   // }));
   // const previousAction = usePrevious(action);
   const { nodes, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Cat_Animations.gltf",
+    "/assets/animals/GLTF/Animations/Cat_Animations.gltf"
   );
   // console.log(nodes);
   const { actions } = useAnimations(animations, group);
@@ -45,6 +45,17 @@ export default function CatAnimations({
 
   const dispatch = useDispatch();
   const campfirePosition = new THREE.Vector3(37, 0.01, -68);
+
+  const [ref, api] = useBox(() => ({
+    rotation: [Math.PI / 4, 0, Math.PI / 4],
+    mass: 1,
+    args: [2, 1, 2],
+    // type: "Dynamic",
+    // args: [1, 5, 1],
+    position: [destinationPoint.x, 1, destinationPoint.z],
+  }));
+
+  //   const realRef = useRef(ref);
 
   useEffect(() => {
     if (destinationPoint) {
@@ -66,20 +77,20 @@ export default function CatAnimations({
       if (moving) {
         angle = Math.atan2(
           destinationPoint.z - group.current.position.z,
-          destinationPoint.x - group.current.position.x,
+          destinationPoint.x - group.current.position.x
         );
         group.current.position.x += Math.cos(angle) * 0.065;
         group.current.position.z += Math.sin(angle) * 0.065;
-
+        api.position.set(group.current.position.x, 0, group.current.position.z);
         state.camera.position.x = 1 + group.current.position.x;
         state.camera.position.z = 5 + group.current.position.z;
 
         actions["Idle_A"].stop();
         actions["Walk"].play();
         // console.log("우리 고양이 걷는다");
-        console.log(destinationPoint);
-        console.log(group.current.position);
-        console.log(Math.cos(angle) * 0.065);
+        // console.log(destinationPoint);
+        // console.log(group.current.position);
+        // console.log(Math.cos(angle) * 0.065);
         if (
           Math.abs(destinationPoint.x - group.current.position.x) < 0.03 &&
           Math.abs(destinationPoint.z - group.current.position.z) < 0.03
@@ -115,23 +126,29 @@ export default function CatAnimations({
 
   return (
     // <group ref={group} dispose={null}>
-    <group ref={group} dispose={null} position={[-30, 0, -30]}>
-      <group name="Scene">
-        <group name="Rig">
-          <primitive object={nodes.root} />
-          <skinnedMesh
-            name="Cat"
-            geometry={nodes.Cat.geometry}
-            material={materials.M_Cat}
-            skeleton={nodes.Cat.skeleton}
-            morphTargetDictionary={nodes.Cat.morphTargetDictionary}
-            morphTargetInfluences={nodes.Cat.morphTargetInfluences}
-            // 그림자 설정은 여기에!
-            castShadow
-            receiveShadow
-          />
+    <group>
+      <group ref={group} dispose={null} position={[-30, 0, -30]}>
+        <group name="Scene">
+          <group name="Rig">
+            <primitive object={nodes.root} />
+            <skinnedMesh
+              name="Cat"
+              geometry={nodes.Cat.geometry}
+              material={materials.M_Cat}
+              skeleton={nodes.Cat.skeleton}
+              morphTargetDictionary={nodes.Cat.morphTargetDictionary}
+              morphTargetInfluences={nodes.Cat.morphTargetInfluences}
+              // 그림자 설정은 여기에!
+              castShadow
+              receiveShadow
+            />
+          </group>
         </group>
       </group>
+      <mesh ref={ref} castShadow={true}>
+        <boxGeometry args={[2, 2, 2]} />
+        <meshLambertMaterial color={"hotpink"} />
+      </mesh>
     </group>
   );
 }
