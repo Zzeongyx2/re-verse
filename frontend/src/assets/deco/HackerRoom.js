@@ -348,7 +348,7 @@ export function HackerRoom(props) {
             />
           </group>
           <group
-            position={[-4, 4.53, 0.58]}
+            position={[-3.99, 4.53, 0.58]}
             rotation={[-2.93, 0, -Math.PI / 2]}
             scale={3.5}
           >
