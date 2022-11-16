@@ -10,6 +10,7 @@ import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 // import { OrthographicCamera } from "@react-three/drei";
 
 import { TextureLoader } from "three/src/loaders/TextureLoader";
+
 import { getArchiveDetail } from "../../api/reverse.js";
 
 import { setInfo, setSelectStuff } from "../../modules/reverse.js";
@@ -37,6 +38,8 @@ import { HackerRoom } from "../../assets/deco/HackerRoom.js";
 import { Fireworks } from "../../assets/deco/Fireworks.js";
 import { Park } from "../../assets/deco/Park.js";
 import { ForestKit } from "../../assets/deco/ForestKit.js";
+import { ReverseFloor } from "../../assets/deco/ReverseFloor.js";
+import { CampingMod } from "../../assets/deco/CampMod.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -54,7 +57,7 @@ function Reverse() {
     new Vector3(-30, 0, -30),
   );
   const destRef = useRef(destinationPoint);
-  const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
+  const floorTexture = useLoader(TextureLoader, "/textures/map_texture.jpg");
   if (floorTexture) {
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
     floorTexture.repeat.x = 10;
@@ -840,9 +843,10 @@ function Reverse() {
           {/* <ObjectTest currentPosition={currentPosition} /> */}
 
           {/* travel zone */}
-          <CampingPack />
+          {/* <CampingPack /> */}
           <CartoonCampingKit />
           <FireAnimated />
+          <CampingMod />
 
           {/* anniv zone */}
           <Christmas />
@@ -859,6 +863,7 @@ function Reverse() {
           <Park />
 
           {/* floor */}
+          <ReverseFloor />
           {/* <ForestKit /> */}
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
@@ -891,7 +896,7 @@ function Reverse() {
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
         <mesh
           rotation={[-0.5 * Math.PI, 0, 0]}
-          position={[-30, 0.01, -30]}
+          position={[-30, 0.02, -30]}
           receiveShadow
         >
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
