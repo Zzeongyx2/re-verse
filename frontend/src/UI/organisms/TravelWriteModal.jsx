@@ -46,7 +46,7 @@ function TravelWriteModal() {
         memoryTime: moment(reverse.article.memoryDate).format("yyyy-MM-DD"),
       },
       success,
-      fail,
+      fail
     );
   };
   const success = (res) => {
@@ -55,7 +55,7 @@ function TravelWriteModal() {
       reverse.info.archiveId,
       reverse.info.stuffs[reverse.selectStuff].id,
       stuffSuccess,
-      stuffFail,
+      stuffFail
     );
   };
 
