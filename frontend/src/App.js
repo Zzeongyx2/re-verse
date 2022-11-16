@@ -38,7 +38,7 @@ function App() {
           <Route path="/reversetemp/:archiveId" element={<ReverseTemp />} />
           <Route path="/reverse/rtc" element={<ReverseWebRTC />} />
           <Route path="/texteditor" element={<ReverseTextEditor />} />
-          <Route path="/audiotest" element={<LazyAudio />} />
+          <Route path="/audiote/:archiveId" element={<LazyAudio />} />
         </Routes>
       </div>
     </BrowserRouter>

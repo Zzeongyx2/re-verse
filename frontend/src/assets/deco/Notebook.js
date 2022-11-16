@@ -38,6 +38,7 @@ export function Notebook({ props, event, position, rotation }) {
 
   // modal창 열어주세요
   const dispatch = useDispatch();
+  const reverse = useSelector((state) => state.reverse);
 
   return (
     <group
