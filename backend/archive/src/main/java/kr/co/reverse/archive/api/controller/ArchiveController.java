@@ -94,6 +94,20 @@ public class ArchiveController {
 
     }
 
+    @GetMapping("/last")
+    public ResponseEntity<? extends ArchiveDetailRes> getLastArchive() {
+        // TODO: Archive 접근 권한 여부 확인
+        // return ResponseEntity.status(HttpStatus.FORBIDDEN).body()
+
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
+
+        ArchiveDetailRes archiveDetailRes = archiveService.getLastArchiveDetail(user);
+
+        return ResponseEntity.ok(archiveDetailRes);
+
+    }
+
     @PatchMapping("/{archive_id}")
     public ResponseEntity updateArchive(@PathVariable(name = "archive_id") String archiveId,
                                         @RequestBody ArchiveReq archiveReq) {
