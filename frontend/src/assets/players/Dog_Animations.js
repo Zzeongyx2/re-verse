@@ -19,7 +19,7 @@ export default function DogAnimations({
   const group = useRef();
   // const previousAction = usePrevious(action);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Dog_Animations.gltf"
+    "/assets/animals/GLTF/Animations/Dog_Animations.gltf",
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -57,7 +57,7 @@ export default function DogAnimations({
       // console.log(group.current); // player.modelmesh
       // console.log(group.current.lookAt(destinationPoint));
       group.current.lookAt(
-        new Vector3(destinationPoint.x, 0, destinationPoint.z)
+        new Vector3(destinationPoint.x, 0, destinationPoint.z),
       );
       group.current.name = userName;
       // console.log(group.current.name);
@@ -75,7 +75,7 @@ export default function DogAnimations({
       if (moveRef.current) {
         angle = Math.atan2(
           destinationPoint.z - group.current.position.z,
-          destinationPoint.x - group.current.position.x
+          destinationPoint.x - group.current.position.x,
         );
         group.current.position.x += Math.cos(angle) * 0.05;
         group.current.position.z += Math.sin(angle) * 0.05;
