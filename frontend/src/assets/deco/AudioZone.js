@@ -1,14 +1,10 @@
 import { PositionalAudio } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React, { Suspense, useEffect, useRef, useState } from "react";
-import * as THREE from "three";
-import { AudioListener, Camera, MeshPhongMaterial, PlaneGeometry } from "three";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { PositionalAudioHelper } from "three/addons/helpers/PositionalAudioHelper.js";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
 import { useSelector } from "react-redux";
 
-export default function MusicTest(params) {
+export default function AudioZone(params) {
   const audioref = useRef();
   const webrtcRedux = useSelector((state) => state.webrtc);
 
@@ -20,6 +16,44 @@ export default function MusicTest(params) {
     }
   }, [webrtcRedux.bgmCheck]);
 
+  const musicList = [
+    <PositionalAudio
+      ref={audioref}
+      autoplay
+      loop
+      url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/Sweet-Mood_AdobeStock_452607713_preview.m4a"
+      distance={2}
+    />,
+    <PositionalAudio
+      ref={audioref}
+      autoplay
+      loop
+      url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/TheCats.m4a"
+      distance={2}
+    />,
+    <PositionalAudio
+      ref={audioref}
+      autoplay
+      loop
+      url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/A-Picnic-With-My-Family_AdobeStock_452603097_preview.m4a"
+      distance={2}
+    />,
+    <PositionalAudio
+      ref={audioref}
+      autoplay
+      loop
+      url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/We-Wish-You-A-Merry-Christmas_AdobeStock_353746933_preview.m4a"
+      distance={2}
+    />,
+    <PositionalAudio
+      ref={audioref}
+      autoplay
+      loop
+      url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/Emotional-Cinematic-Music-Box_AdobeStock_528505763_preview.m4a"
+      distance={2}
+    />,
+  ];
+
   return (
     <group>
       <mesh
@@ -27,12 +61,13 @@ export default function MusicTest(params) {
         position={[0, 1, 0]}
         receiveShadow
       >
-        <planeGeometry args={[10, 10]} />
-        <meshPhongMaterial color={0x999999} />
+        <planeGeometry args={[20, 20]} />
+        <meshBasicMaterial color="green" opacity={0} transparent />
       </mesh>
-      <gridHelper args={[10, 10]} position={[0, 1.01, 0]} />
+
       <group>
-        {webrtcRedux.bgmCheck && webrtcRedux.musicTheme === 0 ? (
+        {webrtcRedux.bgmCheck && musicList[webrtcRedux.musicTheme]}
+        {/* {webrtcRedux.bgmCheck && webrtcRedux.musicTheme === 0 ? (
           <PositionalAudio
             ref={audioref}
             autoplay
@@ -76,15 +111,7 @@ export default function MusicTest(params) {
             url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/TheCats.m4a"
             distance={2}
           />
-        ) : null}
-        {/* <PositionalAudio
-          ref={audioref}
-          autoplay
-          loop
-          url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/A-Picnic-With-My-Family_AdobeStock_452603097_preview.m4a"
-          distance={2}
-          onEnded
-        /> */}
+        ) : null} */}
       </group>
     </group>
   );
