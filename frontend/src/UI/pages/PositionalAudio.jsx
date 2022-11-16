@@ -40,7 +40,8 @@ import { Park } from "../../assets/deco/Park.js";
 import { ForestKit } from "../../assets/deco/ForestKit.js";
 import { ReverseFloor } from "../../assets/deco/ReverseFloor.js";
 import { CampingMod } from "../../assets/deco/CampMod.js";
-import MusicTest from "../../assets/deco/AudioZone.js";
+import { Radio } from "../../assets/deco/Radio.js";
+import AudioZone from "../../assets/deco/AudioZone.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -51,7 +52,7 @@ var ws1;
 let localStream;
 let audioMapIdx = 0;
 
-function Reverse() {
+function PositionalAudio() {
   // default action = idle
   // const [characterPosition, setCharacterPosition] = useState();
   const [destinationPoint, setDestinationPoint] = useState(
@@ -202,19 +203,19 @@ function Reverse() {
     }
   }, [webrtcRedux.headCheck]);
 
-  useEffect(() => {
-    const bgmChristmas = document.getElementById("bgm-christmas");
-    const bgmTravel = document.getElementById("bgm-travel");
-    const bgmDiary = document.getElementById("bgm-diary");
-    const bgm = bgmDiary;
-    console.log(bgmChristmas);
-    bgm.volume = 0.1;
-    if (webrtcRedux.bgmCheck) {
-      bgm.muted = false;
-    } else {
-      bgm.muted = true;
-    }
-  }, [webrtcRedux.bgmCheck]);
+  // useEffect(() => {
+  //   const bgmChristmas = document.getElementById("bgm-christmas");
+  //   const bgmTravel = document.getElementById("bgm-travel");
+  //   const bgmDiary = document.getElementById("bgm-diary");
+  //   const bgm = bgmDiary;
+  //   console.log(bgmChristmas);
+  //   bgm.volume = 0.1;
+  //   if (webrtcRedux.bgmCheck) {
+  //     bgm.muted = false;
+  //   } else {
+  //     bgm.muted = true;
+  //   }
+  // }, [webrtcRedux.bgmCheck]);
   // ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
   async function login() {
     await navigator.mediaDevices
@@ -796,7 +797,7 @@ function Reverse() {
           enableZoom={true}
           // enableRotate={false}
           // minZoom={8.5}
-          maxZoom={20}
+          maxZoom={35}
         />
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
@@ -869,7 +870,9 @@ function Reverse() {
           <Park />
 
           {/* music - positional audio */}
-          {/* <MusicTest /> */}
+          {/* audiozone = 소리 나오는 구간  &  radio = theme song 바꾸는거 */}
+          <AudioZone />
+          <Radio />
 
           {/* floor */}
           <ReverseFloor />
@@ -940,4 +943,4 @@ function Reverse() {
   );
 }
 
-export default Reverse;
+export default PositionalAudio;

@@ -15,6 +15,7 @@ import ReverseWebRTC from "./UI/pages/ReverseWebRTC";
 import { EditorComponent } from "./UI/organisms/TextEditor";
 import ReverseTextEditor from "./UI/organisms/ReverseTextEditor";
 import ReverseHelper from "./UI/pages/ReverseHelper";
+import LazyAudio from "./UI/pages/LazyAudio";
 
 axios.defaults.withCredentials = true;
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/reversetemp/:archiveId" element={<ReverseTemp />} />
           <Route path="/reverse/rtc" element={<ReverseWebRTC />} />
           <Route path="/texteditor" element={<ReverseTextEditor />} />
+          <Route path="/audiote/:archiveId" element={<LazyAudio />} />
         </Routes>
       </div>
     </BrowserRouter>

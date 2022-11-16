@@ -22,8 +22,8 @@ export function FireAnimated(props) {
   console.log(campfire);
   useFrame((state) => {
     if (campfire) {
-      eventSpot.current.children[0].material.color.r = 1;
-      eventSpot.current.children[0].material.color.b = 1;
+      // eventSpot.current.children[0].material.color.r = 1;
+      // eventSpot.current.children[0].material.color.b = 1;
 
       gsap.to(group.current.position, {
         duration: 0.3,
@@ -35,8 +35,8 @@ export function FireAnimated(props) {
         y: 3,
       });
     } else {
-      eventSpot.current.children[0].material.color.r = 0;
-      eventSpot.current.children[0].material.color.b = 1;
+      // eventSpot.current.children[0].material.color.r = 0;
+      // eventSpot.current.children[0].material.color.b = 1;
 
       gsap.to(group.current.position, {
         duration: 0.2,
@@ -45,13 +45,13 @@ export function FireAnimated(props) {
       });
       gsap.to(state.camera.position, {
         duration: 1,
-        y: 6,
+        y: 5,
       });
     }
   });
   return (
     <group>
-      <group ref={group} {...props} dispose={null} position={[43.5, -10, -67]}>
+      <group ref={group} {...props} dispose={null} position={[49, -10, -67.5]}>
         <group name="Sketchfab_Scene">
           <group
             name="Sketchfab_model"
@@ -197,7 +197,7 @@ export function FireAnimated(props) {
           position={[38, 0.01, -68]}
         >
           <planeBufferGeometry attach="geometry" args={[35, 25]} />
-          <meshBasicMaterial color="blue" opacity={0.5} transparent />
+          <meshBasicMaterial color="blue" opacity={0} transparent />
         </mesh>
       </group>
     </group>

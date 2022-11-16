@@ -12,13 +12,13 @@ function ArticlesTimeline() {
 
   // memory time 순서대로 정렬
   [...reverse.travel.articleList].sort(
-    (a, b) => new Date(a.memoryTime) - new Date(b.memoryTime),
+    (a, b) => new Date(a.memoryTime) - new Date(b.memoryTime)
   );
   [...reverse.anniv.articleList].sort(
-    (a, b) => new Date(a.memoryTime) - new Date(b.memoryTime),
+    (a, b) => new Date(a.memoryTime) - new Date(b.memoryTime)
   );
   [...reverse.diary.articleList].sort(
-    (a, b) => new Date(a.memoryTime) - new Date(b.memoryTime),
+    (a, b) => new Date(a.memoryTime) - new Date(b.memoryTime)
   );
 
   const weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -29,7 +29,7 @@ function ArticlesTimeline() {
       reverse.info.stuffs[reverse.selectStuff].id,
       paperId,
       success,
-      fail,
+      fail
     );
   };
 
@@ -45,36 +45,18 @@ function ArticlesTimeline() {
   return (
     <div className="w-5/6 mx-auto relative">
       {/* <div className="border-l-2 mt-4 "> */}
-      {reverse.selectStuff == 0 && !reverse.travel.articleList.length && (
+      {reverse.selectStuff === 0 && !reverse.travel.articleList.length && (
         <div>기록된 추억이 없어요!</div>
       )}
-      {reverse.selectStuff == 1 && !reverse.anniv.articleList.length && (
+      {reverse.selectStuff === 1 && !reverse.anniv.articleList.length && (
         <div>기록된 추억이 없어요!</div>
       )}
-      {reverse.selectStuff == 2 && !reverse.diary.articleList.length && (
+      {reverse.selectStuff === 2 && !reverse.diary.articleList.length && (
         <div>기록된 추억이 없어요!</div>
       )}
-      {/* {reverse.travel.articleList.length &&
-        reverse.travel.articleList
-          .filter(
-            (v, i) =>
-              reverse.travel.articleList.findIndex(
-                (x) => x.memoryTime === v.memoryTime
-              ) === i
-          )
-          .map((article, idx) => {
-            return (
-              <div key={`travel-${idx}`} className="mb-5">
-                <div className="font-semibold text-base1">
-                  {new Date(article.memoryTime).toLocaleDateString() + " "}
-                  {weekDay[new Date(article.memoryTime).getDay()]}
-                </div>
-                <div>{article.title}</div>
-              </div>
-            );
-          })} */}
+
       {/* 선택한 stuff가 여행일때 */}
-      {reverse.selectStuff == 0 &&
+      {reverse.selectStuff === 0 &&
         reverse.travel.articleList.length &&
         reverse.travel.articleList.map((article, idx) => {
           return (
@@ -94,7 +76,7 @@ function ArticlesTimeline() {
           );
         })}
       {/* 선택한 stuff가 기념일일때 */}
-      {reverse.selectStuff == 1 &&
+      {reverse.selectStuff === 1 &&
         reverse.anniv.articleList.length &&
         reverse.anniv.articleList.map((article, idx) => {
           return (
@@ -114,7 +96,7 @@ function ArticlesTimeline() {
           );
         })}
       {/* 선택한 stuff가 일기일때 */}
-      {reverse.selectStuff == 2 &&
+      {reverse.selectStuff === 2 &&
         reverse.diary.articleList.length &&
         reverse.diary.articleList.map((article, idx) => {
           return (
@@ -133,7 +115,6 @@ function ArticlesTimeline() {
             </div>
           );
         })}
-      {/* </div> */}
     </div>
   );
 }
