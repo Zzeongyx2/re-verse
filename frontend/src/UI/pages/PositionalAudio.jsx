@@ -42,6 +42,7 @@ import { ReverseFloor } from "../../assets/deco/ReverseFloor.js";
 import { CampingMod } from "../../assets/deco/CampMod.js";
 import { Radio } from "../../assets/deco/Radio.js";
 import AudioZone from "../../assets/deco/AudioZone.js";
+import { StonesMod } from "../../assets/deco/StonesMod.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -822,7 +823,7 @@ function PositionalAudio() {
           {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
 
           {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-          {others.map((other, idx) => {
+          {/* {others.map((other, idx) => {
             // console.log(other);
             // console.log(others);
             // console.log(idx);
@@ -844,7 +845,7 @@ function PositionalAudio() {
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
             // handleEvent={handleEvent}
-          />
+          /> */}
 
           <ObjectTest visible={visible} />
           {/* <ObjectTest currentPosition={currentPosition} /> */}
@@ -876,6 +877,7 @@ function PositionalAudio() {
 
           {/* floor */}
           <ReverseFloor />
+          <StonesMod />
           {/* <ForestKit /> */}
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
