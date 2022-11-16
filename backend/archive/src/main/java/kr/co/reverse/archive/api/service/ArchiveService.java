@@ -110,6 +110,13 @@ public class ArchiveService {
         return archiveDetailRes;
     }
 
+    public ArchiveDetailRes getLastArchiveDetail(User user) {
+
+        LastArchive lastArchive = lastArchiveRepository.findTop1ByUserOrderByTimeDesc(user);
+
+        return getArchiveDetail(lastArchive.getArchive().getId());
+    }
+
     public Archive getArchive(UUID archiveId) {
         return archiveRepository.findById(archiveId)
                 .orElseThrow(() -> new NoSuchElementException());
