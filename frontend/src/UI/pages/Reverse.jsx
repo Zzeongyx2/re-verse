@@ -25,9 +25,6 @@ import { Notebook } from "../../assets/deco/Notebook.js";
 import { Christmas } from "../../assets/deco/Christmas.js";
 import { EasterPack } from "../../assets/deco/EasterPack.js";
 
-import CatAnimations from "../../assets/players/Cat_Animations.js";
-import DogAnimations from "../../assets/players/Dog_Animations.js";
-
 import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
 import TravelWriteModal from "../organisms/TravelWriteModal.jsx";
 import TravelReadModal from "../organisms/TravelReadModal.jsx";
@@ -55,7 +52,7 @@ function Reverse() {
   // default action = idle
   // const [characterPosition, setCharacterPosition] = useState();
   const [destinationPoint, setDestinationPoint] = useState(
-    new Vector3(-30, 0, -30)
+    new Vector3(-30, 0, -30),
   );
   const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
@@ -354,7 +351,7 @@ function Reverse() {
 
     if (data1.type === "NewMember") {
       let channel1 = rtcPeer.createDataChannel(
-        Math.floor(Math.random() * 10000000000)
+        Math.floor(Math.random() * 10000000000),
       );
       channelConfig(channel1);
 
@@ -676,7 +673,7 @@ function Reverse() {
         ...reverse.info,
         archiveId: archiveId,
         stuffs: res.data.stuffs,
-      })
+      }),
     );
   };
 

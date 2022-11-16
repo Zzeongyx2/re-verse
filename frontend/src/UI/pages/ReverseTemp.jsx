@@ -7,7 +7,7 @@ import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 // import { OrthographicCamera } from "@react-three/drei";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
-import CatAnimations from "../../assets/players/Cat_Animations.js";
+import CatAnimations from "../../assets/players/my/MyCatAnimations";
 import { SkyTube } from "../../assets/deco/SkyTube.js";
 import { ObjectTest } from "../../assets/deco/ObjectTest.js";
 import { CampingPack } from "../../assets/deco/CampingPack.js";
@@ -46,7 +46,7 @@ function ReverseTemp() {
         ...reverse.info,
         archiveId: archiveId,
         stuffs: res.data.stuffs,
-      })
+      }),
     );
   };
 
