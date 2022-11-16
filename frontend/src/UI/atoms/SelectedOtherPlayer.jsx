@@ -1,7 +1,7 @@
 import CatAnimations from "../../assets/players/Cat_Animations";
 import { useSelector, useDispatch } from "react-redux";
 import DogAnimations from "../../assets/players/Dog_Animations";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useEffect } from "react";
 import { useBox, useCylinder } from "@react-three/cannon";
 
@@ -26,12 +26,8 @@ function SelectedOtherPlayer({ destinationPoint, handleVisible, userName }) {
       }
     }
   }, []);
+  const playerOtherCharacter = useRef();
 
-  const [playerOtherCharacter] = useBox(() => ({
-    mass: 1,
-    args: [2, 1, 2],
-    position: [destinationPoint.x, 0, destinationPoint.z],
-  }));
   return (
     <group ref={playerOtherCharacter}>
       {selectAvartar === "Cat" ? (

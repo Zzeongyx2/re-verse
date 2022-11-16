@@ -48,8 +48,8 @@ export default function CatAnimations({
 
   const [ref, api] = useBox(() => ({
     rotation: [0, 0, 0],
-    mass: 1,
-    args: [2, 1, 2],
+    mass: 10,
+    args: [1.5, 1.5, 1.5],
     // type: "Static",
     // args: [1, 5, 1],
     position: [destinationPoint.x, 1.1, destinationPoint.z],
@@ -88,8 +88,8 @@ export default function CatAnimations({
           destinationPoint.x - group.current.position.x
         );
         if (isCollided) {
-          group.current.position.x -= Math.cos(angle) * 0.3;
-          group.current.position.z -= Math.sin(angle) * 0.3;
+          group.current.position.x -= Math.cos(angle) * 0.5;
+          group.current.position.z -= Math.sin(angle) * 0.5;
           setMoving(false);
           setCollision(false);
         } else {
@@ -136,6 +136,7 @@ export default function CatAnimations({
           dispatch(setCampfireOn(0));
         }
       }
+      api.position.set(group.current.position.x, 0, group.current.position.z);
     }
   });
 
@@ -161,8 +162,8 @@ export default function CatAnimations({
         </group>
       </group>
       <mesh ref={ref} castShadow={true}>
-        <boxGeometry args={[2, 2, 2]} />
-        <meshLambertMaterial color={"hotpink"} />
+        <boxGeometry args={[1.5, 1.5, 1.5]} />
+        <meshLambertMaterial color={"skyblue"} />
       </mesh>
     </group>
   );
