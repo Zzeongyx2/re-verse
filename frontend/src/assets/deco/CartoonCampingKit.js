@@ -15,7 +15,7 @@ export function CartoonCampingKit(props) {
   );
   return (
     // campfire
-    <group {...props} dispose={null} scale={130} position={[-13, 0.35, -92]}>
+    <group {...props} dispose={null} scale={130} position={[-8, 0.35, -92]}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group position={[0, 0, 0.19]} scale={0.01}>

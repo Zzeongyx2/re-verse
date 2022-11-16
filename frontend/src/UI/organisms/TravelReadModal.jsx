@@ -35,9 +35,6 @@ function TravelReadModal() {
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
 
-  // console.log("____________________");
-  // console.log(reverse.info);
-
   const [editTitle, setEditTitle] = useState("");
   useEffect(() => {
     if (reverse.info.details) setEditTitle(reverse.info.details.title);
@@ -52,7 +49,7 @@ function TravelReadModal() {
       reverse.info.stuffs[reverse.selectStuff].id,
       reverse.info.details.id,
       success,
-      fail,
+      fail
     );
   };
   const success = (res) => {
@@ -70,7 +67,7 @@ function TravelReadModal() {
         archiveId: reverse.info.archiveId,
         stuffs: reverse.info.stuffs,
         details: { ...reverse.info.details, title: editTitle },
-      }),
+      })
     );
   };
 
@@ -88,11 +85,11 @@ function TravelReadModal() {
         title: editTitle,
         content: reverse.info.details.content,
         memoryTime: moment(reverse.info.details.memoryTime).format(
-          "yyyy-MM-DD",
+          "yyyy-MM-DD"
         ),
       },
       editSuccess,
-      editFail,
+      editFail
     );
   };
 
@@ -102,7 +99,7 @@ function TravelReadModal() {
       reverse.info.archiveId,
       reverse.info.stuffs[reverse.selectStuff].id,
       stuffSuccess,
-      stuffFail,
+      stuffFail
     );
   };
 
@@ -115,8 +112,6 @@ function TravelReadModal() {
     } else if (reverse.selectStuff == 2) {
       dispatch(setDiary({ ...reverse.diary, articleList: res.data.papers }));
     }
-    // dispatch(setInfo({ ...reverse.info, details: null }));
-    // console.log(res.data);
   };
 
   const stuffFail = (err) => {
@@ -127,12 +122,7 @@ function TravelReadModal() {
     // console.log(err);
   };
 
-  // useEffect(() => {
-  //   getStuffDetail(archiveId, stuffId, getDetailSuccess, getDetailFail);
-  // }, []);
   const getDetailSuccess = (res) => {
-    // console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    // console.log(res);
     if (reverse.selectStuff == 0) {
       dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
     } else if (reverse.selectStuff == 1) {
@@ -150,7 +140,7 @@ function TravelReadModal() {
       reverse.info.archiveId,
       reverse.info.stuffs[reverse.selectStuff].id,
       getDetailSuccess,
-      getDetailFail,
+      getDetailFail
     );
   }, []);
   useEffect(() => {
@@ -158,7 +148,7 @@ function TravelReadModal() {
       reverse.info.archiveId,
       reverse.info.stuffs[reverse.selectStuff].id,
       getDetailSuccess,
-      getDetailFail,
+      getDetailFail
     );
     dispatch(setInfo({ ...reverse.info, details: null }));
   }, [reverse.selectStuff]);
@@ -176,7 +166,9 @@ function TravelReadModal() {
           <ModalContent minH={"500"}>
             <ModalHeader mb={4} textAlign="center">
               <div className="flex justify-between items-center">
-                윤선이의 여행 기록
+                {reverse.selectStuff === 0 && "윤선이의 여행"}
+                {reverse.selectStuff === 1 && "윤선이의 기념일"}
+                {reverse.selectStuff === 2 && "윤선이의 다이어리"}
                 <AiOutlineClose
                   className="cursor-pointer"
                   onClick={() => {
