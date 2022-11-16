@@ -37,6 +37,10 @@ import { HackerRoom } from "../../assets/deco/HackerRoom.js";
 import { Fireworks } from "../../assets/deco/Fireworks.js";
 import { Park } from "../../assets/deco/Park.js";
 import { ForestKit } from "../../assets/deco/ForestKit.js";
+import SelectedMyPlayer from "../atoms/SelectedMyPlayer.jsx";
+import SelectedOtherPlayer from "../atoms/SelectedOtherPlayer.jsx";
+import { Physics } from "@react-three/cannon";
+import ThreeFloor from "../atoms/ThreeFloor.jsx";
 
 var channels = [];
 var channelUsers = new Map();
@@ -808,85 +812,96 @@ function Reverse() {
         <ambientLight intensity={0.3} />
         <spotLight intensity={0.5} position={[100, 1000, 100]} />
         {/* character */}
-        <Suspense fallback={null}>
-          {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
-
-          {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-          {others.map((other, idx) => {
-            // console.log(other);
-            // console.log(others);
-            // console.log(idx);
-            console.log(otherCharacterMap);
-            // console.log(otherCharacterMap[other]);
-            return (
-              <DogAnimations
-                key={idx}
-                // action={action}
-                destinationPoint={otherCharacterMap.get(other)}
-                // isPressed={isPressed}
-                handleVisible={handleVisible}
-                userName={other}
-                // handleCurrentPosition={handleCurrentPosition}
-              />
-            );
-          })}
-          <CatAnimations
+        <Physics gravity={[0, -10, 0]}>
+          <Suspense fallback={null}>
+            {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
+            {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
+            {others.map((other, idx) => {
+              // console.log(other);
+              // console.log(others);
+              // console.log(idx);
+              console.log(otherCharacterMap);
+              // console.log(otherCharacterMap[other]);
+              return (
+                // <DogAnimations
+                //   key={idx}
+                //   // action={action}
+                //   destinationPoint={otherCharacterMap.get(other)}
+                //   // isPressed={isPressed}
+                //   handleVisible={handleVisible}
+                //   userName={other}
+                //   // handleCurrentPosition={handleCurrentPosition}
+                // />
+                <SelectedOtherPlayer
+                  key={idx}
+                  destinationPoint={otherCharacterMap.get(other)}
+                  handleVisible={handleVisible}
+                  userName={other}
+                />
+              );
+            })}
+            {/* <CatAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
             // handleEvent={handleEvent}
-          />
+          /> */}
+            <SelectedMyPlayer
+              destinationPoint={destinationPoint}
+              handleVisible={handleVisible}
+            />
+            <ObjectTest visible={visible} />
+            {/* <ObjectTest currentPosition={currentPosition} /> */}
 
-          <ObjectTest visible={visible} />
-          {/* <ObjectTest currentPosition={currentPosition} /> */}
+            {/* travel zone */}
+            <CampingPack />
+            <CartoonCampingKit />
+            <FireAnimated />
 
-          {/* travel zone */}
-          <CampingPack />
-          <CartoonCampingKit />
-          <FireAnimated />
+            {/* anniv zone */}
+            <Christmas />
 
-          {/* anniv zone */}
-          <Christmas />
+            {/* diary zone */}
+            <HackerRoom />
 
-          {/* diary zone */}
-          <HackerRoom />
+            {/* easter egg zone */}
+            <EasterPack />
 
-          {/* easter egg zone */}
-          <EasterPack />
+            {/* etc */}
+            <Fireworks />
+            <SkyTube />
+            <Park />
 
-          {/* etc */}
-          <Fireworks />
-          <SkyTube />
-          <Park />
+            {/* floor */}
+            {/* <ForestKit /> */}
 
-          {/* floor */}
-          {/* <ForestKit /> */}
-
-          {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
-          {/* 여행 */}
-          <Polaroid position={[20, 1.1, -70]} />
-          <Notebook position={[24, 0.4, -73.5]} />
-          {/* 기념일 */}
-          <Polaroid position={[35, 1.1, 57]} />
-          <Notebook position={[30, 1.1, 61]} />
-          {/* 일기 */}
-          <Polaroid position={[-115, 9, -129]} />
-          <Notebook position={[-110, 9, -130]} />
-          {/* <Polaroid event={event} />
+            {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
+            {/* 여행 */}
+            <Polaroid position={[20, 1.1, -70]} />
+            <Notebook position={[24, 0.4, -73.5]} />
+            {/* 기념일 */}
+            <Polaroid position={[35, 1.1, 57]} />
+            <Notebook position={[30, 1.1, 61]} />
+            {/* 일기 */}
+            <Polaroid position={[-115, 9, -129]} />
+            <Notebook position={[-110, 9, -130]} />
+            {/* <Polaroid event={event} />
           <Notebook event={event} /> */}
-          {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
-        </Suspense>
-        {/* floor */}
-        <mesh
-          onPointerDown={(e) => {
-            setDestinationPoint(e.point);
-            sendPosition(e.point);
-          }}
-          rotation={[-0.5 * Math.PI, 0, 0]}
-          receiveShadow
-        >
-          <planeBufferGeometry attach="geometry" args={[300, 300]} />
-          <meshStandardMaterial map={floorTexture} />
-        </mesh>
+            {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
+          </Suspense>
+          {/* floor */}
+          <mesh
+            onPointerDown={(e) => {
+              setDestinationPoint(e.point);
+              sendPosition(e.point);
+            }}
+            rotation={[-0.5 * Math.PI, 0, 0]}
+            receiveShadow
+          >
+            <planeBufferGeometry attach="geometry" args={[300, 300]} />
+            <meshStandardMaterial map={floorTexture} />
+          </mesh>
+          <ThreeFloor position={[0, -0.5, 0]} rotation={[-Math.PI / 2, 0, 0]} />
+        </Physics>
 
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
         <mesh

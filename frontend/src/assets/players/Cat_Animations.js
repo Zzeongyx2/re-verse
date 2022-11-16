@@ -9,6 +9,7 @@ import { useFrame } from "@react-three/fiber";
 
 import { useDispatch } from "react-redux";
 import { setCampfireOn } from "../../modules/reverse";
+import { useBox } from "@react-three/cannon";
 
 export default function CatAnimations({
   // action,
@@ -18,9 +19,14 @@ export default function CatAnimations({
   handleEvent, // travel, anniv, diary event handler
 }) {
   const group = useRef();
+  // const [group] = useBox(() => ({
+  //   mass: 1,
+  //   args: [2, 1, 2],
+  //   position: [destinationPoint.x, 0, destinationPoint.z],
+  // }));
   // const previousAction = usePrevious(action);
   const { nodes, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Cat_Animations.gltf"
+    "/assets/animals/GLTF/Animations/Cat_Animations.gltf",
   );
   // console.log(nodes);
   const { actions } = useAnimations(animations, group);
@@ -60,7 +66,7 @@ export default function CatAnimations({
       if (moving) {
         angle = Math.atan2(
           destinationPoint.z - group.current.position.z,
-          destinationPoint.x - group.current.position.x
+          destinationPoint.x - group.current.position.x,
         );
         group.current.position.x += Math.cos(angle) * 0.065;
         group.current.position.z += Math.sin(angle) * 0.065;
@@ -71,7 +77,9 @@ export default function CatAnimations({
         actions["Idle_A"].stop();
         actions["Walk"].play();
         // console.log("우리 고양이 걷는다");
-
+        console.log(destinationPoint);
+        console.log(group.current.position);
+        console.log(Math.cos(angle) * 0.065);
         if (
           Math.abs(destinationPoint.x - group.current.position.x) < 0.03 &&
           Math.abs(destinationPoint.z - group.current.position.z) < 0.03
