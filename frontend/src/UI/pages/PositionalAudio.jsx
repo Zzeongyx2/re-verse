@@ -887,7 +887,7 @@ function PositionalAudio() {
             rotation={[-Math.PI / 2, 0, Math.PI / 5]}
           />
           <Notebook
-            position={[71, 4, -38]}
+            position={[71, 3.4, -38]}
             rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]}
           />
           {/* 기념일 */}
