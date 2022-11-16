@@ -7,7 +7,7 @@ title: Cartoon Notebook & Pencil
 */
 
 import React, { useRef, useState } from "react";
-import { useGLTF } from "@react-three/drei";
+import { Sparkles, useGLTF } from "@react-three/drei";
 import { gsap } from "gsap";
 import { useFrame } from "@react-three/fiber";
 
@@ -82,6 +82,13 @@ export function Notebook({ props, event, position, rotation }) {
           </group>
         </group>
       </group>
+      <Sparkles
+        count={100}
+        scale={3}
+        size={5}
+        position={position}
+        speed={0.4}
+      />
     </group>
   );
 }

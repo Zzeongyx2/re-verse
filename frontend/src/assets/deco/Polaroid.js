@@ -8,7 +8,7 @@ title: Retro Polaroid
 
 import React, { useRef } from "react";
 import * as THREE from "three";
-import { useGLTF } from "@react-three/drei";
+import { Sparkles, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { gsap } from "gsap";
 
@@ -71,7 +71,7 @@ export function Polaroid({ props, position, event, rotation }) {
           </group>
         </group>
       </group>
-
+      <Sparkles count={50} scale={3} size={5} position={position} speed={0.4} />
       {/* // FIXME: 다른 에셋에서 애니메이션 적용할구야 */}
       {/* 오브젝트 나타나는 지점
       <group ref={travelSpot}>
