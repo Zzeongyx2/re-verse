@@ -5,10 +5,9 @@ import { Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
 export const Box = ({ destinationPoint }) => {
   const [ref, api] = useBox(() => ({
-    rotation: [Math.PI / 4, 0, Math.PI / 4],
     mass: 100000,
     args: [2, 2, 2],
-    // type: "Static",
+    type: "Static",
     // args: [1, 5, 1],
     position: [destinationPoint.x, 1, destinationPoint.z],
   }));
@@ -23,7 +22,7 @@ export const Box = ({ destinationPoint }) => {
     }
   }, [destinationPoint]);
   useFrame(() => {
-    console.log(destinationPoint);
+    // console.log(destinationPoint);
   });
   return (
     <mesh ref={ref} castShadow={true}>
