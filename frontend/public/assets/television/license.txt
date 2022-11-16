@@ -1,0 +1,11 @@
+Model Information:
+* title:	The Little TV That Couldn't
+* source:	https://sketchfab.com/3d-models/the-little-tv-that-couldnt-6813826f9126436fa1248d7eeb792f66
+* author:	B Domeier (https://sketchfab.com/acidfawn)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "The Little TV That Couldn't" (https://sketchfab.com/3d-models/the-little-tv-that-couldnt-6813826f9126436fa1248d7eeb792f66) by B Domeier (https://sketchfab.com/acidfawn) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
