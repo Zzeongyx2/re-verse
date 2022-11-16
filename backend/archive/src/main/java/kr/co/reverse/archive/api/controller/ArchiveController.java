@@ -85,6 +85,11 @@ public class ArchiveController {
 
         ArchiveDetailRes archiveDetailRes = archiveService.getArchiveDetail(UUID.fromString(archiveId));
 
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
+
+        archiveService.createLastArchive(UUID.fromString(archiveId), user);
+
         return ResponseEntity.ok(archiveDetailRes);
 
     }
