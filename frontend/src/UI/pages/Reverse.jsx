@@ -39,6 +39,7 @@ import { Fireworks } from "../../assets/deco/Fireworks.js";
 import { Park } from "../../assets/deco/Park.js";
 import { ForestKit } from "../../assets/deco/ForestKit.js";
 import { ReverseFloor } from "../../assets/deco/ReverseFloor.js";
+import { CampingMod } from "../../assets/deco/CampMod.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -803,9 +804,10 @@ function Reverse() {
           {/* <ObjectTest currentPosition={currentPosition} /> */}
 
           {/* travel zone */}
-          <CampingPack />
+          {/* <CampingPack /> */}
           <CartoonCampingKit />
           <FireAnimated />
+          <CampingMod />
 
           {/* anniv zone */}
           <Christmas />
@@ -848,7 +850,7 @@ function Reverse() {
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
         <mesh
           rotation={[-0.5 * Math.PI, 0, 0]}
-          position={[-30, 0.01, -30]}
+          position={[-30, 0.02, -30]}
           receiveShadow
         >
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
