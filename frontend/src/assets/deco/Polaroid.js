@@ -7,53 +7,24 @@ title: Retro Polaroid
 */
 
 import React, { useRef } from "react";
+import * as THREE from "three";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { gsap } from "gsap";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setTravelReadIsOpen } from "../../modules/reverse";
 
-export function Polaroid({ props, position, event }) {
+export function Polaroid({ props, position, event, rotation }) {
   const { nodes, materials } = useGLTF("/assets/retro_polaroid/scene.gltf");
 
   const travelObject = useRef();
   const travelSpot = useRef();
-  // console.log("======================[polaroid]======================");
-  // console.log(event);
-  // useFrame((state) => {
-  //   if (event === 1) {
-  //     travelSpot.current.children[0].material.color.r = 1;
-  //     travelSpot.current.children[0].material.color.b = 1;
-
-  //     gsap.to(travelObject.current.position, {
-  //       duration: 0.3,
-  //       y: 1.1,
-  //       ease: "Bounce.easeOut",
-  //     });
-  //     gsap.to(state.camera.position, {
-  //       duration: 1,
-  //       y: 3,
-  //     });
-  //   } else if (event !== 1) {
-  //     travelSpot.current.children[0].material.color.r = 0;
-  //     travelSpot.current.children[0].material.color.b = 1;
-  //     gsap.to(travelObject.current.position, {
-  //       duration: 0.4,
-  //       y: -2,
-  //       ease: "Bounce.easeOut",
-  //     });
-  //     gsap.to(state.camera.position, {
-  //       duration: 1,
-  //       y: 5,
-  //     });
-  //   }
-  // });
 
   // modal창 열어주세요
   const dispatch = useDispatch();
 
-  console.log(travelObject.current);
+  // console.log(travelObject.current);
 
   return (
     <group
@@ -66,7 +37,8 @@ export function Polaroid({ props, position, event }) {
     >
       <group
         ref={travelObject}
-        rotation={[-Math.PI / 2, 0, Math.PI / 6]}
+        // rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
+        rotation={rotation}
         scale={0.05}
         // position={[20, 1.1, -70]}
         // position={[48.5, 0.8, -70]}

@@ -41,7 +41,7 @@ function ArticleDetail() {
       info.stuffs[reverse.selectStuff].id,
       info.details.id,
       deleteSuccess,
-      deleteFail,
+      deleteFail
     );
   };
 
@@ -51,17 +51,17 @@ function ArticleDetail() {
       info.archiveId,
       info.stuffs[reverse.selectStuff].id,
       stuffSuccess,
-      stuffFail,
+      stuffFail
     );
   };
 
   const stuffSuccess = (res) => {
     console.log(res);
-    if (reverse.selectStuff == 0) {
+    if (reverse.selectStuff === 0) {
       dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
-    } else if (reverse.selectStuff == 1) {
+    } else if (reverse.selectStuff === 1) {
       dispatch(setAnniv({ ...reverse.anniv, articleList: res.data.papers }));
-    } else if (reverse.selectStuff == 2) {
+    } else if (reverse.selectStuff === 2) {
       dispatch(setDiary({ ...reverse.diary, articleList: res.data.papers }));
     }
     // dispatch(setTravel({ ...travel, articleList: res.data.papers }));

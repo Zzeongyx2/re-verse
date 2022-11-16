@@ -14,7 +14,7 @@ import { useFrame } from "@react-three/fiber";
 import { useSelector, useDispatch } from "react-redux";
 import { setTravelWriteIsOpen } from "../../modules/reverse";
 
-export function Notebook({ props, event, position }) {
+export function Notebook({ props, event, position, rotation }) {
   const { nodes, materials } = useGLTF("/assets/notebook/scene.gltf");
   const travelWriteObject = useRef();
   // console.log("notebook");
@@ -38,6 +38,7 @@ export function Notebook({ props, event, position }) {
 
   // modal창 열어주세요
   const dispatch = useDispatch();
+  const reverse = useSelector((state) => state.reverse);
 
   return (
     <group
@@ -50,7 +51,7 @@ export function Notebook({ props, event, position }) {
     >
       <group
         ref={travelWriteObject}
-        rotation={[-Math.PI / 2, 0, -Math.PI / 6]}
+        rotation={rotation}
         scale={0.05}
         // position={[24, 0.4, -73.5]}
         position={position}
