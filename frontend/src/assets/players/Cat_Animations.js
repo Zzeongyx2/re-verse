@@ -29,7 +29,7 @@ export default function CatAnimations({
   let angle = 0;
 
   // 이벤트 발생할 오브젝트의 좌표
-  const objectPosition = new THREE.Vector3(-20, 0.01, 3);
+  const objectPosition = new THREE.Vector3(-13, 0.01, 3);
   // console.log(objectPosition);
   // const [visible, setVisible] = useState(false);
 
