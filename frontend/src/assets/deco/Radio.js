@@ -6,13 +6,41 @@ source: https://sketchfab.com/3d-models/radio-lowpoly-b36f73e09f3447e092a0463d9c
 title: Radio - Lowpoly
 */
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useDispatch, useSelector } from "react-redux";
+import { setMusicTheme } from "../../modules/webrtc";
 
 export function Radio(props) {
   const { nodes, materials } = useGLTF("/assets/radio/scene.gltf");
+  const dispatch = useDispatch();
+  const webrtcRedux = useSelector((state) => state.webrtc);
+  const [click, setClick] = useState(0);
+  const handleClick = () => {
+    setClick((prev) => (prev + 1) % 5);
+    dispatch(setMusicTheme(click));
+  };
+  // useEffect(() => {
+  //   dispatch(setMusicTheme(click));
+  // }, []);
+  console.log(webrtcRedux);
+
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      position={[-128, 0, -99]}
+      scale={0.5}
+      onPointerOver={(e) => {
+        document.getElementsByTagName("body")[0].style.cursor = "pointer";
+      }}
+      onPointerLeave={(e) => {
+        document.getElementsByTagName("body")[0].style.cursor = "";
+      }}
+      onClick={() => {
+        handleClick();
+      }}
+    >
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group rotation={[-Math.PI / 2, 0, 0]}>
