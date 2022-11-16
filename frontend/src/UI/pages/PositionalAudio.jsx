@@ -44,6 +44,8 @@ import { Radio } from "../../assets/deco/Radio.js";
 import AudioZone from "../../assets/deco/AudioZone.js";
 import { StonesMod } from "../../assets/deco/StonesMod.js";
 
+import { TelevisionMod } from "../../assets/deco/TelevisionMod.js";
+
 var channels = [];
 var channelUsers = new Map();
 var friendToName = new Map();
@@ -798,7 +800,7 @@ function PositionalAudio() {
           enableZoom={true}
           // enableRotate={false}
           // minZoom={8.5}
-          maxZoom={35}
+          // maxZoom={35}
         />
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
@@ -879,6 +881,10 @@ function PositionalAudio() {
           <ReverseFloor />
           <StonesMod />
           {/* <ForestKit /> */}
+
+          {/* test html effect */}
+          {/* <Television /> */}
+          <TelevisionMod />
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
           {/* 여행 */}
