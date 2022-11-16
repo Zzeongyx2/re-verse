@@ -54,7 +54,7 @@ function Reverse() {
   // default action = idle
   // const [characterPosition, setCharacterPosition] = useState();
   const [destinationPoint, setDestinationPoint] = useState(
-    new Vector3(-30, 0, -30),
+    new Vector3(-30, 0, -30)
   );
   const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/map_texture.jpg");
@@ -353,7 +353,7 @@ function Reverse() {
 
     if (data1.type === "NewMember") {
       let channel1 = rtcPeer.createDataChannel(
-        Math.floor(Math.random() * 10000000000),
+        Math.floor(Math.random() * 10000000000)
       );
       channelConfig(channel1);
 
@@ -675,7 +675,7 @@ function Reverse() {
         ...reverse.info,
         archiveId: archiveId,
         stuffs: res.data.stuffs,
-      }),
+      })
     );
   };
 
@@ -791,7 +791,12 @@ function Reverse() {
         }}
       >
         {/* // TODO: 컴포넌트 배치할 때에는 키고 하는게 편함 */}
-        <OrbitControls />
+        <OrbitControls
+          enableZoom={true}
+          // enableRotate={false}
+          // minZoom={8.5}
+          maxZoom={20}
+        />
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
         {/* light */}
@@ -815,7 +820,7 @@ function Reverse() {
           {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
 
           {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-          {others.map((other, idx) => {
+          {/* {others.map((other, idx) => {
             // console.log(other);
             // console.log(others);
             // console.log(idx);
@@ -837,7 +842,7 @@ function Reverse() {
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
             // handleEvent={handleEvent}
-          />
+          /> */}
 
           <ObjectTest visible={visible} />
           {/* <ObjectTest currentPosition={currentPosition} /> */}
@@ -868,14 +873,29 @@ function Reverse() {
 
           {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
           {/* 여행 */}
-          <Polaroid position={[20, 1.1, -70]} />
-          <Notebook position={[24, 0.4, -73.5]} />
+          <Polaroid
+            position={[71, 4, -43]}
+            rotation={[-Math.PI / 2, 0, Math.PI / 5]}
+          />
+          <Notebook
+            position={[71, 4, -38]}
+            rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]}
+          />
           {/* 기념일 */}
-          <Polaroid position={[35, 1.1, 57]} />
-          <Notebook position={[30, 1.1, 61]} />
+          <Polaroid position={[38, 1.1, 62]} rotation={[-Math.PI / 2, 0, 0]} />
+          <Notebook
+            position={[35, 0.3, 66]}
+            rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]}
+          />
           {/* 일기 */}
-          <Polaroid position={[-115, 9, -129]} />
-          <Notebook position={[-110, 9, -130]} />
+          <Polaroid
+            position={[-115, 9, -129]}
+            rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
+          />
+          <Notebook
+            position={[-110, 8.2, -131]}
+            rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
+          />
           {/* <Polaroid event={event} />
           <Notebook event={event} /> */}
           {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
@@ -890,6 +910,7 @@ function Reverse() {
           receiveShadow
         >
           <planeBufferGeometry attach="geometry" args={[300, 300]} />
+          {/* <planeBufferGeometry attach="geometry" args={[400, 400]} /> */}
           <meshStandardMaterial map={floorTexture} />
         </mesh>
 
