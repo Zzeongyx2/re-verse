@@ -2,6 +2,7 @@ package kr.co.reverse.archive.api.controller;
 
 import kr.co.reverse.archive.api.request.*;
 import kr.co.reverse.archive.api.response.*;
+import kr.co.reverse.archive.api.service.ArchiveService;
 import kr.co.reverse.archive.api.service.UserSearchService;
 import kr.co.reverse.archive.api.service.UserService;
 import kr.co.reverse.archive.db.entity.Archive;
