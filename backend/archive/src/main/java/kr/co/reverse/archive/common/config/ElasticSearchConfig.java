@@ -30,6 +30,10 @@ public class ElasticSearchConfig extends AbstractElasticsearchConfiguration {
     @Override
     @Bean
     public RestHighLevelClient elasticsearchClient() {
+
+        System.out.println("======= elastic search port : " + elasticPort);
+        System.out.println("------- elastic search host : " + elasticHost);
+
         ClientConfiguration clientConfiguration = ClientConfiguration.builder()
                 .connectedTo(elasticHost + ":" + elasticHPort)
                 .build();
