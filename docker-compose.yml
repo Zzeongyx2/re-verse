@@ -49,7 +49,7 @@ services:
             SPRING_REDIS_PORT: 6379 
             SPRING_REDIS_PASSWORD: flQjtm1024
             ELASTICSEARCH_HOST: elasticsearch
-            ELASTICSEARCH_POST: 9200
+            ELASTICSEARCH_PORT: 9200
         ports:
             - 8081:8081
 
