@@ -47,6 +47,8 @@ services:
             SPRING_REDIS_HOST: auth_redis
             SPRING_REDIS_PORT: 6379 
             SPRING_REDIS_PASSWORD: flQjtm1024
+            ELASTICSEARCH_URL: http://elasticsearch:9200
+            ELASTICSEARCH_HOSTS: http://elasticsearch:9200
         ports:
             - 8081:8081
 
