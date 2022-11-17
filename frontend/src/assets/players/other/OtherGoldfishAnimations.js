@@ -19,7 +19,7 @@ export default function OtherGoldfishAnimations({
   const group = useRef();
   // const previousAction = usePrevious(action);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Goldfish_Animations.gltf",
+    "/assets/animals/GLTF/Animations/Goldfish_Animations.gltf"
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -57,7 +57,7 @@ export default function OtherGoldfishAnimations({
       // console.log(group.current); // player.modelmesh
       // console.log(group.current.lookAt(destinationPoint));
       group.current.lookAt(
-        new Vector3(destinationPoint.x, 0, destinationPoint.z),
+        new Vector3(destinationPoint.x, 0, destinationPoint.z)
       );
       group.current.name = userName;
       // console.log(group.current.name);
@@ -91,7 +91,7 @@ export default function OtherGoldfishAnimations({
       if (moveRef.current) {
         angle = Math.atan2(
           destinationPoint.z - group.current.position.z,
-          destinationPoint.x - group.current.position.x,
+          destinationPoint.x - group.current.position.x
         );
         if (isCollided) {
           group.current.position.x -= Math.cos(angle) * 0.5;
@@ -101,8 +101,8 @@ export default function OtherGoldfishAnimations({
           setMoving(false);
           setCollision(false);
         } else {
-          group.current.position.x += Math.cos(angle) * 0.065;
-          group.current.position.z += Math.sin(angle) * 0.065;
+          group.current.position.x += Math.cos(angle) * 0.2;
+          group.current.position.z += Math.sin(angle) * 0.2;
         }
         api.position.set(group.current.position.x, 0, group.current.position.z);
 
@@ -118,8 +118,8 @@ export default function OtherGoldfishAnimations({
         // console.log("우리 강아지 걷는다");
 
         if (
-          Math.abs(destinationPoint.x - group.current.position.x) < 0.03 &&
-          Math.abs(destinationPoint.z - group.current.position.z) < 0.03
+          Math.abs(destinationPoint.x - group.current.position.x) < 0.1 &&
+          Math.abs(destinationPoint.z - group.current.position.z) < 0.1
         ) {
           // setMoving(false);
           setMoving((prev) => {
@@ -160,7 +160,7 @@ export default function OtherGoldfishAnimations({
     <group>
       <group ref={group} position={initPosition}>
         <group>
-          <group>
+          <group scale={2}>
             <primitive object={nodes.root} />
             <skinnedMesh
               geometry={nodes.Goldfish.geometry}
