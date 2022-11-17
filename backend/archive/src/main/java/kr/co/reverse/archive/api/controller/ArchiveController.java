@@ -29,6 +29,7 @@ public class ArchiveController {
 
     private final PaperService paperService;
 
+    private final UserRepository userRepository;
     private final UserService userService;
 
     private final FriendService friendService;
@@ -77,7 +78,25 @@ public class ArchiveController {
             throw new UnauthorizedException(CommonErrorCode.UNAUTHORIZED_ERROR);
         }
 
-        ArchiveDetailRes archiveDetailRes = archiveService.getArchiveDetail(UUID.fromString(archiveId));
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
+
+        archiveService.createLastArchive(UUID.fromString(archiveId), user);
+
+        return ResponseEntity.ok(archiveDetailRes);
+
+    }
+
+    @GetMapping("/last")
+    public ResponseEntity<? extends ArchiveDetailRes> getLastArchive() {
+        // TODO: Archive 접근 권한 여부 확인
+        // return ResponseEntity.status(HttpStatus.FORBIDDEN).body()
+
+        String userId = userService.getUserId();
+        User user = userService.getPlayer(userId);
+
+        ArchiveDetailRes archiveDetailRes = archiveService.getLastArchiveDetail(user);
+
         return ResponseEntity.ok(archiveDetailRes);
     }
 
