@@ -26,9 +26,6 @@ import { Notebook } from "../../assets/deco/Notebook.js";
 import { Christmas } from "../../assets/deco/Christmas.js";
 import { EasterPack } from "../../assets/deco/EasterPack.js";
 
-import CatAnimations from "../../assets/players/my/MyCatAnimations";
-import DogAnimations from "../../assets/players/other/OtherDogAnimations";
-
 import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
 import TravelWriteModal from "../organisms/TravelWriteModal.jsx";
 import TravelReadModal from "../organisms/TravelReadModal.jsx";
@@ -38,12 +35,16 @@ import { HackerRoom } from "../../assets/deco/HackerRoom.js";
 import { Fireworks } from "../../assets/deco/Fireworks.js";
 import { Park } from "../../assets/deco/Park.js";
 import { ForestKit } from "../../assets/deco/ForestKit.js";
+import SelectedMyPlayer from "../atoms/SelectedMyPlayer.jsx";
+import SelectedOtherPlayer from "../atoms/SelectedOtherPlayer.jsx";
+import { Physics } from "@react-three/cannon";
+import ThreeFloor from "../atoms/ThreeFloor.jsx";
 import { ReverseFloor } from "../../assets/deco/ReverseFloor.js";
 import { CampingMod } from "../../assets/deco/CampMod.js";
-import { Radio } from "../../assets/deco/Radio.js";
+import MusicTest from "../../assets/deco/AudioZone.js";
 import AudioZone from "../../assets/deco/AudioZone.js";
+import { Radio } from "../../assets/deco/Radio.js";
 import { StonesMod } from "../../assets/deco/StonesMod.js";
-
 import { TelevisionMod } from "../../assets/deco/TelevisionMod.js";
 
 var channels = [];
@@ -55,7 +56,7 @@ var ws1;
 let localStream;
 let audioMapIdx = 0;
 
-function PositionalAudio() {
+function Reverse() {
   // default action = idle
   // const [characterPosition, setCharacterPosition] = useState();
   const [destinationPoint, setDestinationPoint] = useState(new Vector3(-30, 0, -30));
@@ -204,19 +205,19 @@ function PositionalAudio() {
     }
   }, [webrtcRedux.headCheck]);
 
-  // useEffect(() => {
-  //   const bgmChristmas = document.getElementById("bgm-christmas");
-  //   const bgmTravel = document.getElementById("bgm-travel");
-  //   const bgmDiary = document.getElementById("bgm-diary");
-  //   const bgm = bgmDiary;
-  //   console.log(bgmChristmas);
-  //   bgm.volume = 0.1;
-  //   if (webrtcRedux.bgmCheck) {
-  //     bgm.muted = false;
-  //   } else {
-  //     bgm.muted = true;
-  //   }
-  // }, [webrtcRedux.bgmCheck]);
+  useEffect(() => {
+    const bgmChristmas = document.getElementById("bgm-christmas");
+    const bgmTravel = document.getElementById("bgm-travel");
+    const bgmDiary = document.getElementById("bgm-diary");
+    const bgm = bgmDiary;
+    console.log(bgmChristmas);
+    bgm.volume = 0.1;
+    if (webrtcRedux.bgmCheck) {
+      bgm.muted = false;
+    } else {
+      bgm.muted = true;
+    }
+  }, [webrtcRedux.bgmCheck]);
   // ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
   async function login() {
     await navigator.mediaDevices
@@ -794,7 +795,7 @@ function PositionalAudio() {
           enableZoom={true}
           // enableRotate={false}
           // minZoom={8.5}
-          // maxZoom={35}
+          maxZoom={20}
         />
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
@@ -815,101 +816,131 @@ function PositionalAudio() {
         <ambientLight intensity={0.3} />
         <spotLight intensity={0.5} position={[100, 1000, 100]} />
         {/* character */}
-        <Suspense fallback={null}>
-          {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
-
-          {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-          {/* {others.map((other, idx) => {
-            // console.log(other);
-            // console.log(others);
-            // console.log(idx);
-            console.log(otherCharacterMap);
-            // console.log(otherCharacterMap[other]);
-            return (
-              <DogAnimations
-                key={idx}
-                // action={action}
-                destinationPoint={otherCharacterMap.get(other)}
-                // isPressed={isPressed}
-                handleVisible={handleVisible}
-                userName={other}
-                // handleCurrentPosition={handleCurrentPosition}
-              />
-            );
-          })}
-          <CatAnimations
+        <Physics gravity={[0, -10, 0]}>
+          <Suspense fallback={null}>
+            {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
+            {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
+            {others.map((other, idx) => {
+              // console.log(other);
+              // console.log(others);
+              // console.log(idx);
+              console.log(otherCharacterMap);
+              // console.log(otherCharacterMap[other]);
+              return (
+                // <DogAnimations
+                //   key={idx}
+                //   // action={action}
+                //   destinationPoint={otherCharacterMap.get(other)}
+                //   // isPressed={isPressed}
+                //   handleVisible={handleVisible}
+                //   userName={other}
+                //   // handleCurrentPosition={handleCurrentPosition}
+                // />
+                <SelectedOtherPlayer
+                  key={idx}
+                  destinationPoint={otherCharacterMap.get(other)}
+                  handleVisible={handleVisible}
+                  userName={other}
+                />
+              );
+            })}
+            {/* <CatAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
             // handleEvent={handleEvent}
           /> */}
+            <SelectedMyPlayer
+              destinationPoint={destinationPoint}
+              handleVisible={handleVisible}
+            />
+            <ObjectTest visible={visible} />
+            {/* <ObjectTest currentPosition={currentPosition} /> */}
 
-          <ObjectTest visible={visible} />
-          {/* <ObjectTest currentPosition={currentPosition} /> */}
+            <CartoonCampingKit />
+            <FireAnimated />
+            <CampingMod />
 
-          {/* travel zone */}
-          {/* <CampingPack /> */}
-          <CartoonCampingKit />
-          <FireAnimated />
-          <CampingMod />
+            {/* anniv zone */}
+            <Christmas />
 
-          {/* anniv zone */}
-          <Christmas />
+            {/* diary zone */}
+            <HackerRoom />
 
-          {/* diary zone */}
-          <HackerRoom />
+            {/* easter egg zone */}
+            <EasterPack />
 
-          {/* easter egg zone */}
-          <EasterPack />
+            {/* etc */}
+            <Fireworks />
+            <SkyTube />
+            <Park />
 
-          {/* etc */}
-          <Fireworks />
-          <SkyTube />
-          <Park />
+            {/* music - positional audio */}
+            {/* audiozone = 소리 나오는 구간  &  radio = theme song 바꾸는거 */}
+            <AudioZone />
+            <Radio />
 
-          {/* music - positional audio */}
-          {/* audiozone = 소리 나오는 구간  &  radio = theme song 바꾸는거 */}
-          <AudioZone />
-          <Radio />
+            {/* floor */}
+            <ReverseFloor />
+            <StonesMod />
+            {/* <ForestKit /> */}
 
-          {/* floor */}
-          <ReverseFloor />
-          <StonesMod />
-          {/* <ForestKit /> */}
+            {/* test html effect */}
+            {/* <Television /> */}
+            <TelevisionMod />
 
-          {/* test html effect */}
-          {/* <Television /> */}
-          <TelevisionMod />
-
-          {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
-          {/* 여행 */}
-          <Polaroid position={[71, 4, -43]} rotation={[-Math.PI / 2, 0, Math.PI / 5]} />
-          <Notebook position={[71, 3.4, -38]} rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]} />
-          {/* 기념일 */}
-          <Polaroid position={[38, 1.1, 62]} rotation={[-Math.PI / 2, 0, 0]} />
-          <Notebook position={[35, 0.3, 66]} rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]} />
-          {/* 일기 */}
-          <Polaroid position={[-115, 9, -129]} rotation={[-Math.PI / 2, 0, Math.PI / 1.2]} />
-          <Notebook position={[-110, 8.2, -131]} rotation={[-Math.PI / 2, 0, -Math.PI / 3]} />
-          {/* <Polaroid event={event} />
+            {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
+            {/* 여행 */}
+            <Polaroid
+              position={[71, 4, -43]}
+              rotation={[-Math.PI / 2, 0, Math.PI / 5]}
+            />
+            <Notebook
+              position={[71, 3.4, -38]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]}
+            />
+            {/* 기념일 */}
+            <Polaroid
+              position={[38, 1.1, 62]}
+              rotation={[-Math.PI / 2, 0, 0]}
+            />
+            <Notebook
+              position={[35, 0.3, 66]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]}
+            />
+            {/* 일기 */}
+            <Polaroid
+              position={[-115, 7.7, -129]}
+              rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
+            />
+            <Notebook
+              position={[-110, 6.9, -131]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
+            />
+            {/* <Polaroid event={event} />
           <Notebook event={event} /> */}
-          {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
-        </Suspense>
-        {/* floor */}
-        <mesh
-          onPointerDown={(e) => {
-            setDestinationPoint(e.point);
-            sendPosition(e.point);
-          }}
-          rotation={[-0.5 * Math.PI, 0, 0]}
-          receiveShadow
-        >
-          <planeBufferGeometry attach="geometry" args={[300, 300]} />
-          {/* <planeBufferGeometry attach="geometry" args={[400, 400]} /> */}
-          <meshStandardMaterial map={floorTexture} />
-        </mesh>
+            {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
+          </Suspense>
+          {/* floor */}
+          <mesh
+            onPointerDown={(e) => {
+              setDestinationPoint(e.point);
+              sendPosition(e.point);
+            }}
+            rotation={[-0.5 * Math.PI, 0, 0]}
+            receiveShadow
+          >
+            <planeBufferGeometry attach="geometry" args={[300, 300]} />
+            <meshStandardMaterial map={floorTexture} />
+          </mesh>
+          <ThreeFloor position={[0, -0.5, 0]} rotation={[-Math.PI / 2, 0, 0]} />
+        </Physics>
 
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
-        <mesh rotation={[-0.5 * Math.PI, 0, 0]} position={[-30, 0.02, -30]} receiveShadow>
+        <mesh
+          rotation={[-0.5 * Math.PI, 0, 0]}
+          position={[-30, 0.02, -30]}
+          receiveShadow
+        >
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
           <meshBasicMaterial color="black" transparent opacity={0.3} />
         </mesh>
@@ -926,4 +957,4 @@ function PositionalAudio() {
   );
 }
 
-export default PositionalAudio;
+export default Reverse;
