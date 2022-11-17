@@ -150,7 +150,7 @@ export default function MyGoldfishAnimations({
     <group>
       <group ref={group} dispose={null} position={[-30, 0, -30]}>
         <group name="Scene">
-          <group name="Rig">
+          <group name="Rig" scale={2}>
             <primitive object={nodes.root} />
             <skinnedMesh
               name="Goldfish"
