@@ -8,11 +8,23 @@ title: Low Poly 80's Hacker Room 🕹️
 
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
-
+import { useBox } from "@react-three/cannon";
 export function HackerRoom(props) {
   const { nodes, materials } = useGLTF("/assets/hacker_room/scene.gltf");
+  const [boxCollider] = useBox((props) => ({
+    mass: 100000,
+    args: [20, 10, 10],
+    type: "Static",
+    position: [-118, 1, -130],
+    ...props,
+    // args: [1, 5, 1],
+  }));
   return (
-    <group {...props} dispose={null} scale={4} position={[-120, 0, -120]}>
+    <group {...props} dispose={null} scale={4} position={[-120, -1.3, -120]}>
+      <group>
+        <mesh ref={boxCollider}>
+        </mesh>
+      </group>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group position={[0, 0.34, 0]}>

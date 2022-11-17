@@ -10,7 +10,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useDispatch, useSelector } from "react-redux";
 import { setMusicTheme } from "../../modules/webrtc";
-
+import { useBox } from "@react-three/cannon";
 export function Radio(props) {
   const { nodes, materials } = useGLTF("/assets/radio/scene.gltf");
   const dispatch = useDispatch();
@@ -25,7 +25,14 @@ export function Radio(props) {
   //   dispatch(setMusicTheme(click));
   // }, [click]);
   console.log(webrtcRedux);
-
+const [boxCollider] = useBox((props) => ({
+  mass: 100000,
+  args: [20, 10, 15],
+  type: "Static",
+  position: [-128, 1, -100],
+  ...props,
+  // args: [1, 5, 1],
+}));
   return (
     <group
       {...props}
@@ -39,6 +46,7 @@ export function Radio(props) {
         document.getElementsByTagName("body")[0].style.cursor = "";
       }}
     >
+      <mesh ref={boxCollider} scale={50}></mesh>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group
