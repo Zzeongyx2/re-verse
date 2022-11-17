@@ -60,7 +60,7 @@ services:
             - 9200:9200
             - 9300:9300
         networks:
-            - my_net
+            - default
         volumes:
             - elasticsearch:/usr/share/elasticsearch/data
         environment:
