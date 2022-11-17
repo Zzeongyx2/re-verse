@@ -16,7 +16,6 @@ import kr.co.reverse.archive.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -42,6 +41,7 @@ public class UserService {
     private final ArchiveRepository archiveRepository;
     private final UserRepository userRepository;
     private final RedisService redisService;
+    private final UserSearchService userSearchService;
 
     public User getPlayer(String userId) {
         return userRepository.findById(UUID.fromString(userId)).get();
@@ -96,6 +96,8 @@ public class UserService {
         user.setNickname(userInfo.getNickname());
         user.setMessage(userInfo.getMessage());
 
+        userSearchService.updateUser(user);
+
     }
 
     @Transactional
@@ -110,7 +112,10 @@ public class UserService {
                     .createdTime(LocalDate.now())
                     .build();
 
-            return userRepository.save(user);
+            userRepository.save(user);
+
+            //document에 저장
+            userSearchService.createUser(user);
         }
 
         return null;
@@ -122,6 +127,8 @@ public class UserService {
         User user = getPlayer(userId);
 
         user.setAvatar(Avatar.valueOf(avatarInfo.getAvatar()));
+
+        userSearchService.updateAvatar(user);
 
     }
 
@@ -143,9 +150,14 @@ public class UserService {
 
     public List<User> getUsers(String nickname) {
 
-        List<User> users = userRepository.findByNicknameContaining(nickname);
+        //        userSearchRepository.findByNickname(nickname).stream().map(UserDocument::from).collect(Collectors.toList());
 
-        return users;
+
+        return userRepository.findByNicknameContaining(nickname);
+    }
+
+    public User getUserByAuthId(String authId) {
+        return userRepository.findUserByAuthId(authId);
     }
 
     public User getUserByNickname(String nickname) {
