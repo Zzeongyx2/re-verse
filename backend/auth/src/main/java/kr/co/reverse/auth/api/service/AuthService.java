@@ -214,6 +214,8 @@ public class AuthService {
         redisService.deleteValues(accessToken);
         redisService.deleteValues(refreshToken);
 
+        connectDeleteUser(auth.getId().toString());
+
         Cookie accessCookie = new Cookie(REFRESH_TOKEN, null);
         accessCookie.setMaxAge(0);
         response.addCookie(accessCookie);
@@ -317,7 +319,7 @@ public class AuthService {
 
     }
 
-    public void connectDeleteUser(String authId){
+    public void connectDeleteUser(String authId) {
         RestTemplate restTemplate = new RestTemplate();
 
         URI uri = UriComponentsBuilder.fromUriString(USER_REDIRECT_URI)
