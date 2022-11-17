@@ -27,7 +27,7 @@ export default function MyParrotAnimations({
   // }));
   // const previousAction = usePrevious(action);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Parrot_Animations.gltf",
+    "/assets/animals/GLTF/Animations/Parrot_Animations.gltf"
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -88,7 +88,7 @@ export default function MyParrotAnimations({
       if (moving) {
         angle = Math.atan2(
           destinationPoint.z - group.current.position.z,
-          destinationPoint.x - group.current.position.x,
+          destinationPoint.x - group.current.position.x
         );
         if (isCollided) {
           group.current.position.x -= Math.cos(angle) * 0.5;
@@ -98,8 +98,8 @@ export default function MyParrotAnimations({
           setMoving(false);
           setCollision(false);
         } else {
-          group.current.position.x += Math.cos(angle) * 0.065;
-          group.current.position.z += Math.sin(angle) * 0.065;
+          group.current.position.x += Math.cos(angle) * 0.2;
+          group.current.position.z += Math.sin(angle) * 0.2;
         }
         api.position.set(group.current.position.x, 0, group.current.position.z);
         state.camera.position.x = 1 + group.current.position.x;
@@ -112,8 +112,8 @@ export default function MyParrotAnimations({
         // console.log(group.current.position);
         // console.log(Math.cos(angle) * 0.065);
         if (
-          Math.abs(destinationPoint.x - group.current.position.x) < 0.03 &&
-          Math.abs(destinationPoint.z - group.current.position.z) < 0.03
+          Math.abs(destinationPoint.x - group.current.position.x) < 0.1 &&
+          Math.abs(destinationPoint.z - group.current.position.z) < 0.1
         ) {
           setMoving(false);
           actions["Walk"].stop();
@@ -150,7 +150,7 @@ export default function MyParrotAnimations({
     <group>
       <group ref={group} dispose={null} position={[-30, 0, -30]}>
         <group name="Scene">
-          <group name="Rig">
+          <group name="Rig" scale={2}>
             <primitive object={nodes.root} />
             <skinnedMesh
               name="Parrot"
