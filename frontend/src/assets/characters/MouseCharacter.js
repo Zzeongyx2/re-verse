@@ -9,23 +9,18 @@ export default function MouseCharacter() {
   const { nodes, materials, animations } = useGLTF(
     "/assets/animals/GLTF/Animations/Mouse_Animations.gltf"
   );
-  const { actions } = useAnimations(animations, group);
+  const { actions, names } = useAnimations(animations, group);
 
-  const characterClick = () => {
-    if (action === "Idle_A") {
-      setAction("Roll");
-    } else {
-      setAction("Idle_A");
-    }
-  };
+  const [index, setIndex] = useState(8);
   useEffect(() => {
-    if (previousAction) {
-      actions[previousAction].fadeOut(0.2);
-      actions[action].stop();
-    }
-    actions[action].play();
-    actions[action].fadeIn(0.2);
-  }, [actions, action, previousAction]);
+    actions[names[index]].reset().fadeIn(0.5).play();
+    return () => {
+      if (actions[names[index]]) {
+        actions[names[index]].fadeOut(0.5);
+      }
+    };
+  }, [index, actions, names]);
+
   return (
     <group ref={group} dispose={null}>
       <group name="Scene">
@@ -41,9 +36,7 @@ export default function MouseCharacter() {
             // 그림자 설정은 여기에!
             castShadow
             receiveShadow
-            onClick={() => {
-              characterClick();
-            }}
+            onClick={() => setIndex((index + 1) % names.length)}
           />
         </group>
       </group>

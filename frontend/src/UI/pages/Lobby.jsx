@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { getUserInfo } from "../../api/user";
 import { useSelector, useDispatch } from "react-redux";
 import { setLoginUser } from "../../modules/user";
+import LobbyCharacterThree from "../organisms/LobbyCharacterThree";
 
 function Lobby() {
   // TODO: 메인아카이브, 최근방문 아카이브 가져와서 넣어주기
@@ -27,7 +28,7 @@ function Lobby() {
   };
 
   return (
-    <div className="mt-8">
+    <div className="pt-10">
       <div className="">
         <Navbar />
       </div>
@@ -38,7 +39,8 @@ function Lobby() {
             <NeonLightBG />
           </div>
           <div className="absolute bg-opacity-0 w-full h-full">
-            <CharacterThree animalName={loginUser.avatar} />
+            {/* <CharacterThree animalName={loginUser.avatar} /> */}
+            <LobbyCharacterThree animalName={loginUser.avatar} />
           </div>
         </div>
         {/* right side: shortcut btn, profile */}

@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
-export default function RabbitCharacter() {
+export default function SnowLeopardCharacter() {
   const group = useRef();
   const [action, setAction] = useState("Idle_A");
 
   const previousAction = usePrevious(action);
   const { nodes, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Rabbit_Animations.gltf"
+    "/assets/animals/GLTF/Animations/SnowLeopard_Animations.gltf"
   );
   const { actions, names } = useAnimations(animations, group);
 
@@ -27,12 +27,12 @@ export default function RabbitCharacter() {
         <group name="Rig">
           <primitive object={nodes.root} />
           <skinnedMesh
-            name="Rabbit"
-            geometry={nodes.Rabbit.geometry}
-            material={materials.M_Rabbit}
-            skeleton={nodes.Rabbit.skeleton}
-            morphTargetDictionary={nodes.Rabbit.morphTargetDictionary}
-            morphTargetInfluences={nodes.Rabbit.morphTargetInfluences}
+            name="SnowLeopard"
+            geometry={nodes.SnowLeopard.geometry}
+            material={materials.M_SnowLeopard}
+            skeleton={nodes.SnowLeopard.skeleton}
+            morphTargetDictionary={nodes.SnowLeopard.morphTargetDictionary}
+            morphTargetInfluences={nodes.SnowLeopard.morphTargetInfluences}
             // 그림자 설정은 여기에!
             castShadow
             receiveShadow
@@ -44,7 +44,7 @@ export default function RabbitCharacter() {
   );
 }
 
-useGLTF.preload("/assets/animals/GLTF/Animations/Rabbit_Animations.gltf");
+useGLTF.preload("/assets/animals/GLTF/Animations/SnowLeopard_Animations.gltf");
 
 function usePrevious(value) {
   const ref = useRef();
