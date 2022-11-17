@@ -78,19 +78,6 @@ public class ArchiveController {
         }
 
         ArchiveDetailRes archiveDetailRes = archiveService.getArchiveDetail(UUID.fromString(archiveId));
-        archiveService.createLastArchive(UUID.fromString(archiveId), user);
-        return ResponseEntity.ok(archiveDetailRes);
-    }
-
-
-    @GetMapping("/last")
-    public ResponseEntity<? extends ArchiveDetailRes> getLastArchive() {
-
-        String userId = userService.getUserId();
-        User user = userService.getPlayer(userId);
-
-        ArchiveDetailRes archiveDetailRes = archiveService.getLastArchiveDetail(user);
-
         return ResponseEntity.ok(archiveDetailRes);
     }
 
