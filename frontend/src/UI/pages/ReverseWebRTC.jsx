@@ -12,7 +12,7 @@ import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
 
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import CatAnimations from "../../assets/players/Cat_Animations copy";
-import DogAnimations from "../../assets/players/Dog_Animations.js";
+import DogAnimations from "../../assets/players/other/OtherDogAnimations";
 import { SkyTube } from "../../assets/deco/SkyTube.js";
 import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
 import ReverseFooter from "../organisms/ReverseFooter.jsx";
@@ -38,7 +38,7 @@ function ReverseWebRTC() {
   const [action, setAction] = useState("Idle_A");
   // const [characterPosition, setCharacterPosition] = useState();
   const [destinationPoint, setDestinationPoint] = useState(
-    new Vector3(-30, 0, -30)
+    new Vector3(-30, 0, -30),
   );
   const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/grid.png");
@@ -263,7 +263,7 @@ function ReverseWebRTC() {
         // document.getElementById("h3-myStatus").appendChild(myStatus);
         // document.getElementById('btnShowLogin').click();
         alert(
-          "Connected to Signalling Server. Please click the Show Login/Chat button"
+          "Connected to Signalling Server. Please click the Show Login/Chat button",
         );
         newMember(userId2);
       } else if (data1.type === "Offer") {
@@ -319,7 +319,7 @@ function ReverseWebRTC() {
 
     if (data1.type === "NewMember") {
       let channel1 = rtcPeer.createDataChannel(
-        Math.floor(Math.random() * 10000000000)
+        Math.floor(Math.random() * 10000000000),
       );
       channelConfig(channel1);
 

@@ -9,7 +9,7 @@ import { useFrame, useGraph } from "@react-three/fiber";
 import { Vector3 } from "three";
 import { useBox } from "@react-three/cannon";
 import * as SkeletonUtils from "three/examples/jsm/utils/SkeletonUtils";
-export default function DogAnimations({
+export default function OtherDogAnimations({
   action,
   destinationPoint,
   handleCurrentPosition,
@@ -19,7 +19,7 @@ export default function DogAnimations({
   const group = useRef();
   // const previousAction = usePrevious(action);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Dog_Animations.gltf"
+    "/assets/animals/GLTF/Animations/Dog_Animations.gltf",
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -57,14 +57,30 @@ export default function DogAnimations({
       // console.log(group.current); // player.modelmesh
       // console.log(group.current.lookAt(destinationPoint));
       group.current.lookAt(
-        new Vector3(destinationPoint.x, 0, destinationPoint.z)
+        new Vector3(destinationPoint.x, 0, destinationPoint.z),
       );
       group.current.name = userName;
       // console.log(group.current.name);
       // console.log(group.current);
     }
   }, [destinationPoint]);
-
+  const [isCollided, setCollision] = useState(false);
+  const [ref, api] = useBox(() => ({
+    rotation: [0, 0, 0],
+    mass: 10,
+    args: [1.5, 1.5, 1.5],
+    // type: "Static",
+    // args: [1, 5, 1],
+    position: [destinationPoint.x, 1.1, destinationPoint.z],
+    onCollideBegin: (e) => {
+      console.log("아야");
+      console.log(e);
+      // setMoving(false);
+      setCollision(true);
+      actions["Walk"].stop();
+      actions["Idle_A"].play();
+    },
+  }));
   useFrame((state) => {
     actions["Idle_A"].play();
     if (group.current) {
@@ -75,10 +91,20 @@ export default function DogAnimations({
       if (moveRef.current) {
         angle = Math.atan2(
           destinationPoint.z - group.current.position.z,
-          destinationPoint.x - group.current.position.x
+          destinationPoint.x - group.current.position.x,
         );
-        group.current.position.x += Math.cos(angle) * 0.05;
-        group.current.position.z += Math.sin(angle) * 0.05;
+        if (isCollided) {
+          group.current.position.x -= Math.cos(angle) * 0.5;
+          group.current.position.z -= Math.sin(angle) * 0.5;
+          destinationPoint.x = group.current.position.x;
+          destinationPoint.z = group.current.position.z;
+          setMoving(false);
+          setCollision(false);
+        } else {
+          group.current.position.x += Math.cos(angle) * 0.065;
+          group.current.position.z += Math.sin(angle) * 0.065;
+        }
+        api.position.set(group.current.position.x, 0, group.current.position.z);
 
         // state.camera.position.x = 1 + group.current.position.x;
         // state.camera.position.z = 5 + group.current.position.z;
@@ -117,6 +143,7 @@ export default function DogAnimations({
           handleVisible(false);
         }
       }
+      api.position.set(group.current.position.x, 0, group.current.position.z);
     }
   });
 
@@ -130,23 +157,28 @@ export default function DogAnimations({
   //   // actions.Idle_A.play();
   // }, [actions, action, previousAction]);
   return (
-    // <group ref={group} dispose={null}>
-    <group ref={group} position={initPosition}>
-      <group>
+    <group>
+      <group ref={group} position={initPosition}>
         <group>
-          <primitive object={nodes.root} />
-          <skinnedMesh
-            geometry={nodes.Dog.geometry}
-            material={materials.M_Dog}
-            skeleton={nodes.Dog.skeleton}
-            morphTargetDictionary={nodes.Dog.morphTargetDictionary}
-            morphTargetInfluences={nodes.Dog.morphTargetInfluences}
-            // 그림자 설정은 여기에!
-            castShadow
-            receiveShadow
-          />
+          <group>
+            <primitive object={nodes.root} />
+            <skinnedMesh
+              geometry={nodes.Dog.geometry}
+              material={materials.M_Dog}
+              skeleton={nodes.Dog.skeleton}
+              morphTargetDictionary={nodes.Dog.morphTargetDictionary}
+              morphTargetInfluences={nodes.Dog.morphTargetInfluences}
+              // 그림자 설정은 여기에!
+              castShadow
+              receiveShadow
+            />
+          </group>
         </group>
       </group>
+      <mesh ref={ref} castShadow={true}>
+        <boxGeometry args={[1.5, 1.5, 1.5]} />
+        <meshLambertMaterial color={"hotpink"} />
+      </mesh>
     </group>
   );
 }
