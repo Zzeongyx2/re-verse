@@ -2,11 +2,16 @@ server:
   port: 8080
 
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://re-verse.co.kr:3306/reverse_auth?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: flQjtm1024
   jpa:
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
@@ -15,6 +20,10 @@ spring:
         show_sql: true
         format_sql: true
         dialect: org.hibernate.dialect.MySQL57Dialect
+  # redis:
+  #   host: localhost
+  #   port: 6379
+  #   password: reverse
 
 logging:
   level:

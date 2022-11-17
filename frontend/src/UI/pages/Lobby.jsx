@@ -6,21 +6,21 @@ import CharacterThree from "../organisms/CharacterThree";
 import ThreeTest from "../organisms/ThreeTest";
 import { useState, useEffect } from "react";
 import { getUserInfo } from "../../api/user";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoginUser } from "../../modules/user";
 
 function Lobby() {
   // TODO: 메인아카이브, 최근방문 아카이브 가져와서 넣어주기
-  const initialUserInfo = {
-    nickname: "",
-    message: "",
-    avatar: "Cat",
-  };
 
-  const [loginUser, setLoginUser] = useState(initialUserInfo);
+  // const [loginUser, setLoginUser] = useState(initialUserInfo);
+  const loginUser = useSelector((state) => state.user.loginUser);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     getUserInfo(getUserInfoSuccess, getUserInfoFail);
   }, []);
   const getUserInfoSuccess = (res) => {
-    setLoginUser(res.data);
+    dispatch(setLoginUser(res.data));
   };
   const getUserInfoFail = (error) => {
     console.log(error);
@@ -45,7 +45,7 @@ function Lobby() {
         <div className="w-[calc(96%/3)]">
           {/* // FIXME: 나중에 linkto 속성값 변경해야 함 */}
           <LobbyButton
-            linkTo={"/lobby"}
+            linkTo={`/reverse/${loginUser.bestArchiveId}`}
             buttonTitle={"대표 아카이브 바로가기"}
             buttonMessage={"zl존윤sun의 메인 아카이브"}
             textcolor={"text-white"}

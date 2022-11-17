@@ -10,9 +10,12 @@ import Character from "./UI/pages/Character";
 import Friend from "./UI/pages/Friend";
 import Archive from "./UI/pages/Archive";
 import NeonTest from "./UI/pages/NeonTest";
-import Reverse from "./UI/pages/Reverse";
 import ReverseTemp from "./UI/pages/ReverseTemp";
 import ReverseWebRTC from "./UI/pages/ReverseWebRTC";
+import { EditorComponent } from "./UI/organisms/TextEditor";
+import ReverseTextEditor from "./UI/organisms/ReverseTextEditor";
+import ReverseHelper from "./UI/pages/ReverseHelper";
+import LazyAudio from "./UI/pages/LazyAudio";
 
 axios.defaults.withCredentials = true;
 
@@ -31,9 +34,11 @@ function App() {
           <Route path="/friend/*" element={<Friend />} />
           <Route path="/archive/*" element={<Archive />} />
           <Route path="/neontest" element={<NeonTest />} />
-          <Route path="/reverse/:archiveId" element={<Reverse />} />
-          <Route path="/reversetemp" element={<ReverseTemp />} />
+          <Route path="/reverse/:archiveId" element={<ReverseHelper />} />
+          <Route path="/reversetemp/:archiveId" element={<ReverseTemp />} />
           <Route path="/reverse/rtc" element={<ReverseWebRTC />} />
+          <Route path="/texteditor" element={<ReverseTextEditor />} />
+          <Route path="/audiote/:archiveId" element={<LazyAudio />} />
         </Routes>
       </div>
     </BrowserRouter>

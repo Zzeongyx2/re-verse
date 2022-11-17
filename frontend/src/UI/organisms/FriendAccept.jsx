@@ -4,53 +4,55 @@ import { Avatar } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
 
 import { BsCheckCircle, BsXCircle } from "react-icons/bs";
+import { acceptFriend, getAcceptFriendList, getFriendList } from "../../api/friend";
+import { imageForm, s3Path } from "../../api";
+import { useDispatch } from "react-redux";
+import { setFriendList } from "../../modules/friend";
 
 function FriendAccept() {
   const [friendAcceptList, setFriendAcceptList] = useState([]);
-  // TODO: 이미지 저장용 변수 나중에 지우기
-  // const [image] = useState(
-  //   "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f2b4e0f-cd21-46d7-a5c3-b392a363d398/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221028%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221028T014603Z&X-Amz-Expires=86400&X-Amz-Signature=5cfd5ce99324a5c83710ee8d825ca12caa1c23a33835352bb9d5fe12fa2a2d0c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject"
-  // );
-  const profileImg =
-    "https://images.unsplash.com/photo-1639503611585-1054af5dbfab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80";
+  const dispatch = useDispatch();
 
-  // TODO:
-  const friendAccept = (email) => {
-    // TODO: 친구수락 하기
-    console.log("친구수락", email);
+  const friendAccept = (nickname) => {
+    acceptFriend({ nickname: nickname, isAccepted: true }, acceptSuccess, acceptFail);
+    console.log("친구수락", nickname);
   };
-  const friendRefuse = (email) => {
-    // TODO: 친구거절 하기
-    console.log("친구거절", email);
+  const friendRefuse = (nickname) => {
+    acceptFriend({ nickname: nickname, isAccepted: false }, acceptSuccess, acceptFail);
+    console.log("친구거절", nickname);
   };
-
+  const acceptSuccess = (res) => {
+    getAcceptList();
+    console.log(res);
+  };
+  const acceptFail = (error) => {
+    console.log(error);
+  };
+  const getAcceptList = async () => {
+    await getAcceptFriendList(getAcceptListSuccess, getAcceptListFail);
+  };
   useEffect(() => {
-    // TODO: axios 요청으로 유저 목록 받기
-    setFriendAcceptList((list) => {
-      return [
-        ...list,
-        {
-          email: "email@naver.com",
-          nickname: "KIN거운KAN쵸",
-          avatar: profileImg,
-          message: "엉망으로 살아야 해! 인생은 한 번이야!",
-        },
-        {
-          email: "email@naver.com",
-          nickname: "oO강약약강Oo",
-          avatar: profileImg,
-          message: "가는 말이 고우면, 얕본다.",
-        },
-        {
-          email: "email@naver.com",
-          nickname: "zl존윤sun2",
-          avatar: profileImg,
-          message:
-            "새벽에 먹는 맥주와 치킨은 0 칼로리다.새벽에 먹는 맥주와 치킨은 0 칼로리다.새벽에 먹는 맥주와 치킨은 0 칼로리다.",
-        },
-      ];
-    });
+    getAcceptList();
   }, []);
+  const getAcceptListSuccess = async (res) => {
+    console.log(res);
+    setFriendAcceptList(res.data.waitingFrom);
+    await settingFriendList();
+  };
+  const settingFriendList = async () => {
+    await getFriendList(getFriendSuccess, getFriendFail);
+  };
+
+  const getFriendSuccess = (res) => {
+    console.log(res);
+    dispatch(setFriendList(res.data.friendList));
+  };
+  const getFriendFail = (error) => {
+    console.log(error);
+  };
+  const getAcceptListFail = (error) => {
+    console.log(error);
+  };
 
   return (
     <div className="text-base2">
@@ -63,7 +65,11 @@ function FriendAccept() {
                 <div key={`friendAcceptList-${index}`}>
                   <div className="flex items-center justify-between px-2 py-1">
                     <div className="flex items-center">
-                      <Avatar name="profileImg" src={profileImg} size="sm" />
+                      <Avatar
+                        name="profileImg"
+                        src={s3Path + friend.avatar + imageForm}
+                        size="sm"
+                      />
                       <div className="text-base1 px-3">
                         <p className="text-sm font-bold">{friend.nickname}</p>
                         <p className="overflow-hidden text-ellipsis line-clamp-1 text-xs text-zinc-500">
@@ -75,14 +81,14 @@ function FriendAccept() {
                       <button
                         className="mx-1.5"
                         onClick={() => {
-                          friendAccept(friend.email);
+                          friendAccept(friend.nickname);
                         }}
                       >
                         <BsCheckCircle className="text-[#4ECB71]" size={22} />
                       </button>
                       <button
                         onClick={() => {
-                          friendRefuse(friend.email);
+                          friendRefuse(friend.nickname);
                         }}
                       >
                         <BsXCircle className="text-sub4" size={22} />

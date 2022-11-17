@@ -22,4 +22,14 @@ public class WebSocketDto {
         this.session = session;
         this.sessionMap = sessionMap;
     }
+
+    @Override
+    public String toString() {
+        return "\n\tWebSocketDto{" +
+                "\n\t\tsession :" +
+                "\n\t\t\t"+session +
+                "\n\t\tsessionMap :" +
+                "\n\t\t\t"+ sessionMap +
+                "\n}\n";
+    }
 }

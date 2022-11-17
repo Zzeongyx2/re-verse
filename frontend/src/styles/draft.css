@@ -1,0 +1,14 @@
+.wrapper {
+  height: 100%;
+  overflow: hidden;
+}
+.editor {
+  height: 100%;
+  overflow: auto;
+}
+.toolbar {
+}
+
+/* .textalign {
+  background-color: blue;
+} */

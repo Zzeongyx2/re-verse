@@ -4,52 +4,56 @@ import { BsSearch } from "react-icons/bs";
 import { FiPlusCircle } from "react-icons/fi";
 
 import { Avatar, Divider } from "@chakra-ui/react";
+import { getFriendList, requestFriend, searchUser } from "../../api/friend";
+import { imageForm, s3Path } from "../../api";
+import { useSelector, useDispatch } from "react-redux";
+import { setFriendList } from "../../modules/friend";
 
 function FriendRequest() {
   const [findNickName, setFindNickName] = useState("");
   const [userList, setUserList] = useState([]);
-  // TODO: 이미지 저장용 변수 나중에 지우기
-  const [profileImg] = useState(
-    "https://images.unsplash.com/photo-1628260412297-a3377e45006f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80"
-  );
+  const loginUser = useSelector((state) => state.user.loginUser);
+  const friendList = useSelector((state) => state.friend.friendList);
+  const dispatch = useDispatch();
 
-  // TODO:
   const findNickNameHandleChange = (e) => {
     setFindNickName(e.target.value);
   };
 
-  const friendRequest = (email) => {
-    // TODO: 친구요청 하기
-    console.log("친구요청", email);
+  const friendRequest = (nickname) => {
+    requestFriend(nickname, requestFriendSuccess, requestFriendFail);
+    console.log("친구요청", nickname);
+  };
+  const requestFriendSuccess = async (res) => {
+    await settingFriendList();
+
+    console.log(res);
+  };
+  const settingFriendList = async () => {
+    await getFriendList(getFriendSuccess, getFriendFail);
   };
 
+  const getFriendSuccess = (res) => {
+    console.log(res);
+    dispatch(setFriendList(res.data.friendList));
+  };
+  const getFriendFail = (error) => {
+    console.log(error);
+  };
+  const requestFriendFail = (error) => {
+    console.log(error);
+  };
   useEffect(() => {
-    // TODO: axios 요청으로 유저 목록 받기
-    setUserList((list) => {
-      return [
-        ...list,
-        {
-          email: "email@naver.com",
-          nickname: "KIN거운KAN쵸",
-          avatar: profileImg,
-          message: "엉망으로 살아야 해! 인생은 한 번이야!",
-        },
-        {
-          email: "email@naver.com",
-          nickname: "oO강약약강Oo",
-          avatar: profileImg,
-          message: "가는 말이 고우면, 얕본다.",
-        },
-        {
-          email: "email@naver.com",
-          nickname: "zl존윤sun2",
-          avatar: profileImg,
-          message:
-            "새벽에 먹는 맥주와 치킨은 0 칼로리다.새벽에 먹는 맥주와 치킨은 0 칼로리다.새벽에 먹는 맥주와 치킨은 0 칼로리다.",
-        },
-      ];
-    });
-  }, []);
+    searchUser(findNickName, searchUserSuccess, searchUserFail);
+  }, [findNickName]);
+
+  const searchUserSuccess = (res) => {
+    console.log(res);
+    setUserList(res.data.users);
+  };
+  const searchUserFail = (error) => {
+    console.log(error);
+  };
 
   return (
     <div className="text-base2">
@@ -69,23 +73,30 @@ function FriendRequest() {
           {/* user lifo */}
           <div className="w-[calc(100%-70px)] overflow-auto scrollbar-hide">
             {userList
-              .filter((friend) => {
-                if (findNickName.trim() === "") {
-                  return friendRequest;
-                } else if (friend.nickname.includes(findNickName)) {
-                  return friend;
+              .filter((user) => {
+                if (user.nickname === loginUser.nickname) {
+                  return;
                 }
+                for (let index = 0; index < friendList.length; index++) {
+                  const friend = friendList[index];
+                  if (friend.nickname === user.nickname) {
+                    return;
+                  }
+                }
+                return user;
               })
               .map((friend, index) => {
                 return (
                   <div key={`userList-${index}`}>
                     <div className="flex items-center justify-between px-2 py-1">
                       <div className="flex items-center">
-                        <Avatar name="profileImg" src={profileImg} size="sm" />
+                        <Avatar
+                          name="profileImg"
+                          src={s3Path + friend.avatar + imageForm}
+                          size="sm"
+                        />
                         <div className="text-base1 px-3">
-                          <p className="cursor-pointer text-sm font-bold">
-                            {friend.nickname}
-                          </p>
+                          <p className="cursor-pointer text-sm font-bold">{friend.nickname}</p>
                           <p className="overflow-hidden text-ellipsis line-clamp-1 text-xs text-zinc-500">
                             {friend.message}
                           </p>
@@ -96,7 +107,7 @@ function FriendRequest() {
                       </div>
                       <button
                         onClick={() => {
-                          friendRequest(friend.email);
+                          friendRequest(friend.nickname);
                         }}
                       >
                         <FiPlusCircle className="text-[#3F81FB]" size={24} />

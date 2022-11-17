@@ -2,7 +2,7 @@ package kr.co.reverse.model;
 
 public class SignalData {
 
-    private String userId, type, data, toUid, archive;
+    private String userId, type, data, toUid, archiveId;
 
 
     public String getToUid() {
@@ -37,12 +37,12 @@ public class SignalData {
         this.data = data;
     }
 
-    public String getArchive() {
-        return archive;
+    public String getArchivId() {
+        return archiveId;
     }
 
-    public void setArchive(String archive) {
-        this.archive = archive;
+    public void setArchiveId(String archive) {
+        this.archiveId = archive;
     }
 
 

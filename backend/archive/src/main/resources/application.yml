@@ -2,11 +2,15 @@ server:
   port: 8081
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 50MB
   jpa:
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
@@ -24,6 +28,26 @@ logging:
     org.springframework.boot: debug
     org.apache.tiles: info
     kr.co.reverse.archive: debug
+
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIA35FT7NQ63VIMM2LP
+      secret-key: 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
+    s3:
+      bucket: re-verse-bucket
+#        url: https://s3.ap-northeast-2.amazonaws.com/re-verse-bucket
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
+
+
+# elasticsearch:
+#   host: localhost
+#   port : 9200
 
 jwt:
   secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK

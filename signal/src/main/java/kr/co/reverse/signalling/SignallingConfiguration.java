@@ -15,8 +15,8 @@ public class SignallingConfiguration  implements WebSocketConfigurer{
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-
-        registry.addHandler(new SignallingHandler(), "/socket1").setAllowedOrigins(allowedOrigin);
+        registry
+                .addHandler(new SignallingHandler(), "/socket").setAllowedOrigins(allowedOrigin);
     }
 
 

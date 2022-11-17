@@ -1,12 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import {
-  Link,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Button from "../atoms/Button";
 import ArchiveFriend from "../organisms/ArchiveFriend";
 import ArchiveLike from "../organisms/ArchiveLike";
@@ -43,9 +37,7 @@ function Archive() {
             <Link to="my">
               <Button
                 color={selectTap === "나의아카이브" ? "white" : "black"}
-                from={
-                  selectTap === "나의아카이브" ? "from-main1" : "from-main2"
-                }
+                from={selectTap === "나의아카이브" ? "from-main1" : "from-main2"}
                 to={selectTap === "나의아카이브" ? "to-sub1" : "to-sub2"}
                 text={"나의 아카이브"}
                 click={() => {}}
@@ -56,9 +48,7 @@ function Archive() {
             <Link to="friend">
               <Button
                 color={selectTap === "친구아카이브" ? "white" : "black"}
-                from={
-                  selectTap === "친구아카이브" ? "from-main1" : "from-main2"
-                }
+                from={selectTap === "친구아카이브" ? "from-main1" : "from-main2"}
                 to={selectTap === "친구아카이브" ? "to-sub1" : "to-sub2"}
                 text={"친구의 아카이브"}
                 click={() => {}}
