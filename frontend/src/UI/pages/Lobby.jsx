@@ -9,21 +9,32 @@ import { getUserInfo } from "../../api/user";
 import { useSelector, useDispatch } from "react-redux";
 import { setLoginUser } from "../../modules/user";
 import LobbyCharacterThree from "../organisms/LobbyCharacterThree";
+import { getLastArchive } from "../../api/archive";
+import { setLastArchive } from "../../modules/archive";
 
 function Lobby() {
   // TODO: 메인아카이브, 최근방문 아카이브 가져와서 넣어주기
 
   // const [loginUser, setLoginUser] = useState(initialUserInfo);
   const loginUser = useSelector((state) => state.user.loginUser);
+  const lastArchive = useSelector((state) => state.archive.lastArchive);
   const dispatch = useDispatch();
-
+  console.log(lastArchive);
   useEffect(() => {
     getUserInfo(getUserInfoSuccess, getUserInfoFail);
+    getLastArchive(getLastArchiveSuccess, getLastArchiveFail);
   }, []);
   const getUserInfoSuccess = (res) => {
     dispatch(setLoginUser(res.data));
   };
   const getUserInfoFail = (error) => {
+    console.log(error);
+  };
+  const getLastArchiveSuccess = (res) => {
+    dispatch(setLastArchive(res.data));
+    console.log(res);
+  };
+  const getLastArchiveFail = (error) => {
     console.log(error);
   };
 
@@ -49,16 +60,16 @@ function Lobby() {
           <LobbyButton
             linkTo={`/reverse/${loginUser.bestArchiveId}`}
             buttonTitle={"대표 아카이브 바로가기"}
-            buttonMessage={"zl존윤sun의 메인 아카이브"}
+            buttonMessage={`${loginUser.nickname}의 메인 아카이브`}
             textcolor={"text-white"}
             from={"from-main1"}
             to={"to-sub1"}
           />
           <br />
           <LobbyButton
-            linkTo={"/lobby"}
+            linkTo={`/reverse/${lastArchive?.id}`}
             buttonTitle={"최근 방문한 아카이브 바로가기"}
-            buttonMessage={"zl존윤sun의 메인 아카이브"}
+            buttonMessage={`${lastArchive?.members[0].nickname}의 아카이브 ${lastArchive?.title}`}
             textcolor={"text-gray-700"}
             from={"from-main2"}
             to={"to-sub2"}

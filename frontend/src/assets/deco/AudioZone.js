@@ -2,11 +2,14 @@ import { PositionalAudio } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setMusicTheme } from "../../modules/webrtc";
 
 export default function AudioZone(params) {
   const audioref = useRef();
   const webrtcRedux = useSelector((state) => state.webrtc);
+  const dispatch = useDispatch();
+  const [initAudio, setInitAudio] = useState(0);
 
   useEffect(() => {
     if (webrtcRedux.bgmCheck) {
@@ -15,6 +18,15 @@ export default function AudioZone(params) {
       console.log("bgm off");
     }
   }, [webrtcRedux.bgmCheck]);
+
+  useEffect(() => {
+    if (initAudio < 5) {
+      dispatch(setMusicTheme((webrtcRedux.musicTheme + 1) % 5));
+      setInitAudio(initAudio + 1);
+      console.log(webrtcRedux.musicTheme);
+      console.log(initAudio);
+    }
+  }, [initAudio]);
 
   // const musicList = [
   //   <PositionalAudio

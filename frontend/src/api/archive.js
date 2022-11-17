@@ -16,10 +16,23 @@ async function deleteArchive(archiveId, success, fail) {
   await api.delete(`/archive/${archiveId}`).then(success).catch(fail);
 }
 async function editArchive(archiveId, editArchiveReq, success, fail) {
-  await api.patch(`/archive/${archiveId}`, editArchiveReq).then(success).catch(fail);
+  await api
+    .patch(`/archive/${archiveId}`, editArchiveReq)
+    .then(success)
+    .catch(fail);
 }
 async function getArchiveLike(success, fail) {
   await api.get(`/friend/bookmark`).then(success).catch(fail);
 }
+async function getLastArchive(success, fail) {
+  await api.get(`/archive/last`).then(success).catch(fail);
+}
 
-export { postArchive, getArchiveList, deleteArchive, editArchive, getArchiveLike };
+export {
+  postArchive,
+  getArchiveList,
+  deleteArchive,
+  editArchive,
+  getArchiveLike,
+  getLastArchive,
+};
