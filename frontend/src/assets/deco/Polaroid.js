@@ -11,7 +11,7 @@ import * as THREE from "three";
 import { Sparkles, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { gsap } from "gsap";
-
+import {useBox} from "@react-three/cannon"
 import { useDispatch, useSelector } from "react-redux";
 import { setTravelReadIsOpen } from "../../modules/reverse";
 
@@ -25,7 +25,14 @@ export function Polaroid({ props, position, event, rotation }) {
   const dispatch = useDispatch();
 
   // console.log(travelObject.current);
-
+  const [boxCollider] = useBox((props) => ({
+    mass: 100000,
+    args: [5, 5, 5],
+    type: "Static",
+    position,
+    ...props,
+    // args: [1, 5, 1],
+  }));
   return (
     <group
       {...props}
@@ -69,6 +76,11 @@ export function Polaroid({ props, position, event, rotation }) {
               material={materials.Mat_photo}
             />
           </group>
+        </group>
+        <group>
+          <mesh ref={boxCollider} scale={50} position={position} {...props}>
+            <meshLambertMaterial color={"hotpink"} />
+          </mesh>
         </group>
       </group>
       <Sparkles count={50} scale={3} size={5} position={position} speed={0.4} />

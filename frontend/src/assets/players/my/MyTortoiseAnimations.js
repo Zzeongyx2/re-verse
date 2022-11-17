@@ -98,8 +98,8 @@ export default function MyTortoiseAnimations({
           setMoving(false);
           setCollision(false);
         } else {
-          group.current.position.x += Math.cos(angle) * 0.065;
-          group.current.position.z += Math.sin(angle) * 0.065;
+          group.current.position.x += Math.cos(angle) * 0.2;
+          group.current.position.z += Math.sin(angle) * 0.2;
         }
         api.position.set(group.current.position.x, 0, group.current.position.z);
         state.camera.position.x = 1 + group.current.position.x;

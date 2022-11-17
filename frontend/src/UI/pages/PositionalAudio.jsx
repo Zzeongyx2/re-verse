@@ -26,8 +26,8 @@ import { Notebook } from "../../assets/deco/Notebook.js";
 import { Christmas } from "../../assets/deco/Christmas.js";
 import { EasterPack } from "../../assets/deco/EasterPack.js";
 
-import CatAnimations from "../../assets/players/Cat_Animations.js";
-import DogAnimations from "../../assets/players/Dog_Animations.js";
+// import CatAnimations from "../../assets/players/Cat_Animations.js";
+// import DogAnimations from "../../assets/players/Dog_Animations.js";
 
 import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
 import TravelWriteModal from "../organisms/TravelWriteModal.jsx";
@@ -45,7 +45,7 @@ import AudioZone from "../../assets/deco/AudioZone.js";
 import { StonesMod } from "../../assets/deco/StonesMod.js";
 
 import { TelevisionMod } from "../../assets/deco/TelevisionMod.js";
-
+import {Physics} from "@react-three/cannon"
 var channels = [];
 var channelUsers = new Map();
 var friendToName = new Map();
@@ -854,66 +854,71 @@ function PositionalAudio() {
 
           {/* travel zone */}
           {/* <CampingPack /> */}
-          <CartoonCampingKit />
-          <FireAnimated />
-          <CampingMod />
+          <Physics>
+            <CartoonCampingKit />
+            <FireAnimated />
+            <CampingMod />
 
-          {/* anniv zone */}
-          <Christmas />
+            {/* anniv zone */}
+            <Christmas />
 
-          {/* diary zone */}
-          <HackerRoom />
+            {/* diary zone */}
+            <HackerRoom />
 
-          {/* easter egg zone */}
-          <EasterPack />
+            {/* easter egg zone */}
+            <EasterPack />
 
-          {/* etc */}
-          <Fireworks />
-          <SkyTube />
-          <Park />
+            {/* etc */}
+            <Fireworks />
+            <SkyTube />
+            <Park />
 
-          {/* music - positional audio */}
-          {/* audiozone = 소리 나오는 구간  &  radio = theme song 바꾸는거 */}
-          <AudioZone />
-          <Radio />
+            {/* music - positional audio */}
+            {/* audiozone = 소리 나오는 구간  &  radio = theme song 바꾸는거 */}
+            <AudioZone />
+            <Radio />
 
-          {/* floor */}
-          <ReverseFloor />
-          <StonesMod />
-          {/* <ForestKit /> */}
+            {/* floor */}
+            <ReverseFloor />
+            <StonesMod />
+            {/* <ForestKit /> */}
 
-          {/* test html effect */}
-          {/* <Television /> */}
-          <TelevisionMod />
+            {/* test html effect */}
+            {/* <Television /> */}
+            <TelevisionMod />
 
-          {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
-          {/* 여행 */}
-          <Polaroid
-            position={[71, 4, -43]}
-            rotation={[-Math.PI / 2, 0, Math.PI / 5]}
-          />
-          <Notebook
-            position={[71, 3.4, -38]}
-            rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]}
-          />
-          {/* 기념일 */}
-          <Polaroid position={[38, 1.1, 62]} rotation={[-Math.PI / 2, 0, 0]} />
-          <Notebook
-            position={[35, 0.3, 66]}
-            rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]}
-          />
-          {/* 일기 */}
-          <Polaroid
-            position={[-115, 9, -129]}
-            rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
-          />
-          <Notebook
-            position={[-110, 8.2, -131]}
-            rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
-          />
-          {/* <Polaroid event={event} />
+            {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
+            {/* 여행 */}
+            <Polaroid
+              position={[71, 4, -43]}
+              rotation={[-Math.PI / 2, 0, Math.PI / 5]}
+            />
+            <Notebook
+              position={[71, 3.4, -38]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]}
+            />
+            {/* 기념일 */}
+            <Polaroid
+              position={[38, 1.1, 62]}
+              rotation={[-Math.PI / 2, 0, 0]}
+            />
+            <Notebook
+              position={[35, 0.3, 66]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]}
+            />
+            {/* 일기 */}
+            <Polaroid
+              position={[-115, 9, -129]}
+              rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
+            />
+            <Notebook
+              position={[-110, 8.2, -131]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
+            />
+            {/* <Polaroid event={event} />
           <Notebook event={event} /> */}
-          {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
+            {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
+          </Physics>
         </Suspense>
         {/* floor */}
         <mesh
