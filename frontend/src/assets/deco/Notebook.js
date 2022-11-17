@@ -41,23 +41,18 @@ export function Notebook({ props, event, position, rotation }) {
   // modal창 열어주세요
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
+  const loginUser = useSelector((state) => state.user.loginUser);
+  const joinArchive = useSelector((state) => state.archive.joinArchive);
   const [boxCollider] = useBox((props) => ({
     mass: 100000,
     args: [5, 5, 5],
     type: "Static",
     position,
-    ...props
+    ...props,
     // args: [1, 5, 1],
   }));
   return (
-    <group
-      {...props}
-      dispose={null}
-      onClick={() => {
-        console.log("노트북 눌렀따");
-        dispatch(setTravelWriteIsOpen());
-      }}
-    >
+    <group {...props} dispose={null}>
       <group
         ref={travelWriteObject}
         rotation={rotation}
@@ -73,21 +68,25 @@ export function Notebook({ props, event, position, rotation }) {
         }}
       >
         <group rotation={[Math.PI / 2, 0, 0]}>
-          <group
-            position={[-2.36, 21.71, -37.71]}
-            rotation={[-1.07, -1.4, 2.78]}
-            scale={1.06}
-          >
+          <group position={[-2.36, 21.71, -37.71]} rotation={[-1.07, -1.4, 2.78]} scale={1.06}>
             <mesh
               geometry={nodes["Pencil_01_-_Default_0"].geometry}
               material={materials["01_-_Default"]}
             />
           </group>
-          <group rotation={[-Math.PI / 2, 0, 0.7]}>
-            <mesh
-              geometry={nodes.Rectangle004__0.geometry}
-              material={materials.Rectangle004__0}
-            />
+          <group
+            rotation={[-Math.PI / 2, 0, 0.7]}
+            onClick={() => {
+              console.log("노트북 눌렀따");
+              if (joinArchive.members[0].nickname !== loginUser.nickname) {
+                console.log("alert 뜬곳");
+                alert("글쓰기 권한이 없습니다.");
+                return;
+              }
+              dispatch(setTravelWriteIsOpen());
+            }}
+          >
+            <mesh geometry={nodes.Rectangle004__0.geometry} material={materials.Rectangle004__0} />
           </group>
         </group>
         <group>
@@ -98,13 +97,7 @@ export function Notebook({ props, event, position, rotation }) {
       </group>
 
       {/* <Box destinationPoint={position} /> */}
-      <Sparkles
-        count={100}
-        scale={3}
-        size={5}
-        position={position}
-        speed={0.4}
-      />
+      <Sparkles count={100} scale={3} size={5} position={position} speed={0.4} />
     </group>
   );
 }
