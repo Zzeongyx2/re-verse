@@ -9,6 +9,7 @@ import { setLoginUser } from "../../modules/user";
 import SelectCharacterBtn from "../atoms/SelectCharacterBtn";
 import SelectedCharacter from "../atoms/SelectedCharacter";
 
+// 캐릭터 변경하는 페이지
 function CharacterThree({ animalName }) {
   const mine = useSelector((state) => state.user.loginUser);
   const dispatch = useDispatch();
@@ -43,18 +44,23 @@ function CharacterThree({ animalName }) {
   };
   return (
     <div className="w-full h-full px-5 py-2 relative flex justify-center">
-      <div className="w-full text-white absolute flex justify-between items-center px-6">
-        <div className="text-6xl font-bold">SELECT YOUR CHARACTER</div>
-        <div className="text-3xl font-bold uppercase pt-2">
-          {selectCharacter}
+      <div className="w-full text-white absolute flex justify-between px-6">
+        <div>
+          <div className="text-6xl font-bold">SELECT YOUR CHARACTER</div>
+          <div className="text-3xl font-bold uppercase pt-2">
+            {selectCharacter}
+          </div>
         </div>
-        {/* <div className="text-white absolute">hi</div> */}
+        <button
+          className="text-white font-bold bg-gradient-to-t from-extra1 to-extra2 text-xl w-fit px-12 py-2 mb-8 mt-2 border rounded-3xl z-30"
+          onClick={() => {
+            clickEditBtn();
+          }}
+        >
+          <span className="drop-shadow-xl">적용하기</span>
+        </button>
       </div>
-      {/* <div className="w-5/6 text-white absolute flex items-center">
-        <div className="text-6xl font-bold">SELECT YOUR CHARACTER</div>
-        <div className="text-4xl uppercase">{animalName}</div>
-      </div> */}
-      <div className="h-1/4 w-full px-6 absolute bottom-0 z-20">
+      <div className="h-1/4 w-full px-6 absolute bottom-3 z-20 flex flex-wrap items-center">
         {characters.map((character, idx) => (
           <label key={`character-${idx}`}>
             {/* <label key={`character + ${idx}`}> */}
@@ -72,14 +78,6 @@ function CharacterThree({ animalName }) {
             />
           </label>
         ))}
-        <button
-          className="text-white font-bold bg-gradient-to-t from-extra1 to-extra2 text-xl w-fit px-12 py-2 mt-4 border rounded-3xl"
-          onClick={() => {
-            clickEditBtn();
-          }}
-        >
-          <span className="drop-shadow-xl">적용하기</span>
-        </button>
       </div>
       <Canvas camera={{ fov: 75, near: 0.1, far: 1000, position: [2.5, 3, 3] }}>
         <OrbitControls />
