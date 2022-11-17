@@ -13,7 +13,9 @@ import { useFrame } from "@react-three/fiber";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setTravelWriteIsOpen } from "../../modules/reverse";
-
+import { Box } from "../../UI/atoms/Collider.jsx";
+import { useBox } from "@react-three/cannon";
+import { BoxGeometry } from "three";
 export function Notebook({ props, event, position, rotation }) {
   const { nodes, materials } = useGLTF("/assets/notebook/scene.gltf");
   const travelWriteObject = useRef();
@@ -39,7 +41,14 @@ export function Notebook({ props, event, position, rotation }) {
   // modal창 열어주세요
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
-
+  const [boxCollider] = useBox((props) => ({
+    mass: 100000,
+    args: [5, 5, 5],
+    type: "Static",
+    position,
+    ...props
+    // args: [1, 5, 1],
+  }));
   return (
     <group
       {...props}
@@ -81,7 +90,14 @@ export function Notebook({ props, event, position, rotation }) {
             />
           </group>
         </group>
+        <group>
+          <mesh ref={boxCollider} scale={50} position={position} {...props}>
+            <meshLambertMaterial color={"hotpink"} />
+          </mesh>
+        </group>
       </group>
+
+      {/* <Box destinationPoint={position} /> */}
       <Sparkles
         count={100}
         scale={3}
