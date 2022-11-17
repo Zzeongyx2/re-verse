@@ -1,17 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import { BiCog, BiHeadphone } from "react-icons/bi";
-import {
-  BsFillPeopleFill,
-  BsFillMicFill,
-  BsMusicNoteBeamed,
-} from "react-icons/bs";
+import { BsFillPeopleFill, BsFillMicFill, BsMusicNoteBeamed } from "react-icons/bs";
 
 import Swal from "sweetalert2";
 import { Toast } from "../atoms/Toast";
 
 import ReverseSettingModal from "./ReverseSettingModal";
 import ReverseFriendModal from "./ReverseFriendsModal";
+import { logout } from "../../api/auth";
 function ReverseNavbar({ destinationPoint }) {
   const navigate = useNavigate();
   return (
@@ -35,7 +32,14 @@ function ReverseNavbar({ destinationPoint }) {
                 timer: 1500,
               });
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-              localStorage.removeItem("accessToken");
+              logout(
+                (res) => {
+                  console.log(res);
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
               navigate("/");
               Toast.fire({
                 icon: "success",

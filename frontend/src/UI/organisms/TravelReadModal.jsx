@@ -34,7 +34,7 @@ import moment from "moment/moment";
 function TravelReadModal() {
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
-
+  const joinArchive = useSelector((state) => state.archive.joinArchive);
   const [editTitle, setEditTitle] = useState("");
   useEffect(() => {
     if (reverse.info.details) setEditTitle(reverse.info.details.title);
@@ -84,9 +84,7 @@ function TravelReadModal() {
       {
         title: editTitle,
         content: reverse.info.details.content,
-        memoryTime: moment(reverse.info.details.memoryTime).format(
-          "yyyy-MM-DD"
-        ),
+        memoryTime: moment(reverse.info.details.memoryTime).format("yyyy-MM-DD"),
       },
       editSuccess,
       editFail
@@ -166,9 +164,9 @@ function TravelReadModal() {
           <ModalContent minH={"500"}>
             <ModalHeader mb={4} textAlign="center">
               <div className="flex justify-between items-center">
-                {reverse.selectStuff === 0 && "윤선이의 여행"}
-                {reverse.selectStuff === 1 && "윤선이의 기념일"}
-                {reverse.selectStuff === 2 && "윤선이의 다이어리"}
+                {reverse.selectStuff === 0 && `${joinArchive.members[0].nickname}의 여행`}
+                {reverse.selectStuff === 1 && `${joinArchive.members[0].nickname}의 기념일`}
+                {reverse.selectStuff === 2 && `${joinArchive.members[0].nickname}의 다이어리`}
                 <AiOutlineClose
                   className="cursor-pointer"
                   onClick={() => {

@@ -36,7 +36,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createArchiveMember, deleteArchiveMember, getFriendList } from "../../api/friend";
 import { getArchiveList } from "../../api/archive";
-import { setMyArchiveList } from "../../modules/archive";
+import { setJoinArchive, setMyArchiveList } from "../../modules/archive";
 import { useEffect } from "react";
 import { getArchiveDetail } from "../../api/reverse";
 import { setInfo } from "../../modules/reverse";
@@ -79,6 +79,7 @@ function ReverseFriendModal() {
   const getArchiveDetailSuccess = (res) => {
     console.log(res);
     setArchive(res.data);
+    dispatch(setJoinArchive(res.data));
     dispatch(
       setInfo({
         ...reverse.info,
