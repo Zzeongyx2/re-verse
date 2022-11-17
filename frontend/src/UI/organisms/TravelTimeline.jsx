@@ -11,15 +11,9 @@ function ArticlesTimeline() {
   const reverse = useSelector((state) => state.reverse);
 
   // memory time 순서대로 정렬
-  [...reverse.travel.articleList].sort(
-    (a, b) => new Date(a.memoryTime) - new Date(b.memoryTime)
-  );
-  [...reverse.anniv.articleList].sort(
-    (a, b) => new Date(a.memoryTime) - new Date(b.memoryTime)
-  );
-  [...reverse.diary.articleList].sort(
-    (a, b) => new Date(a.memoryTime) - new Date(b.memoryTime)
-  );
+  [...reverse.travel.articleList].sort((a, b) => new Date(a.memoryTime) - new Date(b.memoryTime));
+  [...reverse.anniv.articleList].sort((a, b) => new Date(a.memoryTime) - new Date(b.memoryTime));
+  [...reverse.diary.articleList].sort((a, b) => new Date(a.memoryTime) - new Date(b.memoryTime));
 
   const weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
@@ -57,7 +51,7 @@ function ArticlesTimeline() {
 
       {/* 선택한 stuff가 여행일때 */}
       {reverse.selectStuff === 0 &&
-        reverse.travel.articleList.length &&
+        reverse.travel.articleList.length > 0 &&
         reverse.travel.articleList.map((article, idx) => {
           return (
             <div
@@ -77,7 +71,7 @@ function ArticlesTimeline() {
         })}
       {/* 선택한 stuff가 기념일일때 */}
       {reverse.selectStuff === 1 &&
-        reverse.anniv.articleList.length &&
+        reverse.anniv.articleList.length > 0 &&
         reverse.anniv.articleList.map((article, idx) => {
           return (
             <div
@@ -97,7 +91,7 @@ function ArticlesTimeline() {
         })}
       {/* 선택한 stuff가 일기일때 */}
       {reverse.selectStuff === 2 &&
-        reverse.diary.articleList.length &&
+        reverse.diary.articleList.length > 0 &&
         reverse.diary.articleList.map((article, idx) => {
           return (
             <div
