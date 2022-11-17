@@ -5,12 +5,10 @@ import kr.co.reverse.archive.api.response.ArchiveDetailRes;
 import kr.co.reverse.archive.api.response.ArchiveRes;
 import kr.co.reverse.archive.api.response.StuffRes;
 import kr.co.reverse.archive.api.response.UserRes;
-import kr.co.reverse.archive.db.entity.Archive;
-import kr.co.reverse.archive.db.entity.ArchiveMember;
-import kr.co.reverse.archive.db.entity.Role;
-import kr.co.reverse.archive.db.entity.User;
+import kr.co.reverse.archive.db.entity.*;
 import kr.co.reverse.archive.db.repository.ArchiveMemberRepository;
 import kr.co.reverse.archive.db.repository.ArchiveRepository;
+import kr.co.reverse.archive.db.repository.LastArchiveRepository;
 import kr.co.reverse.archive.db.repository.StuffRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +28,8 @@ public class ArchiveService {
     private final ArchiveMemberRepository archiveMemberRepository;
 
     private final StuffRepository stuffRepository;
+
+    private final LastArchiveRepository lastArchiveRepository;
 
     @Transactional
     public Archive createArchive(ArchiveReq archiveReq, User user) {
@@ -125,9 +125,28 @@ public class ArchiveService {
         return archiveDetailRes;
     }
 
+    public ArchiveDetailRes getLastArchiveDetail(User user) {
+
+        LastArchive lastArchive = lastArchiveRepository.findTop1ByUserOrderByTimeDesc(user);
+
+        return getArchiveDetail(lastArchive.getArchive().getId());
+    }
+
     public Archive getArchive(UUID archiveId) {
         return archiveRepository.findById(archiveId)
                 .orElseThrow(() -> new NoSuchElementException());
+    }
+
+
+    public void createLastArchive(UUID archiveId, User user){
+
+        Archive archive = archiveRepository.findById(archiveId).get();
+
+        LastArchive lastArchive = LastArchive.builder()
+                                .archive(archive)
+                                .user(user).time(LocalDateTime.now()).build();
+
+        lastArchiveRepository.save(lastArchive);
     }
 
     public Boolean checkOwner(UUID archiveId, UUID userId) {
@@ -157,4 +176,5 @@ public class ArchiveService {
         // TODO: isDeleted로 변경
         archiveRepository.deleteById(archiveId);
     }
+
 }
