@@ -1,12 +1,9 @@
 package kr.co.reverse.archive.api.service;
 
-import co.elastic.clients.elasticsearch.core.UpdateRequest;
 import kr.co.reverse.archive.db.entity.User;
 import kr.co.reverse.archive.db.entity.UserDocument;
 import kr.co.reverse.archive.db.repository.UserSearchRepository;
 import lombok.RequiredArgsConstructor;
-import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
