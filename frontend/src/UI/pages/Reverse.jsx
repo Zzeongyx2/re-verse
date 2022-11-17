@@ -26,9 +26,6 @@ import { Notebook } from "../../assets/deco/Notebook.js";
 import { Christmas } from "../../assets/deco/Christmas.js";
 import { EasterPack } from "../../assets/deco/EasterPack.js";
 
-import CatAnimations from "../../assets/players/Cat_Animations.js";
-import DogAnimations from "../../assets/players/Dog_Animations.js";
-
 import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
 import TravelWriteModal from "../organisms/TravelWriteModal.jsx";
 import TravelReadModal from "../organisms/TravelReadModal.jsx";
@@ -38,6 +35,10 @@ import { HackerRoom } from "../../assets/deco/HackerRoom.js";
 import { Fireworks } from "../../assets/deco/Fireworks.js";
 import { Park } from "../../assets/deco/Park.js";
 import { ForestKit } from "../../assets/deco/ForestKit.js";
+import SelectedMyPlayer from "../atoms/SelectedMyPlayer.jsx";
+import SelectedOtherPlayer from "../atoms/SelectedOtherPlayer.jsx";
+import { Physics } from "@react-three/cannon";
+import ThreeFloor from "../atoms/ThreeFloor.jsx";
 import { ReverseFloor } from "../../assets/deco/ReverseFloor.js";
 import { CampingMod } from "../../assets/deco/CampMod.js";
 import MusicTest from "../../assets/deco/AudioZone.js";
@@ -54,9 +55,7 @@ let audioMapIdx = 0;
 function Reverse() {
   // default action = idle
   // const [characterPosition, setCharacterPosition] = useState();
-  const [destinationPoint, setDestinationPoint] = useState(
-    new Vector3(-30, 0, -30)
-  );
+  const [destinationPoint, setDestinationPoint] = useState(new Vector3(-30, 0, -30));
   const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/map_texture.jpg");
   if (floorTexture) {
@@ -311,9 +310,7 @@ function Reverse() {
           let peer1 = rtcPeers.get(data1.userId);
 
           if (peer1) {
-            peer1
-              .addIceCandidate(new RTCIceCandidate(data2))
-              .catch((error) => {});
+            peer1.addIceCandidate(new RTCIceCandidate(data2)).catch((error) => {});
           }
         }
       } else if (data1.type === "Answer") {
@@ -353,9 +350,7 @@ function Reverse() {
     setRtcPeers2(rtcPeers2);
 
     if (data1.type === "NewMember") {
-      let channel1 = rtcPeer.createDataChannel(
-        Math.floor(Math.random() * 10000000000)
-      );
+      let channel1 = rtcPeer.createDataChannel(Math.floor(Math.random() * 10000000000));
       channelConfig(channel1);
 
       //create offer
@@ -817,113 +812,101 @@ function Reverse() {
         <ambientLight intensity={0.3} />
         <spotLight intensity={0.5} position={[100, 1000, 100]} />
         {/* character */}
-        <Suspense fallback={null}>
-          {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
-
-          {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-          {others.map((other, idx) => {
-            // console.log(other);
-            // console.log(others);
-            // console.log(idx);
-            console.log(otherCharacterMap);
-            // console.log(otherCharacterMap[other]);
-            return (
-              <DogAnimations
-                key={idx}
-                // action={action}
-                destinationPoint={otherCharacterMap.get(other)}
-                // isPressed={isPressed}
-                handleVisible={handleVisible}
-                userName={other}
-                // handleCurrentPosition={handleCurrentPosition}
-              />
-            );
-          })}
-          <CatAnimations
+        <Physics gravity={[0, -10, 0]}>
+          <Suspense fallback={null}>
+            {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
+            {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
+            {others.map((other, idx) => {
+              // console.log(other);
+              // console.log(others);
+              // console.log(idx);
+              console.log(otherCharacterMap);
+              // console.log(otherCharacterMap[other]);
+              return (
+                // <DogAnimations
+                //   key={idx}
+                //   // action={action}
+                //   destinationPoint={otherCharacterMap.get(other)}
+                //   // isPressed={isPressed}
+                //   handleVisible={handleVisible}
+                //   userName={other}
+                //   // handleCurrentPosition={handleCurrentPosition}
+                // />
+                <SelectedOtherPlayer
+                  key={idx}
+                  destinationPoint={otherCharacterMap.get(other)}
+                  handleVisible={handleVisible}
+                  userName={other}
+                />
+              );
+            })}
+            {/* <CatAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
             // handleEvent={handleEvent}
-          />
+          /> */}
+            <SelectedMyPlayer destinationPoint={destinationPoint} handleVisible={handleVisible} />
+            <ObjectTest visible={visible} />
+            {/* <ObjectTest currentPosition={currentPosition} /> */}
 
-          <ObjectTest visible={visible} />
-          {/* <ObjectTest currentPosition={currentPosition} /> */}
+            {/* travel zone */}
+            {/* <CampingPack /> */}
+            <CartoonCampingKit />
+            <FireAnimated />
+            <CampingMod />
 
-          {/* travel zone */}
-          {/* <CampingPack /> */}
-          <CartoonCampingKit />
-          <FireAnimated />
-          <CampingMod />
+            {/* anniv zone */}
+            <Christmas />
 
-          {/* anniv zone */}
-          <Christmas />
+            {/* diary zone */}
+            <HackerRoom />
 
-          {/* diary zone */}
-          <HackerRoom />
+            {/* easter egg zone */}
+            <EasterPack />
 
-          {/* easter egg zone */}
-          <EasterPack />
+            {/* etc */}
+            <Fireworks />
+            <SkyTube />
+            <Park />
 
-          {/* etc */}
-          <Fireworks />
-          <SkyTube />
-          <Park />
+            {/* music - positional audio */}
+            {/* <MusicTest /> */}
 
-          {/* music - positional audio */}
-          {/* <MusicTest /> */}
+            {/* floor */}
+            <ReverseFloor />
+            {/* <ForestKit /> */}
 
-          {/* floor */}
-          <ReverseFloor />
-          {/* <ForestKit /> */}
-
-          {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
-          {/* 여행 */}
-          <Polaroid
-            position={[71, 4, -43]}
-            rotation={[-Math.PI / 2, 0, Math.PI / 5]}
-          />
-          <Notebook
-            position={[71, 4, -38]}
-            rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]}
-          />
-          {/* 기념일 */}
-          <Polaroid position={[38, 1.1, 62]} rotation={[-Math.PI / 2, 0, 0]} />
-          <Notebook
-            position={[35, 0.3, 66]}
-            rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]}
-          />
-          {/* 일기 */}
-          <Polaroid
-            position={[-115, 9, -129]}
-            rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
-          />
-          <Notebook
-            position={[-110, 8.2, -131]}
-            rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
-          />
-          {/* <Polaroid event={event} />
+            {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
+            {/* 여행 */}
+            <Polaroid position={[71, 4, -43]} rotation={[-Math.PI / 2, 0, Math.PI / 5]} />
+            <Notebook position={[71, 4, -38]} rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]} />
+            {/* 기념일 */}
+            <Polaroid position={[38, 1.1, 62]} rotation={[-Math.PI / 2, 0, 0]} />
+            <Notebook position={[35, 0.3, 66]} rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]} />
+            {/* 일기 */}
+            <Polaroid position={[-115, 9, -129]} rotation={[-Math.PI / 2, 0, Math.PI / 1.2]} />
+            <Notebook position={[-110, 8.2, -131]} rotation={[-Math.PI / 2, 0, -Math.PI / 3]} />
+            {/* <Polaroid event={event} />
           <Notebook event={event} /> */}
-          {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
-        </Suspense>
-        {/* floor */}
-        <mesh
-          onPointerDown={(e) => {
-            setDestinationPoint(e.point);
-            sendPosition(e.point);
-          }}
-          rotation={[-0.5 * Math.PI, 0, 0]}
-          receiveShadow
-        >
-          <planeBufferGeometry attach="geometry" args={[300, 300]} />
-          {/* <planeBufferGeometry attach="geometry" args={[400, 400]} /> */}
-          <meshStandardMaterial map={floorTexture} />
-        </mesh>
+            {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
+          </Suspense>
+          {/* floor */}
+          <mesh
+            onPointerDown={(e) => {
+              setDestinationPoint(e.point);
+              sendPosition(e.point);
+            }}
+            rotation={[-0.5 * Math.PI, 0, 0]}
+            receiveShadow
+          >
+            <planeBufferGeometry attach="geometry" args={[300, 300]} />
+            <meshStandardMaterial map={floorTexture} />
+          </mesh>
+          <ThreeFloor position={[0, -0.5, 0]} rotation={[-Math.PI / 2, 0, 0]} />
+        </Physics>
 
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
-        <mesh
-          rotation={[-0.5 * Math.PI, 0, 0]}
-          position={[-30, 0.02, -30]}
-          receiveShadow
-        >
+        <mesh rotation={[-0.5 * Math.PI, 0, 0]} position={[-30, 0.02, -30]} receiveShadow>
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
           <meshBasicMaterial color="black" transparent opacity={0.3} />
         </mesh>
