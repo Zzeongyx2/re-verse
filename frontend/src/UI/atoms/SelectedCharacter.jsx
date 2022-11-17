@@ -1,6 +1,5 @@
 import BelugaCharacter from "../../assets/characters/BelugaCharacter";
 import CatCharacter from "../../assets/characters/CatCharacter";
-import CougarCharacter from "../../assets/characters/CougarCharacter";
 import DogCharacter from "../../assets/characters/DogCharacter";
 import DoveCharacter from "../../assets/characters/DoveCharacter";
 import GoldfishCharacter from "../../assets/characters/GoldfishCharacter";
@@ -30,7 +29,6 @@ function SelectedCharacter({ animalName }) {
       {animalName === "Rabbit" ? <RabbitCharacter /> : null}
       {animalName === "Tortoise" ? <TortoiseCharacter /> : null}
       {animalName === "Beluga" ? <BelugaCharacter /> : null}
-      {animalName === "Cougar" ? <CougarCharacter /> : null}
       {animalName === "Hare" ? <HareCharacter /> : null}
       {animalName === "Husky" ? <HuskyCharacter /> : null}
       {animalName === "Lynx" ? <LynxCharacter /> : null}
