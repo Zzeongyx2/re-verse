@@ -1,10 +1,9 @@
-
 # Build Stage 1. Build React App
 FROM node:alpine as builder
 WORKDIR '/app'
-COPY ./re-verse/frontend/package.json .
+COPY ./package.json .
 RUN npm install
-COPY ./re-verse/frontend ./
+COPY . ./
 RUN npm run build
 
 # Build Stage 2. Static Server
