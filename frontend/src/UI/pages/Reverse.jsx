@@ -42,6 +42,10 @@ import ThreeFloor from "../atoms/ThreeFloor.jsx";
 import { ReverseFloor } from "../../assets/deco/ReverseFloor.js";
 import { CampingMod } from "../../assets/deco/CampMod.js";
 import MusicTest from "../../assets/deco/AudioZone.js";
+import AudioZone from "../../assets/deco/AudioZone.js";
+import { Radio } from "../../assets/deco/Radio.js";
+import { StonesMod } from "../../assets/deco/StonesMod.js";
+import { TelevisionMod } from "../../assets/deco/TelevisionMod.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -845,12 +849,13 @@ function Reverse() {
             handleVisible={handleVisible}
             // handleEvent={handleEvent}
           /> */}
-            <SelectedMyPlayer destinationPoint={destinationPoint} handleVisible={handleVisible} />
+            <SelectedMyPlayer
+              destinationPoint={destinationPoint}
+              handleVisible={handleVisible}
+            />
             <ObjectTest visible={visible} />
             {/* <ObjectTest currentPosition={currentPosition} /> */}
 
-            {/* travel zone */}
-            {/* <CampingPack /> */}
             <CartoonCampingKit />
             <FireAnimated />
             <CampingMod />
@@ -870,22 +875,47 @@ function Reverse() {
             <Park />
 
             {/* music - positional audio */}
-            {/* <MusicTest /> */}
+            {/* audiozone = 소리 나오는 구간  &  radio = theme song 바꾸는거 */}
+            <AudioZone />
+            <Radio />
 
             {/* floor */}
             <ReverseFloor />
+            <StonesMod />
             {/* <ForestKit /> */}
+
+            {/* test html effect */}
+            {/* <Television /> */}
+            <TelevisionMod />
 
             {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
             {/* 여행 */}
-            <Polaroid position={[71, 4, -43]} rotation={[-Math.PI / 2, 0, Math.PI / 5]} />
-            <Notebook position={[71, 4, -38]} rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]} />
+            <Polaroid
+              position={[71, 4, -43]}
+              rotation={[-Math.PI / 2, 0, Math.PI / 5]}
+            />
+            <Notebook
+              position={[71, 3.4, -38]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]}
+            />
             {/* 기념일 */}
-            <Polaroid position={[38, 1.1, 62]} rotation={[-Math.PI / 2, 0, 0]} />
-            <Notebook position={[35, 0.3, 66]} rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]} />
+            <Polaroid
+              position={[38, 1.1, 62]}
+              rotation={[-Math.PI / 2, 0, 0]}
+            />
+            <Notebook
+              position={[35, 0.3, 66]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]}
+            />
             {/* 일기 */}
-            <Polaroid position={[-115, 9, -129]} rotation={[-Math.PI / 2, 0, Math.PI / 1.2]} />
-            <Notebook position={[-110, 8.2, -131]} rotation={[-Math.PI / 2, 0, -Math.PI / 3]} />
+            <Polaroid
+              position={[-115, 7.7, -129]}
+              rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
+            />
+            <Notebook
+              position={[-110, 6.9, -131]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
+            />
             {/* <Polaroid event={event} />
           <Notebook event={event} /> */}
             {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
@@ -906,7 +936,11 @@ function Reverse() {
         </Physics>
 
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
-        <mesh rotation={[-0.5 * Math.PI, 0, 0]} position={[-30, 0.02, -30]} receiveShadow>
+        <mesh
+          rotation={[-0.5 * Math.PI, 0, 0]}
+          position={[-30, 0.02, -30]}
+          receiveShadow
+        >
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
           <meshBasicMaterial color="black" transparent opacity={0.3} />
         </mesh>
