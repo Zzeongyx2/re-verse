@@ -1,6 +1,6 @@
 import React, { Suspense, useRef, useState } from "react";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as THREE from "three";
@@ -679,8 +679,12 @@ function Reverse() {
     );
   };
 
+  const navigate = useNavigate();
   const getArchiveDetailFail = (err) => {
-    // console.log(err);
+    alert("초대받지 않은 아카이브입니다.");
+    console.log("arlet나온곳");
+    navigate("/lobby");
+    console.log(err);
   };
 
   const refCanvas = useRef();
@@ -849,10 +853,7 @@ function Reverse() {
             handleVisible={handleVisible}
             // handleEvent={handleEvent}
           /> */}
-            <SelectedMyPlayer
-              destinationPoint={destinationPoint}
-              handleVisible={handleVisible}
-            />
+            <SelectedMyPlayer destinationPoint={destinationPoint} handleVisible={handleVisible} />
             <ObjectTest visible={visible} />
             {/* <ObjectTest currentPosition={currentPosition} /> */}
 
@@ -890,32 +891,14 @@ function Reverse() {
 
             {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
             {/* 여행 */}
-            <Polaroid
-              position={[71, 4, -43]}
-              rotation={[-Math.PI / 2, 0, Math.PI / 5]}
-            />
-            <Notebook
-              position={[71, 3.4, -38]}
-              rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]}
-            />
+            <Polaroid position={[71, 4, -43]} rotation={[-Math.PI / 2, 0, Math.PI / 5]} />
+            <Notebook position={[71, 3.4, -38]} rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]} />
             {/* 기념일 */}
-            <Polaroid
-              position={[38, 1.1, 62]}
-              rotation={[-Math.PI / 2, 0, 0]}
-            />
-            <Notebook
-              position={[35, 0.3, 66]}
-              rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]}
-            />
+            <Polaroid position={[38, 1.1, 62]} rotation={[-Math.PI / 2, 0, 0]} />
+            <Notebook position={[35, 0.3, 66]} rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]} />
             {/* 일기 */}
-            <Polaroid
-              position={[-115, 7.7, -129]}
-              rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
-            />
-            <Notebook
-              position={[-110, 6.9, -131]}
-              rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
-            />
+            <Polaroid position={[-115, 7.7, -129]} rotation={[-Math.PI / 2, 0, Math.PI / 1.2]} />
+            <Notebook position={[-110, 6.9, -131]} rotation={[-Math.PI / 2, 0, -Math.PI / 3]} />
             {/* <Polaroid event={event} />
           <Notebook event={event} /> */}
             {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
@@ -936,11 +919,7 @@ function Reverse() {
         </Physics>
 
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
-        <mesh
-          rotation={[-0.5 * Math.PI, 0, 0]}
-          position={[-30, 0.02, -30]}
-          receiveShadow
-        >
+        <mesh rotation={[-0.5 * Math.PI, 0, 0]} position={[-30, 0.02, -30]} receiveShadow>
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
           <meshBasicMaterial color="black" transparent opacity={0.3} />
         </mesh>
