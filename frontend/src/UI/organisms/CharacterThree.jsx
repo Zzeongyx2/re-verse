@@ -51,33 +51,36 @@ function CharacterThree({ animalName }) {
             {selectCharacter}
           </div>
         </div>
-        <button
-          className="text-white font-bold bg-gradient-to-t from-extra1 to-extra2 text-xl w-fit px-12 py-2 mb-8 mt-2 border rounded-3xl z-30"
-          onClick={() => {
-            clickEditBtn();
-          }}
-        >
-          <span className="drop-shadow-xl">적용하기</span>
-        </button>
       </div>
-      <div className="h-1/4 w-full px-6 absolute bottom-3 z-20 flex flex-wrap items-center">
-        {characters.map((character, idx) => (
-          <label key={`character-${idx}`}>
-            {/* <label key={`character + ${idx}`}> */}
-            <input
-              type="radio"
-              name="avatar"
-              className="hidden"
-              value={character}
-              onChange={handleChange}
-              selected={ischecked}
-            />
-            <SelectCharacterBtn
-              imgUrl={s3Path + character + imageForm}
-              name={character}
-            />
-          </label>
-        ))}
+      <div className="lg:h-1/4 md:h-[calc(30%)] w-[calc(100%-80px)] absolute bottom-2 z-30">
+        <div className="h-1/3 flex items-center justify-end">
+          <button
+            className="text-white font-bold bg-gradient-to-t from-extra1 to-extra2 text-xl w-fit px-12 py-2 border rounded-3xl z-30"
+            onClick={() => {
+              clickEditBtn();
+            }}
+          >
+            <span className="drop-shadow-xl">적용하기</span>
+          </button>
+        </div>
+        <div className="lg:pt-5 h-2/3 flex justify-between">
+          {characters.map((character, idx) => (
+            <label key={`character-${idx}`}>
+              <input
+                type="radio"
+                name="avatar"
+                className="hidden"
+                value={character}
+                onChange={handleChange}
+                selected={ischecked}
+              />
+              <SelectCharacterBtn
+                imgUrl={s3Path + character + imageForm}
+                name={character}
+              />
+            </label>
+          ))}
+        </div>
       </div>
       <Canvas camera={{ fov: 75, near: 0.1, far: 1000, position: [2.5, 3, 3] }}>
         <OrbitControls />
