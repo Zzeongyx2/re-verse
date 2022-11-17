@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { setCampfireOn } from "../../../modules/reverse";
 import { useBox, useConvexPolyhedron } from "@react-three/cannon";
 
-export default function MyPigeonAnimations({
+export default function MyBelugaAnimations({
   // action,
   // handleCurrentPosition,
   destinationPoint,
@@ -27,7 +27,7 @@ export default function MyPigeonAnimations({
   // }));
   // const previousAction = usePrevious(action);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Pigeon_Animations.gltf"
+    "/assets/animals/GLTF/Animations/Beluga_Animations.gltf"
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -153,12 +153,12 @@ export default function MyPigeonAnimations({
           <group name="Rig" scale={2}>
             <primitive object={nodes.root} />
             <skinnedMesh
-              name="Pigeon"
-              geometry={nodes.Pigeon.geometry}
-              material={materials.M_Pigeon}
-              skeleton={nodes.Pigeon.skeleton}
-              morphTargetDictionary={nodes.Pigeon.morphTargetDictionary}
-              morphTargetInfluences={nodes.Pigeon.morphTargetInfluences}
+              name="Beluga"
+              geometry={nodes.Beluga.geometry}
+              material={materials.M_Beluga}
+              skeleton={nodes.Beluga.skeleton}
+              morphTargetDictionary={nodes.Beluga.morphTargetDictionary}
+              morphTargetInfluences={nodes.Beluga.morphTargetInfluences}
               // 그림자 설정은 여기에!
               castShadow
               receiveShadow
@@ -174,7 +174,7 @@ export default function MyPigeonAnimations({
   );
 }
 
-useGLTF.preload("/Pigeon_Animations.gltf");
+useGLTF.preload("/Beluga_Animations.gltf");
 
 function usePrevious(value) {
   const ref = useRef();
