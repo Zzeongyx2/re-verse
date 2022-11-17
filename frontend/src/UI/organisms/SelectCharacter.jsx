@@ -1,45 +1,53 @@
 import { useEffect, useState } from "react";
-import { getUserInfo } from "../../api/user";
+import { imageForm, s3Path } from "../../api";
+import { editAvatar, getAvatars } from "../../api/user";
 
 import SelectCharacterBtn from "../atoms/SelectCharacterBtn";
 import CharacterThree from "./CharacterThree";
-// import "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80fDB8fHx8&auto=format&fit=crop&w=735&q=80" from "../../assets/new-moon.png";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoginUser } from "../../modules/user";
 
 function SelectCharacter() {
-  const initialData = {
-    nickname: "",
-    message: "",
-    avatar: "Cat",
-  };
-  const [mine, setMine] = useState(initialData);
+  // const [mine, setMine] = useState(initialData);
+  const mine = useSelector((state) => state.user.loginUser);
+  const dispatch = useDispatch();
   const [ischecked, setIschecked] = useState(false);
+  const [selectCharacter, setSelectCharacter] = useState("");
+  const [characters, setCharacters] = useState([]);
 
   const handleChange = (e) => {
     console.log(e.target.value);
-    // setMine(e.target.value);
-    setMine((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    setSelectCharacter(e.target.value);
     setIschecked((prev) => !prev);
   };
   useEffect(() => {
-    getUserInfo(getUserInfoSuccess, getUserInfoFail);
+    getAvatars(getAvatarsSuccess, getAvatarsFail);
+    setSelectCharacter(mine.avatar);
   }, []);
-  const getUserInfoSuccess = (res) => {
-    setMine(res.data);
+  const getAvatarsSuccess = (res) => {
+    setCharacters(res.data.avatars);
   };
-  const getUserInfoFail = (error) => {
+  const getAvatarsFail = (error) => {
     console.log(error);
   };
 
+  const clickEditBtn = () => {
+    editAvatar(selectCharacter, editAvatarSuccess, editAvatarFail);
+  };
+  const editAvatarSuccess = (res) => {
+    console.log(res);
+    dispatch(setLoginUser({ ...mine, avatar: selectCharacter }));
+  };
+  const editAvatarFail = (error) => {
+    console.log(error);
+  };
   return (
     <div className="text-base2">
       {/* <div>select character!</div> */}
       <div className="flex justify-between">
         {/* 캐릭터 렌더링 */}
         <div className="bg-white rounded-3xl w-[calc(96%/3)] pt-5 pb-6">
-          <CharacterThree animalName={mine.avatar} />
+          <CharacterThree animalName={selectCharacter} />
         </div>
         <div className="flex flex-col w-[calc(96%/3*2)] items-end">
           {/* 캐릭터 선택 창 */}
@@ -54,13 +62,13 @@ function SelectCharacter() {
                   {/* <label key={`character + ${idx}`}> */}
                   <input
                     type="radio"
-                    name="character"
+                    name="avatar"
                     className="hidden"
-                    value={character.name}
+                    value={character}
                     onChange={handleChange}
                     selected={ischecked}
                   />
-                  <SelectCharacterBtn imgUrl={character.imgUrl} name={character.name} />
+                  <SelectCharacterBtn imgUrl={s3Path + character + imageForm} name={character} />
                 </label>
               ))}
               {/* {characters.map((character, idx) => {
@@ -87,7 +95,12 @@ function SelectCharacter() {
               })} */}
             </div>
           </div>
-          <button className="text-white font-bold bg-gradient-to-t from-extra1 to-extra2 text-xl w-fit px-12 py-2 mt-4 border rounded-3xl">
+          <button
+            className="text-white font-bold bg-gradient-to-t from-extra1 to-extra2 text-xl w-fit px-12 py-2 mt-4 border rounded-3xl"
+            onClick={() => {
+              clickEditBtn();
+            }}
+          >
             <span className="drop-shadow-xl">적용하기</span>
           </button>
         </div>
@@ -95,241 +108,5 @@ function SelectCharacter() {
     </div>
   );
 }
-
-// TODO: 나중에 useEffect로 캐릭터 목록 가져다가 뿌려주기
-const characters = [
-  {
-    name: 1,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 2,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 3,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 4,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 5,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 6,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 7,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 8,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 9,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 10,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 11,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 12,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 13,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 14,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 15,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 16,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 17,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 18,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 19,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 20,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 21,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 22,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 23,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 24,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 25,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 26,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 27,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 28,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 29,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 30,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 31,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 32,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 33,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 34,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 35,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 36,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 37,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 38,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 39,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  {
-    name: 40,
-    imgUrl:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80",
-  },
-  // {
-  //   name: 41,
-  //   imgUrl: "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=808fHx8&auto=format&fit=crop&w=735&q=80",
-  // },
-  // {
-  //   name: 42,
-  //   imgUrl: "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=808fHx8&auto=format&fit=crop&w=735&q=80",
-  // },
-  // {
-  //   name: 43,
-  //   imgUrl: "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=808fHx8&auto=format&fit=crop&w=735&q=80",
-  // },
-  // {
-  //   name: 44,
-  //   imgUrl: "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=808fHx8&auto=format&fit=crop&w=735&q=80",
-  // },
-  // {
-  //   name: 45,
-  //   imgUrl: "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=808fHx8&auto=format&fit=crop&w=735&q=80",
-  // },
-  // {
-  //   name: 46,
-  //   imgUrl: "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=808fHx8&auto=format&fit=crop&w=735&q=80",
-  // },
-  // {
-  //   name: 47,
-  //   imgUrl: "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=808fHx8&auto=format&fit=crop&w=735&q=80",
-  // },
-  // {
-  //   name: 48,
-  //   imgUrl: "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=808fHx8&auto=format&fit=crop&w=735&q=80",
-  // },
-];
 
 export default SelectCharacter;

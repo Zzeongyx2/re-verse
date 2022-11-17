@@ -36,3 +36,57 @@
     transform: rotate(360deg);
   }
 }
+
+#chat .message {
+  padding-left: 4px;
+  color: #fff;
+  text-shadow: 1px 1px 2px #1587f1;
+  /* line-height: 25px; */
+  /* max-width:90%; */
+  display: inline-block;
+  text-align: left;
+  border-radius: 5px;
+  font-size: 14px;
+}
+#chat .others-message {
+  padding-left: 4px;
+  color: #fff;
+  text-shadow: 1px 1px 2px #757575;
+  /* line-height: 25px; */
+  /* max-width:90%; */
+  display: inline-block;
+  text-align: left;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+#chat .me {
+  text-align: left;
+}
+
+#chat .triangle {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+}
+
+#chat .you .triangle {
+  border-color: transparent transparent #58b666 transparent;
+  margin-left: 15px;
+}
+
+#chat .me .triangle {
+  border-color: transparent transparent #6fbced transparent;
+  /* margin-left:375px; */
+}
+
+#my-name {
+  color: #fff;
+  text-shadow: 1px 1px 2px #1587f1;
+}
+
+#others-name {
+  color: #fff;
+  text-shadow: 1px 1px 2px #757575;
+}

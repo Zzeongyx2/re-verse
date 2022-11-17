@@ -15,13 +15,6 @@ export function ObjectTest({ visible }) {
   const houseRef = useRef();
   const spotRef = useRef();
 
-  console.log("+==========");
-  // console.log(visible);
-
-  // useEffect(() => {
-  //   if (visible) {
-  //   }
-  // }, [visible]);
   useFrame((state) => {
     if (visible) {
       // console.log("나와라!");
@@ -65,7 +58,7 @@ export function ObjectTest({ visible }) {
         <mesh
           rotation={[-0.5 * Math.PI, 0, 0]}
           receiveShadow
-          position={[-20, 0.01, 3]}
+          position={[-13, 0.01, 3]}
         >
           <planeBufferGeometry attach="geometry" args={[8, 8]} />
           <meshBasicMaterial color="red" opacity={0.5} transparent />

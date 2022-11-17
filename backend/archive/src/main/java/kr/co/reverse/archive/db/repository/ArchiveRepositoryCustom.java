@@ -9,13 +9,15 @@ import java.util.UUID;
 
 public interface ArchiveRepositoryCustom {
 
-    public ArchiveDetailRes getArchiveDetail(UUID archiveId);
+    ArchiveDetailRes getArchiveDetail(UUID archiveId);
 
-    public List<ArchiveRes> getMyArchives(UUID userId);
+    List<ArchiveRes> getMyArchives(UUID userId);
 
-    public List<ArchiveRes> getFriendArchives(UUID userId);
+    List<ArchiveRes> getFriendArchives(UUID userId);
 
-    public List<UserRes> getMembers(UUID archiveId);
+    List<UserRes> getMembers(UUID archiveId);
 
-    public Boolean checkBookmark(UUID archiveId, UUID userId);
+    Boolean checkBookmark(UUID archiveId, UUID userId);
+
+    List<ArchiveRes> getBookmarkArchive(UUID userId);
 }

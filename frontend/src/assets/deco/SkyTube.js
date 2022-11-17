@@ -8,6 +8,7 @@ title: Sky Tube Dancing  Animated
 import * as THREE from "three";
 import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import { useSelector } from "react-redux";
 
 export function SkyTube(props) {
   const group = useRef();
@@ -15,7 +16,7 @@ export function SkyTube(props) {
     "/assets/sky_tube_dancing__animated/scene.gltf"
   );
   const { actions } = useAnimations(animations, group);
-  // console.log(animations);
+
   useEffect(() => {
     actions["Take 001"].play();
   });
@@ -25,8 +26,8 @@ export function SkyTube(props) {
       ref={group}
       {...props}
       dispose={null}
-      scale={[0.05, 0.05, 0.05]}
-      position={[10, 0, 10]}
+      scale={0.08}
+      position={[0, 0, 0]}
     >
       <group name="Sketchfab_Scene">
         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>

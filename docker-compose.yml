@@ -1,5 +1,15 @@
 version: "3.8"
 services:    
+    signal_server:
+        build:
+            context: ./
+            dockerfile: ./signal/Dockerfile
+            network: my_net
+        user: root
+        container_name: signalserver
+        ports:
+            - 8998:8998
+
     auth_back:
         depends_on:
             - auth_mysql

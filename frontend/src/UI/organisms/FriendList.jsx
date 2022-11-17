@@ -7,33 +7,43 @@ import { HiOutlineTrash } from "react-icons/hi";
 
 import { Avatar } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
+import {
+  deleteArchiveMember,
+  deleteFriend,
+  getFriendArchiveList,
+  getFriendList,
+} from "../../api/friend";
+import { imageForm, s3Path } from "../../api";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setFriendList } from "../../modules/friend";
 
 function FriendList() {
-  // temporary data
-  // TODO: 이미지 저장용 변수 나중에 지우기
-  const [profileImg] = useState(
-    "https://images.unsplash.com/photo-1638643391904-9b551ba91eaa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2592&q=80"
-  );
-
-  // TODO:
+  // const [friendList, setFriendList] = useState([]);
+  const friendList = useSelector((state) => state.friend.friendList);
+  const dispatch = useDispatch();
   const [findNickName, setFindNickName] = useState("");
-  const [friendList, setFriendList] = useState([]);
   const [archiveList, setArchiveList] = useState([]);
-  const [selectFriend, setSelectFriend] = useState({
-    email: "",
-    nickname: "",
-    avatar: "",
-    message: "",
-  });
+  const [selectFriend, setSelectFriend] = useState();
   const [rightTitle, setRightTitle] = useState("");
+  const loginUser = useSelector((state) => state.user.loginUser);
+  const navigate = useNavigate();
 
   const findNickNameHandleChange = (e) => {
     setFindNickName(e.target.value);
   };
 
-  const friendDelete = (email) => {
-    // TODO: 친구삭제 하기
-    console.log("친구삭제", email);
+  const friendDelete = async (nickname) => {
+    await deleteFriend(nickname, deleteFriendSuccess, deleteFriendFail);
+    console.log("친구삭제", nickname);
+    await settingFriendList();
+    setSelectFriend(null);
+  };
+  const deleteFriendSuccess = (res) => {
+    console.log(res);
+  };
+  const deleteFriendFail = (error) => {
+    console.log(error);
   };
 
   const clickNickname = (friend) => {
@@ -42,83 +52,63 @@ function FriendList() {
   };
 
   const enterArchive = (archiveId) => {
-    // TODO: 아카이브로 이동
     console.log(archiveId, "이동");
+    navigate(`/reverse/${archiveId}`);
+    // navigate(`/reversetemp/${archiveId}`);
   };
 
-  const archiveDelete = (archiveId) => {
-    // TODO: 공유된 아카이브 삭제
+  const archiveDelete = async (archiveId) => {
+    await deleteArchiveMember(
+      archiveId,
+      loginUser.nickname,
+      deleteArchiveMemberSuccess,
+      deleteArchiveMemberFail
+    );
     console.log(archiveId, "삭제");
+    await settingFriendArchiveList();
+  };
+  const deleteArchiveMemberSuccess = (res) => {
+    console.log(res);
+  };
+  const deleteArchiveMemberFail = (error) => {
+    console.log(error);
   };
 
   useEffect(() => {
-    // TODO: axios 요청으로 친구 목록 받기
-    setFriendList((list) => {
-      return [
-        ...list,
-        {
-          email: "email@naver.com",
-          nickname: "KIN거운KAN쵸",
-          avatar: profileImg,
-          message: "엉망으로 살아야 해! 인생은 한 번이야!",
-        },
-        {
-          email: "email@naver.com",
-          nickname: "oO강약약강Oo",
-          avatar: profileImg,
-          message: "가는 말이 고우면, 얕본다.",
-        },
-        {
-          email: "email@naver.com",
-          nickname: "zl존윤sun2",
-          avatar: profileImg,
-          message:
-            "새벽에 먹는 맥주와 치킨은 0 칼로리다.새벽에 먹는 맥주와 치킨은 0 칼로리다.새벽에 먹는 맥주와 치킨은 0 칼로리다.",
-        },
-      ];
-    });
-    if (friendList.length > 0) {
-      setSelectFriend(friendList[0]);
-      setRightTitle(`나와함께하는 '${friendList[0].nickname}'의 아카이브`);
-    } else {
-      setRightTitle("함께하는 친구가 없습니다");
-    }
+    settingFriendList();
   }, []);
+  const settingFriendList = async () => {
+    await getFriendList(getFriendSuccess, getFriendFail);
+  };
 
-  // FIXME: 처음에는 빈간이였다가, 나중에 친구 이름 눌렀을 때 오른쪽 화면에 보여야 함!
+  const getFriendSuccess = (res) => {
+    console.log(res);
+    dispatch(setFriendList(res.data.friendList));
+  };
+  const getFriendFail = (error) => {
+    console.log(error);
+  };
+
   useEffect(() => {
-    // TODO: 선택 유저 바뀔때마다 아카이브 목록 가져오기
-    console.log(selectFriend.nickname, "아카이브 목록 가져옴");
-    setArchiveList([
-      {
-        archiveId: "a1",
-        title: "놀러와요 KAN쵸월드",
-        description: "하루에 3번, 3분씩 3개의 칸쵸를 먹자",
-        level: 1,
-        bookmarks: false,
-        members: [
-          {
-            nickname: "name",
-            avatar: "aaa",
-          },
-        ],
-      },
-      {
-        archiveId: "a2",
-        title: "놀러와요 KAN쵸월드 (2)",
-        description: "하루에 6번, 6분씩 6개의 칸쵸를 먹자",
-        level: 1,
-        bookmarks: true,
-        members: [
-          {
-            nickname: "String",
-            avatar: "112",
-          },
-        ],
-      },
-    ]);
+    if (selectFriend) {
+      settingFriendArchiveList();
+      console.log(selectFriend?.nickname, "아카이브 목록 가져옴");
+    }
   }, [selectFriend]);
-
+  const settingFriendArchiveList = async () => {
+    await getFriendArchiveList(
+      selectFriend.nickname,
+      getFriendArchiveListSuccess,
+      getFriendArchiveListFail
+    );
+  };
+  const getFriendArchiveListSuccess = (res) => {
+    setArchiveList(res.data.archives);
+    console.log(res);
+  };
+  const getFriendArchiveListFail = (error) => {
+    console.log(error);
+  };
   return (
     <div className="text-base2">
       {/* friend list */}
@@ -152,7 +142,11 @@ function FriendList() {
                     <div className="flex items-center justify-between px-2 py-1">
                       <div className="flex items-center">
                         {/* <img src={friend.avatar} alt={friend.nickname} /> */}
-                        <Avatar name="profileImg" src={profileImg} size="sm" />
+                        <Avatar
+                          name="profileImg"
+                          src={s3Path + friend.avatar + imageForm}
+                          size="sm"
+                        />
                         <div className="text-base1 px-3">
                           <p
                             onClick={() => {
@@ -172,7 +166,7 @@ function FriendList() {
                       </div>
                       <button
                         onClick={() => {
-                          friendDelete(friend.email);
+                          friendDelete(friend.nickname);
                         }}
                       >
                         <FiMinusCircle className="text-sub3" size={24} />
@@ -186,54 +180,59 @@ function FriendList() {
           </div>
         </div>
         {/* archive list */}
-        <div className="bg-white rounded-3xl w-[calc(96%/2)] h-[600px] pt-5 pb-6 flex flex-col items-center">
-          {/* <div className="bg-white rounded-3xl w-[calc(96%/2)] h-full pt-5 pb-6 flex flex-col items-center"> */}
-          <div className="w-[calc(100%-50px)] text-xl font-bold mb-2">
-            <p className="mt-2 mb-2 mx-2 px-2.5">{rightTitle}</p>
-            <Divider />
-          </div>
-          <div className="w-[calc(100%-50px)] overflow-auto scrollbar-hide">
-            {archiveList.map((archive, index) => {
-              return (
-                <div key={`archiveList-${index}`}>
-                  <div className="flex items-center justify-between px-2 py-1">
-                    <div className="text-base1 px-3">
-                      <p className="text-sm font-bold">{archive.title}</p>
-                      <p className="text-xs overflow-hidden text-ellipsis line-clamp-1 text-zinc-500">
-                        {archive.description}
-                      </p>
+        {selectFriend ? (
+          <div className="bg-white rounded-3xl w-[calc(96%/2)] h-[600px] pt-5 pb-6 flex flex-col items-center">
+            {/* <div className="bg-white rounded-3xl w-[calc(96%/2)] h-full pt-5 pb-6 flex flex-col items-center"> */}
+            <div className="w-[calc(100%-50px)] text-xl font-bold mb-2">
+              <p className="mt-2 mb-2 mx-2 px-2.5">{rightTitle}</p>
+              <Divider />
+            </div>
+            <div className="w-[calc(100%-50px)] overflow-auto scrollbar-hide">
+              {archiveList.map((archive, index) => {
+                return (
+                  <div key={`archiveList-${index}`}>
+                    <div className="flex items-center justify-between px-2 py-1">
+                      <div className="text-base1 px-3">
+                        <p className="text-sm font-bold">{archive.title}</p>
+                        <p className="text-xs overflow-hidden text-ellipsis line-clamp-1 text-zinc-500">
+                          {archive.description}
+                        </p>
+                      </div>
+                      <div>
+                        <button
+                          onClick={() => {
+                            enterArchive(archive.archiveId);
+                          }}
+                          className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
+                        >
+                          <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
+                        </button>
+                        <button
+                          onClick={() => {
+                            archiveDelete(archive.archiveId);
+                          }}
+                          className="bg-sub3 border-2 border-basic3 rounded-full"
+                        >
+                          <HiOutlineTrash size={18} className="text-white m-0.5" />
+                        </button>
+                      </div>
                     </div>
-                    <div>
-                      <button
-                        onClick={() => {
-                          enterArchive(archive.archiveId);
-                        }}
-                        className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
-                      >
-                        <BiLogIn
-                          size={18}
-                          className="text-white m-0.5 -translate-x-0.5"
-                        />
-                      </button>
-                      <button
-                        onClick={() => {
-                          archiveDelete(archive.archiveId);
-                        }}
-                        className="bg-sub3 border-2 border-basic3 rounded-full"
-                      >
-                        <HiOutlineTrash
-                          size={18}
-                          className="text-white m-0.5"
-                        />
-                      </button>
-                    </div>
+                    <Divider />
                   </div>
-                  <Divider />
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="bg-white rounded-3xl w-[calc(96%/2)] h-[600px] pt-5 pb-6 flex flex-col items-center justify-center">
+            <p className="font-bold text-3xl mb-6">사랑~해요~</p>
+            <img
+              className="aspect-square rounded-full w-3/5"
+              src="https://images.velog.io/images/sdp1123/post/ea263380-9ae0-4850-bd69-6af4dcf3e8e6/%EB%9A%B1%EC%9D%B41.jpg"
+              alt="nothing"
+            />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -11,10 +11,13 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
-import { postArchive } from "../../api/archive";
+import { getArchiveList, postArchive } from "../../api/archive";
+import { useDispatch } from "react-redux";
+import { setMyArchiveList } from "../../modules/archive";
 
 function CreateArchiveModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useDispatch();
 
   const [newTitle, setNewTitle] = useState("");
   const [newMessage, setNewMessage] = useState("");
@@ -29,27 +32,39 @@ function CreateArchiveModal() {
 
   const [clickBtn, setClickBtn] = useState(false);
 
-  const handleArchiveSubmit = () => {
-    const formData = new FormData();
-    const content = {
-      newTitle: newTitle,
-      newMessage: newMessage,
-    };
-    const json = JSON.stringify(content);
-    formData.append("content", json);
+  const handleArchiveSubmit = async () => {
+    // const formData = new FormData();
+    // const content = {
+    //   newTitle: newTitle,
+    //   newMessage: newMessage,
+    // };
+    // const json = JSON.stringify(content);
+    // formData.append("content", json);
 
-    postArchive(
-      json,
-      (res) => {
-        setNewTitle(res.data.newTitle);
-        setNewMessage(res.data.newMessage);
-      },
-      (err) => {
-        console.log(err);
-      }
+    await postArchive(
+      { title: newTitle, description: newMessage },
+      postArchiveSuccess,
+      postArchiveFail,
     );
-  };
 
+    await getList();
+  };
+  const postArchiveSuccess = (res) => {
+    console.log(res);
+  };
+  const postArchiveFail = (error) => {
+    console.log(error);
+  };
+  const getList = async () => {
+    await getArchiveList(0, getArchiveListSuccess, getArchiveListFail);
+  };
+  const getArchiveListSuccess = (res) => {
+    console.log(res);
+    dispatch(setMyArchiveList(res.data.archives));
+  };
+  const getArchiveListFail = (error) => {
+    console.log(error);
+  };
   return (
     <>
       {/* modal button */}
@@ -72,6 +87,8 @@ function CreateArchiveModal() {
             <FormControl>
               <input
                 type="text"
+                value={newTitle}
+                onChange={handleNewTitle}
                 placeholder="아카이브 이름"
                 className="w-full focus:outline-none border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1 focus:border-extra1"
               />
@@ -83,6 +100,8 @@ function CreateArchiveModal() {
                 name="message"
                 id="message"
                 rows="4"
+                value={newMessage}
+                onChange={handleNewMessage}
                 className="w-full focus:outline-none resize-none border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1 focus:border-extra1"
               ></textarea>
             </FormControl>
@@ -97,10 +116,12 @@ function CreateArchiveModal() {
             </button>
             <button
               onClick={() => {
-                // handleArchiveSubmit();
+                setClickBtn(true);
+                handleArchiveSubmit();
                 onClose();
               }}
               className="font-bold bg-extra1 px-6 py-2 rounded-xl text-sm"
+              disabled={clickBtn}
             >
               생성하기
             </button>

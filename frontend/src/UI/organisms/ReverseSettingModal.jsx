@@ -12,9 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { BiCog, BiHeadphone } from "react-icons/bi";
 import { BsFillMicFill, BsMusicNoteBeamed } from "react-icons/bs";
-
+import { useSelector, useDispatch } from "react-redux";
+import { setHeadCheck, setMicCheck, setBgmCheck } from "../../modules/webrtc";
 function ReverseSettingModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const webrtcRedux = useSelector((state) => state.webrtc);
+  const dispatch = useDispatch();
   return (
     <div>
       <button
@@ -52,7 +55,14 @@ function ReverseSettingModal() {
                   <BiHeadphone size={24} />
                   <p className="text-sm">음성</p>
                 </FormLabel>
-                <Switch id="headphone" />
+                <Switch
+                  id="headphone"
+                  isChecked={webrtcRedux.headCheck}
+                  onChange={() => {
+                    dispatch(setHeadCheck(!webrtcRedux.headCheck));
+                    // console.log(webrtcRedux);
+                  }}
+                />
               </FormControl>
 
               {/* 마이크 */}
@@ -74,7 +84,14 @@ function ReverseSettingModal() {
                   <BsFillMicFill size={24} />
                   <p className="text-sm">마이크</p>
                 </FormLabel>
-                <Switch id="mic" />
+                <Switch
+                  id="mic"
+                  isChecked={webrtcRedux.micCheck}
+                  onChange={() => {
+                    dispatch(setMicCheck(!webrtcRedux.micCheck));
+                    // console.log(webrtcRedux);
+                  }}
+                />
               </FormControl>
 
               {/* 배경음악 */}
@@ -96,7 +113,13 @@ function ReverseSettingModal() {
                   <BsMusicNoteBeamed size={24} />
                   <p className="text-sm">배경음악</p>
                 </FormLabel>
-                <Switch id="bgm" />
+                <Switch
+                  id="bgm"
+                  isChecked={webrtcRedux.bgmCheck}
+                  onChange={() => {
+                    dispatch(setBgmCheck(!webrtcRedux.bgmCheck));
+                  }}
+                />
               </FormControl>
             </div>
           </ModalBody>
