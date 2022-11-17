@@ -14,6 +14,14 @@ import MyParrotAnimations from "../../assets/players/my/MyParrotAnimations.js";
 import MyPigeonAnimations from "../../assets/players/my/MyPigeonAnimations.js";
 import MyRabbitAnimations from "../../assets/players/my/MyRabbitAnimations.js";
 import MyTortoiseAnimations from "../../assets/players/my/MyTortoiseAnimations.js";
+import MyBelugaAnimations from "../../assets/players/my/MyBelugaAnimations.js";
+import MyHareAnimations from "../../assets/players/my/MyHareAnimations.js";
+import MyHuskyAnimations from "../../assets/players/my/MyHuskyAnimations.js";
+import MyLynxAnimations from "../../assets/players/my/MyLynxAnimations.js";
+import MyMooseAnimations from "../../assets/players/my/MyMooseAnimations.js";
+import MyNarwhalAnimations from "../../assets/players/my/MyNarwhalAnimations.js";
+import MyPuffinAnimations from "../../assets/players/my/MyPuffinAnimations.js";
+import MySnowLeopardAnimations from "../../assets/players/my/MySnowLeopardAnimations.js";
 
 function SelectedMyPlayer({ destinationPoint, handleVisible }) {
   const loginUser = useSelector((state) => state.user.loginUser);
@@ -78,6 +86,54 @@ function SelectedMyPlayer({ destinationPoint, handleVisible }) {
         ) : null}
         {loginUser.avatar === "Tortoise" ? (
           <MyTortoiseAnimations
+            destinationPoint={destinationPoint}
+            handleVisible={handleVisible}
+          />
+        ) : null}
+        {loginUser.avatar === "Beluga" ? (
+          <MyBelugaAnimations
+            destinationPoint={destinationPoint}
+            handleVisible={handleVisible}
+          />
+        ) : null}
+        {loginUser.avatar === "Hare" ? (
+          <MyHareAnimations
+            destinationPoint={destinationPoint}
+            handleVisible={handleVisible}
+          />
+        ) : null}
+        {loginUser.avatar === "Husky" ? (
+          <MyHuskyAnimations
+            destinationPoint={destinationPoint}
+            handleVisible={handleVisible}
+          />
+        ) : null}
+        {loginUser.avatar === "Lynx" ? (
+          <MyLynxAnimations
+            destinationPoint={destinationPoint}
+            handleVisible={handleVisible}
+          />
+        ) : null}
+        {loginUser.avatar === "Moose" ? (
+          <MyMooseAnimations
+            destinationPoint={destinationPoint}
+            handleVisible={handleVisible}
+          />
+        ) : null}
+        {loginUser.avatar === "Narwhal" ? (
+          <MyNarwhalAnimations
+            destinationPoint={destinationPoint}
+            handleVisible={handleVisible}
+          />
+        ) : null}
+        {loginUser.avatar === "Puffin" ? (
+          <MyPuffinAnimations
+            destinationPoint={destinationPoint}
+            handleVisible={handleVisible}
+          />
+        ) : null}
+        {loginUser.avatar === "SnowLeopard" ? (
+          <MySnowLeopardAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
           />
