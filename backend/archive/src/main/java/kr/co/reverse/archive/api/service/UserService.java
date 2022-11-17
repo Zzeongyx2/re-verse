@@ -4,6 +4,7 @@ package kr.co.reverse.archive.api.service;
 import kr.co.reverse.archive.api.request.AvatarReq;
 import kr.co.reverse.archive.api.request.SigninUserReq;
 import kr.co.reverse.archive.api.request.UserReq;
+import kr.co.reverse.archive.api.response.UserRes;
 import kr.co.reverse.archive.common.error.CommonErrorCode;
 import kr.co.reverse.archive.common.exception.NicknameDuplicateException;
 import kr.co.reverse.archive.common.exception.UnauthorizedException;
@@ -15,7 +16,12 @@ import kr.co.reverse.archive.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -36,7 +42,6 @@ public class UserService {
     private final ArchiveRepository archiveRepository;
     private final UserRepository userRepository;
     private final RedisService redisService;
-    private final UserSearchService userSearchService;
 
     public User getPlayer(String userId) {
         return userRepository.findById(UUID.fromString(userId)).get();
@@ -91,8 +96,6 @@ public class UserService {
         user.setNickname(userInfo.getNickname());
         user.setMessage(userInfo.getMessage());
 
-        userSearchService.updateUser(user);
-
     }
 
     @Transactional
@@ -107,10 +110,7 @@ public class UserService {
                     .createdTime(LocalDate.now())
                     .build();
 
-            userRepository.save(user);
-
-            //document에 저장
-            userSearchService.createUser(user);
+            return userRepository.save(user);
         }
 
         return null;
@@ -122,8 +122,6 @@ public class UserService {
         User user = getPlayer(userId);
 
         user.setAvatar(Avatar.valueOf(avatarInfo.getAvatar()));
-
-        userSearchService.updateAvatar(user);
 
     }
 
@@ -145,14 +143,9 @@ public class UserService {
 
     public List<User> getUsers(String nickname) {
 
-        //        userSearchRepository.findByNickname(nickname).stream().map(UserDocument::from).collect(Collectors.toList());
+        List<User> users = userRepository.findByNicknameContaining(nickname);
 
-
-        return userRepository.findByNicknameContaining(nickname);
-    }
-
-    public User getUserByAuthId(String authId) {
-        return userRepository.findUserByAuthId(authId);
+        return users;
     }
 
     public User getUserByNickname(String nickname) {
