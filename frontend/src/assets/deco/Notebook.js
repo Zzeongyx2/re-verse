@@ -7,7 +7,7 @@ title: Cartoon Notebook & Pencil
 */
 
 import React, { useRef, useState } from "react";
-import { Sparkles, useGLTF } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { gsap } from "gsap";
 import { useFrame } from "@react-three/fiber";
 
@@ -68,7 +68,11 @@ export function Notebook({ props, event, position, rotation }) {
         }}
       >
         <group rotation={[Math.PI / 2, 0, 0]}>
-          <group position={[-2.36, 21.71, -37.71]} rotation={[-1.07, -1.4, 2.78]} scale={1.06}>
+          <group
+            position={[-2.36, 21.71, -37.71]}
+            rotation={[-1.07, -1.4, 2.78]}
+            scale={1.06}
+          >
             <mesh
               geometry={nodes["Pencil_01_-_Default_0"].geometry}
               material={materials["01_-_Default"]}
@@ -86,7 +90,10 @@ export function Notebook({ props, event, position, rotation }) {
               dispatch(setTravelWriteIsOpen());
             }}
           >
-            <mesh geometry={nodes.Rectangle004__0.geometry} material={materials.Rectangle004__0} />
+            <mesh
+              geometry={nodes.Rectangle004__0.geometry}
+              material={materials.Rectangle004__0}
+            />
           </group>
         </group>
         <group>
@@ -97,7 +104,6 @@ export function Notebook({ props, event, position, rotation }) {
       </group>
 
       {/* <Box destinationPoint={position} /> */}
-      <Sparkles count={100} scale={3} size={5} position={position} speed={0.4} />
     </group>
   );
 }
