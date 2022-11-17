@@ -27,7 +27,7 @@ function Lobby() {
   };
 
   return (
-    <div className="mt-8">
+    <div className="pt-10">
       <div className="">
         <Navbar />
       </div>

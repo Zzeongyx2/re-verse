@@ -21,7 +21,7 @@ function Friend() {
   }, [location]);
 
   return (
-    <div className="mt-8">
+    <div className="pt-10">
       <Navbar />
 
       <div className="flex mb-5">
