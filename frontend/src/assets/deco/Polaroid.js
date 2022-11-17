@@ -11,7 +11,7 @@ import * as THREE from "three";
 import { Sparkles, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { gsap } from "gsap";
-import {useBox} from "@react-three/cannon"
+import { useBox } from "@react-three/cannon";
 import { useDispatch, useSelector } from "react-redux";
 import { setTravelReadIsOpen } from "../../modules/reverse";
 
@@ -34,14 +34,7 @@ export function Polaroid({ props, position, event, rotation }) {
     // args: [1, 5, 1],
   }));
   return (
-    <group
-      {...props}
-      dispose={null}
-      onClick={() => {
-        console.log("폴라로이드 눌렀다");
-        dispatch(setTravelReadIsOpen());
-      }}
-    >
+    <group {...props} dispose={null}>
       <group
         ref={travelObject}
         // rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
@@ -59,6 +52,10 @@ export function Polaroid({ props, position, event, rotation }) {
             }}
             onPointerLeave={(e) => {
               document.getElementsByTagName("body")[0].style.cursor = "";
+            }}
+            onClick={() => {
+              console.log("폴라로이드 눌렀다");
+              dispatch(setTravelReadIsOpen());
             }}
           >
             <mesh
