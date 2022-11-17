@@ -22,7 +22,7 @@ import java.net.UnknownHostException;
 public class ElasticSearchConfig extends AbstractElasticsearchConfiguration {
 
     @Value("${elasticsearch.port}")
-    private String elasticHPort;
+    private String elasticPort;
 
     @Value("${elasticsearch.host}")
     private String elasticHost;
@@ -35,7 +35,7 @@ public class ElasticSearchConfig extends AbstractElasticsearchConfiguration {
         System.out.println("------- elastic search host : " + elasticHost);
 
         ClientConfiguration clientConfiguration = ClientConfiguration.builder()
-                .connectedTo(elasticHost + ":" + elasticHPort)
+                .connectedTo(elasticHost + ":" + elasticPort)
                 .build();
         return RestClients.create((clientConfiguration)).rest();
     }
