@@ -34,7 +34,11 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createArchiveMember, deleteArchiveMember, getFriendList } from "../../api/friend";
+import {
+  createArchiveMember,
+  deleteArchiveMember,
+  getFriendList,
+} from "../../api/friend";
 import { getArchiveList } from "../../api/archive";
 import { setJoinArchive, setMyArchiveList } from "../../modules/archive";
 import { useEffect } from "react";
@@ -43,11 +47,12 @@ import { setInfo } from "../../modules/reverse";
 import { setFriendList } from "../../modules/friend";
 import { imageForm, s3Path } from "../../api";
 
-function ReverseFriendModal() {
+function ReverseFriendModal({ joinMembers }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [scrollBehavior, setScrollBehavior] = useState("inside");
   const reverse = useSelector((state) => state.reverse);
   const friendList = useSelector((state) => state.friend.friendList);
+  const joinArchive = useSelector((state) => state.archive.joinArchive);
   const dispatch = useDispatch();
   const [findNickName, setFindNickName] = useState("");
   const [archive, setArchive] = useState();
@@ -57,7 +62,11 @@ function ReverseFriendModal() {
   useEffect(() => {
     console.log(reverse);
     if (reverse.info.archiveId) {
-      getArchiveDetail(reverse.info.archiveId, getArchiveDetailSuccess, getArchiveDetailFail);
+      getArchiveDetail(
+        reverse.info.archiveId,
+        getArchiveDetailSuccess,
+        getArchiveDetailFail,
+      );
     }
   }, [reverse.info.archiveId]);
   useEffect(() => {
@@ -84,7 +93,7 @@ function ReverseFriendModal() {
       setInfo({
         ...reverse.info,
         stuffs: res.data.stuffs,
-      })
+      }),
     );
   };
 
@@ -94,15 +103,29 @@ function ReverseFriendModal() {
 
   const shareMember = async (nickname) => {
     console.log(archive);
-    await createArchiveMember(archive.id, nickname, editMemberSuccess, editMemberFail);
+    await createArchiveMember(
+      archive.id,
+      nickname,
+      editMemberSuccess,
+      editMemberFail,
+    );
   };
   const deleteMember = async (nickname) => {
-    await deleteArchiveMember(archive.id, nickname, editMemberSuccess, editMemberFail);
+    await deleteArchiveMember(
+      archive.id,
+      nickname,
+      editMemberSuccess,
+      editMemberFail,
+    );
   };
   const editMemberSuccess = async (res) => {
     console.log(res);
     await getList();
-    await getArchiveDetail(reverse.info.archiveId, getArchiveDetailSuccess, getArchiveDetailFail);
+    await getArchiveDetail(
+      reverse.info.archiveId,
+      getArchiveDetailSuccess,
+      getArchiveDetailFail,
+    );
   };
   const editMemberFail = (error) => {
     console.log(error);
@@ -119,7 +142,10 @@ function ReverseFriendModal() {
   };
   return (
     <div>
-      <button onClick={onOpen} className="bg-white flex items-center rounded-full">
+      <button
+        onClick={onOpen}
+        className="bg-white flex items-center rounded-full"
+      >
         <BsFillPeopleFill className="text-2xl m-1.5" />
       </button>
       <Modal
@@ -139,16 +165,29 @@ function ReverseFriendModal() {
             <div className="flex flex-col h-[400px] justify-between">
               {/* 현재 접속중인 친구 */}
               <div className="p-2 border-2 border-basic3 rounded-lg w-full h-[calc(96%/3-24px)]">
-                <p className="font-bold px-1 pt-0.5 pb-1.5">현재 접속중인 친구</p>
-                {/* {friendList.map((info, idx) => {
-                  return (
-                    info.isAccessed && (
+                <p className="font-bold px-1 pt-0.5 pb-1.5">
+                  현재 접속중인 친구
+                </p>
+                {joinArchive?.members
+                  .filter((member) => {
+                    for (let index = 0; index < joinMembers.length; index++) {
+                      console.log(member);
+                      const element = joinMembers[index];
+                      console.log(element);
+                      if (element == member.nickname) {
+                        console.log("mmmmmmmmmmmmmmmmmmmmmmmmmm");
+                        return member;
+                      }
+                    }
+                  })
+                  .map((info, idx) => {
+                    return (
                       <Popover key={`isaccessed-${idx}`}>
                         <PopoverTrigger>
                           <Avatar
                             key={`isaccessed-${idx}`}
                             name={info.nickname}
-                            src={info.imgUrl}
+                            src={s3Path + info.avatar + imageForm}
                             cursor="pointer"
                             mr="-2"
                           />
@@ -165,15 +204,16 @@ function ReverseFriendModal() {
                           </PopoverBody>
                         </PopoverContent>
                       </Popover>
-                    )
-                  );
-                })} */}
-                후추 잠시
+                    );
+                  })}
+                {/* 후추 잠시 */}
               </div>
 
               {/* 아카이브 공유 관리 */}
               <div className="p-2 mb-4 border-2 border-basic3 rounded-lg w-full h-[calc(99%/3*2)] ">
-                <p className="font-bold px-1 pt-0.5 pb-1.5 mb-1.5">아카이브 공유 관리</p>
+                <p className="font-bold px-1 pt-0.5 pb-1.5 mb-1.5">
+                  아카이브 공유 관리
+                </p>
                 {/* search bar */}
                 <div className="w-full flex justify-center items-center px-4 py-1.5 mb-5 border-2 border-base1/20 rounded-lg">
                   <BsSearch size={24} />
@@ -189,11 +229,17 @@ function ReverseFriendModal() {
                 <div className="flex justify-between">
                   {/* 공유되지 않은 친구 */}
                   <div className="w-[calc(90%/2)]">
-                    <p className="bg-basic2 w-full py-1 px-2 mb-1 rounded-md">공유되지 않은 친구</p>
+                    <p className="bg-basic2 w-full py-1 px-2 mb-1 rounded-md">
+                      공유되지 않은 친구
+                    </p>
                     <div className="h-28 overflow-auto scrollbar-hide">
                       {friendList
                         .filter((info) => {
-                          for (let index = 0; index < archive?.members.length; index++) {
+                          for (
+                            let index = 0;
+                            index < archive?.members.length;
+                            index++
+                          ) {
                             const element = archive.members[index];
                             if (info.nickname === element.nickname) {
                               return;
@@ -236,11 +282,17 @@ function ReverseFriendModal() {
 
                   {/* 공유된 친구 */}
                   <div className="w-[calc(90%/2)]">
-                    <p className="bg-basic2 w-full py-1 px-2 mb-1 rounded-md">공유된 친구</p>
+                    <p className="bg-basic2 w-full py-1 px-2 mb-1 rounded-md">
+                      공유된 친구
+                    </p>
                     <div className="h-28 overflow-auto scrollbar-hide">
                       {friendList
                         .filter((info) => {
-                          for (let index = 0; index < archive?.members.length; index++) {
+                          for (
+                            let index = 0;
+                            index < archive?.members.length;
+                            index++
+                          ) {
                             const element = archive.members[index];
                             if (info.nickname === element.nickname) {
                               if (findNickName.trim() === "") {
