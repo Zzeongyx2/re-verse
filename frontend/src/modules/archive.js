@@ -4,6 +4,7 @@ const initialState = {
   myArchiveList: [],
   friendArchiveList: [],
   likeArchiveList: [],
+  joinArchive: { members: [{ nickname: "" }] },
 };
 
 const reducers = {
@@ -16,6 +17,9 @@ const reducers = {
   setLikeArchiveList: (state, action) => {
     state.likeArchiveList = action.payload;
   },
+  setJoinArchive: (state, action) => {
+    state.joinArchive = action.payload;
+  },
 };
 
 export const archiveSlice = createSlice({
@@ -24,6 +28,7 @@ export const archiveSlice = createSlice({
   reducers,
 });
 
-export const { setMyArchiveList, setFriendArchiveList, setLikeArchiveList } = archiveSlice.actions;
+export const { setMyArchiveList, setFriendArchiveList, setLikeArchiveList, setJoinArchive } =
+  archiveSlice.actions;
 
 export default archiveSlice.reducer;
