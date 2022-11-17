@@ -34,6 +34,7 @@ services:
         depends_on:
             - archive_mysql
             - auth_redis
+            - elasticsearch
         build: 
             context: ./
             dockerfile: ./backend/archive/Dockerfile
@@ -51,6 +52,37 @@ services:
             ELASTICSEARCH_HOSTS: http://elasticsearch:9200
         ports:
             - 8081:8081
+
+    elasticsearch:
+        container_name: elasticsearch
+        image: elasticsearch:7.9.0
+        ports:
+            - 9200:9200
+            - 9300:9300
+        networks:
+            - my_net
+        volumes:
+            - elasticsearch:/usr/share/elasticsearch/data
+        environment:
+            - discovery.type=single-node
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+            - TZ=Asia/Seoul
+        user: root
+        restart: always
+        privileged: true
+    kibana:
+        container_name: kibana
+        image: docker.elastic.co/kibana/kibana:7.6.1
+        ports:
+            - 5601:5601
+            # - 5601:8996
+        environment:
+            ELASTICSEARCH_URL: http://elasticsearch:9200
+            ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+        networks:
+            - default
+        depends_on:
+            - elasticsearch
 
     auth_mysql:
         container_name: authdb
@@ -101,6 +133,8 @@ volumes:
         name: archiveback
     authcache:
         name: authcache
+    elasticsearch:
+        name: elasticsearch
 networks:
     default:
         external:
