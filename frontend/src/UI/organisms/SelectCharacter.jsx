@@ -53,7 +53,9 @@ function SelectCharacter() {
           {/* 캐릭터 선택 창 */}
           <div className="flex flex-col bg-white rounded-3xl pb-6 w-full">
             <div className="flex justify-center items-center w-full rounded-tl-3xl rounded-tr-3xl bg-gradient-to-t from-main1 to-sub1 mb-4">
-              <p className="text-2xl drop-shadow font-bold my-4 text-white">캐릭터 선택</p>
+              <p className="text-2xl drop-shadow font-bold my-4 text-white">
+                캐릭터 선택
+              </p>
             </div>
             <div className="grid grid-cols-8 gap-3 justify-items-center mx-4">
               {/* // FIXME: 캐릭터 선택 라디오 버튼 */}
@@ -68,9 +70,152 @@ function SelectCharacter() {
                     onChange={handleChange}
                     selected={ischecked}
                   />
-                  <SelectCharacterBtn imgUrl={s3Path + character + imageForm} name={character} />
+                  <SelectCharacterBtn
+                    imgUrl={s3Path + character + imageForm}
+                    name={character}
+                  />
                 </label>
               ))}
+
+              {/* // TODO: 지워줘요 */}
+              <label>
+                {/* <label key={`character + ${idx}`}> */}
+                <input
+                  type="radio"
+                  name="avatar"
+                  className="hidden"
+                  value={"Beluga"}
+                  onChange={handleChange}
+                  selected={ischecked}
+                />
+                <SelectCharacterBtn
+                  imgUrl={s3Path + "Beluga" + imageForm}
+                  name={"Beluga"}
+                />
+              </label>
+              <label>
+                {/* <label key={`character + ${idx}`}> */}
+                <input
+                  type="radio"
+                  name="avatar"
+                  className="hidden"
+                  value={"Cougar"}
+                  onChange={handleChange}
+                  selected={ischecked}
+                />
+                <SelectCharacterBtn
+                  imgUrl={s3Path + "Cougar" + imageForm}
+                  name={"Cougar"}
+                />
+              </label>
+              <label>
+                {/* <label key={`character + ${idx}`}> */}
+                <input
+                  type="radio"
+                  name="avatar"
+                  className="hidden"
+                  value={"Hare"}
+                  onChange={handleChange}
+                  selected={ischecked}
+                />
+                <SelectCharacterBtn
+                  imgUrl={s3Path + "Hare" + imageForm}
+                  name={"Hare"}
+                />
+              </label>
+              <label>
+                {/* <label key={`character + ${idx}`}> */}
+                <input
+                  type="radio"
+                  name="avatar"
+                  className="hidden"
+                  value={"Husky"}
+                  onChange={handleChange}
+                  selected={ischecked}
+                />
+                <SelectCharacterBtn
+                  imgUrl={s3Path + "Husky" + imageForm}
+                  name={"Husky"}
+                />
+              </label>
+              <label>
+                {/* <label key={`character + ${idx}`}> */}
+                <input
+                  type="radio"
+                  name="avatar"
+                  className="hidden"
+                  value={"Lynx"}
+                  onChange={handleChange}
+                  selected={ischecked}
+                />
+                <SelectCharacterBtn
+                  imgUrl={s3Path + "Lynx" + imageForm}
+                  name={"Lynx"}
+                />
+              </label>
+              <label>
+                {/* <label key={`character + ${idx}`}> */}
+                <input
+                  type="radio"
+                  name="avatar"
+                  className="hidden"
+                  value={"Moose"}
+                  onChange={handleChange}
+                  selected={ischecked}
+                />
+                <SelectCharacterBtn
+                  imgUrl={s3Path + "Moose" + imageForm}
+                  name={"Moose"}
+                />
+              </label>
+              <label>
+                {/* <label key={`character + ${idx}`}> */}
+                <input
+                  type="radio"
+                  name="avatar"
+                  className="hidden"
+                  value={"Narwhal"}
+                  onChange={handleChange}
+                  selected={ischecked}
+                />
+                <SelectCharacterBtn
+                  imgUrl={s3Path + "Narwhal" + imageForm}
+                  name={"Narwhal"}
+                />
+              </label>
+              <label>
+                {/* <label key={`character + ${idx}`}> */}
+                <input
+                  type="radio"
+                  name="avatar"
+                  className="hidden"
+                  value={"Puffin"}
+                  onChange={handleChange}
+                  selected={ischecked}
+                />
+                <SelectCharacterBtn
+                  imgUrl={s3Path + "Puffin" + imageForm}
+                  name={"Puffin"}
+                />
+              </label>
+              <label>
+                {/* <label key={`character + ${idx}`}> */}
+                <input
+                  type="radio"
+                  name="avatar"
+                  className="hidden"
+                  value={"SnowLeopard"}
+                  onChange={handleChange}
+                  selected={ischecked}
+                />
+                <SelectCharacterBtn
+                  imgUrl={s3Path + "SnowLeopard" + imageForm}
+                  name={"SnowLeopard"}
+                />
+              </label>
+
+              {/* <label key={`character + ${idx}`}> */}
+
               {/* {characters.map((character, idx) => {
                 return (
                   <label key={`character-${idx}`}>
