@@ -3,7 +3,7 @@ import SelectCharacter from "../organisms/SelectCharacter";
 
 function Character() {
   return (
-    <div className="mt-8">
+    <div className="pt-10">
       <Navbar />
       <SelectCharacter />
       {/* <div className="text-white">this is selecting character page</div> */}
