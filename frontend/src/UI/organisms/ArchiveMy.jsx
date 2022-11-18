@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { Avatar, AvatarGroup } from "@chakra-ui/react";
+import { Avatar, AvatarGroup, Tooltip } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
 
 import { FiSettings } from "react-icons/fi";
@@ -31,7 +31,7 @@ function ArchiveMy() {
     editBestArchive(
       archive.archiveId,
       editBestArchiveSuccess,
-      editBestArchiveFail,
+      editBestArchiveFail
     );
   };
   const editBestArchiveSuccess = (res) => {
@@ -96,18 +96,26 @@ function ArchiveMy() {
                   </p>
                   {/* 들어가있는 멤버 */}
                   <div className="w-40">
-                    <AvatarGroup size="sm" max={5} spacing="-2">
-                      {archive.members.map((member, index) => {
-                        return (
+                    {/* <AvatarGroup size="sm" max={5} spacing="-2"> */}
+                    {archive.members.map((member, index) => {
+                      return (
+                        <Tooltip
+                          label={`${member.nickname}`}
+                          aria-label="A tooltip"
+                        >
                           <Avatar
+                            size={"sm"}
+                            marginLeft={-1.5}
+                            variant="avatarBorder"
                             name="profileImg"
                             src={s3Path + member.avatar + imageForm}
                             key={`avatar-${index}`}
                             alt={index}
                           />
-                        );
-                      })}
-                    </AvatarGroup>
+                        </Tooltip>
+                      );
+                    })}
+                    {/* </AvatarGroup> */}
                   </div>
                   {/* 버튼들 */}
                   <div>

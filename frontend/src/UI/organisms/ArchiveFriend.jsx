@@ -2,9 +2,13 @@ import { useState, useEffect } from "react";
 import { BiLogIn } from "react-icons/bi";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { HiOutlineTrash } from "react-icons/hi";
-import { Avatar, AvatarGroup } from "@chakra-ui/react";
+import { Avatar, AvatarGroup, Tooltip } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
-import { deleteArchiveMember, deleteBookmark, postBookmark } from "../../api/friend";
+import {
+  deleteArchiveMember,
+  deleteBookmark,
+  postBookmark,
+} from "../../api/friend";
 import { getArchiveList } from "../../api/archive";
 import { imageForm, s3Path } from "../../api";
 import { useDispatch, useSelector } from "react-redux";
@@ -42,9 +46,17 @@ function ArchiveFriend() {
   };
   const bookmarkTrigger = async (archive, index) => {
     if (!archive.bookmarks) {
-      await postBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
+      await postBookmark(
+        archive.archiveId,
+        bookmarkControlSuccess,
+        bookmarkControl
+      );
     } else {
-      await deleteBookmark(archive.archiveId, bookmarkControlSuccess, bookmarkControl);
+      await deleteBookmark(
+        archive.archiveId,
+        bookmarkControlSuccess,
+        bookmarkControl
+      );
     }
 
     await getList();
@@ -85,7 +97,11 @@ function ArchiveFriend() {
                       }}
                       className="w-14 text-extra1"
                     >
-                      {archive.bookmark ? <AiFillStar size={18} /> : <AiOutlineStar size={18} />}
+                      {archive.bookmark ? (
+                        <AiFillStar size={18} />
+                      ) : (
+                        <AiOutlineStar size={18} />
+                      )}
                     </button>
                     {/* 유저 이름 */}
                     <div className="font-bold text-sm overflow-hidden text-ellipsis line-clamp-1 md:w-44 sm:w-36">
@@ -103,18 +119,24 @@ function ArchiveFriend() {
                   </div>
                   {/* 참여한 멤버들 */}
                   <div className="w-40">
-                    <AvatarGroup size="sm" max={5} spacing="-2">
-                      {archive.members.map((member, index) => {
-                        return (
+                    {archive.members.map((member, index) => {
+                      return (
+                        <Tooltip
+                          label={`${member.nickname}`}
+                          aria-label="A tooltip"
+                        >
                           <Avatar
-                            name={member.nickname}
+                            size={"sm"}
+                            marginLeft={-1.5}
+                            variant="avatarBorder"
+                            name="profileImg"
                             src={s3Path + member.avatar + imageForm}
-                            key={index}
+                            key={`avatar-${index}`}
                             alt={index}
                           />
-                        );
-                      })}
-                    </AvatarGroup>
+                        </Tooltip>
+                      );
+                    })}
                   </div>
                   {/* 버튼들 */}
                   <div>
@@ -124,7 +146,10 @@ function ArchiveFriend() {
                       }}
                       className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
                     >
-                      <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
+                      <BiLogIn
+                        size={18}
+                        className="text-white m-0.5 -translate-x-0.5"
+                      />
                     </button>
                     <button
                       onClick={() => {
