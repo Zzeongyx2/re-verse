@@ -21,30 +21,37 @@ export function EasterPack(props) {
             position={[-85, 0, 90]}
           >
             <mesh
+              castShadow
               geometry={nodes.Easter_Picnic_Pack_Mat_Ground_0.geometry}
               material={materials.Mat_Ground}
             />
             <mesh
+              castShadow
               geometry={nodes["Easter_Picnic_Pack_02_-_Default_0"].geometry}
               material={materials["02_-_Default"]}
             />
             <mesh
+              castShadow
               geometry={nodes.Easter_Picnic_Pack_Mat_Ester_Basket_0.geometry}
               material={materials.Mat_Ester_Basket}
             />
             <mesh
+              castShadow
               geometry={nodes.Easter_Picnic_Pack_Mat_Easter_Blanket_0.geometry}
               material={materials.Mat_Easter_Blanket}
             />
             <mesh
+              castShadow
               geometry={nodes.Easter_Picnic_Pack_Mat_Leaves_01_0.geometry}
               material={materials.Mat_Leaves_01}
             />
             <mesh
+              castShadow
               geometry={nodes.Easter_Picnic_Pack_Mat_Leaves_02_0.geometry}
               material={materials.Mat_Leaves_02}
             />
             <mesh
+              castShadow
               geometry={nodes.Easter_Picnic_Pack_Mat_Clovers_0.geometry}
               material={materials.Mat_Clovers}
             />

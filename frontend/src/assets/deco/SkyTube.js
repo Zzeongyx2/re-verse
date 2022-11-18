@@ -48,7 +48,6 @@ export function SkyTube(props) {
                       material={materials.SkyTube}
                       skeleton={nodes.Object_9.skeleton}
                       castShadow
-                      receiveShadow
                     />
                   </group>
                 </group>
