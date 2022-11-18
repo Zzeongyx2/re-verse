@@ -25,19 +25,19 @@ export function Radio(props) {
   //   dispatch(setMusicTheme(click));
   // }, [click]);
   console.log(webrtcRedux);
-const [boxCollider] = useBox((props) => ({
-  mass: 100000,
-  args: [20, 10, 15],
-  type: "Static",
-  position: [-128, 1, -100],
-  ...props,
-  // args: [1, 5, 1],
-}));
+  const [boxCollider] = useBox((props) => ({
+    mass: 100000,
+    args: [20, 10, 15],
+    type: "Static",
+    position: [-128, 1, -100],
+    ...props,
+    // args: [1, 5, 1],
+  }));
   return (
     <group
       {...props}
       dispose={null}
-      position={[-128, 0, -99]}
+      position={[-128, 0, -93]}
       scale={0.5}
       onPointerOver={(e) => {
         document.getElementsByTagName("body")[0].style.cursor = "pointer";
@@ -47,7 +47,7 @@ const [boxCollider] = useBox((props) => ({
       }}
     >
       <mesh ref={boxCollider} scale={50}></mesh>
-      <group rotation={[-Math.PI / 2, 0, 0]}>
+      <group rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group
             rotation={[-Math.PI / 2, 0, 0]}
