@@ -1,11 +1,10 @@
 import axios from "axios";
-import { reissue } from "./auth";
 
+const BASE_URL = process.env.REACT_APP_SERVER_URL;
 // axios 객체 생성
-
 function apiInstance() {
   const instance = axios.create({
-    baseURL: "https://re-verse.co.kr/api/v1",
+    baseURL: `${BASE_URL}/api/v1`,
     headers: {
       "Content-Type": "application/json",
     },
@@ -41,7 +40,7 @@ function apiInstance() {
 
 function fileApiInstance() {
   const instance = axios.create({
-    baseURL: "https://re-verse.co.kr/api/v1",
+    baseURL: `${BASE_URL}/api/v1`,
     headers: {
       "Content-Type": `multipart/form-data`,
     },
