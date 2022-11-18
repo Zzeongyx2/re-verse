@@ -1,7 +1,12 @@
 server:
-  port: 8081
+  port: 8080
 
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://reverse-archive.clpjhqrsb3pu.ap-northeast-2.rds.amazonaws.com:3306/reverse_auth?serverTimezone=UTC&characterEncoding=UTF-8
+    username: admin
+    password: flQjtm1024
   servlet:
     multipart:
       max-file-size: 30MB
@@ -20,6 +25,9 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL57Dialect
         use_sql_comments: true
+  redis:
+    host: reverse-redis.akqgni.ng.0001.apn2.cache.amazonaws.com
+    port: 6379
 
 logging:
   level:
@@ -46,7 +54,7 @@ cloud:
 
 
 elasticsearch:
-  host: re-verse.co.kr
+  host: https://vpc-reverse-elastic-search-1-tx7r32a6sdboafhr2uzfkdmvyi.ap-northeast-2.es.amazonaws.com
   port : 9200
 
 jwt:
