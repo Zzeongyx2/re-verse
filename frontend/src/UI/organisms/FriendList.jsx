@@ -62,7 +62,7 @@ function FriendList() {
       archiveId,
       loginUser.nickname,
       deleteArchiveMemberSuccess,
-      deleteArchiveMemberFail
+      deleteArchiveMemberFail,
     );
     console.log(archiveId, "삭제");
     await settingFriendArchiveList();
@@ -99,7 +99,7 @@ function FriendList() {
     await getFriendArchiveList(
       selectFriend.nickname,
       getFriendArchiveListSuccess,
-      getFriendArchiveListFail
+      getFriendArchiveListFail,
     );
   };
   const getFriendArchiveListSuccess = (res) => {
@@ -188,39 +188,54 @@ function FriendList() {
               <Divider />
             </div>
             <div className="w-[calc(100%-50px)] overflow-auto scrollbar-hide">
-              {archiveList.map((archive, index) => {
-                return (
-                  <div key={`archiveList-${index}`}>
-                    <div className="flex items-center justify-between px-2 py-1">
-                      <div className="text-base1 px-3">
-                        <p className="text-sm font-bold">{archive.title}</p>
-                        <p className="text-xs overflow-hidden text-ellipsis line-clamp-1 text-zinc-500">
-                          {archive.description}
-                        </p>
+              {archiveList
+                .filter((archive) => {
+                  for (let index = 0; index < archive.members.length; index++) {
+                    const element = archive.members[index];
+                    if (element.nickname === loginUser.nickname) {
+                      return archive;
+                    }
+                  }
+                })
+                .map((archive, index) => {
+                  return (
+                    <div key={`archiveList-${index}`}>
+                      <div className="flex items-center justify-between px-2 py-1">
+                        <div className="text-base1 px-3">
+                          <p className="text-sm font-bold">{archive.title}</p>
+                          <p className="text-xs overflow-hidden text-ellipsis line-clamp-1 text-zinc-500">
+                            {archive.description}
+                          </p>
+                        </div>
+                        <div>
+                          <button
+                            onClick={() => {
+                              enterArchive(archive.archiveId);
+                            }}
+                            className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
+                          >
+                            <BiLogIn
+                              size={18}
+                              className="text-white m-0.5 -translate-x-0.5"
+                            />
+                          </button>
+                          <button
+                            onClick={() => {
+                              archiveDelete(archive.archiveId);
+                            }}
+                            className="bg-sub3 border-2 border-basic3 rounded-full"
+                          >
+                            <HiOutlineTrash
+                              size={18}
+                              className="text-white m-0.5"
+                            />
+                          </button>
+                        </div>
                       </div>
-                      <div>
-                        <button
-                          onClick={() => {
-                            enterArchive(archive.archiveId);
-                          }}
-                          className="bg-main1 border-2 border-basic3 rounded-full mx-1.5"
-                        >
-                          <BiLogIn size={18} className="text-white m-0.5 -translate-x-0.5" />
-                        </button>
-                        <button
-                          onClick={() => {
-                            archiveDelete(archive.archiveId);
-                          }}
-                          className="bg-sub3 border-2 border-basic3 rounded-full"
-                        >
-                          <HiOutlineTrash size={18} className="text-white m-0.5" />
-                        </button>
-                      </div>
+                      <Divider />
                     </div>
-                    <Divider />
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           </div>
         ) : (
