@@ -22,14 +22,15 @@ function ReverseNavbar({ destinationPoint, joinMembers }) {
         onClick={() => {
           Swal.fire({
             title: "리버스를 종료하시겠습니까?",
-            text: "이히히",
+            text: "다음에 또 놀러와!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "로비로 가기",
             cancelButtonText: "로그아웃 하기",
           }).then((result) => {
             if (result.isConfirmed) {
-              navigate("/lobby");
+              window.location.href = "/lobby";
+              // navigate("/lobby");
               Toast.fire({
                 icon: "success",
                 title: "로비로 이동하였습니다",
@@ -44,7 +45,8 @@ function ReverseNavbar({ destinationPoint, joinMembers }) {
                   console.log(error);
                 },
               );
-              navigate("/");
+              // navigate("/");
+              window.location.href = "/";
               Toast.fire({
                 icon: "success",
                 title: "로그아웃 되었습니다.",
