@@ -45,6 +45,10 @@ function LobbyProfile({ loginUser }) {
     }
     setIsValid({ valid: true, message: "" });
     //axios 요청으로 닉네임 중복검사하기
+
+    if (loginUser.nickname === userInfo.nickname) {
+      return;
+    }
     nicknameCheck(userInfo.nickname, nickCheckSuccess, nickCheckFail);
   };
   const nickCheckSuccess = (res) => {
@@ -70,7 +74,10 @@ function LobbyProfile({ loginUser }) {
         <p className="text-2xl drop-shadow font-bold my-4 text-white">프로필</p>
       </div>
       {/* profile contents */}
-      <form onSubmit={handleSubmit} className="flex flex-col w-full items-center">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col w-full items-center"
+      >
         {/* nickname */}
         <div className="w-11/12 my-3">
           <div>
@@ -87,7 +94,9 @@ function LobbyProfile({ loginUser }) {
                 (isValid.valid ? " border-base2/20" : " border-red-500/80")
               }
             />
-            <p className="text-red-500 ml-1 mt-1 text-[10px]">{isValid.message}</p>
+            <p className="text-red-500 ml-1 mt-1 text-[10px]">
+              {isValid.message}
+            </p>
           </div>
           {/* comments */}
           <div>
@@ -111,7 +120,7 @@ function LobbyProfile({ loginUser }) {
                   editUserInfo(
                     { nickname: userInfo.nickname, message: userInfo.message },
                     editUserInfoSuccess,
-                    editUserInfoFail
+                    editUserInfoFail,
                   );
 
                   setEdit(false);
