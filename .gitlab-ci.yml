@@ -29,7 +29,7 @@ build_image:
         - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$TAG_NAME
         - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_3:$TAG_NAME -f ./backend/archive/ArchiveDockerfile ./backend/archive
         - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_3:$TAG_NAME
-        # - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_4:$TAG_NAME -f ./signal/SignalDockerfile ./signal
-        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_4:$TAG_NAME
+        - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_4:$TAG_NAME -f ./signal/SignalDockerfile ./signal
+        - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_4:$TAG_NAME
     tags:
         - reverse-runner
