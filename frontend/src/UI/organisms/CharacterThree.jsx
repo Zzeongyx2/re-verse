@@ -1,3 +1,4 @@
+import { Toast } from "../atoms/Toast";
 import { OrbitControls } from "@react-three/drei/core";
 import { Canvas } from "@react-three/fiber";
 import { useEffect } from "react";
@@ -58,6 +59,19 @@ function CharacterThree({ animalName }) {
             className="text-white font-bold bg-gradient-to-t from-extra1 to-extra2 text-xl w-fit px-12 py-2 border rounded-3xl z-30"
             onClick={() => {
               clickEditBtn();
+              if (characters) {
+                Toast.fire({
+                  icon: "success",
+                  title: "캐릭터가 변경되었습니다",
+                  timer: 1500,
+                });
+              } else {
+                Toast.fire({
+                  icon: "warning",
+                  title: "캐릭터를 선택해 주세요",
+                  timer: 1500,
+                });
+              }
             }}
           >
             <span className="drop-shadow-xl">적용하기</span>
