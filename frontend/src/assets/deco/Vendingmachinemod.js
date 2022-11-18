@@ -15,7 +15,7 @@ export function VendingMachine(props) {
       <group
         position={[-40, 0, 120]}
         rotation={[-Math.PI / 2, 0, Math.PI / 2]}
-        scale={2}
+        scale={2.4}
       >
         <group rotation={[Math.PI / 2, 0, 0]}>
           <mesh
@@ -24,11 +24,11 @@ export function VendingMachine(props) {
             position={[2.19, 6.13, 0.03]}
           >
             <Html
-              className="w-36 h-[150px] bg-gray-200"
+              className="w-[150px] h-[150px] bg-gray-200 border-2 rounded-lg"
               transform
               occlude
               rotation={[0, Math.PI / 2, 0]}
-              position={[0.1, 0, 0]}
+              position={[0, 0, 0]}
               distanceFactor={10}
             >
               {/* <h1>hello?</h1> */}
