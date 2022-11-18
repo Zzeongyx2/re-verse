@@ -46,6 +46,7 @@ import AudioZone from "../../assets/deco/AudioZone.js";
 import { Radio } from "../../assets/deco/Radio.js";
 import { StonesMod } from "../../assets/deco/StonesMod.js";
 import { TelevisionMod } from "../../assets/deco/TelevisionMod.js";
+import { Toast } from "../atoms/Toast.jsx";
 
 var channels = [];
 var channelUsers = new Map();
@@ -59,7 +60,9 @@ let audioMapIdx = 0;
 function Reverse() {
   // default action = idle
   // const [characterPosition, setCharacterPosition] = useState();
-  const [destinationPoint, setDestinationPoint] = useState(new Vector3(-30, 0, -30));
+  const [destinationPoint, setDestinationPoint] = useState(
+    new Vector3(-30, 0, -30)
+  );
   const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/map_texture.jpg");
   if (floorTexture) {
@@ -314,7 +317,9 @@ function Reverse() {
           let peer1 = rtcPeers.get(data1.userId);
 
           if (peer1) {
-            peer1.addIceCandidate(new RTCIceCandidate(data2)).catch((error) => {});
+            peer1
+              .addIceCandidate(new RTCIceCandidate(data2))
+              .catch((error) => {});
           }
         }
       } else if (data1.type === "Answer") {
@@ -354,7 +359,9 @@ function Reverse() {
     setRtcPeers2(rtcPeers2);
 
     if (data1.type === "NewMember") {
-      let channel1 = rtcPeer.createDataChannel(Math.floor(Math.random() * 10000000000));
+      let channel1 = rtcPeer.createDataChannel(
+        Math.floor(Math.random() * 10000000000)
+      );
       channelConfig(channel1);
 
       //create offer
@@ -681,7 +688,12 @@ function Reverse() {
 
   const navigate = useNavigate();
   const getArchiveDetailFail = (err) => {
-    alert("초대받지 않은 아카이브입니다.");
+    // alert("초대받지 않은 아카이브입니다.");
+    Toast.fire({
+      icon: "warning",
+      title: "초대받지 않은 아카이브 입니다",
+      timer: 1500,
+    });
     console.log("arlet나온곳");
     navigate("/lobby");
     console.log(err);
@@ -853,7 +865,10 @@ function Reverse() {
             handleVisible={handleVisible}
             // handleEvent={handleEvent}
           /> */}
-            <SelectedMyPlayer destinationPoint={destinationPoint} handleVisible={handleVisible} />
+            <SelectedMyPlayer
+              destinationPoint={destinationPoint}
+              handleVisible={handleVisible}
+            />
             <ObjectTest visible={visible} />
             {/* <ObjectTest currentPosition={currentPosition} /> */}
 
@@ -891,14 +906,32 @@ function Reverse() {
 
             {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
             {/* 여행 */}
-            <Polaroid position={[71, 4, -43]} rotation={[-Math.PI / 2, 0, Math.PI / 5]} />
-            <Notebook position={[71, 3.4, -38]} rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]} />
+            <Polaroid
+              position={[71, 4, -43]}
+              rotation={[-Math.PI / 2, 0, Math.PI / 5]}
+            />
+            <Notebook
+              position={[71, 3.4, -38]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]}
+            />
             {/* 기념일 */}
-            <Polaroid position={[38, 1.1, 62]} rotation={[-Math.PI / 2, 0, 0]} />
-            <Notebook position={[35, 0.3, 66]} rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]} />
+            <Polaroid
+              position={[38, 1.1, 62]}
+              rotation={[-Math.PI / 2, 0, 0]}
+            />
+            <Notebook
+              position={[35, 0.3, 66]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]}
+            />
             {/* 일기 */}
-            <Polaroid position={[-115, 7.7, -129]} rotation={[-Math.PI / 2, 0, Math.PI / 1.2]} />
-            <Notebook position={[-110, 6.9, -131]} rotation={[-Math.PI / 2, 0, -Math.PI / 3]} />
+            <Polaroid
+              position={[-115, 7.7, -129]}
+              rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
+            />
+            <Notebook
+              position={[-110, 6.9, -131]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
+            />
             {/* <Polaroid event={event} />
           <Notebook event={event} /> */}
             {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
@@ -919,7 +952,11 @@ function Reverse() {
         </Physics>
 
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
-        <mesh rotation={[-0.5 * Math.PI, 0, 0]} position={[-30, 0.02, -30]} receiveShadow>
+        <mesh
+          rotation={[-0.5 * Math.PI, 0, 0]}
+          position={[-30, 0.02, -30]}
+          receiveShadow
+        >
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
           <meshBasicMaterial color="black" transparent opacity={0.3} />
         </mesh>

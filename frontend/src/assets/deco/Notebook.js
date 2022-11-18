@@ -16,6 +16,7 @@ import { setTravelWriteIsOpen } from "../../modules/reverse";
 import { Box } from "../../UI/atoms/Collider.jsx";
 import { useBox } from "@react-three/cannon";
 import { BoxGeometry } from "three";
+import { Toast } from "../../UI/atoms/Toast";
 export function Notebook({ props, event, position, rotation }) {
   const { nodes, materials } = useGLTF("/assets/notebook/scene.gltf");
   const travelWriteObject = useRef();
@@ -84,7 +85,12 @@ export function Notebook({ props, event, position, rotation }) {
               console.log("노트북 눌렀따");
               if (joinArchive.members[0].nickname !== loginUser.nickname) {
                 console.log("alert 뜬곳");
-                alert("글쓰기 권한이 없습니다.");
+                Toast.fire({
+                  icon: "error",
+                  title: "글쓰기 권한이 없습니다",
+                  timer: 1500,
+                });
+                // alert("글쓰기 권한이 없습니다.");
                 return;
               }
               dispatch(setTravelWriteIsOpen());
