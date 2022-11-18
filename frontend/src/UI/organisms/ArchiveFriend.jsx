@@ -33,7 +33,7 @@ function ArchiveFriend() {
       archiveId,
       loginUser.nickname,
       deleteArchiveMemberSuccess,
-      deleteArchiveMemberFail
+      deleteArchiveMemberFail,
     );
     console.log(archiveId, "나가기");
     await getList();
@@ -49,13 +49,13 @@ function ArchiveFriend() {
       await postBookmark(
         archive.archiveId,
         bookmarkControlSuccess,
-        bookmarkControl
+        bookmarkControl,
       );
     } else {
       await deleteBookmark(
         archive.archiveId,
         bookmarkControlSuccess,
-        bookmarkControl
+        bookmarkControl,
       );
     }
 
@@ -124,6 +124,7 @@ function ArchiveFriend() {
                         <Tooltip
                           label={`${member.nickname}`}
                           aria-label="A tooltip"
+                          key={`avatar-${index}`}
                         >
                           <Avatar
                             size={"sm"}
@@ -131,7 +132,6 @@ function ArchiveFriend() {
                             variant="avatarBorder"
                             name="profileImg"
                             src={s3Path + member.avatar + imageForm}
-                            key={`avatar-${index}`}
                             alt={index}
                           />
                         </Tooltip>
