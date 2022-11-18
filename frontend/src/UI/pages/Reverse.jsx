@@ -51,6 +51,7 @@ import Loading from "../organisms/Loading.jsx";
 import { setLoadingPage } from "../../modules/loading.js";
 import { BgAsset } from "../../assets/deco/Bgasset.js";
 import { CustomForest } from "../../assets/deco/Customforest.js";
+import { Banana } from "../../assets/deco/Banana.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -906,6 +907,7 @@ function Reverse() {
             {/* audiozone = 소리 나오는 구간  &  radio = theme song 바꾸는거 */}
             <AudioZone />
             <Radio />
+            <Banana />
 
             {/* floor */}
             <ReverseFloor />
