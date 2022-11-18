@@ -22,23 +22,25 @@ export function HackerRoom(props) {
   return (
     <group {...props} dispose={null} scale={4} position={[-120, -1.3, -120]}>
       <group>
-        <mesh ref={boxCollider}>
-        </mesh>
+        <mesh ref={boxCollider}></mesh>
       </group>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group position={[0, 0.34, 0]}>
             <mesh
+              castShadow
               geometry={nodes.Object_4.geometry}
               material={materials.Wall}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_5.geometry}
               material={materials.Floor}
             />
           </group>
           <group position={[4, 0.34, 4]} scale={[1.28, 1.35, 1.28]}>
             <mesh
+              castShadow
               geometry={nodes.Object_7.geometry}
               material={materials.material}
             />
@@ -46,49 +48,59 @@ export function HackerRoom(props) {
           <group position={[-3.1, 0, 2.69]} scale={0.82}>
             <group position={[0.81, 2.83, 0.27]} rotation={[0, 0, -0.24]}>
               <mesh
+                castShadow
                 geometry={nodes.Object_14.geometry}
                 material={materials.Yellow_Glow}
               />
             </group>
             <group position={[0.81, 2.83, -1.04]} rotation={[0, 0, -0.24]}>
               <mesh
+                castShadow
                 geometry={nodes.Object_16.geometry}
                 material={materials.Yellow_Glow}
               />
             </group>
             <group position={[1.1, 2.82, 0.63]} rotation={[0, 0, -0.24]}>
               <mesh
+                castShadow
                 geometry={nodes.Object_18.geometry}
                 material={materials.Black}
               />
               <mesh
+                castShadow
                 geometry={nodes.Object_19.geometry}
                 material={materials.material}
               />
             </group>
             <group position={[1.1, 2.82, -0.68]} rotation={[0, 0, -0.24]}>
               <mesh
+                castShadow
                 geometry={nodes.Object_21.geometry}
                 material={materials.Black}
               />
               <mesh
+                castShadow
                 geometry={nodes.Object_22.geometry}
                 material={materials.material}
               />
             </group>
             <mesh
+              castShadow
               geometry={nodes.Object_9.geometry}
               material={materials.Black}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_10.geometry}
               material={materials.Arcade_screen}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_11.geometry}
               material={materials.Glow}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_12.geometry}
               material={materials.Logo}
             />
@@ -99,84 +111,100 @@ export function HackerRoom(props) {
             scale={1.17}
           >
             <mesh
+              castShadow
               geometry={nodes.Object_26.geometry}
               material={materials.Black}
             />
             <group position={[0, 1.41, 0]} scale={1.19}>
               <group rotation={[0, 1.55, 0]} scale={0.84}>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_30.geometry}
                   material={materials.Black}
                 />
               </group>
               <mesh
+                castShadow
                 geometry={nodes.Object_28.geometry}
                 material={materials.material}
               />
             </group>
             <mesh
+              castShadow
               geometry={nodes.Object_24.geometry}
               material={materials.Metal}
             />
           </group>
           <group position={[-2.41, 0.34, -0.29]}>
             <mesh
+              castShadow
               geometry={nodes.Object_32.geometry}
               material={materials.Grey}
             />
           </group>
           <group position={[-4, 4.82, -2.2]}>
             <mesh
+              castShadow
               geometry={nodes.Object_34.geometry}
               material={materials.Wood}
             />
           </group>
           <group position={[-4, 4.96, -1.15]} rotation={[-0.19, 0, 0]}>
             <mesh
+              castShadow
               geometry={nodes.Object_36.geometry}
               material={materials.Book}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_37.geometry}
               material={materials.White}
             />
           </group>
           <group position={[-4, 4.94, -1.38]} scale={[0.93, 0.9, 0.66]}>
             <mesh
+              castShadow
               geometry={nodes.Object_39.geometry}
               material={materials.Book}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_40.geometry}
               material={materials.White}
             />
           </group>
           <group position={[-4, 4.94, -1.46]} scale={0.96}>
             <mesh
+              castShadow
               geometry={nodes.Object_42.geometry}
               material={materials.Book}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_43.geometry}
               material={materials.White}
             />
           </group>
           <group position={[-4, 4.94, -1.59]} scale={[0.93, 1.1, 0.66]}>
             <mesh
+              castShadow
               geometry={nodes.Object_45.geometry}
               material={materials.Book}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_46.geometry}
               material={materials.White}
             />
           </group>
           <group position={[-4, 4.94, -1.68]} scale={0.96}>
             <mesh
+              castShadow
               geometry={nodes.Object_48.geometry}
               material={materials.Book}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_49.geometry}
               material={materials.White}
             />
@@ -187,50 +215,60 @@ export function HackerRoom(props) {
             scale={[0.96, 1.05, 0.96]}
           >
             <mesh
+              castShadow
               geometry={nodes.Object_51.geometry}
               material={materials.Book}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_52.geometry}
               material={materials.White}
             />
           </group>
           <group position={[-4, 4.94, -1.97]} scale={[0.93, 0.9, 0.51]}>
             <mesh
+              castShadow
               geometry={nodes.Object_54.geometry}
               material={materials.Book}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_55.geometry}
               material={materials.White}
             />
           </group>
           <group position={[-4, 4.94, -2.04]} scale={0.96}>
             <mesh
+              castShadow
               geometry={nodes.Object_57.geometry}
               material={materials.Book}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_58.geometry}
               material={materials.White}
             />
           </group>
           <group position={[-4, 4.94, -2.16]} scale={[0.93, 1.1, 0.66]}>
             <mesh
+              castShadow
               geometry={nodes.Object_60.geometry}
               material={materials.Book}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_61.geometry}
               material={materials.White}
             />
           </group>
           <group position={[-4, 4.94, -2.25]} scale={[0.93, 0.9, 0.66]}>
             <mesh
+              castShadow
               geometry={nodes.Object_63.geometry}
               material={materials.Book}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_64.geometry}
               material={materials.White}
             />
@@ -241,10 +279,12 @@ export function HackerRoom(props) {
             scale={[0.96, 1.04, 0.47]}
           >
             <mesh
+              castShadow
               geometry={nodes.Object_66.geometry}
               material={materials.Book}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_67.geometry}
               material={materials.White}
             />
@@ -255,10 +295,12 @@ export function HackerRoom(props) {
             scale={0.96}
           >
             <mesh
+              castShadow
               geometry={nodes.Object_69.geometry}
               material={materials.Book}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_70.geometry}
               material={materials.White}
             />
@@ -269,10 +311,12 @@ export function HackerRoom(props) {
             scale={[0.89, 0.95, 0.66]}
           >
             <mesh
+              castShadow
               geometry={nodes.Object_72.geometry}
               material={materials.Book}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_73.geometry}
               material={materials.White}
             />
@@ -283,10 +327,12 @@ export function HackerRoom(props) {
             scale={[0.93, 0.9, 0.66]}
           >
             <mesh
+              castShadow
               geometry={nodes.Object_75.geometry}
               material={materials.Book}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_76.geometry}
               material={materials.White}
             />
@@ -298,11 +344,13 @@ export function HackerRoom(props) {
           >
             <group position={[-0.03, 0, 0.01]} rotation={[0.1, 0, 0]}>
               <mesh
+                castShadow
                 geometry={nodes.Object_80.geometry}
                 material={materials.Grey}
               />
             </group>
             <mesh
+              castShadow
               geometry={nodes.Object_78.geometry}
               material={materials["Computer-beige"]}
             />
@@ -314,11 +362,13 @@ export function HackerRoom(props) {
           >
             <group rotation={[0.09, 0, 0]}>
               <mesh
+                castShadow
                 geometry={nodes.Object_84.geometry}
                 material={materials.Grey}
               />
             </group>
             <mesh
+              castShadow
               geometry={nodes.Object_82.geometry}
               material={materials["Computer-beige"]}
             />
@@ -339,22 +389,26 @@ export function HackerRoom(props) {
                 scale={1.36}
               >
                 <mesh
+                  castShadow
                   geometry={nodes.Object_90.geometry}
                   material={materials.material_0}
                 />
               </group>
               <mesh
+                castShadow
                 geometry={nodes.Object_88.geometry}
                 material={materials.material}
               />
             </group>
             <group position={[0, 0.05, 0]}>
               <mesh
+                castShadow
                 geometry={nodes.Object_92.geometry}
                 material={materials.Black}
               />
             </group>
             <mesh
+              castShadow
               geometry={nodes.Object_86.geometry}
               material={materials.material}
             />
@@ -365,6 +419,7 @@ export function HackerRoom(props) {
             scale={3.5}
           >
             <mesh
+              castShadow
               geometry={nodes.Object_94.geometry}
               material={materials.material_0}
             />
@@ -375,16 +430,19 @@ export function HackerRoom(props) {
             scale={2.12}
           >
             <mesh
+              castShadow
               geometry={nodes.Object_96.geometry}
               material={materials.material_0}
             />
           </group>
           <group position={[-0.8, 4.29, -4]}>
             <mesh
+              castShadow
               geometry={nodes.Object_98.geometry}
               material={materials.Black}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_99.geometry}
               material={materials.Poster1}
             />
@@ -395,10 +453,12 @@ export function HackerRoom(props) {
             scale={0.7}
           >
             <mesh
+              castShadow
               geometry={nodes.Object_101.geometry}
               material={materials["Black-gloss"]}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_102.geometry}
               material={materials.Poster2}
             />
@@ -412,27 +472,31 @@ export function HackerRoom(props) {
           // TODO: FLOOR MESH 바꾸자!!!!!!!!!!!!!!!!!!!
           // TODO: FLOOR MESH 바꾸자!!!!!!!!!!!!!!!!!!! */}
           {/* <group position={[0, 0.04, 0]} scale={21.23}>
-            <mesh
+            <mesh castShadow
               geometry={nodes.Object_104.geometry}
               material={materials.material_18}
             />
           </group> */}
           <group position={[-3.64, 4.94, -0.73]} rotation={[0, 0.29, 0]}>
             <mesh
+              castShadow
               geometry={nodes.Object_108.geometry}
               material={materials["Black-gloss"]}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_106.geometry}
               material={materials.Black}
             />
           </group>
           <group position={[-3.6, 4.94, -3.66]} rotation={[0, -0.5, 0]}>
             <mesh
+              castShadow
               geometry={nodes.Object_112.geometry}
               material={materials["Black-gloss"]}
             />
             <mesh
+              castShadow
               geometry={nodes.Object_110.geometry}
               material={materials.Black}
             />
@@ -448,14 +512,17 @@ export function HackerRoom(props) {
               scale={1.16}
             >
               <mesh
+                castShadow
                 geometry={nodes.Object_119.geometry}
                 material={materials.Black}
               />
               <mesh
+                castShadow
                 geometry={nodes.Object_120.geometry}
                 material={materials["Computer-beige"]}
               />
               <mesh
+                castShadow
                 geometry={nodes.Object_121.geometry}
                 material={materials.Grey}
               />
@@ -465,15 +532,18 @@ export function HackerRoom(props) {
                 scale={1.32}
               >
                 <mesh
+                  castShadow
                   geometry={nodes.Object_123.geometry}
                   material={materials.Grey}
                 />
               </group>
               <mesh
+                castShadow
                 geometry={nodes.Object_116.geometry}
                 material={materials["Computer-beige"]}
               />
               <mesh
+                castShadow
                 geometry={nodes.Object_117.geometry}
                 material={materials["Screen-dos"]}
               />
@@ -484,63 +554,75 @@ export function HackerRoom(props) {
               scale={1.42}
             >
               <mesh
+                castShadow
                 geometry={nodes.Object_127.geometry}
                 material={materials["Computer-beige"]}
               />
               <group position={[0, 0, -0.1]}>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_129.geometry}
                   material={materials.Black}
                 />
               </group>
               <group position={[0.4, 0.18, 0.42]} rotation={[-0.11, 0, 0]}>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_131.geometry}
                   material={materials.material}
                 />
               </group>
               <group position={[-0.45, 0.11, 0.43]}>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_133.geometry}
                   material={materials["Computer-beige"]}
                 />
                 <mesh
+                  castShadow
                   geometry={nodes.Object_134.geometry}
                   material={materials.Yellow_Glow}
                 />
               </group>
               <group position={[-0.41, 0.11, 0.43]}>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_136.geometry}
                   material={materials["Computer-beige"]}
                 />
                 <mesh
+                  castShadow
                   geometry={nodes.Object_137.geometry}
                   material={materials.Yellow_Glow}
                 />
               </group>
               <group position={[0.01, 0.26, 0.04]} scale={1.22}>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_139.geometry}
                   material={materials["Computer-beige"]}
                 />
                 <mesh
+                  castShadow
                   geometry={nodes.Object_140.geometry}
                   material={materials["Screen-nc"]}
                 />
               </group>
               <mesh
+                castShadow
                 geometry={nodes.Object_125.geometry}
                 material={materials["Computer-beige"]}
               />
             </group>
             <group scale={1.18}>
               <mesh
+                castShadow
                 geometry={nodes.Object_142.geometry}
                 material={materials.Wood}
               />
             </group>
             <mesh
+              castShadow
               geometry={nodes.Object_114.geometry}
               material={materials.Wood}
             />
@@ -548,62 +630,74 @@ export function HackerRoom(props) {
           <group position={[0.87, -0.17, -2.86]} scale={0.86}>
             <group position={[-2.03, 2.52, -0.69]} scale={1.42}>
               <mesh
+                castShadow
                 geometry={nodes.Object_148.geometry}
                 material={materials["Computer-beige"]}
               />
               <mesh
+                castShadow
                 geometry={nodes.Object_150.geometry}
                 material={materials.Black}
               />
               <group position={[0.4, 0.18, 0.42]} rotation={[-0.11, 0, 0]}>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_152.geometry}
                   material={materials.material}
                 />
               </group>
               <group position={[-0.45, 0.11, 0.43]}>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_154.geometry}
                   material={materials["Computer-beige"]}
                 />
                 <mesh
+                  castShadow
                   geometry={nodes.Object_155.geometry}
                   material={materials.Yellow_Glow}
                 />
               </group>
               <group position={[-0.41, 0.11, 0.43]}>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_157.geometry}
                   material={materials["Computer-beige"]}
                 />
                 <mesh
+                  castShadow
                   geometry={nodes.Object_158.geometry}
                   material={materials.Yellow_Glow}
                 />
               </group>
               <group position={[0.01, 0.26, 0.04]}>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_160.geometry}
                   material={materials["Computer-beige"]}
                 />
                 <mesh
+                  castShadow
                   geometry={nodes.Object_161.geometry}
                   material={materials["Screen-qb"]}
                 />
               </group>
               <mesh
+                castShadow
                 geometry={nodes.Object_146.geometry}
                 material={materials["Computer-beige"]}
               />
             </group>
             <group scale={1.18}>
               <mesh
+                castShadow
                 geometry={nodes.Object_163.geometry}
                 material={materials.Wood}
               />
             </group>
             <group position={[-1.8, 2.52, 0.53]} scale={1.59}>
               <mesh
+                castShadow
                 geometry={nodes.Object_165.geometry}
                 material={materials["Computer-beige"]}
               />
@@ -619,10 +713,12 @@ export function HackerRoom(props) {
                 scale={1.76}
               >
                 <mesh
+                  castShadow
                   geometry={nodes.Object_171.geometry}
                   material={materials.Grey}
                 />
                 <mesh
+                  castShadow
                   geometry={nodes.Object_172.geometry}
                   material={materials.Yellow_Glow}
                 />
@@ -631,77 +727,92 @@ export function HackerRoom(props) {
                   rotation={[Math.PI / 2, 0, 0]}
                 >
                   <mesh
+                    castShadow
                     geometry={nodes.Object_174.geometry}
                     material={materials.Black}
                   />
                 </group>
                 <group position={[0, 0, -0.12]}>
                   <mesh
+                    castShadow
                     geometry={nodes.Object_176.geometry}
                     material={materials.Black}
                   />
                 </group>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_178.geometry}
                   material={materials.Grey}
                 />
                 <mesh
+                  castShadow
                   geometry={nodes.Object_180.geometry}
                   material={materials.Black}
                 />
                 <group position={[0.48, 0.03, 0.32]}>
                   <mesh
+                    castShadow
                     geometry={nodes.Object_182.geometry}
                     material={materials.Yellow_Glow}
                   />
                 </group>
                 <group position={[0.36, 0.31, 0.08]} rotation={[0, -0.32, 0]}>
                   <mesh
+                    castShadow
                     geometry={nodes.Object_184.geometry}
                     material={materials.Black}
                   />
                 </group>
                 <group position={[0.36, 0.26, 0.08]} rotation={[0, -0.5, 0]}>
                   <mesh
+                    castShadow
                     geometry={nodes.Object_186.geometry}
                     material={materials.Black}
                   />
                 </group>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_169.geometry}
                   material={materials.Grey}
                 />
               </group>
               <group position={[0.73, 0.65, 0.53]}>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_188.geometry}
                   material={materials.Black}
                 />
                 <mesh
+                  castShadow
                   geometry={nodes.Object_189.geometry}
                   material={materials.Yellow_Glow}
                 />
               </group>
               <mesh
+                castShadow
                 geometry={nodes.Object_191.geometry}
                 material={materials.Black}
               />
               <mesh
+                castShadow
                 geometry={nodes.Object_192.geometry}
                 material={materials.TV_screen}
               />
               <group position={[0, 0, -0.02]}>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_194.geometry}
                   material={materials.Grey}
                 />
               </group>
               <mesh
+                castShadow
                 geometry={nodes.Object_167.geometry}
                 material={materials.Black}
               />
             </group>
             <mesh
+              castShadow
               geometry={nodes.Object_144.geometry}
               material={materials.Wood}
             />
@@ -718,76 +829,89 @@ export function HackerRoom(props) {
             >
               <group position={[-0.06, 0, -0.01]} rotation={[0, -0.2, 0]}>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_200.geometry}
                   material={materials.material_0}
                 />
               </group>
               <group position={[0.2, 0, 0.13]} rotation={[0, -0.98, 0]}>
                 <mesh
+                  castShadow
                   geometry={nodes.Object_202.geometry}
                   material={materials.material_0}
                 />
               </group>
               <mesh
+                castShadow
                 geometry={nodes.Object_198.geometry}
                 material={materials.material_0}
               />
             </group>
             <group scale={1.18}>
               <mesh
+                castShadow
                 geometry={nodes.Object_204.geometry}
                 material={materials.Wood}
               />
             </group>
             <mesh
+              castShadow
               geometry={nodes.Object_196.geometry}
               material={materials.Wood}
             />
           </group>
           <group position={[-3.72, 6.41, 0]}>
             <mesh
+              castShadow
               geometry={nodes.Object_206.geometry}
               material={materials.Metal}
             />
           </group>
           <group position={[-3.72, 6.41, 4]}>
             <mesh
+              castShadow
               geometry={nodes.Object_208.geometry}
               material={materials.Metal}
             />
           </group>
           <group position={[0.13, 0, 3.65]}>
             <mesh
+              castShadow
               geometry={nodes.Object_210.geometry}
               material={materials.Metal}
             />
           </group>
           <group position={[-2.04, 2, -3.27]}>
             <mesh
+              castShadow
               geometry={nodes.Object_212.geometry}
               material={materials["Computer-beige"]}
             />
           </group>
           <group position={[-3, 2, -2.32]}>
             <mesh
+              castShadow
               geometry={nodes.Object_214.geometry}
               material={materials.material_0}
             />
           </group>
           <group position={[1.56, 2.89, -3.46]} rotation={[0, 0.19, 0]}>
             <mesh
+              castShadow
               geometry={nodes.Object_216.geometry}
               material={materials.Black}
             />
           </group>
           <group position={[2.81, 2.14, -3.76]}>
             <mesh
+              castShadow
               geometry={nodes.Object_218.geometry}
               material={materials.Black}
             />
           </group>
           <group position={[-3.94, 5.36, -0.63]}>
             <mesh
+              castShadow
               geometry={nodes.Object_220.geometry}
               material={materials["Black-gloss"]}
             />

@@ -170,7 +170,7 @@ export default function OtherGoldfishAnimations({
               morphTargetInfluences={nodes.Goldfish.morphTargetInfluences}
               // 그림자 설정은 여기에!
               castShadow
-              receiveShadow
+              // receiveShadow
             />
           </group>
         </group>
