@@ -65,7 +65,7 @@ function ReverseFriendModal({ joinMembers }) {
       getArchiveDetail(
         reverse.info.archiveId,
         getArchiveDetailSuccess,
-        getArchiveDetailFail,
+        getArchiveDetailFail
       );
     }
   }, [reverse.info.archiveId]);
@@ -93,7 +93,7 @@ function ReverseFriendModal({ joinMembers }) {
       setInfo({
         ...reverse.info,
         stuffs: res.data.stuffs,
-      }),
+      })
     );
   };
 
@@ -107,7 +107,7 @@ function ReverseFriendModal({ joinMembers }) {
       archive.id,
       nickname,
       editMemberSuccess,
-      editMemberFail,
+      editMemberFail
     );
   };
   const deleteMember = async (nickname) => {
@@ -115,7 +115,7 @@ function ReverseFriendModal({ joinMembers }) {
       archive.id,
       nickname,
       editMemberSuccess,
-      editMemberFail,
+      editMemberFail
     );
   };
   const editMemberSuccess = async (res) => {
@@ -124,7 +124,7 @@ function ReverseFriendModal({ joinMembers }) {
     await getArchiveDetail(
       reverse.info.archiveId,
       getArchiveDetailSuccess,
-      getArchiveDetailFail,
+      getArchiveDetailFail
     );
   };
   const editMemberFail = (error) => {
