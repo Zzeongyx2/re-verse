@@ -161,7 +161,7 @@ export default function MyCatAnimations({
               morphTargetInfluences={nodes.Cat.morphTargetInfluences}
               // 그림자 설정은 여기에!
               castShadow
-              receiveShadow
+              // receiveShadow
             />
           </group>
         </group>

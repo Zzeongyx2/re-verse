@@ -161,7 +161,7 @@ export default function MyCougarAnimations({
               morphTargetInfluences={nodes.Cougar.morphTargetInfluences}
               // 그림자 설정은 여기에!
               castShadow
-              receiveShadow
+              // receiveShadow
             />
           </group>
         </group>
