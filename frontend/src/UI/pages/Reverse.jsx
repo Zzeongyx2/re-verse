@@ -850,7 +850,7 @@ function Reverse() {
           <Suspense fallback={null}>
             {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
             {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-            {/* {others.map((other, idx) => {
+            {others.map((other, idx) => {
               // console.log(other);
               // console.log(others);
               // console.log(idx);
@@ -874,11 +874,11 @@ function Reverse() {
                 />
               );
             })}
-   
+
             <SelectedMyPlayer
               destinationPoint={destinationPoint}
               handleVisible={handleVisible}
-            /> */}
+            />
             <ObjectTest visible={visible} />
             {/* <ObjectTest currentPosition={currentPosition} /> */}
 
