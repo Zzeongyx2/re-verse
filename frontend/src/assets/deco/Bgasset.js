@@ -1942,7 +1942,7 @@ export function BgAsset(props) {
           <group
             position={[4500, 84.69, -2000]}
             rotation={[-Math.PI / 2, 0, 0]}
-            scale={100}
+            scale={50}
           >
             <mesh
               geometry={nodes.Mintstar_02_LOD1_Mat_Candy_Specular_0001.geometry}
@@ -1986,7 +1986,7 @@ export function BgAsset(props) {
           <group
             position={[5500, 84.69, -3000]}
             rotation={[-Math.PI / 2, 0, 0]}
-            scale={100}
+            scale={60}
           >
             <mesh
               geometry={nodes.Mintstar_06_LOD1_Mat_Candy_Specular_0001.geometry}
@@ -2312,7 +2312,7 @@ export function BgAsset(props) {
           <group
             position={[1500, 97.17, -2000]}
             rotation={[-Math.PI / 2, 0, -Math.PI / 6]}
-            scale={100}
+            scale={70}
           >
             <mesh
               geometry={
@@ -2325,7 +2325,7 @@ export function BgAsset(props) {
           <group
             position={[-500, 118.27, -2000]}
             rotation={[-Math.PI / 2, 0, 0]}
-            scale={100}
+            scale={80}
           >
             <mesh
               geometry={
@@ -2386,7 +2386,7 @@ export function BgAsset(props) {
           <group
             position={[4500, 84.69, -2000]}
             rotation={[-Math.PI / 2, 0, 0]}
-            scale={100}
+            scale={50}
           >
             <mesh
               geometry={nodes.Mintstar_02_LOD1_Mat_Candy_Specular_0003.geometry}
@@ -2408,7 +2408,7 @@ export function BgAsset(props) {
           <group
             position={[4500, 84.69, -3000]}
             rotation={[-Math.PI / 2, 0, 0]}
-            scale={100}
+            scale={50}
           >
             <mesh
               geometry={nodes.Mintstar_05_LOD1_Mat_Candy_Specular_0003.geometry}
