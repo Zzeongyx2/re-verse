@@ -12,7 +12,9 @@ stages:
 
 build_image:
     stage: build
-    image: amazon/aws-cli
+    image:
+        name: amazon/aws-cli
+        entrypoint: [""]
     services:
         - docker:20.10.16-dind # docker in docker (docker daemon)
     before_script:
