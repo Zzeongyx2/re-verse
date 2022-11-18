@@ -15,6 +15,7 @@ import PuffinCharacter from "../../assets/characters/PuffinCharacter";
 import RabbitCharacter from "../../assets/characters/RabbitCharacter";
 import SnowLeopardCharacter from "../../assets/characters/SnowLeopardCharacter";
 import TortoiseCharacter from "../../assets/characters/TortoiseCharacter";
+import CougarCharacter from "../../assets/characters/Cougar_Animations";
 
 function SelectedCharacter({ animalName }) {
   return (
@@ -36,6 +37,7 @@ function SelectedCharacter({ animalName }) {
       {animalName === "Narwhal" ? <NarwhalCharacter /> : null}
       {animalName === "Puffin" ? <PuffinCharacter /> : null}
       {animalName === "SnowLeopard" ? <SnowLeopardCharacter /> : null}
+      {animalName === "Cougar" ? <CougarCharacter /> : null}
     </group>
   );
 }
