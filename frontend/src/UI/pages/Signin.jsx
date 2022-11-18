@@ -7,6 +7,7 @@ import Logo from "../atoms/Logo";
 
 import { signin, emailCheck } from "../../api/auth";
 import { nicknameCheck } from "../../api/user";
+import { Toast } from "../atoms/Toast";
 
 function SignIn() {
   const [id, setId] = useState("");
@@ -119,16 +120,36 @@ function SignIn() {
 
   const clickSignin = () => {
     if (id.trim() === "") {
-      alert("아이디를 입력하세요");
+      // alert("아이디를 입력하세요");
+      Toast.fire({
+        icon: "error",
+        title: "아이디를 입력하세요",
+        timer: 1500,
+      });
       return;
     } else if (pw.trim() === "") {
-      alert("비밀번호를 입력하세요.");
+      // alert("비밀번호를 입력하세요.");
+      Toast.fire({
+        icon: "error",
+        title: "비밀번호를 입력하세요",
+        timer: 1500,
+      });
       return;
     } else if (pwCheck.trim() === "") {
-      alert("비밀번호 확인을 입력하세요.");
+      // alert("비밀번호 확인을 입력하세요.");
+      Toast.fire({
+        icon: "error",
+        title: "비밀번호가 일치하지 않습니다",
+        timer: 1500,
+      });
       return;
     } else if (nickName.trim() === "") {
-      alert("닉네임을 입력하세요.");
+      // alert("닉네임을 입력하세요.");
+      Toast.fire({
+        icon: "error",
+        title: "닉네임을 입력하세요",
+        timer: 1500,
+      });
       return;
     } else if (
       !idValid.isValid ||
@@ -148,7 +169,7 @@ function SignIn() {
         nickname: nickName,
       },
       signinSuccess,
-      signinFail,
+      signinFail
     );
   };
   const signinSuccess = () => {
