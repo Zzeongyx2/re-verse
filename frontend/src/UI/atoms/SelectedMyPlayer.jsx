@@ -34,7 +34,7 @@ function SelectedMyPlayer({ destinationPoint, handleVisible }) {
   return (
     <group ref={playerCharacter} dispose={null}>
       {/* <Box destinationPoint={destinationPoint} /> */}
-      <Box destinationPoint={new Vector3(5, 2, 5)} />
+      {/* <Box destinationPoint={new Vector3(5, 2, 5)} /> */}
       <group>
         {loginUser.avatar === "Cat" ? (
           <MyCatAnimations
