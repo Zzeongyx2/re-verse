@@ -12,6 +12,14 @@ import OtherParrotAnimations from "../../assets/players/other/OtherParrotAnimati
 import OtherPigeonAnimations from "../../assets/players/other/OtherPigeonAnimations";
 import OtherRabbitAnimations from "../../assets/players/other/OtherRabbitAnimations";
 import OtherTortoiseAnimations from "../../assets/players/other/OtherTortoiseAnimations";
+import OtherBelugaAnimations from "../../assets/players/other/OtherBelugaAnimations";
+import OtherHareAnimations from "../../assets/players/other/OtherHareAnimations";
+import OtherHuskyAnimations from "../../assets/players/other/OtherHuskyAnimations";
+import OtherLynxAnimations from "../../assets/players/other/OtherLynxAnimations";
+import OtherMooseAnimations from "../../assets/players/other/OtherMooseAnimations";
+import OtherNarwhalAnimations from "../../assets/players/other/OtherNarwhalAnimations";
+import OtherPuffinAnimations from "../../assets/players/other/OtherPuffinAnimations";
+import OtherSnowLeopardAnimations from "../../assets/players/other/OtherSnowLeopardAnimations";
 
 function SelectedOtherPlayer({ destinationPoint, handleVisible, userName }) {
   const archiveList = useSelector((state) => state.archive.myArchiveList);
@@ -88,6 +96,54 @@ function SelectedOtherPlayer({ destinationPoint, handleVisible, userName }) {
       ) : null}
       {selectAvartar === "Tortoise" ? (
         <OtherTortoiseAnimations
+          destinationPoint={destinationPoint}
+          handleVisible={handleVisible}
+        />
+      ) : null}
+      {selectAvartar === "Beluga" ? (
+        <OtherBelugaAnimations
+          destinationPoint={destinationPoint}
+          handleVisible={handleVisible}
+        />
+      ) : null}
+      {selectAvartar === "Hare" ? (
+        <OtherHareAnimations
+          destinationPoint={destinationPoint}
+          handleVisible={handleVisible}
+        />
+      ) : null}
+      {selectAvartar === "Husky" ? (
+        <OtherHuskyAnimations
+          destinationPoint={destinationPoint}
+          handleVisible={handleVisible}
+        />
+      ) : null}
+      {selectAvartar === "Lynx" ? (
+        <OtherLynxAnimations
+          destinationPoint={destinationPoint}
+          handleVisible={handleVisible}
+        />
+      ) : null}
+      {selectAvartar === "Moose" ? (
+        <OtherMooseAnimations
+          destinationPoint={destinationPoint}
+          handleVisible={handleVisible}
+        />
+      ) : null}
+      {selectAvartar === "Narwhal" ? (
+        <OtherNarwhalAnimations
+          destinationPoint={destinationPoint}
+          handleVisible={handleVisible}
+        />
+      ) : null}
+      {selectAvartar === "Puffin" ? (
+        <OtherPuffinAnimations
+          destinationPoint={destinationPoint}
+          handleVisible={handleVisible}
+        />
+      ) : null}
+      {selectAvartar === "SnowLeopard" ? (
+        <OtherSnowLeopardAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
         />
