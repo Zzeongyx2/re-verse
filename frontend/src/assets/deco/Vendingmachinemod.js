@@ -6,7 +6,7 @@ import React, { useRef } from "react";
 import { Html, useGLTF } from "@react-three/drei";
 import VendingPage from "../../UI/three/VendingTest";
 
-export function VendingScreen(props) {
+export function VendingMachine(props) {
   const { nodes, materials } = useGLTF(
     "/assets/vendingmachine/vendingmachinemod.glb"
   );
