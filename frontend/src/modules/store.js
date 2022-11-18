@@ -7,12 +7,13 @@ import archiveReducer from "./archive";
 import userReducer from "./user";
 import friendReducer from "./friend";
 import webrtcReducer from "./webrtc";
+import loadingReducer from "./loading";
 import thunk from "redux-thunk";
 
 const persistConfig = {
   key: "root",
   storage: storageSession,
-  whitelist: ["reverse", "archive", "user", "friend", "webrtc"],
+  whitelist: ["reverse", "archive", "user", "friend", "webrtc", "loading"],
   // blacklist -> 그것만 제외합니다
 };
 
@@ -22,6 +23,7 @@ const reducers = combineReducers({
   user: userReducer,
   friend: friendReducer,
   webrtc: webrtcReducer,
+  loading: loadingReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
