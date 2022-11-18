@@ -1,0 +1,28 @@
+variables:
+    - REPO_NAME: "reverse-registry"
+
+stages:
+    - build
+
+build_image:
+    stage: build
+    image: docker:20.10.21
+    services:
+        - docker:20.10.21-dind # docker in docker (docker daemon)
+    variables:
+        DOCKER_TLS_CERTDIR: "/certs" # sharing same certificate between docker client and daemon
+    before_script:
+        - apk add --no-cache curl jq python3 py3-pip
+        - pip install awscli
+        - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+        - aws --version
+        - docker --version
+    script:
+        - docker build -t $REPO_NAME/frontend:1.0 -f ./frontend/Dockerfile ./re-verse/frontend
+        - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/frontend:1.0
+        # - docker build -t $REPO_NAME/auth-backend:1.0 -f ./backend/auth/AuthDockerfile ./re-verse/backend/auth
+        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/auth-backend:1.0
+        # - docker build -t $REPO_NAME/archive-backend:1.0 -f ./backend/archive/ArchiveDockerfile ./re-verse/backend/archive
+        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/archive-backend:1.0
+        # - docker build -t $REPO_NAME/signal-backend:1.0 -f ./signal/SignalDockerfile ./re-verse/signal
+        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/signal-backend:1.0
