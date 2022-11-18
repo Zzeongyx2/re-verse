@@ -1,6 +1,4 @@
 variables:
-    # ACCOUNT_ID: $ACCOUNT_ID
-    # AWS_REGION: $AWS_REGION
     REPO_NAME: "reverse-registry"
 
 stages:
@@ -21,13 +19,13 @@ build_image:
         - aws --version
         - docker --version
     script:
-        - docker build -t $REPO_NAME/frontend:1.0 -f ./frontend/Dockerfile ./re-verse/frontend
+        - docker build -t $REPO_NAME/frontend:1.0 -f ./frontend/Dockerfile ./frontend
         - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/frontend:1.0
-        # - docker build -t $REPO_NAME/auth-backend:1.0 -f ./backend/auth/AuthDockerfile ./re-verse/backend/auth
+        # - docker build -t $REPO_NAME/auth-backend:1.0 -f ./backend/auth/AuthDockerfile ./backend/auth
         # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/auth-backend:1.0
-        # - docker build -t $REPO_NAME/archive-backend:1.0 -f ./backend/archive/ArchiveDockerfile ./re-verse/backend/archive
+        # - docker build -t $REPO_NAME/archive-backend:1.0 -f ./backend/archive/ArchiveDockerfile ./backend/archive
         # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/archive-backend:1.0
-        # - docker build -t $REPO_NAME/signal-backend:1.0 -f ./signal/SignalDockerfile ./re-verse/signal
+        # - docker build -t $REPO_NAME/signal-backend:1.0 -f ./signal/SignalDockerfile ./signal
         # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/signal-backend:1.0
     tags:
         - reverse-runner
