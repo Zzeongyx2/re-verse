@@ -20,6 +20,7 @@ import OtherMooseAnimations from "../../assets/players/other/OtherMooseAnimation
 import OtherNarwhalAnimations from "../../assets/players/other/OtherNarwhalAnimations";
 import OtherPuffinAnimations from "../../assets/players/other/OtherPuffinAnimations";
 import OtherSnowLeopardAnimations from "../../assets/players/other/OtherSnowLeopardAnimations";
+import OtherCougarAnimations from "../../assets/players/other/OtherCougarAnimations";
 
 function SelectedOtherPlayer({ destinationPoint, handleVisible, userName }) {
   const archiveList = useSelector((state) => state.archive.myArchiveList);
@@ -144,6 +145,12 @@ function SelectedOtherPlayer({ destinationPoint, handleVisible, userName }) {
       ) : null}
       {selectAvartar === "SnowLeopard" ? (
         <OtherSnowLeopardAnimations
+          destinationPoint={destinationPoint}
+          handleVisible={handleVisible}
+        />
+      ) : null}
+      {selectAvartar === "Cougar" ? (
+        <OtherCougarAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
         />
