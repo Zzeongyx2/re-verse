@@ -19,17 +19,17 @@ build_image:
         - docker:20.10.16-dind # docker in docker (docker daemon)
     before_script:
         - amazon-linux-extras install docker
-        - aws --version
-        - docker --version
+        # - aws --version
+        # - docker --version
         - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
     script:
-        # - docker build -t $REPO_NAME/frontend:1.0 -f ./frontend/Dockerfile ./frontend
-        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/frontend:1.0
+        - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_1:$TAG_NAME -f ./frontend/Dockerfile ./frontend
+        - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_1:$TAG_NAME
         - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$TAG_NAME -f ./backend/auth/AuthDockerfile ./backend/auth
         - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$TAG_NAME
-        # - docker build -t $REPO_NAME/archive-backend:1.0 -f ./backend/archive/ArchiveDockerfile ./backend/archive
-        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/archive-backend:1.0
-        # - docker build -t $REPO_NAME/signal-backend:1.0 -f ./signal/SignalDockerfile ./signal
-        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/signal-backend:1.0
+        - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_3:$TAG_NAME -f ./backend/archive/ArchiveDockerfile ./backend/archive
+        - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_3:$TAG_NAME
+        # - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_4:$TAG_NAME -f ./signal/SignalDockerfile ./signal
+        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_4:$TAG_NAME
     tags:
         - reverse-runner
