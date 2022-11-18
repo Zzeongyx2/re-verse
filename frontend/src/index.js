@@ -17,6 +17,30 @@ const theme = extendTheme({
     Modal: modalTheme,
     Avatar: avatarTheme,
   },
+  styles: {
+    global: {
+      h1: {
+        fontSize: "26px",
+        fontWeight: "bold",
+      },
+      h2: {
+        fontSize: "19.5px",
+        fontWeight: "bold",
+      },
+      h3: {
+        fontSize: "15px",
+      },
+      h4: {
+        fontSize: "13px",
+      },
+      h5: {
+        fontSize: "11px",
+      },
+      h6: {
+        fontSize: "10px",
+      },
+    },
+  },
 });
 
 let persistor = persistStore(store);
