@@ -170,7 +170,7 @@ export default function OtherDoveAnimations({
               morphTargetInfluences={nodes.Dove.morphTargetInfluences}
               // 그림자 설정은 여기에!
               castShadow
-              receiveShadow
+              // receiveShadow
             />
           </group>
         </group>
