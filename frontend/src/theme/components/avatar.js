@@ -18,7 +18,7 @@ const { definePartsStyle, defineMultiStyleConfig } =
 
 const roundedSquare = definePartsStyle({
   container: {
-    borderRadius: "lg",
+    borderRadius: "sm",
   },
 });
 
