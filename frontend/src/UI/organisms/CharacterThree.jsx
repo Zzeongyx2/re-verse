@@ -43,6 +43,7 @@ function CharacterThree({ animalName }) {
   const editAvatarFail = (error) => {
     console.log(error);
   };
+
   return (
     <div className="w-full h-full px-5 py-2 relative flex justify-center">
       <div className="w-full text-white absolute flex justify-between px-6">
@@ -91,6 +92,7 @@ function CharacterThree({ animalName }) {
               <SelectCharacterBtn
                 imgUrl={s3Path + character + imageForm}
                 name={character}
+                checked={characters[idx] === selectCharacter}
               />
             </label>
           ))}

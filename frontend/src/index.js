@@ -10,10 +10,12 @@ import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 
 import { modalTheme } from "./theme/components/modal";
+import { avatarTheme } from "./theme/components/avatar";
 
 const theme = extendTheme({
   components: {
     Modal: modalTheme,
+    Avatar: avatarTheme,
   },
 });
 
