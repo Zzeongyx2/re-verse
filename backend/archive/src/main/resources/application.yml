@@ -55,7 +55,6 @@ cloud:
 
 elasticsearch:
   host: https://vpc-reverse-elastic-search-1-tx7r32a6sdboafhr2uzfkdmvyi.ap-northeast-2.es.amazonaws.com
-  port : 9200
 
 jwt:
   secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
