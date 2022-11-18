@@ -18,12 +18,14 @@ export function Christmas(props) {
           <group rotation={[-Math.PI / 2, 0, 0]}>
             <group position={[85, -65, 0]} scale={0.28}>
               <mesh
+                castShadow
                 geometry={
                   nodes.Christmas_Pack_Mesh_Mat_Christmas_Pack_0.geometry
                 }
                 material={materials.Mat_Christmas_Pack}
               />
               <mesh
+                castShadow
                 geometry={
                   nodes.Christmas_Pack_Mesh_Mat_Christmas_Pack_0_1.geometry
                 }
