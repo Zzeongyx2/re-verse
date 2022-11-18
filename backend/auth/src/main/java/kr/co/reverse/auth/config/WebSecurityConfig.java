@@ -82,6 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.addAllowedOrigin("http://localhost:3000");
         configuration.addAllowedOrigin("https://re-verse.co.kr");
         configuration.addAllowedOrigin("https://re-verse.co.kr:3000");
+        configuration.addAllowedOrigin("https://re-verse.kr");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.addExposedHeader("Authorization");
