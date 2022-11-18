@@ -17,8 +17,8 @@ export function EasterPack(props) {
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group
             rotation={[-Math.PI / 2, 0, 0]}
-            scale={0.115}
-            position={[-85, 0, 80]}
+            scale={0.1}
+            position={[-85, 0, 90]}
           >
             <mesh
               geometry={nodes.Easter_Picnic_Pack_Mat_Ground_0.geometry}
