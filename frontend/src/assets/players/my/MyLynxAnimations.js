@@ -164,7 +164,7 @@ export default function MyLynxAnimations({
               morphTargetInfluences={nodes.Lynx.morphTargetInfluences}
               // 그림자 설정은 여기에!
               castShadow
-              receiveShadow
+              // receiveShadow
             />
           </group>
         </group>

@@ -164,7 +164,7 @@ export default function MyHuskyAnimations({
               morphTargetInfluences={nodes.Husky.morphTargetInfluences}
               // 그림자 설정은 여기에!
               castShadow
-              receiveShadow
+              // receiveShadow
             />
           </group>
         </group>
