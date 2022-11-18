@@ -1,14 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import * as SkeletonUtils from "three/examples/jsm/utils/SkeletonUtils";
+import { useGraph } from "@react-three/fiber";
 
 export default function ParrotCharacter() {
   const group = useRef();
   const [action, setAction] = useState("Idle_A");
 
   const previousAction = usePrevious(action);
-  const { nodes, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Parrot_Animations.gltf"
+  const { scene, materials, animations } = useGLTF(
+    "/assets/animals/GLTF/Animations/Parrot_Animations.gltf",
   );
+  const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
+  const { nodes } = useGraph(clone);
   const { actions, names } = useAnimations(animations, group);
 
   const [index, setIndex] = useState(8);
