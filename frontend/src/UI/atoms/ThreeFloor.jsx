@@ -10,6 +10,7 @@ function ThreeFloor({ position, rotation }) {
       scale={[300, 300, 300]}
       position={position}
       rotation={rotation}
+      name={"plane"}
     >
       <planeGeometry />
       <meshPhongMaterial color={"skyblue"} receiveShadow />

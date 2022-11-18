@@ -64,7 +64,7 @@ function Reverse() {
   // default action = idle
   // const [characterPosition, setCharacterPosition] = useState();
   const [destinationPoint, setDestinationPoint] = useState(
-    new Vector3(-30, 0, -30)
+    new Vector3(-30, 0, -30),
   );
   const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/map_texture.jpg");
@@ -363,7 +363,7 @@ function Reverse() {
 
     if (data1.type === "NewMember") {
       let channel1 = rtcPeer.createDataChannel(
-        Math.floor(Math.random() * 10000000000)
+        Math.floor(Math.random() * 10000000000),
       );
       channelConfig(channel1);
 
@@ -690,7 +690,7 @@ function Reverse() {
         ...reverse.info,
         archiveId: archiveId,
         stuffs: res.data.stuffs,
-      })
+      }),
     );
   };
 
@@ -850,7 +850,7 @@ function Reverse() {
           <Suspense fallback={null}>
             {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
             {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-            {/* {others.map((other, idx) => {
+            {others.map((other, idx) => {
               // console.log(other);
               // console.log(others);
               // console.log(idx);
@@ -874,11 +874,11 @@ function Reverse() {
                 />
               );
             })}
-   
+
             <SelectedMyPlayer
               destinationPoint={destinationPoint}
               handleVisible={handleVisible}
-            /> */}
+            />
             <ObjectTest visible={visible} />
             {/* <ObjectTest currentPosition={currentPosition} /> */}
 
