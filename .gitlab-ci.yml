@@ -1,4 +1,6 @@
 variables:
+    ACCOUNT_ID: $ACCOUNT_ID
+    AWS_REGION: $AWS_REGION
     REPO_NAME: "reverse-registry"
 
 stages:
