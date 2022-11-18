@@ -191,9 +191,9 @@ function Reverse() {
     }
   }, [webrtcRedux.micCheck]);
 
-  const audioChristmas = require("../../assets/bgm/Ikson - Christmas.wav");
-  const audioTravel = require("../../assets/bgm/세계인-아스라이.mp3");
-  const audioDiary = require("../../assets/bgm/Japan by uniq.mp3");
+  // const audioChristmas = require("../../assets/bgm/Ikson - Christmas.wav");
+  // const audioTravel = require("../../assets/bgm/세계인-아스라이.mp3");
+  // const audioDiary = require("../../assets/bgm/Japan by uniq.mp3");
   useEffect(() => {
     const audioSet = document.getElementById("user-audio").childNodes;
     if (audioSet) {
@@ -210,19 +210,19 @@ function Reverse() {
     }
   }, [webrtcRedux.headCheck]);
 
-  useEffect(() => {
-    const bgmChristmas = document.getElementById("bgm-christmas");
-    const bgmTravel = document.getElementById("bgm-travel");
-    const bgmDiary = document.getElementById("bgm-diary");
-    const bgm = bgmDiary;
-    console.log(bgmChristmas);
-    bgm.volume = 0.1;
-    if (webrtcRedux.bgmCheck) {
-      bgm.muted = false;
-    } else {
-      bgm.muted = true;
-    }
-  }, [webrtcRedux.bgmCheck]);
+  // useEffect(() => {
+  //   const bgmChristmas = document.getElementById("bgm-christmas");
+  //   const bgmTravel = document.getElementById("bgm-travel");
+  //   const bgmDiary = document.getElementById("bgm-diary");
+  //   const bgm = bgmDiary;
+  //   console.log(bgmChristmas);
+  //   bgm.volume = 0.1;
+  //   if (webrtcRedux.bgmCheck) {
+  //     bgm.muted = false;
+  //   } else {
+  //     bgm.muted = true;
+  //   }
+  // }, [webrtcRedux.bgmCheck]);
   // ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
   async function login() {
     await navigator.mediaDevices
@@ -789,7 +789,7 @@ function Reverse() {
       </div>
       {/* chatting */}
 
-      <audio id="bgm-christmas" autoPlay controls loop hidden muted>
+      {/* <audio id="bgm-christmas" autoPlay controls loop hidden muted>
         <source src={audioChristmas}></source>
         does it not work?
       </audio>
@@ -800,7 +800,7 @@ function Reverse() {
       <audio id="bgm-diary" autoPlay controls muted loop hidden>
         <source src={audioDiary}></source>
         does it not work?
-      </audio>
+      </audio> */}
       <Canvas
         ref={refCanvas}
         shadows
@@ -915,7 +915,7 @@ function Reverse() {
 
             {/* test html effect */}
             {/* <Television /> */}
-            <TelevisionMod />
+            {/* <TelevisionMod /> */}
 
             {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
             {/* 여행 */}
