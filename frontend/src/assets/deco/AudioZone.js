@@ -10,6 +10,7 @@ export default function AudioZone(params) {
   const webrtcRedux = useSelector((state) => state.webrtc);
   const dispatch = useDispatch();
   const [initAudio, setInitAudio] = useState(0);
+  const [audioState, setAudioState] = useState(false);
 
   useEffect(() => {
     if (webrtcRedux.bgmCheck) {
@@ -25,6 +26,9 @@ export default function AudioZone(params) {
       setInitAudio(initAudio + 1);
       console.log(webrtcRedux.musicTheme);
       console.log(initAudio);
+    }
+    if (initAudio == 3) {
+      setAudioState(true);
     }
   }, [initAudio]);
 
@@ -82,7 +86,7 @@ export default function AudioZone(params) {
         {webrtcRedux.bgmCheck && webrtcRedux.musicTheme === 0 ? (
           <PositionalAudio
             ref={audioref}
-            autoplay
+            autoplay={audioState}
             loop
             url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/A-Picnic-With-My-Family_AdobeStock_452603097_preview.m4a"
             distance={2}
@@ -91,7 +95,7 @@ export default function AudioZone(params) {
         {webrtcRedux.bgmCheck && webrtcRedux.musicTheme === 1 ? (
           <PositionalAudio
             ref={audioref}
-            autoplay
+            autoplay={audioState}
             loop
             url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/We-Wish-You-A-Merry-Christmas_AdobeStock_353746933_preview.m4a"
             distance={2}
@@ -100,7 +104,7 @@ export default function AudioZone(params) {
         {webrtcRedux.bgmCheck && webrtcRedux.musicTheme === 2 ? (
           <PositionalAudio
             ref={audioref}
-            autoplay
+            autoplay={audioState}
             loop
             url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/Sweet-Mood_AdobeStock_452607713_preview.m4a"
             distance={2}
@@ -109,7 +113,7 @@ export default function AudioZone(params) {
         {webrtcRedux.bgmCheck && webrtcRedux.musicTheme === 3 ? (
           <PositionalAudio
             ref={audioref}
-            autoplay
+            autoplay={audioState}
             loop
             url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/Emotional-Cinematic-Music-Box_AdobeStock_528505763_preview.m4a"
             distance={2}
@@ -118,7 +122,7 @@ export default function AudioZone(params) {
         {webrtcRedux.bgmCheck && webrtcRedux.musicTheme === 4 ? (
           <PositionalAudio
             ref={audioref}
-            autoplay
+            autoplay={audioState}
             loop
             url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/TheCats.m4a"
             distance={2}
