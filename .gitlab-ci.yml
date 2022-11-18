@@ -1,10 +1,10 @@
 variables:
     DOCKER_TLS_CERTDIR: "" # sharing same certificate between docker client and daemon
     DOCKER_HOST: tcp://docker:2375
-    APP_NAME_1: reverse # frontend
-    APP_NAME_2: auth_backend
-    APP_NAME_3: archive_backend
-    APP_NAME_4: signaling_server
+    APP_NAME_1: reverse-app # frontend
+    APP_NAME_2: auth-backend
+    APP_NAME_3: archive-backend
+    APP_NAME_4: signal-backend
     TAG_NAME: "1.0"
 
 stages:
