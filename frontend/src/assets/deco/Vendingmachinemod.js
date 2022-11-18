@@ -13,9 +13,9 @@ export function VendingScreen(props) {
   return (
     <group {...props} dispose={null}>
       <group
-        position={[0.78, -10, -0.07]}
-        rotation={[-Math.PI / 2, 0, 0]}
-        scale={4.38}
+        position={[-40, 0, 120]}
+        rotation={[-Math.PI / 2, 0, Math.PI / 2]}
+        scale={2}
       >
         <group rotation={[Math.PI / 2, 0, 0]}>
           <mesh
@@ -33,6 +33,7 @@ export function VendingScreen(props) {
               occlude
               rotation={[0, Math.PI / 2, 0]}
               position={[0.1, 0, 0]}
+              distanceFactor={10}
             >
               {/* <h1>hello?</h1> */}
               <VendingPage />
