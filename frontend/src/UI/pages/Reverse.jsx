@@ -52,7 +52,8 @@ import { setLoadingPage } from "../../modules/loading.js";
 import { BgAsset } from "../../assets/deco/Bgasset.js";
 import { CustomForest } from "../../assets/deco/Customforest.js";
 import { Banana } from "../../assets/deco/Banana.js";
-import { Cloud, Sky, Stars } from "@react-three/drei";
+import { Sky } from "@react-three/drei";
+import { VendingScreen } from "../../assets/deco/Vendingmachinemod.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -827,11 +828,10 @@ function Reverse() {
         <Sky sunPosition={[100, 50, 100]} />
         {/* // TODO: 컴포넌트 배치할 때에는 키고 하는게 편함 */}
         <OrbitControls
-          makeDefault
           enableZoom={true}
           // enableRotate={false}
           // minZoom={8.5}
-          maxZoom={20}
+          // maxZoom={20}
         />
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
@@ -856,7 +856,7 @@ function Reverse() {
           <Suspense fallback={null}>
             {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
             {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-            {others.map((other, idx) => {
+            {/* {others.map((other, idx) => {
               // console.log(other);
               // console.log(others);
               // console.log(idx);
@@ -884,7 +884,7 @@ function Reverse() {
             <SelectedMyPlayer
               destinationPoint={destinationPoint}
               handleVisible={handleVisible}
-            />
+            /> */}
             <ObjectTest visible={visible} />
             {/* <ObjectTest currentPosition={currentPosition} /> */}
 
@@ -904,8 +904,10 @@ function Reverse() {
             {/* etc */}
             <Fireworks />
             <SkyTube />
-            <Park />
+            {/* <Park /> */}
             <CustomForest />
+            {/* <Vendingmachine /> */}
+            <VendingScreen />
 
             {/* music - positional audio */}
             {/* audiozone = 소리 나오는 구간  &  radio = theme song 바꾸는거 */}
