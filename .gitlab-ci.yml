@@ -26,3 +26,5 @@ build_image:
         # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/archive-backend:1.0
         # - docker build -t $REPO_NAME/signal-backend:1.0 -f ./signal/SignalDockerfile ./re-verse/signal
         # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/signal-backend:1.0
+    tags:
+        - reverse-runner
