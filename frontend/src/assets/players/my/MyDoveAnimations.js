@@ -27,7 +27,7 @@ export default function MyDoveAnimations({
   // }));
   // const previousAction = usePrevious(action);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Dove_Animations.gltf"
+    "/assets/animals/GLTF/Animations/Dove_Animations.gltf",
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -59,6 +59,9 @@ export default function MyDoveAnimations({
     onCollideBegin: (e) => {
       console.log("아야");
       console.log(e);
+      if (e.body.name === "plane" || e.body.name === "bridge") {
+        return;
+      }
       // setMoving(false);
       setCollision(true);
       actions["Walk"].stop();
@@ -88,7 +91,7 @@ export default function MyDoveAnimations({
       if (moving) {
         angle = Math.atan2(
           destinationPoint.z - group.current.position.z,
-          destinationPoint.x - group.current.position.x
+          destinationPoint.x - group.current.position.x,
         );
         if (isCollided) {
           group.current.position.x -= Math.cos(angle) * 0.5;

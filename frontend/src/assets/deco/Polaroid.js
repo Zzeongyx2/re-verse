@@ -75,7 +75,13 @@ export function Polaroid({ props, position, event, rotation }) {
           </group>
         </group>
         <group>
-          <mesh ref={boxCollider} scale={50} position={position} {...props}>
+          <mesh
+            ref={boxCollider}
+            scale={50}
+            position={position}
+            {...props}
+            name={"plaroid"}
+          >
             <meshLambertMaterial color={"hotpink"} />
           </mesh>
         </group>
