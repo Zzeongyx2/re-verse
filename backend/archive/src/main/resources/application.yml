@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://reverse-archive.clpjhqrsb3pu.ap-northeast-2.rds.amazonaws.com:3306/reverse_auth?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://reverse-archive.clpjhqrsb3pu.ap-northeast-2.rds.amazonaws.com:3306/reverse_archive?serverTimezone=UTC&characterEncoding=UTF-8
     username: admin
     password: flQjtm1024
   servlet:
