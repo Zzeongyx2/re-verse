@@ -1,6 +1,5 @@
 variables:
     REPO_NAME: "reverse-registry"
-    DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: "/certs" # sharing same certificate between docker client and daemon
 
 stages:
@@ -8,9 +7,9 @@ stages:
 
 build_image:
     stage: build
-    image: docker:20.10.21
+    image: docker:20.10.16
     services:
-        - docker:20.10.21-dind # docker in docker (docker daemon)
+        - docker:20.10.16-dind # docker in docker (docker daemon)
     before_script:
         - echo "$AWS_REGION"
         - apk add --no-cache curl jq python3 py3-pip
