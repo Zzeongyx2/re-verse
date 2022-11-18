@@ -22,6 +22,7 @@ import MyMooseAnimations from "../../assets/players/my/MyMooseAnimations.js";
 import MyNarwhalAnimations from "../../assets/players/my/MyNarwhalAnimations.js";
 import MyPuffinAnimations from "../../assets/players/my/MyPuffinAnimations.js";
 import MySnowLeopardAnimations from "../../assets/players/my/MySnowLeopardAnimations.js";
+import MyCougarAnimations from "../../assets/players/my/MyCougarAnimations.js";
 
 function SelectedMyPlayer({ destinationPoint, handleVisible }) {
   const loginUser = useSelector((state) => state.user.loginUser);
@@ -134,6 +135,12 @@ function SelectedMyPlayer({ destinationPoint, handleVisible }) {
         ) : null}
         {loginUser.avatar === "SnowLeopard" ? (
           <MySnowLeopardAnimations
+            destinationPoint={destinationPoint}
+            handleVisible={handleVisible}
+          />
+        ) : null}
+        {loginUser.avatar === "Cougar" ? (
+          <MyCougarAnimations
             destinationPoint={destinationPoint}
             handleVisible={handleVisible}
           />
