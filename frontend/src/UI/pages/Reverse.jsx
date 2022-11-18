@@ -47,6 +47,8 @@ import { Radio } from "../../assets/deco/Radio.js";
 import { StonesMod } from "../../assets/deco/StonesMod.js";
 import { TelevisionMod } from "../../assets/deco/TelevisionMod.js";
 import { Toast } from "../atoms/Toast.jsx";
+import Loading from "../organisms/Loading.jsx";
+import { setLoadingPage } from "../../modules/loading.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -672,7 +674,12 @@ function Reverse() {
   const reverse = useSelector((state) => state.reverse);
 
   useEffect(() => {
+    dispatch(setLoadingPage(true));
     getArchiveDetail(archiveId, getArchiveDetailSuccess, getArchiveDetailFail);
+
+    setTimeout(() => {
+      dispatch(setLoadingPage(false));
+    }, 4500);
   }, []);
 
   const getArchiveDetailSuccess = (res) => {
@@ -709,9 +716,12 @@ function Reverse() {
     setCheckNull(e.target.value);
     // console.log(checkNull);
   };
+  const loadingPage = useSelector((state) => state.loading.loadingPage);
 
   return (
     <div className="h-screen overflow-hidden relative">
+      {/* loading page... */}
+      <div>{loadingPage && <Loading />}</div>
       <audio id="myAudio" autoPlay hidden muted controls></audio>
       <div className="w-full h-[0.15] absolute z-10">
         <ul id="user-audio"></ul>
