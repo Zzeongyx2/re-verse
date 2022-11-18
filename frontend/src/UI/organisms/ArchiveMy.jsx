@@ -31,7 +31,7 @@ function ArchiveMy() {
     editBestArchive(
       archive.archiveId,
       editBestArchiveSuccess,
-      editBestArchiveFail
+      editBestArchiveFail,
     );
   };
   const editBestArchiveSuccess = (res) => {
@@ -102,6 +102,7 @@ function ArchiveMy() {
                         <Tooltip
                           label={`${member.nickname}`}
                           aria-label="A tooltip"
+                          key={`avatar-${index}`}
                         >
                           <Avatar
                             size={"sm"}
@@ -109,7 +110,6 @@ function ArchiveMy() {
                             variant="avatarBorder"
                             name="profileImg"
                             src={s3Path + member.avatar + imageForm}
-                            key={`avatar-${index}`}
                             alt={index}
                           />
                         </Tooltip>

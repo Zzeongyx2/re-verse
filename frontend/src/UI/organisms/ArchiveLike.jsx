@@ -31,7 +31,7 @@ function ArchiveLike() {
       archiveId,
       loginUser.nickname,
       deleteArchiveMemberSuccess,
-      deleteArchiveMemberFail
+      deleteArchiveMemberFail,
     );
     console.log(archiveId, "나가기");
     await getLikeList();
@@ -47,13 +47,13 @@ function ArchiveLike() {
       await postBookmark(
         archive.archiveId,
         bookmarkControlSuccess,
-        bookmarkControl
+        bookmarkControl,
       );
     } else {
       await deleteBookmark(
         archive.archiveId,
         bookmarkControlSuccess,
-        bookmarkControl
+        bookmarkControl,
       );
     }
     await getLikeList();
@@ -120,6 +120,7 @@ function ArchiveLike() {
                           <Tooltip
                             label={`${member.nickname}`}
                             aria-label="A tooltip"
+                            key={`avatar-${index}`}
                           >
                             <Avatar
                               size={"sm"}
@@ -127,7 +128,6 @@ function ArchiveLike() {
                               variant="avatarBorder"
                               name="profileImg"
                               src={s3Path + member.avatar + imageForm}
-                              key={`avatar-${index}`}
                               alt={index}
                             />
                           </Tooltip>
