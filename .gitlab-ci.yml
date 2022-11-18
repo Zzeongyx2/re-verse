@@ -1,5 +1,5 @@
 variables:
-    # DOCKER_TLS_CERTDIR: "/certs" # sharing same certificate between docker client and daemon
+    DOCKER_TLS_CERTDIR: "/certs" # sharing same certificate between docker client and daemon
     DOCKER_HOST: tcp://docker:2375
     APP_NAME_1: reverse # frontend
     APP_NAME_2: auth_backend
@@ -25,8 +25,7 @@ build_image:
     script:
         # - docker build -t $REPO_NAME/frontend:1.0 -f ./frontend/Dockerfile ./frontend
         # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/frontend:1.0
-        - docker build -t $APP_NAME_2:$TAG_NAME -f ./backend/auth/AuthDockerfile ./backend/auth
-        - docker tag $APP_NAME_2:$TAG_NAME $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$TAG_NAME
+        - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$TAG_NAME -f ./backend/auth/AuthDockerfile ./backend/auth
         - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$TAG_NAME
         # - docker build -t $REPO_NAME/archive-backend:1.0 -f ./backend/archive/ArchiveDockerfile ./backend/archive
         # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME/archive-backend:1.0
