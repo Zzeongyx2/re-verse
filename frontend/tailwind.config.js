@@ -1,7 +1,9 @@
-const { scaleFadeConfig } = require("@chakra-ui/react");
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  // preflight 설정 해제해야지 기존 태그들 사용 가능 for react quill
+  corePlugins: {
+    preflight: false,
+  },
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {

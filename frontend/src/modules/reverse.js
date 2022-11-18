@@ -5,7 +5,7 @@ const initialState = {
   info: {
     archiveId: "",
     stuffs: [],
-    details: null,
+    details: null, // 폴라로이드 오브젝트에서 글 상세 보기 할 때, 내가 어떤 글을 보고 있는지
   },
   editBtn: false,
   travelWriteIsOpen: false,
@@ -17,6 +17,7 @@ const initialState = {
   modalIsOpen: false,
   isCampfireOn: 0,
   article: {
+    // 노트북 오브젝트에서 내가 글을 작성할 때, 어떤 인풋을 주었는지
     title: "",
     content: "",
     memoryDate: `${new Date()}`,
