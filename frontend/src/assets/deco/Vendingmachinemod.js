@@ -24,11 +24,7 @@ export function VendingMachine(props) {
             position={[2.19, 6.13, 0.03]}
           >
             <Html
-              style={{
-                backgroundColor: "gray",
-                width: "144px",
-                height: "150px",
-              }}
+              className="w-36 h-[150px] bg-gray-200"
               transform
               occlude
               rotation={[0, Math.PI / 2, 0]}
