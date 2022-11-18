@@ -50,6 +50,7 @@ import { Toast } from "../atoms/Toast.jsx";
 import Loading from "../organisms/Loading.jsx";
 import { setLoadingPage } from "../../modules/loading.js";
 import { BgAsset } from "../../assets/deco/Bgasset.js";
+import { CustomForest } from "../../assets/deco/Customforest.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -850,7 +851,7 @@ function Reverse() {
           <Suspense fallback={null}>
             {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
             {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-            {others.map((other, idx) => {
+            {/* {others.map((other, idx) => {
               // console.log(other);
               // console.log(others);
               // console.log(idx);
@@ -878,7 +879,7 @@ function Reverse() {
             <SelectedMyPlayer
               destinationPoint={destinationPoint}
               handleVisible={handleVisible}
-            />
+            /> */}
             <ObjectTest visible={visible} />
             {/* <ObjectTest currentPosition={currentPosition} /> */}
 
@@ -899,6 +900,7 @@ function Reverse() {
             <Fireworks />
             <SkyTube />
             <Park />
+            <CustomForest />
 
             {/* music - positional audio */}
             {/* audiozone = 소리 나오는 구간  &  radio = theme song 바꾸는거 */}
@@ -908,7 +910,7 @@ function Reverse() {
             {/* floor */}
             <ReverseFloor />
             <StonesMod />
-            <BgAsset />
+            {/* <BgAsset /> */}
 
             {/* test html effect */}
             {/* <Television /> */}
