@@ -17,18 +17,18 @@ import { CylinderGeometry } from "three";
 
 export function Park(props) {
   const { nodes, materials } = useGLTF("/assets/park/scene.gltf");
-  const [collider] = useCylinder(() => ({
-    mass: 100,
-    type: "Static",
-    args: [5, 10, 5, 4],
-    // position: [75, 0, 7],
-  }));
+  // const [collider] = useCylinder(() => ({
+  //   mass: 100,
+  //   type: "Static",
+  //   args: [5, 10, 5, 4],
+  //   // position: [75, 0, 7],
+  // }));
   return (
     <group>
-      <mesh ref={collider} {...props} scale={1} name={"bridge"}>
-        {/* <cylinderGeometry args={[5, 10, 5, 4]} /> */}
+      {/* <mesh ref={collider} {...props} scale={1} name={"bridge"}>
+        <cylinderGeometry args={[5, 10, 5, 4]} />
         <meshStandardMaterial color="red" />
-      </mesh>
+      </mesh> */}
       <group {...props} dispose={null} scale={7} position={[75, 0, 7]}>
         <group rotation={[-Math.PI / 2, 0, -Math.PI / 10]}>
           <group rotation={[Math.PI / 2, 0, 0]}>
