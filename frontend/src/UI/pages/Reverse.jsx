@@ -46,6 +46,7 @@ import AudioZone from "../../assets/deco/AudioZone.js";
 import { Radio } from "../../assets/deco/Radio.js";
 import { StonesMod } from "../../assets/deco/StonesMod.js";
 import { TelevisionMod } from "../../assets/deco/TelevisionMod.js";
+import { Toast } from "../atoms/Toast.jsx";
 
 var channels = [];
 var channelUsers = new Map();
@@ -687,7 +688,12 @@ function Reverse() {
 
   const navigate = useNavigate();
   const getArchiveDetailFail = (err) => {
-    alert("초대받지 않은 아카이브입니다.");
+    // alert("초대받지 않은 아카이브입니다.");
+    Toast.fire({
+      icon: "warning",
+      title: "초대받지 않은 아카이브 입니다",
+      timer: 1500,
+    });
     console.log("arlet나온곳");
     navigate("/lobby");
     console.log(err);

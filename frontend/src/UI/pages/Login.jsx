@@ -8,6 +8,7 @@ import Logo from "../atoms/Logo";
 import NonLoginMain from "./NonLoginMain";
 
 import { BsInfoCircle } from "react-icons/bs";
+import { Toast } from "../atoms/Toast";
 
 function Login() {
   const [id, setId] = useState("");
@@ -29,10 +30,20 @@ function Login() {
 
   const clickLogin = () => {
     if (id.trim() === "") {
-      alert("아이디를 입력하세요");
+      // alert("아이디를 입력하세요");
+      Toast.fire({
+        icon: "error",
+        title: "아이디를 입력하세요",
+        timer: 1500,
+      });
       return;
     } else if (pw.trim() === "") {
-      alert("비밀번호를 입력하세요.");
+      // alert("비밀번호를 입력하세요.");
+      Toast.fire({
+        icon: "error",
+        title: "비밀번호를 입력하세요",
+        timer: 1500,
+      });
       return;
     }
 
@@ -44,7 +55,12 @@ function Login() {
     window.location.href = "/lobby";
   };
   const loginFail = (error) => {
-    alert("로그인실패");
+    // alert("로그인실패");
+    Toast.fire({
+      icon: "warning",
+      title: "로그인 실패",
+      timer: 1500,
+    });
   };
 
   return (
@@ -59,6 +75,7 @@ function Login() {
           placeholder="아이디"
           value={id}
           onChange={idHandleChange}
+          onKeyUp={handleKeyUp}
         />
 
         <input
