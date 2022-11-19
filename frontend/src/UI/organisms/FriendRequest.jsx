@@ -8,6 +8,7 @@ import { getFriendList, requestFriend, searchUser } from "../../api/friend";
 import { imageForm, s3Path } from "../../api";
 import { useSelector, useDispatch } from "react-redux";
 import { setFriendList } from "../../modules/friend";
+import { Toast } from "../atoms/Toast";
 
 function FriendRequest() {
   const [findNickName, setFindNickName] = useState("");
@@ -96,7 +97,9 @@ function FriendRequest() {
                           size="sm"
                         />
                         <div className="text-base1 px-3">
-                          <p className="cursor-pointer text-sm font-bold">{friend.nickname}</p>
+                          <p className="cursor-pointer text-sm font-bold">
+                            {friend.nickname}
+                          </p>
                           <p className="overflow-hidden text-ellipsis line-clamp-1 text-xs text-zinc-500">
                             {friend.message}
                           </p>
@@ -107,6 +110,11 @@ function FriendRequest() {
                       </div>
                       <button
                         onClick={() => {
+                          Toast.fire({
+                            icon: "success",
+                            title: "친구 요청을 보냈습니다.",
+                            timer: 1500,
+                          });
                           friendRequest(friend.nickname);
                         }}
                       >

@@ -16,6 +16,7 @@ function Lobby() {
   // const [loginUser, setLoginUser] = useState(initialUserInfo);
   const loginUser = useSelector((state) => state.user.loginUser);
   const lastArchive = useSelector((state) => state.archive.lastArchive);
+  // const lastArchive = undefined;
   const dispatch = useDispatch();
   console.log(lastArchive);
   useEffect(() => {
@@ -65,12 +66,16 @@ function Lobby() {
           />
           <br />
           <LobbyButton
-            linkTo={`/reverse/${lastArchive?.id}`}
+            linkTo={lastArchive ? `/reverse/${lastArchive?.id}` : "/lobby"}
             buttonTitle={"최근 방문한 아카이브 바로가기"}
-            buttonMessage={`${lastArchive?.members[0].nickname}의 아카이브 ${lastArchive?.title}`}
+            buttonMessage={
+              lastArchive
+                ? `${lastArchive?.members[0].nickname}의 아카이브 ${lastArchive?.title}`
+                : "최근 방문한 아카이브가 없습니다."
+            }
             textcolor={"text-gray-700"}
-            from={"from-main2"}
-            to={"to-sub2"}
+            from={lastArchive ? "from-main2" : "cursor-default"}
+            to={lastArchive ? "to-sub2" : "bg-gray-500"}
           />
           <LobbyProfile loginUser={loginUser} />
         </div>
