@@ -11,7 +11,7 @@ export function CandyCustomTwo(props) {
     <group
       {...props}
       dispose={null}
-      position={[110, 0, 6.5]}
+      position={[110, 0.8, 6.5]}
       rotation={[0, Math.PI / 1.1, 0]}
       scale={0.56}
     >
@@ -144,7 +144,7 @@ export function CandyCustomTwo(props) {
       <mesh
         geometry={nodes.Marshmallow_B_03_LOD1_Mat_Candy_0.geometry}
         material={materials["Mat_Candy.001"]}
-        position={[-4.87, 4.84, -27.77]}
+        position={[-4.87, 2, -27.77]}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={1.42}
       />
