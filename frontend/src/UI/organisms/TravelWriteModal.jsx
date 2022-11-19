@@ -5,9 +5,8 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  FormControl,
 } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -20,9 +19,8 @@ import {
 import ArchiveDatePicker from "../molecules/ReverseDatePicker";
 
 import { AiOutlineCalendar } from "react-icons/ai";
-import { EditorComponent } from "./TextEditor";
 import ReverseTextEditor from "./ReverseTextEditor";
-import { getPaper, getStuffDetail, postPaper } from "../../api/reverse";
+import { getStuffDetail, postPaper } from "../../api/reverse";
 
 import moment from "moment/moment";
 
@@ -46,7 +44,7 @@ function TravelWriteModal() {
         memoryTime: moment(reverse.article.memoryDate).format("yyyy-MM-DD"),
       },
       success,
-      fail
+      fail,
     );
   };
   const success = (res) => {
@@ -55,17 +53,17 @@ function TravelWriteModal() {
       reverse.info.archiveId,
       reverse.info.stuffs[reverse.selectStuff].id,
       stuffSuccess,
-      stuffFail
+      stuffFail,
     );
   };
 
   const stuffSuccess = (res) => {
     console.log(res);
-    if (reverse.selectStuff == 0) {
+    if (reverse.selectStuff === 0) {
       dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
-    } else if (reverse.selectStuff == 1) {
+    } else if (reverse.selectStuff === 1) {
       dispatch(setAnniv({ ...reverse.anniv, articleList: res.data.papers }));
-    } else if (reverse.selectStuff == 2) {
+    } else if (reverse.selectStuff === 2) {
       dispatch(setDiary({ ...reverse.diary, articleList: res.data.papers }));
     }
     // dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
