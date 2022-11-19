@@ -1,15 +1,13 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-import { Avatar, AvatarGroup, Tooltip } from "@chakra-ui/react";
+import { Avatar, Tooltip } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
 
-import { FiSettings } from "react-icons/fi";
-import { BiLogIn, BiPencil } from "react-icons/bi";
+import { BiLogIn } from "react-icons/bi";
 import { RiVipCrownFill, RiVipCrownLine } from "react-icons/ri";
 import EditArchiveModal from "./EditArchiveModal";
 import SettingArchiveModal from "./SettingArchiveModal";
 import { getArchiveList } from "../../api/archive";
-import { deleteBookmark, postBookmark } from "../../api/friend";
 import { imageForm, s3Path } from "../../api";
 import { useSelector, useDispatch } from "react-redux";
 import { setMyArchiveList } from "../../modules/archive";
