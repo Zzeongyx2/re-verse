@@ -55,6 +55,7 @@ import { Banana } from "../../assets/deco/Banana.js";
 import { Sky } from "@react-three/drei";
 import { VendingMachine } from "../../assets/deco/Vendingmachinemod.js";
 import { ArcadeMachine } from "../../assets/deco/ArcadeMachine.js";
+import { setOnOne, setOnThree } from "../../modules/camera.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -69,7 +70,7 @@ function Reverse() {
   // default action = idle
   // const [characterPosition, setCharacterPosition] = useState();
   const [destinationPoint, setDestinationPoint] = useState(
-    new Vector3(-30, 0, -30)
+    new Vector3(-30, 0, -30),
   );
   const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/map_texture.jpg");
@@ -368,7 +369,7 @@ function Reverse() {
 
     if (data1.type === "NewMember") {
       let channel1 = rtcPeer.createDataChannel(
-        Math.floor(Math.random() * 10000000000)
+        Math.floor(Math.random() * 10000000000),
       );
       channelConfig(channel1);
 
@@ -678,14 +679,51 @@ function Reverse() {
 
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
+  const cameraState = useSelector((state) => state.camera);
+  const [cameraKeyPress, setCameraKeyPress] = useState(false);
+  const upHandler = ({ key }) => {
+    if (key === "y") {
+      setCameraKeyPress(false);
+    }
+  };
+  const downHandler = ({ key }) => {
+    if (key === "y") {
+      setCameraKeyPress(true);
+    }
+  };
+  useEffect(() => {
+    if (cameraKeyPress) {
+      console.log(cameraKeyPress);
+      changeView();
+    }
+  }, [cameraKeyPress]);
 
+  const changeView = () => {
+    if (cameraState.team || cameraState.game) {
+      return;
+    }
+    if (cameraState.characterThree) {
+      dispatch(setOnOne());
+    } else {
+      dispatch(setOnThree());
+    }
+  };
   useEffect(() => {
     dispatch(setLoadingPage(true));
     getArchiveDetail(archiveId, getArchiveDetailSuccess, getArchiveDetailFail);
+    dispatch(setOnThree());
+
+    window.addEventListener("keyup", upHandler);
+    window.addEventListener("keydown", downHandler);
 
     setTimeout(() => {
       dispatch(setLoadingPage(false));
     }, 4500);
+
+    return () => {
+      window.addEventListener("keyup", upHandler);
+      window.addEventListener("keydown", downHandler);
+    };
   }, []);
 
   const getArchiveDetailSuccess = (res) => {
@@ -695,7 +733,7 @@ function Reverse() {
         ...reverse.info,
         archiveId: archiveId,
         stuffs: res.data.stuffs,
-      })
+      }),
     );
   };
 
@@ -857,7 +895,7 @@ function Reverse() {
           <Suspense fallback={null}>
             {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
             {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-            {/* {others.map((other, idx) => {
+            {others.map((other, idx) => {
               // console.log(other);
               // console.log(others);
               // console.log(idx);
@@ -885,7 +923,7 @@ function Reverse() {
             <SelectedMyPlayer
               destinationPoint={destinationPoint}
               handleVisible={handleVisible}
-            /> */}
+            />
             <ObjectTest visible={visible} />
             {/* <ObjectTest currentPosition={currentPosition} /> */}
 
