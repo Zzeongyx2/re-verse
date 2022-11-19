@@ -1,7 +1,7 @@
 package kr.co.reverse.archive.api.response;
 
 import kr.co.reverse.archive.db.entity.User;
-import kr.co.reverse.archive.db.entity.UserDocument;
+// import kr.co.reverse.archive.db.entity.UserDocument;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
