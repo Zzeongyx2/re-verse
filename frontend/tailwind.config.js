@@ -30,6 +30,7 @@ module.exports = {
         travel: ["Jeju Gothic", "sans-serif"],
         diary: ["KNPSKkomi-Regular00"],
         monitor: ["HBIOS-SYS"],
+        hand: ["LeeSeoyun"],
       },
       dropShadow: {
         "3xl": [
