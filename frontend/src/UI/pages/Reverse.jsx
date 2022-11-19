@@ -55,6 +55,8 @@ import { Banana } from "../../assets/deco/Banana.js";
 import { Sky } from "@react-three/drei";
 import { VendingMachine } from "../../assets/deco/Vendingmachinemod.js";
 import { ArcadeMachine } from "../../assets/deco/ArcadeMachine.js";
+import { CandyCustomOne } from "../../assets/deco/Customfirst.js";
+import { CandyCustomTwo } from "../../assets/deco/Customsecond.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -906,6 +908,8 @@ function Reverse() {
             <Fireworks />
             {/* <SkyTube /> */}
             <CustomForest />
+            <CandyCustomOne />
+            <CandyCustomTwo />
 
             {/* easter eggs */}
             <VendingMachine />
