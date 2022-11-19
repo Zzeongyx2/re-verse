@@ -23,6 +23,7 @@ build_image:
         # - docker --version
         - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
     script:
+        # - cp $ENV_FILE .env
         # - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_1:$TAG_NAME -f ./frontend/Dockerfile ./frontend
         # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_1:$TAG_NAME
         - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$TAG_NAME -f ./backend/auth/AuthDockerfile ./backend/auth
