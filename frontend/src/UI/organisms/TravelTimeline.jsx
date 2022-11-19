@@ -11,9 +11,9 @@ function ArticlesTimeline() {
   const reverse = useSelector((state) => state.reverse);
 
   // memory time 순서대로 정렬
-  [...reverse.travel.articleList].sort((a, b) => new Date(a.memoryTime) - new Date(b.memoryTime));
-  [...reverse.anniv.articleList].sort((a, b) => new Date(a.memoryTime) - new Date(b.memoryTime));
-  [...reverse.diary.articleList].sort((a, b) => new Date(a.memoryTime) - new Date(b.memoryTime));
+  // [...reverse.travel.articleList].sort((a, b) => new Date(a.memoryTime) - new Date(b.memoryTime));
+  // [...reverse.anniv.articleList].sort((a, b) => new Date(a.memoryTime) - new Date(b.memoryTime));
+  // [...reverse.diary.articleList].sort((a, b) => new Date(a.memoryTime) - new Date(b.memoryTime));
 
   const weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
@@ -59,7 +59,7 @@ function ArticlesTimeline() {
               onClick={() => {
                 handleGetDetail(article.id);
               }}
-              className="mb-5 cursor-pointer border-2 px-2 py-2 rounded-md"
+              className="mb-5 cursor-pointer px-2 py-2 rounded-md bg-white drop-shadow-lg"
             >
               <div className="font-semibold text-base1">
                 {new Date(article.memoryTime).toLocaleDateString() + " "}
