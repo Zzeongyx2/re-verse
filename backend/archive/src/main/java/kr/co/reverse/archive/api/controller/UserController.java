@@ -90,8 +90,8 @@ public class UserController {
     @GetMapping("/search")
     public ResponseEntity<? extends UsersRes> searchUsers(@RequestParam String nickname) {
 
-//        List<User> users = userService.getUsers(nickname);
-        List<UserDocument> users = userSearchService.searchUser(nickname);
+       List<User> users = userService.getUsers(nickname);
+        // List<UserDocument> users = userSearchService.searchUser(nickname);
 
         return ResponseEntity.ok(UsersRes.ofDocument(users));
     }

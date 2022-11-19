@@ -32,13 +32,13 @@ public class UsersRes {
         return res;
     }
 
-    public static UsersRes ofDocument(List<UserDocument> users) {
+    public static UsersRes ofDocument(List<User> users) {
         UsersRes res = new UsersRes();
 
         List<UserRes> userResList = new ArrayList<>();
-        for(UserDocument user : users){
+        for(User user : users){
             UserRes userRes = new UserRes();
-            userRes.setUserId(user.getUserId());
+            userRes.setUserId(user.getId());
             userRes.setMessage(user.getMessage());
             userRes.setNickname(user.getNickname());
             userRes.setAvatar(user.getAvatar().toString());
