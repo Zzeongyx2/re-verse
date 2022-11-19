@@ -1,7 +1,7 @@
-import { apiInstance, fileApiInstance } from "./index";
+import { apiInstance } from "./index";
 
 const api = apiInstance();
-const fileApi = fileApiInstance();
+// const fileApi = fileApiInstance();
 
 async function postArchive(archiveReq, success, fail) {
   await api.post(`/archive`, archiveReq).then(success).catch(fail);

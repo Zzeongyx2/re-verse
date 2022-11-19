@@ -25,9 +25,13 @@ function ReverseDatePicker() {
   };
   useEffect(() => {
     if (!reverse.editBtn) {
-      dispatch(
-        createArticle({ ...reverse.article, memoryDate: `${startDate}` }),
-      );
+      setTimeout(() => {
+        dispatch(
+          createArticle({ ...reverse.article, memoryDate: `${startDate}` }),
+        );
+        console.log(startDate);
+        console.log(reverse.article);
+      }, 500);
     }
   }, [reverse.travelWriteIsOpen]);
   // useEffect(() => {
