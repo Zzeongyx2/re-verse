@@ -55,7 +55,11 @@ import { Banana } from "../../assets/deco/Banana.js";
 import { Sky } from "@react-three/drei";
 import { VendingMachine } from "../../assets/deco/Vendingmachinemod.js";
 import { ArcadeMachine } from "../../assets/deco/ArcadeMachine.js";
-import { setOnOne, setOnThree } from "../../modules/camera.js";
+import { CandyCustomOne } from "../../assets/deco/Customfirst.js";
+import { CandyCustomTwo } from "../../assets/deco/Customsecond.js";
+import { CustomForestSecond } from "../../assets/deco/Customforestsecond.js";
+import { CandyCustomThird } from "../../assets/deco/Customthird.js";
+import { CustomForestThird } from "../../assets/deco/Customforestthird.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -942,8 +946,13 @@ function Reverse() {
 
             {/* etc */}
             <Fireworks />
-            {/* <SkyTube /> */}
+            <SkyTube />
             <CustomForest />
+            <CustomForestSecond />
+            <CustomForestThird />
+            <CandyCustomOne />
+            <CandyCustomTwo />
+            <CandyCustomThird />
 
             {/* easter eggs */}
             <VendingMachine />
@@ -1012,14 +1021,14 @@ function Reverse() {
         </Physics>
 
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
-        <mesh
+        {/* <mesh
           rotation={[-0.5 * Math.PI, 0, 0]}
           position={[-30, 0.02, -30]}
           receiveShadow
         >
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
           <meshBasicMaterial color="black" transparent opacity={0.3} />
-        </mesh>
+        </mesh> */}
       </Canvas>
       {/* // TODO: travel = 0, anniv = 1, diary = 2 */}
       {reverse.info.stuffs.length > 0 && (

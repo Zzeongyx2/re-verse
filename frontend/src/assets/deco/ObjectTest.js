@@ -20,8 +20,8 @@ export function ObjectTest({ visible }) {
       // console.log("나와라!");
       // console.log(houseRef.current);
       // console.log(spotRef.current);
-      spotRef.current.children[0].material.color.r = 1;
-      spotRef.current.children[0].material.color.g = 1;
+      // spotRef.current.children[0].material.color.r = 1;
+      // spotRef.current.children[0].material.color.g = 1;
 
       gsap.to(houseRef.current.position, {
         duration: 0.5,
@@ -35,8 +35,8 @@ export function ObjectTest({ visible }) {
       // console.log(group.current.children[1]);
     } else if (!visible) {
       // console.log("들어가렴");
-      spotRef.current.children[0].material.color.r = 1;
-      spotRef.current.children[0].material.color.g = 0;
+      // spotRef.current.children[0].material.color.r = 1;
+      // spotRef.current.children[0].material.color.g = 0;
       gsap.to(houseRef.current.position, {
         duration: 0.5,
         y: -1.3,
@@ -61,7 +61,7 @@ export function ObjectTest({ visible }) {
           position={[-13, 0.01, 3]}
         >
           <planeBufferGeometry attach="geometry" args={[8, 8]} />
-          <meshBasicMaterial color="red" opacity={0.5} transparent />
+          <meshBasicMaterial color="red" opacity={0} transparent />
         </mesh>
       </group>
     </group>
