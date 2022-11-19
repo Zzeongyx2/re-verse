@@ -1,7 +1,7 @@
 variables:
     DOCKER_TLS_CERTDIR: "" # sharing same certificate between docker client and daemon
     DOCKER_HOST: tcp://docker:2375
-    APP_NAME_1: reverse-app # frontend
+    # APP_NAME_1: reverse-app # frontend
     APP_NAME_2: auth-backend
     APP_NAME_3: archive-backend
     APP_NAME_4: signal-backend
@@ -23,14 +23,13 @@ build_image:
         # - docker --version
         - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
     script:
-        - cp $ENV_FILE .env
-        - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_1:$TAG_NAME -f ./frontend/Dockerfile ./frontend
-        - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_1:$TAG_NAME
-        # - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$TAG_NAME -f ./backend/auth/AuthDockerfile ./backend/auth
-        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$TAG_NAME
-        # - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_3:$TAG_NAME -f ./backend/archive/ArchiveDockerfile ./backend/archive
-        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_3:$TAG_NAME
-        # - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_4:$TAG_NAME -f ./signal/SignalDockerfile ./signal
-        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_4:$TAG_NAME
+        # - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_1:$TAG_NAME -f ./frontend/Dockerfile ./frontend
+        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_1:$TAG_NAME
+        - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$TAG_NAME -f ./backend/auth/AuthDockerfile ./backend/auth
+        - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$TAG_NAME
+        - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_3:$TAG_NAME -f ./backend/archive/ArchiveDockerfile ./backend/archive
+        - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_3:$TAG_NAME
+        - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_4:$TAG_NAME -f ./signal/SignalDockerfile ./signal
+        - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_4:$TAG_NAME
     tags:
         - reverse-runner

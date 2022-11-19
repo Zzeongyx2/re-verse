@@ -35,6 +35,7 @@ const initialState = {
     timelines: [],
   },
   selectStuff: 0,
+  isCardOpen: false,
 };
 
 const reducers = {
@@ -83,6 +84,9 @@ const reducers = {
   setSelectStuff: (state, action) => {
     state.selectStuff = action.payload;
   },
+  setIsCardOpen: (state, action) => {
+    state.isCardOpen = !state.isCardOpen;
+  },
 };
 
 export const reverseSlice = createSlice({
@@ -107,6 +111,7 @@ export const {
   setAnniv,
   setDiary,
   setSelectStuff,
+  setIsCardOpen,
 } = reverseSlice.actions;
 
 export default reverseSlice.reducer;
