@@ -42,7 +42,7 @@ public class UserService {
     private final ArchiveRepository archiveRepository;
     private final UserRepository userRepository;
     private final RedisService redisService;
-    private final UserSearchService userSearchService;
+    // private final UserSearchService userSearchService;
 
     public User getPlayer(String userId) {
         return userRepository.findById(UUID.fromString(userId)).get();
@@ -50,26 +50,24 @@ public class UserService {
 
     public String getUserId() {
 
-//         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
-// //        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
-//         String bearerToken = null;
-//         Cookie[] cookies = request.getCookies();
+ //        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+         String bearerToken = null;
+         Cookie[] cookies = request.getCookies();
 
-//         for(Cookie cookie : cookies){
-//             if(cookie.getName().equals(ACCESS_TOKEN)){
-//                 bearerToken = cookie.getValue();
-//                 break;
-//             }
-//         }
+         for(Cookie cookie : cookies){
+             if(cookie.getName().equals(ACCESS_TOKEN)){
+                 bearerToken = cookie.getValue();
+                 break;
+             }
+         }
 
 //        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
 //            bearerToken = bearerToken.substring(7);
 //        }
 
-        // String userId = redisService.getValues(bearerToken);
-
-        return "410d4d91-99b9-43af-ab9c-69192ce0d1c7";
+        return redisService.getValues(bearerToken);
 
     }
 
@@ -97,7 +95,7 @@ public class UserService {
         user.setNickname(userInfo.getNickname());
         user.setMessage(userInfo.getMessage());
 
-        userSearchService.updateUser(user);
+        // userSearchService.updateUser(user);
 
     }
 
@@ -114,7 +112,7 @@ public class UserService {
                     .build();
 
             userRepository.save(user);
-            userSearchService.createUser(user);
+            // userSearchService.createUser(user);
 
             return user;
         }
@@ -129,7 +127,7 @@ public class UserService {
 
         user.setAvatar(Avatar.valueOf(avatarInfo.getAvatar()));
 
-        userSearchService.updateAvatar(user);
+        // userSearchService.updateAvatar(user);
 
     }
 
