@@ -6,9 +6,7 @@ import {
   ModalFooter,
   ModalBody,
   FormControl,
-  ModalCloseButton,
 } from "@chakra-ui/react";
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { editPaper, getPaper, getStuffDetail } from "../../api/reverse";
@@ -18,7 +16,6 @@ import {
   setDiary,
   setEditBtn,
   setInfo,
-  setIsCardOpen,
   setModalIsOpen,
   setTravel,
   setTravelReadIsOpen,
@@ -33,8 +30,6 @@ import ArchiveDatePicker from "../molecules/ReverseDatePicker";
 import ReverseTextEditor from "./ReverseTextEditor";
 
 import moment from "moment/moment";
-import ArticleDetailCard from "./ArticleDetailCard";
-import ArchiveTimeline from "./ArchiveTimeline";
 
 function TravelReadModal() {
   const dispatch = useDispatch();
@@ -158,11 +153,6 @@ function TravelReadModal() {
     dispatch(setInfo({ ...reverse.info, details: null }));
   }, [reverse.selectStuff]);
 
-  // const [card, setCard] = useState(false);
-  // const handleOpenCard = () => {
-  //   setCard((prev) => !prev);
-  // };
-
   return (
     <>
       <Modal
@@ -173,12 +163,15 @@ function TravelReadModal() {
       >
         <ModalOverlay />
         {!reverse.editBtn ? (
-          <ModalContent minH="680" maxW="360">
-            <ModalHeader>
+          <ModalContent minH={"500"}>
+            <ModalHeader mb={4} textAlign="center">
               <div className="flex justify-between items-center">
-                {reverse.selectStuff === 0 && "REVERSE TO TRAVEL"}
-                {reverse.selectStuff === 1 && "REVERSE TO ANNIVERSARY"}
-                {reverse.selectStuff === 2 && "REVERSE TO DIARY"}
+                {reverse.selectStuff === 0 &&
+                  `${joinArchive.members[0].nickname}의 여행`}
+                {reverse.selectStuff === 1 &&
+                  `${joinArchive.members[1].nickname}의 기념일`}
+                {reverse.selectStuff === 2 &&
+                  `${joinArchive.members[2].nickname}의 다이어리`}
                 <AiOutlineClose
                   className="cursor-pointer"
                   onClick={() => {
@@ -188,43 +181,104 @@ function TravelReadModal() {
                 />
               </div>
             </ModalHeader>
-            <ModalBody
-              borderLeft={"8px"}
-              borderRight={"8px"}
-              borderColor={"#00BEFF"}
-            >
-              <div className="mt-4 mb-6 font-travel font-bold text-xl text-center "></div>
-              <div
-                className={`h-[500px] overflow-auto scrollbar-hide ${
-                  !reverse.isCardOpen ? "flex justify-center" : null
-                }`}
-              >
-                {/* 글 목록 컴포넌트 */}
-                {reverse.isCardOpen && (
-                  <div className="overflow-auto scollbar-hide">
-                    {/* <div className="h-[calc(90%)] overflow-auto scollbar-hide"> */}
-                    <ArchiveTimeline />
+            {/* <ModalCloseButton mt={1.5} /> */}
+            <ModalBody>
+              <div className="flex justify-between">
+                {/* timeline */}
+                <div className="bg-white border-basic3 rounded-lg w-[calc(96%/3)] h-[500px] border-2">
+                  <p className="hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-main1 hover:to-main2">
+                    {reverse.selectStuff === 0 && "REVERSE TO TRAVEL"}
+                    {reverse.selectStuff === 1 && "REVERSE TO ANNIVERSARY"}
+                    {reverse.selectStuff === 2 && "REVERSE TO PERSONAL MEMORY"}
+                  </p>
 
-                    {/* <ArticlesTimeline /> */}
+                  <div className="h-[calc(90%)] overflow-auto scrollbar-hide">
+                    <ArticlesTimeline />
                   </div>
-                )}
-                {!reverse.isCardOpen && <ArticleDetailCard />}
+                </div>
+                {/* article detail */}
+                <div className="bg-white border-basic3 rounded-lg w-[calc(96%/3*2)]  border-2 p-4">
+                  <ArticleDetail />
+                </div>
               </div>
+
+              {/* {reverse.travelArticleList.map((article, idx) => {
+              return (
+                <div key={`travel-${idx}`}>
+                  <div>{article.title}</div>
+                </div>
+              );
+            })} */}
+
+              {/* <div class="relative max-w-2xl">
+              <div class="absolute top-0 h-full border-r-2 border-gray-500 left-3"></div>
+              <ul class="space-y-2">
+                <li>
+                  <div class="flex items-center">
+                    <span class="w-6 h-6 bg-gray-500 rounded-full"></span>
+                    <h5 class="ml-4 font-bold text-gray-600">
+                      Tailwind CSS 3.0
+                    </h5>
+                  </div>
+                  <div class="ml-12">
+                    <p class="text-sm text-gray-500">
+                      Lorem ipsum, dolor sit amet consectetur Lorem, ipsum dolor
+                      si
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center">
+                    <span class="w-6 h-6 bg-gray-500 rounded-full"></span>
+                    <h5 class="ml-4 font-bold text-gray-600">
+                      Tailwind CSS 3.0.5v
+                    </h5>
+                  </div>
+                  <div class="ml-12">
+                    <p class="text-sm text-gray-500">
+                      Lorem ipsum, dolor sit amet consectetur Lorem, ipsum dolor
+                      si
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center">
+                    <span class="w-6 h-6 bg-gray-500 rounded-full"></span>
+                    <h5 class="ml-4 font-bold text-gray-600">
+                      Tailwind CSS 3.0.7v
+                    </h5>
+                  </div>
+                  <div class="ml-12">
+                    <p class="text-sm text-gray-500">
+                      Lorem ipsum, dolor sit amet consectetur Lorem, ipsum dolor
+                      si
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div> */}
             </ModalBody>
-            <ModalFooter
-              pt={0}
-              backgroundColor={"#00BEFF"}
-              borderBottomRadius={"3xl"}
-              flex={true}
-              justifyContent={"center"}
+
+            <ModalFooter pt={0}>
+              {/* <button
+              onClick={() => {
+                dispatch(setTravelReadIsOpen());
+                console.log("cancel button");
+              }}
+              className="font-bold bg-[#d9d9d9] px-6 py-2 rounded-xl text-sm mx-3"
             >
-              <div
-                onClick={() => {
-                  // console.log("닫기 버튼");
-                  dispatch(setTravelReadIsOpen());
-                }}
-                className="cursor-pointer mt-4 mb-2 text-xl py-2 border-2 rounded-lg border-white w-10"
-              ></div>
+              취소하기
+            </button>
+            <button
+              onClick={() => {
+                console.log("article is posted!");
+                // handleArchiveSubmit();
+                // onClose;
+              }}
+              className="font-bold bg-extra1 px-6 py-2 rounded-xl text-sm"
+            >
+              게시하기
+            </button> */}
             </ModalFooter>
           </ModalContent>
         ) : (
