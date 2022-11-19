@@ -3,7 +3,6 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./modules/store";
 import { persistStore } from "redux-persist";
@@ -54,7 +53,7 @@ root.render(
         <App />
       </ChakraProvider>
     </PersistGate>
-  </Provider>
+  </Provider>,
   // </React.StrictMode>
 );
 
