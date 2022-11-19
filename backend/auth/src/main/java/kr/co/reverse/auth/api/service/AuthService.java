@@ -224,7 +224,7 @@ public class AuthService {
         refreshCookie.setMaxAge(0);
         response.addCookie(refreshCookie);
 
-        connectDeleteUser(auth.getId().toString());
+        // connectDeleteUser(auth.getId().toString());
 
 
     }
@@ -319,15 +319,15 @@ public class AuthService {
 
     }
 
-    public void connectDeleteUser(String authId) {
-        RestTemplate restTemplate = new RestTemplate();
+    // public void connectDeleteUser(String authId) {
+    //     RestTemplate restTemplate = new RestTemplate();
 
-        URI uri = UriComponentsBuilder.fromUriString(USER_REDIRECT_URI)
-                .path("/delete/{auth_id}")
-                .encode().build()
-                .expand(authId)
-                .toUri();
+    //     URI uri = UriComponentsBuilder.fromUriString(USER_REDIRECT_URI)
+    //             .path("/delete/{auth_id}")
+    //             .encode().build()
+    //             .expand(authId)
+    //             .toUri();
 
-        restTemplate.delete(uri);
-    }
+    //     restTemplate.delete(uri);
+    // }
 }
