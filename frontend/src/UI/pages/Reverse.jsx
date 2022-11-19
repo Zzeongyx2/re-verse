@@ -260,7 +260,7 @@ function Reverse() {
 
   function startWebSocket() {
     console.log("startWebSocket");
-    ws1 = new WebSocket("wss://re-verse.co.kr/socket");
+    ws1 = new WebSocket("wss://re-verse.kr/socket");
     // console.log(ws1);
 
     ws1.onopen = (event) => {

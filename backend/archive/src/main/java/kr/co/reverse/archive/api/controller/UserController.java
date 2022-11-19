@@ -3,12 +3,12 @@ package kr.co.reverse.archive.api.controller;
 import kr.co.reverse.archive.api.request.*;
 import kr.co.reverse.archive.api.response.*;
 import kr.co.reverse.archive.api.service.ArchiveService;
-import kr.co.reverse.archive.api.service.UserSearchService;
+// import kr.co.reverse.archive.api.service.UserSearchService;
 import kr.co.reverse.archive.api.service.UserService;
 import kr.co.reverse.archive.db.entity.Archive;
 import kr.co.reverse.archive.db.entity.Avatar;
 import kr.co.reverse.archive.db.entity.User;
-import kr.co.reverse.archive.db.entity.UserDocument;
+// import kr.co.reverse.archive.db.entity.UserDocument;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class UserController {
     private final UserService userService;
 
     private final ArchiveService archiveService;
-    private final UserSearchService userSearchService;
+    // private final UserSearchService userSearchService;
 
     @GetMapping
     public ResponseEntity<? extends UserDetailRes> getPlayer() {
@@ -90,8 +90,8 @@ public class UserController {
     @GetMapping("/search")
     public ResponseEntity<? extends UsersRes> searchUsers(@RequestParam String nickname) {
 
-//        List<User> users = userService.getUsers(nickname);
-        List<UserDocument> users = userSearchService.searchUser(nickname);
+       List<User> users = userService.getUsers(nickname);
+        // List<UserDocument> users = userSearchService.searchUser(nickname);
 
         return ResponseEntity.ok(UsersRes.ofDocument(users));
     }
@@ -127,15 +127,15 @@ public class UserController {
         return ResponseEntity.ok(UserIdRes.of(authId));
     }
 
-    @DeleteMapping("/delete/{auth_id}")
-    public void deleteUser(@PathVariable(name = "auth_id") String authId){
+//     @DeleteMapping("/delete/{auth_id}")
+//     public void deleteUser(@PathVariable(name = "auth_id") String authId){
 
 
-        User user = userService.getUserByAuthId(authId);
+//         User user = userService.getUserByAuthId(authId);
 
-        userSearchService.deleteUser(user);
+//         userSearchService.deleteUser(user);
 
-//        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
-    }
+// //        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+//     }
 
 }

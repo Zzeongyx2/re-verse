@@ -45,16 +45,19 @@ cloud:
       secret-key: PrPfuSXJxBFOejdVRZMO7h27GM5GoxaF8PN1QIy+
     s3:
       bucket: re-verse-bucket
-#        url: https://s3.ap-northeast-2.amazonaws.com/re-verse-bucket
+    #        url: https://s3.ap-northeast-2.amazonaws.com/re-verse-bucket
     region:
       static: ap-northeast-2
     stack:
       auto: false
 
-elasticsearch:
-  endpoint: vpc-reverse-elastic-search-1-tx7r32a6sdboafhr2uzfkdmvyi.ap-northeast-2.es.amazonaws.com
-  iam: arn:aws:iam::407503498231:role/aws-service-role/opensearchservice.amazonaws.com/AWSServiceRoleForAmazonOpenSearchService
-  region: ap-northeast-2
+#elasticsearch:
+#  endpoint: search-reverse-elastic-search-wwjxyhiofuvlhmriehomivboqe.ap-northeast-2.es.amazonaws.com
+#  region: ap-northeast-2
+#  port: 9200
+#  protocol: https
+#  username: reverse
+#  password: flQjtm1024$
 
 jwt:
   secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
