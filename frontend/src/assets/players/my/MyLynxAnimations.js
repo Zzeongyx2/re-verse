@@ -8,9 +8,10 @@ import GLTFLoader from "gltfjsx/src/utils/glftLoader";
 import { useFrame, useGraph } from "@react-three/fiber";
 import * as SkeletonUtils from "three/examples/jsm/utils/SkeletonUtils";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCampfireOn } from "../../../modules/reverse";
 import { useBox, useConvexPolyhedron } from "@react-three/cannon";
+import { Quaternion, Vector3 } from "three";
 
 export default function MyLynxAnimations({
   // action,
@@ -76,7 +77,7 @@ export default function MyLynxAnimations({
       setMoving(true);
       // console.log(group.current); // player.modelmesh
       group.current.lookAt(destinationPoint);
-      group.current.name = "mememememe";
+      group.current.name = "lynx";
 
       // console.log(group.current);
     }
@@ -94,8 +95,8 @@ export default function MyLynxAnimations({
           destinationPoint.x - group.current.position.x,
         );
         if (isCollided) {
-          group.current.position.x -= Math.cos(angle) * 0.5;
-          group.current.position.z -= Math.sin(angle) * 0.5;
+          group.current.position.x -= Math.cos(angle) * 0.9;
+          group.current.position.z -= Math.sin(angle) * 0.9;
           destinationPoint.x = group.current.position.x;
           destinationPoint.z = group.current.position.z;
           setMoving(false);
@@ -104,9 +105,6 @@ export default function MyLynxAnimations({
           group.current.position.x += Math.cos(angle) * 0.2;
           group.current.position.z += Math.sin(angle) * 0.2;
         }
-        api.position.set(group.current.position.x, 0, group.current.position.z);
-        state.camera.position.x = 1 + group.current.position.x;
-        state.camera.position.z = 5 + group.current.position.z;
 
         actions["Idle_A"].stop();
         actions["Walk"].play();
@@ -144,9 +142,34 @@ export default function MyLynxAnimations({
           dispatch(setCampfireOn(0));
         }
       }
+      if (!cameraState.team && !cameraState.game) {
+        if (cameraState.characterThree) {
+          state.camera.position.x = 1 + group.current.position.x;
+          state.camera.position.z = 5 + group.current.position.z;
+        } else if (cameraState.characterOne) {
+          let position = new Vector3(0, 0, 0);
+          position.setFromMatrixPosition(group.current.matrixWorld);
+
+          let quaternion = new Quaternion(0, 0, 0, 0);
+          quaternion.setFromRotationMatrix(group.current.matrixWorld);
+
+          let wDir = new Vector3(0, 0, 1);
+          wDir.applyQuaternion(quaternion);
+          wDir.normalize();
+
+          let cameraPosition = position
+            .clone()
+            .add(wDir.clone().multiplyScalar(-1).add(new Vector3(0, 0.5, 0)));
+
+          wDir.add(new Vector3(0, 0.2, 0));
+          state.camera.position.copy(cameraPosition);
+          state.camera.lookAt(position);
+        }
+      }
       api.position.set(group.current.position.x, 0, group.current.position.z);
     }
   });
+  const cameraState = useSelector((state) => state.camera);
 
   return (
     // <group ref={group} dispose={null}>
