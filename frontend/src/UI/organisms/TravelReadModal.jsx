@@ -189,6 +189,7 @@ function TravelReadModal() {
               </div>
             </ModalHeader>
             <ModalBody
+              px={2}
               borderLeft={"8px"}
               borderRight={"8px"}
               borderColor={"#00BEFF"}

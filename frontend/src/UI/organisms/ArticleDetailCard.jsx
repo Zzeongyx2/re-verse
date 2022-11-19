@@ -71,10 +71,17 @@ function ArticleDetailCard() {
                 <BiArrowBack />
               </button>
             </div>
-            <div className="text-sm text-basic1">
-              {new Date(info.details.memoryTime).toLocaleDateString() + " "}
-              {weekDay[new Date(info.details.memoryTime).getDay()]}
-            </div>
+            {info.details.memoryTime === "" ? (
+              <div className="text-sm text-basic1">
+                {new Date(info.details.memoryTime).toLocaleDateString() + " "}
+                {weekDay[new Date(info.details.memoryTime).getDay()]}
+              </div>
+            ) : (
+              <div className="text-sm text-basic1">
+                {new Date().toLocaleDateString() + " "}
+                {weekDay[new Date().getDay()]}
+              </div>
+            )}
           </CardHeader>
           <CardBody minH={400}>
             <div

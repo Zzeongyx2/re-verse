@@ -21,7 +21,7 @@ export function ArcadeMachine(props) {
     <group
       {...props}
       dispose={null}
-      position={[-26, 0, 119]}
+      position={[-26, -8, 119]}
       rotation={[0, Math.PI, 0]}
     >
       <mesh ref={boxCollider}>
