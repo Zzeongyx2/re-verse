@@ -4,7 +4,7 @@ WORKDIR '/app'
 COPY ./package.json .
 RUN npm install
 COPY . ./
-COPY .env /.env
+COPY .env ./.env
 RUN npm run build
 
 # Build Stage 2. Static Server
