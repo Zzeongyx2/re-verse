@@ -75,7 +75,7 @@ function Reverse() {
   // default action = idle
   // const [characterPosition, setCharacterPosition] = useState();
   const [destinationPoint, setDestinationPoint] = useState(
-    new Vector3(-30, 0, -30)
+    new Vector3(-30, 0, -30),
   );
   const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/map_texture.jpg");
@@ -374,7 +374,7 @@ function Reverse() {
 
     if (data1.type === "NewMember") {
       let channel1 = rtcPeer.createDataChannel(
-        Math.floor(Math.random() * 10000000000)
+        Math.floor(Math.random() * 10000000000),
       );
       channelConfig(channel1);
 
@@ -721,9 +721,9 @@ function Reverse() {
     window.addEventListener("keyup", upHandler);
     window.addEventListener("keydown", downHandler);
 
-    setTimeout(() => {
-      dispatch(setLoadingPage(false));
-    }, 4500);
+    // setTimeout(() => {
+    //   dispatch(setLoadingPage(false));
+    // }, 4500);
 
     return () => {
       window.addEventListener("keyup", upHandler);
@@ -738,7 +738,7 @@ function Reverse() {
         ...reverse.info,
         archiveId: archiveId,
         stuffs: res.data.stuffs,
-      })
+      }),
     );
   };
 
@@ -864,7 +864,7 @@ function Reverse() {
           right: `${aspect}`,
           top: 1,
           bottom: -1,
-          zoom: 28,
+          zoom: 2.5,
           near: -1000,
           far: 1000,
         }}
@@ -1009,6 +1009,10 @@ function Reverse() {
           {/* floor */}
           <mesh
             onPointerDown={(e) => {
+              console.log(e);
+              if (e.point.z > 114) {
+                return;
+              }
               setDestinationPoint(e.point);
               sendPosition(e.point);
             }}
