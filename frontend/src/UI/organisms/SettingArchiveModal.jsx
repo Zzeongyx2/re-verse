@@ -231,18 +231,9 @@ function SettingArchiveModal({ archive }) {
           <ModalFooter pt={2}>
             <button
               onClick={onClose}
-              className="font-bold bg-[#d9d9d9] px-6 py-2 rounded-xl text-sm mx-3"
+              className="font-bold bg-[#d9d9d9] px-6 py-2 rounded-xl text-sm"
             >
               취소하기
-            </button>
-            <button
-              onClick={() => {
-                // handleArchiveSubmit();
-                onClose();
-              }}
-              className="font-bold bg-extra1 px-6 py-2 rounded-xl text-sm"
-            >
-              생성하기
             </button>
           </ModalFooter>
         </ModalContent>
