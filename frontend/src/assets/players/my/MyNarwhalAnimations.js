@@ -193,7 +193,7 @@ export default function MyNarwhalAnimations({
         </group>
       </group>
       <mesh ref={ref} castShadow={true}>
-        <boxGeometry args={[1.5, 1.5, 1.5]} />
+        {/* <boxGeometry args={[1.5, 1.5, 1.5]} /> */}
         <meshLambertMaterial color={"skyblue"} />
       </mesh>
     </group>

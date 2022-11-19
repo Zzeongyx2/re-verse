@@ -159,7 +159,9 @@ export default function MyTortoiseAnimations({
 
           let cameraPosition = position
             .clone()
-            .add(wDir.clone().multiplyScalar(-1).add(new Vector3(0, 0.5, 0)));
+            .add(
+              wDir.clone().multiplyScalar(-1).add(new Vector3(-0.3, 0.5, 0)),
+            );
 
           wDir.add(new Vector3(0, 0.2, 0));
           state.camera.position.copy(cameraPosition);
@@ -168,8 +170,12 @@ export default function MyTortoiseAnimations({
       }
       api.position.set(group.current.position.x, 0, group.current.position.z);
     }
+    if (loadingPage) {
+      state.camera.zoom = 28;
+    }
   });
   const cameraState = useSelector((state) => state.camera);
+  const loadingPage = useSelector((state) => state.loading.loadingPage);
 
   return (
     // <group ref={group} dispose={null}>
@@ -193,7 +199,7 @@ export default function MyTortoiseAnimations({
         </group>
       </group>
       <mesh ref={ref} castShadow={true}>
-        <boxGeometry args={[1.5, 1.5, 1.5]} />
+        {/* <boxGeometry args={[1.5, 1.5, 1.5]} /> */}
         <meshLambertMaterial color={"skyblue"} />
       </mesh>
     </group>

@@ -48,7 +48,7 @@ function FriendList() {
 
   const clickNickname = (friend) => {
     setSelectFriend(friend);
-    setRightTitle(`나와함께하는 '${friend.nickname}'의 아카이브`);
+    setRightTitle(`나와 함께하는 '${friend.nickname}'의 아카이브`);
   };
 
   const enterArchive = (archiveId) => {
@@ -236,6 +236,14 @@ function FriendList() {
                     </div>
                   );
                 })}
+              {archiveList.length === 0 ? (
+                <div className="pt-5 pb-6 pl-5">
+                  <p>
+                    '{selectFriend.nickname}'님에게 공유받은 아카이브가
+                    없습니다.
+                  </p>
+                </div>
+              ) : null}
             </div>
           </div>
         ) : (
