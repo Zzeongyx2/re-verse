@@ -80,7 +80,7 @@ function ArchiveTimeline() {
                 handleGetDetail(article.id);
                 dispatch(setIsCardOpen());
               }}
-              className="mb-5 cursor-pointer rounded-xl w-[calc(100%-48px)] mx-auto p-1 bg-basic3 hover:bg-gradient-to-r hover:from-main1 hover:to-main2 transition hover:delay-500"
+              className="mb-5 cursor-pointer rounded-xl w-[calc(100%-30px)] mx-auto p-1 bg-basic3 hover:bg-gradient-to-r hover:from-main1 hover:to-main2 transition hover:delay-500"
             >
               <div className="bg-white rounded-lg  py-2 px-4">
                 <div className="font-semibold text-base1 text-sm">
@@ -105,7 +105,7 @@ function ArchiveTimeline() {
                 handleGetDetail(article.id);
                 dispatch(setIsCardOpen());
               }}
-              className="mb-5 cursor-pointer rounded-xl w-[calc(100%-56px)] mx-auto p-1 bg-basic3 hover:bg-gradient-to-r hover:from-main1 hover:to-main2 transition hover:delay-500"
+              className="mb-5 cursor-pointer rounded-xl w-[calc(100%-30px)] mx-auto p-1 bg-basic3 hover:bg-gradient-to-r hover:from-main1 hover:to-main2 transition hover:delay-500"
             >
               <div className="bg-white rounded-lg  py-2 px-4">
                 <div className="font-semibold text-base1 text-sm">
