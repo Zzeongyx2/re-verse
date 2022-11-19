@@ -8,12 +8,21 @@ import userReducer from "./user";
 import friendReducer from "./friend";
 import webrtcReducer from "./webrtc";
 import loadingReducer from "./loading";
+import cameraReducer from "./camera";
 import thunk from "redux-thunk";
 
 const persistConfig = {
   key: "root",
   storage: storageSession,
-  whitelist: ["reverse", "archive", "user", "friend", "webrtc", "loading"],
+  whitelist: [
+    "reverse",
+    "archive",
+    "user",
+    "friend",
+    "webrtc",
+    "loading",
+    "camera",
+  ],
   // blacklist -> 그것만 제외합니다
 };
 
@@ -24,6 +33,7 @@ const reducers = combineReducers({
   friend: friendReducer,
   webrtc: webrtcReducer,
   loading: loadingReducer,
+  camera: cameraReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
