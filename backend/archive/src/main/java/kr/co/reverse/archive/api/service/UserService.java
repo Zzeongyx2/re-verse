@@ -42,7 +42,7 @@ public class UserService {
     private final ArchiveRepository archiveRepository;
     private final UserRepository userRepository;
     private final RedisService redisService;
-    private final UserSearchService userSearchService;
+    // private final UserSearchService userSearchService;
 
     public User getPlayer(String userId) {
         return userRepository.findById(UUID.fromString(userId)).get();
@@ -95,7 +95,7 @@ public class UserService {
         user.setNickname(userInfo.getNickname());
         user.setMessage(userInfo.getMessage());
 
-        userSearchService.updateUser(user);
+        // userSearchService.updateUser(user);
 
     }
 
@@ -112,7 +112,7 @@ public class UserService {
                     .build();
 
             userRepository.save(user);
-            userSearchService.createUser(user);
+            // userSearchService.createUser(user);
 
             return user;
         }
@@ -127,7 +127,7 @@ public class UserService {
 
         user.setAvatar(Avatar.valueOf(avatarInfo.getAvatar()));
 
-        userSearchService.updateAvatar(user);
+        // userSearchService.updateAvatar(user);
 
     }
 
