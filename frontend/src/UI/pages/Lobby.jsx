@@ -18,7 +18,6 @@ function Lobby() {
   const lastArchive = useSelector((state) => state.archive.lastArchive);
   // const lastArchive = undefined;
   const dispatch = useDispatch();
-  console.log(lastArchive);
   useEffect(() => {
     getUserInfo(getUserInfoSuccess, getUserInfoFail);
     getLastArchive(getLastArchiveSuccess, getLastArchiveFail);
@@ -31,7 +30,7 @@ function Lobby() {
   };
   const getLastArchiveSuccess = (res) => {
     dispatch(setLastArchive(res.data));
-    console.log(res);
+    // console.log(res);
   };
   const getLastArchiveFail = (error) => {
     console.log(error);
@@ -66,16 +65,22 @@ function Lobby() {
           />
           <br />
           <LobbyButton
-            linkTo={lastArchive ? `/reverse/${lastArchive?.id}` : "/lobby"}
+            linkTo={
+              lastArchive.members[0].nickname
+                ? `/reverse/${lastArchive?.id}`
+                : "/lobby"
+            }
             buttonTitle={"최근 방문한 아카이브 바로가기"}
             buttonMessage={
-              lastArchive
+              lastArchive.members[0].nickname
                 ? `${lastArchive?.members[0].nickname}의 아카이브 ${lastArchive?.title}`
                 : "최근 방문한 아카이브가 없습니다."
             }
             textcolor={"text-gray-700"}
-            from={lastArchive ? "from-main2" : "cursor-default"}
-            to={lastArchive ? "to-sub2" : "bg-gray-500"}
+            from={
+              lastArchive.members[0].nickname ? "from-main2" : "cursor-default"
+            }
+            to={lastArchive.members[0].nickname ? "to-sub2" : "bg-gray-500"}
           />
           <LobbyProfile loginUser={loginUser} />
         </div>
