@@ -8,10 +8,9 @@ import {
   ModalCloseButton,
   useDisclosure,
   FormControl,
-  FormLabel,
   Avatar,
 } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { FiSettings } from "react-icons/fi";
 import { BsSearch } from "react-icons/bs";

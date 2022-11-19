@@ -1,7 +1,7 @@
-import { apiInstance, fileApiInstance } from "./index";
+import { apiInstance } from "./index";
 
 const api = apiInstance();
-const fileApi = fileApiInstance();
+// const fileApi = fileApiInstance();
 
 async function signin(authInfo, success, fail) {
   await api.post("/auth/sign-up", authInfo).then(success).catch(fail);

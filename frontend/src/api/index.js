@@ -16,7 +16,7 @@ function apiInstance() {
     },
     async function (error) {
       if (error.response && error.response.status) {
-        if (error.response.status == 401) {
+        if (error.response.status === 401) {
           await instance
             .post("/auth/reissue")
             .then((res) => {

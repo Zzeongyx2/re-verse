@@ -12,7 +12,6 @@ import Archive from "./UI/pages/Archive";
 import NeonTest from "./UI/pages/NeonTest";
 import ReverseTemp from "./UI/pages/ReverseTemp";
 import ReverseWebRTC from "./UI/pages/ReverseWebRTC";
-import { EditorComponent } from "./UI/organisms/TextEditor";
 import ReverseTextEditor from "./UI/organisms/ReverseTextEditor";
 import ReverseHelper from "./UI/pages/ReverseHelper";
 import LazyAudio from "./UI/pages/LazyAudio";

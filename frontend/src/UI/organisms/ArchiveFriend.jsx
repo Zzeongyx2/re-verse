@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { BiLogIn } from "react-icons/bi";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { HiOutlineTrash } from "react-icons/hi";
-import { Avatar, AvatarGroup, Tooltip } from "@chakra-ui/react";
+import { Avatar, Tooltip } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
 import {
   deleteArchiveMember,
