@@ -1,12 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import {
-  Link,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Button from "../atoms/Button";
 import ArchiveFriend from "../organisms/ArchiveFriend";
 import ArchiveLike from "../organisms/ArchiveLike";
@@ -17,12 +11,6 @@ import Navbar from "../organisms/Navbar";
 function Archive() {
   const [selectTap, setSelectTap] = useState("");
   const location = useLocation();
-  const navigate = useNavigate();
-
-  const createArchive = () => {
-    // TODO: 새 아카이브 만들기
-    navigate("/archive/my");
-  };
 
   useEffect(() => {
     if (location.pathname.includes("my")) {
