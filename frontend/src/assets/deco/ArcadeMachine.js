@@ -12,7 +12,7 @@ export function ArcadeMachine(props) {
     <group
       {...props}
       dispose={null}
-      position={[-26, 0, 119]}
+      position={[-26, -8, 119]}
       rotation={[0, Math.PI, 0]}
     >
       <group rotation={[-Math.PI / 2, 0, 0]}>
