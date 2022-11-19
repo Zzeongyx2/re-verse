@@ -159,7 +159,9 @@ export default function MyDoveAnimations({
 
           let cameraPosition = position
             .clone()
-            .add(wDir.clone().multiplyScalar(-1).add(new Vector3(0, 0.5, 0)));
+            .add(
+              wDir.clone().multiplyScalar(-1).add(new Vector3(-0.3, 0.5, 0)),
+            );
 
           wDir.add(new Vector3(0, 0.2, 0));
           state.camera.position.copy(cameraPosition);
