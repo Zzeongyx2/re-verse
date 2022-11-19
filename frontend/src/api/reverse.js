@@ -1,7 +1,7 @@
-import { apiInstance, fileApiInstance } from "./index";
+import { apiInstance } from "./index";
 
 const api = apiInstance();
-const fileApi = fileApiInstance();
+// const fileApi = fileApiInstance();
 
 async function getArchiveDetail(archiveId, success, fail) {
   await api.get(`/archive/${archiveId}`).then(success).catch(fail);

@@ -11,7 +11,7 @@ import SelectCharacterBtn from "../atoms/SelectCharacterBtn";
 import SelectedCharacter from "../atoms/SelectedCharacter";
 
 // 캐릭터 변경하는 페이지
-function CharacterThree({ animalName }) {
+function CharacterThree() {
   const mine = useSelector((state) => state.user.loginUser);
   const dispatch = useDispatch();
   const [ischecked, setIschecked] = useState(false);
