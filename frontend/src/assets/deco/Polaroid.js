@@ -45,24 +45,23 @@ export function Polaroid({ props, position, event, rotation }) {
         position={position}
       >
         <group rotation={[Math.PI / 2, 0, 0]}>
-          <group
-            rotation={[-Math.PI / 2, 0, 0]}
-            onPointerOver={(e) => {
-              document.getElementsByTagName("body")[0].style.cursor = "pointer";
-            }}
-            onPointerLeave={(e) => {
-              document.getElementsByTagName("body")[0].style.cursor = "";
-            }}
-            onClick={() => {
-              console.log("폴라로이드 눌렀다");
-              dispatch(setTravelReadIsOpen());
-            }}
-          >
+          <group rotation={[-Math.PI / 2, 0, 0]}>
             <mesh
               geometry={nodes.Polaroid_01_Mat_plastic_0.geometry}
               material={materials.Mat_plastic}
               castShadow
               receiveShadow
+              onPointerOver={(e) => {
+                document.getElementsByTagName("body")[0].style.cursor =
+                  "pointer";
+              }}
+              onPointerLeave={(e) => {
+                document.getElementsByTagName("body")[0].style.cursor = "";
+              }}
+              onClick={() => {
+                console.log("폴라로이드 눌렀다");
+                dispatch(setTravelReadIsOpen());
+              }}
             />
             <mesh
               geometry={nodes.Polaroid_01_Mat_glass_0.geometry}
