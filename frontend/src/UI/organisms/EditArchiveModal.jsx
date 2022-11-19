@@ -8,9 +8,8 @@ import {
   ModalCloseButton,
   useDisclosure,
   FormControl,
-  FormLabel,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import { BiPencil } from "react-icons/bi";
 import { useDispatch } from "react-redux";

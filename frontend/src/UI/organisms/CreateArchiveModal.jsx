@@ -8,9 +8,8 @@ import {
   ModalCloseButton,
   useDisclosure,
   FormControl,
-  FormLabel,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { getArchiveList, postArchive } from "../../api/archive";
 import { useDispatch } from "react-redux";
 import { setMyArchiveList } from "../../modules/archive";
