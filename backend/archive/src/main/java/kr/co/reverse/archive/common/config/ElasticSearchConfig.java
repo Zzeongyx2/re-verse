@@ -21,8 +21,8 @@ import java.net.UnknownHostException;
 @EnableElasticsearchRepositories(basePackageClasses = UserSearchRepository.class)
 public class ElasticSearchConfig extends AbstractElasticsearchConfiguration {
 
-    @Value("${elasticsearch.port}")
-    private String elasticPort;
+//    @Value("${elasticsearch.port}")
+//    private String elasticPort;
 
     @Value("${elasticsearch.host}")
     private String elasticHost;
@@ -31,7 +31,8 @@ public class ElasticSearchConfig extends AbstractElasticsearchConfiguration {
     @Bean
     public RestHighLevelClient elasticsearchClient() {
         ClientConfiguration clientConfiguration = ClientConfiguration.builder()
-                .connectedTo(elasticHost + ":" + elasticPort)
+//                .connectedTo(elasticHost + ":" + elasticPort)
+                .connectedTo(elasticHost)
                 .build();
         return RestClients.create((clientConfiguration)).rest();
     }
