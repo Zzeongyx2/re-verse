@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
+import { setLoadingPage } from "../../modules/loading";
 import { setMusicTheme } from "../../modules/webrtc";
 
 export default function AudioZone(params) {
@@ -27,8 +28,11 @@ export default function AudioZone(params) {
       console.log(webrtcRedux.musicTheme);
       console.log(initAudio);
     }
-    if (initAudio == 3) {
+    if (initAudio === 3) {
       setAudioState(true);
+    }
+    if (initAudio === 5) {
+      dispatch(setLoadingPage(false));
     }
   }, [initAudio]);
 
