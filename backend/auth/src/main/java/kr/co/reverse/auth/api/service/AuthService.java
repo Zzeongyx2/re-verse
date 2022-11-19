@@ -214,7 +214,7 @@ public class AuthService {
         redisService.deleteValues(accessToken);
         redisService.deleteValues(refreshToken);
 
-        connectDeleteUser(auth.getId().toString());
+        // connectDeleteUser(auth.getId().toString());
 
         Cookie accessCookie = new Cookie(REFRESH_TOKEN, null);
         accessCookie.setMaxAge(0);
