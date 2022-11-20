@@ -62,6 +62,8 @@ import { CandyCustomThird } from "../../assets/deco/Customthird.js";
 import { setOnOne, setOnThree } from "../../modules/camera.js";
 import { CustomTree } from "../../assets/deco/Customtree.js";
 import { CustomRoadFirst } from "../../assets/deco/Customroadfirst.js";
+import { DiaryStoneRoad } from "../../assets/deco/Customroadsecond.js";
+import { AnnivStoneRoad } from "../../assets/deco/Customroadthird.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -958,8 +960,13 @@ function Reverse() {
 
             {/* floor */}
             <ReverseFloor />
+            {/* campin road */}
             <StonesMod />
             <CustomRoadFirst />
+            {/* anniv road */}
+            <AnnivStoneRoad />
+            {/* diary road */}
+            <DiaryStoneRoad />
 
             {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
             {/* 여행 */}
@@ -1013,14 +1020,14 @@ function Reverse() {
         </Physics>
 
         {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
-        {/* <mesh
+        <mesh
           rotation={[-0.5 * Math.PI, 0, 0]}
           position={[-30, 0.02, -30]}
           receiveShadow
         >
           <planeBufferGeometry attach="geometry" args={[5, 5]} />
           <meshBasicMaterial color="black" transparent opacity={0.3} />
-        </mesh> */}
+        </mesh>
       </Canvas>
       {/* // TODO: travel = 0, anniv = 1, diary = 2 */}
       {reverse.info.stuffs.length > 0 && (
