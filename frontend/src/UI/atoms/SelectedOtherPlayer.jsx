@@ -23,40 +23,35 @@ import OtherSnowLeopardAnimations from "../../assets/players/other/OtherSnowLeop
 import OtherCougarAnimations from "../../assets/players/other/OtherCougarAnimations";
 
 function SelectedOtherPlayer({ destinationPoint, handleVisible, userName }) {
-  const archiveList = useSelector((state) => state.archive.myArchiveList);
+  // const archiveList = useSelector((state) => state.archive.myArchiveList);
+  const joinArchive = useSelector((state) => state.archive.joinArchive);
   const reverse = useSelector((state) => state.reverse);
   const [selectAvartar, setSelectAvatar] = useState("");
 
   useEffect(() => {
     // 유저 네임인 사람을 아카이브 멤버중에서 찾아서 캐릭터 찾기
-    for (let index = 0; index < archiveList.length; index++) {
-      const element = archiveList[index];
-      if (element.archiveId === reverse.info.archiveId) {
-        for (let idx = 0; idx < element.members.length; idx++) {
-          const member = element.members[idx];
-          if (member.nickname === userName) {
-            setSelectAvatar(member.avatar);
-            return;
-          }
+    if (joinArchive.archiveId === reverse.info.archiveId) {
+      for (let idx = 0; idx < joinArchive.members.length; idx++) {
+        const member = joinArchive.members[idx];
+        if (member.nickname === userName) {
+          setSelectAvatar(member.avatar);
+          return;
         }
-        return;
       }
+      return;
     }
   }, [userName]);
   useEffect(() => {
     // 유저 네임인 사람을 아카이브 멤버중에서 찾아서 캐릭터 찾기
-    for (let index = 0; index < archiveList.length; index++) {
-      const element = archiveList[index];
-      if (element.archiveId === reverse.info.archiveId) {
-        for (let idx = 0; idx < element.members.length; idx++) {
-          const member = element.members[idx];
-          if (member.nickname === userName) {
-            setSelectAvatar(member.avatar);
-            return;
-          }
+    if (joinArchive.archiveId === reverse.info.archiveId) {
+      for (let idx = 0; idx < joinArchive.members.length; idx++) {
+        const member = joinArchive.members[idx];
+        if (member.nickname === userName) {
+          setSelectAvatar(member.avatar);
+          return;
         }
-        return;
       }
+      return;
     }
   }, []);
   const playerOtherCharacter = useRef();
