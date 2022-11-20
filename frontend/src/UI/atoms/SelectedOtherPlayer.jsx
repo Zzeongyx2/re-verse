@@ -1,8 +1,6 @@
-import { useSelector, useDispatch } from "react-redux";
-import DogAnimations from "../../assets/players/other/OtherDogAnimations";
+import { useSelector } from "react-redux";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
-import { useBox, useCylinder } from "@react-three/cannon";
 import OtherCatAnimations from "../../assets/players/other/OtherCatAnimations";
 import OtherDogAnimations from "../../assets/players/other/OtherDogAnimations";
 import OtherDoveAnimations from "../../assets/players/other/OtherDoveAnimations";
@@ -23,9 +21,7 @@ import OtherSnowLeopardAnimations from "../../assets/players/other/OtherSnowLeop
 import OtherCougarAnimations from "../../assets/players/other/OtherCougarAnimations";
 
 function SelectedOtherPlayer({ destinationPoint, handleVisible, userName }) {
-  // const archiveList = useSelector((state) => state.archive.myArchiveList);
   const joinArchive = useSelector((state) => state.archive.joinArchive);
-  const reverse = useSelector((state) => state.reverse);
   const [selectAvartar, setSelectAvatar] = useState("");
 
   useEffect(() => {

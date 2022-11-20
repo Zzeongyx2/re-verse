@@ -15,7 +15,6 @@ export function ArcadeMachine(props) {
     type: "Static",
     position: [-26, 0, 119],
     ...props,
-    // args: [1, 5, 1],
   }));
   return (
     <group
@@ -32,10 +31,7 @@ export function ArcadeMachine(props) {
           geometry={nodes.Object_2.geometry}
           material={materials.initialShadingGroup}
         />
-        <mesh
-        // geometry={nodes.Object_3.geometry}
-        // material={materials.lambert2SG}
-        >
+        <mesh>
           <Html
             transform
             occlude
@@ -43,7 +39,6 @@ export function ArcadeMachine(props) {
             rotation={[Math.PI / 2.2, 0, 0]}
             position={[0, 0.22, 14.5169]}
           >
-            {/* <div>hello?</div> */}
             <Game />
           </Html>
         </mesh>

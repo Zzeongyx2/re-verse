@@ -14,7 +14,6 @@ import { setMyArchiveList } from "../../modules/archive";
 import { editBestArchive, getUserInfo } from "../../api/user";
 import { setLoginUser } from "../../modules/user";
 function ArchiveMy() {
-  // const [archiveList, setArchiveList] = useState([]);
   const archiveList = useSelector((state) => state.archive.myArchiveList);
   const loginUser = useSelector((state) => state.user.loginUser);
   const dispatch = useDispatch();
@@ -22,7 +21,6 @@ function ArchiveMy() {
   const enterArchive = (archiveId) => {
     console.log(archiveId, "이동");
     window.location.href = `/reverse/${archiveId}`;
-    // window.location.href = `/reversetemp/${archiveId}`;
   };
   const changeBestArchive = (archive) => {
     console.log(archive);

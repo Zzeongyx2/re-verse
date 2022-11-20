@@ -55,7 +55,7 @@ function SettingArchiveModal({ archive }) {
       archive.archiveId,
       nickname,
       editMemberSuccess,
-      editMemberFail,
+      editMemberFail
     );
   };
   const deleteMember = async (nickname) => {
@@ -63,7 +63,7 @@ function SettingArchiveModal({ archive }) {
       archive.archiveId,
       nickname,
       editMemberSuccess,
-      editMemberFail,
+      editMemberFail
     );
   };
   const editMemberSuccess = (res) => {
@@ -137,7 +137,6 @@ function SettingArchiveModal({ archive }) {
                       }
                     })
                     .map((info, idx) => {
-                      // {friendArr.map((info, idx) => {
                       return (
                         <div
                           key={`setting-${idx}`}
@@ -191,7 +190,6 @@ function SettingArchiveModal({ archive }) {
                       }
                     })
                     .map((info, idx) => {
-                      // {friendArr.map((info, idx) => {
                       return (
                         <div
                           key={`setting-${idx}`}

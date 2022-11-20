@@ -79,7 +79,6 @@ function CharacterThree() {
           </button>
         </div>
         <div className="pt-1 xl:mt-4 h-[calc(96%/4*3)] sm:grid sm:grid-cols-9 gap-x-1 gap-y-1 justify-items-center xl:flex xl:justify-between ">
-          {/* <div className="lg:pt-5 h-2/3 flex justify-between"> */}
           {characters.map((character, idx) => (
             <label key={`character-${idx}`}>
               <input

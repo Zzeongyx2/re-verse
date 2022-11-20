@@ -13,10 +13,8 @@ import { setLastArchive } from "../../modules/archive";
 function Lobby() {
   // TODO: 메인아카이브, 최근방문 아카이브 가져와서 넣어주기
 
-  // const [loginUser, setLoginUser] = useState(initialUserInfo);
   const loginUser = useSelector((state) => state.user.loginUser);
   const lastArchive = useSelector((state) => state.archive.lastArchive);
-  // const lastArchive = undefined;
   const dispatch = useDispatch();
   useEffect(() => {
     getUserInfo(getUserInfoSuccess, getUserInfoFail);
@@ -30,7 +28,6 @@ function Lobby() {
   };
   const getLastArchiveSuccess = (res) => {
     dispatch(setLastArchive(res.data));
-    // console.log(res);
   };
   const getLastArchiveFail = (error) => {
     console.log(error);
@@ -48,13 +45,11 @@ function Lobby() {
             <NeonLightBG />
           </div>
           <div className="absolute bg-opacity-0 w-full h-full">
-            {/* <CharacterThree animalName={loginUser.avatar} /> */}
             <LobbyCharacterThree animalName={loginUser.avatar} />
           </div>
         </div>
         {/* right side: shortcut btn, profile */}
         <div className="w-[calc(96%/3)]">
-          {/* // FIXME: 나중에 linkto 속성값 변경해야 함 */}
           <LobbyButton
             linkTo={`/reverse/${loginUser.bestArchiveId}`}
             buttonTitle={"대표 아카이브 바로가기"}

@@ -27,8 +27,6 @@ import moment from "moment/moment";
 function TravelWriteModal() {
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
-  // console.log(reverse);
-  // const openModal = useSelector((state) => state.reverse.isOpen);
 
   // 글 제목
   const [title, setTitle] = useState("");
@@ -44,7 +42,7 @@ function TravelWriteModal() {
         memoryTime: moment(reverse.article.memoryDate).format("yyyy-MM-DD"),
       },
       success,
-      fail,
+      fail
     );
   };
   const success = (res) => {
@@ -53,7 +51,7 @@ function TravelWriteModal() {
       reverse.info.archiveId,
       reverse.info.stuffs[reverse.selectStuff].id,
       stuffSuccess,
-      stuffFail,
+      stuffFail
     );
   };
 
@@ -66,9 +64,6 @@ function TravelWriteModal() {
     } else if (reverse.selectStuff === 2) {
       dispatch(setDiary({ ...reverse.diary, articleList: res.data.papers }));
     }
-    // dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
-    // dispatch(setInfo({ ...reverse.info, details: null }));
-    // console.log(res.data);
   };
 
   const stuffFail = (err) => {
@@ -81,19 +76,12 @@ function TravelWriteModal() {
 
   return (
     <>
-      {/* <Modal isOpen={isOpen} onClose={onClose} size={"lg"} isCentered> */}
-      <Modal
-        isOpen={reverse.travelWriteIsOpen}
-        // onClose={dispatch(setOpen())}
-        size={"4xl"}
-        isCentered
-      >
+      <Modal isOpen={reverse.travelWriteIsOpen} size={"4xl"} isCentered>
         <ModalOverlay />
         <ModalContent minH={"750"}>
           <ModalHeader mb={4} textAlign="center">
             새 글 작성하기
           </ModalHeader>
-          {/* <ModalCloseButton mt={1.5} /> */}
           <ModalBody>
             <div className="flex justify-between">
               {/* 글 제목 */}
@@ -118,7 +106,6 @@ function TravelWriteModal() {
             </div>
 
             <div className="my-3.5 w-full h-[520px] border-2 border-[#d9d9d9] rounded-lg p-2 placeholder-base1 overflow-auto scrollbar-hide">
-              {/* <EditorComponent /> */}
               <ReverseTextEditor />
             </div>
           </ModalBody>

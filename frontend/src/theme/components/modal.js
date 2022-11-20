@@ -5,7 +5,6 @@ const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(parts.keys);
 
 const baseStyle = definePartsStyle({
-  // define the part you're going to style
   header: {
     bg: "#00BEFF",
     borderTopRadius: "3xl",
@@ -19,8 +18,6 @@ const baseStyle = definePartsStyle({
   dialogContainer: {},
   dialog: {
     borderRadius: "3xl",
-    // borderRadius: "md",
-    // bg: `purple.100`,
   },
   closeButton: {},
   body: {},

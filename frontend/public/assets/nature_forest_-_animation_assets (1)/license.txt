@@ -1,8 +1,0 @@
-Model Information:
-* title:	Nature Forest - Animation Assets
-* source:	https://sketchfab.com/3d-models/nature-forest-animation-assets-dc0111fb59424e88abad0fecf66372ae
-* author:	Omabuarts Studio (https://sketchfab.com/omabuarts)
-
-Model License:
-* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
-* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

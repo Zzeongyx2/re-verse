@@ -1,9 +1,7 @@
-// test for react quill
 import React, { useMemo, useRef, useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ImageResize from "quill-image-resize";
-import axios from "axios";
 import { fileApiInstance } from "../../api";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -104,9 +102,6 @@ function ReverseTextEditor() {
           ["link", "image", "video"],
           ["clean"],
         ],
-        // handlers: {
-        //   image: imageHandler,
-        // },
       },
       ImageResize: {
         parchment: Quill.import("parchment"),
@@ -116,7 +111,6 @@ function ReverseTextEditor() {
 
   const formats = [
     "header",
-
     "size",
     "bold",
     "italic",
@@ -136,13 +130,10 @@ function ReverseTextEditor() {
 
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
-  console.log(reverse.info.details);
 
   const [text, setText] = useState("");
   const handleText = (value) => {
-    // console.log(value);
     setText(value);
-    // saveContent();
   };
 
   const saveContent = () => {
@@ -156,7 +147,6 @@ function ReverseTextEditor() {
   };
 
   const editSaveContent = () => {
-    // dispatch(createArticle({ ...reverse.article, content: editText }));
     dispatch(
       setInfo({
         archiveId: reverse.info.archiveId,
@@ -168,7 +158,6 @@ function ReverseTextEditor() {
     console.log(reverse.info.details);
   };
 
-  // 이거.. 왜 돼...? 너 뭐야...??
   useEffect(() => {
     saveContent();
   }, [text]);
@@ -199,9 +188,6 @@ function ReverseTextEditor() {
         modules={modules}
         formats={formats}
         value={editText}
-        // onchange={(e) => {
-        //   handleEditText(e);
-        // }}
         onChange={handleEditText}
       />
     </div>

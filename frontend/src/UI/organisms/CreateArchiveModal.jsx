@@ -32,18 +32,10 @@ function CreateArchiveModal() {
   const [clickBtn, setClickBtn] = useState(false);
 
   const handleArchiveSubmit = async () => {
-    // const formData = new FormData();
-    // const content = {
-    //   newTitle: newTitle,
-    //   newMessage: newMessage,
-    // };
-    // const json = JSON.stringify(content);
-    // formData.append("content", json);
-
     await postArchive(
       { title: newTitle, description: newMessage },
       postArchiveSuccess,
-      postArchiveFail,
+      postArchiveFail
     );
 
     await getList();

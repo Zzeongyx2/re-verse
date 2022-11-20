@@ -15,7 +15,6 @@ import {
 import { imageForm, s3Path } from "../../api";
 
 function ArchiveLike() {
-  // const archiveList = useState([]);
   const archiveList = useSelector((state) => state.archive.likeArchiveList);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,7 +23,6 @@ function ArchiveLike() {
   const enterArchive = (archiveId) => {
     console.log(archiveId, "이동");
     navigate(`/reverse/${archiveId}`);
-    // navigate(`/reversetemp/${archiveId}`);
   };
   const deleteArchive = async (archiveId) => {
     await deleteArchiveMember(
@@ -67,7 +65,6 @@ function ArchiveLike() {
 
   useEffect(() => {
     getLikeList();
-    console.log("아카이브 목록 가져옴");
   }, []);
   const getLikeList = async () => {
     await getArchiveLike(getArchiveLikeSuccess, getArchiveLikeFail);
@@ -95,7 +92,6 @@ function ArchiveLike() {
                       }}
                       className="w-14 text-extra1"
                     >
-                      {/* 어차피 눌린 애들만 보일거니까 */}
                       {archive.bookmark && <AiFillStar size={18} />}
                     </button>
                     {/* 유저 이름 */}
@@ -148,7 +144,6 @@ function ArchiveLike() {
                         className="text-white m-0.5 -translate-x-0.5"
                       />
                     </button>
-                    {/* 아카이브 주인이 로그인한 유저면 아카이브 나가는 버튼 없게하기 */}
                     {archive.owner.nickname === loginUser.nickname ? null : (
                       <button
                         onClick={() => {

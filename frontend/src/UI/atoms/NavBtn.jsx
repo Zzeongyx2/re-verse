@@ -1,9 +1,3 @@
-// FIXME: active & hover btn color is wrong!!!!!
-// FIXME: active & hover btn color is wrong!!!!!
-// FIXME: active & hover btn color is wrong!!!!!
-// FIXME: active & hover btn color is wrong!!!!!
-// FIXME: active & hover btn color is wrong!!!!!
-
 function NavBtn({ icon, to, from }) {
   return (
     <div

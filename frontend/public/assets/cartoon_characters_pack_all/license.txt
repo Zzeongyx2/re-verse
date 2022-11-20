@@ -1,8 +1,0 @@
-Model Information:
-* title:	Cartoon characters pack_all
-* source:	https://sketchfab.com/3d-models/cartoon-characters-pack-all-1aca41daa8b04ac4a9c84409bba446b5
-* author:	BlackSpire (https://sketchfab.com/blackspire)
-
-Model License:
-* license type:	SKETCHFAB Editorial (https://sketchfab.com/licenses)
-* requirements:	Use only in connection with events that are newsworthy or of public interest

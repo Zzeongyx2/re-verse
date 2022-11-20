@@ -13,7 +13,6 @@ import { useFrame } from "@react-three/fiber";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setTravelWriteIsOpen } from "../../modules/reverse";
-import { Box } from "../../UI/atoms/Collider.jsx";
 import { useBox } from "@react-three/cannon";
 import { BoxGeometry } from "three";
 import { Toast } from "../../UI/atoms/Toast";

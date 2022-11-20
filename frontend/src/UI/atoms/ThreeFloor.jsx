@@ -1,5 +1,4 @@
 import { usePlane } from "@react-three/cannon";
-import { MeshReflectorMaterial } from "@react-three/drei";
 
 function ThreeFloor({ position, rotation }) {
   const [ref] = usePlane(() => ({ type: "Static", position, rotation }));

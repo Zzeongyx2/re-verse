@@ -1,5 +1,4 @@
 import React from "react";
-import { Box, Grid, GridItem } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 function LobbyButton({
