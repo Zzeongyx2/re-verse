@@ -163,9 +163,14 @@
     - [기술 스택 버전 정보](/exec)
     - [빌드 매뉴얼](/exec)
 -   외부 서비스
-    - [AWS 뭐시기1](/exec)
-    - [AWS 뭐시기2](/exec)
-    - [AWS 뭐시기3](/exec)
+    - [AWS EKS](/exec)
+    - [AWS VPC](/exec)
+    - [AWS ALB](/exec)
+    - [AWS ECR](/exec)
+    - [AWS RDS](/exec)
+    - [GitLab CI](/exec)
+    - [Argo CD](/exec)
+
 -   [DB 덤프 파일](/exec)
 -   [시연 시나리오](/exec)
 
