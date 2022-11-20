@@ -54,10 +54,10 @@ function CharacterThree() {
           </div>
         </div>
       </div>
-      <div className="lg:h-1/4 md:h-[calc(30%)] w-[calc(100%-80px)] absolute bottom-2 z-30">
-        <div className="h-1/3 flex items-center justify-end">
+      <div className="xl:h-1/5 md:h-[calc(30%)] w-[calc(100%-80px)] absolute bottom-2 z-30">
+        <div className="h-[calc(96%/4)] flex items-center justify-end">
           <button
-            className="text-white font-bold bg-gradient-to-t from-extra1 to-extra2 text-xl w-fit px-12 py-2 border rounded-3xl z-30"
+            className="text-white font-bold bg-gradient-to-t from-extra1 to-extra2 w-fit px-12 py-2 border rounded-3xl z-30"
             onClick={() => {
               clickEditBtn();
               if (characters) {
@@ -78,7 +78,8 @@ function CharacterThree() {
             <span className="drop-shadow-xl">적용하기</span>
           </button>
         </div>
-        <div className="lg:pt-5 h-2/3 flex justify-between">
+        <div className="pt-1 xl:mt-4 h-[calc(96%/4*3)] sm:grid sm:grid-cols-9 gap-x-1 gap-y-1 justify-items-center xl:flex xl:justify-between ">
+          {/* <div className="lg:pt-5 h-2/3 flex justify-between"> */}
           {characters.map((character, idx) => (
             <label key={`character-${idx}`}>
               <input
