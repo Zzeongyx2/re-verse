@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { BiLogIn } from "react-icons/bi";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { HiOutlineTrash } from "react-icons/hi";
-import { Avatar, Tooltip } from "@chakra-ui/react";
+import { Avatar, AvatarGroup, Tooltip } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
 import {
   deleteArchiveMember,
@@ -33,7 +33,7 @@ function ArchiveFriend() {
       archiveId,
       loginUser.nickname,
       deleteArchiveMemberSuccess,
-      deleteArchiveMemberFail,
+      deleteArchiveMemberFail
     );
     console.log(archiveId, "나가기");
     await getList();
@@ -49,13 +49,13 @@ function ArchiveFriend() {
       await postBookmark(
         archive.archiveId,
         bookmarkControlSuccess,
-        bookmarkControl,
+        bookmarkControl
       );
     } else {
       await deleteBookmark(
         archive.archiveId,
         bookmarkControlSuccess,
-        bookmarkControl,
+        bookmarkControl
       );
     }
 
@@ -83,8 +83,8 @@ function ArchiveFriend() {
 
   return (
     <div className="text-base2">
-      <div className="bg-white rounded-3xl w-full h-full pt-5 pb-6 flex flex-col justify-center items-center">
-        <div className="w-[calc(100%-50px)] overflow-auto scrollbar-hide">
+      <div className="bg-white rounded-3xl w-full h-[calc(600px)] pt-5 pb-6 flex justify-center">
+        <div className="xl:w-[calc(100%-50px)] lg:w-[calc(96%)] overflow-auto scrollbar-hide">
           {archiveList.map((archive, index) => {
             return (
               <div key={`archiveList-${index}`}>
@@ -95,7 +95,7 @@ function ArchiveFriend() {
                       onClick={() => {
                         bookmarkTrigger(archive, index);
                       }}
-                      className="w-14 text-extra1"
+                      className="w-8 md:w-14 text-extra1"
                     >
                       {archive.bookmark ? (
                         <AiFillStar size={18} />
@@ -104,42 +104,44 @@ function ArchiveFriend() {
                       )}
                     </button>
                     {/* 유저 이름 */}
-                    <div className="font-bold text-sm overflow-hidden text-ellipsis line-clamp-1 md:w-44 sm:w-36">
+                    <div className="font-bold text-sm overflow-hidden text-ellipsis line-clamp-1 lg:w-44 md:w-36 w-24">
                       {archive.owner.nickname}
                     </div>
                   </div>
 
                   {/* 아카이브 이름 */}
-                  <div className="font-bold text-sm overflow-hidden text-ellipsis line-clamp-1 md:w-52 sm:w-44">
+                  <div className="font-bold text-sm overflow-hidden text-ellipsis line-clamp-1 lg:w-52 md:w-40 w-32">
                     {archive.title}
                   </div>
                   {/* 아카이브 설명 */}
-                  <div className="text-sm text-zinc-500 overflow-hidden text-ellipsis line-clamp-1 md:w-72 sm:w-64">
+                  <div className="text-sm text-zinc-500 overflow-hidden text-ellipsis line-clamp-1 lg:w-48 md:w-36 w-32 mr-2">
                     {archive.description}
                   </div>
                   {/* 참여한 멤버들 */}
-                  <div className="w-40">
-                    {archive.members.map((member, index) => {
-                      return (
-                        <Tooltip
-                          label={`${member.nickname}`}
-                          aria-label="A tooltip"
-                          key={`avatar-${index}`}
-                        >
-                          <Avatar
-                            size={"sm"}
-                            marginLeft={-1.5}
-                            variant="avatarBorder"
-                            name="profileImg"
-                            src={s3Path + member.avatar + imageForm}
-                            alt={index}
-                          />
-                        </Tooltip>
-                      );
-                    })}
+                  <div className="w-32 md:w-36">
+                    <AvatarGroup max={5} spacing="-2">
+                      {archive.members.map((member, index) => {
+                        return (
+                          <Tooltip
+                            label={`${member.nickname}`}
+                            aria-label="A tooltip"
+                            key={`avatar-${index}`}
+                          >
+                            <Avatar
+                              size={{ base: "xs", md: "sm" }}
+                              marginLeft={-1.5}
+                              variant="avatarBorder"
+                              name="profileImg"
+                              src={s3Path + member.avatar + imageForm}
+                              alt={index}
+                            />
+                          </Tooltip>
+                        );
+                      })}
+                    </AvatarGroup>
                   </div>
                   {/* 버튼들 */}
-                  <div>
+                  <div className="w-28 md:w-20">
                     <button
                       onClick={() => {
                         enterArchive(archive.archiveId);
