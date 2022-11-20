@@ -16,7 +16,7 @@ export default function OtherSnowLeopardAnimations({
   const group = useRef();
   // const previousAction = usePrevious(action);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/SnowLeopard_Animations.gltf"
+    "/assets/animals/GLTF/Animations/SnowLeopard_Animations.gltf",
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -45,7 +45,7 @@ export default function OtherSnowLeopardAnimations({
       });
 
       group.current.lookAt(
-        new Vector3(destinationPoint.x, 0, destinationPoint.z)
+        new Vector3(destinationPoint.x, 0, destinationPoint.z),
       );
       group.current.name = userName;
     }
@@ -72,7 +72,7 @@ export default function OtherSnowLeopardAnimations({
       if (moveRef.current) {
         angle = Math.atan2(
           destinationPoint.z - group.current.position.z,
-          destinationPoint.x - group.current.position.x
+          destinationPoint.x - group.current.position.x,
         );
         if (isCollided) {
           group.current.position.x -= Math.cos(angle) * 0.5;
@@ -91,8 +91,8 @@ export default function OtherSnowLeopardAnimations({
         actions["Walk"].play();
 
         if (
-          Math.abs(destinationPoint.x - group.current.position.x) < 0.2 &&
-          Math.abs(destinationPoint.z - group.current.position.z) < 0.2
+          Math.abs(destinationPoint.x - group.current.position.x) < 0.3 &&
+          Math.abs(destinationPoint.z - group.current.position.z) < 0.3
         ) {
           setMoving((prev) => {
             moveRef.current = false;

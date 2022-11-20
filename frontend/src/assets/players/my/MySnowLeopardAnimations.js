@@ -18,7 +18,7 @@ export default function MySnowLeopardAnimations({
   const group = useRef();
 
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Puffin_Animations.gltf"
+    "/assets/animals/GLTF/Animations/Puffin_Animations.gltf",
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -69,11 +69,11 @@ export default function MySnowLeopardAnimations({
       if (moving) {
         angle = Math.atan2(
           destinationPoint.z - group.current.position.z,
-          destinationPoint.x - group.current.position.x
+          destinationPoint.x - group.current.position.x,
         );
         if (isCollided) {
-          group.current.position.x -= Math.cos(angle) * 1.3;
-          group.current.position.z -= Math.sin(angle) * 1.3;
+          group.current.position.x -= Math.cos(angle) * 1.8;
+          group.current.position.z -= Math.sin(angle) * 1.8;
           destinationPoint.x = group.current.position.x;
           destinationPoint.z = group.current.position.z;
           setMoving(false);
@@ -87,8 +87,8 @@ export default function MySnowLeopardAnimations({
         actions["Walk"].play();
 
         if (
-          Math.abs(destinationPoint.x - group.current.position.x) < 0.2 &&
-          Math.abs(destinationPoint.z - group.current.position.z) < 0.2
+          Math.abs(destinationPoint.x - group.current.position.x) < 0.3 &&
+          Math.abs(destinationPoint.z - group.current.position.z) < 0.3
         ) {
           setMoving(false);
           actions["Walk"].stop();
@@ -133,7 +133,7 @@ export default function MySnowLeopardAnimations({
           let cameraPosition = position
             .clone()
             .add(
-              wDir.clone().multiplyScalar(-1).add(new Vector3(-0.3, 0.5, 0))
+              wDir.clone().multiplyScalar(-1).add(new Vector3(-0.3, 0.5, 0)),
             );
 
           wDir.add(new Vector3(0, 0.2, 0));
