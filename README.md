@@ -60,7 +60,7 @@
 <summary>ER Diagram</summary>
 <div markdown="1">
 
-![image.png](./images/erd.png)
+![image.png](./images/Erd.png)
 
 </div>
 </details>
@@ -69,7 +69,7 @@
 <summary>Entity 설계</summary>
 <div markdown="1">
 
-![image.png](./images/entity.png)
+![image.png](./images/Entity.png)
 
 </div>
 </details>
@@ -153,7 +153,7 @@
 ## 💻서비스
 
 -   [RE-VERSE URL](https://re-verse.kr)
--   [UCC](https://www.youtube.com/watch?v=F-DhYVAxK2E)
+-   [UCC](https://youtu.be/FPgYeuqBGyw)
 
 <br/>
 
