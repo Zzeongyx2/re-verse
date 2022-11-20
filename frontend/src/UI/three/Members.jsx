@@ -24,7 +24,7 @@ export default function Members() {
 
           <div className="page__text">
             <h1 className="font-travel text-white">WELCOME TO THE REVERSE</h1>
-            {click && (
+            {!click && (
               <div className="grid grid-cols-3">
                 {profiles.map((info, idx) => {
                   return (
@@ -43,7 +43,7 @@ export default function Members() {
                 })}
               </div>
             )}
-            {/* {!click && } */}
+            {click && <div className="w-full h-full"></div>}
           </div>
         </div>
       </div>
