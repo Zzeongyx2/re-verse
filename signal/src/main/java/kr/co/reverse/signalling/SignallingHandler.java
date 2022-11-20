@@ -27,7 +27,7 @@ public class SignallingHandler extends TextWebSocketHandler {
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        System.out.println("this archive's size : "+archiveMap.toString());
+        System.out.println("this archive : "+archiveMap.toString());
         System.out.println("this archive's size : "+archiveMap.size());
         final String msg1 = message.getPayload();
         SignalData sigData = map1.readValue(msg1, SignalData.class);

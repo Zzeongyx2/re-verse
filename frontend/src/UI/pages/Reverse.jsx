@@ -357,11 +357,11 @@ function Reverse() {
         {
           urls: "stun:re-verse.co.kr:8997",
         },
-        // {
-        //   urls: "turn:re-verse.co.kr:8997?transport=tcp",
-        //   username: "reverse",
-        //   credential: "flQjtm1024",
-        // },
+        {
+          urls: "turn:re-verse.co.kr:8997?transport=tcp",
+          username: "reverse",
+          credential: "flQjtm1024",
+        },
       ],
     });
     // console.log(localStream);
