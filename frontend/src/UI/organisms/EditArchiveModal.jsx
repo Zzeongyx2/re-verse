@@ -39,13 +39,11 @@ function EditArchiveModal({ archive }) {
         description: editMessage,
       },
       editArchiveSuccess,
-      editArchiveFail,
+      editArchiveFail
     );
     await getList();
   };
-  const editArchiveSuccess = (res) => {
-    console.log(res);
-  };
+  const editArchiveSuccess = (res) => {};
   const editArchiveFail = (error) => {
     console.log(error);
   };
@@ -53,7 +51,6 @@ function EditArchiveModal({ archive }) {
     await getArchiveList(0, getArchiveListSuccess, getArchiveListFail);
   };
   const getArchiveListSuccess = (res) => {
-    console.log(res);
     dispatch(setMyArchiveList(res.data.archives));
   };
   const getArchiveListFail = (error) => {

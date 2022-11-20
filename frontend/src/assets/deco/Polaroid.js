@@ -24,24 +24,19 @@ export function Polaroid({ props, position, event, rotation }) {
   // modal창 열어주세요
   const dispatch = useDispatch();
 
-  // console.log(travelObject.current);
   const [boxCollider] = useBox((props) => ({
     mass: 100000,
     args: [5, 5, 5],
     type: "Static",
     position,
     ...props,
-    // args: [1, 5, 1],
   }));
   return (
     <group {...props} dispose={null}>
       <group
         ref={travelObject}
-        // rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
         rotation={rotation}
         scale={0.05}
-        // position={[20, 1.1, -70]}
-        // position={[48.5, 0.8, -70]}
         position={position}
       >
         <group rotation={[Math.PI / 2, 0, 0]}>
@@ -59,7 +54,6 @@ export function Polaroid({ props, position, event, rotation }) {
                 document.getElementsByTagName("body")[0].style.cursor = "";
               }}
               onClick={() => {
-                console.log("폴라로이드 눌렀다");
                 dispatch(setTravelReadIsOpen());
               }}
             />
@@ -85,18 +79,6 @@ export function Polaroid({ props, position, event, rotation }) {
           </mesh>
         </group>
       </group>
-      {/* // FIXME: 다른 에셋에서 애니메이션 적용할구야 */}
-      {/* 오브젝트 나타나는 지점
-      <group ref={travelSpot}>
-        <mesh
-          rotation={[-0.5 * Math.PI, 0, -0.2 * Math.PI]}
-          receiveShadow
-          position={[38, 0.01, -68]}
-        >
-          <planeBufferGeometry attach="geometry" args={[20, 20]} />
-          <meshBasicMaterial color="blue" opacity={0.5} transparent />
-        </mesh>
-      </group> */}
     </group>
   );
 }

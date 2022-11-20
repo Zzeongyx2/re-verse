@@ -3,7 +3,6 @@ import { editUserInfo, nicknameCheck } from "../../api/user";
 
 function LobbyProfile({ loginUser }) {
   const [userInfo, setUserInfo] = useState(loginUser);
-  console.log(userInfo);
   useEffect(() => {
     setUserInfo(loginUser);
   }, [loginUser]);
@@ -11,7 +10,6 @@ function LobbyProfile({ loginUser }) {
   const [edit, setEdit] = useState(false);
 
   const handleChange = (e) => {
-    console.log(e.target);
     setUserInfo((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -34,7 +32,6 @@ function LobbyProfile({ loginUser }) {
         valid: false,
         message: "*2~12글자 사이로 입력해주세요",
       });
-      console.log(isValid.message);
       return;
     }
     setIsValid({ valid: true, message: "" });
@@ -53,9 +50,7 @@ function LobbyProfile({ loginUser }) {
       message: "*중복된 닉네임 입니다.",
     });
   };
-  const editUserInfoSuccess = (res) => {
-    console.log(res);
-  };
+  const editUserInfoSuccess = (res) => {};
   const editUserInfoFail = (error) => {
     console.log(error);
   };

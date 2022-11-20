@@ -33,7 +33,6 @@ function ArticleDetailCard() {
   };
 
   const deleteSuccess = (res) => {
-    console.log(res);
     getStuffDetail(
       info.archiveId,
       info.stuffs[reverse.selectStuff].id,
@@ -43,7 +42,6 @@ function ArticleDetailCard() {
   };
 
   const stuffSuccess = (res) => {
-    console.log(res);
     if (reverse.selectStuff === 0) {
       dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
     } else if (reverse.selectStuff === 1) {

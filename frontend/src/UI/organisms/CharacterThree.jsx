@@ -18,7 +18,6 @@ function CharacterThree() {
   const [selectCharacter, setSelectCharacter] = useState("");
   const [characters, setCharacters] = useState([]);
   const handleChange = (e) => {
-    console.log(e.target.value);
     setSelectCharacter(e.target.value);
     setIschecked((prev) => !prev);
   };
@@ -37,7 +36,6 @@ function CharacterThree() {
     editAvatar(selectCharacter, editAvatarSuccess, editAvatarFail);
   };
   const editAvatarSuccess = (res) => {
-    console.log(res);
     dispatch(setLoginUser({ ...mine, avatar: selectCharacter }));
   };
   const editAvatarFail = (error) => {

@@ -19,11 +19,9 @@ function ArchiveMy() {
   const dispatch = useDispatch();
 
   const enterArchive = (archiveId) => {
-    console.log(archiveId, "이동");
     window.location.href = `/reverse/${archiveId}`;
   };
   const changeBestArchive = (archive) => {
-    console.log(archive);
     editBestArchive(
       archive.archiveId,
       editBestArchiveSuccess,
@@ -31,7 +29,6 @@ function ArchiveMy() {
     );
   };
   const editBestArchiveSuccess = (res) => {
-    console.log(res);
     getUserInfo(getUserInfoSuccess, getUserInfoFail);
   };
   const editBestArchiveFail = (error) => {
@@ -51,7 +48,6 @@ function ArchiveMy() {
     await getArchiveList(0, getArchiveListSuccess, getArchiveListFail);
   };
   const getArchiveListSuccess = (res) => {
-    console.log(res);
     dispatch(setMyArchiveList(res.data.archives));
   };
   const getArchiveListFail = (error) => {
@@ -130,7 +126,6 @@ function ArchiveMy() {
                     {/* 아카이브 수정 */}
                     <EditArchiveModal archive={archive} />
                     {/* 아카이브 권한 설정 */}
-                    {/* TODO: 아카이브id 주고 친구 목록중에 초대 했는지 안했는지 알아와야댐*/}
                     <SettingArchiveModal archive={archive} />
                   </div>
                 </div>

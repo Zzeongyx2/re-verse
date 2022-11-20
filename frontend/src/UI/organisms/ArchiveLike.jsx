@@ -21,7 +21,6 @@ function ArchiveLike() {
   const loginUser = useSelector((state) => state.user.loginUser);
 
   const enterArchive = (archiveId) => {
-    console.log(archiveId, "이동");
     navigate(`/reverse/${archiveId}`);
   };
   const deleteArchive = async (archiveId) => {
@@ -31,12 +30,9 @@ function ArchiveLike() {
       deleteArchiveMemberSuccess,
       deleteArchiveMemberFail
     );
-    console.log(archiveId, "나가기");
     await getLikeList();
   };
-  const deleteArchiveMemberSuccess = (res) => {
-    console.log(res);
-  };
+  const deleteArchiveMemberSuccess = (res) => {};
   const deleteArchiveMemberFail = (error) => {
     console.log(error);
   };
@@ -56,9 +52,7 @@ function ArchiveLike() {
     }
     await getLikeList();
   };
-  const bookmarkControlSuccess = (res) => {
-    console.log(res);
-  };
+  const bookmarkControlSuccess = (res) => {};
   const bookmarkControl = (error) => {
     console.log(error);
   };
@@ -70,7 +64,6 @@ function ArchiveLike() {
     await getArchiveLike(getArchiveLikeSuccess, getArchiveLikeFail);
   };
   const getArchiveLikeSuccess = (res) => {
-    console.log(res);
     dispatch(setLikeArchiveList(res.data.archives));
   };
   const getArchiveLikeFail = (error) => {

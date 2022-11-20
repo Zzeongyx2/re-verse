@@ -17,10 +17,7 @@ function ReverseTextEditor() {
     input.click();
 
     input.onchange = async () => {
-      console.log(input.files);
       if (input.files) {
-        console.log("파일 첨부!");
-        console.log(input.files[0]);
         var file = input.files[0];
         var formData = new FormData();
         formData.append("images", file);
@@ -28,7 +25,6 @@ function ReverseTextEditor() {
         api
           .post("/archive/image", formData)
           .then((res) => {
-            console.log(res);
             const IMG_URL = res.data.urls[0];
 
             const editor = quillRef.current.getEditor();
@@ -143,7 +139,6 @@ function ReverseTextEditor() {
   const [editText, setEditText] = useState(reverse.info.details?.content);
   const handleEditText = (value) => {
     setEditText(value);
-    console.log(editText);
   };
 
   const editSaveContent = () => {
@@ -154,8 +149,6 @@ function ReverseTextEditor() {
         details: { ...reverse.info.details, content: editText },
       })
     );
-    console.log(editText);
-    console.log(reverse.info.details);
   };
 
   useEffect(() => {
@@ -164,7 +157,6 @@ function ReverseTextEditor() {
 
   useEffect(() => {
     editSaveContent();
-    console.log(editText);
   }, [editText]);
 
   return !reverse.editBtn ? (

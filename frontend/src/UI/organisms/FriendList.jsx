@@ -34,13 +34,10 @@ function FriendList() {
 
   const friendDelete = async (nickname) => {
     await deleteFriend(nickname, deleteFriendSuccess, deleteFriendFail);
-    console.log("친구삭제", nickname);
     await settingFriendList();
     setSelectFriend(null);
   };
-  const deleteFriendSuccess = (res) => {
-    console.log(res);
-  };
+  const deleteFriendSuccess = (res) => {};
   const deleteFriendFail = (error) => {
     console.log(error);
   };
@@ -51,7 +48,6 @@ function FriendList() {
   };
 
   const enterArchive = (archiveId) => {
-    console.log(archiveId, "이동");
     navigate(`/reverse/${archiveId}`);
   };
 
@@ -62,12 +58,9 @@ function FriendList() {
       deleteArchiveMemberSuccess,
       deleteArchiveMemberFail
     );
-    console.log(archiveId, "삭제");
     await settingFriendArchiveList();
   };
-  const deleteArchiveMemberSuccess = (res) => {
-    console.log(res);
-  };
+  const deleteArchiveMemberSuccess = (res) => {};
   const deleteArchiveMemberFail = (error) => {
     console.log(error);
   };
@@ -80,7 +73,6 @@ function FriendList() {
   };
 
   const getFriendSuccess = (res) => {
-    console.log(res);
     dispatch(setFriendList(res.data.friendList));
   };
   const getFriendFail = (error) => {
@@ -90,7 +82,6 @@ function FriendList() {
   useEffect(() => {
     if (selectFriend) {
       settingFriendArchiveList();
-      console.log(selectFriend?.nickname, "아카이브 목록 가져옴");
     }
   }, [selectFriend]);
   const settingFriendArchiveList = async () => {
@@ -102,7 +93,6 @@ function FriendList() {
   };
   const getFriendArchiveListSuccess = (res) => {
     setArchiveList(res.data.archives);
-    console.log(res);
   };
   const getFriendArchiveListFail = (error) => {
     console.log(error);

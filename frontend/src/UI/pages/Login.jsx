@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -9,8 +9,16 @@ import NonLoginMain from "./NonLoginMain";
 
 import { BsInfoCircle } from "react-icons/bs";
 import { Toast } from "../atoms/Toast";
+import { useSelector } from "react-redux";
 
 function Login() {
+  const loginUser = useSelector((state) => state.user.loginUser);
+
+  useEffect(() => {
+    if (loginUser.nickname.length !== 0) {
+      window.location.href = "/lobby";
+    }
+  }, []);
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
 
@@ -47,7 +55,6 @@ function Login() {
       return;
     }
 
-    console.log("axios 로그인 요청 ");
     //axios 로그인 요청 보내기
     login({ email: id, password: pw }, loginSuccess, loginFail);
   };

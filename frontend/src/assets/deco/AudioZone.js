@@ -13,19 +13,9 @@ export default function AudioZone(params) {
   const [audioState, setAudioState] = useState(false);
 
   useEffect(() => {
-    if (webrtcRedux.bgmCheck) {
-      console.log("bgm on");
-    } else {
-      console.log("bgm off");
-    }
-  }, [webrtcRedux.bgmCheck]);
-
-  useEffect(() => {
     if (initAudio < 5) {
       dispatch(setMusicTheme((webrtcRedux.musicTheme + 1) % 5));
       setInitAudio(initAudio + 1);
-      console.log(webrtcRedux.musicTheme);
-      console.log(initAudio);
     }
     if (initAudio === 3) {
       setAudioState(true);

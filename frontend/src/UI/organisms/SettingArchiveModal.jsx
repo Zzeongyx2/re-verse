@@ -44,7 +44,6 @@ function SettingArchiveModal({ archive }) {
   };
 
   const getFriendSuccess = (res) => {
-    console.log(res);
     dispatch(setFriendList(res.data.friendList));
   };
   const getFriendFail = (error) => {
@@ -67,7 +66,6 @@ function SettingArchiveModal({ archive }) {
     );
   };
   const editMemberSuccess = (res) => {
-    console.log(res);
     getList();
   };
   const editMemberFail = (error) => {
@@ -77,7 +75,6 @@ function SettingArchiveModal({ archive }) {
     await getArchiveList(0, getArchiveListSuccess, getArchiveListFail);
   };
   const getArchiveListSuccess = (res) => {
-    console.log(res);
     dispatch(setMyArchiveList(res.data.archives));
   };
   const getArchiveListFail = (error) => {

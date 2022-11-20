@@ -17,7 +17,6 @@ export function Fireworks(props) {
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    console.log(animations);
     actions["Scene"].play();
   });
   return (

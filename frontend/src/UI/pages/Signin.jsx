@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -8,8 +8,17 @@ import Logo from "../atoms/Logo";
 import { signin, emailCheck } from "../../api/auth";
 import { nicknameCheck } from "../../api/user";
 import { Toast } from "../atoms/Toast";
+import { useSelector } from "react-redux";
 
 function SignIn() {
+  const loginUser = useSelector((state) => state.user.loginUser);
+
+  useEffect(() => {
+    if (loginUser.nickname.length !== 0) {
+      window.location.href = "/lobby";
+    }
+  }, []);
+
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const [pwCheck, setPwCheck] = useState("");
@@ -51,17 +60,12 @@ function SignIn() {
   };
   const idBlurHandle = (e) => {
     let idRE = new RegExp("[a-zA-Z0-9]+@[a-zA-Z]+[.][a-zA-Z]{2,3}$");
-    // let idRE = new RegExp("[a-zA-Z0-9]+@[a-zA-Z]+[.][a-zA-Z]$");
     if (!idRE.test(id)) {
       setIdValid({ isValid: false, message: "*이메일 형식이 아닙니다." });
-      console.log(idValid);
-      console.log(id);
       return;
     }
     setIdValid({ isValid: true, message: "." });
-    // axios 요청으로 id 중복검사하기
     emailCheck(id, emailCheckSuccess, emailCheckFail);
-    // setIdValid({ isValid: true, message: "이미 가입된 아이디입니다." });
   };
   const emailCheckSuccess = (res) => {
     setIdValid({ isValid: true, message: "." });
@@ -120,7 +124,6 @@ function SignIn() {
 
   const clickSignin = () => {
     if (id.trim() === "") {
-      // alert("아이디를 입력하세요");
       Toast.fire({
         icon: "error",
         title: "아이디를 입력하세요",
@@ -128,7 +131,6 @@ function SignIn() {
       });
       return;
     } else if (pw.trim() === "") {
-      // alert("비밀번호를 입력하세요.");
       Toast.fire({
         icon: "error",
         title: "비밀번호를 입력하세요",
@@ -136,7 +138,6 @@ function SignIn() {
       });
       return;
     } else if (pwCheck.trim() === "") {
-      // alert("비밀번호 확인을 입력하세요.");
       Toast.fire({
         icon: "error",
         title: "비밀번호가 일치하지 않습니다",
@@ -144,7 +145,6 @@ function SignIn() {
       });
       return;
     } else if (nickName.trim() === "") {
-      // alert("닉네임을 입력하세요.");
       Toast.fire({
         icon: "error",
         title: "닉네임을 입력하세요",
@@ -160,7 +160,6 @@ function SignIn() {
       return;
     }
 
-    console.log("axios 회원가입 요청 ");
     //axios 회원가입 요청 보내기
     signin(
       {
@@ -176,7 +175,6 @@ function SignIn() {
     window.location.href = "/login";
   };
   const signinFail = () => {
-    // alert("회원가입 실패!");
     Toast.fire({
       icon: "warning",
       title: "회원가입 실패",

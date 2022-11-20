@@ -40,9 +40,7 @@ function CreateArchiveModal() {
 
     await getList();
   };
-  const postArchiveSuccess = (res) => {
-    console.log(res);
-  };
+  const postArchiveSuccess = (res) => {};
   const postArchiveFail = (error) => {
     console.log(error);
   };
@@ -50,7 +48,6 @@ function CreateArchiveModal() {
     await getArchiveList(0, getArchiveListSuccess, getArchiveListFail);
   };
   const getArchiveListSuccess = (res) => {
-    console.log(res);
     dispatch(setMyArchiveList(res.data.archives));
   };
   const getArchiveListFail = (error) => {

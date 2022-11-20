@@ -464,19 +464,6 @@ export function HackerRoom(props) {
             />
           </group>
 
-          {/* // TODO: FLOOR MESH 바꾸자!!!!!!!!!!!!!!!!!!!
-          // TODO: FLOOR MESH 바꾸자!!!!!!!!!!!!!!!!!!!
-          // TODO: FLOOR MESH 바꾸자!!!!!!!!!!!!!!!!!!!
-          // TODO: FLOOR MESH 바꾸자!!!!!!!!!!!!!!!!!!!
-          // TODO: FLOOR MESH 바꾸자!!!!!!!!!!!!!!!!!!!
-          // TODO: FLOOR MESH 바꾸자!!!!!!!!!!!!!!!!!!!
-          // TODO: FLOOR MESH 바꾸자!!!!!!!!!!!!!!!!!!! */}
-          {/* <group position={[0, 0.04, 0]} scale={21.23}>
-            <mesh castShadow
-              geometry={nodes.Object_104.geometry}
-              material={materials.material_18}
-            />
-          </group> */}
           <group position={[-3.64, 4.94, -0.73]} rotation={[0, 0.29, 0]}>
             <mesh
               castShadow

@@ -6,7 +6,7 @@ source: https://sketchfab.com/3d-models/radio-lowpoly-b36f73e09f3447e092a0463d9c
 title: Radio - Lowpoly
 */
 
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { useDispatch, useSelector } from "react-redux";
 import { setMusicTheme } from "../../modules/webrtc";
@@ -15,23 +15,16 @@ export function Radio(props) {
   const { nodes, materials } = useGLTF("/assets/radio/scene.gltf");
   const dispatch = useDispatch();
   const webrtcRedux = useSelector((state) => state.webrtc);
-  // const [click, setClick] = useState(0);
   const handleClick = () => {
     dispatch(setMusicTheme((webrtcRedux.musicTheme + 1) % 5));
-    // setClick((prev) => (prev + 1) % 5);
-    // dispatch(setMusicTheme(click));
   };
-  // useEffect(() => {
-  //   dispatch(setMusicTheme(click));
-  // }, [click]);
-  console.log(webrtcRedux);
+
   const [boxCollider] = useBox((props) => ({
     mass: 100000,
     args: [20, 10, 15],
     type: "Static",
     position: [-128, 1, -100],
     ...props,
-    // args: [1, 5, 1],
   }));
   return (
     <group
