@@ -4,7 +4,7 @@
   width: 564px;
   transform: scale(0.5);
   transform-origin: top left;
-
   /* overflow: hidden; */
-  margin: 0 auto;
+  margin-top: 10px;
+  margin-left: 10px;
 }
