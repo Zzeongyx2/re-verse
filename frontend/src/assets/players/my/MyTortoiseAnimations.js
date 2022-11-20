@@ -95,15 +95,15 @@ export default function MyTortoiseAnimations({
           destinationPoint.x - group.current.position.x,
         );
         if (isCollided) {
-          group.current.position.x -= Math.cos(angle) * 0.9;
-          group.current.position.z -= Math.sin(angle) * 0.9;
+          group.current.position.x -= Math.cos(angle) * 1.1;
+          group.current.position.z -= Math.sin(angle) * 1.1;
           destinationPoint.x = group.current.position.x;
           destinationPoint.z = group.current.position.z;
           setMoving(false);
           setCollision(false);
         } else {
-          group.current.position.x += Math.cos(angle) * 0.2;
-          group.current.position.z += Math.sin(angle) * 0.2;
+          group.current.position.x += Math.cos(angle) * 0.5;
+          group.current.position.z += Math.sin(angle) * 0.5;
         }
 
         actions["Idle_A"].stop();
@@ -113,8 +113,8 @@ export default function MyTortoiseAnimations({
         // console.log(group.current.position);
         // console.log(Math.cos(angle) * 0.065);
         if (
-          Math.abs(destinationPoint.x - group.current.position.x) < 0.1 &&
-          Math.abs(destinationPoint.z - group.current.position.z) < 0.1
+          Math.abs(destinationPoint.x - group.current.position.x) < 0.2 &&
+          Math.abs(destinationPoint.z - group.current.position.z) < 0.2
         ) {
           setMoving(false);
           actions["Walk"].stop();
