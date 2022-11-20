@@ -15,13 +15,13 @@ body::-webkit-scrollbar {
 }
 
 .page__container {
-  /* width: 100%;
-  height: 100%; */
-  width: 584px;
+  width: 100%;
+  height: 100%;
+  /* width: 584px;
   height: 580px;
   transform: scale(0.25);
   transform-origin: top left;
-  border-radius: 10px;
+  border-radius: 10px; */
 }
 
 .page__wrapper {
