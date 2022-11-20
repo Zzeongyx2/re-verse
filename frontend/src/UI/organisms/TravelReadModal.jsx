@@ -7,6 +7,7 @@ import {
   ModalBody,
   FormControl,
   ModalCloseButton,
+  CloseButton,
 } from "@chakra-ui/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -35,6 +36,8 @@ import ReverseTextEditor from "./ReverseTextEditor";
 import moment from "moment/moment";
 import ArticleDetailCard from "./ArticleDetailCard";
 import ArchiveTimeline from "./ArchiveTimeline";
+
+import handImage from "../../assets/handimage.png";
 
 function TravelReadModal() {
   const dispatch = useDispatch();
@@ -171,38 +174,35 @@ function TravelReadModal() {
         size={"4xl"}
         isCentered
       >
-        <ModalOverlay />
+        <ModalOverlay
+        // bgImage={handImage}
+        // pos="absolute"
+        // bgPosition={["55.2%"]}
+        // left="0"
+        // // bgPosition={["55.2%"]}
+        // bgSize={"50%"}
+        // bgRepeat="no-repeat"
+        />
         {!reverse.editBtn ? (
-          <ModalContent minH="680" maxW="360">
-            <ModalHeader>
-              <div className="flex justify-between items-center">
-                {reverse.selectStuff === 0 && "REVERSE TO TRAVEL"}
-                {reverse.selectStuff === 1 && "REVERSE TO ANNIVERSARY"}
-                {reverse.selectStuff === 2 && "REVERSE TO DIARY"}
-                <AiOutlineClose
-                  className="cursor-pointer"
-                  onClick={() => {
-                    // console.log("닫기 버튼");
-                    dispatch(setTravelReadIsOpen());
-                  }}
-                />
-              </div>
-            </ModalHeader>
-            <ModalBody
-              px={2}
-              borderLeft={"8px"}
-              borderRight={"8px"}
-              borderColor={"#00BEFF"}
-            >
-              <div className="mt-4 mb-6 font-travel font-bold text-xl text-center "></div>
+          <ModalContent minH="600" maxW="350">
+            {/* <ModalHeader>
+              <CloseButton
+                onClick={() => {
+                  // console.log("닫기 버튼");
+                  dispatch(setTravelReadIsOpen());
+                }}
+              />
+            </ModalHeader> */}
+            <ModalBody p={0} bgColor={"transparent"}>
+              {/* <div className="mt-4 mb-6 font-travel font-bold text-xl text-center "></div> */}
               <div
-                className={`h-[500px] overflow-auto scrollbar-hide ${
+                className={`h-[600px] overflow-hidden ${
                   !reverse.isCardOpen ? "flex justify-center" : null
                 }`}
               >
                 {/* 글 목록 컴포넌트 */}
                 {reverse.isCardOpen && (
-                  <div className="overflow-auto scollbar-hide">
+                  <div className="">
                     {/* <div className="h-[calc(90%)] overflow-auto scollbar-hide"> */}
                     <ArchiveTimeline />
 
@@ -212,9 +212,8 @@ function TravelReadModal() {
                 {!reverse.isCardOpen && <ArticleDetailCard />}
               </div>
             </ModalBody>
-            <ModalFooter
+            {/* <ModalFooter
               pt={0}
-              backgroundColor={"#00BEFF"}
               borderBottomRadius={"3xl"}
               flex={true}
               justifyContent={"center"}
@@ -226,7 +225,7 @@ function TravelReadModal() {
                 }}
                 className="cursor-pointer mt-4 mb-2 text-xl py-2 border-2 rounded-lg border-white w-10"
               ></div>
-            </ModalFooter>
+            </ModalFooter> */}
           </ModalContent>
         ) : (
           <ModalContent minH={"750"}>
