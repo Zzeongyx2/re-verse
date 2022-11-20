@@ -82,8 +82,8 @@ export default function OtherHuskyAnimations({
           setMoving(false);
           setCollision(false);
         } else {
-          group.current.position.x += Math.cos(angle) * 0.2;
-          group.current.position.z += Math.sin(angle) * 0.2;
+          group.current.position.x += Math.cos(angle) * 0.5;
+          group.current.position.z += Math.sin(angle) * 0.5;
         }
         api.position.set(group.current.position.x, 0, group.current.position.z);
 
@@ -91,8 +91,8 @@ export default function OtherHuskyAnimations({
         actions["Walk"].play();
 
         if (
-          Math.abs(destinationPoint.x - group.current.position.x) < 0.1 &&
-          Math.abs(destinationPoint.z - group.current.position.z) < 0.1
+          Math.abs(destinationPoint.x - group.current.position.x) < 0.2 &&
+          Math.abs(destinationPoint.z - group.current.position.z) < 0.2
         ) {
           setMoving((prev) => {
             moveRef.current = false;
