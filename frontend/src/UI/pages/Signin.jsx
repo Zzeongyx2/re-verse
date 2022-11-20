@@ -176,7 +176,12 @@ function SignIn() {
     window.location.href = "/login";
   };
   const signinFail = () => {
-    alert("회원가입 실패!");
+    // alert("회원가입 실패!");
+    Toast.fire({
+      icon: "warning",
+      title: "회원가입 실패",
+      timer: 1500,
+    });
   };
 
   return (
