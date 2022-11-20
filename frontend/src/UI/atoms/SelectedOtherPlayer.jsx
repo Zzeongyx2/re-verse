@@ -42,6 +42,22 @@ function SelectedOtherPlayer({ destinationPoint, handleVisible, userName }) {
         return;
       }
     }
+  }, [userName]);
+  useEffect(() => {
+    // 유저 네임인 사람을 아카이브 멤버중에서 찾아서 캐릭터 찾기
+    for (let index = 0; index < archiveList.length; index++) {
+      const element = archiveList[index];
+      if (element.archiveId === reverse.info.archiveId) {
+        for (let idx = 0; idx < element.members.length; idx++) {
+          const member = element.members[idx];
+          if (member.nickname === userName) {
+            setSelectAvatar(member.avatar);
+            return;
+          }
+        }
+        return;
+      }
+    }
   }, []);
   const playerOtherCharacter = useRef();
 
