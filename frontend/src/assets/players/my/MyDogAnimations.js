@@ -170,8 +170,12 @@ export default function MyDogAnimations({
       }
       api.position.set(group.current.position.x, 0, group.current.position.z);
     }
+    if (loadingPage) {
+      state.camera.zoom = 28;
+    }
   });
   const cameraState = useSelector((state) => state.camera);
+  const loadingPage = useSelector((state) => state.loading.loadingPage);
 
   return (
     // <group ref={group} dispose={null}>
