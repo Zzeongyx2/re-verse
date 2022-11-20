@@ -93,20 +93,18 @@ function ArchiveTimeline() {
         {/* Content */}
         <div className="overflow-scroll scrollbar-hide font-hand">
           <div className="">
+            {reverse.selectStuff === 0 &&
+              !reverse.travel.articleList.length && (
+                <div className="">기록된 추억이 없어요!</div>
+              )}
+            {reverse.selectStuff === 1 && !reverse.anniv.articleList.length && (
+              <div>기록된 추억이 없어요!</div>
+            )}
+            {reverse.selectStuff === 2 && !reverse.diary.articleList.length && (
+              <div>기록된 추억이 없어요!</div>
+            )}
             <div className="flex flex-col md:grid grid-cols-12 text-gray-500">
               {/* <div className="overflow-auto scollbar-hide"> */}
-              {reverse.selectStuff === 0 &&
-                !reverse.travel.articleList.length && (
-                  <div>기록된 추억이 없어요!</div>
-                )}
-              {reverse.selectStuff === 1 &&
-                !reverse.anniv.articleList.length && (
-                  <div>기록된 추억이 없어요!</div>
-                )}
-              {reverse.selectStuff === 2 &&
-                !reverse.diary.articleList.length && (
-                  <div>기록된 추억이 없어요!</div>
-                )}
               {/* 글 목록 컴포넌트 */}
               {/* 선택한 stuff가 여행일때 */}
               {reverse.selectStuff === 0 &&
