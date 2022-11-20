@@ -4,9 +4,12 @@ import kr.co.reverse.archive.api.request.*;
 import kr.co.reverse.archive.api.response.*;
 import kr.co.reverse.archive.api.service.ArchiveService;
 // import kr.co.reverse.archive.api.service.UserSearchService;
+import kr.co.reverse.archive.api.service.PhotoBookService;
+import kr.co.reverse.archive.api.service.StuffService;
 import kr.co.reverse.archive.api.service.UserService;
 import kr.co.reverse.archive.db.entity.Archive;
 import kr.co.reverse.archive.db.entity.Avatar;
+import kr.co.reverse.archive.db.entity.StuffType;
 import kr.co.reverse.archive.db.entity.User;
 // import kr.co.reverse.archive.db.entity.UserDocument;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +28,10 @@ public class UserController {
 
     private final ArchiveService archiveService;
     // private final UserSearchService userSearchService;
+
+    private final PhotoBookService photoBookService;
+
+    private final StuffService stuffService;
 
     @GetMapping
     public ResponseEntity<? extends UserDetailRes> getPlayer() {
@@ -106,6 +113,15 @@ public class UserController {
             Archive archive = archiveService.createArchive(
                     ArchiveReq.of("나의 첫 아카이브", "친구와 나의 추억을 공유해보세요 :)"), user);
             userService.updateBestArchive(user.getId().toString(), archive.getId().toString());
+
+            for (int i = 1; i <= 3; i++) { // PhotoBook 생성
+                photoBookService.createPhotoBook(archive, i);
+            }
+
+            for (int i = 1; i <= 3; i++) { // 각 photobook 별 읽기 전용 / 쓰기 전용 stuff 생성
+//            stuffService.createStuff(archive, StuffType.READ_ONLY);
+                stuffService.createStuff(archive, StuffType.WRITE_ONLY);
+            }
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
