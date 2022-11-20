@@ -148,7 +148,28 @@
 </div>
 </details>
 
-<br/> 
+<br/>
+
+## 💻서비스
+
+-   [RE-VERSE URL](https://re-verse.kr)
+-   [UCC](https://www.youtube.com/watch?v=F-DhYVAxK2E)
+
+<br/>
+
+## 🔌포팅 매뉴얼
+
+-   빌드 및 배포
+    - [기술 스택 버전 정보](/exec)
+    - [빌드 매뉴얼](/exec)
+-   외부 서비스
+    - [AWS 뭐시기1](/exec)
+    - [AWS 뭐시기2](/exec)
+    - [AWS 뭐시기3](/exec)
+-   [DB 덤프 파일](/exec)
+-   [시연 시나리오](/exec)
+
+<br/>
 
 ## 🙂 팀원 소개
 
