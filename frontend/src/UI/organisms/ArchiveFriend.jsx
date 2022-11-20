@@ -23,7 +23,6 @@ function ArchiveFriend() {
   const loginUser = useSelector((state) => state.user.loginUser);
 
   const enterArchive = (archiveId) => {
-    console.log(archiveId, "이동");
     navigate(`/reverse/${archiveId}`);
     // navigate(`/reversetemp/${archiveId}`);
   };
@@ -35,12 +34,9 @@ function ArchiveFriend() {
       deleteArchiveMemberSuccess,
       deleteArchiveMemberFail
     );
-    console.log(archiveId, "나가기");
     await getList();
   };
-  const deleteArchiveMemberSuccess = (res) => {
-    console.log(res);
-  };
+  const deleteArchiveMemberSuccess = (res) => {};
   const deleteArchiveMemberFail = (error) => {
     console.log(error);
   };
@@ -61,9 +57,7 @@ function ArchiveFriend() {
 
     await getList();
   };
-  const bookmarkControlSuccess = (res) => {
-    console.log(res);
-  };
+  const bookmarkControlSuccess = (res) => {};
   const bookmarkControl = (error) => {
     console.log(error);
   };
@@ -74,7 +68,6 @@ function ArchiveFriend() {
     await getArchiveList(1, getArchiveListSuccess, getArchiveListFail);
   };
   const getArchiveListSuccess = (res) => {
-    console.log(res);
     dispatch(setFriendArchiveList(res.data.archives));
   };
   const getArchiveListFail = (error) => {

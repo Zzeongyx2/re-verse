@@ -19,6 +19,8 @@ body::-webkit-scrollbar {
   height: 100%; */
   width: 584px;
   height: 580px;
+  /* transform: scale(0.25);
+  transform-origin: top left; */
 
   /* width: 584px;
   height: 580px;

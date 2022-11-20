@@ -26,8 +26,6 @@ function ReverseDatePicker() {
         dispatch(
           createArticle({ ...reverse.article, memoryDate: `${startDate}` })
         );
-        console.log(startDate);
-        console.log(reverse.article);
       }, 500);
     }
   }, [reverse.travelWriteIsOpen]);

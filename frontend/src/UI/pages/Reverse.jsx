@@ -97,10 +97,7 @@ function Reverse() {
   };
   const removeOther = (value) => {
     setOthers((others) => {
-      console.log(value);
-      console.log(others);
       let temp = othersRef.current.filter((other) => other !== value);
-      console.log(temp);
       othersRef.current = temp;
       return temp;
     });
@@ -122,13 +119,11 @@ function Reverse() {
   const [rtcPeers2, setRtcPeers2] = useState("");
 
   useEffect(() => {
-    console.log(others);
     othersRef.current = others;
   }, [others]);
   useEffect(() => {}, [otherCharacterMap]);
   useEffect(() => {
     destRef.current = destinationPoint;
-    console.log(destRef.current);
     if (destinationPoint.x > 0 && destinationPoint.z < 0) {
       dispatch(setSelectStuff(0));
     } else if (destinationPoint.x < 0 && destinationPoint.z < 0) {
@@ -136,7 +131,6 @@ function Reverse() {
     } else if (destinationPoint.x > 0 && destinationPoint.z > 0) {
       dispatch(setSelectStuff(1));
     }
-    console.log(reverse);
   }, [destinationPoint]);
 
   const preventClose = (e) => {
@@ -146,7 +140,6 @@ function Reverse() {
     (() => {
       window.addEventListener("unload", preventClose);
     })();
-    console.log(loginUser);
     login();
   }, []);
   var signal1 = {
@@ -176,7 +169,6 @@ function Reverse() {
           element.enabled = false;
         });
       }
-      console.log(localStream.getAudioTracks());
     }
   }, [webrtcRedux.micCheck]);
 
@@ -192,7 +184,6 @@ function Reverse() {
           audioSet[i].muted = true;
         }
       }
-      console.log(audioSet);
     }
   }, [webrtcRedux.headCheck]);
 
@@ -200,9 +191,7 @@ function Reverse() {
     await navigator.mediaDevices
       .getUserMedia({ audio: { echoCancellation: true } })
       .then(handleAudio)
-      .catch((e) => {
-        //console.lo(e);
-      });
+      .catch((e) => {});
     startWebSocket();
   }
   function handleAudio(stream) {
@@ -214,7 +203,6 @@ function Reverse() {
   }
 
   function startWebSocket() {
-    console.log("startWebSocket");
     ws1 = new WebSocket("wss://re-verse.kr/socket");
 
     ws1.onopen = (event) => {
@@ -234,7 +222,6 @@ function Reverse() {
     ws1.onmessage = (event) => {
       var data1 = JSON.parse(event.data);
       var data2 = null;
-      console.log("here is onmessage");
       if (data1.userId === userId2 || data1.userId.length < 2) {
         return;
       } else if (data1.type === "NewMember") {
@@ -246,7 +233,6 @@ function Reverse() {
         newMember(userId2);
       } else if (data1.type === "Offer") {
         data2 = JSON.parse(data1.data);
-        console.log("Receive offer:");
         handleNewMemberAndOffer(data1);
       } else if (data1.type === "Ice") {
         data2 = JSON.parse(data1.data);
@@ -260,7 +246,6 @@ function Reverse() {
           }
         }
       } else if (data1.type === "Answer") {
-        console.log("Receive answer:");
         data2 = JSON.parse(data1.data);
         let peer1 = rtcPeers.get(data1.userId);
         peer1.setRemoteDescription(new RTCSessionDescription(data2));
@@ -269,7 +254,6 @@ function Reverse() {
   }
 
   function handleNewMemberAndOffer(data1) {
-    console.log("handle new member");
     let data3 = JSON.parse(data1.data);
     let peerId = data1.userId;
     let rtcPeer = new RTCPeerConnection({
@@ -286,7 +270,6 @@ function Reverse() {
       ],
     });
     localStream.getTracks().forEach((track) => {
-      console.log("in the rtcpeer make phase track");
       rtcPeer.addTrack(track, localStream);
     });
 
@@ -302,7 +285,6 @@ function Reverse() {
       rtcPeer
         .createOffer()
         .then((a) => {
-          console.log("Sending offer");
           signal1.userId = userId2;
           signal1.type = "Offer";
           signal1.data = JSON.stringify(a);
@@ -311,14 +293,11 @@ function Reverse() {
           rtcPeer.setLocalDescription(a);
         })
         .then(() => {})
-        .catch((err) => {
-          console.log("Error Offer:" + err);
-        });
+        .catch((err) => {});
     }
     //when not new member
     else {
       let data2 = JSON.parse(data1.data);
-      console.log("Sending answer");
       rtcPeer.setRemoteDescription(data2).then(() => {
         rtcPeer.createAnswer().then((a) => {
           signal1.userId = userId2;
@@ -335,8 +314,6 @@ function Reverse() {
       channelConfig(channel2, peerId);
     };
     rtcPeer.ontrack = (event) => {
-      console.log("here is ontrack phase");
-
       let newUser = document.createElement("li");
       let div1 = document.createElement("div");
       let h2 = document.createElement("h2");
@@ -344,7 +321,6 @@ function Reverse() {
       let div2 = document.createElement("div");
       let userAudio = document.createElement("audio");
       userAudio.id = peerId;
-      console.log("this is userAudio id : " + userAudio.id);
       userAudio.autoplay = true;
       userAudio.controls = true;
       userAudio.hidden = true;
@@ -369,21 +345,14 @@ function Reverse() {
         }
       }
     };
-    rtcPeer.onicecandidateerror = (event) => {
-      console.log("ice error");
-    };
+    rtcPeer.onicecandidateerror = (event) => {};
 
-    rtcPeer.onicegatheringstatechange = (event) => {
-      console.log("ice change phase");
-      console.log(event);
-    };
+    rtcPeer.onicegatheringstatechange = (event) => {};
 
     rtcPeers.set(peerId, rtcPeer);
   }
   function channelConfig(channel1, peerId) {
     channel1.onclose = (event) => {
-      console.log("Close channel:");
-
       let friendId = channelUsers.get(channel1);
       let friendName = friendToName.get(friendId);
 
@@ -401,7 +370,6 @@ function Reverse() {
       if (dataChannel1.type === "message") {
         addChatLine(dataChannel1.data, "you", dataChannel1.userId);
       } else if (dataChannel1.type === "handshake") {
-        console.log("this is handshake phase");
         friendToName.set(dataChannel1.data.uuid, dataChannel1.data.username);
         channelUsers.set(channel1, dataChannel1.data.uuid);
 
@@ -415,7 +383,6 @@ function Reverse() {
     };
 
     channel1.onopen = () => {
-      console.log("here is datachannel open");
       channelData.userId = loginUser.nickname;
       channelData.type = "handshake";
 
@@ -473,7 +440,6 @@ function Reverse() {
   }
 
   function sendChat() {
-    console.log("here is sendchat");
     channels.forEach((a) => {
       let dataToSend = document.getElementById("toSend").value;
       channelData.userId = `${loginUser.nickname} : `;
@@ -515,15 +481,12 @@ function Reverse() {
       senders.forEach((sender) => a.removeTrack(sender));
       a.close();
     });
-    console.log("disconnect phase");
     const audioSet = document.getElementById("user-audio").childNodes;
     for (let i = audioSet.length - 1; i >= 0; i--) {
       audioSet[i].remove();
     }
     for (let i = others.length - 1; i >= 0; i--) {
-      console.log(others[i]);
       removeOther(others[i]);
-      console.log(othersRef.current);
     }
     rtcPeers.clear();
     audioMap.clear();
@@ -551,7 +514,6 @@ function Reverse() {
   };
   useEffect(() => {
     if (cameraKeyPress) {
-      console.log(cameraKeyPress);
       changeView();
     }
   }, [cameraKeyPress]);
@@ -597,9 +559,7 @@ function Reverse() {
       title: "초대받지 않은 아카이브 입니다",
       timer: 1500,
     });
-    console.log("arlet나온곳");
     navigate("/lobby");
-    console.log(err);
   };
 
   const refCanvas = useRef();
@@ -695,7 +655,6 @@ function Reverse() {
         }}
       >
         <Sky sunPosition={[100, 50, 100]} />
-        {/* // TODO: 컴포넌트 배치할 때에는 키고 하는게 편함 */}
         <OrbitControls
           enableZoom={true}
           // enableRotate={false}
@@ -816,7 +775,6 @@ function Reverse() {
           {/* floor */}
           <mesh
             onPointerDown={(e) => {
-              console.log(e);
               if (e.point.z > 114) {
                 return;
               }

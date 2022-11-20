@@ -19,7 +19,6 @@ export function FireAnimated(props) {
 
   const campfire = useSelector((state) => state.reverse.isCampfireOn);
 
-  console.log(campfire);
   useFrame((state) => {
     if (campfire) {
       // eventSpot.current.children[0].material.color.r = 1;

@@ -52,7 +52,6 @@ function ReverseFriendModal({ joinMembers }) {
     setFindNickName(e.target.value);
   };
   useEffect(() => {
-    console.log(reverse);
     if (reverse.info.archiveId) {
       getArchiveDetail(
         reverse.info.archiveId,
@@ -71,14 +70,12 @@ function ReverseFriendModal({ joinMembers }) {
   };
 
   const getFriendSuccess = (res) => {
-    console.log(res);
     dispatch(setFriendList(res.data.friendList));
   };
   const getFriendFail = (error) => {
     console.log(error);
   };
   const getArchiveDetailSuccess = (res) => {
-    console.log(res);
     setArchive(res.data);
     dispatch(setJoinArchive(res.data));
     dispatch(
@@ -94,7 +91,6 @@ function ReverseFriendModal({ joinMembers }) {
   };
 
   const shareMember = async (nickname) => {
-    console.log(archive);
     await createArchiveMember(
       archive.id,
       nickname,
@@ -111,7 +107,6 @@ function ReverseFriendModal({ joinMembers }) {
     );
   };
   const editMemberSuccess = async (res) => {
-    console.log(res);
     await getList();
     await getArchiveDetail(
       reverse.info.archiveId,
@@ -126,7 +121,6 @@ function ReverseFriendModal({ joinMembers }) {
     await getArchiveList(0, getArchiveListSuccess, getArchiveListFail);
   };
   const getArchiveListSuccess = (res) => {
-    console.log(res);
     dispatch(setMyArchiveList(res.data.archives));
   };
   const getArchiveListFail = (error) => {
@@ -157,11 +151,8 @@ function ReverseFriendModal({ joinMembers }) {
                 {joinArchive?.members
                   .filter((member) => {
                     for (let index = 0; index < joinMembers.length; index++) {
-                      console.log(member);
                       const element = joinMembers[index];
-                      console.log(element);
                       if (element == member.nickname) {
-                        console.log("mmmmmmmmmmmmmmmmmmmmmmmmmm");
                         return member;
                       }
                     }

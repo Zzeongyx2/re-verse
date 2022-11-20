@@ -23,19 +23,15 @@ function FriendRequest() {
 
   const friendRequest = (nickname) => {
     requestFriend(nickname, requestFriendSuccess, requestFriendFail);
-    console.log("친구요청", nickname);
   };
   const requestFriendSuccess = async (res) => {
     await settingFriendList();
-
-    console.log(res);
   };
   const settingFriendList = async () => {
     await getFriendList(getFriendSuccess, getFriendFail);
   };
 
   const getFriendSuccess = (res) => {
-    console.log(res);
     dispatch(setFriendList(res.data.friendList));
   };
   const getFriendFail = (error) => {
@@ -49,7 +45,6 @@ function FriendRequest() {
   }, [findNickName]);
 
   const searchUserSuccess = (res) => {
-    console.log(res);
     setUserList(res.data.users);
   };
   const searchUserFail = (error) => {

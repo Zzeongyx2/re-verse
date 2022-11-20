@@ -4,7 +4,11 @@ import { Toast } from "../atoms/Toast";
 import ReverseSettingModal from "./ReverseSettingModal";
 import ReverseFriendModal from "./ReverseFriendsModal";
 import { logout } from "../../api/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoginUser } from "../../modules/user";
 function ReverseNavbar({ joinMembers }) {
+  const dispatch = useDispatch();
+  const loginUser = useSelector((state) => state.user.loginUser);
   return (
     <div className="my-2 mx-4 flex justify-between">
       {/* 리버스 로고 버튼 - 메인 로비로 가기 버튼 & 로그아웃 버튼 모달 */}
@@ -20,7 +24,6 @@ function ReverseNavbar({ joinMembers }) {
           }).then((result) => {
             if (result.isConfirmed) {
               window.location.href = "/lobby";
-              // navigate("/lobby");
               Toast.fire({
                 icon: "success",
                 title: "로비로 이동하였습니다",
@@ -29,7 +32,14 @@ function ReverseNavbar({ joinMembers }) {
             } else if (result.dismiss === Swal.DismissReason.cancel) {
               logout(
                 (res) => {
-                  console.log(res);
+                  dispatch(
+                    setLoginUser({
+                      nickname: "",
+                      message: "",
+                      avatar: "",
+                      bestArchiveId: "",
+                    })
+                  );
                 },
                 (error) => {
                   console.log(error);

@@ -20,7 +20,6 @@ function apiInstance() {
           await instance
             .post("/auth/reissue")
             .then((res) => {
-              console.log(res);
               window.location.reload();
             })
             .catch((error) => {
@@ -33,7 +32,7 @@ function apiInstance() {
       }
       console.log(error);
       return Promise.reject(error);
-    },
+    }
   );
   return instance;
 }

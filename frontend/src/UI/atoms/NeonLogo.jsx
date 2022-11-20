@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Login from "../pages/Login";
 
@@ -7,6 +8,8 @@ function NeonLogo() {
   const handleMove = () => {
     setMove((prev) => !prev);
   };
+
+  const loginUser = useSelector((state) => state.user.loginUser);
 
   return (
     <div className="flex items-center justify-center">
@@ -35,7 +38,10 @@ function NeonLogo() {
             : " animate-fadein transition-transform delay-1000")
         }
       >
-        <Link to="/login" element={<Login />}>
+        <Link
+          to={loginUser.nickname.length > 0 ? "/lobby" : "/login"}
+          element={<Login />}
+        >
           <span className="font-neon text-[5.5em] text-[#f890e7] drop-shadow-4xl">
             START
           </span>

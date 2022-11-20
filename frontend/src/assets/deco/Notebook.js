@@ -19,24 +19,6 @@ import { Toast } from "../../UI/atoms/Toast";
 export function Notebook({ props, event, position, rotation }) {
   const { nodes, materials } = useGLTF("/assets/notebook/scene.gltf");
   const travelWriteObject = useRef();
-  // console.log("notebook");
-  // console.log(event);
-
-  // useFrame((state) => {
-  //   if (event === 1) {
-  //     gsap.to(travelWriteObject.current.position, {
-  //       duration: 0.3,
-  //       y: 0.4,
-  //       ease: "Bounce.easeOut",
-  //     });
-  //   } else if (event !== 1) {
-  //     gsap.to(travelWriteObject.current.position, {
-  //       duration: 0.4,
-  //       y: -2.2,
-  //       ease: "Bounce.easeOut",
-  //     });
-  //   }
-  // });
 
   // modal창 열어주세요
   const dispatch = useDispatch();
@@ -81,9 +63,7 @@ export function Notebook({ props, event, position, rotation }) {
           <group
             rotation={[-Math.PI / 2, 0, 0.7]}
             onClick={() => {
-              console.log("노트북 눌렀따");
               if (joinArchive.members[0].nickname !== loginUser.nickname) {
-                console.log("alert 뜬곳");
                 Toast.fire({
                   icon: "error",
                   title: "글쓰기 권한이 없습니다",
@@ -107,8 +87,6 @@ export function Notebook({ props, event, position, rotation }) {
           </mesh>
         </group>
       </group>
-
-      {/* <Box destinationPoint={position} /> */}
     </group>
   );
 }

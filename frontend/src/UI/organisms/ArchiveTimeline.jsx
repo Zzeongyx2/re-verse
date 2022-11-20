@@ -28,7 +28,6 @@ function ArchiveTimeline() {
   };
 
   const success = (res) => {
-    console.log(res);
     dispatch(setInfo({ ...reverse.info, details: res.data }));
   };
 

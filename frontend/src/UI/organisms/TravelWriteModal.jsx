@@ -46,7 +46,6 @@ function TravelWriteModal() {
     );
   };
   const success = (res) => {
-    console.log(res);
     getStuffDetail(
       reverse.info.archiveId,
       reverse.info.stuffs[reverse.selectStuff].id,
@@ -56,7 +55,6 @@ function TravelWriteModal() {
   };
 
   const stuffSuccess = (res) => {
-    console.log(res);
     if (reverse.selectStuff === 0) {
       dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
     } else if (reverse.selectStuff === 1) {
@@ -121,7 +119,6 @@ function TravelWriteModal() {
             </button>
             <button
               onClick={() => {
-                console.log("travel article is posted!");
                 dispatch(createArticle({ ...reverse.article, title: title }));
                 handlePostPaper();
                 dispatch(setTravelWriteIsOpen());
