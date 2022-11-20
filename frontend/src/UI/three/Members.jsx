@@ -12,42 +12,123 @@ import zzeongyx from "../../assets/members/zzeongyx.jpg";
 import yoonyoung from "../../assets/members/yoonyoung.jpg";
 
 export default function Members() {
-  const [click, setClick] = useState(false);
-  const handleClick = () => {
-    setClick((prev) => !prev);
-  };
+  const [click, setClick] = useState(-1);
   return (
     <div className="page__container">
       <div className="page__wrapper">
-        <div className="page__hero">
-          <div className="page__image"></div>
-
-          <div className="page__text">
-            <h1 className="font-travel text-white">WELCOME TO THE REVERSE</h1>
-            {!click && (
-              <div className="grid grid-cols-3">
-                {profiles.map((info, idx) => {
-                  return (
-                    <button
-                      onClick={handleClick}
-                      key={idx}
-                      className="border-8 hover:border-main2"
-                    >
-                      <img
-                        className="w-full h-full rounded-sm object-cover"
-                        src={info.img}
-                        alt={info.name}
-                      />
-                    </button>
-                  );
+        <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1650986656202-c8ceceb9b1ae?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2064&q=80')]">
+          <div className="text-center z-10 p-[1rem] flex flex-col">
+            <div className="font-bold text-white text-[2rem] pb-[0.5rem]">
+              WELCOME TO THE REVERSE
+            </div>
+            <div>
+              {click === -1 && (
+                <div className="grid grid-cols-3 justify-items-center gap-2">
+                  {profiles.map((info, idx) => {
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => {
+                          setClick(idx);
+                        }}
+                        className="bg-white rounded-lg border-8 hover:border-main2"
+                      >
+                        <img
+                          className="w-full h-full object-cover rounded-sm"
+                          src={info.img}
+                          alt={info.name}
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+              {click > -1 &&
+                profiles.map((info, idx) => {
+                  if (idx === click)
+                    return (
+                      <div
+                        key={`detail-${idx}`}
+                        className="flex w-full h-[480px] bg-white rounded-lg"
+                      >
+                        <div className="w-2/5 m-2">
+                          <img src={info.img} alt={info.nickname} />
+                          <button
+                            onClick={() => {
+                              setClick(-1);
+                            }}
+                            className="bg-white"
+                          >
+                            GO BACK
+                          </button>
+                        </div>
+                      </div>
+                    );
                 })}
-              </div>
-            )}
-            {click && <div className="w-full h-full"></div>}
+            </div>
           </div>
         </div>
       </div>
     </div>
+    // <div className="page__container">
+    //   <div className="page__wrapper">
+    //     <div className="page__hero">
+    //       <div className="page__text">
+    //         <div className="h-1/6 font-travel text-white">
+    //           WELCOME TO THE REVERSE
+    //         </div>
+    //         <div className="h-5/6">
+    //           {click === -1 && (
+    //             <div className="grid grid-cols-3">
+    //               {profiles.map((info, idx) => {
+    //                 return (
+    //                   <button
+    //                     onClick={() => {
+    //                       setClick(idx);
+    //                     }}
+    //                     key={idx}
+    //                     className="border-8 hover:border-main2"
+    //                   >
+    //                     <img
+    //                       // className="page__image"
+    //                       className="w-full h-full rounded-sm object-cover"
+    //                       src={info.img}
+    //                       alt={info.name}
+    //                     />
+    //                   </button>
+    //                 );
+    //               })}
+    //             </div>
+    //           )}
+    //           {click > -1 &&
+    //             profiles.map((info, idx) => {
+    //               if (idx === click) {
+    //                 return (
+    //                   <div
+    //                     key={`detail-${idx}`}
+    //                     className="w-full bg-white rounded-xl px-[2rem] py-[1rem]"
+    //                   >
+    //                     <img
+    //                       className="w-full h-5/6 rounded-sm object-cover"
+    //                       src={info.img}
+    //                       alt=""
+    //                     />
+    //                     <button
+    //                       onClick={() => {
+    //                         setClick((prev) => -1);
+    //                       }}
+    //                     >
+    //                       GO BACK
+    //                     </button>
+    //                   </div>
+    //                 );
+    //               }
+    //             })}
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 
