@@ -160,58 +160,6 @@ function ArticleDetailCard() {
             </button>
           </div>
         </div>
-        {/* <Card width={"xs"}>
-          <CardHeader px={4} py={0}>
-            <div className="flex justify-between">
-              <div className="text-lg font-semibold">{info.details.title}</div>
-              <button onClick={() => dispatch(setIsCardOpen())}>
-                <BiArrowBack />
-              </button>
-            </div>
-            {info.details.memoryTime === "" ? (
-              <div className="text-sm text-basic1">
-                {new Date(info.details.memoryTime).toLocaleDateString() + " "}
-                {weekDay[new Date(info.details.memoryTime).getDay()]}
-              </div>
-            ) : (
-              <div className="text-sm text-basic1">
-                {new Date().toLocaleDateString() + " "}
-                {weekDay[new Date().getDay()]}
-              </div>
-            )}
-          </CardHeader>
-          <CardBody minH={323}>
-            <div
-              dangerouslySetInnerHTML={{ __html: info.details.content }}
-            ></div>
-          </CardBody>
-          <CardFooter
-            // pb={4}
-            justify="space-between"
-            flexWrap="wrap"
-            sx={{
-              "& > button": {
-                minW: "136px",
-              },
-            }}
-          >
-            <button
-              onClick={() => {
-                dispatch(setEditBtn());
-              }}
-            >
-              수정하기
-            </button>
-            <button
-              onClick={() => {
-                handleDelete();
-                dispatch(setIsCardOpen());
-              }}
-            >
-              삭제하기
-            </button>
-          </CardFooter>
-        </Card> */}
       </div>
     )
   );
