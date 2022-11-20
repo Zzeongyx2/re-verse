@@ -184,7 +184,7 @@ function TravelReadModal() {
         // bgRepeat="no-repeat"
         />
         {!reverse.editBtn ? (
-          <ModalContent minH="600" maxW="350">
+          <ModalContent minH="800" maxW="500">
             {/* <ModalHeader>
               <CloseButton
                 onClick={() => {
@@ -196,7 +196,7 @@ function TravelReadModal() {
             <ModalBody p={0} bgColor={"transparent"}>
               {/* <div className="mt-4 mb-6 font-travel font-bold text-xl text-center "></div> */}
               <div
-                className={`h-[600px] overflow-hidden ${
+                className={`h-[800px] overflow-hidden ${
                   !reverse.isCardOpen ? "flex justify-center" : null
                 }`}
               >
