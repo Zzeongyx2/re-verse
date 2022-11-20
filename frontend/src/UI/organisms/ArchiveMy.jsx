@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { Avatar, Tooltip } from "@chakra-ui/react";
+import { Avatar, AvatarGroup, Tooltip } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
 
 import { BiLogIn } from "react-icons/bi";
@@ -29,7 +29,7 @@ function ArchiveMy() {
     editBestArchive(
       archive.archiveId,
       editBestArchiveSuccess,
-      editBestArchiveFail,
+      editBestArchiveFail
     );
   };
   const editBestArchiveSuccess = (res) => {
@@ -62,8 +62,8 @@ function ArchiveMy() {
 
   return (
     <div className="text-base2">
-      <div className="bg-white rounded-3xl w-full h-full pt-5 pb-6 flex justify-center">
-        <div className="w-[calc(100%-50px)] overflow-auto scrollbar-hide">
+      <div className="bg-white rounded-3xl w-full h-[calc(600px)] pt-5 pb-6 flex justify-center">
+        <div className="xl:w-[calc(100%-50px)] lg:w-[calc(96%)] overflow-auto scrollbar-hide">
           {archiveList.map((archive, index) => {
             return (
               <div key={`archive-${index}`}>
@@ -75,7 +75,7 @@ function ArchiveMy() {
                       onClick={() => {
                         changeBestArchive(archive);
                       }}
-                      className="w-14 text-extra1"
+                      className="w-8 md:w-14 text-extra1"
                     >
                       {archive.archiveId === loginUser.bestArchiveId ? (
                         <RiVipCrownFill size={18} />
@@ -84,39 +84,39 @@ function ArchiveMy() {
                       )}
                     </button>
                     {/* 아카이브 이름 */}
-                    <p className="text-sm font-bold overflow-hidden text-ellipsis line-clamp-1 md:w-44 sm:w-36">
+                    <p className="text-sm font-bold overflow-hidden text-ellipsis line-clamp-1 lg:w-44 md:w-36 w-24">
                       {archive.title}
                     </p>
                   </div>
                   {/* 아카이브 설명 */}
-                  <p className="text-sm text-zinc-500 overflow-hidden text-ellipsis line-clamp-1 md:w-56 sm:w-52">
+                  <p className="text-sm text-zinc-500 overflow-hidden text-ellipsis line-clamp-1 lg:w-52 md:w-40 w-32 mr-2">
                     {archive.description}
                   </p>
                   {/* 들어가있는 멤버 */}
-                  <div className="w-40">
-                    {/* <AvatarGroup size="sm" max={5} spacing="-2"> */}
-                    {archive.members.map((member, index) => {
-                      return (
-                        <Tooltip
-                          label={`${member.nickname}`}
-                          aria-label="A tooltip"
-                          key={`avatar-${index}`}
-                        >
-                          <Avatar
-                            size={"sm"}
-                            marginLeft={-1.5}
-                            variant="avatarBorder"
-                            name="profileImg"
-                            src={s3Path + member.avatar + imageForm}
-                            alt={index}
-                          />
-                        </Tooltip>
-                      );
-                    })}
-                    {/* </AvatarGroup> */}
+                  <div className="w-32 md:w-36">
+                    <AvatarGroup max={5} spacing="-2">
+                      {archive.members.map((member, index) => {
+                        return (
+                          <Tooltip
+                            label={`${member.nickname}`}
+                            aria-label="A tooltip"
+                            key={`avatar-${index}`}
+                          >
+                            <Avatar
+                              size={{ base: "xs", md: "sm" }}
+                              marginLeft={-1.5}
+                              variant="avatarBorder"
+                              name="profileImg"
+                              src={s3Path + member.avatar + imageForm}
+                              alt={index}
+                            />
+                          </Tooltip>
+                        );
+                      })}
+                    </AvatarGroup>
                   </div>
                   {/* 버튼들 */}
-                  <div>
+                  <div className="w-32">
                     {/* 아카이브 입장 */}
                     <button
                       className="bg-main1 border-2 border-basic3 rounded-full"
