@@ -1,8 +1,8 @@
 .cell {
   display: flex;
   background-color: rgb(136, 80, 83);
-  min-width: 30px;
-  min-height: 30px;
+  min-width: 40px;
+  min-height: 40px;
   align-items: center;
   justify-content: center;
   cursor: pointer;
