@@ -119,7 +119,7 @@ const profiles = [
     role: "BE",
     img: wonchang,
     comments: "더 울어라...",
-    github: "https://github.com/wonchangPark",
+    github: "github.com/wonchangPark",
     mail: "parkwc0213@naver.com",
   },
   {
