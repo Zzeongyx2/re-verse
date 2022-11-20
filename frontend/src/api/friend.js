@@ -1,7 +1,6 @@
 import { apiInstance } from "./index";
 
 const api = apiInstance();
-// const fileApi = fileApiInstance();
 
 async function deleteFriend(nickname, success, fail) {
   await api

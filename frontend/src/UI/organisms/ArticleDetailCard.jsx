@@ -1,10 +1,3 @@
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CloseButton,
-} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePaper, getStuffDetail } from "../../api/reverse";
@@ -26,7 +19,6 @@ function ArticleDetailCard() {
   const dispatch = useDispatch();
   const info = useSelector((state) => state.reverse.info);
   const reverse = useSelector((state) => state.reverse);
-  const edit = useSelector((state) => state.reverse.editBtn);
 
   const weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
@@ -59,7 +51,6 @@ function ArticleDetailCard() {
     } else if (reverse.selectStuff === 2) {
       dispatch(setDiary({ ...reverse.diary, articleList: res.data.papers }));
     }
-    // dispatch(setTravel({ ...travel, articleList: res.data.papers }));
     dispatch(setInfo({ ...info, details: null }));
   };
 
@@ -125,14 +116,6 @@ function ArticleDetailCard() {
           </div>
           {/* title */}
           <div className="text-lg font-semibold">{info.details.title}</div>
-          {/* createdTime */}
-          {/* <div className="text-sm text-basic1">
-            생성날짜 : {info.details.createdTime.slice(0, -9)}
-          </div> */}
-          {/* lastEditedTime */}
-          {/* <div className="text-sm text-basic1">
-            최근 수정날짜 : {info.details.lastEditedTime.slice(0, -9)}
-          </div> */}
           {/* content */}
           <div className="mx-2 mt-2 h-[590px] overflow-auto scrollbar-hide">
             <div

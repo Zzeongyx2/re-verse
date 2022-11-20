@@ -1,7 +1,5 @@
 import { OrbitControls } from "@react-three/drei/core";
 import { Canvas } from "@react-three/fiber";
-import { useEffect } from "react";
-import { useState } from "react";
 import SelectedCharacter from "../atoms/SelectedCharacter";
 
 function LobbyCharacterThree({ animalName }) {

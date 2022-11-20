@@ -1,8 +1,0 @@
-Model Information:
-* title:	Camping Pack
-* source:	https://sketchfab.com/3d-models/camping-pack-d6b274f1760d46d8b8bb8045f93ab12c
-* author:	L3X (https://sketchfab.com/L3X)
-
-Model License:
-* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
-* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

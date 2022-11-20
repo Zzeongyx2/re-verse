@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserInfo } from "../../api/user";
-import { setLoginUser } from "../../modules/user";
+import React from "react";
+import { useSelector } from "react-redux";
 import NeonLightBG from "../atoms/NeonLightBG";
 
 function Loading() {

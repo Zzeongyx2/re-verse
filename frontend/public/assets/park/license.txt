@@ -1,8 +1,0 @@
-Model Information:
-* title:	Isometric Low Poly Park
-* source:	https://sketchfab.com/3d-models/isometric-low-poly-park-36d03819e5154f2d876924220c035ee4
-* author:	N1x (https://sketchfab.com/N1x)
-
-Model License:
-* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
-* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

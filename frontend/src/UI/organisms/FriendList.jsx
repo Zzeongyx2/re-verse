@@ -19,7 +19,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { setFriendList } from "../../modules/friend";
 
 function FriendList() {
-  // const [friendList, setFriendList] = useState([]);
   const friendList = useSelector((state) => state.friend.friendList);
   const dispatch = useDispatch();
   const [findNickName, setFindNickName] = useState("");
@@ -54,7 +53,6 @@ function FriendList() {
   const enterArchive = (archiveId) => {
     console.log(archiveId, "이동");
     navigate(`/reverse/${archiveId}`);
-    // navigate(`/reversetemp/${archiveId}`);
   };
 
   const archiveDelete = async (archiveId) => {
@@ -62,7 +60,7 @@ function FriendList() {
       archiveId,
       loginUser.nickname,
       deleteArchiveMemberSuccess,
-      deleteArchiveMemberFail,
+      deleteArchiveMemberFail
     );
     console.log(archiveId, "삭제");
     await settingFriendArchiveList();
@@ -99,7 +97,7 @@ function FriendList() {
     await getFriendArchiveList(
       selectFriend.nickname,
       getFriendArchiveListSuccess,
-      getFriendArchiveListFail,
+      getFriendArchiveListFail
     );
   };
   const getFriendArchiveListSuccess = (res) => {
@@ -141,7 +139,6 @@ function FriendList() {
                   <div key={`friend-${index}`}>
                     <div className="flex items-center justify-between px-2 py-1">
                       <div className="flex items-center">
-                        {/* <img src={friend.avatar} alt={friend.nickname} /> */}
                         <Avatar
                           name="profileImg"
                           src={s3Path + friend.avatar + imageForm}
@@ -159,9 +156,6 @@ function FriendList() {
                           <p className="overflow-hidden text-ellipsis line-clamp-1 text-xs text-zinc-500">
                             {friend.message}
                           </p>
-                          {/* <div className="whitespace-nowrap overflow-hidden text-ellipsis">
-                        {friend.message}
-                      </div> */}
                         </div>
                       </div>
                       <button
@@ -171,7 +165,6 @@ function FriendList() {
                       >
                         <FiMinusCircle className="text-sub3" size={24} />
                       </button>
-                      {/* </div> */}
                     </div>
                     <Divider />
                   </div>
@@ -182,7 +175,6 @@ function FriendList() {
         {/* archive list */}
         {selectFriend ? (
           <div className="bg-white rounded-3xl w-[calc(96%/2)] h-[600px] pt-5 pb-6 flex flex-col items-center">
-            {/* <div className="bg-white rounded-3xl w-[calc(96%/2)] h-full pt-5 pb-6 flex flex-col items-center"> */}
             <div className="w-[calc(100%-50px)] text-xl font-bold mb-2">
               <p className="mt-2 mb-2 mx-2 px-2.5">{rightTitle}</p>
               <Divider />

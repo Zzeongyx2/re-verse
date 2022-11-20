@@ -23,7 +23,6 @@ function ReverseSettingModal() {
       <button
         onClick={onOpen}
         className="border-2 border-white bg-gradient-to-t from-main2 to-sub2 flex items-center rounded-full mb-2 hover:animate-spin-slow"
-        // className="bg-white flex items-center rounded-full mb-2 hover:animate-spin-slow"
       >
         <BiCog className="text-2xl m-1.5" />
       </button>
@@ -61,7 +60,6 @@ function ReverseSettingModal() {
                   isChecked={webrtcRedux.headCheck}
                   onChange={() => {
                     dispatch(setHeadCheck(!webrtcRedux.headCheck));
-                    // console.log(webrtcRedux);
                   }}
                 />
               </FormControl>
@@ -90,7 +88,6 @@ function ReverseSettingModal() {
                   isChecked={webrtcRedux.micCheck}
                   onChange={() => {
                     dispatch(setMicCheck(!webrtcRedux.micCheck));
-                    // console.log(webrtcRedux);
                   }}
                 />
               </FormControl>

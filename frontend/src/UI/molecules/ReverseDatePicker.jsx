@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useRef } from "react";
 import { forwardRef, useState } from "react";
 import DatePicker from "react-datepicker";
 
@@ -20,76 +19,47 @@ function ReverseDatePicker() {
   ));
 
   const [editDate, setEditDate] = useState(reverse.info.details?.memoryTime);
-  const handleEditDate = (e) => {
-    setEditDate(e.target.value);
-  };
+
   useEffect(() => {
     if (!reverse.editBtn) {
       setTimeout(() => {
         dispatch(
-          createArticle({ ...reverse.article, memoryDate: `${startDate}` }),
+          createArticle({ ...reverse.article, memoryDate: `${startDate}` })
         );
         console.log(startDate);
         console.log(reverse.article);
       }, 500);
     }
   }, [reverse.travelWriteIsOpen]);
-  // useEffect(() => {
-  //   dispatch(
-  //     createArticle({
-  //       ...reverse.article,
-  //       memoryDate: reverse.info.details.memoryTime,
-  //     })
-  //   );
-  // }, [reverse.info.details.memoryTime]);
 
-  return (
-    // <DatePicker
-    //   dateFormat="yyyy.MM.dd (eee)"
-    //   // selected={startDate}
-    //   selected={!reverse.editBtn ? startDate : editDate}
-    //   onChange={(date) => {
-    //     setStartDate(date);
-    //     dispatch(createArticle({ ...reverse.article, memoryDate: `${date}` }));
-    //   }}
-    //   customInput={<InputBtn />}
-    //   maxDate={new Date()}
-    // />
-    !reverse.editBtn ? (
-      <DatePicker
-        dateFormat="yyyy.MM.dd (eee)"
-        selected={startDate}
-        onChange={(date) => {
-          setStartDate(date);
-          dispatch(
-            createArticle({ ...reverse.article, memoryDate: `${date}` }),
-          );
-        }}
-        customInput={<InputBtn />}
-        maxDate={new Date()}
-      />
-    ) : (
-      <DatePicker
-        dateFormat="yyyy.MM.dd (eee)"
-        selected={new Date(editDate)}
-        onChange={(date) => {
-          setEditDate(date);
-          dispatch(
-            setInfo({
-              archiveId: reverse.info.archiveId,
-              stuffs: reverse.info.stuffs,
-              details: { ...reverse.info.details, memoryTime: date },
-            }),
-          );
-          // dispatch(
-          //   createArticle({ ...reverse.article, memoryDate: `${date}` })
-          // );
-          console.log(reverse.article.memoryDate);
-        }}
-        customInput={<InputBtn />}
-        maxDate={new Date()}
-      />
-    )
+  return !reverse.editBtn ? (
+    <DatePicker
+      dateFormat="yyyy.MM.dd (eee)"
+      selected={startDate}
+      onChange={(date) => {
+        setStartDate(date);
+        dispatch(createArticle({ ...reverse.article, memoryDate: `${date}` }));
+      }}
+      customInput={<InputBtn />}
+      maxDate={new Date()}
+    />
+  ) : (
+    <DatePicker
+      dateFormat="yyyy.MM.dd (eee)"
+      selected={new Date(editDate)}
+      onChange={(date) => {
+        setEditDate(date);
+        dispatch(
+          setInfo({
+            archiveId: reverse.info.archiveId,
+            stuffs: reverse.info.stuffs,
+            details: { ...reverse.info.details, memoryTime: date },
+          })
+        );
+      }}
+      customInput={<InputBtn />}
+      maxDate={new Date()}
+    />
   );
 }
 

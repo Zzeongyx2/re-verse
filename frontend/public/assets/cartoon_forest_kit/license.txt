@@ -1,8 +1,0 @@
-Model Information:
-* title:	Cartoon Forest Kit
-* source:	https://sketchfab.com/3d-models/cartoon-forest-kit-793d6112bc2a48df8824cceb89f2dd6e
-* author:	BlackSpire (https://sketchfab.com/blackspire)
-
-Model License:
-* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
-* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

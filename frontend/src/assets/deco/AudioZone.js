@@ -1,6 +1,5 @@
 import { PositionalAudio } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setLoadingPage } from "../../modules/loading";
@@ -36,44 +35,6 @@ export default function AudioZone(params) {
     }
   }, [initAudio]);
 
-  // const musicList = [
-  //   <PositionalAudio
-  //     ref={audioref}
-  //     autoplay
-  //     loop
-  //     url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/Sweet-Mood_AdobeStock_452607713_preview.m4a"
-  //     distance={2}
-  //   />,
-  //   <PositionalAudio
-  //     ref={audioref}
-  //     autoplay
-  //     loop
-  //     url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/TheCats.m4a"
-  //     distance={2}
-  //   />,
-  //   <PositionalAudio
-  //     ref={audioref}
-  //     autoplay
-  //     loop
-  //     url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/A-Picnic-With-My-Family_AdobeStock_452603097_preview.m4a"
-  //     distance={2}
-  //   />,
-  //   <PositionalAudio
-  //     ref={audioref}
-  //     autoplay
-  //     loop
-  //     url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/We-Wish-You-A-Merry-Christmas_AdobeStock_353746933_preview.m4a"
-  //     distance={2}
-  //   />,
-  //   <PositionalAudio
-  //     ref={audioref}
-  //     autoplay
-  //     loop
-  //     url="https://re-verse-bucket.s3.ap-northeast-2.amazonaws.com/bgm/Emotional-Cinematic-Music-Box_AdobeStock_528505763_preview.m4a"
-  //     distance={2}
-  //   />,
-  // ];
-
   return (
     <group>
       <mesh
@@ -86,7 +47,6 @@ export default function AudioZone(params) {
       </mesh>
 
       <group>
-        {/* {webrtcRedux.bgmCheck && musicList[webrtcRedux.musicTheme]} */}
         {webrtcRedux.bgmCheck && webrtcRedux.musicTheme === 0 ? (
           <PositionalAudio
             ref={audioref}

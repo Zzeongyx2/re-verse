@@ -5,30 +5,19 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  FormControl,
-  ModalCloseButton,
-  CloseButton,
 } from "@chakra-ui/react";
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { editPaper, getPaper, getStuffDetail } from "../../api/reverse";
 import {
-  createArticle,
   setAnniv,
   setDiary,
   setEditBtn,
   setInfo,
-  setIsCardOpen,
-  setModalIsOpen,
   setTravel,
-  setTravelReadIsOpen,
-  setTravelWriteIsOpen,
 } from "../../modules/reverse";
 
-import { AiOutlineCalendar, AiOutlineClose } from "react-icons/ai";
-import ArticlesTimeline from "./TravelTimeline";
-import ArticleDetail from "./ArticleDetail";
+import { AiOutlineCalendar } from "react-icons/ai";
 
 import ArchiveDatePicker from "../molecules/ReverseDatePicker";
 import ReverseTextEditor from "./ReverseTextEditor";
@@ -37,19 +26,15 @@ import moment from "moment/moment";
 import ArticleDetailCard from "./ArticleDetailCard";
 import ArchiveTimeline from "./ArchiveTimeline";
 
-import handImage from "../../assets/handimage.png";
-
 function TravelReadModal() {
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
-  const joinArchive = useSelector((state) => state.archive.joinArchive);
   const [editTitle, setEditTitle] = useState("");
   useEffect(() => {
     if (reverse.info.details) setEditTitle(reverse.info.details.title);
   }, [reverse.info.details]);
   const handleEditTitle = (e) => {
     setEditTitle(e.target.value);
-    // dispatch(createArticle({ ...reverse.article, title: editTitle }));
   };
   const handleGetDetail = async () => {
     await getPaper(
@@ -61,15 +46,11 @@ function TravelReadModal() {
     );
   };
   const success = (res) => {
-    // console.log(res);
     dispatch(setInfo({ ...reverse.info, details: res.data }));
   };
 
-  const fail = (err) => {
-    // console.log(err);
-  };
+  const fail = (err) => {};
   const editSaveContent = () => {
-    // dispatch(createArticle({ ...reverse.article, content: editText }));
     dispatch(
       setInfo({
         archiveId: reverse.info.archiveId,
@@ -79,7 +60,6 @@ function TravelReadModal() {
     );
   };
 
-  // 이거.. 왜 돼...? 너 뭐야...??
   useEffect(() => {
     editSaveContent();
   }, [editTitle]);
@@ -102,7 +82,6 @@ function TravelReadModal() {
   };
 
   const editSuccess = (res) => {
-    // console.log(res);
     getStuffDetail(
       reverse.info.archiveId,
       reverse.info.stuffs[reverse.selectStuff].id,
@@ -122,13 +101,9 @@ function TravelReadModal() {
     }
   };
 
-  const stuffFail = (err) => {
-    // console.log(err);
-  };
+  const stuffFail = (err) => {};
 
-  const editFail = (err) => {
-    // console.log(err);
-  };
+  const editFail = (err) => {};
 
   const getDetailSuccess = (res) => {
     if (reverse.selectStuff == 0) {
@@ -138,11 +113,8 @@ function TravelReadModal() {
     } else if (reverse.selectStuff == 2) {
       dispatch(setDiary({ ...reverse.diary, articleList: res.data.papers }));
     }
-    // dispatch(setTravel({ ...reverse.travel, articleList: res.data.papers }));
   };
-  const getDetailFail = (err) => {
-    // console.log(err);
-  };
+  const getDetailFail = (err) => {};
   useEffect(() => {
     getStuffDetail(
       reverse.info.archiveId,
@@ -161,40 +133,13 @@ function TravelReadModal() {
     dispatch(setInfo({ ...reverse.info, details: null }));
   }, [reverse.selectStuff]);
 
-  // const [card, setCard] = useState(false);
-  // const handleOpenCard = () => {
-  //   setCard((prev) => !prev);
-  // };
-
   return (
     <>
-      <Modal
-        isOpen={reverse.travelReadIsOpen}
-        // onClose={dispatch(setOpen())}
-        size={"4xl"}
-        isCentered
-      >
-        <ModalOverlay
-        // bgImage={handImage}
-        // pos="absolute"
-        // bgPosition={["55.2%"]}
-        // left="0"
-        // // bgPosition={["55.2%"]}
-        // bgSize={"50%"}
-        // bgRepeat="no-repeat"
-        />
+      <Modal isOpen={reverse.travelReadIsOpen} size={"4xl"} isCentered>
+        <ModalOverlay />
         {!reverse.editBtn ? (
           <ModalContent minH="800" maxW="500">
-            {/* <ModalHeader>
-              <CloseButton
-                onClick={() => {
-                  // console.log("닫기 버튼");
-                  dispatch(setTravelReadIsOpen());
-                }}
-              />
-            </ModalHeader> */}
             <ModalBody p={0} bgColor={"transparent"}>
-              {/* <div className="mt-4 mb-6 font-travel font-bold text-xl text-center "></div> */}
               <div
                 className={`h-[800px] overflow-hidden ${
                   !reverse.isCardOpen ? "flex justify-center" : null
@@ -203,7 +148,6 @@ function TravelReadModal() {
                 {/* 글 목록 컴포넌트 */}
                 {!reverse.isCardOpen && (
                   <div className="">
-                    {/* <div className="h-[calc(90%)] overflow-auto scollbar-hide"> */}
                     <ArchiveTimeline />
 
                     {/* <ArticlesTimeline /> */}
@@ -212,27 +156,12 @@ function TravelReadModal() {
                 {reverse.isCardOpen && <ArticleDetailCard />}
               </div>
             </ModalBody>
-            {/* <ModalFooter
-              pt={0}
-              borderBottomRadius={"3xl"}
-              flex={true}
-              justifyContent={"center"}
-            >
-              <div
-                onClick={() => {
-                  // console.log("닫기 버튼");
-                  dispatch(setTravelReadIsOpen());
-                }}
-                className="cursor-pointer mt-4 mb-2 text-xl py-2 border-2 rounded-lg border-white w-10"
-              ></div>
-            </ModalFooter> */}
           </ModalContent>
         ) : (
           <ModalContent minH={"750"}>
             <ModalHeader mb={4} textAlign="center">
               글 수정하기
             </ModalHeader>
-            {/* <ModalCloseButton mt={1.5} /> */}
             <ModalBody>
               <div className="flex justify-between">
                 {/* 글 제목 수정*/}

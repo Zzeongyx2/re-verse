@@ -103,9 +103,6 @@ function FriendRequest() {
                           <p className="overflow-hidden text-ellipsis line-clamp-1 text-xs text-zinc-500">
                             {friend.message}
                           </p>
-                          {/* <div className="whitespace-nowrap overflow-hidden text-ellipsis">
-                        {friend.message}
-                      </div> */}
                         </div>
                       </div>
                       <button

@@ -2,18 +2,12 @@ import { useState, useEffect } from "react";
 import { editUserInfo, nicknameCheck } from "../../api/user";
 
 function LobbyProfile({ loginUser }) {
-  // const initialUserInfo = {
-  //   nickname: "zl존윤sun",
-  //   message: "늦었다고 생각할 때가 진짜 너무 늦었다",
-  // };
-
   const [userInfo, setUserInfo] = useState(loginUser);
   console.log(userInfo);
   useEffect(() => {
     setUserInfo(loginUser);
   }, [loginUser]);
 
-  // edit ? "편집하는 중!" : "편집 안하는 중"
   const [edit, setEdit] = useState(false);
 
   const handleChange = (e) => {
@@ -44,7 +38,6 @@ function LobbyProfile({ loginUser }) {
       return;
     }
     setIsValid({ valid: true, message: "" });
-    //axios 요청으로 닉네임 중복검사하기
 
     if (loginUser.nickname === userInfo.nickname) {
       return;
@@ -120,7 +113,7 @@ function LobbyProfile({ loginUser }) {
                   editUserInfo(
                     { nickname: userInfo.nickname, message: userInfo.message },
                     editUserInfoSuccess,
-                    editUserInfoFail,
+                    editUserInfoFail
                   );
 
                   setEdit(false);

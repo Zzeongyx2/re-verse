@@ -16,10 +16,7 @@ import { CloseButton } from "@chakra-ui/react";
 function ArchiveTimeline() {
   const dispatch = useDispatch();
   const reverse = useSelector((state) => state.reverse);
-  const [card, setCard] = useState(false);
-  const handleOpenCard = () => {
-    setCard((prev) => !prev);
-  };
+
   const handleGetDetail = async (paperId) => {
     await getPaper(
       reverse.info.archiveId,
@@ -38,8 +35,6 @@ function ArchiveTimeline() {
   const fail = (err) => {
     console.log(err);
   };
-
-  const weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
   const [time, setTime] = useState("00:00");
   const timeSet = new Set();
@@ -62,7 +57,6 @@ function ArchiveTimeline() {
 
   return (
     <div className="">
-      {/* <div className=" w-[300px] h-[600px] pr-6 flex flex-col p-2 rounded-lg"> */}
       <div className="my-2 w-[484px] h-[784px] bg-white flex flex-col py-2 px-4 rounded-lg ring-8 border-4 ring-gray-200 border-gray-200">
         {/* Status Bar */}
         <div className="w-100 flex justify-between mb-2">
@@ -83,7 +77,6 @@ function ArchiveTimeline() {
           <div className="text-xl font-semibold">RE-VERSE</div>
           <CloseButton
             onClick={() => {
-              // console.log("닫기 버튼");
               dispatch(setTravelReadIsOpen());
             }}
           />
@@ -104,13 +97,11 @@ function ArchiveTimeline() {
               <div>기록된 추억이 없어요!</div>
             )}
             <div className="flex flex-col md:grid grid-cols-12 text-gray-500">
-              {/* <div className="overflow-auto scollbar-hide"> */}
               {/* 글 목록 컴포넌트 */}
               {/* 선택한 stuff가 여행일때 */}
               {reverse.selectStuff === 0 &&
                 reverse.travel.articleList.length > 0 &&
                 reverse.travel.articleList.map((article, idx) => {
-                  // 중복되는 날짜는 동그라미 제거
                   const flag = timeSet.has(article.memoryTime);
                   if (!flag) {
                     timeSet.add(article.memoryTime);
@@ -147,7 +138,6 @@ function ArchiveTimeline() {
               {reverse.selectStuff === 1 &&
                 reverse.anniv.articleList.length > 0 &&
                 reverse.anniv.articleList.map((article, idx) => {
-                  // 중복되는 날짜는 동그라미 제거
                   const flag = timeSet.has(article.memoryTime);
                   if (!flag) {
                     timeSet.add(article.memoryTime);
@@ -184,7 +174,6 @@ function ArchiveTimeline() {
               {reverse.selectStuff === 2 &&
                 reverse.diary.articleList.length > 0 &&
                 reverse.diary.articleList.map((article, idx) => {
-                  // 중복되는 날짜는 동그라미 제거
                   const flag = timeSet.has(article.memoryTime);
                   if (!flag) {
                     timeSet.add(article.memoryTime);
@@ -220,25 +209,7 @@ function ArchiveTimeline() {
             </div>
           </div>
         </div>
-        <div className="">
-          {/* 글 하나 버튼 컴포넌트 */}
-          {/* <div
-          onClick={() => dispatch(setIsCardOpen())}
-          className="mb-5 cursor-pointer rounded-xl w-[calc(100%-56px)] mx-auto p-1 bg-basic3 hover:bg-gradient-to-r hover:from-main1 hover:to-main2 transition hover:delay-500"
-          // className="mb-5 cursor-pointer px-2 py-2 rounded-md bg-white drop-shadow-lg w-[calc(100%-20px)] mx-auto hover:bg-gradient-to-r hover:from-main1 hover:to-main2"
-        >
-          <div className="bg-white rounded-lg  py-2 px-4">
-            <div className="font-semibold text-base1 text-sm">
-              2022.11.19 SAT
-            </div>
-            <div className="text-ellipsis line-clamp-1 font-semibold text-lg ">
-              content title
-            </div>
-          </div>
-        </div> */}
-
-          {/* <ArticlesTimeline /> */}
-        </div>
+        <div className=""></div>
       </div>
     </div>
   );

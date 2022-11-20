@@ -4,18 +4,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NonLoginMain from "./UI/pages/NonLoginMain";
 import Login from "./UI/pages/Login";
 import Signin from "./UI/pages/Signin";
-import TestPage from "./UI/pages/TestPage";
 import Lobby from "./UI/pages/Lobby";
 import Character from "./UI/pages/Character";
 import Friend from "./UI/pages/Friend";
 import Archive from "./UI/pages/Archive";
-import NeonTest from "./UI/pages/NeonTest";
-import ReverseTemp from "./UI/pages/ReverseTemp";
-import ReverseWebRTC from "./UI/pages/ReverseWebRTC";
-import ReverseTextEditor from "./UI/organisms/ReverseTextEditor";
 import ReverseHelper from "./UI/pages/ReverseHelper";
-import LazyAudio from "./UI/pages/LazyAudio";
-import Phone from "./UI/pages/Phone";
 import Members from "./UI/three/Members";
 
 axios.defaults.withCredentials = true;
@@ -29,17 +22,11 @@ function App() {
           <Route path="/" element={<NonLoginMain />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signin" element={<Signin />} />
-          <Route path="/test" element={<TestPage />} />
           <Route path="/lobby" element={<Lobby />} />
           <Route path="/character" element={<Character />} />
           <Route path="/friend/*" element={<Friend />} />
           <Route path="/archive/*" element={<Archive />} />
-          <Route path="/neontest" element={<NeonTest />} />
           <Route path="/reverse/:archiveId" element={<ReverseHelper />} />
-          <Route path="/reversetemp/:archiveId" element={<ReverseTemp />} />
-          <Route path="/reverse/rtc" element={<ReverseWebRTC />} />
-          <Route path="/audiote/:archiveId" element={<LazyAudio />} />
-          <Route path="/phone" element={<Phone />} />
           <Route path="/members" element={<Members />} />
         </Routes>
       </div>

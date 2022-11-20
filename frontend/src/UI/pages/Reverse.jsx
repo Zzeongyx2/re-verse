@@ -7,7 +7,6 @@ import * as THREE from "three";
 import { Vector3 } from "three";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei/core/OrbitControls.js";
-// import { OrthographicCamera } from "@react-three/drei";
 
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 
@@ -17,8 +16,6 @@ import { setInfo, setSelectStuff } from "../../modules/reverse.js";
 
 import { SkyTube } from "../../assets/deco/SkyTube.js";
 import { ObjectTest } from "../../assets/deco/ObjectTest.js";
-import { CampingPack } from "../../assets/deco/CampingPack.js";
-// import { FireAnimated } from "../../assets/deco/FireAnimated.js";
 import { Polaroid } from "../../assets/deco/Polaroid.js";
 import { CartoonCampingKit } from "../../assets/deco/CartoonCampingKit.js";
 import { FireAnimated } from "../../assets/deco/FireAnimated.js";
@@ -30,26 +27,20 @@ import ReverseNavbar from "../organisms/ReverseNavbar.jsx";
 import TravelWriteModal from "../organisms/TravelWriteModal.jsx";
 import TravelReadModal from "../organisms/TravelReadModal.jsx";
 
-import { IoIosSend } from "react-icons/io";
 import { HackerRoom } from "../../assets/deco/HackerRoom.js";
 import { Fireworks } from "../../assets/deco/Fireworks.js";
-import { Park } from "../../assets/deco/Park.js";
-import { ForestKit } from "../../assets/deco/ForestKit.js";
 import SelectedMyPlayer from "../atoms/SelectedMyPlayer.jsx";
 import SelectedOtherPlayer from "../atoms/SelectedOtherPlayer.jsx";
 import { Physics } from "@react-three/cannon";
 import ThreeFloor from "../atoms/ThreeFloor.jsx";
 import { ReverseFloor } from "../../assets/deco/ReverseFloor.js";
 import { CampingMod } from "../../assets/deco/CampMod.js";
-import MusicTest from "../../assets/deco/AudioZone.js";
 import AudioZone from "../../assets/deco/AudioZone.js";
 import { Radio } from "../../assets/deco/Radio.js";
 import { StonesMod } from "../../assets/deco/StonesMod.js";
-import { TelevisionMod } from "../../assets/deco/TelevisionMod.js";
 import { Toast } from "../atoms/Toast.jsx";
 import Loading from "../organisms/Loading.jsx";
 import { setLoadingPage } from "../../modules/loading.js";
-import { BgAsset } from "../../assets/deco/Bgasset.js";
 import { CustomForest } from "../../assets/deco/Customforest.js";
 import { Banana } from "../../assets/deco/Banana.js";
 import { Sky } from "@react-three/drei";
@@ -73,11 +64,8 @@ var audioMap = new Map();
 var rtcPeers = new Map();
 var ws1;
 let localStream;
-let audioMapIdx = 0;
 
 function Reverse() {
-  // default action = idle
-  // const [characterPosition, setCharacterPosition] = useState();
   const [destinationPoint, setDestinationPoint] = useState(
     new Vector3(-30, 0, -30)
   );
@@ -117,7 +105,6 @@ function Reverse() {
       return temp;
     });
   };
-  // const [otherCharacterMap, setMap] = useState({});
   const [otherCharacterMap, setMap] = useState(new Map());
   const addMap = (key, value) => {
     setMap((prev) => new Map([...prev, [key, value]]));
@@ -132,22 +119,16 @@ function Reverse() {
       return newState;
     });
   };
-  // const [archiveId, setArchiveId] = useState("");
   const [rtcPeers2, setRtcPeers2] = useState("");
 
   useEffect(() => {
     console.log(others);
     othersRef.current = others;
   }, [others]);
+  useEffect(() => {}, [otherCharacterMap]);
   useEffect(() => {
-    // console.log(otherCharacterMap);
-  }, [otherCharacterMap]);
-  useEffect(() => {
-    // console.log(destRef.current);
     destRef.current = destinationPoint;
     console.log(destRef.current);
-    // console.log(destRef.current);
-    // console.log(destinationPoint);
     if (destinationPoint.x > 0 && destinationPoint.z < 0) {
       dispatch(setSelectStuff(0));
     } else if (destinationPoint.x < 0 && destinationPoint.z < 0) {
@@ -159,14 +140,8 @@ function Reverse() {
   }, [destinationPoint]);
 
   const preventClose = (e) => {
-    // console.log(e)
-    // e.preventDefault();
     disconnectAll();
-    // console.log(e);
-    // console.log("hihihihi");
-    // e.returnValue = ""; //Chrome에서 동작하도록; deprecated
   };
-  // console.log(preventClose);
   useEffect(() => {
     (() => {
       window.addEventListener("unload", preventClose);
@@ -186,9 +161,7 @@ function Reverse() {
     data: null,
     type: null,
   };
-  // const archiveidHandle = (e) => {
-  //   setArchiveId(e.target.value);
-  // };
+
   var userId2 = "";
 
   const webrtcRedux = useSelector((state) => state.webrtc);
@@ -207,9 +180,6 @@ function Reverse() {
     }
   }, [webrtcRedux.micCheck]);
 
-  // const audioChristmas = require("../../assets/bgm/Ikson - Christmas.wav");
-  // const audioTravel = require("../../assets/bgm/세계인-아스라이.mp3");
-  // const audioDiary = require("../../assets/bgm/Japan by uniq.mp3");
   useEffect(() => {
     const audioSet = document.getElementById("user-audio").childNodes;
     if (audioSet) {
@@ -226,20 +196,6 @@ function Reverse() {
     }
   }, [webrtcRedux.headCheck]);
 
-  // useEffect(() => {
-  //   const bgmChristmas = document.getElementById("bgm-christmas");
-  //   const bgmTravel = document.getElementById("bgm-travel");
-  //   const bgmDiary = document.getElementById("bgm-diary");
-  //   const bgm = bgmDiary;
-  //   console.log(bgmChristmas);
-  //   bgm.volume = 0.1;
-  //   if (webrtcRedux.bgmCheck) {
-  //     bgm.muted = false;
-  //   } else {
-  //     bgm.muted = true;
-  //   }
-  // }, [webrtcRedux.bgmCheck]);
-  // ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
   async function login() {
     await navigator.mediaDevices
       .getUserMedia({ audio: { echoCancellation: true } })
@@ -252,20 +208,14 @@ function Reverse() {
   function handleAudio(stream) {
     localStream = stream;
     const audio = document.getElementById("myAudio");
-    //console.lo(audio);
     const audioTracks = localStream.getAudioTracks();
-    //console.lo(audioTracks);
-    localStream.oninactive = function () {
-      //console.lo("stream ended");
-    };
-    // window.stream = localStream;
+    localStream.oninactive = function () {};
     audio.srcObject = localStream;
   }
 
   function startWebSocket() {
     console.log("startWebSocket");
     ws1 = new WebSocket("wss://re-verse.kr/socket");
-    // console.log(ws1);
 
     ws1.onopen = (event) => {
       signal1.userId = "";
@@ -279,27 +229,10 @@ function Reverse() {
       alert("Error connecting to signalling server, please try login again");
     };
 
-    ws1.onclose = (event) => {
-      console.log(channels);
-      console.log(channelUsers);
-      console.log(friendToName);
-      console.log(audioMap);
-      console.log(rtcPeers);
-      // document.getElementById("status-offline").style.display = "block";
-      // document.getElementById("status-online").style.display = "none";
-      // document.getElementById("myUsername").removeAttribute("readOnly");
-      // let myStatus = document.getElementById("myStatus");
-      // myStatus.className = "status orange";
-      // document.getElementById("h3-myStatus").innerText = "offline";
-      // document.getElementById("h3-myStatus").appendChild(myStatus);
-      // document.getElementById("btnLogin").style.display = "block";
-      // document.getElementById("toSend").setAttribute("disabled", "true");
-      // document.getElementById("btnSend").setAttribute("disabled", "true");
-    };
+    ws1.onclose = (event) => {};
 
     ws1.onmessage = (event) => {
       var data1 = JSON.parse(event.data);
-      // console.log(data1);
       var data2 = null;
       console.log("here is onmessage");
       if (data1.userId === userId2 || data1.userId.length < 2) {
@@ -309,21 +242,7 @@ function Reverse() {
       } else if (data1.type === "UserId") {
         setUserId(data1.data);
         userId2 = data1.data;
-        // document.getElementById("status-offline").style.display = "none";
-        // document.getElementById("status-online").style.display = "block";
-        // document.getElementById("toSend").removeAttribute("disabled");
-        // document.getElementById("btnSend").removeAttribute("disabled");
-        // document.getElementById("btnLogin").style.display = "none";
-        // document.getElementById("myUsername").setAttribute("readOnly", "true");
 
-        // let myStatus = document.getElementById("myStatus");
-        // myStatus.className = "status green";
-        // document.getElementById("h3-myStatus").innerText = "online";
-        // document.getElementById("h3-myStatus").appendChild(myStatus);
-        // document.getElementById('btnShowLogin').click();
-        // alert(
-        //   "Connected to Signalling Server. Please click the Show Login/Chat button"
-        // );
         newMember(userId2);
       } else if (data1.type === "Offer") {
         data2 = JSON.parse(data1.data);
@@ -343,7 +262,6 @@ function Reverse() {
       } else if (data1.type === "Answer") {
         console.log("Receive answer:");
         data2 = JSON.parse(data1.data);
-        // console.log(data2);
         let peer1 = rtcPeers.get(data1.userId);
         peer1.setRemoteDescription(new RTCSessionDescription(data2));
       }
@@ -354,7 +272,6 @@ function Reverse() {
     console.log("handle new member");
     let data3 = JSON.parse(data1.data);
     let peerId = data1.userId;
-    // console.log(peerId);
     let rtcPeer = new RTCPeerConnection({
       offerToReceiveAudio: true,
       iceServers: [
@@ -368,7 +285,6 @@ function Reverse() {
         },
       ],
     });
-    // console.log(localStream);
     localStream.getTracks().forEach((track) => {
       console.log("in the rtcpeer make phase track");
       rtcPeer.addTrack(track, localStream);
@@ -387,7 +303,6 @@ function Reverse() {
         .createOffer()
         .then((a) => {
           console.log("Sending offer");
-          // console.log(a);
           signal1.userId = userId2;
           signal1.type = "Offer";
           signal1.data = JSON.stringify(a);
@@ -421,13 +336,6 @@ function Reverse() {
     };
     rtcPeer.ontrack = (event) => {
       console.log("here is ontrack phase");
-      // console.log("this is answer ontrack");
-      // console.log(friendToName);
-      // console.log(peerId);
-
-      // console.log(audioMap.size());
-      // audioMap.set(peerId, "audio" + audioMap.size());
-      // console.log(audioMap);
 
       let newUser = document.createElement("li");
       let div1 = document.createElement("div");
@@ -446,13 +354,7 @@ function Reverse() {
       newUser.appendChild(div2);
       document.getElementById("user-audio").appendChild(userAudio);
       const peerAudio = document.getElementById(peerId);
-      // console.log(event.streams);
-      // if (peerAudio.srcObject !== event.streams[0]) {
       peerAudio.srcObject = event.streams[0];
-      // }
-      // console.log(event.streams);
-      //console.lo(audioComp);
-      //console.lo(peerAudio);
     };
     rtcPeer.onicecandidate = (event) => {
       if (event.candidate) {
@@ -476,84 +378,47 @@ function Reverse() {
       console.log(event);
     };
 
-    // rtcPeer.oniceconnectionstatechange = (event) => {};
-
     rtcPeers.set(peerId, rtcPeer);
   }
   function channelConfig(channel1, peerId) {
     channel1.onclose = (event) => {
       console.log("Close channel:");
-      // console.log(channel1);
-      // console.log(event);
-      // console.log(channelUsers);
+
       let friendId = channelUsers.get(channel1);
       let friendName = friendToName.get(friendId);
-      // console.log(peerId);
-      // console.log(friendId);
-      // console.log(event);
-      // console.log(friendName);
-      // console.log("=======================");
-      // if (peerId) document.getElementById(peerId).remove();
-      // else
+
       if (friendName) {
         document.getElementById(friendId).remove();
         removeOther(friendName);
         deleteMap(friendName);
-        // console.log(othersRef.current);
       }
-      // console.log(friendId);
       addUserOnChat(friendToName.get(friendId), false);
       friendToName.delete(friendId);
     };
 
     channel1.onmessage = (event) => {
-      //console.lo("Receive msg datachannel:" + event.data);
       let dataChannel1 = JSON.parse(event.data);
-      // console.log(dataChannel1);
       if (dataChannel1.type === "message") {
         addChatLine(dataChannel1.data, "you", dataChannel1.userId);
       } else if (dataChannel1.type === "handshake") {
         console.log("this is handshake phase");
-        // console.log(dataChannel1);
-        // setOthers((other) => {
-        //   return [...other, dataChannel1.userId];
-        // });
-        // setMap((other) => ({
-        //   ...other,
-        //   [dataChannel1.userId]: dataChannel1.data.position,
-        // }));
-        // setOthers((other) => {
-        //   return [...other, dataChannel1.userId];
-        // });
-        // upsertMap(dataChannel1.userId, dataChannel1.data.position);
-
-        // otherCharacterMap.set(dataChannel1.userId, dataChannel1.data.position);
         friendToName.set(dataChannel1.data.uuid, dataChannel1.data.username);
-        // addUser(dataChannel1.data, dataChannel1.userId);
         channelUsers.set(channel1, dataChannel1.data.uuid);
-        // console.log(friendToName);
-        // console.log(channelUsers);
+
         upsertMap(dataChannel1.userId, dataChannel1.data.position);
         setOthers((other) => {
           return [...other, dataChannel1.userId];
         });
       } else if (dataChannel1.type === "move") {
-        console.log("==================== moving phase");
-        // setMap((other) => ({
-        //   ...other,
-        //   [dataChannel1.userId]: dataChannel1.data,
-        // }));
         upsertMap(dataChannel1.userId, dataChannel1.data);
       }
     };
 
     channel1.onopen = () => {
-      //console.lo("Now it's open");
       console.log("here is datachannel open");
       channelData.userId = loginUser.nickname;
       channelData.type = "handshake";
-      // console.log(peerId);
-      // console.log(destRef.current);
+
       channelData.data = {
         position: { x: destRef.current.x, y: 1, z: destRef.current.z },
         username: loginUser.nickname,
@@ -565,13 +430,11 @@ function Reverse() {
   }
   function addChatLine(data1, listClass, pengirim) {
     let list = document.createElement("li");
-    // list.className = listClass;
     list.className = "flex my-0.5";
     let entete = document.createElement("div");
     entete.className = "entete";
     let span1 = document.createElement("span");
     let h2 = document.createElement("h2");
-    // let h3 = document.createElement("h3");
     h2.innerText = pengirim;
     if (h2.innerText === "나 : ") {
       h2.id = "my-name";
@@ -579,12 +442,8 @@ function Reverse() {
       h2.id = "others-name";
     }
     h2.className = "mt-0.5 text-sm font-semibold whitespace-nowrap";
-    // h3.innerText = new Date().toLocaleTimeString();
     entete.appendChild(h2);
-    // entete.appendChild(h3);
 
-    // let triangle = document.createElement("div");
-    // triangle.className = "triangle";
     let message = document.createElement("message");
     message.className = "message";
     message.innerHTML = data1;
@@ -620,13 +479,11 @@ function Reverse() {
       channelData.userId = `${loginUser.nickname} : `;
       channelData.type = "message";
       channelData.data = dataToSend;
-      //console.lo("Send chat:" + JSON.stringify(channelData));
       if (a.readyState === "open") {
         a.send(JSON.stringify(channelData));
       }
     });
     addChatLine(document.getElementById("toSend").value, "me", "나 : ");
-    // if (channelData.data.length > 0)
     document.getElementById("toSend").value = "";
   }
 
@@ -635,7 +492,6 @@ function Reverse() {
       channelData.userId = loginUser.nickname;
       channelData.type = "move";
       channelData.data = position;
-      //console.lo("Send chat:" + JSON.stringify(channelData));
       if (a.readyState === "open") {
         a.send(JSON.stringify(channelData));
       }
@@ -657,11 +513,8 @@ function Reverse() {
 
       // 만약 안들린다면 삭제해보기
       senders.forEach((sender) => a.removeTrack(sender));
-      // localStream.getTracks().forEach((track))
-      // localStream.getTracks().forEach((track)=>a.removeTrack(track));
       a.close();
     });
-    // localStream.getTracks().forEach((track) => track.stop());
     console.log("disconnect phase");
     const audioSet = document.getElementById("user-audio").childNodes;
     for (let i = audioSet.length - 1; i >= 0; i--) {
@@ -675,14 +528,10 @@ function Reverse() {
     rtcPeers.clear();
     audioMap.clear();
     channels = [];
-    // channelUsers.forEach((a, b) => document.getElementById(a).remove());
     channelUsers.clear();
   }
 
-  //ddddddddddddddddddddddddddddddd
   const location = useLocation();
-  // console.log(location.pathname);
-  // console.log(location.pathname.substring(9));
   const archiveId = location.pathname.substring(9);
   const loginUser = useSelector((state) => state.user.loginUser);
 
@@ -725,10 +574,6 @@ function Reverse() {
     window.addEventListener("keyup", upHandler);
     window.addEventListener("keydown", downHandler);
 
-    // setTimeout(() => {
-    //   dispatch(setLoadingPage(false));
-    // }, 4500);
-
     return () => {
       window.addEventListener("keyup", upHandler);
       window.addEventListener("keydown", downHandler);
@@ -736,7 +581,6 @@ function Reverse() {
   }, []);
 
   const getArchiveDetailSuccess = (res) => {
-    // console.log(res);
     dispatch(
       setInfo({
         ...reverse.info,
@@ -748,7 +592,6 @@ function Reverse() {
 
   const navigate = useNavigate();
   const getArchiveDetailFail = (err) => {
-    // alert("초대받지 않은 아카이브입니다.");
     Toast.fire({
       icon: "warning",
       title: "초대받지 않은 아카이브 입니다",
@@ -761,13 +604,9 @@ function Reverse() {
 
   const refCanvas = useRef();
 
-  // 채팅 메세지 아무것도 없는 경우 못보내게
   const [checkNull, setCheckNull] = useState("");
-  // console.log(checkNull.length);
-  // console.log("kfjlaijfliaejflj");
   const handleCheckNull = (e) => {
     setCheckNull(e.target.value);
-    // console.log(checkNull);
   };
   const loadingPage = useSelector((state) => state.loading.loadingPage);
 
@@ -785,9 +624,6 @@ function Reverse() {
           joinMembers={others}
         />
       </div>
-      {/* <div className="w-1/4 h-2/5 absolute z-20 bottom-0">
-        <ReverseFooter />
-      </div> */}
 
       {/* chatting */}
       <div className="w-1/4 h-2/5 min-w-[240px] absolute z-20 bottom-0 ml-4">
@@ -840,20 +676,7 @@ function Reverse() {
           </div>
         )}
       </div>
-      {/* chatting */}
 
-      {/* <audio id="bgm-christmas" autoPlay controls loop hidden muted>
-        <source src={audioChristmas}></source>
-        does it not work?
-      </audio>
-      <audio id="bgm-travel" autoPlay controls muted loop hidden>
-        <source src={audioTravel}></source>
-        does it not work?
-      </audio>
-      <audio id="bgm-diary" autoPlay controls muted loop hidden>
-        <source src={audioDiary}></source>
-        does it not work?
-      </audio> */}
       <Canvas
         ref={refCanvas}
         shadows
@@ -861,9 +684,7 @@ function Reverse() {
         dpr={[1, 2]}
         camera={{
           fov: 60,
-          // player의 초기 위치: [-30, 0, -30]
           position: [-29, 5, -25],
-          // position: [1, 5, 5],
           left: `-${aspect}`,
           right: `${aspect}`,
           top: 1,
@@ -902,14 +723,8 @@ function Reverse() {
         {/* character */}
         <Physics gravity={[0, -10, 0]}>
           <Suspense fallback={null}>
-            {/* // TODO: 오브젝트 배치할 때에는 캐릭터 빼고 하는게 좋아 */}
-            {/* // FIXME: 배치 다했으면 다시 풀어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
+            {/* !important : characters */}
             {others.map((other, idx) => {
-              // console.log(other);
-              // console.log(others);
-              // console.log(idx);
-              console.log(otherCharacterMap);
-              // console.log(otherCharacterMap[other]);
               return (
                 <SelectedOtherPlayer
                   key={idx}
@@ -954,7 +769,6 @@ function Reverse() {
             <VendingMachine />
             <ArcadeMachine />
 
-            {/* music - positional audio */}
             {/* audiozone = 소리 나오는 구간  &  radio = theme song 바꾸는거 */}
             <AudioZone />
             <Radio />
@@ -998,9 +812,6 @@ function Reverse() {
               position={[-110, 6.9, -131]}
               rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
             />
-            {/* <Polaroid event={event} />
-          <Notebook event={event} /> */}
-            {/* <Polaroid position={new THREE.Vector3(38.5, 0.8, -70)} /> */}
           </Suspense>
           {/* floor */}
           <mesh
@@ -1020,18 +831,8 @@ function Reverse() {
           </mesh>
           <ThreeFloor position={[0, -0.5, 0]} rotation={[-Math.PI / 2, 0, 0]} />
         </Physics>
-
-        {/* pointer mesh; 클릭할 때 내가 어디로 가는지 확인하려고,, 나중에 지울지도 */}
-        {/* <mesh
-          rotation={[-0.5 * Math.PI, 0, 0]}
-          position={[-30, 0.02, -30]}
-          receiveShadow
-        >
-          <planeBufferGeometry attach="geometry" args={[5, 5]} />
-          <meshBasicMaterial color="black" transparent opacity={0.3} />
-        </mesh> */}
       </Canvas>
-      {/* // TODO: travel = 0, anniv = 1, diary = 2 */}
+
       {reverse.info.stuffs.length > 0 && (
         <>
           {/* travel, anniv, diary */}

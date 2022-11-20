@@ -5,19 +5,15 @@ import {
   BsFillPlusCircleFill,
   BsFillDashCircleFill,
 } from "react-icons/bs";
-import { Avatar, AvatarGroup } from "@chakra-ui/react";
+import { Avatar } from "@chakra-ui/react";
 
 import {
-  FormControl,
-  FormLabel,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Switch,
   useDisclosure,
 } from "@chakra-ui/react";
 
@@ -25,12 +21,8 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
-  PopoverCloseButton,
-  PopoverAnchor,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -49,7 +41,6 @@ import { imageForm, s3Path } from "../../api";
 
 function ReverseFriendModal({ joinMembers }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [scrollBehavior, setScrollBehavior] = useState("inside");
   const reverse = useSelector((state) => state.reverse);
   const friendList = useSelector((state) => state.friend.friendList);
   const joinArchive = useSelector((state) => state.archive.joinArchive);
@@ -66,7 +57,7 @@ function ReverseFriendModal({ joinMembers }) {
       getArchiveDetail(
         reverse.info.archiveId,
         getArchiveDetailSuccess,
-        getArchiveDetailFail,
+        getArchiveDetailFail
       );
     }
   }, [reverse.info.archiveId]);
@@ -94,7 +85,7 @@ function ReverseFriendModal({ joinMembers }) {
       setInfo({
         ...reverse.info,
         stuffs: res.data.stuffs,
-      }),
+      })
     );
   };
 
@@ -108,7 +99,7 @@ function ReverseFriendModal({ joinMembers }) {
       archive.id,
       nickname,
       editMemberSuccess,
-      editMemberFail,
+      editMemberFail
     );
   };
   const deleteMember = async (nickname) => {
@@ -116,7 +107,7 @@ function ReverseFriendModal({ joinMembers }) {
       archive.id,
       nickname,
       editMemberSuccess,
-      editMemberFail,
+      editMemberFail
     );
   };
   const editMemberSuccess = async (res) => {
@@ -125,7 +116,7 @@ function ReverseFriendModal({ joinMembers }) {
     await getArchiveDetail(
       reverse.info.archiveId,
       getArchiveDetailSuccess,
-      getArchiveDetailFail,
+      getArchiveDetailFail
     );
   };
   const editMemberFail = (error) => {
@@ -149,13 +140,7 @@ function ReverseFriendModal({ joinMembers }) {
       >
         <BsFillPeopleFill className="text-2xl m-1.5" />
       </button>
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        size={"xl"}
-        // scrollBehavior={scrollBehavior}
-        isCentered
-      >
+      <Modal isOpen={isOpen} onClose={onClose} size={"xl"} isCentered>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader mb={3} textAlign="center">
@@ -332,14 +317,10 @@ function ReverseFriendModal({ joinMembers }) {
                       </div>
                     </div>
                   </div>
-                  {/* {friendArr.map((info, idx) => {
-                  return <div>{info.nickname}</div>;
-                })} */}
                 </div>
               )}
             </div>
           </ModalBody>
-          {/* <ModalFooter></ModalFooter> */}
         </ModalContent>
       </Modal>
     </div>

@@ -6,7 +6,6 @@ function Character() {
     <div className="pt-10">
       <Navbar />
       <SelectCharacter />
-      {/* <div className="text-white">this is selecting character page</div> */}
     </div>
   );
 }
