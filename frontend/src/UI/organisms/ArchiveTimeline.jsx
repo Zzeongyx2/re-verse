@@ -93,7 +93,7 @@ function ArchiveTimeline() {
         {/* Content */}
         <div className="overflow-scroll scrollbar-hide font-hand">
           <div className="">
-            <div className="flex flex-col md:grid grid-cols-12 text-gray-50">
+            <div className="flex flex-col md:grid grid-cols-12 text-gray-500">
               {/* <div className="overflow-auto scollbar-hide"> */}
               {reverse.selectStuff === 0 &&
                 !reverse.travel.articleList.length && (
