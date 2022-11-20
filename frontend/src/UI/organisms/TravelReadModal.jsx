@@ -7,6 +7,7 @@ import {
   ModalBody,
   FormControl,
   ModalCloseButton,
+  CloseButton,
 } from "@chakra-ui/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -174,26 +175,34 @@ function TravelReadModal() {
         isCentered
       >
         <ModalOverlay
-          bgImage={handImage}
-          pos="absolute"
-          bgPosition={["55.2%"]}
-          left="0"
-          // bgPosition={["55.2%"]}
-          bgSize={"50%"}
-          bgRepeat="no-repeat"
+        // bgImage={handImage}
+        // pos="absolute"
+        // bgPosition={["55.2%"]}
+        // left="0"
+        // // bgPosition={["55.2%"]}
+        // bgSize={"50%"}
+        // bgRepeat="no-repeat"
         />
         {!reverse.editBtn ? (
-          <ModalContent minH="500" maxW="280" bgColor={"transparent"}>
+          <ModalContent minH="600" maxW="350">
+            {/* <ModalHeader>
+              <CloseButton
+                onClick={() => {
+                  // console.log("닫기 버튼");
+                  dispatch(setTravelReadIsOpen());
+                }}
+              />
+            </ModalHeader> */}
             <ModalBody p={0} bgColor={"transparent"}>
               {/* <div className="mt-4 mb-6 font-travel font-bold text-xl text-center "></div> */}
               <div
-                className={`h-[500px] overflow-hidden ${
+                className={`h-[600px] overflow-hidden ${
                   !reverse.isCardOpen ? "flex justify-center" : null
                 }`}
               >
                 {/* 글 목록 컴포넌트 */}
                 {reverse.isCardOpen && (
-                  <div className="scale-95">
+                  <div className="">
                     {/* <div className="h-[calc(90%)] overflow-auto scollbar-hide"> */}
                     <ArchiveTimeline />
 
