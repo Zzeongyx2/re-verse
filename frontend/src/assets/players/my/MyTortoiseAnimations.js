@@ -72,8 +72,8 @@ export default function MyTortoiseAnimations({
           destinationPoint.x - group.current.position.x
         );
         if (isCollided) {
-          group.current.position.x -= Math.cos(angle) * 1.1;
-          group.current.position.z -= Math.sin(angle) * 1.1;
+          group.current.position.x -= Math.cos(angle) * 1.3;
+          group.current.position.z -= Math.sin(angle) * 1.3;
           destinationPoint.x = group.current.position.x;
           destinationPoint.z = group.current.position.z;
           setMoving(false);
