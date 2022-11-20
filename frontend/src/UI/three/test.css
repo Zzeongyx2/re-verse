@@ -76,7 +76,8 @@ body::-webkit-scrollbar {
   font-family: monospace, "Courier New", Courier;
   border: none;
   outline: none;
-  background-color: #393939;
+  background-color: #f3f3f3;
+  /* background-color: #393939; */
   transition: 0.3s all ease;
   -webkit-transition: 0.3s all ease;
   -moz-transition: 0.3s all ease;
@@ -87,6 +88,9 @@ body::-webkit-scrollbar {
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+  width: 300px;
+  margin-right: 2rem;
+  margin-left: 2rem;
 }
 
 .page__text button:hover {
