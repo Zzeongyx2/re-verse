@@ -19,7 +19,7 @@ export default function OtherMouseAnimations({
   const group = useRef();
   // const previousAction = usePrevious(action);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Mouse_Animations.gltf"
+    "/assets/animals/GLTF/Animations/Mouse_Animations.gltf",
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -57,7 +57,7 @@ export default function OtherMouseAnimations({
       // console.log(group.current); // player.modelmesh
       // console.log(group.current.lookAt(destinationPoint));
       group.current.lookAt(
-        new Vector3(destinationPoint.x, 0, destinationPoint.z)
+        new Vector3(destinationPoint.x, 0, destinationPoint.z),
       );
       group.current.name = userName;
       // console.log(group.current.name);
@@ -91,7 +91,7 @@ export default function OtherMouseAnimations({
       if (moveRef.current) {
         angle = Math.atan2(
           destinationPoint.z - group.current.position.z,
-          destinationPoint.x - group.current.position.x
+          destinationPoint.x - group.current.position.x,
         );
         if (isCollided) {
           group.current.position.x -= Math.cos(angle) * 0.5;
@@ -176,7 +176,7 @@ export default function OtherMouseAnimations({
         </group>
       </group>
       <mesh ref={ref} castShadow={true}>
-        <boxGeometry args={[1.5, 1.5, 1.5]} />
+        {/* <boxGeometry args={[1.5, 1.5, 1.5]} /> */}
         <meshLambertMaterial color={"hotpink"} />
       </mesh>
     </group>
