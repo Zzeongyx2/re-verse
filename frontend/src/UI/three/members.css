@@ -56,26 +56,20 @@ body::-webkit-scrollbar {
 .page__text h1 {
   width: 100%;
   text-align: center;
-  color: #fff;
   font-size: 3rem;
   text-transform: uppercase;
-  font-family: monospace, "Courier New", Courier;
 }
 
 .page__text p {
   width: 100%;
   color: #fff;
-  font-size: 1.2rem;
-  font-family: monospace, "Courier New", Courier;
 }
 .page__text button {
   margin-top: 1rem;
-  padding: 0.5rem 1.5rem;
+  /* padding: 0.5rem 1.5rem; */
   color: #fff;
-  font-size: 1.2rem;
-  font-family: monospace, "Courier New", Courier;
-  border: none;
-  outline: none;
+  /* border: none;
+  outline: none; */
   background-color: #f3f3f3;
   /* background-color: #393939; */
   transition: 0.3s all ease;
@@ -93,8 +87,8 @@ body::-webkit-scrollbar {
   margin-left: 2rem;
 }
 
-.page__text button:hover {
+/* .page__text button:hover {
   background-color: #545454;
   padding: 0.5rem 2rem;
   cursor: pointer;
-}
+} */
