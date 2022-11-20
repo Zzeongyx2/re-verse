@@ -201,7 +201,7 @@ function TravelReadModal() {
                 }`}
               >
                 {/* 글 목록 컴포넌트 */}
-                {reverse.isCardOpen && (
+                {!reverse.isCardOpen && (
                   <div className="">
                     {/* <div className="h-[calc(90%)] overflow-auto scollbar-hide"> */}
                     <ArchiveTimeline />
@@ -209,7 +209,7 @@ function TravelReadModal() {
                     {/* <ArticlesTimeline /> */}
                   </div>
                 )}
-                {!reverse.isCardOpen && <ArticleDetailCard />}
+                {reverse.isCardOpen && <ArticleDetailCard />}
               </div>
             </ModalBody>
             {/* <ModalFooter
