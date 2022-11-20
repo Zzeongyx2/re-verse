@@ -63,7 +63,7 @@ function ArchiveTimeline() {
   return (
     <div className="">
       {/* <div className=" w-[300px] h-[600px] pr-6 flex flex-col p-2 rounded-lg"> */}
-      <div className=" my-2 w-[334px] h-[584px] bg-white flex flex-col py-2 px-4 rounded-lg ring-8 border-4 ring-gray-200 border-gray-200">
+      <div className="my-2 w-[334px] h-[584px] bg-white flex flex-col py-2 px-4 rounded-lg ring-8 border-4 ring-gray-200 border-gray-200">
         {/* Status Bar */}
         <div className="w-100 flex justify-between mb-2">
           <div>
