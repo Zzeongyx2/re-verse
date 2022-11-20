@@ -61,6 +61,7 @@ import { CustomForestSecond } from "../../assets/deco/Customforestsecond.js";
 import { CandyCustomThird } from "../../assets/deco/Customthird.js";
 import { setOnOne, setOnThree } from "../../modules/camera.js";
 import { CustomTree } from "../../assets/deco/Customtree.js";
+import { CustomRoadFirst } from "../../assets/deco/Customroadfirst.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -958,6 +959,7 @@ function Reverse() {
             {/* floor */}
             <ReverseFloor />
             <StonesMod />
+            <CustomRoadFirst />
 
             {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
             {/* 여행 */}
