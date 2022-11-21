@@ -1,0 +1,35 @@
+variables:
+    DOCKER_TLS_CERTDIR: "" # sharing same certificate between docker client and daemon
+    DOCKER_HOST: tcp://docker:2375
+    APP_NAME_1: reverse-app # frontend
+    # APP_NAME_2: auth-backend
+    APP_NAME_3: archive-backend
+    # APP_NAME_4: signal-backend
+
+stages:
+    - build
+
+build_image:
+    stage: build
+    image:
+        name: amazon/aws-cli
+        entrypoint: [""]
+    services:
+        - docker:20.10.16-dind # docker in docker (docker daemon)
+    before_script:
+        - amazon-linux-extras install docker
+        # - aws --version
+        # - docker --version
+        - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+    script:
+        - cp $ENV_FILE .env
+        - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_1:$CI_PIPELINE_IID -f ./frontend/Dockerfile ./frontend
+        - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_1:$CI_PIPELINE_IID
+        # - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$CI_PIPELINE_IID -f ./backend/auth/AuthDockerfile ./backend/auth
+        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$CI_PIPELINE_IID
+        - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_3:$CI_PIPELINE_IID -f ./backend/archive/ArchiveDockerfile ./backend/archive
+        - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_3:$CI_PIPELINE_IID
+        # - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_4:$CI_PIPELINE_IID -f ./signal/SignalDockerfile ./signal
+        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_4:$CI_PIPELINE_IID
+    tags:
+        - reverse-runner

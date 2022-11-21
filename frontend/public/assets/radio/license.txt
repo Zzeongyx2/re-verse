@@ -1,0 +1,11 @@
+Model Information:
+* title:	Radio - Lowpoly
+* source:	https://sketchfab.com/3d-models/radio-lowpoly-b36f73e09f3447e092a0463d9ce157aa
+* author:	media_mas (https://sketchfab.com/media_mas)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Radio - Lowpoly" (https://sketchfab.com/3d-models/radio-lowpoly-b36f73e09f3447e092a0463d9ce157aa) by media_mas (https://sketchfab.com/media_mas) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
