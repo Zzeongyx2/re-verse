@@ -1,0 +1,11 @@
+# Build Stage 1. Build Spring Boot App
+FROM openjdk:11-jdk-slim as builder
+COPY . .
+RUN chmod +x ./gradlew
+RUN ./gradlew bootJAR
+
+# Build Stage 2. Run Spring Boot App
+FROM openjdk:11-jdk-slim
+COPY --from=builder build/libs/\*.jar app.jar
+EXPOSE 8998
+ENTRYPOINT ["java", "-jar", "/app.jar"]

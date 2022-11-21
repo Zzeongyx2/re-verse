@@ -1,0 +1,11 @@
+Model Information:
+* title:	Cartoon Notebook & Pencil
+* source:	https://sketchfab.com/3d-models/cartoon-notebook-pencil-bd3831c95ab04e719f6ba740289a6ed1
+* author:	Vanillain (https://sketchfab.com/vanillain)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Cartoon Notebook & Pencil" (https://sketchfab.com/3d-models/cartoon-notebook-pencil-bd3831c95ab04e719f6ba740289a6ed1) by Vanillain (https://sketchfab.com/vanillain) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

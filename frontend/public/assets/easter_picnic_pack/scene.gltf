@@ -1,0 +1,868 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 588,
+      "max": [
+        509.0008850097656,
+        508.91790771484375,
+        14.07276725769043
+      ],
+      "min": [
+        -508.66912841796875,
+        -508.91790771484375,
+        -7.26477575302124
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 7056,
+      "componentType": 5126,
+      "count": 588,
+      "max": [
+        0.9896232485771179,
+        0.9962888956069946,
+        1.0
+      ],
+      "min": [
+        -0.994782567024231,
+        -0.9895578026771545,
+        -0.5647322535514832
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 588,
+      "max": [
+        0.9277171492576599,
+        1.0
+      ],
+      "min": [
+        -0.1071428656578064,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 2151,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 14112,
+      "componentType": 5126,
+      "count": 49409,
+      "max": [
+        465.65576171875,
+        450.31781005859375,
+        348.5738525390625
+      ],
+      "min": [
+        -444.1770935058594,
+        -426.59112548828125,
+        -6.787529945373535
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 607020,
+      "componentType": 5126,
+      "count": 49409,
+      "max": [
+        0.9999998807907104,
+        0.9999999403953552,
+        1.0
+      ],
+      "min": [
+        -0.9999999403953552,
+        -0.9999998807907104,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 4704,
+      "componentType": 5126,
+      "count": 49409,
+      "max": [
+        0.9978092908859253,
+        0.9941752552986145
+      ],
+      "min": [
+        0.02946934662759304,
+        0.004511892795562744
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 8604,
+      "componentType": 5125,
+      "count": 256674,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1199928,
+      "componentType": 5126,
+      "count": 1743,
+      "max": [
+        99.69473266601563,
+        191.3809814453125,
+        92.474365234375
+      ],
+      "min": [
+        -131.45660400390625,
+        -254.24630737304688,
+        -1.6706335544586182
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1220844,
+      "componentType": 5126,
+      "count": 1743,
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 399976,
+      "componentType": 5126,
+      "count": 1743,
+      "max": [
+        9.656347274780273,
+        3.9626171588897705
+      ],
+      "min": [
+        -9.422538757324219,
+        -1.4769723415374756
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1035300,
+      "componentType": 5125,
+      "count": 4908,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1241760,
+      "componentType": 5126,
+      "count": 89,
+      "max": [
+        220.19735717773438,
+        224.0734405517578,
+        9.745512008666992
+      ],
+      "min": [
+        -193.53179931640625,
+        -185.22454833984375,
+        -2.9794130325317383
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1242828,
+      "componentType": 5126,
+      "count": 89,
+      "max": [
+        0.9906177520751953,
+        0.9801318645477295,
+        1.0
+      ],
+      "min": [
+        -0.9895418286323547,
+        -0.9880610108375549,
+        -3.0952940051065525e-06
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 413920,
+      "componentType": 5126,
+      "count": 89,
+      "max": [
+        6.428183078765869,
+        0.9672037959098816
+      ],
+      "min": [
+        0.032793495804071426,
+        -5.42818546295166
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1054932,
+      "componentType": 5125,
+      "count": 432,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1243896,
+      "componentType": 5126,
+      "count": 160,
+      "max": [
+        240.06581115722656,
+        378.58074951171875,
+        433.8006896972656
+      ],
+      "min": [
+        -592.35546875,
+        -478.13055419921875,
+        0.84912109375
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1245816,
+      "componentType": 5126,
+      "count": 160,
+      "max": [
+        0.8666727542877197,
+        0.8672189712524414,
+        1.0
+      ],
+      "min": [
+        -0.8578401803970337,
+        -0.8572647571563721,
+        0.4956870973110199
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 414632,
+      "componentType": 5126,
+      "count": 160,
+      "max": [
+        1.0,
+        1.0
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1056660,
+      "componentType": 5125,
+      "count": 603,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1247736,
+      "componentType": 5126,
+      "count": 563,
+      "max": [
+        408.7193908691406,
+        378.06329345703125,
+        426.9874267578125
+      ],
+      "min": [
+        -625.7108154296875,
+        -508.504150390625,
+        0.7023026347160339
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1254492,
+      "componentType": 5126,
+      "count": 563,
+      "max": [
+        0.9945605397224426,
+        0.9960260391235352,
+        1.0
+      ],
+      "min": [
+        -0.9889700412750244,
+        -0.9920680522918701,
+        -0.803076446056366
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 415912,
+      "componentType": 5126,
+      "count": 563,
+      "max": [
+        1.0,
+        1.0
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1059072,
+      "componentType": 5125,
+      "count": 1740,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1261248,
+      "componentType": 5126,
+      "count": 144,
+      "max": [
+        423.4404602050781,
+        433.29315185546875,
+        0.3832244873046875
+      ],
+      "min": [
+        -439.75982666015625,
+        -459.1277770996094,
+        0.38321590423583984
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1262976,
+      "componentType": 5126,
+      "count": 144,
+      "max": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "min": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 420416,
+      "componentType": 5126,
+      "count": 144,
+      "max": [
+        0.3983567953109741,
+        0.3613855242729187
+      ],
+      "min": [
+        0.08394297957420349,
+        0.07400134205818176
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1066032,
+      "componentType": 5125,
+      "count": 384,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "L3X (https://sketchfab.com/L3X)",
+      "license": "SKETCHFAB Standard (https://sketchfab.com/licenses)",
+      "source": "https://sketchfab.com/3d-models/easter-picnic-pack-7dac71c6f31b45bebb38a9ba55a8ebe2",
+      "title": "Easter Picnic Pack"
+    },
+    "generator": "Sketchfab-12.68.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 1067568,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 421568,
+      "byteOffset": 1067568,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1264704,
+      "byteOffset": 1489136,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 2753840,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/02_-_Default_baseColor.jpeg"
+    },
+    {
+      "uri": "textures/Mat_Ester_Basket_baseColor.jpeg"
+    },
+    {
+      "uri": "textures/Mat_Easter_Blanket_baseColor.jpeg"
+    },
+    {
+      "uri": "textures/Mat_Easter_Blanket_emissive.jpeg"
+    },
+    {
+      "uri": "textures/Mat_Leaves_01_baseColor.png"
+    }
+  ],
+  "materials": [
+    {
+      "alphaMode": "BLEND",
+      "doubleSided": true,
+      "emissiveFactor": [
+        0.015119226252760801,
+        0.06355075203972299,
+        0.007109069808491792
+      ],
+      "name": "Mat_Ground",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.27538894155006477,
+          0.52649540628949,
+          0.024234997324733498,
+          0.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.9253278733378326
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0.3819108768217719,
+        0.3819108768217719,
+        0.3819108768217719
+      ],
+      "emissiveTexture": {
+        "index": 0
+      },
+      "name": "02_-_Default",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.5063644212587175,
+          0.5063644212587175,
+          0.5063644212587175,
+          1.0
+        ],
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.603078695681253
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0.13944186866374778,
+        0.06021780011089925,
+        0.033092962758243034
+      ],
+      "name": "Mat_Ester_Basket",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.7252506551386584,
+          0.7252506551386584,
+          0.7252506551386584,
+          1.0
+        ],
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.8929713596497552
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "emissiveTexture": {
+        "index": 3
+      },
+      "name": "Mat_Easter_Blanket",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.4881239017687224,
+          0.4881239017687224,
+          0.4881239017687224,
+          1.0
+        ],
+        "baseColorTexture": {
+          "index": 2
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.8523657953778523
+      }
+    },
+    {
+      "alphaMode": "BLEND",
+      "doubleSided": true,
+      "emissiveFactor": [
+        0.4024214034929608,
+        0.038950877543184804,
+        0.20681947040649193
+      ],
+      "name": "Mat_Leaves_01",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1.0,
+          0.2549020000000001,
+          0.6745100000000002,
+          1.0
+        ],
+        "baseColorTexture": {
+          "index": 4
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.9010071806845059
+      }
+    },
+    {
+      "alphaMode": "BLEND",
+      "doubleSided": true,
+      "emissiveFactor": [
+        0.46337390530806105,
+        0.02099835272517285,
+        0.15933484272889645
+      ],
+      "name": "Mat_Leaves_02",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.8103699510436352,
+          0.16234720958796883,
+          0.5335120590089655,
+          1.0
+        ],
+        "baseColorTexture": {
+          "index": 4
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.5422769640479361
+      }
+    },
+    {
+      "alphaMode": "BLEND",
+      "doubleSided": true,
+      "name": "Mat_Clovers",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.010299700791112492,
+          0.31228501526033814,
+          1.0,
+          1.0
+        ],
+        "baseColorTexture": {
+          "index": 4
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.8929713596497552
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Easter_Picnic_Pack_Mat_Ground_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Easter_Picnic_Pack_02 - Default_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Easter_Picnic_Pack_Mat_Ester_Basket_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 9,
+            "POSITION": 8,
+            "TEXCOORD_0": 10
+          },
+          "indices": 11,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Easter_Picnic_Pack_Mat_Easter_Blanket_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 13,
+            "POSITION": 12,
+            "TEXCOORD_0": 14
+          },
+          "indices": 15,
+          "material": 3,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Easter_Picnic_Pack_Mat_Leaves_01_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 17,
+            "POSITION": 16,
+            "TEXCOORD_0": 18
+          },
+          "indices": 19,
+          "material": 4,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Easter_Picnic_Pack_Mat_Leaves_02_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 21,
+            "POSITION": 20,
+            "TEXCOORD_0": 22
+          },
+          "indices": 23,
+          "material": 5,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Easter_Picnic_Pack_Mat_Clovers_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 25,
+            "POSITION": 24,
+            "TEXCOORD_0": 26
+          },
+          "indices": 27,
+          "material": 6,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "9b2a138e81c947febd71fe664a61b642.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Easter_Picnic_Pack"
+    },
+    {
+      "mesh": 0,
+      "name": "Easter_Picnic_Pack_Mat_Ground_0"
+    },
+    {
+      "mesh": 1,
+      "name": "Easter_Picnic_Pack_02 - Default_0"
+    },
+    {
+      "mesh": 2,
+      "name": "Easter_Picnic_Pack_Mat_Ester_Basket_0"
+    },
+    {
+      "mesh": 3,
+      "name": "Easter_Picnic_Pack_Mat_Easter_Blanket_0"
+    },
+    {
+      "mesh": 4,
+      "name": "Easter_Picnic_Pack_Mat_Leaves_01_0"
+    },
+    {
+      "mesh": 5,
+      "name": "Easter_Picnic_Pack_Mat_Leaves_02_0"
+    },
+    {
+      "mesh": 6,
+      "name": "Easter_Picnic_Pack_Mat_Clovers_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    },
+    {
+      "sampler": 0,
+      "source": 3
+    },
+    {
+      "sampler": 0,
+      "source": 4
+    }
+  ]
+}
