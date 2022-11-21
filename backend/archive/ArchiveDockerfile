@@ -1,0 +1,12 @@
+# Build Stage 1. Build Spring Boot App
+FROM openjdk:11-jdk-slim as builder
+COPY . .
+# TODO: application.properties 복사
+RUN chmod +x ./gradlew
+RUN ./gradlew bootJAR
+
+# Build Stage 2. Run Spring Boot App
+FROM openjdk:11-jdk-slim
+COPY --from=builder build/libs/*.jar app.jar
+EXPOSE 8081
+ENTRYPOINT ["java", "-jar", "/app.jar"]
