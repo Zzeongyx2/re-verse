@@ -1,0 +1,105 @@
+version: "3.8"
+services:    
+    signal_server:
+        build:
+            context: ./
+            dockerfile: ./signal/Dockerfile
+            network: my_net
+        user: root
+        container_name: signalserver
+        ports:
+            - 8998:8998
+
+    auth_back:
+        depends_on:
+            - auth_mysql
+            - auth_redis
+        build: 
+            context: ./
+            dockerfile: ./backend/auth/Dockerfile
+            network: my_net
+        container_name: authback
+        user: root
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:mysql://auth_mysql:3306/reverse-auth
+            SPRING_DATASOURCE_USERNAME: root
+            SPRING_DATASOURCE_PASSWORD: flQjtm1024
+            SPRING_REDIS_HOST: auth_redis
+            SPRING_REDIS_PORT: 6379
+            SPRING_REDIS_PASSWORD: flQjtm1024
+        ports:
+            - 8080:8080
+
+    archive_back:
+        depends_on:
+            - archive_mysql
+            - auth_redis
+        build: 
+            context: ./
+            dockerfile: ./backend/archive/Dockerfile
+            network: my_net
+        container_name: archiveback
+        user: root
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:mysql://archive_mysql:3306/reverse-archive
+            SPRING_DATASOURCE_USERNAME: root
+            SPRING_DATASOURCE_PASSWORD: flQjtm1024
+            SPRING_REDIS_HOST: auth_redis
+            SPRING_REDIS_PORT: 6379 
+            SPRING_REDIS_PASSWORD: flQjtm1024
+        ports:
+            - 8081:8081
+
+    auth_mysql:
+        container_name: authdb
+        user: root
+        image: mysql:8.0.28 # 컨테이너에서 사용하는 base image 지정
+        restart: always # 컨테이너 다운 시 재시작하라는 명령어
+        volumes: # -v 옵션과 동일
+            - authdb:/var/lib/mysql
+        environment: # 컨테이너 안의 환경변수 설정
+            - MYSQL_ROOT_PASSWORD=flQjtm1024
+            - MYSQL_DATABASE=reverse-auth
+        ports: # -p 옵션과 동일
+            - "3306:3306"
+
+    archive_mysql:
+        container_name: archivedb
+        user: root
+        image: mysql:8.0.28 # 컨테이너에서 사용하는 base image 지정
+        restart: always # 컨테이너 다운 시 재시작하라는 명령어
+        volumes: # -v 옵션과 동일
+            - archivedb:/var/lib/mysql
+        environment: # 컨테이너 안의 환경변수 설정
+            - MYSQL_ROOT_PASSWORD=flQjtm1024
+            - MYSQL_DATABASE=reverse-archive
+        ports: # -p 옵션과 동일
+            - "3307:3306"
+
+    auth_redis:
+        container_name: auth_cache
+        user: root
+        image: redis:latest
+        restart: always
+        environment:
+            - REDIS_PASSWORD=flQjtm1024
+        volumes:
+            - authcache:/data
+        ports:
+            - 6379:6379
+
+volumes:
+    authdb:
+        name: authdb
+    archivedb:
+        name: archivedb
+    authback:
+        name: authback
+    archiveback:
+        name: archiveback
+    authcache:
+        name: authcache
+networks:
+    default:
+        external:
+            name: my_net

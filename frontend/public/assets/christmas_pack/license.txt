@@ -1,0 +1,8 @@
+Model Information:
+* title:	Christmas Pack
+* source:	https://sketchfab.com/3d-models/christmas-pack-908411f3d5ee4aa18b5d68162cbc9fb8
+* author:	L3X (https://sketchfab.com/L3X)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
