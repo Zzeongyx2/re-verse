@@ -56,6 +56,7 @@ import { CustomRoadFirst } from "../../assets/deco/Customroadfirst.js";
 import { DiaryStoneRoad } from "../../assets/deco/Customroadsecond.js";
 import { AnnivStoneRoad } from "../../assets/deco/Customroadthird.js";
 import { Eggs } from "../../assets/deco/Eggs.js";
+import { ScreenMod } from "../../assets/deco/Screen.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -674,11 +675,12 @@ function Reverse() {
       >
         <Sky sunPosition={[100, 50, 100]} />
         <OrbitControls
-          enableZoom={true}
-          enableRotate={false}
-          enablePan={false}
-          minZoom={8.5}
-          maxZoom={20}
+        // enableZoom={true}
+        // enableRotate={false}
+        // enablePan={false}
+        // 얘는 뺄까
+        // minZoom={8.5}
+        // maxZoom={20}
         />
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
@@ -689,7 +691,7 @@ function Reverse() {
         <Physics gravity={[0, -10, 0]}>
           <Suspense fallback={null}>
             {/* !important : characters */}
-            {others.map((other, idx) => {
+            {/* {others.map((other, idx) => {
               return (
                 <SelectedOtherPlayer
                   key={idx}
@@ -703,7 +705,7 @@ function Reverse() {
             <SelectedMyPlayer
               destinationPoint={destinationPoint}
               handleVisible={handleVisible}
-            />
+            /> */}
 
             <CartoonCampingKit />
             <FireAnimated />
@@ -731,8 +733,9 @@ function Reverse() {
             <Eggs />
 
             {/* easter eggs */}
-            <VendingMachine />
+            {/* <VendingMachine /> */}
             <ArcadeMachine />
+            <ScreenMod />
 
             {/* audiozone = 소리 나오는 구간  &  radio = theme song 바꾸는거 */}
             <AudioZone />
