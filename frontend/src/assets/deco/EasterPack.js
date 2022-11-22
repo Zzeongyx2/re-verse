@@ -22,11 +22,6 @@ export function EasterPack(props) {
           >
             <mesh
               castShadow
-              geometry={nodes.Easter_Picnic_Pack_Mat_Ground_0.geometry}
-              material={materials.Mat_Ground}
-            />
-            <mesh
-              castShadow
               geometry={nodes["Easter_Picnic_Pack_02_-_Default_0"].geometry}
               material={materials["02_-_Default"]}
             />
