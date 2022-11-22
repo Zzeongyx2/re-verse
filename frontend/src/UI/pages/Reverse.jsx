@@ -65,6 +65,7 @@ import { CustomRoadFirst } from "../../assets/deco/Customroadfirst.js";
 import { DiaryStoneRoad } from "../../assets/deco/Customroadsecond.js";
 import { AnnivStoneRoad } from "../../assets/deco/Customroadthird.js";
 import { Eggs } from "../../assets/deco/Eggs.js";
+import { ScreenMod } from "../../assets/deco/Screen.js";
 
 var channels = [];
 var channelUsers = new Map();
@@ -75,9 +76,7 @@ var ws1;
 let localStream;
 
 function Reverse() {
-  const [destinationPoint, setDestinationPoint] = useState(
-    new Vector3(-30, 0, -30),
-  );
+  const [destinationPoint, setDestinationPoint] = useState(new Vector3(-30, 0, -30));
   const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/map_texture.jpg");
   if (floorTexture) {
@@ -249,9 +248,7 @@ function Reverse() {
           let peer1 = rtcPeers.get(data1.userId);
 
           if (peer1) {
-            peer1
-              .addIceCandidate(new RTCIceCandidate(data2))
-              .catch((error) => {});
+            peer1.addIceCandidate(new RTCIceCandidate(data2)).catch((error) => {});
           }
         }
       } else if (data1.type === "Answer") {
@@ -285,9 +282,7 @@ function Reverse() {
     setRtcPeers2(rtcPeers2);
 
     if (data1.type === "NewMember") {
-      let channel1 = rtcPeer.createDataChannel(
-        Math.floor(Math.random() * 10000000000),
-      );
+      let channel1 = rtcPeer.createDataChannel(Math.floor(Math.random() * 10000000000));
       channelConfig(channel1);
 
       //create offer
@@ -638,7 +633,7 @@ function Reverse() {
         ...reverse.info,
         archiveId: archiveId,
         stuffs: res.data.stuffs,
-      }),
+      })
     );
   };
 
@@ -659,6 +654,24 @@ function Reverse() {
     setCheckNull(e.target.value);
   };
   const loadingPage = useSelector((state) => state.loading.loadingPage);
+
+  function Directional() {
+    return (
+      <directionalLight
+        position={(0, 10, 100)}
+        castShadow
+        // shadow quality
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-camera-left={-200}
+        shadow-camera-right={200}
+        shadow-camera-top={200}
+        shadow-camera-bottom={-200}
+        intensity={0.5}
+        color={"#FFFBE7"}
+      />
+    );
+  }
 
   return (
     <div className="h-screen overflow-hidden relative">
@@ -743,34 +756,24 @@ function Reverse() {
       >
         {/* <Sky sunPosition={[100, 50, 100]} /> */}
         <OrbitControls
-          enableZoom={true}
-          // enableRotate={false}
-          // minZoom={8.5}
-          // maxZoom={20}
+        // enableZoom={true}
+        // enableRotate={false}
+        // enablePan={false}
+        // 얘는 뺄까
+        // minZoom={8.5}
+        // maxZoom={20}
         />
         {/* camera */}
         {/* perspective; 원근감 o, ortho; 원근감 x */}
         {/* light */}
-        <directionalLight
-          intensity={0.4}
-          position={[-50, 50, 50]}
-          castShadow
-          shadow-mapSize-width={2048}
-          shadow-mapSize-height={2048}
-          shadow-camera-near={-100}
-          shadow-camera-far={2000}
-          shadow-camera-left={-2000}
-          shadow-camera-right={2000}
-          shadow-camera-top={2000}
-          shadow-camera-bottom={-2000}
-        />
-        {/* <ambientLight intensity={0.3} /> */}
-        <spotLight intensity={0.5} position={[100, 1000, 100]} />
+
+        <ambientLight intensity={0.5} color={"#FFFDF5"} />
+        <Directional />
         {/* character */}
         <Physics gravity={[0, -10, 0]}>
           <Suspense fallback={null}>
             {/* !important : characters */}
-            {others.map((other, idx) => {
+            {/* {others.map((other, idx) => {
               return (
                 <SelectedOtherPlayer
                   key={idx}
@@ -784,7 +787,7 @@ function Reverse() {
             <SelectedMyPlayer
               destinationPoint={destinationPoint}
               handleVisible={handleVisible}
-            />
+            /> */}
 
             <CartoonCampingKit />
             <FireAnimated />
@@ -812,8 +815,9 @@ function Reverse() {
             <Eggs />
 
             {/* easter eggs */}
-            <VendingMachine />
+            {/* <VendingMachine /> */}
             <ArcadeMachine />
+            <ScreenMod />
 
             {/* audiozone = 소리 나오는 구간  &  radio = theme song 바꾸는거 */}
             <AudioZone />
@@ -821,8 +825,8 @@ function Reverse() {
             <Banana />
 
             {/* floor */}
-            <ReverseFloor />
-            {/* campin road */}
+            {/* <ReverseFloor /> */}
+            {/* camping road */}
             <StonesMod />
             <CustomRoadFirst />
             {/* anniv road */}
@@ -832,32 +836,14 @@ function Reverse() {
 
             {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
             {/* 여행 */}
-            <Polaroid
-              position={[71, 4, -43]}
-              rotation={[-Math.PI / 2, 0, Math.PI / 5]}
-            />
-            <Notebook
-              position={[71, 3.4, -38]}
-              rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]}
-            />
+            <Polaroid position={[71, 4, -43]} rotation={[-Math.PI / 2, 0, Math.PI / 5]} />
+            <Notebook position={[71, 3.4, -38]} rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]} />
             {/* 기념일 */}
-            <Polaroid
-              position={[38, 1.1, 62]}
-              rotation={[-Math.PI / 2, 0, 0]}
-            />
-            <Notebook
-              position={[35, 0.3, 66]}
-              rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]}
-            />
+            <Polaroid position={[38, 1.1, 62]} rotation={[-Math.PI / 2, 0, 0]} />
+            <Notebook position={[35, 0.3, 66]} rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]} />
             {/* 일기 */}
-            <Polaroid
-              position={[-115, 7.7, -129]}
-              rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
-            />
-            <Notebook
-              position={[-110, 6.9, -131]}
-              rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
-            />
+            <Polaroid position={[-115, 7.7, -129]} rotation={[-Math.PI / 2, 0, Math.PI / 1.2]} />
+            <Notebook position={[-110, 6.9, -131]} rotation={[-Math.PI / 2, 0, -Math.PI / 3]} />
           </Suspense>
           {/* floor */}
           <mesh
@@ -871,7 +857,8 @@ function Reverse() {
             rotation={[-0.5 * Math.PI, 0, 0]}
             receiveShadow
           >
-            <planeBufferGeometry attach="geometry" args={[400, 400]} />
+            {/* <planeBufferGeometry attach="geometry" args={[400, 400]} /> */}
+            <planeGeometry attach="geometry" args={[400, 400]} />
             <meshStandardMaterial map={floorTexture} />
           </mesh>
           <ThreeFloor position={[0, -0.5, 0]} rotation={[-Math.PI / 2, 0, 0]} />
