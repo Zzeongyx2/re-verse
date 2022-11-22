@@ -46,7 +46,8 @@ export function ObjectTest({ visible }) {
           receiveShadow
           position={[-13, 0.01, 3]}
         >
-          <planeBufferGeometry attach="geometry" args={[8, 8]} />
+          {/* <planeBufferGeometry attach="geometry" args={[8, 8]} /> */}
+          <planeGeometry attach="geometry" args={[8, 8]} />
           <meshBasicMaterial color="red" opacity={0} transparent />
         </mesh>
       </group>
