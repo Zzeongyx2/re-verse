@@ -96,7 +96,7 @@ function CharacterThree() {
           ))}
         </div>
       </div>
-      <Canvas camera={{ fov: 75, near: 0.1, far: 1000, position: [2.5, 3, 3] }}>
+      <Canvas camera={{ fov: 75, near: 0.1, far: 1000, position: [4, 2, 4] }}>
         <OrbitControls />
         <directionalLight intensity={0.3} />
         <ambientLight position={(10, 10, 10)} intensity={0.4} />
