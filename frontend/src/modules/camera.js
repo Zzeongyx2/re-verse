@@ -3,28 +3,40 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   characterThree: true,
   characterOne: false,
-  team: false,
-  game: false,
+  charactereye: false,
+  keyW: false,
+  keyA: false,
+  keyS: false,
+  keyD: false,
 };
 
 const reducers = {
   setOnThree: (state, action) => {
     state.characterThree = true;
     state.characterOne = false;
-    state.team = false;
-    state.game = false;
+    state.charactereye = false;
   },
   setOnOne: (state, action) => {
     state.characterThree = false;
     state.characterOne = true;
-    state.team = false;
-    state.game = false;
+    state.charactereye = false;
   },
-  setOnTeam: (state, action) => {
-    state.team = action.payload;
+  setEye: (state, action) => {
+    state.characterThree = false;
+    state.characterOne = false;
+    state.charactereye = true;
   },
-  setOnGame: (state, action) => {
-    state.game = action.payload;
+  setKeyW: (state, action) => {
+    state.keyW = action.payload;
+  },
+  setKeyA: (state, action) => {
+    state.keyA = action.payload;
+  },
+  setKeyS: (state, action) => {
+    state.keyS = action.payload;
+  },
+  setKeyD: (state, action) => {
+    state.keyD = action.payload;
   },
 };
 
@@ -34,7 +46,7 @@ export const cameraSlice = createSlice({
   reducers,
 });
 
-export const { setOnThree, setOnOne, setOnTeam, setOnGame } =
+export const { setOnThree, setOnOne, setEye, setKeyW, setKeyA, setKeyS, setKeyD } =
   cameraSlice.actions;
 
 export default cameraSlice.reducer;
