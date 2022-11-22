@@ -50,7 +50,7 @@ import { CandyCustomOne } from "../../assets/deco/Customfirst.js";
 import { CandyCustomTwo } from "../../assets/deco/Customsecond.js";
 import { CustomForestSecond } from "../../assets/deco/Customforestsecond.js";
 import { CandyCustomThird } from "../../assets/deco/Customthird.js";
-import { setOnOne, setOnThree } from "../../modules/camera.js";
+import { setKeyA, setKeyD, setKeyS, setKeyW, setOnOne, setOnThree } from "../../modules/camera.js";
 import { CustomTree } from "../../assets/deco/Customtree.js";
 import { CustomRoadFirst } from "../../assets/deco/Customroadfirst.js";
 import { DiaryStoneRoad } from "../../assets/deco/Customroadsecond.js";
@@ -66,9 +66,7 @@ var ws1;
 let localStream;
 
 function Reverse() {
-  const [destinationPoint, setDestinationPoint] = useState(
-    new Vector3(-30, 0, -30)
-  );
+  const [destinationPoint, setDestinationPoint] = useState(new Vector3(-30, 0, -30));
   const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/map_texture.jpg");
   if (floorTexture) {
@@ -240,9 +238,7 @@ function Reverse() {
           let peer1 = rtcPeers.get(data1.userId);
 
           if (peer1) {
-            peer1
-              .addIceCandidate(new RTCIceCandidate(data2))
-              .catch((error) => {});
+            peer1.addIceCandidate(new RTCIceCandidate(data2)).catch((error) => {});
           }
         }
       } else if (data1.type === "Answer") {
@@ -276,9 +272,7 @@ function Reverse() {
     setRtcPeers2(rtcPeers2);
 
     if (data1.type === "NewMember") {
-      let channel1 = rtcPeer.createDataChannel(
-        Math.floor(Math.random() * 10000000000)
-      );
+      let channel1 = rtcPeer.createDataChannel(Math.floor(Math.random() * 10000000000));
       channelConfig(channel1);
 
       //create offer
@@ -502,14 +496,42 @@ function Reverse() {
   const reverse = useSelector((state) => state.reverse);
   const cameraState = useSelector((state) => state.camera);
   const [cameraKeyPress, setCameraKeyPress] = useState(false);
+  const [pressW, setPressW] = useState(false);
+  const [pressA, setPressA] = useState(false);
+  const [pressS, setPressS] = useState(false);
+  const [pressD, setPressD] = useState(false);
   const upHandler = ({ key }) => {
     if (key === "y") {
       setCameraKeyPress(false);
+    }
+    if (key === "w") {
+      setPressW(false);
+    }
+    if (key === "a") {
+      setPressA(false);
+    }
+    if (key === "s") {
+      setPressS(false);
+    }
+    if (key === "d") {
+      setPressD(false);
     }
   };
   const downHandler = ({ key }) => {
     if (key === "y") {
       setCameraKeyPress(true);
+    }
+    if (key === "w") {
+      setPressW(true);
+    }
+    if (key === "a") {
+      setPressA(true);
+    }
+    if (key === "s") {
+      setPressS(true);
+    }
+    if (key === "d") {
+      setPressD(true);
     }
   };
   useEffect(() => {
@@ -517,11 +539,40 @@ function Reverse() {
       changeView();
     }
   }, [cameraKeyPress]);
+  // 이동 키 누르기
+  useEffect(() => {
+    if (pressW) {
+      dispatch(setKeyW(true));
+    } else {
+      dispatch(setKeyW(false));
+    }
+  }, [pressW]);
+
+  useEffect(() => {
+    if (pressA) {
+      dispatch(setKeyA(true));
+    } else {
+      dispatch(setKeyA(false));
+    }
+  }, [pressA]);
+
+  useEffect(() => {
+    if (pressS) {
+      dispatch(setKeyS(true));
+    } else {
+      dispatch(setKeyS(false));
+    }
+  }, [pressS]);
+
+  useEffect(() => {
+    if (pressD) {
+      dispatch(setKeyD(true));
+    } else {
+      dispatch(setKeyD(false));
+    }
+  }, [pressD]);
 
   const changeView = () => {
-    if (cameraState.team || cameraState.game) {
-      return;
-    }
     if (cameraState.characterThree) {
       dispatch(setOnOne());
     } else {
@@ -579,10 +630,7 @@ function Reverse() {
         <ul id="user-audio"></ul>
       </div>
       <div className="w-full h-[0.15] absolute z-10">
-        <ReverseNavbar
-          destinationPoint={destinationPoint}
-          joinMembers={others}
-        />
+        <ReverseNavbar destinationPoint={destinationPoint} joinMembers={others} />
       </div>
 
       {/* chatting */}
@@ -654,7 +702,7 @@ function Reverse() {
           far: 1000,
         }}
       >
-        <Sky sunPosition={[100, 50, 100]} />
+        {/* <Sky sunPosition={[100, 50, 100]} /> */}
         <OrbitControls
           enableZoom={true}
           // enableRotate={false}
@@ -677,7 +725,7 @@ function Reverse() {
           shadow-camera-top={2000}
           shadow-camera-bottom={-2000}
         />
-        <ambientLight intensity={0.3} />
+        {/* <ambientLight intensity={0.3} /> */}
         <spotLight intensity={0.5} position={[100, 1000, 100]} />
         {/* character */}
         <Physics gravity={[0, -10, 0]}>
@@ -694,10 +742,7 @@ function Reverse() {
               );
             })}
 
-            <SelectedMyPlayer
-              destinationPoint={destinationPoint}
-              handleVisible={handleVisible}
-            />
+            <SelectedMyPlayer destinationPoint={destinationPoint} handleVisible={handleVisible} />
 
             <CartoonCampingKit />
             <FireAnimated />
@@ -745,32 +790,14 @@ function Reverse() {
 
             {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
             {/* 여행 */}
-            <Polaroid
-              position={[71, 4, -43]}
-              rotation={[-Math.PI / 2, 0, Math.PI / 5]}
-            />
-            <Notebook
-              position={[71, 3.4, -38]}
-              rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]}
-            />
+            <Polaroid position={[71, 4, -43]} rotation={[-Math.PI / 2, 0, Math.PI / 5]} />
+            <Notebook position={[71, 3.4, -38]} rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]} />
             {/* 기념일 */}
-            <Polaroid
-              position={[38, 1.1, 62]}
-              rotation={[-Math.PI / 2, 0, 0]}
-            />
-            <Notebook
-              position={[35, 0.3, 66]}
-              rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]}
-            />
+            <Polaroid position={[38, 1.1, 62]} rotation={[-Math.PI / 2, 0, 0]} />
+            <Notebook position={[35, 0.3, 66]} rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]} />
             {/* 일기 */}
-            <Polaroid
-              position={[-115, 7.7, -129]}
-              rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
-            />
-            <Notebook
-              position={[-110, 6.9, -131]}
-              rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
-            />
+            <Polaroid position={[-115, 7.7, -129]} rotation={[-Math.PI / 2, 0, Math.PI / 1.2]} />
+            <Notebook position={[-110, 6.9, -131]} rotation={[-Math.PI / 2, 0, -Math.PI / 3]} />
           </Suspense>
           {/* floor */}
           <mesh
