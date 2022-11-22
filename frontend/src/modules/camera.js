@@ -3,40 +3,46 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   characterThree: true,
   characterOne: false,
-  charactereye: false,
-  keyW: false,
-  keyA: false,
-  keyS: false,
-  keyD: false,
+  characterEye: false,
+  keyPress: {
+    keyW: false,
+    keyA: false,
+    keyS: false,
+    keyD: false,
+  },
+  position: { x: -30, y: 0, z: -30 },
 };
 
 const reducers = {
   setOnThree: (state, action) => {
     state.characterThree = true;
     state.characterOne = false;
-    state.charactereye = false;
+    state.characterEye = false;
   },
   setOnOne: (state, action) => {
     state.characterThree = false;
     state.characterOne = true;
-    state.charactereye = false;
+    state.characterEye = false;
   },
   setEye: (state, action) => {
     state.characterThree = false;
     state.characterOne = false;
-    state.charactereye = true;
+    state.characterEye = true;
   },
   setKeyW: (state, action) => {
-    state.keyW = action.payload;
+    state.keyPress.keyW = action.payload;
   },
   setKeyA: (state, action) => {
-    state.keyA = action.payload;
+    state.keyPress.keyA = action.payload;
   },
   setKeyS: (state, action) => {
-    state.keyS = action.payload;
+    state.keyPress.keyS = action.payload;
   },
   setKeyD: (state, action) => {
-    state.keyD = action.payload;
+    state.keyPress.keyD = action.payload;
+  },
+  setPosition: (state, action) => {
+    state.position = action.payload;
   },
 };
 
@@ -46,7 +52,15 @@ export const cameraSlice = createSlice({
   reducers,
 });
 
-export const { setOnThree, setOnOne, setEye, setKeyW, setKeyA, setKeyS, setKeyD } =
-  cameraSlice.actions;
+export const {
+  setOnThree,
+  setOnOne,
+  setEye,
+  setKeyW,
+  setKeyA,
+  setKeyS,
+  setKeyD,
+  setPosition,
+} = cameraSlice.actions;
 
 export default cameraSlice.reducer;
