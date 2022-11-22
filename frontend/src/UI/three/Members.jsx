@@ -13,7 +13,7 @@ export default function Members() {
   return (
     <div className="page__container">
       <div className="page__wrapper">
-        <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1650986656202-c8ceceb9b1ae?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2064&q=80')]">
+        <div className="rounded-md w-full h-full bg-[url('https://images.unsplash.com/photo-1650986656202-c8ceceb9b1ae?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2064&q=80')]">
           <div className="text-center z-10 p-[1rem] flex flex-col">
             <div className="font-bold font-travel text-white text-[2rem] pb-[0.5rem]">
               WELCOME TO THE REVERSE
@@ -21,6 +21,7 @@ export default function Members() {
             <div>
               {click === -1 && (
                 <div className="w-full h-[480px]">
+                  {/* <div className="w-full h-[480px]"> */}
                   {profiles.map((info, idx) => {
                     return (
                       <button
@@ -28,7 +29,7 @@ export default function Members() {
                         onClick={() => {
                           setClick(idx);
                         }}
-                        className="bg-white rounded-lg border-8 hover:border-main2 w-44 h-60 mx-1"
+                        className="bg-white rounded-lg border-8 hover:border-main2 w-36 h-56 mx-2 my-2.5"
                       >
                         <img
                           className="w-full h-full object-cover rounded-sm"

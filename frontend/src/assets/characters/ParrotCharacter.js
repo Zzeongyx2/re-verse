@@ -9,7 +9,7 @@ export default function ParrotCharacter() {
 
   const previousAction = usePrevious(action);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Parrot_Animations.gltf",
+    "/assets/animals/GLTF/Animations/Parrot_Animations.gltf"
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -39,7 +39,7 @@ export default function ParrotCharacter() {
             morphTargetInfluences={nodes.Parrot.morphTargetInfluences}
             // 그림자 설정은 여기에!
             castShadow
-            receiveShadow
+            // receiveShadow
             onClick={() => setIndex((index + 1) % names.length)}
           />
         </group>
