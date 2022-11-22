@@ -9,7 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCampfireOn } from "../../../modules/reverse";
 import { useBox, useConvexPolyhedron } from "@react-three/cannon";
 import { Quaternion, Vector3 } from "three";
-import { setKeyA, setKeyD, setKeyS, setKeyW } from "../../../modules/camera";
+import {
+  setKeyA,
+  setKeyD,
+  setKeyS,
+  setKeyW,
+  setPosition,
+} from "../../../modules/camera";
 
 export default function MyBelugaAnimations({
   destinationPoint,
@@ -17,12 +23,12 @@ export default function MyBelugaAnimations({
   handleEvent, // travel, anniv, diary event handler
 }) {
   const group = useRef();
-  const keyW = useSelector((state) => state.camera.keyW);
-  const keyA = useSelector((state) => state.camera.keyA);
-  const keyS = useSelector((state) => state.camera.keyS);
-  const keyD = useSelector((state) => state.camera.keyD);
+  const keyW = useSelector((state) => state.camera.keyPress.keyW);
+  const keyA = useSelector((state) => state.camera.keyPress.keyA);
+  const keyS = useSelector((state) => state.camera.keyPress.keyS);
+  const keyD = useSelector((state) => state.camera.keyPress.keyD);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Beluga_Animations.gltf"
+    "/assets/animals/GLTF/Animations/Beluga_Animations.gltf",
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -52,14 +58,6 @@ export default function MyBelugaAnimations({
     },
   }));
 
-  // useEffect(() => {
-  //   if (destinationPoint) {
-  //     setMoving(true);
-  //     group.current.lookAt(destinationPoint);
-  //     group.current.name = "beluga";
-  //   }
-  // }, [destinationPoint]);
-
   useFrame((state) => {
     actions["Idle_A"].play();
     if (group.current) {
@@ -71,80 +69,81 @@ export default function MyBelugaAnimations({
         if (keyW && keyD) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x + 0.2,
+              group.current.position.x + 0.4,
               group.current.position.y,
-              group.current.position.z - 0.2
-            )
+              group.current.position.z - 0.4,
+            ),
           );
-          group.current.position.z -= 0.2;
-          group.current.position.x += 0.2;
+          group.current.position.z -= 0.4;
+          group.current.position.x += 0.4;
         } else if (keyS && keyD) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x + 0.2,
+              group.current.position.x + 0.4,
               group.current.position.y,
-              group.current.position.z + 0.2
-            )
+              group.current.position.z + 0.4,
+            ),
           );
-          group.current.position.z += 0.2;
-          group.current.position.x += 0.2;
+          group.current.position.z += 0.4;
+          group.current.position.x += 0.4;
         } else if (keyW && keyA) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x - 0.2,
+              group.current.position.x - 0.4,
               group.current.position.y,
-              group.current.position.z - 0.2
-            )
+              group.current.position.z - 0.4,
+            ),
           );
-          group.current.position.z -= 0.2;
-          group.current.position.x -= 0.2;
+          group.current.position.z -= 0.4;
+          group.current.position.x -= 0.4;
         } else if (keyS && keyA) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x - 0.2,
+              group.current.position.x - 0.4,
               group.current.position.y,
-              group.current.position.z + 0.2
-            )
+              group.current.position.z + 0.4,
+            ),
           );
-          group.current.position.z += 0.2;
-          group.current.position.x -= 0.2;
+          group.current.position.z += 0.4;
+          group.current.position.x -= 0.4;
         } else if (keyW) {
           group.current.lookAt(
             new Vector3(
               group.current.position.x,
               group.current.position.y,
-              group.current.position.z - 0.2
-            )
+              group.current.position.z - 0.4,
+            ),
           );
-          group.current.position.z -= 0.2;
+          group.current.position.z -= 0.4;
         } else if (keyA) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x - 0.2,
+              group.current.position.x - 0.4,
               group.current.position.y,
-              group.current.position.z
-            )
+              group.current.position.z,
+            ),
           );
-          group.current.position.x -= 0.2;
+          group.current.position.x -= 0.4;
         } else if (keyS) {
           group.current.lookAt(
             new Vector3(
               group.current.position.x,
               group.current.position.y,
-              group.current.position.z + 0.2
-            )
+              group.current.position.z + 0.4,
+            ),
           );
-          group.current.position.z += 0.2;
+          group.current.position.z += 0.4;
         } else if (keyD) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x + 0.2,
+              group.current.position.x + 0.4,
               group.current.position.y,
-              group.current.position.z
-            )
+              group.current.position.z,
+            ),
           );
-          group.current.position.x += 0.2;
+          group.current.position.x += 0.4;
         }
+        dispatch(setPosition(group.current.position));
       } else {
         actions["Walk"].stop();
         actions["Idle_A"].play();
@@ -198,82 +197,6 @@ export default function MyBelugaAnimations({
     if (loadingPage) {
       state.camera.zoom = 28;
     }
-
-    // if (group.current) {
-    // if (moving) {
-    //   angle = Math.atan2(
-    //     destinationPoint.z - group.current.position.z,
-    //     destinationPoint.x - group.current.position.x
-    //   );
-    //   if (isCollided) {
-    //     group.current.position.x -= Math.cos(angle) * 1.8;
-    //     group.current.position.z -= Math.sin(angle) * 1.8;
-    //     destinationPoint.x = group.current.position.x;
-    //     destinationPoint.z = group.current.position.z;
-    //     setMoving(false);
-    //     setCollision(false);
-    //   } else {
-    //     group.current.position.x += Math.cos(angle) * 0.5;
-    //     group.current.position.z += Math.sin(angle) * 0.5;
-    //   }
-
-    //   // actions["Idle_A"].stop();
-    //   // actions["Walk"].play();
-    //   if (
-    //     Math.abs(destinationPoint.x - group.current.position.x) < 0.3 &&
-    //     Math.abs(destinationPoint.z - group.current.position.z) < 0.3
-    //   ) {
-    //     setMoving(false);
-    //     // actions["Walk"].stop();
-    //     // actions["Idle_A"].play();
-    //   }
-
-    //   // 오브젝트 visible event
-    //   if (
-    //     Math.abs(objectPosition.x - group.current.position.x) < 4 &&
-    //     Math.abs(objectPosition.z - group.current.position.z) < 4
-    //   ) {
-    //     handleVisible(true);
-    //   } else {
-    //     handleVisible(false);
-    //   }
-
-    //   // travel zone, campfire animation
-    //   if (
-    //     Math.abs(campfirePosition.x - group.current.position.x) < 17 &&
-    //     Math.abs(campfirePosition.z - group.current.position.z) < 12
-    //   ) {
-    //     dispatch(setCampfireOn(1));
-    //   } else {
-    //     dispatch(setCampfireOn(0));
-    //   }
-    // }
-    // if (!cameraState.team && !cameraState.game) {
-    //   if (cameraState.characterThree) {
-    //     state.camera.position.x = 1 + group.current.position.x;
-    //     state.camera.position.z = 5 + group.current.position.z;
-    //   } else if (cameraState.characterOne) {
-    //     let position = new Vector3(0, 0, 0);
-    //     position.setFromMatrixPosition(group.current.matrixWorld);
-
-    //     let quaternion = new Quaternion(0, 0, 0, 0);
-    //     quaternion.setFromRotationMatrix(group.current.matrixWorld);
-
-    //     let wDir = new Vector3(0, 0, 1);
-    //     wDir.applyQuaternion(quaternion);
-    //     wDir.normalize();
-
-    //     let cameraPosition = position
-    //       .clone()
-    //       .add(wDir.clone().multiplyScalar(-1).add(new Vector3(-0.3, 0.5, 0)));
-
-    //     wDir.add(new Vector3(0, 0.2, 0));
-    //     state.camera.position.copy(cameraPosition);
-    //     state.camera.lookAt(position);
-    //   }
-    // }
-    // api.position.set(group.current.position.x, 0, group.current.position.z);
-    // }
   });
   const cameraState = useSelector((state) => state.camera);
   const loadingPage = useSelector((state) => state.loading.loadingPage);

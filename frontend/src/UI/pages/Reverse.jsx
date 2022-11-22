@@ -50,7 +50,16 @@ import { CandyCustomOne } from "../../assets/deco/Customfirst.js";
 import { CandyCustomTwo } from "../../assets/deco/Customsecond.js";
 import { CustomForestSecond } from "../../assets/deco/Customforestsecond.js";
 import { CandyCustomThird } from "../../assets/deco/Customthird.js";
-import { setKeyA, setKeyD, setKeyS, setKeyW, setOnOne, setOnThree } from "../../modules/camera.js";
+import {
+  setEye,
+  setKeyA,
+  setKeyD,
+  setKeyS,
+  setKeyW,
+  setOnOne,
+  setOnThree,
+  setPosition,
+} from "../../modules/camera.js";
 import { CustomTree } from "../../assets/deco/Customtree.js";
 import { CustomRoadFirst } from "../../assets/deco/Customroadfirst.js";
 import { DiaryStoneRoad } from "../../assets/deco/Customroadsecond.js";
@@ -66,7 +75,9 @@ var ws1;
 let localStream;
 
 function Reverse() {
-  const [destinationPoint, setDestinationPoint] = useState(new Vector3(-30, 0, -30));
+  const [destinationPoint, setDestinationPoint] = useState(
+    new Vector3(-30, 0, -30),
+  );
   const destRef = useRef(destinationPoint);
   const floorTexture = useLoader(TextureLoader, "/textures/map_texture.jpg");
   if (floorTexture) {
@@ -238,7 +249,9 @@ function Reverse() {
           let peer1 = rtcPeers.get(data1.userId);
 
           if (peer1) {
-            peer1.addIceCandidate(new RTCIceCandidate(data2)).catch((error) => {});
+            peer1
+              .addIceCandidate(new RTCIceCandidate(data2))
+              .catch((error) => {});
           }
         }
       } else if (data1.type === "Answer") {
@@ -272,7 +285,9 @@ function Reverse() {
     setRtcPeers2(rtcPeers2);
 
     if (data1.type === "NewMember") {
-      let channel1 = rtcPeer.createDataChannel(Math.floor(Math.random() * 10000000000));
+      let channel1 = rtcPeer.createDataChannel(
+        Math.floor(Math.random() * 10000000000),
+      );
       channelConfig(channel1);
 
       //create offer
@@ -379,9 +394,9 @@ function Reverse() {
     channel1.onopen = () => {
       channelData.userId = loginUser.nickname;
       channelData.type = "handshake";
-
+      console.log(cameraState);
       channelData.data = {
-        position: { x: destRef.current.x, y: 1, z: destRef.current.z },
+        position: cameraState.position,
         username: loginUser.nickname,
         uuid: userId2,
       };
@@ -496,13 +511,22 @@ function Reverse() {
   const reverse = useSelector((state) => state.reverse);
   const cameraState = useSelector((state) => state.camera);
   const [cameraKeyPress, setCameraKeyPress] = useState(false);
+  const [pressT, setPressT] = useState(false);
   const [pressW, setPressW] = useState(false);
   const [pressA, setPressA] = useState(false);
   const [pressS, setPressS] = useState(false);
   const [pressD, setPressD] = useState(false);
+
+  useEffect(() => {
+    sendPosition(cameraState.position);
+  }, [cameraState.keyPress]);
+
   const upHandler = ({ key }) => {
     if (key === "y") {
       setCameraKeyPress(false);
+    }
+    if (key === "t") {
+      setPressT(false);
     }
     if (key === "w") {
       setPressW(false);
@@ -520,6 +544,9 @@ function Reverse() {
   const downHandler = ({ key }) => {
     if (key === "y") {
       setCameraKeyPress(true);
+    }
+    if (key === "t") {
+      setPressT(true);
     }
     if (key === "w") {
       setPressW(true);
@@ -539,6 +566,11 @@ function Reverse() {
       changeView();
     }
   }, [cameraKeyPress]);
+  useEffect(() => {
+    if (pressT) {
+      changeViewEye();
+    }
+  }, [pressT]);
   // 이동 키 누르기
   useEffect(() => {
     if (pressW) {
@@ -572,6 +604,13 @@ function Reverse() {
     }
   }, [pressD]);
 
+  const changeViewEye = () => {
+    if (cameraState.characterEye) {
+      dispatch(setOnThree());
+    } else {
+      dispatch(setEye());
+    }
+  };
   const changeView = () => {
     if (cameraState.characterThree) {
       dispatch(setOnOne());
@@ -599,7 +638,7 @@ function Reverse() {
         ...reverse.info,
         archiveId: archiveId,
         stuffs: res.data.stuffs,
-      })
+      }),
     );
   };
 
@@ -630,7 +669,7 @@ function Reverse() {
         <ul id="user-audio"></ul>
       </div>
       <div className="w-full h-[0.15] absolute z-10">
-        <ReverseNavbar destinationPoint={destinationPoint} joinMembers={others} />
+        <ReverseNavbar joinMembers={others} />
       </div>
 
       {/* chatting */}
@@ -742,7 +781,10 @@ function Reverse() {
               );
             })}
 
-            <SelectedMyPlayer destinationPoint={destinationPoint} handleVisible={handleVisible} />
+            <SelectedMyPlayer
+              destinationPoint={destinationPoint}
+              handleVisible={handleVisible}
+            />
 
             <CartoonCampingKit />
             <FireAnimated />
@@ -790,14 +832,32 @@ function Reverse() {
 
             {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
             {/* 여행 */}
-            <Polaroid position={[71, 4, -43]} rotation={[-Math.PI / 2, 0, Math.PI / 5]} />
-            <Notebook position={[71, 3.4, -38]} rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]} />
+            <Polaroid
+              position={[71, 4, -43]}
+              rotation={[-Math.PI / 2, 0, Math.PI / 5]}
+            />
+            <Notebook
+              position={[71, 3.4, -38]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]}
+            />
             {/* 기념일 */}
-            <Polaroid position={[38, 1.1, 62]} rotation={[-Math.PI / 2, 0, 0]} />
-            <Notebook position={[35, 0.3, 66]} rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]} />
+            <Polaroid
+              position={[38, 1.1, 62]}
+              rotation={[-Math.PI / 2, 0, 0]}
+            />
+            <Notebook
+              position={[35, 0.3, 66]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]}
+            />
             {/* 일기 */}
-            <Polaroid position={[-115, 7.7, -129]} rotation={[-Math.PI / 2, 0, Math.PI / 1.2]} />
-            <Notebook position={[-110, 6.9, -131]} rotation={[-Math.PI / 2, 0, -Math.PI / 3]} />
+            <Polaroid
+              position={[-115, 7.7, -129]}
+              rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
+            />
+            <Notebook
+              position={[-110, 6.9, -131]}
+              rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
+            />
           </Suspense>
           {/* floor */}
           <mesh
@@ -806,7 +866,7 @@ function Reverse() {
                 return;
               }
               setDestinationPoint(e.point);
-              sendPosition(e.point);
+              // sendPosition(e.point);
             }}
             rotation={[-0.5 * Math.PI, 0, 0]}
             receiveShadow
