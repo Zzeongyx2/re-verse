@@ -9,7 +9,7 @@ export default function BelugaCharacter() {
 
   const previousAction = usePrevious(action);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Beluga_Animations.gltf",
+    "/assets/animals/GLTF/Animations/Beluga_Animations.gltf"
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
