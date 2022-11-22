@@ -195,7 +195,8 @@ export function FireAnimated(props) {
           receiveShadow
           position={[38, 0.01, -68]}
         >
-          <planeBufferGeometry attach="geometry" args={[35, 25]} />
+          {/* <planeBufferGeometry attach="geometry" args={[35, 25]} /> */}
+          <planeGeometry attach="geometry" args={[35, 25]} />
           <meshBasicMaterial color="blue" opacity={0} transparent />
         </mesh>
       </group>

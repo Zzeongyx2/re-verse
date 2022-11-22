@@ -12,6 +12,7 @@ export function CandyCustomThird(props) {
       rotation={[0, Math.PI, 0]}
     >
       <mesh
+        castShadow
         geometry={nodes.Tree_CottonCandy_01_LOD1_Mat_Candy_0001.geometry}
         material={materials["Mat_Candy.005"]}
         position={[63.93, -0.3, -27.9]}
@@ -19,6 +20,7 @@ export function CandyCustomThird(props) {
         scale={4.25}
       />
       <mesh
+        castShadow
         geometry={
           nodes.Tree_CottonCandy_01_LOD1_Mat_Candy_Specular_0001.geometry
         }
@@ -28,6 +30,7 @@ export function CandyCustomThird(props) {
         scale={4.25}
       />
       <mesh
+        castShadow
         geometry={nodes.Tree_Candy_03_LOD1_Mat_Candy_0.geometry}
         material={materials.Mat_Candy}
         position={[83.78, -0.3, -19.69]}
@@ -35,6 +38,7 @@ export function CandyCustomThird(props) {
         scale={2.31}
       />
       <mesh
+        castShadow
         geometry={nodes.Tree_Candy_03_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[83.78, -0.3, -19.69]}
@@ -42,6 +46,7 @@ export function CandyCustomThird(props) {
         scale={2.31}
       />
       <mesh
+        castShadow
         geometry={nodes.Mintstar_06_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[95.29, -0.09, 6.62]}
@@ -49,6 +54,7 @@ export function CandyCustomThird(props) {
         scale={1.82}
       />
       <mesh
+        castShadow
         geometry={nodes.Mintstar_05_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[47.65, -0.09, 1.09]}
@@ -56,6 +62,7 @@ export function CandyCustomThird(props) {
         scale={[2.76, 2.76, 2.59]}
       />
       <mesh
+        castShadow
         geometry={nodes.Mintstar_04_LOD1_Mat_Candy_Specular_0001.geometry}
         material={materials["Mat_Candy_Specular.002"]}
         position={[75.13, -0.09, 29.59]}
@@ -63,6 +70,7 @@ export function CandyCustomThird(props) {
         scale={4.02}
       />
       <mesh
+        castShadow
         geometry={nodes.Mintstar_04_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[56.59, -0.09, -10.64]}
@@ -70,6 +78,7 @@ export function CandyCustomThird(props) {
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.Mint_C_02_LOD1_Mat_Candy_0.geometry}
         material={materials.Mat_Candy}
         position={[68.11, -0.09, -16]}
@@ -77,6 +86,7 @@ export function CandyCustomThird(props) {
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.Mint_A_01_LOD1_Mat_Candy_Specular_0002.geometry}
         material={materials["Mat_Candy_Specular.021"]}
         position={[127.47, -0.09, -4.29]}
@@ -84,6 +94,7 @@ export function CandyCustomThird(props) {
         scale={2.75}
       />
       <mesh
+        castShadow
         geometry={nodes.Mint_A_01_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[118.15, -0.09, 1.46]}
@@ -91,6 +102,7 @@ export function CandyCustomThird(props) {
         scale={1.78}
       />
       <mesh
+        castShadow
         geometry={nodes.Lolly_B_01_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[97.64, -0.3, -23.5]}
@@ -98,6 +110,7 @@ export function CandyCustomThird(props) {
         scale={3.96}
       />
       <mesh
+        castShadow
         geometry={nodes.Lollipop_B_02_LOD1_Mat_Candy_0.geometry}
         material={materials.Mat_Candy}
         position={[32.76, -0.09, 8.59]}
@@ -105,6 +118,7 @@ export function CandyCustomThird(props) {
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.Lollipop_B_02_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[32.76, -0.09, 8.59]}
@@ -112,6 +126,7 @@ export function CandyCustomThird(props) {
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.Lollipop_B_01_LOD1_Mat_Candy_0.geometry}
         material={materials.Mat_Candy}
         position={[20.16, -0.09, 16.16]}
@@ -119,6 +134,7 @@ export function CandyCustomThird(props) {
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.Lollipop_B_01_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[20.16, -0.09, 16.16]}
@@ -126,6 +142,7 @@ export function CandyCustomThird(props) {
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.Lollipop_A_03_LOD1_Mat_Candy_0.geometry}
         material={materials.Mat_Candy}
         position={[127.5, -0.09, 8.63]}
@@ -133,6 +150,7 @@ export function CandyCustomThird(props) {
         scale={3.12}
       />
       <mesh
+        castShadow
         geometry={nodes.Lollipop_A_03_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[127.5, -0.09, 8.63]}
@@ -140,6 +158,7 @@ export function CandyCustomThird(props) {
         scale={3.12}
       />
       <mesh
+        castShadow
         geometry={nodes.Lollipop_A_02_LOD1_Mat_Candy_0.geometry}
         material={materials.Mat_Candy}
         position={[108.55, -0.09, -18.35]}
@@ -147,6 +166,7 @@ export function CandyCustomThird(props) {
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.Lollipop_A_02_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[108.55, -0.09, -18.35]}
@@ -154,6 +174,7 @@ export function CandyCustomThird(props) {
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.Heartcandy_01_LOD1_Mat_Candy_Specular_0003.geometry}
         material={materials["Mat_Candy_Specular.020"]}
         position={[115.55, 4.36, -7.15]}
@@ -161,6 +182,7 @@ export function CandyCustomThird(props) {
         scale={2.67}
       />
       <mesh
+        castShadow
         geometry={nodes.Donut_A_04_LOD1_Mat_Pastry_0.geometry}
         material={materials.Mat_Pastry}
         position={[55.96, -0.09, 19.43]}
@@ -168,6 +190,7 @@ export function CandyCustomThird(props) {
         scale={[3.54, 3.54, 2.59]}
       />
       <mesh
+        castShadow
         geometry={nodes.CookieNut_02_LOD1_Mat_Pastry_0.geometry}
         material={materials.Mat_Pastry}
         position={[83.42, -0.09, 0.13]}
@@ -175,6 +198,7 @@ export function CandyCustomThird(props) {
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.CookieNut_01_LOD1_Mat_Pastry_0.geometry}
         material={materials.Mat_Pastry}
         position={[73.78, -0.09, 13.41]}
@@ -182,6 +206,7 @@ export function CandyCustomThird(props) {
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.Chocwhite_03_LOD1_Mat_Candy_Specular_0001.geometry}
         material={materials["Mat_Candy_Specular.009"]}
         position={[106.44, -0.09, 3.48]}
@@ -189,6 +214,7 @@ export function CandyCustomThird(props) {
         scale={1.53}
       />
       <mesh
+        castShadow
         geometry={nodes.CandyPlant_A_03_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[63.96, -0.09, -5.12]}
@@ -196,6 +222,7 @@ export function CandyCustomThird(props) {
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.Candycane_01_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[23.62, -0.09, 10.52]}
@@ -203,6 +230,7 @@ export function CandyCustomThird(props) {
         scale={1.79}
       />
       <mesh
+        castShadow
         geometry={nodes.Candybar_A_02_LOD1_Mat_Candy_Specular_0001.geometry}
         material={materials["Mat_Candy_Specular.005"]}
         position={[34.42, 1.67, -15.14]}
@@ -210,6 +238,7 @@ export function CandyCustomThird(props) {
         scale={1.49}
       />
       <mesh
+        castShadow
         geometry={nodes.Candybar_A_01_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[42.46, -0.3, -17.24]}
@@ -217,6 +246,7 @@ export function CandyCustomThird(props) {
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.Candy_D_03_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[78.19, -0.09, -12.66]}
@@ -224,6 +254,7 @@ export function CandyCustomThird(props) {
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.Candy_D_01_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[86.25, -0.09, 12.7]}
@@ -231,12 +262,14 @@ export function CandyCustomThird(props) {
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.Candy_B_03_LOD1_Mat_Candy_Specular_0.geometry}
         material={materials.Mat_Candy_Specular}
         position={[57.99, -0.09, 37.44]}
         scale={2.59}
       />
       <mesh
+        castShadow
         geometry={nodes.Candy_A_02_LOD1_Mat_Candy_Specular_0002.geometry}
         material={materials["Mat_Candy_Specular.022"]}
         position={[123.82, -0.09, -19.68]}
@@ -244,6 +277,7 @@ export function CandyCustomThird(props) {
         scale={3.19}
       />
       <mesh
+        castShadow
         geometry={nodes.Breadstick_01_LOD1_Mat_Pastry_0.geometry}
         material={materials.Mat_Pastry}
         position={[93.76, -0.09, -11.73]}

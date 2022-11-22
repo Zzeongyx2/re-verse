@@ -24,7 +24,6 @@ export function CartoonCampingKit(props) {
                 geometry={nodes.Campfire_03_Camping_mat_0.geometry}
                 material={materials.Camping_mat}
                 castShadow
-                receiveShadow
               />
             </group>
           </group>
