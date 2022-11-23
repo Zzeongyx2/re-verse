@@ -85,79 +85,79 @@ export default function MyTortoiseAnimations({
         if (keyW && keyD) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x + 0.4,
+              group.current.position.x + 0.8,
               group.current.position.y,
-              group.current.position.z - 0.4
+              group.current.position.z - 0.8
             )
           );
-          group.current.position.z -= 0.4;
-          group.current.position.x += 0.4;
+          group.current.position.z -= 0.8;
+          group.current.position.x += 0.8;
         } else if (keyS && keyD) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x + 0.4,
+              group.current.position.x + 0.8,
               group.current.position.y,
-              group.current.position.z + 0.4
+              group.current.position.z + 0.8
             )
           );
-          group.current.position.z += 0.4;
-          group.current.position.x += 0.4;
+          group.current.position.z += 0.8;
+          group.current.position.x += 0.8;
         } else if (keyW && keyA) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x - 0.4,
+              group.current.position.x - 0.8,
               group.current.position.y,
-              group.current.position.z - 0.4
+              group.current.position.z - 0.8
             )
           );
-          group.current.position.z -= 0.4;
-          group.current.position.x -= 0.4;
+          group.current.position.z -= 0.8;
+          group.current.position.x -= 0.8;
         } else if (keyS && keyA) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x - 0.4,
+              group.current.position.x - 0.8,
               group.current.position.y,
-              group.current.position.z + 0.4
+              group.current.position.z + 0.8
             )
           );
-          group.current.position.z += 0.4;
-          group.current.position.x -= 0.4;
+          group.current.position.z += 0.8;
+          group.current.position.x -= 0.8;
         } else if (keyW) {
           group.current.lookAt(
             new Vector3(
               group.current.position.x,
               group.current.position.y,
-              group.current.position.z - 0.4
+              group.current.position.z - 0.8
             )
           );
-          group.current.position.z -= 0.4;
+          group.current.position.z -= 0.8;
         } else if (keyA) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x - 0.4,
+              group.current.position.x - 0.8,
               group.current.position.y,
               group.current.position.z
             )
           );
-          group.current.position.x -= 0.4;
+          group.current.position.x -= 0.8;
         } else if (keyS) {
           group.current.lookAt(
             new Vector3(
               group.current.position.x,
               group.current.position.y,
-              group.current.position.z + 0.4
+              group.current.position.z + 0.8
             )
           );
-          group.current.position.z += 0.4;
+          group.current.position.z += 0.8;
         } else if (keyD) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x + 0.4,
+              group.current.position.x + 0.8,
               group.current.position.y,
               group.current.position.z
             )
           );
-          group.current.position.x += 0.4;
+          group.current.position.x += 0.8;
         }
         dispatch(setPosition(group.current.position));
       } else {
