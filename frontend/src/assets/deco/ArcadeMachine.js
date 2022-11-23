@@ -16,8 +16,8 @@ export function ArcadeMachine(props) {
     <group
       {...props}
       dispose={null}
-      position={[-26, -8, 119]}
-      rotation={[0, Math.PI, 0]}
+      position={[-56, -8, -91]}
+      rotation={[0, 0, 0]}
     >
       <mesh ref={boxCollider}>
         <meshLambertMaterial color={"white"} />
