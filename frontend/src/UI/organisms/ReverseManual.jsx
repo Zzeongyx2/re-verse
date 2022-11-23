@@ -48,15 +48,26 @@ function ReverseManual({ joinMembers }) {
               {/* 조작 가이드 */}
               <div className="p-2 mb-4 border-2 border-basic3 rounded-lg w-full h-[calc(99%/3*2-20px)] ">
                 <p className="font-bold px-1 pt-0.5 pb-1.5 mb-1.5">캐릭터 조작 키</p>
-                <div>
-                  <div>
-                    <div className="w-8 h-8 border-4 text-center rounded-md shadow-md">W</div>
+                <div className="flex justify-around">
+                  <div className="w-[calc(99%/3+30px)] p-2 mt-6">
+                    <div className="flex justify-center m-1">
+                      <Kbd fontSize={35}>W</Kbd>
+                    </div>
+                    <div className="flex justify-between m-1 p-1">
+                      <Kbd fontSize={35}>A</Kbd>
+                      <Kbd fontSize={35}>S</Kbd>
+                      <Kbd fontSize={35}>D</Kbd>
+                    </div>
+                    <div className="flex text-center justify-center font-bold">이동 키</div>
                   </div>
-                  <Kbd fontSize={35}>w</Kbd>
-                  <div className="h-7 w-7">
-                    <Kbd>w</Kbd>
+                  <div className="m-3 font-bold flex flex-col items-center pt-16">
+                    <div className="flex justify-center m-1 p-1">
+                      <Kbd fontSize={35}>Y</Kbd>
+                    </div>
+                    <div className="flex text-center justify-center font-bold">
+                      카메라 시점 변경
+                    </div>
                   </div>
-                  <div></div>
                 </div>
               </div>
             </div>
