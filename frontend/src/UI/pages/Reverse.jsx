@@ -715,7 +715,6 @@ function Reverse() {
                 }
               }}
             />
-
             <div
               id="btnSend"
               className="w-1/6 cursor-pointer mr-1 flex justify-center font-semibold text-basic3 hover:text-extra3 pb-0.5"
@@ -782,7 +781,7 @@ function Reverse() {
         <Physics gravity={[0, -10, 0]}>
           <Suspense fallback={null}>
             {/* !important : characters */}
-            {/* {others.map((other, idx) => {
+            {others.map((other, idx) => {
               return (
                 <SelectedOtherPlayer
                   key={idx}
@@ -796,7 +795,7 @@ function Reverse() {
             <SelectedMyPlayer
               destinationPoint={destinationPoint}
               handleVisible={handleVisible}
-            /> */}
+            />
 
             <CartoonCampingKit />
             <FireAnimated />

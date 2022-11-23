@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
+import { useGLTF, useAnimations, Html } from "@react-three/drei";
 import GLTFLoader from "gltfjsx/src/utils/glftLoader";
 import { useFrame, useGraph } from "@react-three/fiber";
 import * as SkeletonUtils from "three/examples/jsm/utils/SkeletonUtils";
@@ -28,7 +28,7 @@ export default function MyTortoiseAnimations({
   const keyS = useSelector((state) => state.camera.keyPress.keyS);
   const keyD = useSelector((state) => state.camera.keyPress.keyD);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Tortoise_Animations.gltf",
+    "/assets/animals/GLTF/Animations/Tortoise_Animations.gltf"
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -111,8 +111,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x + 0.4,
               group.current.position.y,
-              group.current.position.z - 0.4,
-            ),
+              group.current.position.z - 0.4
+            )
           );
           group.current.position.z -= 0.4;
           group.current.position.x += 0.4;
@@ -121,8 +121,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x + 0.4,
               group.current.position.y,
-              group.current.position.z + 0.4,
-            ),
+              group.current.position.z + 0.4
+            )
           );
           group.current.position.z += 0.4;
           group.current.position.x += 0.4;
@@ -131,8 +131,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x - 0.4,
               group.current.position.y,
-              group.current.position.z - 0.4,
-            ),
+              group.current.position.z - 0.4
+            )
           );
           group.current.position.z -= 0.4;
           group.current.position.x -= 0.4;
@@ -141,8 +141,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x - 0.4,
               group.current.position.y,
-              group.current.position.z + 0.4,
-            ),
+              group.current.position.z + 0.4
+            )
           );
           group.current.position.z += 0.4;
           group.current.position.x -= 0.4;
@@ -151,8 +151,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x,
               group.current.position.y,
-              group.current.position.z - 0.4,
-            ),
+              group.current.position.z - 0.4
+            )
           );
           group.current.position.z -= 0.4;
         } else if (keyA) {
@@ -160,8 +160,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x - 0.4,
               group.current.position.y,
-              group.current.position.z,
-            ),
+              group.current.position.z
+            )
           );
           group.current.position.x -= 0.4;
         } else if (keyS) {
@@ -169,8 +169,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x,
               group.current.position.y,
-              group.current.position.z + 0.4,
-            ),
+              group.current.position.z + 0.4
+            )
           );
           group.current.position.z += 0.4;
         } else if (keyD) {
@@ -178,8 +178,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x + 0.4,
               group.current.position.y,
-              group.current.position.z,
-            ),
+              group.current.position.z
+            )
           );
           group.current.position.x += 0.4;
         }
@@ -218,8 +218,17 @@ export default function MyTortoiseAnimations({
   const cameraState = useSelector((state) => state.camera);
   const loadingPage = useSelector((state) => state.loading.loadingPage);
 
+  const loginUser = useSelector((state) => state.user.loginUser);
+
   return (
     <group>
+      <mesh>
+        <Html className="" position={[1.5, -1.5, 0]} zIndexRange={[-100, 100]}>
+          <p className="text-md [text-shadow:_1px_1px_2px_rgb(250,181,38)] text-white">
+            {loginUser.nickname}
+          </p>
+        </Html>
+      </mesh>
       <group ref={group} dispose={null} position={[-30, 0, -30]}>
         <group name="Scene">
           <group name="Rig" scale={2}>
@@ -235,8 +244,12 @@ export default function MyTortoiseAnimations({
               castShadow
             />
           </group>
+          {/* <group>
+
+          </group> */}
         </group>
       </group>
+      d
       <mesh ref={ref} castShadow={true} name={"player"}>
         <meshLambertMaterial color={"skyblue"} />
       </mesh>
