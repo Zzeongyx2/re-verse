@@ -34,6 +34,7 @@ export function ArcadeMachine(props) {
             className="bg-blue-400 w-[364px] h-[296px] rounded-md border-[18px] border-black p-1"
             rotation={[Math.PI / 2.2, 0, 0]}
             position={[0, 0.22, 14.5169]}
+            zIndexRange={[-100, 100]}
           >
             <Game />
           </Html>
@@ -51,6 +52,7 @@ export function ArcadeMachine(props) {
           material={materials.lambert8SG}
         />
         <mesh
+          castShadow
           geometry={nodes.Object_7.geometry}
           material={materials.lambert3SG}
         />
