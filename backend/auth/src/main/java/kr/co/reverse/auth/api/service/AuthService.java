@@ -262,6 +262,9 @@ public class AuthService {
         refreshCookie.setMaxAge(0);
         response.addCookie(refreshCookie);
 
+
+        System.out.println("==================== " + accessToken);
+
     }
 
     public void checkDuplicateEmail(String email) {
