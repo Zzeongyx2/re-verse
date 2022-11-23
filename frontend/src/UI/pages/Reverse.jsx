@@ -59,6 +59,7 @@ import {
   setOnOne,
   setOnThree,
   setPosition,
+  setReverseChatPress,
 } from "../../modules/camera.js";
 import { CustomTree } from "../../assets/deco/Customtree.js";
 import { CustomRoadFirst } from "../../assets/deco/Customroadfirst.js";
@@ -511,10 +512,19 @@ function Reverse() {
   const [pressA, setPressA] = useState(false);
   const [pressS, setPressS] = useState(false);
   const [pressD, setPressD] = useState(false);
+  const [chatPress, setChatPress] = useState(false);
 
   useEffect(() => {
     sendPosition(cameraState.position);
   }, [cameraState.keyPress]);
+
+  useEffect(() => {
+    if (chatPress) {
+      dispatch(setReverseChatPress(true));
+    } else {
+      dispatch(setReverseChatPress(false));
+    }
+  }, [chatPress]);
 
   const upHandler = ({ key }) => {
     if (key === "y") {
@@ -561,56 +571,66 @@ function Reverse() {
       changeView();
     }
   }, [cameraKeyPress]);
-  useEffect(() => {
-    if (pressT) {
-      changeViewEye();
-    }
-  }, [pressT]);
+  // useEffect(() => {
+  //   if (pressT) {
+  //     changeViewEye();
+  //   }
+  // }, [pressT]);
   // 이동 키 누르기
   useEffect(() => {
-    if (pressW) {
-      dispatch(setKeyW(true));
-    } else {
-      dispatch(setKeyW(false));
+    if (!cameraState.chatPress) {
+      if (pressW) {
+        dispatch(setKeyW(true));
+      } else {
+        dispatch(setKeyW(false));
+      }
     }
   }, [pressW]);
 
   useEffect(() => {
-    if (pressA) {
-      dispatch(setKeyA(true));
-    } else {
-      dispatch(setKeyA(false));
+    if (!cameraState.chatPress) {
+      if (pressA) {
+        dispatch(setKeyA(true));
+      } else {
+        dispatch(setKeyA(false));
+      }
     }
   }, [pressA]);
 
   useEffect(() => {
-    if (pressS) {
-      dispatch(setKeyS(true));
-    } else {
-      dispatch(setKeyS(false));
+    if (!cameraState.chatPress) {
+      if (pressS) {
+        dispatch(setKeyS(true));
+      } else {
+        dispatch(setKeyS(false));
+      }
     }
   }, [pressS]);
 
   useEffect(() => {
-    if (pressD) {
-      dispatch(setKeyD(true));
-    } else {
-      dispatch(setKeyD(false));
+    if (!cameraState.chatPress) {
+      if (pressD) {
+        dispatch(setKeyD(true));
+      } else {
+        dispatch(setKeyD(false));
+      }
     }
   }, [pressD]);
 
-  const changeViewEye = () => {
-    if (cameraState.characterEye) {
-      dispatch(setOnThree());
-    } else {
-      dispatch(setEye());
-    }
-  };
+  // const changeViewEye = () => {
+  //   if (cameraState.characterEye) {
+  //     dispatch(setOnThree());
+  //   } else {
+  //     dispatch(setEye());
+  //   }
+  // };
   const changeView = () => {
-    if (cameraState.characterThree) {
-      dispatch(setOnOne());
-    } else {
-      dispatch(setOnThree());
+    if (!cameraState.chatPress) {
+      if (cameraState.characterThree) {
+        dispatch(setOnOne());
+      } else {
+        dispatch(setOnThree());
+      }
     }
   };
   useEffect(() => {
@@ -705,6 +725,10 @@ function Reverse() {
                   setCheckNull("");
                 }
               }}
+              onFocus={() => {
+                setChatPress(true);
+              }}
+              onBlur={() => [setChatPress(false)]}
             />
 
             <div
@@ -726,6 +750,10 @@ function Reverse() {
               className="text-sm placeholder:text-sm px-2 w-5/6 py-1.5 focus:outline-none"
               placeholder="메세지를 입력해 보세요"
               onChange={handleCheckNull}
+              onFocus={() => {
+                setChatPress(true);
+              }}
+              onBlur={() => [setChatPress(false)]}
             />
             <div
               id="btnSend"
@@ -773,7 +801,7 @@ function Reverse() {
         <Physics gravity={[0, -10, 0]}>
           <Suspense fallback={null}>
             {/* !important : characters */}
-            {/* {others.map((other, idx) => {
+            {others.map((other, idx) => {
               return (
                 <SelectedOtherPlayer
                   key={idx}
@@ -784,10 +812,7 @@ function Reverse() {
               );
             })}
 
-            <SelectedMyPlayer
-              destinationPoint={destinationPoint}
-              handleVisible={handleVisible}
-            /> */}
+            <SelectedMyPlayer destinationPoint={destinationPoint} handleVisible={handleVisible} />
 
             <CartoonCampingKit />
             <FireAnimated />
