@@ -80,11 +80,14 @@ function Reverse() {
     new Vector3(-30, 0, -30)
   );
   const destRef = useRef(destinationPoint);
-  const floorTexture = useLoader(TextureLoader, "/textures/map_texture.jpg");
+  const floorTexture = useLoader(
+    TextureLoader,
+    "/textures/floor_baseColor.png"
+  );
   if (floorTexture) {
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-    floorTexture.repeat.x = 10;
-    floorTexture.repeat.y = 10;
+    floorTexture.repeat.x = 20;
+    floorTexture.repeat.y = 20;
   }
   const [visible, setVisible] = useState(false);
   const handleVisible = (data) => {
