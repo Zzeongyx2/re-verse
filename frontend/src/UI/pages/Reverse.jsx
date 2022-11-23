@@ -79,11 +79,11 @@ let localStream;
 function Reverse() {
   const [destinationPoint, setDestinationPoint] = useState(new Vector3(-30, 0, -30));
   const destRef = useRef(destinationPoint);
-  const floorTexture = useLoader(TextureLoader, "/textures/map_texture.jpg");
+  const floorTexture = useLoader(TextureLoader, "/textures/floor_baseColor.png");
   if (floorTexture) {
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-    floorTexture.repeat.x = 10;
-    floorTexture.repeat.y = 10;
+    floorTexture.repeat.x = 20;
+    floorTexture.repeat.y = 20;
   }
   const [visible, setVisible] = useState(false);
   const handleVisible = (data) => {
@@ -678,7 +678,7 @@ function Reverse() {
   function Directional() {
     return (
       <directionalLight
-        position={(0, 10, 100)}
+        position={(50, 100, 100)}
         castShadow
         // shadow quality
         shadow-mapSize-width={2048}
@@ -782,7 +782,7 @@ function Reverse() {
           far: 1000,
         }}
       >
-        {/* <Sky sunPosition={[100, 50, 100]} /> */}
+        <Sky sunPosition={[100, 50, 100]} />
         <OrbitControls
         // enableZoom={true}
         // enableRotate={false}

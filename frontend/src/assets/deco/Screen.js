@@ -17,10 +17,11 @@ export function ScreenMod(props) {
     ...props,
   }));
   return (
-    <group {...props} dispose={null} scale={2.5} position={[-42, 0, -100]}>
+    <group {...props} dispose={null} scale={[2.5, 4, 2.5]} position={[-42, 0, -100]}>
       <mesh ref={boxCollider}>
         <meshLambertMaterial color={"white"} />
       </mesh>
+
       <group position={[0, 0.6, 2.75]} rotation={[-Math.PI, Math.PI, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group rotation={[Math.PI / 2, 0, 0]} scale={0.05}>
