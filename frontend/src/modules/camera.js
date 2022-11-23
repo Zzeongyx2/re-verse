@@ -10,6 +10,7 @@ const initialState = {
     keyS: false,
     keyD: false,
   },
+  chatPress: false,
   position: { x: -30, y: 0, z: -30 },
 };
 
@@ -44,6 +45,9 @@ const reducers = {
   setPosition: (state, action) => {
     state.position = action.payload;
   },
+  setReverseChatPress: (state, action) => {
+    state.chatPress = action.payload;
+  },
 };
 
 export const cameraSlice = createSlice({
@@ -61,6 +65,7 @@ export const {
   setKeyS,
   setKeyD,
   setPosition,
+  setReverseChatPress,
 } = cameraSlice.actions;
 
 export default cameraSlice.reducer;
