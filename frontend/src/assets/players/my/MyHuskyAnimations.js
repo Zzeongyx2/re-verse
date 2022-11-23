@@ -9,13 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCampfireOn } from "../../../modules/reverse";
 import { useBox, useConvexPolyhedron } from "@react-three/cannon";
 import { Quaternion, Vector3 } from "three";
-import {
-  setKeyA,
-  setKeyD,
-  setKeyS,
-  setKeyW,
-  setPosition,
-} from "../../../modules/camera";
+import { setKeyA, setKeyD, setKeyS, setKeyW, setPosition } from "../../../modules/camera";
 
 export default function MyHuskyAnimations({
   destinationPoint,
@@ -28,7 +22,7 @@ export default function MyHuskyAnimations({
   const keyS = useSelector((state) => state.camera.keyPress.keyS);
   const keyD = useSelector((state) => state.camera.keyPress.keyD);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Husky_Animations.gltf",
+    "/assets/animals/GLTF/Animations/Husky_Animations.gltf"
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -69,79 +63,79 @@ export default function MyHuskyAnimations({
         if (keyW && keyD) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x + 0.4,
+              group.current.position.x + 0.8,
               group.current.position.y,
-              group.current.position.z - 0.4,
-            ),
+              group.current.position.z - 0.8
+            )
           );
-          group.current.position.z -= 0.4;
-          group.current.position.x += 0.4;
+          group.current.position.z -= 0.8;
+          group.current.position.x += 0.8;
         } else if (keyS && keyD) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x + 0.4,
+              group.current.position.x + 0.8,
               group.current.position.y,
-              group.current.position.z + 0.4,
-            ),
+              group.current.position.z + 0.8
+            )
           );
-          group.current.position.z += 0.4;
-          group.current.position.x += 0.4;
+          group.current.position.z += 0.8;
+          group.current.position.x += 0.8;
         } else if (keyW && keyA) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x - 0.4,
+              group.current.position.x - 0.8,
               group.current.position.y,
-              group.current.position.z - 0.4,
-            ),
+              group.current.position.z - 0.8
+            )
           );
-          group.current.position.z -= 0.4;
-          group.current.position.x -= 0.4;
+          group.current.position.z -= 0.8;
+          group.current.position.x -= 0.8;
         } else if (keyS && keyA) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x - 0.4,
+              group.current.position.x - 0.8,
               group.current.position.y,
-              group.current.position.z + 0.4,
-            ),
+              group.current.position.z + 0.8
+            )
           );
-          group.current.position.z += 0.4;
-          group.current.position.x -= 0.4;
+          group.current.position.z += 0.8;
+          group.current.position.x -= 0.8;
         } else if (keyW) {
           group.current.lookAt(
             new Vector3(
               group.current.position.x,
               group.current.position.y,
-              group.current.position.z - 0.4,
-            ),
+              group.current.position.z - 0.8
+            )
           );
-          group.current.position.z -= 0.4;
+          group.current.position.z -= 0.8;
         } else if (keyA) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x - 0.4,
+              group.current.position.x - 0.8,
               group.current.position.y,
-              group.current.position.z,
-            ),
+              group.current.position.z
+            )
           );
-          group.current.position.x -= 0.4;
+          group.current.position.x -= 0.8;
         } else if (keyS) {
           group.current.lookAt(
             new Vector3(
               group.current.position.x,
               group.current.position.y,
-              group.current.position.z + 0.4,
-            ),
+              group.current.position.z + 0.8
+            )
           );
-          group.current.position.z += 0.4;
+          group.current.position.z += 0.8;
         } else if (keyD) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x + 0.4,
+              group.current.position.x + 0.8,
               group.current.position.y,
-              group.current.position.z,
-            ),
+              group.current.position.z
+            )
           );
-          group.current.position.x += 0.4;
+          group.current.position.x += 0.8;
         }
         dispatch(setPosition(group.current.position));
       } else {
