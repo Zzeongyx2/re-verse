@@ -218,10 +218,16 @@ public class AuthService {
 
         Cookie accessCookie = new Cookie(REFRESH_TOKEN, null);
         accessCookie.setMaxAge(0);
+        accessCookie.setPath("/");
+        accessCookie.setSecure(false);
+        accessCookie.setHttpOnly(true);
         response.addCookie(accessCookie);
 
         Cookie refreshCookie = new Cookie(REFRESH_TOKEN, null);
         refreshCookie.setMaxAge(0);
+        refreshCookie.setPath("/");
+        refreshCookie.setSecure(false);
+        refreshCookie.setHttpOnly(true);
         response.addCookie(refreshCookie);
 
         // connectDeleteUser(auth.getId().toString());
@@ -233,22 +239,18 @@ public class AuthService {
         String accessToken = null;
         Cookie[] cookies = request.getCookies();
 
-        Cookie accessCookie = null;
         for(Cookie cookie : cookies){
             if(cookie.getName().equals(ACCESS_TOKEN)){
                 accessToken = cookie.getValue();
-                accessCookie = cookie;
                 break;
             }
         }
 
-        cookies = request.getCookies();
+//        cookies = request.getCookies();
         String refreshToken = null;
-        Cookie refreshCookie = null;
         for(Cookie cookie : cookies){
             if(cookie.getName().equals(REFRESH_TOKEN)){
                 refreshToken = cookie.getValue();
-                refreshCookie = cookie;
                 break;
             }
         }
@@ -258,10 +260,18 @@ public class AuthService {
         redisService.deleteValues(refreshToken);
 
         //쿠키 삭제
+        Cookie accessCookie = new Cookie(ACCESS_TOKEN, null);
         accessCookie.setMaxAge(0);
+        accessCookie.setPath("/");
+        accessCookie.setSecure(false);
+        accessCookie.setHttpOnly(true);
         response.addCookie(accessCookie);
 
+        Cookie refreshCookie = new Cookie(REFRESH_TOKEN, null);
         refreshCookie.setMaxAge(0);
+        refreshCookie.setPath("/");
+        refreshCookie.setSecure(false);
+        refreshCookie.setHttpOnly(true);
         response.addCookie(refreshCookie);
 
     }
