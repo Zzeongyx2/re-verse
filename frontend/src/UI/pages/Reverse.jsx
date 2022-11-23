@@ -59,6 +59,7 @@ import {
   setOnOne,
   setOnThree,
   setPosition,
+  setReverseChatPress,
 } from "../../modules/camera.js";
 import { CustomTree } from "../../assets/deco/Customtree.js";
 import { CustomRoadFirst } from "../../assets/deco/Customroadfirst.js";
@@ -76,14 +77,9 @@ var ws1;
 let localStream;
 
 function Reverse() {
-  const [destinationPoint, setDestinationPoint] = useState(
-    new Vector3(-30, 0, -30)
-  );
+  const [destinationPoint, setDestinationPoint] = useState(new Vector3(-30, 0, -30));
   const destRef = useRef(destinationPoint);
-  const floorTexture = useLoader(
-    TextureLoader,
-    "/textures/floor_baseColor.png"
-  );
+  const floorTexture = useLoader(TextureLoader, "/textures/floor_baseColor.png");
   if (floorTexture) {
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
     floorTexture.repeat.x = 20;
@@ -253,9 +249,7 @@ function Reverse() {
           let peer1 = rtcPeers.get(data1.userId);
 
           if (peer1) {
-            peer1
-              .addIceCandidate(new RTCIceCandidate(data2))
-              .catch((error) => {});
+            peer1.addIceCandidate(new RTCIceCandidate(data2)).catch((error) => {});
           }
         }
       } else if (data1.type === "Answer") {
@@ -289,9 +283,7 @@ function Reverse() {
     setRtcPeers2(rtcPeers2);
 
     if (data1.type === "NewMember") {
-      let channel1 = rtcPeer.createDataChannel(
-        Math.floor(Math.random() * 10000000000)
-      );
+      let channel1 = rtcPeer.createDataChannel(Math.floor(Math.random() * 10000000000));
       channelConfig(channel1);
 
       //create offer
@@ -520,10 +512,19 @@ function Reverse() {
   const [pressA, setPressA] = useState(false);
   const [pressS, setPressS] = useState(false);
   const [pressD, setPressD] = useState(false);
+  const [chatPress, setChatPress] = useState(false);
 
   useEffect(() => {
     sendPosition(cameraState.position);
   }, [cameraState.keyPress]);
+
+  useEffect(() => {
+    if (chatPress) {
+      dispatch(setReverseChatPress(true));
+    } else {
+      dispatch(setReverseChatPress(false));
+    }
+  }, [chatPress]);
 
   const upHandler = ({ key }) => {
     if (key === "y") {
@@ -570,56 +571,66 @@ function Reverse() {
       changeView();
     }
   }, [cameraKeyPress]);
-  useEffect(() => {
-    if (pressT) {
-      changeViewEye();
-    }
-  }, [pressT]);
+  // useEffect(() => {
+  //   if (pressT) {
+  //     changeViewEye();
+  //   }
+  // }, [pressT]);
   // 이동 키 누르기
   useEffect(() => {
-    if (pressW) {
-      dispatch(setKeyW(true));
-    } else {
-      dispatch(setKeyW(false));
+    if (!cameraState.chatPress) {
+      if (pressW) {
+        dispatch(setKeyW(true));
+      } else {
+        dispatch(setKeyW(false));
+      }
     }
   }, [pressW]);
 
   useEffect(() => {
-    if (pressA) {
-      dispatch(setKeyA(true));
-    } else {
-      dispatch(setKeyA(false));
+    if (!cameraState.chatPress) {
+      if (pressA) {
+        dispatch(setKeyA(true));
+      } else {
+        dispatch(setKeyA(false));
+      }
     }
   }, [pressA]);
 
   useEffect(() => {
-    if (pressS) {
-      dispatch(setKeyS(true));
-    } else {
-      dispatch(setKeyS(false));
+    if (!cameraState.chatPress) {
+      if (pressS) {
+        dispatch(setKeyS(true));
+      } else {
+        dispatch(setKeyS(false));
+      }
     }
   }, [pressS]);
 
   useEffect(() => {
-    if (pressD) {
-      dispatch(setKeyD(true));
-    } else {
-      dispatch(setKeyD(false));
+    if (!cameraState.chatPress) {
+      if (pressD) {
+        dispatch(setKeyD(true));
+      } else {
+        dispatch(setKeyD(false));
+      }
     }
   }, [pressD]);
 
-  const changeViewEye = () => {
-    if (cameraState.characterEye) {
-      dispatch(setOnThree());
-    } else {
-      dispatch(setEye());
-    }
-  };
+  // const changeViewEye = () => {
+  //   if (cameraState.characterEye) {
+  //     dispatch(setOnThree());
+  //   } else {
+  //     dispatch(setEye());
+  //   }
+  // };
   const changeView = () => {
-    if (cameraState.characterThree) {
-      dispatch(setOnOne());
-    } else {
-      dispatch(setOnThree());
+    if (!cameraState.chatPress) {
+      if (cameraState.characterThree) {
+        dispatch(setOnOne());
+      } else {
+        dispatch(setOnThree());
+      }
     }
   };
   useEffect(() => {
@@ -714,6 +725,10 @@ function Reverse() {
                   setCheckNull("");
                 }
               }}
+              onFocus={() => {
+                setChatPress(true);
+              }}
+              onBlur={() => [setChatPress(false)]}
             />
 
             <div
@@ -735,6 +750,10 @@ function Reverse() {
               className="text-sm placeholder:text-sm px-2 w-5/6 py-1.5 focus:outline-none"
               placeholder="메세지를 입력해 보세요"
               onChange={handleCheckNull}
+              onFocus={() => {
+                setChatPress(true);
+              }}
+              onBlur={() => [setChatPress(false)]}
             />
             <div
               id="btnSend"
@@ -763,7 +782,7 @@ function Reverse() {
           far: 1000,
         }}
       >
-        {/* <Sky sunPosition={[100, 50, 100]} /> */}
+        <Sky sunPosition={[100, 50, 100]} />
         <OrbitControls
         // enableZoom={true}
         // enableRotate={false}
@@ -782,7 +801,7 @@ function Reverse() {
         <Physics gravity={[0, -10, 0]}>
           <Suspense fallback={null}>
             {/* !important : characters */}
-            {/* {others.map((other, idx) => {
+            {others.map((other, idx) => {
               return (
                 <SelectedOtherPlayer
                   key={idx}
@@ -793,10 +812,7 @@ function Reverse() {
               );
             })}
 
-            <SelectedMyPlayer
-              destinationPoint={destinationPoint}
-              handleVisible={handleVisible}
-            /> */}
+            <SelectedMyPlayer destinationPoint={destinationPoint} handleVisible={handleVisible} />
 
             <CartoonCampingKit />
             <FireAnimated />
@@ -845,32 +861,14 @@ function Reverse() {
 
             {/* polaroid = 글 보기 오브젝트 , notebook = 글 쓰기 오브젝트 */}
             {/* 여행 */}
-            <Polaroid
-              position={[71, 4, -43]}
-              rotation={[-Math.PI / 2, 0, Math.PI / 5]}
-            />
-            <Notebook
-              position={[71, 3.4, -38]}
-              rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]}
-            />
+            <Polaroid position={[71, 4, -43]} rotation={[-Math.PI / 2, 0, Math.PI / 5]} />
+            <Notebook position={[71, 3.4, -38]} rotation={[-Math.PI / 2, 0, -Math.PI / 1.2]} />
             {/* 기념일 */}
-            <Polaroid
-              position={[38, 1.1, 62]}
-              rotation={[-Math.PI / 2, 0, 0]}
-            />
-            <Notebook
-              position={[35, 0.3, 66]}
-              rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]}
-            />
+            <Polaroid position={[38, 1.1, 62]} rotation={[-Math.PI / 2, 0, 0]} />
+            <Notebook position={[35, 0.3, 66]} rotation={[-Math.PI / 2, 0, -Math.PI / 0.2]} />
             {/* 일기 */}
-            <Polaroid
-              position={[-115, 7.7, -129]}
-              rotation={[-Math.PI / 2, 0, Math.PI / 1.2]}
-            />
-            <Notebook
-              position={[-110, 6.9, -131]}
-              rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
-            />
+            <Polaroid position={[-115, 7.7, -129]} rotation={[-Math.PI / 2, 0, Math.PI / 1.2]} />
+            <Notebook position={[-110, 6.9, -131]} rotation={[-Math.PI / 2, 0, -Math.PI / 3]} />
           </Suspense>
           {/* floor */}
           <mesh
