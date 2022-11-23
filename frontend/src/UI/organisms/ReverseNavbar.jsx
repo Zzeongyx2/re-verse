@@ -52,6 +52,14 @@ function ReverseNavbar({ joinMembers }) {
                 title: "로그아웃 되었습니다.",
                 timer: 1500,
               });
+              dispatch(
+                setLoginUser({
+                  nickname: "",
+                  message: "",
+                  avatar: "",
+                  bestArchiveId: "",
+                })
+              );
             }
           });
         }}
