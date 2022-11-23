@@ -763,7 +763,7 @@ function Reverse() {
           far: 1000,
         }}
       >
-        {/* <Sky sunPosition={[100, 50, 100]} /> */}
+        <Sky sunPosition={[100, 50, 100]} />
         <OrbitControls
         // enableZoom={true}
         // enableRotate={false}
