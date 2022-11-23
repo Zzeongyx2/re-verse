@@ -9,13 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCampfireOn } from "../../../modules/reverse";
 import { useBox, useConvexPolyhedron } from "@react-three/cannon";
 import { Quaternion, Vector3 } from "three";
-import {
-  setKeyA,
-  setKeyD,
-  setKeyS,
-  setKeyW,
-  setPosition,
-} from "../../../modules/camera";
+import { setKeyA, setKeyD, setKeyS, setKeyW, setPosition } from "../../../modules/camera";
 
 export default function MyTortoiseAnimations({
   destinationPoint,
@@ -28,7 +22,7 @@ export default function MyTortoiseAnimations({
   const keyS = useSelector((state) => state.camera.keyPress.keyS);
   const keyD = useSelector((state) => state.camera.keyPress.keyD);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Tortoise_Animations.gltf",
+    "/assets/animals/GLTF/Animations/Tortoise_Animations.gltf"
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -83,26 +77,8 @@ export default function MyTortoiseAnimations({
         wDir.add(new Vector3(0, 0.2, 0));
         state.camera.position.copy(cameraPosition);
         state.camera.lookAt(position);
-      } else if (cameraState.characterEye) {
-        let position = new Vector3(0, 0, 0);
-        position.setFromMatrixPosition(group.current.matrixWorld);
-
-        let quaternion = new Quaternion(0, 0, 0, 0);
-        quaternion.setFromRotationMatrix(group.current.matrixWorld);
-
-        let wDir = new Vector3(0, 0, 1);
-        wDir.applyQuaternion(quaternion);
-        wDir.normalize();
-
-        let cameraPosition = position
-          .clone()
-          .add(wDir.clone().multiplyScalar(1).add(new Vector3(0, 4.8, 0)));
-
-        wDir.add(new Vector3(0, 0.2, 0));
-        state.camera.position.x = 0 + group.current.position.x;
-        state.camera.position.z = 0 + group.current.position.z;
-        state.camera.lookAt(new Vector3(0, 0, 0));
       }
+
       if (keyA || keyD || keyS || keyW) {
         actions["Idle_A"].stop();
         actions["Walk"].play();
@@ -111,8 +87,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x + 0.4,
               group.current.position.y,
-              group.current.position.z - 0.4,
-            ),
+              group.current.position.z - 0.4
+            )
           );
           group.current.position.z -= 0.4;
           group.current.position.x += 0.4;
@@ -121,8 +97,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x + 0.4,
               group.current.position.y,
-              group.current.position.z + 0.4,
-            ),
+              group.current.position.z + 0.4
+            )
           );
           group.current.position.z += 0.4;
           group.current.position.x += 0.4;
@@ -131,8 +107,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x - 0.4,
               group.current.position.y,
-              group.current.position.z - 0.4,
-            ),
+              group.current.position.z - 0.4
+            )
           );
           group.current.position.z -= 0.4;
           group.current.position.x -= 0.4;
@@ -141,8 +117,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x - 0.4,
               group.current.position.y,
-              group.current.position.z + 0.4,
-            ),
+              group.current.position.z + 0.4
+            )
           );
           group.current.position.z += 0.4;
           group.current.position.x -= 0.4;
@@ -151,8 +127,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x,
               group.current.position.y,
-              group.current.position.z - 0.4,
-            ),
+              group.current.position.z - 0.4
+            )
           );
           group.current.position.z -= 0.4;
         } else if (keyA) {
@@ -160,8 +136,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x - 0.4,
               group.current.position.y,
-              group.current.position.z,
-            ),
+              group.current.position.z
+            )
           );
           group.current.position.x -= 0.4;
         } else if (keyS) {
@@ -169,8 +145,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x,
               group.current.position.y,
-              group.current.position.z + 0.4,
-            ),
+              group.current.position.z + 0.4
+            )
           );
           group.current.position.z += 0.4;
         } else if (keyD) {
@@ -178,8 +154,8 @@ export default function MyTortoiseAnimations({
             new Vector3(
               group.current.position.x + 0.4,
               group.current.position.y,
-              group.current.position.z,
-            ),
+              group.current.position.z
+            )
           );
           group.current.position.x += 0.4;
         }
