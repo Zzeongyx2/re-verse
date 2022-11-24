@@ -9,7 +9,7 @@ export function ArcadeMachine(props) {
     mass: 100000,
     args: [15, 10, 13],
     type: "Static",
-    position: [-26, 0, 119],
+    position: [-56, 0, -91],
     ...props,
   }));
   return (
