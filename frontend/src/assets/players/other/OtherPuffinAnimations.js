@@ -114,24 +114,11 @@ export default function OtherPuffinAnimations({
         }
       }
       api.position.set(group.current.position.x, 0, group.current.position.z);
-      // meshref.current.position.copy(group.current.position);
     }
   });
 
-  // console.log(userName);
-
-  // const meshref = useRef();
-  // console.log(meshref);
-
   return (
     <group>
-      <mesh>
-        <Html className="" position={[1.5, -1.5, 0]} zIndexRange={[-100, 100]}>
-          <p className="text-md [text-shadow:_1px_1px_2px_rgb(21,135,241)] text-white">
-            {userName}
-          </p>
-        </Html>
-      </mesh>
       <group ref={group} position={initPosition}>
         <group>
           <group scale={2}>

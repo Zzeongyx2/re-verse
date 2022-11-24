@@ -7,15 +7,6 @@
   font-style: normal;
 }
 
-/* computer font */
-@font-face {
-  font-family: "HBIOS-SYS";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/HBIOS-SYS.woff2")
-    format("woff2");
-  font-weight: normal;
-  font-style: normal;
-}
-
 @font-face {
   font-family: "LeeSeoyun";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff")
