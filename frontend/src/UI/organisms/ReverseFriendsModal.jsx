@@ -168,6 +168,7 @@ function ReverseFriendModal({ joinMembers }) {
                               src={s3Path + info.avatar + imageForm}
                               cursor="pointer"
                               mr="-2"
+                              variant="avatarBorder"
                             />
                           </PopoverTrigger>
                           <PopoverContent
@@ -240,6 +241,7 @@ function ReverseFriendModal({ joinMembers }) {
                                       size="sm"
                                       name={info.nickname}
                                       src={s3Path + info.avatar + imageForm}
+                                      variant="avatarBorder"
                                     />
                                     <div className="font-bold overflow-hidden text-ellipsis line-clamp-1">
                                       {info.nickname}
@@ -294,6 +296,7 @@ function ReverseFriendModal({ joinMembers }) {
                                       size="sm"
                                       name={info.nickname}
                                       src={s3Path + info.avatar + imageForm}
+                                      variant="avatarBorder"
                                     />
                                     <div className="font-bold overflow-hidden text-ellipsis line-clamp-1">
                                       {info.nickname}
@@ -352,6 +355,7 @@ function ReverseFriendModal({ joinMembers }) {
                               src={s3Path + info.avatar + imageForm}
                               cursor="pointer"
                               mr="-2"
+                              variant="avatarBorder"
                             />
                           </PopoverTrigger>
                           <PopoverContent
