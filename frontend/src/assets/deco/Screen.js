@@ -178,6 +178,7 @@ export function ScreenMod(props) {
                 position={[0.03, 0, 0.01]}
                 className="w-[76px] h-[78px] bg-extra3 rounded-sm border border-gray-400"
                 rotation={[-Math.PI / 2, 0, 0]}
+                zIndexRange={[-100, 100]}
               >
                 <Members />
               </Html>

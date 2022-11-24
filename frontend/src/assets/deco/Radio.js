@@ -23,15 +23,15 @@ export function Radio(props) {
     mass: 100000,
     args: [20, 10, 15],
     type: "Static",
-    position: [-128, 1, -100],
+    position: [30, 0, -105],
     ...props,
   }));
   return (
     <group
       {...props}
       dispose={null}
-      position={[-128, 0, -93]}
-      scale={0.5}
+      position={[30, 0, -105]}
+      scale={0.4}
       onPointerOver={(e) => {
         document.getElementsByTagName("body")[0].style.cursor = "pointer";
       }}
@@ -40,10 +40,10 @@ export function Radio(props) {
       }}
     >
       <mesh ref={boxCollider} scale={50}></mesh>
-      <group rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
+      <group rotation={[-Math.PI / 2, 0, -Math.PI / 2]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group
-            rotation={[-Math.PI / 2, 0, 0]}
+            rotation={[-Math.PI / 2, 0, Math.PI / 2]}
             onClick={() => {
               handleClick();
             }}
@@ -69,6 +69,7 @@ export function Radio(props) {
                 material={materials["03_-_Default"]}
               />
               <mesh
+                castShadow
                 geometry={nodes["radio_00_02_-_Default_0"].geometry}
                 material={materials["02_-_Default"]}
               />

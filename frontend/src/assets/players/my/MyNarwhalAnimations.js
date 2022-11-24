@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
+import { useGLTF, useAnimations, Html } from "@react-three/drei";
 import GLTFLoader from "gltfjsx/src/utils/glftLoader";
 import { useFrame, useGraph } from "@react-three/fiber";
 import * as SkeletonUtils from "three/examples/jsm/utils/SkeletonUtils";
@@ -9,7 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCampfireOn } from "../../../modules/reverse";
 import { useBox, useConvexPolyhedron } from "@react-three/cannon";
 import { Quaternion, Vector3 } from "three";
-import { setKeyA, setKeyD, setKeyS, setKeyW, setPosition } from "../../../modules/camera";
+import {
+  setKeyA,
+  setKeyD,
+  setKeyS,
+  setKeyW,
+  setPosition,
+} from "../../../modules/camera";
 
 export default function MyNarwhalAnimations({
   destinationPoint,
@@ -194,9 +200,17 @@ export default function MyNarwhalAnimations({
   });
   const cameraState = useSelector((state) => state.camera);
   const loadingPage = useSelector((state) => state.loading.loadingPage);
+  const loginUser = useSelector((state) => state.user.loginUser);
 
   return (
     <group>
+      <mesh>
+        <Html className="" position={[1.5, -1.5, 0]} zIndexRange={[-100, 100]}>
+          <p className="text-md [text-shadow:_1px_1px_2px_rgb(250,181,38)] text-white">
+            {loginUser.nickname}
+          </p>
+        </Html>
+      </mesh>
       <group ref={group} dispose={null} position={[-30, 0, -30]}>
         <group name="Scene">
           <group name="Rig" scale={2}>
