@@ -3,7 +3,7 @@ variables:
     DOCKER_HOST: tcp://docker:2375
     APP_NAME_1: reverse-app # frontend
     # APP_NAME_2: auth-backend
-    APP_NAME_3: archive-backend
+    # APP_NAME_3: archive-backend
     # APP_NAME_4: signal-backend
 
 stages:
@@ -27,8 +27,8 @@ build_image:
         - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_1:$CI_PIPELINE_IID
         # - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$CI_PIPELINE_IID -f ./backend/auth/AuthDockerfile ./backend/auth
         # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_2:$CI_PIPELINE_IID
-        - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_3:$CI_PIPELINE_IID -f ./backend/archive/ArchiveDockerfile ./backend/archive
-        - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_3:$CI_PIPELINE_IID
+        # - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_3:$CI_PIPELINE_IID -f ./backend/archive/ArchiveDockerfile ./backend/archive
+        # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_3:$CI_PIPELINE_IID
         # - docker build -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_4:$CI_PIPELINE_IID -f ./signal/SignalDockerfile ./signal
         # - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME_4:$CI_PIPELINE_IID
     tags:

@@ -11,6 +11,8 @@ const initialState = {
 
 const reducers = {
   setLoginUser: (state, action) => {
+    console.log(state);
+    console.log(action.payload);
     state.loginUser = action.payload;
   },
 };

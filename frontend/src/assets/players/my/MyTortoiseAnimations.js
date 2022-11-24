@@ -83,105 +83,87 @@ export default function MyTortoiseAnimations({
         wDir.add(new Vector3(0, 0.2, 0));
         state.camera.position.copy(cameraPosition);
         state.camera.lookAt(position);
-      } else if (cameraState.characterEye) {
-        let position = new Vector3(0, 0, 0);
-        position.setFromMatrixPosition(group.current.matrixWorld);
-
-        let quaternion = new Quaternion(0, 0, 0, 0);
-        quaternion.setFromRotationMatrix(group.current.matrixWorld);
-
-        let wDir = new Vector3(0, 0, 1);
-        wDir.applyQuaternion(quaternion);
-        wDir.normalize();
-
-        let cameraPosition = position
-          .clone()
-          .add(wDir.clone().multiplyScalar(1).add(new Vector3(0, 4.8, 0)));
-
-        wDir.add(new Vector3(0, 0.2, 0));
-        state.camera.position.x = 0 + group.current.position.x;
-        state.camera.position.z = 0 + group.current.position.z;
-        state.camera.lookAt(new Vector3(0, 0, 0));
       }
+
       if (keyA || keyD || keyS || keyW) {
         actions["Idle_A"].stop();
         actions["Walk"].play();
         if (keyW && keyD) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x + 0.4,
+              group.current.position.x + 0.8,
               group.current.position.y,
-              group.current.position.z - 0.4
+              group.current.position.z - 0.8
             )
           );
-          group.current.position.z -= 0.4;
-          group.current.position.x += 0.4;
+          group.current.position.z -= 0.8;
+          group.current.position.x += 0.8;
         } else if (keyS && keyD) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x + 0.4,
+              group.current.position.x + 0.8,
               group.current.position.y,
-              group.current.position.z + 0.4
+              group.current.position.z + 0.8
             )
           );
-          group.current.position.z += 0.4;
-          group.current.position.x += 0.4;
+          group.current.position.z += 0.8;
+          group.current.position.x += 0.8;
         } else if (keyW && keyA) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x - 0.4,
+              group.current.position.x - 0.8,
               group.current.position.y,
-              group.current.position.z - 0.4
+              group.current.position.z - 0.8
             )
           );
-          group.current.position.z -= 0.4;
-          group.current.position.x -= 0.4;
+          group.current.position.z -= 0.8;
+          group.current.position.x -= 0.8;
         } else if (keyS && keyA) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x - 0.4,
+              group.current.position.x - 0.8,
               group.current.position.y,
-              group.current.position.z + 0.4
+              group.current.position.z + 0.8
             )
           );
-          group.current.position.z += 0.4;
-          group.current.position.x -= 0.4;
+          group.current.position.z += 0.8;
+          group.current.position.x -= 0.8;
         } else if (keyW) {
           group.current.lookAt(
             new Vector3(
               group.current.position.x,
               group.current.position.y,
-              group.current.position.z - 0.4
+              group.current.position.z - 0.8
             )
           );
-          group.current.position.z -= 0.4;
+          group.current.position.z -= 0.8;
         } else if (keyA) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x - 0.4,
+              group.current.position.x - 0.8,
               group.current.position.y,
               group.current.position.z
             )
           );
-          group.current.position.x -= 0.4;
+          group.current.position.x -= 0.8;
         } else if (keyS) {
           group.current.lookAt(
             new Vector3(
               group.current.position.x,
               group.current.position.y,
-              group.current.position.z + 0.4
+              group.current.position.z + 0.8
             )
           );
-          group.current.position.z += 0.4;
+          group.current.position.z += 0.8;
         } else if (keyD) {
           group.current.lookAt(
             new Vector3(
-              group.current.position.x + 0.4,
+              group.current.position.x + 0.8,
               group.current.position.y,
               group.current.position.z
             )
           );
-          group.current.position.x += 0.4;
+          group.current.position.x += 0.8;
         }
         dispatch(setPosition(group.current.position));
       } else {

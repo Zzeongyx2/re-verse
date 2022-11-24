@@ -218,10 +218,16 @@ public class AuthService {
 
         Cookie accessCookie = new Cookie(REFRESH_TOKEN, null);
         accessCookie.setMaxAge(0);
+        accessCookie.setPath("/");
+        accessCookie.setSecure(false);
+        accessCookie.setHttpOnly(true);
         response.addCookie(accessCookie);
 
         Cookie refreshCookie = new Cookie(REFRESH_TOKEN, null);
         refreshCookie.setMaxAge(0);
+        refreshCookie.setPath("/");
+        refreshCookie.setSecure(false);
+        refreshCookie.setHttpOnly(true);
         response.addCookie(refreshCookie);
 
         // connectDeleteUser(auth.getId().toString());
@@ -240,7 +246,7 @@ public class AuthService {
             }
         }
 
-        cookies = request.getCookies();
+//        cookies = request.getCookies();
         String refreshToken = null;
         for(Cookie cookie : cookies){
             if(cookie.getName().equals(REFRESH_TOKEN)){
@@ -254,12 +260,18 @@ public class AuthService {
         redisService.deleteValues(refreshToken);
 
         //쿠키 삭제
-        Cookie accessCookie = new Cookie(REFRESH_TOKEN, null);
+        Cookie accessCookie = new Cookie(ACCESS_TOKEN, null);
         accessCookie.setMaxAge(0);
+        accessCookie.setPath("/");
+        accessCookie.setSecure(false);
+        accessCookie.setHttpOnly(true);
         response.addCookie(accessCookie);
 
         Cookie refreshCookie = new Cookie(REFRESH_TOKEN, null);
         refreshCookie.setMaxAge(0);
+        refreshCookie.setPath("/");
+        refreshCookie.setSecure(false);
+        refreshCookie.setHttpOnly(true);
         response.addCookie(refreshCookie);
 
     }

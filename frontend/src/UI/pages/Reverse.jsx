@@ -59,6 +59,7 @@ import {
   setOnOne,
   setOnThree,
   setPosition,
+  setReverseChatPress,
 } from "../../modules/camera.js";
 import { CustomTree } from "../../assets/deco/Customtree.js";
 import { CustomRoadFirst } from "../../assets/deco/Customroadfirst.js";
@@ -66,6 +67,7 @@ import { DiaryStoneRoad } from "../../assets/deco/Customroadsecond.js";
 import { AnnivStoneRoad } from "../../assets/deco/Customroadthird.js";
 import { Eggs } from "../../assets/deco/Eggs.js";
 import { ScreenMod } from "../../assets/deco/Screen.js";
+import ReverseManual from "../organisms/ReverseManual.jsx";
 
 var channels = [];
 var channelUsers = new Map();
@@ -398,7 +400,6 @@ function Reverse() {
     channel1.onopen = () => {
       channelData.userId = loginUser.nickname;
       channelData.type = "handshake";
-      console.log(cameraState);
       channelData.data = {
         position: cameraState.position,
         username: loginUser.nickname,
@@ -520,10 +521,19 @@ function Reverse() {
   const [pressA, setPressA] = useState(false);
   const [pressS, setPressS] = useState(false);
   const [pressD, setPressD] = useState(false);
+  const [chatPress, setChatPress] = useState(false);
 
   useEffect(() => {
     sendPosition(cameraState.position);
   }, [cameraState.keyPress]);
+
+  useEffect(() => {
+    if (chatPress) {
+      dispatch(setReverseChatPress(true));
+    } else {
+      dispatch(setReverseChatPress(false));
+    }
+  }, [chatPress]);
 
   const upHandler = ({ key }) => {
     if (key === "y") {
@@ -570,56 +580,66 @@ function Reverse() {
       changeView();
     }
   }, [cameraKeyPress]);
-  useEffect(() => {
-    if (pressT) {
-      changeViewEye();
-    }
-  }, [pressT]);
+  // useEffect(() => {
+  //   if (pressT) {
+  //     changeViewEye();
+  //   }
+  // }, [pressT]);
   // 이동 키 누르기
   useEffect(() => {
-    if (pressW) {
-      dispatch(setKeyW(true));
-    } else {
-      dispatch(setKeyW(false));
+    if (!cameraState.chatPress) {
+      if (pressW) {
+        dispatch(setKeyW(true));
+      } else {
+        dispatch(setKeyW(false));
+      }
     }
   }, [pressW]);
 
   useEffect(() => {
-    if (pressA) {
-      dispatch(setKeyA(true));
-    } else {
-      dispatch(setKeyA(false));
+    if (!cameraState.chatPress) {
+      if (pressA) {
+        dispatch(setKeyA(true));
+      } else {
+        dispatch(setKeyA(false));
+      }
     }
   }, [pressA]);
 
   useEffect(() => {
-    if (pressS) {
-      dispatch(setKeyS(true));
-    } else {
-      dispatch(setKeyS(false));
+    if (!cameraState.chatPress) {
+      if (pressS) {
+        dispatch(setKeyS(true));
+      } else {
+        dispatch(setKeyS(false));
+      }
     }
   }, [pressS]);
 
   useEffect(() => {
-    if (pressD) {
-      dispatch(setKeyD(true));
-    } else {
-      dispatch(setKeyD(false));
+    if (!cameraState.chatPress) {
+      if (pressD) {
+        dispatch(setKeyD(true));
+      } else {
+        dispatch(setKeyD(false));
+      }
     }
   }, [pressD]);
 
-  const changeViewEye = () => {
-    if (cameraState.characterEye) {
-      dispatch(setOnThree());
-    } else {
-      dispatch(setEye());
-    }
-  };
+  // const changeViewEye = () => {
+  //   if (cameraState.characterEye) {
+  //     dispatch(setOnThree());
+  //   } else {
+  //     dispatch(setEye());
+  //   }
+  // };
   const changeView = () => {
-    if (cameraState.characterThree) {
-      dispatch(setOnOne());
-    } else {
-      dispatch(setOnThree());
+    if (!cameraState.chatPress) {
+      if (cameraState.characterThree) {
+        dispatch(setOnOne());
+      } else {
+        dispatch(setOnThree());
+      }
     }
   };
   useEffect(() => {
@@ -693,6 +713,9 @@ function Reverse() {
       <div className="w-full h-[0.15] absolute z-10">
         <ReverseNavbar joinMembers={others} />
       </div>
+      <div className="w-3 h-3 absolute z-10 bottom-5 right-[26px] m-4">
+        <ReverseManual />
+      </div>
 
       {/* chatting */}
       <div className="w-1/4 h-2/5 min-w-[240px] absolute z-20 bottom-0 ml-4">
@@ -714,6 +737,10 @@ function Reverse() {
                   setCheckNull("");
                 }
               }}
+              onFocus={() => {
+                setChatPress(true);
+              }}
+              onBlur={() => [setChatPress(false)]}
             />
             <div
               id="btnSend"
@@ -734,6 +761,10 @@ function Reverse() {
               className="text-sm placeholder:text-sm px-2 w-5/6 py-1.5 focus:outline-none"
               placeholder="메세지를 입력해 보세요"
               onChange={handleCheckNull}
+              onFocus={() => {
+                setChatPress(true);
+              }}
+              onBlur={() => [setChatPress(false)]}
             />
             <div
               id="btnSend"
