@@ -6,6 +6,7 @@ import { fileApiInstance } from "../../api";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createArticle, setInfo } from "../../modules/reverse";
+import { setReverseChatPress } from "../../modules/camera";
 
 Quill.register("modules/ImageResize", ImageResize);
 
@@ -46,12 +47,7 @@ function ReverseTextEditor() {
           [{ header: [1, 2, 3, 4, 5, 6, false] }],
           [{ align: [] }],
           ["bold", "italic", "underline", "strike", "blockquote"],
-          [
-            { list: "ordered" },
-            { list: "bullet" },
-            { indent: "-1" },
-            { indent: "+1" },
-          ],
+          [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
           [
             {
               color: [
@@ -169,6 +165,10 @@ function ReverseTextEditor() {
         formats={formats}
         value={text}
         onChange={handleText}
+        onFocus={() => {
+          setReverseChatPress(true);
+        }}
+        onBlur={() => [setReverseChatPress(false)]}
       />
     </div>
   ) : (
@@ -181,6 +181,10 @@ function ReverseTextEditor() {
         formats={formats}
         value={editText}
         onChange={handleEditText}
+        onFocus={() => {
+          setReverseChatPress(true);
+        }}
+        onBlur={() => [setReverseChatPress(false)]}
       />
     </div>
   );
