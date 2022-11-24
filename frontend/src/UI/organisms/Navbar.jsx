@@ -152,11 +152,10 @@ function Navbar() {
           )}
         </Link>
         {/* logout btn */}
-
         <NavBtn
           icon={<FiPower className="text-3xl text-white" />}
-          from={"from-main1"}
-          to={"to-sub1"}
+          from={"from-sub3"}
+          to={"to-sub4"}
           onClick={() => {
             logout(
               (res) => {
@@ -168,11 +167,6 @@ function Navbar() {
                     bestArchiveId: "",
                   })
                 );
-                Toast.fire({
-                  icon: "success",
-                  title: "로그아웃 되었습니다.",
-                  timer: 1500,
-                });
               },
               (err) => {
                 console.log(err);
