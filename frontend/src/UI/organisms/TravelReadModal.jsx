@@ -167,9 +167,11 @@ function TravelReadModal() {
                       handleEditTitle(e);
                     }}
                     onFocus={() => {
-                      setReverseChatPress(true);
+                      dispatch(setReverseChatPress(true));
                     }}
-                    onBlur={() => [setReverseChatPress(false)]}
+                    onBlur={() => {
+                      dispatch(setReverseChatPress(false));
+                    }}
                   />
                 </div>
                 {/* 기록 날짜 수정*/}

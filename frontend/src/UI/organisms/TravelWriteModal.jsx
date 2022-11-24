@@ -93,9 +93,11 @@ function TravelWriteModal() {
                     setTitle(e.target.value);
                   }}
                   onFocus={() => {
-                    setReverseChatPress(true);
+                    dispatch(setReverseChatPress(true));
                   }}
-                  onBlur={() => [setReverseChatPress(false)]}
+                  onBlur={() => {
+                    dispatch(setReverseChatPress(false));
+                  }}
                 />
               </div>
               {/* 기록 날짜 */}
