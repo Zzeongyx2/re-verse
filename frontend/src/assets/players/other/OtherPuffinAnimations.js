@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import React, { useEffect, useRef, useState, useMemo } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
+import { useGLTF, useAnimations, Html } from "@react-three/drei";
 import GLTFLoader from "gltfjsx/src/utils/glftLoader";
 import { useFrame, useGraph } from "@react-three/fiber";
 import { Vector3 } from "three";
@@ -16,7 +16,7 @@ export default function OtherPuffinAnimations({
   const group = useRef();
   // const previousAction = usePrevious(action);
   const { scene, materials, animations } = useGLTF(
-    "/assets/animals/GLTF/Animations/Puffin_Animations.gltf",
+    "/assets/animals/GLTF/Animations/Puffin_Animations.gltf"
   );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes } = useGraph(clone);
@@ -45,7 +45,7 @@ export default function OtherPuffinAnimations({
       });
 
       group.current.lookAt(
-        new Vector3(destinationPoint.x, 0, destinationPoint.z),
+        new Vector3(destinationPoint.x, 0, destinationPoint.z)
       );
       group.current.name = userName;
     }
@@ -72,7 +72,7 @@ export default function OtherPuffinAnimations({
       if (moveRef.current) {
         angle = Math.atan2(
           destinationPoint.z - group.current.position.z,
-          destinationPoint.x - group.current.position.x,
+          destinationPoint.x - group.current.position.x
         );
         if (isCollided) {
           group.current.position.x -= Math.cos(angle) * 0.5;
@@ -114,11 +114,24 @@ export default function OtherPuffinAnimations({
         }
       }
       api.position.set(group.current.position.x, 0, group.current.position.z);
+      // meshref.current.position.copy(group.current.position);
     }
   });
 
+  // console.log(userName);
+
+  // const meshref = useRef();
+  // console.log(meshref);
+
   return (
     <group>
+      <mesh>
+        <Html className="" position={[1.5, -1.5, 0]} zIndexRange={[-100, 100]}>
+          <p className="text-md [text-shadow:_1px_1px_2px_rgb(21,135,241)] text-white">
+            {userName}
+          </p>
+        </Html>
+      </mesh>
       <group ref={group} position={initPosition}>
         <group>
           <group scale={2}>

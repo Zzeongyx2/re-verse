@@ -52,108 +52,126 @@ function SelectedOtherPlayer({ destinationPoint, handleVisible, userName }) {
         <OtherCatAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Dog" ? (
         <OtherDogAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Dove" ? (
         <OtherDoveAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Goldfish" ? (
         <OtherGoldfishAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Mouse" ? (
         <OtherMouseAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Parrot" ? (
         <OtherParrotAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Pigeon" ? (
         <OtherPigeonAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Rabbit" ? (
         <OtherRabbitAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Tortoise" ? (
         <OtherTortoiseAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Beluga" ? (
         <OtherBelugaAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Hare" ? (
         <OtherHareAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Husky" ? (
         <OtherHuskyAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Lynx" ? (
         <OtherLynxAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Moose" ? (
         <OtherMooseAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Narwhal" ? (
         <OtherNarwhalAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Puffin" ? (
         <OtherPuffinAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "SnowLeopard" ? (
         <OtherSnowLeopardAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
       {selectAvartar === "Cougar" ? (
         <OtherCougarAnimations
           destinationPoint={destinationPoint}
           handleVisible={handleVisible}
+          userName={userName}
         />
       ) : null}
     </group>
