@@ -206,7 +206,7 @@ export default function MyCougarAnimations({
     <group>
       <mesh>
         <Html
-          className="w-32"
+          className="w-32 text-center"
           position={[1.5, -1.5, 0]}
           zIndexRange={[-100, 100]}
         >

@@ -713,7 +713,7 @@ function Reverse() {
       <div className="w-full h-[0.15] absolute z-10">
         <ReverseNavbar joinMembers={others} />
       </div>
-      <div className="w-3 h-3 absolute z-10 bottom-5 right-[26px] m-4">
+      <div className="w-3 h-3 absolute z-10 bottom-10 right-[26px] m-4">
         <ReverseManual />
       </div>
 
