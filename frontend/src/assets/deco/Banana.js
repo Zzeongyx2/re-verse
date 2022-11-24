@@ -46,8 +46,8 @@ export function Banana(props) {
     <group {...props} dispose={null} ref={group}>
       <group
         scale={0.015}
-        position={[-128, -10, -92]}
-        rotation={[0, Math.PI / 2, 0]}
+        position={[30, -12, -105]}
+        rotation={[0, 0, 0]}
         onClick={handleClick}
         onPointerOver={(e) => {
           document.getElementsByTagName("body")[0].style.cursor = "pointer";
