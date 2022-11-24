@@ -130,7 +130,7 @@ function ReverseFriendModal({ joinMembers }) {
     <div>
       <button
         onClick={onOpen}
-        className="border-2 border-white bg-gradient-to-t from-main2 to-sub2 flex items-center rounded-full mb-2"
+        className="border-2 border-white bg-gradient-to-tr from-main1 to-main2 flex items-center rounded-full mb-2"
       >
         <BsFillPeopleFill className="text-2xl m-1.5" />
       </button>
