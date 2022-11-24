@@ -53,13 +53,13 @@ function LobbyProfile({ loginUser }) {
     });
   };
   const editUserInfoSuccess = (res) => {
-    dispatch(setLoginUser());
+    dispatch(setLoginUser({ ...loginUserState, nickname: userInfo.nickname }));
   };
   const editUserInfoFail = (error) => {
     console.log(error);
   };
   const loginUserState = useSelector((state) => state.user.loginUser);
-  const dispatch = useDispatch({ ...loginUserState, nickname: userInfo.nickname });
+  const dispatch = useDispatch();
   return (
     <div className="flex flex-col items-center w-full mt-28 border border-1 border-white rounded-2xl bg-white">
       {/* header */}
