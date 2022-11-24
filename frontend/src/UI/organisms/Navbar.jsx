@@ -10,9 +10,15 @@ import { AiFillHome } from "react-icons/ai";
 import { MdPeopleAlt } from "react-icons/md";
 import { BsArchiveFill } from "react-icons/bs";
 import { TbHanger } from "react-icons/tb";
+import { FiPower } from "react-icons/fi";
+import { useDispatch } from "react-redux";
+import { setLoginUser } from "../../modules/user";
+import { logout } from "../../api/auth";
+import { Toast } from "../atoms/Toast";
 
 function Navbar() {
   const location = useLocation();
+  const dispatch = useDispatch();
   return (
     <div className="flex justify-between pb-14">
       <div>
@@ -80,7 +86,7 @@ function Navbar() {
           </>
         </Breadcrumb>
       </div>
-      <div className="flex justify-between w-56">
+      <div className="flex justify-between w-[260px]">
         <Link to="/lobby">
           {location.pathname === "/lobby" ? (
             <NavBtn
@@ -145,6 +151,44 @@ function Navbar() {
             />
           )}
         </Link>
+        {/* logout btn */}
+
+        <NavBtn
+          icon={<FiPower className="text-3xl text-white" />}
+          from={"from-main1"}
+          to={"to-sub1"}
+          onClick={() => {
+            logout(
+              (res) => {
+                dispatch(
+                  setLoginUser({
+                    nickname: "",
+                    message: "",
+                    avatar: "",
+                    bestArchiveId: "",
+                  })
+                );
+                Toast.fire({
+                  icon: "success",
+                  title: "로그아웃 되었습니다.",
+                  timer: 1500,
+                });
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+            dispatch(
+              setLoginUser({
+                nickname: "",
+                message: "",
+                avatar: "",
+                bestArchiveId: "",
+              })
+            );
+            window.location.href = "/";
+          }}
+        />
       </div>
     </div>
   );
