@@ -166,9 +166,11 @@ function ReverseTextEditor() {
         value={text}
         onChange={handleText}
         onFocus={() => {
-          setReverseChatPress(true);
+          dispatch(setReverseChatPress(true));
         }}
-        onBlur={() => [setReverseChatPress(false)]}
+        onBlur={() => {
+          dispatch(setReverseChatPress(false));
+        }}
       />
     </div>
   ) : (
@@ -182,9 +184,11 @@ function ReverseTextEditor() {
         value={editText}
         onChange={handleEditText}
         onFocus={() => {
-          setReverseChatPress(true);
+          dispatch(setReverseChatPress(true));
         }}
-        onBlur={() => [setReverseChatPress(false)]}
+        onBlur={() => {
+          dispatch(setReverseChatPress(false));
+        }}
       />
     </div>
   );
