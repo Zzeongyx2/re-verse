@@ -5,7 +5,7 @@ const LazyComponent = React.lazy(() => import("./Reverse"));
 function ReverseHelper() {
   return (
     <div>
-      <Suspense fallback={<div>로딩중...</div>}>
+      <Suspense fallback={<div>loading...</div>}>
         <LazyComponent />
       </Suspense>
     </div>
