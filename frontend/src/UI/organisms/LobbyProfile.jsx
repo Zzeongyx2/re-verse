@@ -44,7 +44,7 @@ function LobbyProfile({ loginUser }) {
     nicknameCheck(userInfo.nickname, nickCheckSuccess, nickCheckFail);
   };
   const nickCheckSuccess = (res) => {
-    setIsValid({ valid: true, message: "." });
+    setIsValid({ valid: true, message: "" });
   };
   const nickCheckFail = (error) => {
     setIsValid({
