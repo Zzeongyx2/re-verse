@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { editUserInfo, nicknameCheck } from "../../api/user";
+import { setLoginUser } from "../../modules/user";
 
 function LobbyProfile({ loginUser }) {
   const [userInfo, setUserInfo] = useState(loginUser);
@@ -50,11 +52,14 @@ function LobbyProfile({ loginUser }) {
       message: "*중복된 닉네임 입니다.",
     });
   };
-  const editUserInfoSuccess = (res) => {};
+  const editUserInfoSuccess = (res) => {
+    dispatch(setLoginUser());
+  };
   const editUserInfoFail = (error) => {
     console.log(error);
   };
-
+  const loginUserState = useSelector((state) => state.user.loginUser);
+  const dispatch = useDispatch({ ...loginUserState, nickname: userInfo.nickname });
   return (
     <div className="flex flex-col items-center w-full mt-28 border border-1 border-white rounded-2xl bg-white">
       {/* header */}
@@ -62,10 +67,7 @@ function LobbyProfile({ loginUser }) {
         <p className="text-2xl drop-shadow font-bold my-4 text-white">프로필</p>
       </div>
       {/* profile contents */}
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col w-full items-center"
-      >
+      <form onSubmit={handleSubmit} className="flex flex-col w-full items-center">
         {/* nickname */}
         <div className="w-11/12 my-3">
           <div>
@@ -82,9 +84,7 @@ function LobbyProfile({ loginUser }) {
                 (isValid.valid ? " border-base2/20" : " border-red-500/80")
               }
             />
-            <p className="text-red-500 ml-1 mt-1 text-[10px]">
-              {isValid.message}
-            </p>
+            <p className="text-red-500 ml-1 mt-1 text-[10px]">{isValid.message}</p>
           </div>
           {/* comments */}
           <div>

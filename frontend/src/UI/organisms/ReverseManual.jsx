@@ -42,7 +42,16 @@ function ReverseManual({ joinMembers }) {
             <div className="flex flex-col h-[400px] justify-between">
               {/* 리버스 소개 */}
               <div className="p-2 border-2 border-basic3 rounded-lg w-full h-[calc(96%/5*2-20px)]">
-                <p className="font-bold px-1 pt-0.5 pb-1.5">리버스는 이러한 서비스입니다.</p>
+                <p className="font-bold px-1 pt-0.5 pb-1.5">
+                  리버스는 추억을 특별하게 저장할 수 있는 메타버스 공간입니다.
+                </p>
+                <p className="font-bold text-sm px-1 pt-0.5 pb-1.5">
+                  일기(방), 여행(캠핑), 기념일(크리스마스) 테마에 맞게 꾸며진 공간에 추억을 기록할
+                  수 있어요.
+                </p>
+                <p className="font-bold px-1 pt-0.5 pb-1.5 ">
+                  친구와 리버스에서 만나 추억을 회상해봐요!
+                </p>
               </div>
 
               {/* 조작 가이드 */}
