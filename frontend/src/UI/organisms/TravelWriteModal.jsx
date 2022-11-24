@@ -23,6 +23,7 @@ import ReverseTextEditor from "./ReverseTextEditor";
 import { getStuffDetail, postPaper } from "../../api/reverse";
 
 import moment from "moment/moment";
+import { setReverseChatPress } from "../../modules/camera";
 
 function TravelWriteModal() {
   const dispatch = useDispatch();
@@ -91,6 +92,10 @@ function TravelWriteModal() {
                   onChange={(e) => {
                     setTitle(e.target.value);
                   }}
+                  onFocus={() => {
+                    setReverseChatPress(true);
+                  }}
+                  onBlur={() => [setReverseChatPress(false)]}
                 />
               </div>
               {/* 기록 날짜 */}

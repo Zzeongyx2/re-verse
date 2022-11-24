@@ -9,13 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { editPaper, getPaper, getStuffDetail } from "../../api/reverse";
-import {
-  setAnniv,
-  setDiary,
-  setEditBtn,
-  setInfo,
-  setTravel,
-} from "../../modules/reverse";
+import { setAnniv, setDiary, setEditBtn, setInfo, setTravel } from "../../modules/reverse";
 
 import { AiOutlineCalendar } from "react-icons/ai";
 
@@ -25,6 +19,7 @@ import ReverseTextEditor from "./ReverseTextEditor";
 import moment from "moment/moment";
 import ArticleDetailCard from "./ArticleDetailCard";
 import ArchiveTimeline from "./ArchiveTimeline";
+import { setReverseChatPress } from "../../modules/camera";
 
 function TravelReadModal() {
   const dispatch = useDispatch();
@@ -72,9 +67,7 @@ function TravelReadModal() {
       {
         title: editTitle,
         content: reverse.info.details.content,
-        memoryTime: moment(reverse.info.details.memoryTime).format(
-          "yyyy-MM-DD"
-        ),
+        memoryTime: moment(reverse.info.details.memoryTime).format("yyyy-MM-DD"),
       },
       editSuccess,
       editFail
@@ -173,6 +166,10 @@ function TravelReadModal() {
                     onChange={(e) => {
                       handleEditTitle(e);
                     }}
+                    onFocus={() => {
+                      setReverseChatPress(true);
+                    }}
+                    onBlur={() => [setReverseChatPress(false)]}
                   />
                 </div>
                 {/* 기록 날짜 수정*/}
