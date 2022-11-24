@@ -43,7 +43,7 @@ function TravelWriteModal() {
         memoryTime: moment(reverse.article.memoryDate).format("yyyy-MM-DD"),
       },
       success,
-      fail
+      fail,
     );
   };
   const success = (res) => {
@@ -51,7 +51,7 @@ function TravelWriteModal() {
       reverse.info.archiveId,
       reverse.info.stuffs[reverse.selectStuff].id,
       stuffSuccess,
-      stuffFail
+      stuffFail,
     );
   };
 
@@ -72,7 +72,7 @@ function TravelWriteModal() {
   const fail = (err) => {
     console.log(err);
   };
-
+  const chatPress = useSelector((state) => state.camera.chatPress);
   return (
     <>
       <Modal isOpen={reverse.travelWriteIsOpen} size={"4xl"} isCentered>
@@ -118,6 +118,10 @@ function TravelWriteModal() {
           <ModalFooter pt={0}>
             <button
               onClick={() => {
+                if (chatPress) {
+                  dispatch(setReverseChatPress(false));
+                  return;
+                }
                 dispatch(setTravelWriteIsOpen());
               }}
               className="font-bold bg-[#d9d9d9] px-6 py-2 rounded-xl text-sm mx-3"
@@ -126,6 +130,10 @@ function TravelWriteModal() {
             </button>
             <button
               onClick={() => {
+                if (chatPress) {
+                  dispatch(setReverseChatPress(false));
+                  return;
+                }
                 dispatch(createArticle({ ...reverse.article, title: title }));
                 handlePostPaper();
                 dispatch(setTravelWriteIsOpen());
