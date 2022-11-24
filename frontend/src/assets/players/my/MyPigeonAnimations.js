@@ -205,7 +205,11 @@ export default function MyPigeonAnimations({
   return (
     <group>
       <mesh>
-        <Html className="" position={[1.5, -1.5, 0]} zIndexRange={[-100, 100]}>
+        <Html
+          className="w-32"
+          position={[1.5, -1.5, 0]}
+          zIndexRange={[-100, 100]}
+        >
           <p className="text-md [text-shadow:_1px_1px_2px_rgb(250,181,38)] text-white">
             {loginUser.nickname}
           </p>
