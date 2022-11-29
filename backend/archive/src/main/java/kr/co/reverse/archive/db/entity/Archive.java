@@ -16,6 +16,9 @@ import java.util.UUID;
 @Entity
 @Getter
 @NoArgsConstructor
+@Table(name = "archive", indexes = {
+        @Index(name = "idx__ownerId", columnList = "owner_id")
+})
 public class Archive {
 
     @Id
